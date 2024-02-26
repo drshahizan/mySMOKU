@@ -23,8 +23,9 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
     */
     protected $instiusi_user;
     private $counter = 0;
-    private $totalBayaran  = 0;
-
+    private $totalDisokong = 0;
+    private $totalDibayar = 0;
+    private $totalBaki = 0;
     public function __construct()
     {
         // Get the institusi ID of the logged-in user
@@ -36,14 +37,12 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
-            ->where('tuntutan.status', 8) // Apply status condition to Tuntutan table
-            ->where('d.jenis', 'Yuran')
+            ->where('tuntutan.status', 10) // Apply status condition to Tuntutan table
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
@@ -52,26 +51,25 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'c.tarikh_mula',
                 'c.tarikh_tamat',
                 'c.nama_kursus',
-                'c.status',
                 'g.peringkat',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                 'tuntutan.yuran_dibayar',
                 'tuntutan.wang_saku_dibayar',
+                'tuntutan.yuran_disokong',
+                'tuntutan.wang_saku_disokong',
                 'tuntutan.no_baucer',
                 'tuntutan.tarikh_transaksi',  
+                'tuntutan.status_pemohon',  
                 'tuntutan.perihal',  
             );
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-            ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
             ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
-            ->where('permohonan.status', 8) // Apply status condition to Permohonan table
-            ->where('d.jenis', 'Yuran')
+            ->where('permohonan.status', 10) // Apply status condition to Permohonan table
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
@@ -80,13 +78,14 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'c.tarikh_mula',
                 'c.tarikh_tamat',
                 'c.nama_kursus',
-                'c.status',
                 'g.peringkat',
-                DB::raw('COALESCE(d.jumlah, 0) as jumlah'),
                 'permohonan.yuran_dibayar',
                 'permohonan.wang_saku_dibayar',
+                'permohonan.yuran_disokong',
+                'permohonan.wang_saku_disokong',
                 'permohonan.no_baucer',
-                'permohonan.tarikh_transaksi',    
+                'permohonan.tarikh_transaksi', 
+                'permohonan.status_pemohon',   
                 'permohonan.perihal',    
             );
 
@@ -116,7 +115,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'NAMA KURSUS',
                 'PERINGKAT',
                 'JUMLAH PATUT BAYAR (RM)',
-                'JUMLAH TELAH BAYAR (DILAPORKAN DI SPBB3) (RM)',
+                'JUMLAH TELAH BAYAR (RM)',
                 'BAKI BELUM BAYAR TERKUMPUL (RM)',
                 'RUJUKAN NO. RESIT (BUKTI PEMBAYARAN)',
                 'CATATAN',
@@ -128,17 +127,17 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         return [
             'A' => 5,
-            'B' => 40,           
+            'B' => 30,           
             'C' => 20,
-            'D' => 25,
+            'D' => 20,
             'E' => 15,
             'F' => 30,
             'G' => 15,
-            'H' => 10,
-            'I' => 15,
-            'J' => 10,
-            'K' => 10,
-            'L' => 20
+            'H' => 20,
+            'I' => 20,
+            'J' => 20,
+            'K' => 20,
+            'L' => 30
         ];
     }
 
@@ -152,32 +151,31 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
         $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
 
         // Calculate the total of yuran dibayar & want saki dibayar
-        $bayaran = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
-
-        // Checking for status
-        if($row->status == 1)
-            $status = 'AKTIF';
-        else
-            $status = 'TIDAK AKTIF';
+        $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
+        $disokong = number_format($row->yuran_disokong, 2, '.', '') + number_format($row->wang_saku_disokong, 2, '.', '');
+        $baki = $disokong -  $dibayar;
 
         // Increment the counter for "BIL" column
         $this->counter++;
 
         // Update total values
-        $this->totalBayaran += $bayaran;
+        $this->totalDibayar += $dibayar;
+        $this->totalDisokong += $disokong;
+        $this->totalBaki += $baki;
 
         return [
              $this->counter,
              $row->nama,
              $row->no_kp,
              $tempoh_tajaan,
-             $status,
+             strtoupper($row->status_pemohon),
              strtoupper($row->nama_kursus),
              $row->peringkat,
-            //  number_format($bayaran, 2, '.', ''), 
-            //  $row->no_baucer,
-            //  strtoupper($row->perihal),
-            //  Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+             number_format($disokong, 2, '.', ''), 
+             number_format($dibayar, 2, '.', ''), 
+             number_format($baki, 2, '.', ''), 
+             $row->no_baucer,
+             strtoupper($row->perihal),
         ];
     }
 
@@ -303,12 +301,14 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $lastRow = $event->sheet->getHighestRow();
 
                 // Format the total values with two decimal places
-                $totalBayaranFormatted = number_format($this->totalBayaran , 2, '.', '');
+                $totalBayaranFormatted = number_format($this->totalDibayar , 2, '.', '');
+                $totalDisokongFormatted = number_format($this->totalDisokong , 2, '.', '');
+                $totalBakiFormatted = number_format($this->totalBaki , 2, '.', '');
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
                     // Custom row for total
-                    ['JUMLAH (RM)', '', '', '', '', '', $totalBayaranFormatted],
+                    ['', 'JUMLAH (RM)', '', '', '', '', '', $totalDisokongFormatted, $totalBayaranFormatted, $totalBakiFormatted],
                 ]);
 
                 // Corrected code set background for jumlah
