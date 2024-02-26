@@ -1644,12 +1644,44 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        // Determine the sesi_bayaran based on the current month and year
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1/' . $currentYear;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2/' . $currentYear;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3/' . $currentYear;
+        }
+
         $user = auth()->user();
         $institusiId = $user->id_institusi;
+
         $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->get();
         $tuntutanLayak = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '6')->get();
 
-        return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak','institusiId'));
+        $permohonanBerhenti = Permohonan::orderBy('id', 'desc')->where('permohonan.sesi_bayaran', $sesiBayaran)
+                                        ->where('permohonan.status', '=', '10');
+        $tuntutanBerhenti = Tuntutan::orderBy('id', 'desc')->where('tuntutan.sesi_bayaran', $sesiBayaran)
+                                        ->where('tuntutan.status', '=', '10');
+        $permohonanDibayar = Permohonan::orderBy('id', 'desc')->where('permohonan.sesi_bayaran', $sesiBayaran)
+                                        ->where('permohonan.status', '=', '8')
+                                        ->where(function($query) {
+                                            $query->whereColumn('permohonan.yuran_dibayar', '!=', 'permohonan.yuran_disokong')
+                                                ->orWhereColumn('permohonan.wang_saku_dibayar', '!=', 'permohonan.wang_saku_disokong');
+                                        });
+        $tuntutanDibayar = Tuntutan::orderBy('id', 'desc')->where('tuntutan.sesi_bayaran', $sesiBayaran)
+                                    ->where('tuntutan.status', '=', '8')
+                                    ->where(function($query) {
+                                        $query->whereColumn('tuntutan.yuran_dibayar', '!=', 'tuntutan.yuran_disokong')
+                                            ->orWhereColumn('tuntutan.wang_saku_dibayar', '!=', 'tuntutan.wang_saku_disokong');
+                                    });
+        $kutipanBalik = $permohonanBerhenti->union($tuntutanBerhenti)->union($permohonanDibayar)->union($tuntutanDibayar)->get();
+
+        return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak','institusiId','kutipanBalik'));
     }
 
     //PENYALURAN - PEMBAYARAN - PERMOHONAN

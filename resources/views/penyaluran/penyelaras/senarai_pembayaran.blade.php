@@ -454,29 +454,26 @@
                                         <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>                                                   
-                                                    <th style="width: 45%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 10%"><b>Amaun Yuran</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Amaun Wang Saku</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Tarikh Tuntutan</b></th>
+                                                    <th style="width: 25%"><b>Nama</b></th>
+                                                    <th style="width: 35%"><b>Nama Kursus</b></th> 
+                                                    <th class="text-center" style="width: 15%"><b>Jumlah Disokong</b></th>
+                                                    <th class="text-center" style="width: 15%"><b>Jumlah Dibayar</b></th>
+                                                    <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
                                                 @php
-                                                    $i=0;
-                                                @endphp
-                                                @php
                                                     require_once app_path('helpers.php');
                                                 @endphp
                                             
-                                                @foreach ($tuntutanLayak as $item)
+                                                @foreach ($kutipanBalik as $item)
                                                     @php
-                                                        $i++;
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                         $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
                                                         $instiusi_user = auth()->user()->id_institusi;
-
+                                                        
                                                         // nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); 
                                                         $conjunctions = ['bin', 'binti'];
@@ -494,19 +491,19 @@
                                                     
                                                     @if ($institusi_id == $instiusi_user)
                                                         <tr>
-                                                            <td style="width: 15%">{{$item['no_rujukan_tuntutan']}}</td>                                          
-                                                            <td style="width: 45%">{{$pemohon}}</td>
-                                                            <td class="text-center" style="width: 10%">
-                                                                @if ($item->yuran_disokong !== null)
-                                                                    RM {{ number_format($item->yuran_disokong, 2) }}
+                                                            <td style="width: 25%">{{$pemohon}}</td>
+                                                            <td style="width: 35%">{{$nama_kursus}}</td> 
+                                                            <td class="text-center" style="width: 15%">
+                                                                @if ($item->yuran_disokong !== null && is_numeric($item->yuran_disokong) && $item->wang_saku_disokong !== null && is_numeric($item->wang_saku_disokong))
+                                                                    RM {{ number_format($item->yuran_disokong + $item->wang_saku_disokong, 2) }}
                                                                 @endif
                                                             </td>
                                                             <td class="text-center" style="width: 15%">
-                                                                @if ($item->wang_saku_disokong !== null)
-                                                                    RM {{ number_format($item->wang_saku_disokong, 2) }}
+                                                                @if ($item->yuran_dibayar !== null && is_numeric($item->yuran_dibayar) && $item->wang_saku_dibayar !== null && is_numeric($item->wang_saku_dibayar))
+                                                                    RM {{ number_format($item->yuran_dibayar + $item->wang_saku_dibayar, 2) }}
                                                                 @endif
                                                             </td>
-                                                            <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
+                                                            <td class="text-center" style="width: 10%">{{strtoupper($item->status_pemohon)}}</td>
                                                         </tr>
                                                     @endif
                                                 @endforeach 
