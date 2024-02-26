@@ -98,6 +98,7 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
+
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
                                             <div class="col-md-4" style="display: flex; align-items: center;">
@@ -194,13 +195,46 @@
                                                 <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
                                                     <div class="col-md-3">
                                                         <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
-															<i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-														</a>
+                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12" data-kt-subscription-table-filter="status">
+                                        <div class="row form-filter">
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <select class="form-select" id="kutipan_status_filter">
+                                                    <option value="">Pilih Status</option>
+                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                            </div>
+                                    
+                                            {{-- KUTIPAN BALIK --}}
+                                            <div class="col-md-7 export-container" data-program-code="kutipan"> 
+                                                <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
+                                                    <div class="col-md-3">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+
                                 </div>
                             </div>
                             <!--end::Card toolbar-->
@@ -523,107 +557,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-       {{-- <script>
-          var datatable1, datatable2;
-
-            $(document).ready(function() {
-                $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                    console.log('Tab clicked'); // Log when a tab is clicked
-                    var targetTabId = $(e.target).attr('id'); // Get the ID of the active tab
-                    console.log('Active Tab ID:', targetTabId); // Log the active tab ID
-                    if (targetTabId !== 'kutipan-tab') {
-                        // Code to execute when the active tab is not Kutipan Balik
-                        console.log('Active tab is not Kutipan Balik');
-                        // Show or hide filter toolbar as needed
-                        showFilterToolbar();
-                        applyFilter();
-                    } else {
-                        // Code to execute when the active tab is Kutipan Balik
-                        console.log('Active tab is Kutipan Balik');
-                        // Hide filter toolbar for Kutipan Balik tab
-                        hideFilterToolbarForKutipanTab();
-                    }
-                });
-            });
-
-            function initDataTable(tableId, variableName) {
-                // Check if the datatable is already initialized
-                if ($.fn.DataTable.isDataTable(tableId)) {
-                    // Destroy the existing DataTable instance
-                    $(tableId).DataTable().destroy();
-                }
-
-                // Initialize the datatable and assign it to the global variable
-                window[variableName] = $(tableId).DataTable({
-                    ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] },
-                    ]
-                });
-            }
-
-            function applyFilter() {
-                // Apply filter only for Permohonan and Tuntutan tabs
-                var startDate = $('#start_date').val();
-                var endDate = $('#end_date').val();
-                
-                applyAndLogFilter('Table 1', datatable1, startDate, endDate);
-                applyAndLogFilter('Table 2', datatable2, startDate, endDate);
-            }
-
-            // Other functions remain unchanged...
-            function applyAndLogFilter(tableName, table, startDate, endDate) {
-                // Reset the search for all columns to ensure a clean filter
-                table.columns().search('').draw();
-
-                // Clear the previous search functions
-                $.fn.dataTable.ext.search = [];
-
-                // Apply date range filter for Permohonan and Tuntutan tabs only
-                if (startDate || endDate) {
-                    $.fn.dataTable.ext.search.push(
-                        function (settings, data, dataIndex) {
-                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-
-                            let dateAdded = moment(data[4], 'DD/MM/YYYY');
-
-                            // Check if the date falls within the specified range
-                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                            return result;
-                        }
-                    );
-                }
-
-                // Log filtered data only for Permohonan and Tuntutan tabs
-                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-
-                // Go to the first page for the table
-                table.page(0).draw(false);
-
-                // Log the data of visible rows on the first page for the table
-                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-            }
-
-            function logTableData(message, table) {
-                console.log(message, table.rows().data().toArray());
-            }
-
-            function hideFilterToolbarForKutipanTab() {
-                console.log('Hiding filter toolbar for Kutipan Balik tab');
-                $('#kutipan .card-toolbar').hide(); // Hide the filter toolbar for Kutipan Balik tab
-            }
-
-            function showFilterToolbar() {
-                console.log('Showing filter toolbar');
-                $('.card-toolbar').show(); // Show the filter toolbar
-            }
-       </script> --}}
-
-       <script>
+        <script>
             var datatable1, datatable2, datatable3;
 
             $(document).ready(function() 
@@ -668,7 +602,7 @@
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, startDate, endDate);
                 applyAndLogFilter('Table 2', datatable2, startDate, endDate);
-                applyAndLogFilter('Table 3', datatable3, startDate, endDate);
+                // applyAndLogFilter('Table 3', datatable3, startDate, endDate);
             }
 
             function applyAndLogFilter(tableName, table, startDate, endDate) 
@@ -799,6 +733,26 @@
                     $('#tuntutan_hidden_start_date').val(startDate);
                     $('#tuntutan_hidden_end_date').val(endDate);
                 });
+
+                // Add event listener for status filter dropdown
+                $('#kutipan_status_filter').on('change', function() {
+                    var selectedStatus = $(this).val();
+
+                    // Apply filter based on selected status
+                    applyStatusFilter(selectedStatus);
+                });
+
+                function applyStatusFilter(status) {
+                    if (datatable3) {
+                        // Clear previous search
+                        datatable3.columns().search('').draw();
+
+                        // Apply status filter
+                        if (status !== '') {
+                            datatable3.column(4).search(status).draw();
+                        }
+                    }
+                }
             });
         </script>
 
