@@ -311,7 +311,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
 
         // Concatenate the no_baucer 
-        $baucer = $row->no_baucer_permohonan . '&' . $row->no_baucer_tuntutan;
+        $baucer = $row->no_baucer_permohonan . $row->no_baucer_tuntutan;
 
         // Calculate the total of yuran dibayar & want saki dibayar
         $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
