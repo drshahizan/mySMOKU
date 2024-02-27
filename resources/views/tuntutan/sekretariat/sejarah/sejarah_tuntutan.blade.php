@@ -158,6 +158,7 @@
                                                             $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                             $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                             $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
+                                                           
                                                             $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                             if ($item['status']==2){
                                                                 $status='Baharu';
@@ -177,7 +178,7 @@
                                                                 }
                                                             }
                                                             $pemohon = implode(' ', $result);
-
+                                                            
                                                             //institusi pengajian
                                                             $text3 = ucwords(strtolower($institusi_pengajian));
                                                             $conjunctions = ['of', 'in', 'and'];
@@ -192,6 +193,7 @@
                                                             }
                                                             $institusi = implode(' ', $result);
                                                             $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            
                                                         @endphp
                                                         @if ($permohonan->program=="BKOKU")
                                                             @if ($jenis_institusi!="UA")
@@ -258,7 +260,6 @@
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
                                                         $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                         $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
                                                         $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         if ($item['status']==2){
@@ -294,6 +295,7 @@
                                                         }
                                                         $institusi = implode(' ', $result);
                                                         $institusipengajian = transformBracketsToUppercase($institusi);
+                                                        
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
                                                         @if ($jenis_institusi=="UA")

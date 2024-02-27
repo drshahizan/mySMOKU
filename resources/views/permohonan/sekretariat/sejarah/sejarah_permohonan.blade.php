@@ -152,7 +152,6 @@
                                                         $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-
                                                         if ($akademik) {
                                                             $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                         }
