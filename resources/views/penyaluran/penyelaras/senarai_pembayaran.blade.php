@@ -216,7 +216,7 @@
 
                                             <div class="col-md-6 export-container" data-program-code="kutipan"> 
                                                 <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
                                                             <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
                                                         </a>
@@ -592,7 +592,6 @@
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, startDate, endDate);
                 applyAndLogFilter('Table 2', datatable2, startDate, endDate);
-                // applyAndLogFilter('Table 3', datatable3, startDate, endDate);
             }
 
             function applyAndLogFilter(tableName, table, startDate, endDate) 
@@ -654,6 +653,7 @@
                 $('.export-container[data-program-code="tuntutan"]').hide();
                 $('.export-container[data-program-code="kutipan"]').hide();
                 $('.none-container').show(); 
+                $('#kutipan-toolbar').hide();
 
                 $('.nav-link').on('click', function() {
                     var activeTabId = $(this).attr('id');
@@ -673,35 +673,8 @@
                     }
                 }
 
-                // function updateExportContainers(activeTabId) {
-                //     $('.export-container').hide();
-                //     var programCode = getProgramCode(activeTabId);
-                //     $('.export-container[data-program-code="' + programCode + '"]').show();
-                // }
-
-                // function updateExportContainers(activeTabId) {
-                //     console.log("Updating export containers..."); // Add this line
-
-                //     $('.export-container').hide();
-                //     // $('.form-filter').hide(); // Hide all filter sections
-
-                //     var programCode = getProgramCode(activeTabId);
-                //     $('.export-container[data-program-code="' + programCode + '"]').show();
-
-                //     // Show the corresponding filter section based on the active tab
-                //     if (programCode === 'permohonan' || programCode === 'tuntutan') {
-                //         $('[data-kt-subscription-table-filter="form"]').show();
-                //     } else if (programCode === 'kutipan') {
-                //         console.log('Program Code:', programCode);
-                //         console.log('Selected Element:', $('[data-kt-subscription-table-filter="status"]'));
-                //         console.log('Kutipan tab');
-                //         $('[data-kt-subscription-table-filter="status"]').show();
-                //     }
-                // }
-
-                function updateExportContainers(activeTabId) {
-                    console.log("Updating export containers...");
-
+                function updateExportContainers(activeTabId) 
+                {
                     $('.export-container').hide();
                     var programCode = getProgramCode(activeTabId);
 
@@ -763,14 +736,6 @@
                     // Set the hidden inputs with filter values before form submission
                     $('#tuntutan_hidden_start_date').val(startDate);
                     $('#tuntutan_hidden_end_date').val(endDate);
-                });
-
-                // Add event listener for status filter dropdown
-                $('#kutipan_status_filter').on('change', function() {
-                    var selectedStatus = $(this).val();
-
-                    // Apply filter based on selected status
-                    applyStatusFilter(selectedStatus);
                 });
 
                 function applyStatusFilter(status) {
