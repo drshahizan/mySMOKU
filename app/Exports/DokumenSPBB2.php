@@ -283,10 +283,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     private function getInstitusiData()
     {
-        // Assuming you retrieve the institution data from somewhere
         $institusiData = DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
-        
-        // Convert the data to uppercase
         $institusiData = strtoupper($institusiData);
 
         return $institusiData;
@@ -301,7 +298,6 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         $currentMonth = Carbon::now()->translatedFormat('F');
         $currentYear = Carbon::now()->year;
 
-        // Convert the month name to uppercase and concatenate with the year
         $currentMonth = strtoupper($currentMonth);
         $bulanTahun = $currentMonth . ' ' . $currentYear;
 
@@ -388,7 +384,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->getStyle('A5')->applyFromArray([
                     'font' => [
                         'bold' => true,
-                        'size' => 12, // Data header font size
+                        'size' => 12, 
                     ],
                     'alignment' => [
                         'horizontal' => Alignment::HORIZONTAL_CENTER,
@@ -406,7 +402,7 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'], // Border color
+                            'color' => ['rgb' => '000000'], 
                         ],
                     ],
                 ])
@@ -433,23 +429,23 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->getStyle('A' . ($lastRow + 1) . ':J' . ($lastRow + 1))->applyFromArray([
                     'fill' => [
                         'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'D3D3D3'], // Choose your desired color
+                        'startColor' => ['rgb' => 'D3D3D3'], 
                     ],
                     'font' => [
                         'bold' => true,
-                        'size' => 11, // Data header font size
+                        'size' => 11, 
                     ],
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'], // Border color
+                            'color' => ['rgb' => '000000'], 
                         ],
                     ],
                 ]);
 
+                $event->sheet->mergeCells('A' . ($lastRow + 3) . ':J' . ($lastRow + 4));
                 $event->sheet->getStyle('A' . ($lastRow + 3))->getFont()->setSize(10)->setBold(true);
-                $event->sheet->setCellValue('A' . ($lastRow + 3), "i) Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya." . "\n" .
-                " (Salinan baucar bayaran hendaklah difailkan Khas untuk SALUR PERUNTUKAN BKOKU di setiap UA - Kementerian Pendidikan Tinggi akan membuat pemantauan/semakan dari semasa ke semasa)");
+                $event->sheet->setCellValue('A' . ($lastRow + 3), "i) Disahkan maklumat diatas adalah benar dan bayaran telah dibuat sewajarnya.\n(Salinan baucar bayaran hendaklah difailkan Khas untuk SALUR PERUNTUKAN BKOKU di setiap UA - Kementerian Pendidikan Tinggi akan membuat pemantauan/semakan dari semasa ke semasa)");
 
                 $event->sheet->getStyle('B' . ($lastRow + 6))->getFont()->setSize(10);
                 $event->sheet->setCellValue('B' . ($lastRow + 6), 'Disediakan oleh:');
@@ -477,7 +473,6 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
                 $event->sheet->getStyle('G' . ($lastRow + 9))->getFont()->setSize(10);
                 $event->sheet->setCellValue('G' . ($lastRow + 9), 'Tarikh:');
-
             },
         ];
     }
