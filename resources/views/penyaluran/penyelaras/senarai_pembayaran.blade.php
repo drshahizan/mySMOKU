@@ -679,25 +679,53 @@
                 //     $('.export-container[data-program-code="' + programCode + '"]').show();
                 // }
 
+                // function updateExportContainers(activeTabId) {
+                //     console.log("Updating export containers..."); // Add this line
+
+                //     $('.export-container').hide();
+                //     // $('.form-filter').hide(); // Hide all filter sections
+
+                //     var programCode = getProgramCode(activeTabId);
+                //     $('.export-container[data-program-code="' + programCode + '"]').show();
+
+                //     // Show the corresponding filter section based on the active tab
+                //     if (programCode === 'permohonan' || programCode === 'tuntutan') {
+                //         $('[data-kt-subscription-table-filter="form"]').show();
+                //     } else if (programCode === 'kutipan') {
+                //         console.log('Program Code:', programCode);
+                //         console.log('Selected Element:', $('[data-kt-subscription-table-filter="status"]'));
+                //         console.log('Kutipan tab');
+                //         $('[data-kt-subscription-table-filter="status"]').show();
+                //     }
+                // }
+
                 function updateExportContainers(activeTabId) {
-                    console.log("Updating export containers..."); // Add this line
+                    console.log("Updating export containers...");
 
                     $('.export-container').hide();
-                    // $('.form-filter').hide(); // Hide all filter sections
 
                     var programCode = getProgramCode(activeTabId);
-                    $('.export-container[data-program-code="' + programCode + '"]').show();
 
-                    // Show the corresponding filter section based on the active tab
+                    // Check if the active tab is Kutipan
+                    if (programCode === 'kutipan') {
+                        // Hide all export containers except for Kutipan
+                        $('.export-container[data-program-code]').not('[data-program-code="kutipan"]').hide();
+                        
+                        // Show the Kutipan export container
+                        $('.export-container[data-program-code="kutipan"]').show();
+                    } else {
+                        // For other tabs, show the export container based on program code
+                        $('.export-container[data-program-code="' + programCode + '"]').show();
+                    }
+
+                    // Show or hide the filter section based on the active tab
                     if (programCode === 'permohonan' || programCode === 'tuntutan') {
                         $('[data-kt-subscription-table-filter="form"]').show();
                     } else if (programCode === 'kutipan') {
-                        console.log('Program Code:', programCode);
-                        console.log('Selected Element:', $('[data-kt-subscription-table-filter="status"]'));
-                        console.log('Kutipan tab');
                         $('[data-kt-subscription-table-filter="status"]').show();
                     }
                 }
+
 
                 function getProgramCode(activeTabId) {
                     switch (activeTabId) {
