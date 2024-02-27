@@ -27,13 +27,12 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     private $counter = 0;
     private $totalBayaran  = 0;
 
-    private $results; 
     public function __construct()
     {
         $this->instiusi_user = Auth::user()->id_institusi;
     }
-    
-    public function collection()
+
+    public function collection()    
     {
         // Get the current month and year
         $currentMonth = Carbon::now()->month;
@@ -48,171 +47,152 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             $sesiBayaran = '3/' . $currentYear;
         }
 
-        // Fetch data from Tuntutan table
-        $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
-        ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-        ->where('tuntutan.status', 8)
-        ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
-        ->select(
-            DB::raw('MAX(b.nama) as nama'),
-            DB::raw('MAX(b.no_kp) as no_kp'),
-            DB::raw('MAX(c.tarikh_mula) as tarikh_mula'),
-            DB::raw('MAX(c.tarikh_tamat) as tarikh_tamat'),
-            DB::raw('MAX(c.nama_kursus) as nama_kursus'),
-            DB::raw('MAX(tuntutan.no_baucer) as no_baucer_tuntutan'),
-            DB::raw('MAX(tuntutan.tarikh_transaksi) as tarikh_transaksi'), 
-            DB::raw('MAX(tuntutan.perihal) as perihal'),   
-            DB::raw('MAX(tuntutan.status_pemohon) as status_pemohon'),  
-            DB::raw('SUM(tuntutan.yuran_dibayar) as total_yuran_dibayar_tuntutan'),
-            DB::raw('SUM(tuntutan.wang_saku_dibayar) as total_wang_saku_dibayar_tuntutan')
-        )
-        ->groupBy('tuntutan.smoku_id'); 
-
         // Fetch data from Permohonan table
-        $senaraiPermohonan = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
-        ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-        ->where('permohonan.status', 8)
-        ->where('permohonan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
-        ->select(
-            DB::raw('MAX(b.nama) as nama'),
-            DB::raw('MAX(b.no_kp) as no_kp'),
-            DB::raw('MAX(c.tarikh_mula) as tarikh_mula'),
-            DB::raw('MAX(c.tarikh_tamat) as tarikh_tamat'),
-            DB::raw('MAX(c.nama_kursus) as nama_kursus'),
-            DB::raw('MAX(permohonan.no_baucer) as no_baucer_permohonan'),
-            DB::raw('MAX(permohonan.tarikh_transaksi) as tarikh_transaksi'), 
-            DB::raw('MAX(permohonan.perihal) as perihal'),   
-            DB::raw('MAX(permohonan.status_pemohon) as status_pemohon'),  
-            DB::raw('SUM(permohonan.yuran_dibayar) as total_yuran_dibayar_permohonan'),
-            DB::raw('SUM(permohonan.wang_saku_dibayar) as total_wang_saku_dibayar_permohonan')
-        )
-        ->groupBy('permohonan.smoku_id'); // Include additional columns from smoku and smoku_akademik
+        $permohonanData = $this->fetchPermohonanData($sesiBayaran);
 
-        // Union the results of both queries
-        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
+        // Fetch data from Tuntutan table
+        $tuntutanData = $this->fetchTuntutanData($sesiBayaran);
 
-        $senarai->transform(function ($item) {
-            // Calculate bayaran by summing yuran_dibayar and wang_saku_dibayar
-            $bayaran = $item->total_yuran_dibayar_tuntutan + $item->total_wang_saku_dibayar_tuntutan + $item->total_yuran_dibayar_permohonan + $item->total_wang_saku_dibayar_permohonan;
+        // Merge the data for students with the same smoku_id
+        $mergedData = $this->mergeData($permohonanData, $tuntutanData);
 
-            // Add bayaran to the item
-            $item->bayaran = $bayaran;
+        // Convert $mergedData to a collection
+        $mergedDataCollection = collect($mergedData);
 
-            // Return the modified item
-            return $item;
-        });
-
-        // Calculate the total bayaran for all items
-        $this->totalBayaran = $senarai->sum('bayaran');
-
-        return $senarai;
+        // Return the collection
+        return $mergedDataCollection;
     }
 
-    // public function collection()    
-    // {
-    //     // Initialize results array
-    //     $this->results = [];
+    protected function fetchPermohonanData($sesiBayaran)
+    {
+        $permohonanData =  Permohonan::join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+            ->where('permohonan.status', 8)
+            ->where('permohonan.sesi_bayaran', $sesiBayaran)
+            ->where('bk_info_institusi.id_institusi', $this->instiusi_user)
+            ->select(
+                'smoku.id as smoku_id',
+                'smoku.nama',
+                'smoku.no_kp',
+                DB::raw('MAX(smoku_akademik.tarikh_mula) as tarikh_mula'),
+                DB::raw('MAX(smoku_akademik.tarikh_tamat) as tarikh_tamat'),
+                DB::raw('MAX(smoku_akademik.nama_kursus) as nama_kursus'),
+                DB::raw('GROUP_CONCAT(permohonan.no_baucer) as no_baucer'),
+                DB::raw('GROUP_CONCAT(permohonan.tarikh_baucer) as tarikh_baucer'),
+                DB::raw('GROUP_CONCAT(permohonan.tarikh_transaksi) as tarikh_transaksi'),
+                DB::raw('GROUP_CONCAT(permohonan.perihal) as perihal'),
+                DB::raw('GROUP_CONCAT(permohonan.status_pemohon) as status_pemohon'),
+                DB::raw('SUM(permohonan.yuran_dibayar) as total_yuran_dibayar'),
+                DB::raw('SUM(permohonan.wang_saku_dibayar) as total_wang_saku_dibayar')
+            )
+            ->groupBy('smoku.id', 'smoku.nama', 'smoku.no_kp')
+            ->get();
+        
+        return $permohonanData;
+    }
 
-    //     // Get the current month and year
-    //     $currentMonth = Carbon::now()->month;
-    //     $currentYear = Carbon::now()->year;
+    protected function fetchTuntutanData($sesiBayaran)
+    {
+        $tuntutanData = Tuntutan::join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
+            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+            ->where('tuntutan.status', 8)
+            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+            ->where('bk_info_institusi.id_institusi', $this->instiusi_user)
+            ->select(
+                'smoku.id as smoku_id',
+                'smoku.nama',
+                'smoku.no_kp',
+                DB::raw('MAX(smoku_akademik.tarikh_mula) as tarikh_mula'),
+                DB::raw('MAX(smoku_akademik.tarikh_tamat) as tarikh_tamat'),
+                DB::raw('MAX(smoku_akademik.nama_kursus) as nama_kursus'),
+                DB::raw('GROUP_CONCAT(tuntutan.no_baucer) as no_baucer'), 
+                DB::raw('GROUP_CONCAT(tuntutan.tarikh_baucer) as tarikh_baucer'),
+                DB::raw('GROUP_CONCAT(tuntutan.tarikh_transaksi) as tarikh_transaksi'),
+                DB::raw('GROUP_CONCAT(tuntutan.perihal) as perihal'),
+                DB::raw('GROUP_CONCAT(tuntutan.status_pemohon) as status_pemohon'),
+                DB::raw('SUM(tuntutan.yuran_dibayar) as total_yuran_dibayar'),
+                DB::raw('SUM(tuntutan.wang_saku_dibayar) as total_wang_saku_dibayar')
+            )
+            ->groupBy('smoku.id', 'smoku.nama', 'smoku.no_kp')
+            ->get();
+        
+        return $tuntutanData;
+    }
 
-    //     // Determine the sesi_bayaran based on the current month and year
-    //     if ($currentMonth == 2) {
-    //         $sesiBayaran = '1/' . $currentYear;
-    //     } elseif ($currentMonth == 4) {
-    //         $sesiBayaran = '2/' . $currentYear;
-    //     } elseif ($currentMonth == 10) {
-    //         $sesiBayaran = '3/' . $currentYear;
-    //     }
+    protected function mergeData($permohonanData, $tuntutanData)
+    {
+        $mergedData = [];
 
-    //     // Fetch data from both Tuntutan and Permohonan tables
-    //     $senarai = DB::table('smoku')
-    //         ->join('smoku_akademik', 'smoku.id', '=', 'smoku_akademik.smoku_id')
-    //         ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
-    //         ->leftJoin('tuntutan', function ($join) {
-    //             $join->on('smoku.id', '=', 'tuntutan.smoku_id')
-    //                 ->where('tuntutan.status', 8);
-    //         })
-    //         ->leftJoin('permohonan', function ($join) {
-    //             $join->on('smoku.id', '=', 'permohonan.smoku_id')
-    //                 ->where('permohonan.status', 8);
-    //         })
-    //         ->where('bk_info_institusi.id_institusi', $this->instiusi_user)
-    //         ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-    //         ->where('permohonan.sesi_bayaran', $sesiBayaran)
-    //         ->select(
-    //             DB::raw('MAX(smoku.nama) as nama'),
-    //             DB::raw('MAX(smoku.no_kp) as no_kp'),
-    //             DB::raw('MAX(smoku_akademik.tarikh_mula) as tarikh_mula'),
-    //             DB::raw('MAX(smoku_akademik.tarikh_tamat) as tarikh_tamat'),
-    //             DB::raw('MAX(smoku_akademik.nama_kursus) as nama_kursus'),
-    //             DB::raw('MAX(tuntutan.no_baucer) as no_baucer_tuntutan'),
-    //             DB::raw('MAX(tuntutan.tarikh_transaksi) as  tarikh_transaksi_tuntutan'), 
-    //             DB::raw('MAX(tuntutan.perihal) as perihal_tuntutan'),   
-    //             DB::raw('MAX(tuntutan.status_pemohon) as status_pemohon_tuntutan'), 
-    //             DB::raw('MAX(permohonan.no_baucer) as no_baucer_permohonan'),
-    //             DB::raw('MAX(permohonan.tarikh_transaksi) as tarikh_transaksi_permohonan'), 
-    //             DB::raw('MAX(permohonan.perihal) as perihal_permohonan'),   
-    //             DB::raw('MAX(permohonan.status_pemohon) as status_pemohon_permohonan'),   
-    //             DB::raw('SUM(tuntutan.yuran_dibayar) as total_yuran_dibayar_tuntutan'),
-    //             DB::raw('SUM(tuntutan.wang_saku_dibayar) as total_wang_saku_dibayar_tuntutan'),
-    //             DB::raw('SUM(permohonan.yuran_dibayar) as total_yuran_dibayar_permohonan'),
-    //             DB::raw('SUM(permohonan.wang_saku_dibayar) as total_wang_saku_dibayar_permohonan')
-    //         )
-    //         ->groupBy('smoku.id')
-    //         ->orderBy('smoku.id');
+        foreach ($permohonanData as $permohonanRow) {
+            $smokuId = $permohonanRow->smoku_id;
 
-    //     // Process the results
-    //     if ($senarai->exists()) {
-    //         // Process the results
-    //         $senarai->each(function ($row) {
-    //             // Combine information for bayaran, rujukan bayaran, and jenis tuntutan
-    //             $bayaran = $row->total_yuran_dibayar_tuntutan + $row->total_wang_saku_dibayar_tuntutan +
-    //                         $row->total_yuran_dibayar_permohonan + $row->total_wang_saku_dibayar_permohonan;
-    
-    //             $perihal = $row->perihal_tuntutan ?? $row->perihal_permohonan;
-    
-    //             $status_pemohon = $row->status_pemohon_tuntutan ?? $row->status_pemohon_permohonan;
-    
-    //             $no_baucer = $row->no_baucer_tuntutan ?? $row->no_baucer_permohonan;
-                
-    //             $tarikh_transaksi = $row->tarikh_transaksi_tuntutan ?? $row->tarikh_transaksi_permohonan;
-    
-    //             // Output the combined row
-    //             $this->outputRow([
-    //                 $row->nama,
-    //                 $row->no_kp,
-    //                 $row->nama_kursus,
-    //                 $row->tarikh_mula . ' - ' . $row->tarikh_tamat,
-    //                 $status_pemohon,
-    //                 number_format($bayaran, 2, '.', ''),
-    //                 $no_baucer,
-    //                 strtoupper($perihal),
-    //                 Carbon::parse($tarikh_transaksi)->format('d/m/Y')
-    //             ]);
-    //         });
-    //     } 
-    // }
+            // Check if there is a corresponding Tuntutan data for the current smoku_id
+            $tuntutanRow = $tuntutanData->where('smoku_id', $smokuId)->first();
 
-    // private function outputRow($data)
-    // {
-    //     // Increment the counter for "BIL" column
-    //     $this->counter++;
+            if ($tuntutanRow) {
+                // Combine data for Permohonan and Tuntutan
+                $mergedRow = [
+                    'nama' => $permohonanRow->nama,
+                    'no_kp' => $permohonanRow->no_kp,
+                    'nama_kursus' => $permohonanRow->nama_kursus,
+                    'tarikh_mula' => $permohonanRow->tarikh_mula,
+                    'tarikh_tamat' => $permohonanRow->tarikh_tamat,
+                    'status_pemohon' => $permohonanRow->status_pemohon,
+                    'bayaran' => $permohonanRow->total_yuran_dibayar + $permohonanRow->total_wang_saku_dibayar +
+                                    $tuntutanRow->total_yuran_dibayar + $tuntutanRow->total_wang_saku_dibayar,
+                    'no_baucer' => $permohonanRow->no_baucer . ' & ' . $tuntutanRow->no_baucer,
+                    'perihal' => $permohonanRow->perihal . ' & ' . $tuntutanRow->perihal,
+                    'tarikh_transaksi' => $tuntutanRow->tarikh_transaksi,
+                    'tarikh_baucer' => $tuntutanRow->tarikh_baucer
+                ];
 
-    //     // Add the counter to the beginning of the data array
-    //     array_unshift($data, $this->counter);
+                $mergedData[] = $mergedRow;
+            } else {
+                // Only Permohonan data exists
+                $mergedData[] = [
+                    'nama' => $permohonanRow->nama,
+                    'no_kp' => $permohonanRow->no_kp,
+                    'nama_kursus' => $permohonanRow->nama_kursus,
+                    'tarikh_mula' => $permohonanRow->tarikh_mula,
+                    'tarikh_tamat' => $permohonanRow->tarikh_tamat,
+                    'status_pemohon' => $permohonanRow->status_pemohon,
+                    'bayaran' => $permohonanRow->total_yuran_dibayar + $permohonanRow->total_wang_saku_dibayar,
+                    'no_baucer' => $permohonanRow->no_baucer,
+                    'perihal' => $permohonanRow->perihal,
+                    'tarikh_transaksi' => $permohonanRow->tarikh_transaksi,
+                    'tarikh_baucer' => $permohonanRow->tarikh_baucer
+                ];
+            }
+        }
 
-    //     // Update total values
-    //     $this->totalBayaran += $data[6];
+        // Add Tuntutan data that doesn't have corresponding Permohonan data
+        foreach ($tuntutanData as $tuntutanRow) 
+        {
+            $smokuId = $tuntutanRow->smoku_id;
 
-    //     // Push the data to the results array
-    //     $this->results[] = $data;
-    // }
+            if (!$permohonanData->where('smoku_id', $smokuId)->first()) {
+                $mergedData[] = [
+                    'nama' => $tuntutanRow->nama,
+                    'no_kp' => $tuntutanRow->no_kp,
+                    'nama_kursus' => $tuntutanRow->nama_kursus,
+                    'tarikh_mula' => $tuntutanRow->tarikh_mula,
+                    'tarikh_tamat' => $tuntutanRow->tarikh_tamat,
+                    'status_pemohon' => $tuntutanRow->status_pemohon,
+                    'bayaran' => $tuntutanRow->total_yuran_dibayar + $tuntutanRow->total_wang_saku_dibayar,
+                    'no_baucer' => $tuntutanRow->no_baucer,
+                    'perihal' => $tuntutanRow->perihal,
+                    'tarikh_transaksi' => $tuntutanRow->tarikh_transaksi,
+                    'tarikh_baucer' => $tuntutanRow->tarikh_baucer
+                ];
+            }
+        }
+
+        // dd($mergedData);
+
+        return $mergedData;
+    }
 
 
     public function headings(): array
@@ -246,12 +226,12 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         return [
             'A' => 5,
             'B' => 40,           
-            'C' => 20,
-            'D' => 30,
+            'C' => 15,
+            'D' => 35,
             'E' => 25,
             'F' => 15,
             'G' => 20,
-            'H' => 20,
+            'H' => 25,
             'I' => 30,
             'J' => 20,
         ];
@@ -262,33 +242,42 @@ class DokumenSPBB2 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         // Increment the counter for "BIL" column
         $this->counter++;
 
-        // Retrive tarikh mula & tamat pengajian
-        $tarikh_mula = Carbon::parse($row->tarikh_mula)->format('d/m/Y');
-        $tarikh_tamat = Carbon::parse($row->tarikh_tamat)->format('d/m/Y');
+        // Retrieve tarikh mula & tamat pengajian
+        $tarikh_mula = Carbon::parse($row['tarikh_mula'])->format('d/m/Y');
+        $tarikh_tamat = Carbon::parse($row['tarikh_tamat'])->format('d/m/Y');
 
         // Concatenate the formatted dates with the desired format
         $tempoh_tajaan = $tarikh_mula . ' - ' . $tarikh_tamat;
 
         // Concatenate the no_baucer 
-        $baucer = $row->no_baucer_permohonan . $row->no_baucer_tuntutan;
+        $baucer = $row['no_baucer'];
 
-        // Calculate the total of yuran dibayar & want saki dibayar
-        $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
+        // Split the concatenated baucer string into individual baucer numbers
+        $baucerNumbers = explode(' & ', $baucer);
+
+        // Convert the array of baucer numbers to a string
+        $baucerString = implode(' & ', $baucerNumbers);
+
+        // Get rujukan bayaran
+        $rujukanBayaran = $baucerString . ' ' . Carbon::parse($row['tarikh_baucer'])->format('d/m/Y');
+
+        // Calculate the total of yuran dibayar & wang saku dibayar
+        $bayaran = number_format($row['bayaran'], 2, '.', '');
 
         // Update total values
-        $this->totalBayaran += $dibayar;
+        $this->totalBayaran += $bayaran;
 
         return [
-             $this->counter,
-             $row->nama,
-             $row->no_kp,
-             strtoupper($row->nama_kursus),
-             $tempoh_tajaan,
-             strtoupper($row->status_pemohon),
-             number_format($row->bayaran, 2, '.', ''), 
-             $baucer,
-             strtoupper($row->perihal),
-             Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+            $this->counter,
+            $row['nama'],
+            $row['no_kp'],
+            strtoupper($row['nama_kursus']),
+            $tempoh_tajaan,
+            strtoupper($row['status_pemohon']),
+            $bayaran,
+            $rujukanBayaran, 
+            strtoupper($row['perihal']),
+            Carbon::parse($row['tarikh_transaksi'])->format('d/m/Y'),
         ];
     }
 
