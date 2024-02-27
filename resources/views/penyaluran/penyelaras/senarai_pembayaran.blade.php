@@ -96,9 +96,9 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar">
+                            <div class="card-toolbar" data-kt-subscription-table-filter="form">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
-                                    <div class="col-md-12" data-kt-subscription-table-filter="form">
+                                    <div class="col-md-12">
                                         <div class="row form-filter" >
                                             <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <div class="col-md-6">
@@ -193,8 +193,8 @@
                                 </div>
                             </div>
 
-                            <div class="card-toolbar">
-                                <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-filter="status">
+                            <div class="card-toolbar" data-kt-subscription-table-filter="status">
+                                <div class="d-flex justify-content-between mt-5 mb-0">
                                     <!-- Kutipan Export Container (data-program-code="kutipan") -->
                                     <div class="col-md-7 export-container" data-program-code="kutipan"> 
                                         <!-- Status Filter -->
