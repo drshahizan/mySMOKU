@@ -47,52 +47,54 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->where('tuntutan.status', 8)
-            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'tuntutan.tarikh_transaksi',
-                'tuntutan.no_cek',
-                'tuntutan.yuran_disokong',
-                'tuntutan.wang_saku_disokong',
-                'tuntutan.tarikh_baucer',
-                'tuntutan.no_baucer',
-                'tuntutan.yuran_dibayar',
-                'tuntutan.wang_saku_dibayar',
-            );
+        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+        ->where('tuntutan.status', 8)
+        ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+        ->where('f.id_institusi', $this->instiusi_user)
+        ->select(
+            'tuntutan.tarikh_transaksi',
+            'tuntutan.no_cek',
+            'tuntutan.tarikh_baucer',
+            DB::raw('SUM(tuntutan.yuran_dibayar) as total_yuran_dibayar'),
+            DB::raw('SUM(tuntutan.wang_saku_dibayar) as total_wang_saku_dibayar'),
+            DB::raw('SUM(tuntutan.yuran_disokong) as total_yuran_disokong'),
+            DB::raw('SUM(tuntutan.wang_saku_disokong) as total_wang_saku_disokong')
+        )->groupBy('tuntutan.tarikh_transaksi', 'tuntutan.no_cek', 'tuntutan.tarikh_baucer');
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-            ->where('permohonan.status', 8) 
-            ->where('permohonan.sesi_bayaran', $sesiBayaran)
-            ->where('f.id_institusi', $this->instiusi_user)
-            ->select(
-                'permohonan.tarikh_transaksi',
-                'permohonan.no_cek',
-                'permohonan.yuran_disokong',
-                'permohonan.wang_saku_disokong',
-                'permohonan.tarikh_baucer',
-                'permohonan.no_baucer',
-                'permohonan.yuran_dibayar',
-                'permohonan.wang_saku_dibayar',
-            );
+        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+        ->where('permohonan.status', 8) 
+        ->where('permohonan.sesi_bayaran', $sesiBayaran)
+        ->where('f.id_institusi', $this->instiusi_user)
+        ->select(
+            'permohonan.tarikh_transaksi',
+            'permohonan.no_cek',
+            'permohonan.tarikh_baucer',
+            DB::raw('SUM(permohonan.yuran_dibayar) as total_yuran_dibayar'),
+            DB::raw('SUM(permohonan.wang_saku_dibayar) as total_wang_saku_dibayar'),
+            DB::raw('SUM(permohonan.yuran_disokong) as total_yuran_disokong'),
+            DB::raw('SUM(permohonan.wang_saku_disokong) as total_wang_saku_disokong')
+        )->groupBy('permohonan.tarikh_transaksi', 'permohonan.no_cek', 'permohonan.tarikh_baucer');
 
-        // Combine the results of both queries
-        $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
 
-        // Calculate totals
-        $totalYuranDibayar = $senarai->sum('yuran_dibayar');
-        $totalWangSakuDibayar = $senarai->sum('wang_saku_dibayar');
-        $totalYuranDisokong = $senarai->sum('yuran_disokong');
-        $totalWangSakuDisokong = $senarai->sum('wang_saku_disokong');
+        // Execute the queries and get the results as collections
+        $senaraiTuntutanResults = $senaraiTuntutan->get();
+        $senaraiPermohonanResults = $senaraiPermohonan->get();
+
+        // Now you can perform operations on the resulting collections
+        $totalYuranDibayar = $senaraiPermohonanResults->sum('total_yuran_dibayar') + $senaraiTuntutanResults->sum('total_yuran_dibayar');
+        $totalWangSakuDibayar = $senaraiPermohonanResults->sum('total_wang_saku_dibayar') + $senaraiTuntutanResults->sum('total_wang_saku_dibayar');
+        $totalYuranDisokong = $senaraiPermohonanResults->sum('total_yuran_disokong') + $senaraiTuntutanResults->sum('total_yuran_disokong');
+        $totalWangSakuDisokong = $senaraiPermohonanResults->sum('total_wang_saku_disokong') + $senaraiTuntutanResults->sum('total_wang_saku_disokong');
 
         // Calculate total bayaran and disokong
         $totalBayaran = number_format($totalYuranDibayar + $totalWangSakuDibayar, 2, '.', '');
         $totalDisokong = number_format($totalYuranDisokong + $totalWangSakuDisokong, 2, '.', '');
 
-        // Prepare the data for export
+        // Merge the results of both queries into a single collection
+        $senarai = $senaraiTuntutanResults->merge($senaraiPermohonanResults);
+
         $data = $senarai->map(function ($item) use ($totalBayaran, $totalDisokong) {
             return [
                 'tarikh_transaksi' => $item->tarikh_transaksi,
