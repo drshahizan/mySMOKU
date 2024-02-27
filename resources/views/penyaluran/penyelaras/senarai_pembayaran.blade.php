@@ -195,33 +195,31 @@
 
                             <div class="card-toolbar" data-kt-subscription-table-filter="status">
                                 <div class="d-flex justify-content-between mt-5 mb-0">
-                                    <!-- Kutipan Export Container (data-program-code="kutipan") -->
-                                    <div class="col-md-7 export-container" data-program-code="kutipan"> 
-                                        <!-- Status Filter -->
-                                        <div class="row form-filter">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <select class="form-select" id="kutipan_status_filter">
-                                                    <option value="">Pilih Status</option>
-                                                    <option value="Aktif">Aktif</option>
-                                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                                </select>
-                                            </div>
-                                            
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
-                                                    <i class="ki-duotone ki-filter fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </button>
-                                            </div>
+                                    <div class="row form-filter">
+                                        <div class="col-md-4" style="display: flex; align-items: center;">
+                                            <select class="form-select" id="kutipan_status_filter">
+                                                <option value="">Pilih Status</option>
+                                                <option value="Aktif">Aktif</option>
+                                                <option value="Tidak Aktif">Tidak Aktif</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
+                                                <i class="ki-duotone ki-filter fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </button>
                                         </div>
 
-                                        <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                            <div class="col-md-3">
-                                                <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
-                                                    <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-                                                </a>
+                                        <div class="col-md-7 export-container" data-program-code="kutipan"> 
+                                            <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
+                                                <div class="col-md-3">
+                                                    <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+                                                        <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
