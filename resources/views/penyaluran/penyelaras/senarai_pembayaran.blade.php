@@ -96,7 +96,7 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
-                            <div class="card-toolbar" data-kt-subscription-table-filter="form">
+                            <div class="card-toolbar" id="permohonan-tuntutan-toolbar" data-kt-subscription-table-filter="form">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12">
                                         <div class="row form-filter" >
@@ -193,32 +193,34 @@
                                 </div>
                             </div>
 
-                            <div class="card-toolbar" data-kt-subscription-table-filter="status">
+                            <div class="card-toolbar" id="kutipan-toolbar" data-kt-subscription-table-filter="status">
                                 <div class="d-flex justify-content-between mt-5 mb-0">
-                                    <div class="row form-filter">
-                                        <div class="col-md-4" style="display: flex; align-items: center;">
-                                            <select class="form-select" id="kutipan_status_filter">
-                                                <option value="">Pilih Status</option>
-                                                <option value="Aktif">Aktif</option>
-                                                <option value="Tidak Aktif">Tidak Aktif</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="col-md-1">
-                                            <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
-                                                <i class="ki-duotone ki-filter fs-2">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </button>
-                                        </div>
+                                    <div class="col-md-12">
+                                        <div class="row form-filter">
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                                <select class="form-select" id="kutipan_status_filter">
+                                                    <option value="">Pilih Status</option>
+                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
+                                                    <i class="ki-duotone ki-filter fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                    </i>
+                                                </button>
+                                            </div>
 
-                                        <div class="col-md-7 export-container" data-program-code="kutipan"> 
-                                            <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                <div class="col-md-3">
-                                                    <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
-                                                        <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-                                                    </a>
+                                            <div class="col-md-6 export-container" data-program-code="kutipan"> 
+                                                <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
+                                                    <div class="col-md-3">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -701,27 +703,20 @@
                     console.log("Updating export containers...");
 
                     $('.export-container').hide();
-
                     var programCode = getProgramCode(activeTabId);
 
-                    // Check if the active tab is Kutipan
-                    if (programCode === 'kutipan') {
-                        // Hide all export containers except for Kutipan
-                        $('.export-container[data-program-code]').not('[data-program-code="kutipan"]').hide();
-                        
-                        // Show the Kutipan export container
-                        $('.export-container[data-program-code="kutipan"]').show();
-                    } else {
-                        // For other tabs, show the export container based on program code
-                        $('.export-container[data-program-code="' + programCode + '"]').show();
+                    // Hide all card toolbars
+                    $('.card-toolbar').hide();
+
+                    // Show the card toolbar based on the active tab
+                    if (programCode === 'permohonan' || programCode === 'tuntutan') {
+                        $('#permohonan-tuntutan-toolbar').show();
+                    } else if (programCode === 'kutipan') {
+                        $('#kutipan-toolbar').show();
                     }
 
-                    // Show or hide the filter section based on the active tab
-                    if (programCode === 'permohonan' || programCode === 'tuntutan') {
-                        $('[data-kt-subscription-table-filter="form"]').show();
-                    } else if (programCode === 'kutipan') {
-                        $('[data-kt-subscription-table-filter="status"]').show();
-                    }
+                    // Show the corresponding export container based on the program code
+                    $('.export-container[data-program-code="' + programCode + '"]').show();
                 }
 
 
