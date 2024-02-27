@@ -216,7 +216,7 @@
 
                                             <div class="col-md-6 export-container" data-program-code="kutipan"> 
                                                 <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
                                                             <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
                                                         </a>
