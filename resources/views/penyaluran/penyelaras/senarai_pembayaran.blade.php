@@ -98,7 +98,6 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
-
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <div class="row form-filter" >
                                             <div class="col-md-4" style="display: flex; align-items: center;">
@@ -189,22 +188,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            {{-- KUTIPAN BALIK --}}
-                                            <div class="col-md-7 export-container" data-program-code="kutipan"> 
-                                                <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                    <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
-                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12" data-kt-subscription-table-filter="status">
-                                        <div class="row form-filter">
+                                    <!-- Kutipan Export Container (data-program-code="kutipan") -->
+                                    <div class="col-md-7 export-container" data-program-code="kutipan"> 
+                                        <!-- Status Filter -->
+                                        <div class="row form-filter" data-kt-subscription-table-filter="status">
                                             <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
@@ -221,20 +211,16 @@
                                                     </i>
                                                 </button>
                                             </div>
-                                    
-                                            {{-- KUTIPAN BALIK --}}
-                                            <div class="col-md-7 export-container" data-program-code="kutipan"> 
-                                                <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                    <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
-                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                        </div>
+
+                                        <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
+                                            <div class="col-md-3">
+                                                <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+                                                    <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>                                    
-
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Card toolbar-->
@@ -663,7 +649,7 @@
                 $('.export-container[data-program-code="permohonan"]').show();
                 $('.export-container[data-program-code="tuntutan"]').hide();
                 $('.export-container[data-program-code="kutipan"]').hide();
-                $('.none-container').show(); // Hide export elements
+                $('.none-container').show(); 
 
                 $('.nav-link').on('click', function() {
                     var activeTabId = $(this).attr('id');
@@ -683,10 +669,30 @@
                     }
                 }
 
+                // function updateExportContainers(activeTabId) {
+                //     $('.export-container').hide();
+                //     var programCode = getProgramCode(activeTabId);
+                //     $('.export-container[data-program-code="' + programCode + '"]').show();
+                // }
+
                 function updateExportContainers(activeTabId) {
+                    console.log("Updating export containers..."); // Add this line
+
                     $('.export-container').hide();
+                    // $('.form-filter').hide(); // Hide all filter sections
+
                     var programCode = getProgramCode(activeTabId);
                     $('.export-container[data-program-code="' + programCode + '"]').show();
+
+                    // Show the corresponding filter section based on the active tab
+                    if (programCode === 'permohonan' || programCode === 'tuntutan') {
+                        $('[data-kt-subscription-table-filter="form"]').show();
+                    } else if (programCode === 'kutipan') {
+                        console.log('Program Code:', programCode);
+                        console.log('Selected Element:', $('[data-kt-subscription-table-filter="status"]'));
+                        console.log('Kutipan tab');
+                        $('[data-kt-subscription-table-filter="status"]').show();
+                    }
                 }
 
                 function getProgramCode(activeTabId) {
