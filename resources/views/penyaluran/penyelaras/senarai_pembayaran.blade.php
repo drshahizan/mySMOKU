@@ -190,11 +190,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
+                            <div class="card-toolbar">
+                                <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-filter="status">
                                     <!-- Kutipan Export Container (data-program-code="kutipan") -->
                                     <div class="col-md-7 export-container" data-program-code="kutipan"> 
                                         <!-- Status Filter -->
-                                        <div class="row form-filter" data-kt-subscription-table-filter="status">
+                                        <div class="row form-filter">
                                             <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
