@@ -27,7 +27,6 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
     public function __construct()
     {
-        // Get the institusi ID of the logged-in user
         $this->instiusi_user = Auth::user()->id_institusi;
     }
 
@@ -48,42 +47,63 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
         // Fetch data from Tuntutan table
         $senaraiTuntutan = Tuntutan::join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-        ->where('tuntutan.status', 8)
-        ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
-        ->select(
-            'tuntutan.tarikh_transaksi',
-            'tuntutan.no_cek',
-            'tuntutan.yuran_disokong',
-            'tuntutan.wang_saku_disokong',
-            'tuntutan.tarikh_baucer',
-            'tuntutan.no_baucer',
-            'tuntutan.yuran_dibayar',
-            'tuntutan.wang_saku_dibayar',
-        );
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->where('tuntutan.status', 8)
+            ->where('tuntutan.sesi_bayaran', $sesiBayaran)
+            ->where('f.id_institusi', $this->instiusi_user)
+            ->select(
+                'tuntutan.tarikh_transaksi',
+                'tuntutan.no_cek',
+                'tuntutan.yuran_disokong',
+                'tuntutan.wang_saku_disokong',
+                'tuntutan.tarikh_baucer',
+                'tuntutan.no_baucer',
+                'tuntutan.yuran_dibayar',
+                'tuntutan.wang_saku_dibayar',
+            );
 
         // Fetch data from Permohonan table
         $senaraiPermohonan = Permohonan::join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
-        ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
-        ->where('permohonan.status', 8) 
-        ->where('permohonan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
-        ->select(
-            'permohonan.tarikh_transaksi',
-            'permohonan.no_cek',
-            'permohonan.yuran_disokong',
-            'permohonan.wang_saku_disokong',
-            'permohonan.tarikh_baucer',
-            'permohonan.no_baucer',
-            'permohonan.yuran_dibayar',
-            'permohonan.wang_saku_dibayar',
-        );
+            ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
+            ->where('permohonan.status', 8) 
+            ->where('permohonan.sesi_bayaran', $sesiBayaran)
+            ->where('f.id_institusi', $this->instiusi_user)
+            ->select(
+                'permohonan.tarikh_transaksi',
+                'permohonan.no_cek',
+                'permohonan.yuran_disokong',
+                'permohonan.wang_saku_disokong',
+                'permohonan.tarikh_baucer',
+                'permohonan.no_baucer',
+                'permohonan.yuran_dibayar',
+                'permohonan.wang_saku_dibayar',
+            );
 
         // Combine the results of both queries
         $senarai = $senaraiTuntutan->union($senaraiPermohonan)->get();
 
-        return $senarai;
+        // Calculate totals
+        $totalYuranDibayar = $senarai->sum('yuran_dibayar');
+        $totalWangSakuDibayar = $senarai->sum('wang_saku_dibayar');
+        $totalYuranDisokong = $senarai->sum('yuran_disokong');
+        $totalWangSakuDisokong = $senarai->sum('wang_saku_disokong');
+
+        // Calculate total bayaran and disokong
+        $totalBayaran = number_format($totalYuranDibayar + $totalWangSakuDibayar, 2, '.', '');
+        $totalDisokong = number_format($totalYuranDisokong + $totalWangSakuDisokong, 2, '.', '');
+
+        // Prepare the data for export
+        $data = $senarai->map(function ($item) use ($totalBayaran, $totalDisokong) {
+            return [
+                'tarikh_transaksi' => $item->tarikh_transaksi,
+                'no_cek' => $item->no_cek,
+                'tarikh_baucer' => $item->tarikh_baucer,
+                'total_bayaran' => $totalBayaran, 
+                'total_disokong' => $totalDisokong, 
+            ];
+        });
+
+        return $data;
     }
 
     public function headings(): array
@@ -104,46 +124,27 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
     }
 
     public function map($row): array
-    {
-        // Get the current month and year
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
-
-        // Determine the sesi_bayaran based on the current month and year
-        if ($currentMonth == 2) {
-            $sesiBayaran = '1 ' . $currentYear . '/'. $currentYear+1;
-        } elseif ($currentMonth == 4) {
-            $sesiBayaran = '2 ' . $currentYear . '/'. $currentYear+1;
-        } elseif ($currentMonth == 10) {
-            $sesiBayaran = '3 ' . $currentYear . '/'. $currentYear+1;
-        }
-
-        // Calculate the total of yuran dibayar & want saki dibayar
-        $dibayar = number_format($row->yuran_dibayar, 2, '.', '') + number_format($row->wang_saku_dibayar, 2, '.', '');
-        $disokong = number_format($row->yuran_disokong, 2, '.', '') + number_format($row->wang_saku_disokong, 2, '.', '');
-
-        // Update total values
-        $this->totalBayaran += $dibayar;
-        $this->totalDisokong += $disokong;
-
+    {   
         //perkara
         $perkaraTerimaan = 'PERUNTUKAN DARIPADA BAHAGIAN BIASISWA';
-        $perkaraBayaran = 'BAYARAN YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI '. $sesiBayaran;
+        $perkaraBayaran = 'BAYARAN YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI '. $this->getSesiBayaran();
 
+        $this->totalBayaran = $row['total_bayaran'];
+        $this->totalDisokong = $row['total_disokong'];
+        
         // Prepare array elements
         return [
             '',
-            Carbon::parse($row->tarikh_transaksi)->format('d/m/Y'),
+            Carbon::parse($row['tarikh_transaksi'])->format('d/m/Y'), // Access using array notation
             $perkaraTerimaan,
-            $row->no_cek,
-            number_format($disokong, 2, '.', ''), 
-            Carbon::parse($row->tarikh_baucer)->format('d/m/Y'),
+            $row['no_cek'], // Access using array notation
+            number_format($row['total_disokong'], 2, '.', ''),  // Access using object notation
+            Carbon::parse($row['tarikh_baucer'])->format('d/m/Y'), // Access using array notation
             $perkaraBayaran,
             'SPBB2',
-            number_format($dibayar, 2, '.', ''), 
+            number_format($row['total_bayaran'], 2, '.', ''),  // Access using object notation
         ];
     }
-
 
     private function getInstitusiData()
     {
@@ -172,20 +173,35 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         return $bulanTahun;
     }
 
+    private function getSesiBayaran()
+    {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        // Determine the sesi_bayaran based on the current month and year
+        if ($currentMonth == 2) {
+            $sesiBayaran = '1 ' . $currentYear . '/'. $currentYear+1;
+        } elseif ($currentMonth == 4) {
+            $sesiBayaran = '2 ' . $currentYear . '/'. $currentYear+1;
+        } elseif ($currentMonth == 10) {
+            $sesiBayaran = '3 ' . $currentYear . '/'. $currentYear+1;
+        }
+
+        return $sesiBayaran;
+    }
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $currentYear = Carbon::now()->year;
-                $sesiBayaran = $currentYear . '/'. $currentYear+1;
-
                 // Retrieve additional data for custom headers from the database
                 $customHeaderData = [
                     ['', 'INSTITUSI:', $this->getInstitusiData()],
                     ['', 'CAWANGAN:'],
                     ['', 'BULAN:', $this->getBulanData()],
                     [''],
-                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $sesiBayaran],
+                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $this->getSesiBayaran()],
                 ];
 
                 foreach ($customHeaderData as $index => $rowData) {
@@ -229,19 +245,14 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
                 // Retrieve additional data for tittle
                 $customTittle = [
-                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $sesiBayaran],
+                    ['', 'LAPORAN PENYATA TERIMAAN DAN BAYARAN PROGRAM BKOKU BAGI SESI '. $this->getSesiBayaran()],
                 ];
 
-                foreach ($customTittle as $index => $rowData) {
+                foreach ($customTittle as $index => $rowData) 
+                {
                     $rowNumber = $index + 5; // Adjust the row number to start from 5
-                    
-                    // Assuming the title is in the second cell of the row (index 1)
                     $title = $rowData[1]; // Accessing the second element of the array
-                    
-                    // Merge cells for custom title
                     $event->sheet->mergeCells("B{$rowNumber}:I{$rowNumber}"); // Merge from column B to column I
-                    
-                    // Apply data to the merged cell
                     $event->sheet->setCellValue("B{$rowNumber}", $title); // Set the title in column B
                 }
 
