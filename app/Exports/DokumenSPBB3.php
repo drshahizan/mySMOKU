@@ -367,11 +367,11 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
-                    ['', 'JUMLAH TERIMAAN (i)', '', $totalDisokongFormatted, '', 'JUMLAH BAYARAN (ii)', '', $totalBayaranFormatted],
-                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', '', $bakiFormatted],
+                    ['', '', 'JUMLAH TERIMAAN (i)', '', $totalDisokongFormatted, 'JUMLAH BAYARAN (ii)', '', '', $totalBayaranFormatted],
+                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', '', '', $bakiFormatted],
                     [''],
                     // Custom row for total
-                    ['', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
+                    ['', '', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
                 ]);
 
                 // Set the border for custom footer
