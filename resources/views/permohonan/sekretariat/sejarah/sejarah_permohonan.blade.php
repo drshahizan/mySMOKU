@@ -279,13 +279,13 @@
                                                         $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+
                                                         if ($item['status']==2){
                                                             $status='Baharu';
                                                         }
                                                         if ($item['status']==3){
                                                             $status='Sedang Disaring';
                                                         }
-                                                        
 
                                                         //nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
@@ -350,6 +350,8 @@
                                                                 </td>
                                                             @elseif ($item['status']=='9')
                                                                 <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='10')
+                                                                <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
                                                             @endif
                                                         </tr>
                                                     @endif

@@ -322,6 +322,8 @@
                                                                     <td class="text-center" style="width: 15%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='9')
                                                                     <td class="text-center" style="width: 15%"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='10')
+                                                                    <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
                                                             </tr>
                                                         @endif
