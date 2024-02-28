@@ -412,9 +412,7 @@
                                         </table>
                                     </div>
                                 @endif
-                                <div class="footer">
-                                    <input type="button" value="Hantar" onclick="resend()" class="btn btn-primary">
-                                </div>
+                                
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
                                     <!--begin::Form-->
@@ -444,44 +442,52 @@
             </div>
         </div>
     </div>
+    <style>
+        #token {
+          display: none;
+        }
+        #data {
+          display: none;
+        }
+    </style>
     <!--begin::Javascript-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
   <script>
-     function resend() {
-        // const secretKey = "{{ $secretKey }}";
-        // const time = {{ time() }}; 
-        // const token = generateToken(secretKey, time);
+    //  function resend() {
+    //     // const secretKey = "{{ $secretKey }}";
+    //     // const time = {{ time() }}; 
+    //     // const token = generateToken(secretKey, time);
 
-        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
-        // alert(id_permohonan);
-        const noic = "{{$smoku->no_kp}}";
-        const id_tuntutan = "";
+    //     const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+    //     // alert(id_permohonan);
+    //     const noic = "{{$smoku->no_kp}}";
+    //     const id_tuntutan = "";
 
-        // Construct the JSON array with the token
-        // const tokenArray = [{ "token": token }];
+    //     // Construct the JSON array with the token
+    //     // const tokenArray = [{ "token": token }];
 
-        // // Set the JSON array in the textarea
-        // const tokenTextarea = document.getElementById('token');
-        // tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-        // console.log("Token JSON:", tokenTextarea.value);
+    //     // // Set the JSON array in the textarea
+    //     // const tokenTextarea = document.getElementById('token');
+    //     // tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+    //     // console.log("Token JSON:", tokenTextarea.value);
 
-        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-        // Set the JSON array in the textarea
-        const dataTextarea = document.getElementById('data');
-        dataTextarea.value = JSON.stringify(dataArray, null, 2);
-        // console.log("Data JSON:", dataTextarea.value);
+    //     const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+    //     // Set the JSON array in the textarea
+    //     const dataTextarea = document.getElementById('data');
+    //     dataTextarea.value = JSON.stringify(dataArray, null, 2);
+    //     // console.log("Data JSON:", dataTextarea.value);
 
-    }
+    // }
     function sendData() {
         const secretKey = "{{ $secretKey }}";
         const time = {{ time() }}; 
         const token = generateToken(secretKey, time);
 
-        // const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
-        // // alert(id_permohonan);
-        // const noic = "{{$smoku->no_kp}}";
-        // const id_tuntutan = "";
+        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+        // alert(id_permohonan);
+        const noic = "{{$smoku->no_kp}}";
+        const id_tuntutan = "";
 
         // Construct the JSON array with the token
         const tokenArray = [{ "token": token }];
@@ -491,10 +497,10 @@
         tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
         // console.log("Token JSON:", tokenTextarea.value);
 
-        // const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-        // // Set the JSON array in the textarea
-        // const dataTextarea = document.getElementById('data');
-        // dataTextarea.value = JSON.stringify(dataArray, null, 2);
+        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+        // Set the JSON array in the textarea
+        const dataTextarea = document.getElementById('data');
+        dataTextarea.value = JSON.stringify(dataArray, null, 2);
         // console.log("Data JSON:", dataTextarea.value);
 
         const form = document.getElementById('hantar_maklumat');
@@ -514,7 +520,7 @@
                 Swal.fire({
                 icon: 'error',
                 title: 'Tidak Berjaya',
-                text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
+                text: 'Sila cuba sekali lagi.',
                 }).then((result) => {
                     // Check if the user clicked OK
                     if (result.isConfirmed) {
@@ -529,7 +535,7 @@
                 Swal.fire({
                 icon: 'success',
                 title: 'Berjaya',
-                text: 'Data berjaya di hantar ke ESP. Semak ESP',
+                text: 'Requery berjaya.',
                 }).then((result) => {
                     // Check if the user clicked OK
                     if (result.isConfirmed) {
