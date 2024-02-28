@@ -419,7 +419,15 @@
                                     
                                     <form class="form" id="hantar_maklumat">
                                     <textarea name="token" id="token" rows="10" cols="50"></textarea>
-                                    <textarea name="data" id="data" rows="10" cols="50"></textarea>
+                                    <textarea name="data" id="data" rows="10" cols="50">
+[
+  {
+    "id_permohonan": "B/4/031211010543",
+    "id_tuntutan": "",
+    "noic": "031211010543"
+  }
+]
+                                    </textarea>
                     
                                     <!--begin::Button-->
                                     <div class="footer">
@@ -451,10 +459,10 @@
         const time = {{ time() }}; 
         const token = generateToken(secretKey, time);
 
-        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
-        // alert(id_permohonan);
-        const noic = "{{$smoku->no_kp}}";
-        const id_tuntutan = "";
+        // const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+        // // alert(id_permohonan);
+        // const noic = "{{$smoku->no_kp}}";
+        // const id_tuntutan = "";
 
         // Construct the JSON array with the token
         const tokenArray = [{ "token": token }];
@@ -464,10 +472,10 @@
         tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
         // console.log("Token JSON:", tokenTextarea.value);
 
-        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-        // Set the JSON array in the textarea
-        const dataTextarea = document.getElementById('data');
-        dataTextarea.value = JSON.stringify(dataArray, null, 2);
+        // const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+        // // Set the JSON array in the textarea
+        // const dataTextarea = document.getElementById('data');
+        // dataTextarea.value = JSON.stringify(dataArray, null, 2);
         // console.log("Data JSON:", dataTextarea.value);
 
         const form = document.getElementById('hantar_maklumat');
