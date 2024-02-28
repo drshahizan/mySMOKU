@@ -478,50 +478,12 @@
             body: data
         })
         .then(response => response.json())
-        .then(data => {
-            console.log(data); // Log the API response to the console
-
-            // Convert the API response to a string for display in the alert
-            const responseDataString = JSON.stringify(data, null, 2);
-            if (data.status === 'error'){
-                Swal.fire({
-                icon: 'error',
-                title: 'Tidak Berjaya',
-                text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
-                }).then((result) => {
-                    // Check if the user clicked OK
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-                // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
-                // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
-                
-            }else{
-                Swal.fire({
-                icon: 'success',
-                title: 'Berjaya',
-                text: 'Data berjaya di hantar ke ESP. Semak ESP',
-                }).then((result) => {
-                    // Check if the user clicked OK
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-
-                // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
-                // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
-            }
-
-            // location.reload(); // Refresh the page
-        })
-
-        .catch(error => {
-            console.error('API Request failed:', error);
-            location.reload(); // Refresh the page
-        });
+            .then(data => {
+                console.log(data); // Log the API response to the consolepreven
+            })
+            .catch(error => {
+                console.error('API Request failed:', error);
+            });
     }
 
     function generateToken(secretKey, time) {
