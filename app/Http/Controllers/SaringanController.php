@@ -741,7 +741,7 @@ class SaringanController extends Controller
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
-        $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
+        $secretKey = 't73QYeipBMmHcDuzGAcNSXP_bgbOFXMyLM99OARs';
 
         return view('permohonan.sekretariat.pembayaran.papar',compact('permohonan','secretKey','akademik','smoku'));
     }
