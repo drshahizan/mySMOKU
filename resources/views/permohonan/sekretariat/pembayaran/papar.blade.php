@@ -456,7 +456,7 @@
         const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
         // alert(id_permohonan);
         const noic = "{{$smoku->no_kp}}";
-        const id_tuntutan = "";
+        const id_tuntutan = " ";
 
         // Construct the JSON array with the token
         // const tokenArray = [{ "token": token }];
