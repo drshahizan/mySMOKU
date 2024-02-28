@@ -185,7 +185,7 @@
                                         <td class="space">&nbsp;</td>
                                         <td><strong>Tarikh Bayaran</strong></td>
                                         <td>:</td>
-                                        <td>{{date('d/m/Y', strtotime($tkh_bayaran))}}</td>
+                                        <td>{{date('d/m/Y', strtotime($permohonan->tarikh_transaksi))}}</td>
                                     </tr>
                                 </table>
                                 <hr>
