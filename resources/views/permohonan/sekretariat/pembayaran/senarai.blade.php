@@ -145,281 +145,38 @@
                         </div>
                         <!--end::Card toolbar-->
 
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Form-->
-                            
-                            <form class="form" id="hantar_maklumat">
-                            <textarea name="token" id="token" rows="10" cols="50"></textarea>
-                            <textarea name="data" id="data" rows="10" cols="50"></textarea>
-            
-                            
-                            <div class="tab-content mt-0" id="myTabContent">
-                                {{-- BKOKU --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
-                                    <br><br>
-                                    <div class="body">
-                                        <div class="table-responsive">
-                                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width: 10%"><b>ID Permohonan</b></th>
-                                                    <th style="width: 20%"><b>Nama</b></th>
-                                                    <th style="width: 21%"><b>Nama Kursus</b></th>
-                                                    <th style="width: 25%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Status</b></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
-                                                @foreach ($permohonan as $item)
-                                                    @if ($item['program']=="BKOKU")
-                                                        @php
-                                                            $i++;
-
-                                                            $rujukan = explode("/", $item['no_rujukan_permohonan']);
-                                                            $peringkat = $rujukan[1];
-                                                            $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
-                                                            $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
-                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                            $tkh_bayaran = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', 8)->value('created_at');
-                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                            $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                            if ($item['status']==2){
-                                                                $status='Baharu';
-                                                            }
-                                                            if ($item['status']==3){
-                                                                $status='Sedang Disaring';
-                                                            }
-                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-
-                                                            //nama kursus
-                                                            $text2 = ucwords(strtolower($akademik->nama_kursus));
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text2);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $kursus = implode(' ', $result);
-
-                                                            //institusi pengajian
-                                                            $text3 = ucwords(strtolower($nama_institusi));
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text3);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $institusi = implode(' ', $result);
-                                                        @endphp
-                                                        @if ($jenis_institusi!="UA")
-                                                        <tr>
-                                                            <td>
-                                                                <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" onclick="requeryFunction('{{ $nokp }}')" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                            </td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td>{{$kursus}}</td>
-                                                            <td>{{$nama_institusi}}</td>
-                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                            <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
-                                                            @if ($item['status']=='6')
-                                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif ($item['status']=='8')
-                                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                            @endif
-                                                        </tr>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- BKOKU UA--}}
-                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
-                                    <br>
-                                    <div class="card-body pt-0">
-                                        <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
-                                        {{csrf_field()}}
-                                            <!--begin::Table-->
-                                            <table class="table table-striped table-hover dataTable js-exportable" id="kt_subscriptions_table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>
-                                                        <th style="width: 20%"><b>Nama</b></th>
-                                                        <th style="width: 25%" class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th style="width: 21%" class="text-center"><b>No Baucer</b></th>
-                                                        <th style="width: 8%" class="text-center"><b>Tarikh Baucer</b></th>
-                                                        <th style="width: 8%" class="text-center"><b>No Cek</b></th>
-                                                        <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
-                                                        <th style="width: 5%" class="text-center"><b>Status</b></th>
-                                                        <th style="width: 8%" class="text-center"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
+                        <div class="tab-content mt-0" id="myTabContent">
+                            {{-- BKOKU --}}
+                            <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                <br><br>
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 10%"><b>ID Permohonan</b></th>
+                                                <th style="width: 20%"><b>Nama</b></th>
+                                                <th style="width: 21%"><b>Nama Kursus</b></th>
+                                                <th style="width: 25%"><b>Institusi Pengajian</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Status</b></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @php
+                                                $i=0;
+                                            @endphp
+                                            @foreach ($permohonan as $item)
+                                                @if ($item['program']=="BKOKU")
                                                     @php
-                                                    $i=0;
-                                                    @endphp
-                                                    @foreach ($permohonan as $item)
-                                                        @if ($item['program']=="BKOKU")
-                                                            @php
-                                                                $i++;
-
-                                                                $rujukan = explode("/", $item['no_rujukan_permohonan']);
-                                                                $peringkat = $rujukan[1];
-                                                                $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
-                                                                $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
-                                                                $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                                $tkh_bayaran = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', 8)->value('created_at');
-                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                                $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                                if ($item['status']==2){
-                                                                    $status='Baharu';
-                                                                }
-                                                                if ($item['status']==3){
-                                                                    $status='Sedang Disaring';
-                                                                }
-                                                                $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-
-                                                            @endphp
-                                                            @if ($jenis_institusi=="UA")
-                                                                <tr>
-                                                                                                                    
-                                                                    <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item['id'] }}" /></td> 
-                                                                    <td style="width: 10%">
-                                                                        <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                    </td>
-                                                                    <td style="width: 20%">{{$pemohon}}</td>
-                                                                    <td style="width: 25%">{{$nama_institusi}}</td>
-                                                                    <td class="text-center" style="width: 21%">{{$item['no_baucer']}}</td>
-                                                                    <td class="text-center" style="width: 8%">
-                                                                        {{ $item['tarikh_baucer'] ? date('d/m/Y', strtotime($item['tarikh_baucer'])) : '' }}
-                                                                    </td>
-                                                                    <td class="text-center" style="width: 21%">{{$item['no_cek']}}</td>
-                                                                    <td class="text-center" style="width: 8%">
-                                                                        {{ $item['tarikh_transaksi'] ? date('d/m/Y', strtotime($item['tarikh_transaksi'])) : '' }}
-                                                                    </td>                                                                
-                                                                    @if ($item['status']=='6')
-                                                                        <td class="text-center" style="width: 5%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                    @elseif ($item['status']=='8')
-                                                                        <td class="text-center" style="width: 5%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                    @endif
-                                                                    <td class="text-center" data-id="{{ $item['id'] }}" data-action="return">
-                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kembali Kepada Penyelaras" style="cursor: pointer;">
-                                                                            <i class="fa fa-undo fa-sm custom-white-icon" style="color: #000000;"></i>
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                            <!--end::Table-->
-
-                                            <!-- Button trigger modal --> 
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
-                                                Kemaskini
-                                            </button>
-                                            {{-- Modal --}}
-                                            <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No Cek / No EFT:</label>
-                                                                <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
-                                                                <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi" required oninvalid="this.setCustomValidity('Sila isi tarikh transaksi.')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div> 
-                                        </form>   
-                                    </div>
-                                </div>
-                                {{-- PPK--}}
-                                <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-                                    <br>
-                                    <div class="body">
-                                        <div class="table-responsive">
-                                            <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
-                                                <thead>
-                                                <tr>
-                                                    <th style="width: 10%"><b>ID Permohonan</b></th>
-                                                    <th style="width: 20%"><b>Nama</b></th>
-                                                    <th style="width: 21%"><b>Nama Kursus</b></th>
-                                                    <th style="width: 25%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
-                                                    <th style="width: 8%" class="text-center"><b>Status</b></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
-                                                @foreach ($permohonan as $item)
-                                                    @if ($item['program']=="PPK")
-                                                        @php
-                                                            $i++;
+                                                        $i++;
 
                                                         $rujukan = explode("/", $item['no_rujukan_permohonan']);
                                                         $peringkat = $rujukan[1];
                                                         $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
                                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                         $tkh_bayaran = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', 8)->value('created_at');
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
@@ -470,33 +227,265 @@
                                                             }
                                                         }
                                                         $institusi = implode(' ', $result);
-                                                        @endphp
-                                                        <tr>
-                                                            <td style="width: 10%">
-                                                                <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                            </td>
-                                                            <td style="width: 20%">{{$pemohon}}</td>
-                                                            <td style="width: 21%">{{$kursus}}</td>
-                                                            <td style="width: 25%">{{$nama_institusi}}</td>
-                                                            <td class="text-center" style="width: 8%">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                            <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
-                                                            @if ($item['status']=='6')
-                                                                <td class="text-center" style="width: 8%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                            @elseif ($item['status']=='8')
-                                                                <td class="text-center" style="width: 8%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                            @endif
-                                                        </tr>
+                                                    @endphp
+                                                    @if ($jenis_institusi!="UA")
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                        </td>
+                                                        <td>{{$pemohon}}</td>
+                                                        <td>{{$kursus}}</td>
+                                                        <td>{{$nama_institusi}}</td>
+                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
+                                                        @if ($item['status']=='6')
+                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='8')
+                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+                                                    </tr>
                                                     @endif
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        
-                        </form>
-                        <!--end::Form-->
+                            {{-- BKOKU UA--}}
+                            <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                <br>
+                                <div class="card-body pt-0">
+                                    <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
+                                    {{csrf_field()}}
+                                        <!--begin::Table-->
+                                        <table class="table table-striped table-hover dataTable js-exportable" id="kt_subscriptions_table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
+                                                    <th style="width: 10%"><b>ID Permohonan</b></th>
+                                                    <th style="width: 20%"><b>Nama</b></th>
+                                                    <th style="width: 25%" class="text-center"><b>Institusi Pengajian</b></th>
+                                                    <th style="width: 21%" class="text-center"><b>No Baucer</b></th>
+                                                    <th style="width: 8%" class="text-center"><b>Tarikh Baucer</b></th>
+                                                    <th style="width: 8%" class="text-center"><b>No Cek</b></th>
+                                                    <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
+                                                    <th style="width: 5%" class="text-center"><b>Status</b></th>
+                                                    <th style="width: 8%" class="text-center"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                @php
+                                                $i=0;
+                                                @endphp
+                                                @foreach ($permohonan as $item)
+                                                    @if ($item['program']=="BKOKU")
+                                                        @php
+                                                            $i++;
+
+                                                            $rujukan = explode("/", $item['no_rujukan_permohonan']);
+                                                            $peringkat = $rujukan[1];
+                                                            $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                            $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                            $tkh_bayaran = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', 8)->value('created_at');
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                            if ($item['status']==2){
+                                                                $status='Baharu';
+                                                            }
+                                                            if ($item['status']==3){
+                                                                $status='Sedang Disaring';
+                                                            }
+                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                            $conjunctions = ['bin', 'binti'];
+                                                            $words = explode(' ', $text);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
+                                                            }
+                                                            $pemohon = implode(' ', $result);
+
+                                                        @endphp
+                                                        @if ($jenis_institusi=="UA")
+                                                            <tr>
+                                                                                                                
+                                                                <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item['id'] }}" /></td> 
+                                                                <td style="width: 10%">
+                                                                    <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                </td>
+                                                                <td style="width: 20%">{{$pemohon}}</td>
+                                                                <td style="width: 25%">{{$nama_institusi}}</td>
+                                                                <td class="text-center" style="width: 21%">{{$item['no_baucer']}}</td>
+                                                                <td class="text-center" style="width: 8%">
+                                                                    {{ $item['tarikh_baucer'] ? date('d/m/Y', strtotime($item['tarikh_baucer'])) : '' }}
+                                                                </td>
+                                                                <td class="text-center" style="width: 21%">{{$item['no_cek']}}</td>
+                                                                <td class="text-center" style="width: 8%">
+                                                                    {{ $item['tarikh_transaksi'] ? date('d/m/Y', strtotime($item['tarikh_transaksi'])) : '' }}
+                                                                </td>                                                                
+                                                                @if ($item['status']=='6')
+                                                                    <td class="text-center" style="width: 5%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='8')
+                                                                    <td class="text-center" style="width: 5%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @endif
+                                                                <td class="text-center" data-id="{{ $item['id'] }}" data-action="return">
+                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kembali Kepada Penyelaras" style="cursor: pointer;">
+                                                                        <i class="fa fa-undo fa-sm custom-white-icon" style="color: #000000;"></i>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <!--end::Table-->
+
+                                        <!-- Button trigger modal --> 
+                                        <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
+                                            Kemaskini
+                                        </button>
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">No Cek / No EFT:</label>
+                                                            <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
+                                                            <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi" required oninvalid="this.setCustomValidity('Sila isi tarikh transaksi.')" oninput="setCustomValidity('')">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div> 
+                                    </form>   
+                                </div>
+                            </div>
+                            {{-- PPK--}}
+                            <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+                                <br>
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 10%"><b>ID Permohonan</b></th>
+                                                <th style="width: 20%"><b>Nama</b></th>
+                                                <th style="width: 21%"><b>Nama Kursus</b></th>
+                                                <th style="width: 25%"><b>Institusi Pengajian</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tarikh Dibayar</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Status</b></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @php
+                                                $i=0;
+                                            @endphp
+                                            @foreach ($permohonan as $item)
+                                                @if ($item['program']=="PPK")
+                                                    @php
+                                                        $i++;
+
+                                                    $rujukan = explode("/", $item['no_rujukan_permohonan']);
+                                                    $peringkat = $rujukan[1];
+                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                    $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
+                                                    $tkh_bayaran = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', 8)->value('created_at');
+                                                    $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                    $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                    if ($item['status']==2){
+                                                        $status='Baharu';
+                                                    }
+                                                    if ($item['status']==3){
+                                                        $status='Sedang Disaring';
+                                                    }
+                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $pemohon = implode(' ', $result);
+
+                                                    //nama kursus
+                                                    $text2 = ucwords(strtolower($akademik->nama_kursus));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text2);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $kursus = implode(' ', $result);
+
+                                                    //institusi pengajian
+                                                    $text3 = ucwords(strtolower($nama_institusi));
+                                                    $conjunctions = ['of', 'in', 'and'];
+                                                    $words = explode(' ', $text3);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $institusi = implode(' ', $result);
+                                                    @endphp
+                                                    <tr>
+                                                        <td style="width: 10%">
+                                                            <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                        </td>
+                                                        <td style="width: 20%">{{$pemohon}}</td>
+                                                        <td style="width: 21%">{{$kursus}}</td>
+                                                        <td style="width: 25%">{{$nama_institusi}}</td>
+                                                        <td class="text-center" style="width: 8%">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center" style="width: 8%">{{date('d/m/Y', strtotime($item['tarikh_transaksi']))}}</td>
+                                                        @if ($item['status']=='6')
+                                                            <td class="text-center" style="width: 8%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @elseif ($item['status']=='8')
+                                                            <td class="text-center" style="width: 8%"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                        @endif
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>    
 
                     </div>
@@ -512,72 +501,6 @@
                 margin-left: 10px !important; 
         }
     </style>
-    <style>
-        /* #token {
-          display: none;
-        }
-        #data {
-          display: none;
-        } */
-      </style>
-
-<!--begin::Javascript-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>    
-
-<script>
-    function requeryFunction(nokp) {
-        
-        const id_permohonan = "{{ $item['no_rujukan_permohonan'] }}";
-        const noic = nokp;
-        const id_tuntutan = "";
-        // alert(nokp);
-        const secretKey = "{{ $secretKey }}";
-        const time = {{ time() }}; 
-        const token = generateToken(secretKey, time);
-
-        // Construct the JSON array with the token
-        const tokenArray = [{ "token": token }];
-
-        // Set the JSON array in the textarea
-        const tokenTextarea = document.getElementById('token');
-        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-        // console.log("Token JSON:", tokenTextarea.value);
-
-        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-        // Set the JSON array in the textarea
-        const dataTextarea = document.getElementById('data');
-        dataTextarea.value = JSON.stringify(dataArray, null, 2);
-        // console.log("Data JSON:", dataTextarea.value);
-
-        const form = document.getElementById('hantar_maklumat');
-        const data = new FormData(form);
-
-        fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Log the API response to the console
-
-            // Convert the API response to a string for display in the alert
-            const responseDataString = JSON.stringify(data, null, 2);
-        })
-
-        .catch(error => {
-            console.error('API Request failed:', error);
-           
-        });
-    }
-
-
-    function generateToken(secretKey, time) {
-      const dataToHash = secretKey + time;
-      const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
-      return hash;
-    }
-</script>
-    
     
     <script>
 
