@@ -412,7 +412,9 @@
                                         </table>
                                     </div>
                                 @endif
-
+                                <div class="footer">
+                                    <input type="button" value="Hantar" onclick="resend()" class="btn btn-primary">
+                                </div>
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
                                     <!--begin::Form-->
@@ -446,6 +448,31 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
   <script>
+     function resend() {
+        // const secretKey = "{{ $secretKey }}";
+        // const time = {{ time() }}; 
+        // const token = generateToken(secretKey, time);
+
+        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+        // alert(id_permohonan);
+        const noic = "{{$smoku->no_kp}}";
+        const id_tuntutan = "";
+
+        // Construct the JSON array with the token
+        // const tokenArray = [{ "token": token }];
+
+        // // Set the JSON array in the textarea
+        // const tokenTextarea = document.getElementById('token');
+        // tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+        // console.log("Token JSON:", tokenTextarea.value);
+
+        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+        // Set the JSON array in the textarea
+        const dataTextarea = document.getElementById('data');
+        dataTextarea.value = JSON.stringify(dataArray, null, 2);
+        // console.log("Data JSON:", dataTextarea.value);
+
+    }
     function sendData() {
         const secretKey = "{{ $secretKey }}";
         const time = {{ time() }}; 
