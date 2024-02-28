@@ -340,11 +340,6 @@ class MaklumatESPController extends Controller
                         ] + ($program == 'B' ? ['baki_dibayar' => $amaun_yuran->jumlah - $jsonData['yuran_dibayar'] - $jsonData['wang_saku_dibayar']] : []));
 
                     $permohonan_id = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)->first();    
-                    // SejarahPermohonan::create([
-                    //     'smoku_id' => $smoku->id,
-                    //     'permohonan_id' => $permohonan_id->id,
-                    //     'status' => 8, 
-                    // ]);
                     SejarahPermohonan::updateOrCreate(
                         [
                             'smoku_id' => $smoku->id,
@@ -373,8 +368,8 @@ class MaklumatESPController extends Controller
 
                         $tuntutan_id = Tuntutan::orderBy('id', 'desc')->where('smoku_id',$smoku->id)
                             ->where('permohonan_id', $permohonan_id->id)
-                            ->first();    
-                        SejarahTuntutan::create([
+                            ->first(); 
+                        SejarahTuntutan::updateOrCreate([
                             'smoku_id' => $smoku->id,
                             'tuntutan_id' => $tuntutan_id->id,
                             'status' => 8, 
