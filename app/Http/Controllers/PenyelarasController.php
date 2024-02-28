@@ -716,6 +716,16 @@ class PenyelarasController extends Controller
 
     public function senaraiTuntutanBaharu()
     {
+        // $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
+        // ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+        // ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        // ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
+        // ->where('penyelaras_id','=', Auth::user()->id)
+        // ->where('permohonan.status', 8) 
+        // ->orderBy('permohonan.tarikh_hantar', 'DESC')
+        // ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
@@ -724,7 +734,11 @@ class PenyelarasController extends Controller
         ->where('penyelaras_id','=', Auth::user()->id)
         ->where('permohonan.status', 8) 
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        ->select('smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
+        ->distinct() // Add distinct here
+        ->get();
+
+
 
         return view('tuntutan.penyelaras_bkoku.tuntutan_baharu', compact('layak'));
     }
