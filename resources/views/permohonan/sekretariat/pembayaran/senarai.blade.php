@@ -541,18 +541,26 @@
         // console.log("Data JSON:", dataTextarea.value);
 
         // Parse the values as JSON
-        const tokenJSON = JSON.stringify(tokenArray, null, 2);
-        const dataJSON = JSON.stringify(dataArray, null, 2);
+        const dataJSON = JSON.parse(dataTextarea.value);
+        const tokenJSON = JSON.parse(tokenTextarea.value);
+
+        // Construct request body
+        const requestBody = {
+            token: tokenJSON,
+            data: dataJSON
+        };
         console.log("Token JSON:", tokenJSON);
         console.log("Data JSON:", dataJSON);
 
-        console.log("Data JSON:", tokenJSON,dataJSON);
-        const data = (tokenJSON,dataJSON);
 
+        console.log("Data:", JSON.stringify(requestBody));
         // Make a POST request to the API
         fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
             method: 'POST',
-            body: data
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
         })
         .then(response => {
             if (!response.ok) {
