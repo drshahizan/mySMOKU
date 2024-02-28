@@ -412,9 +412,28 @@
                                         </table>
                                     </div>
                                 @endif
+
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0">
+                                    <!--begin::Form-->
+                                    
+                                    <form class="form" id="hantar_maklumat">
+                                    <textarea name="token" id="token" rows="10" cols="50"></textarea>
+                                    <textarea name="data" id="data" rows="10" cols="50"></textarea>
+                    
+                                    <!--begin::Button-->
+                                    <div class="footer">
+                                        <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
+                                    </div>
+                                    <!--end::Button-->
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Card body-->
+
                                 <!--end: Invoice body-->
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ url('permohonan/sekretariat/pembayaran/senarai') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </button></a>
+                                    <a href="{{ url('permohonan/sekretariat/pembayaran/senarai') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali </button></a>
                                 </div>
                             </div>
                         </div>
@@ -423,4 +442,93 @@
             </div>
         </div>
     </div>
+    <!--begin::Javascript-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+  <script>
+    function sendData() {
+        const secretKey = "{{ $secretKey }}";
+        const time = {{ time() }}; 
+        const token = generateToken(secretKey, time);
+
+        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+        // alert(id_permohonan);
+        const noic = "{{$smoku->no_kp}}";
+        const id_tuntutan = "";
+
+        // Construct the JSON array with the token
+        const tokenArray = [{ "token": token }];
+
+        // Set the JSON array in the textarea
+        const tokenTextarea = document.getElementById('token');
+        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+        // console.log("Token JSON:", tokenTextarea.value);
+
+        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+        // Set the JSON array in the textarea
+        const dataTextarea = document.getElementById('data');
+        dataTextarea.value = JSON.stringify(dataArray, null, 2);
+        // console.log("Data JSON:", dataTextarea.value);
+
+        const form = document.getElementById('hantar_maklumat');
+        const data = new FormData(form);
+
+        fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Log the API response to the console
+
+            // Convert the API response to a string for display in the alert
+            const responseDataString = JSON.stringify(data, null, 2);
+            if (data.status === 'error'){
+                Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya',
+                text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
+                }).then((result) => {
+                    // Check if the user clicked OK
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+                // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
+                // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
+                
+            }else{
+                Swal.fire({
+                icon: 'success',
+                title: 'Berjaya',
+                text: 'Data berjaya di hantar ke ESP. Semak ESP',
+                }).then((result) => {
+                    // Check if the user clicked OK
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
+                // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
+                // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+            }
+
+            // location.reload(); // Refresh the page
+        })
+
+        .catch(error => {
+            console.error('API Request failed:', error);
+            location.reload(); // Refresh the page
+        });
+    }
+
+    function generateToken(secretKey, time) {
+      const dataToHash = secretKey + time;
+      const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
+      return hash;
+    }
+  </script>
+  <!--end::Javascript-->
 </x-default-layout>
