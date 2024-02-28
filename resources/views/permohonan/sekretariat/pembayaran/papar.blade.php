@@ -413,28 +413,27 @@
                                     </div>
                                 @endif
                                 
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0">
-                                    <!--begin::Form-->
-                                    
-                                    <form class="form" id="hantar_maklumat">
+                                
+                                <!--begin::Form REQUERY TO ESP-->
+                                <form class="form" id="hantar_maklumat">
                                     <textarea name="token" id="token" rows="10" cols="50"></textarea>
                                     <textarea name="data" id="data" rows="10" cols="50"></textarea>
-                    
                                     <!--begin::Button-->
-                                    <div class="footer">
-                                        <input type="button" value="Hantar" onclick="sendData()" class="btn btn-primary">
+                                    <div class="row">
+                                        <div class="col-md-12 text-left">
+                                            <input type="button" value="Requery" onclick="sendData()" class="btn btn-danger">
+                                        </div>
                                     </div>
                                     <!--end::Button-->
-                                    </form>
-                                    <!--end::Form-->
-                                </div>
-                                <!--end::Card body-->
-
-                                <!--end: Invoice body-->
+                                </form>
+                                <!--end::Form-->
                                 <div class="col-md-6 text-right">
-                                    <a href="{{ url('permohonan/sekretariat/pembayaran/senarai') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali </button></a>
+                                    <a href="{{ url('permohonan/sekretariat/pembayaran/senarai') }}" class="white">
+                                        <button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali</button>
+                                    </a>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -454,31 +453,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
   <script>
-    //  function resend() {
-    //     // const secretKey = "{{ $secretKey }}";
-    //     // const time = {{ time() }}; 
-    //     // const token = generateToken(secretKey, time);
 
-    //     const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
-    //     // alert(id_permohonan);
-    //     const noic = "{{$smoku->no_kp}}";
-    //     const id_tuntutan = "";
-
-    //     // Construct the JSON array with the token
-    //     // const tokenArray = [{ "token": token }];
-
-    //     // // Set the JSON array in the textarea
-    //     // const tokenTextarea = document.getElementById('token');
-    //     // tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-    //     // console.log("Token JSON:", tokenTextarea.value);
-
-    //     const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-    //     // Set the JSON array in the textarea
-    //     const dataTextarea = document.getElementById('data');
-    //     dataTextarea.value = JSON.stringify(dataArray, null, 2);
-    //     // console.log("Data JSON:", dataTextarea.value);
-
-    // }
     function sendData() {
         const secretKey = "{{ $secretKey }}";
         const time = {{ time() }}; 
