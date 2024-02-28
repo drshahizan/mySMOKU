@@ -197,15 +197,15 @@
                                 <div class="d-flex justify-content-between mt-5 mb-0">
                                     <div class="col-md-12">
                                         <div class="row form-filter">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                            <div class="col-md-2" style="display: flex; align-items: center;">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
-                                                    <option value="AKTIF">Aktif</option>
-                                                    <option value="TIDAK AKTIF">Tidak Aktif</option>
+                                                    <option value="AKTIF">AKTIF</option>
+                                                    <option value="TIDAK AKTIF">TIDAK AKTIF</option>
                                                 </select>
                                             </div>
                                             
-                                            <div class="col-md-2">
+                                            <div class="col-md-1">
                                                 <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
@@ -214,9 +214,9 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-6 export-container" data-program-code="kutipan"> 
+                                            <div class="col-md-9 export-container" data-program-code="kutipan"> 
                                                 <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
                                                             <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
                                                         </a>
@@ -489,14 +489,15 @@
                                             <tbody>
                                                 @php
                                                     require_once app_path('helpers.php');
+                                                    // dd($kutipanBalik);
+                                                    // dd(count($kutipanBalik));
                                                 @endphp
                                             
                                                 @foreach ($kutipanBalik as $item)
                                                     @php
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                         $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
-                                                        $instiusi_user = auth()->user()->id_institusi;
+                                                        $institusi_pelajar = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
                                                         
                                                         // nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); 
@@ -513,7 +514,7 @@
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
                                                     
-                                                    @if ($institusi_id == $instiusi_user)
+                                                    @if ($institusiId == $institusi_pelajar)
                                                         <tr>
                                                             <td style="width: 25%">{{$pemohon}}</td>
                                                             <td style="width: 35%">{{$nama_kursus}}</td> 
@@ -651,8 +652,7 @@
             function applyStatusFilter() 
             {
                 console.log("Status filter button clicked");
-
-                var selectedStatus = $('#kutipan_status_filter').val();
+                var selectedStatus = $('#kutipan_status_filter').val().toUpperCase();
                 console.log("Selected Status:", selectedStatus);
 
                 // Apply filter based on selected status
@@ -663,8 +663,10 @@
                     // Apply status filter
                     if (selectedStatus == 'AKTIF' || selectedStatus == 'TIDAK AKTIF') {
                         datatable3.column(4).search(selectedStatus).draw();
-                        console.log("Search", datatable3.column(4).search(selectedStatus).draw());
+                    } else {
+                        datatable3.column(4).search('').draw(); // Clear the filter
                     }
+
                 }
             }
 
