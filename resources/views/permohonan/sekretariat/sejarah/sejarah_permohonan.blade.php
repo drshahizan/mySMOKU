@@ -249,7 +249,7 @@
                             </div>
                             
                             {{-- BKOKU UA --}}
-                            {{-- <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                            <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
@@ -360,9 +360,9 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             {{-- PPK --}}
-                            {{-- <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
+                            <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
@@ -468,7 +468,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
