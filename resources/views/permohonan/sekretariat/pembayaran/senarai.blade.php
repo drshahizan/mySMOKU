@@ -231,7 +231,7 @@
                                                     @if ($jenis_institusi!="UA")
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                            <a href="{{ url('permohonan/sekretariat/pembayaran/papar/'. $item['id']) }}" onclick="requeryFunction('{{ $nokp }}')" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
                                                         <td>{{$kursus}}</td>
@@ -485,6 +485,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{--test requery--}}
+                        <textarea name="token" id="token" rows="10" cols="50"></textarea>
+                        <textarea name="data" id="data" rows="10" cols="50"></textarea>
+
                     </div>
                 </div>
             </div>
@@ -498,6 +503,98 @@
                 margin-left: 10px !important; 
         }
     </style>
+    <style>
+        #token {
+          display: none;
+        }
+        #data {
+          display: none;
+        }
+      </style>
+
+<!--begin::Javascript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>    
+
+<script>
+    function requeryFunction(nokp) {
+        
+        const id_permohonan = "{{ $item['no_rujukan_permohonan'] }}";
+        const noic = nokp;
+        const id_tuntutan = "";
+        // alert(nokp);
+        const secretKey = "{{ $secretKey }}";
+        const time = {{ time() }}; 
+        const token = generateToken(secretKey, time);
+
+        // Construct the JSON array with the token
+        const tokenArray = [{ "token": token }];
+
+        // Set the JSON array in the textarea
+        const tokenTextarea = document.getElementById('token');
+        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+        // console.log("Token JSON:", tokenTextarea.value);
+
+        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+        // Set the JSON array in the textarea
+        const dataTextarea = document.getElementById('data');
+        dataTextarea.value = JSON.stringify(dataArray, null, 2);
+        // console.log("Data JSON:", dataTextarea.value);
+
+        // Parse the values as JSON
+        const tokenJSON = tokenArray;
+        const dataJSON = dataArray;
+
+        //  console.log("Data JSON:", dataJSON);
+
+        // Make a POST request to the API
+        fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
+            method: 'POST',
+            body: JSON.stringify({ token: tokenJSON[0].token, data: dataJSON })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Response from server:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    // function sendData() {
+      
+
+    //   const form = document.getElementById('hantar_maklumat');
+    //   const data = new FormData(form);
+
+    //   fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
+    //       method: 'POST',
+    //       body: data
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //       console.log(data); // Log the API response to the console
+
+    //       // Convert the API response to a string for display in the alert
+    //       const responseDataString = JSON.stringify(data, null, 2);
+    //   })
+
+    //   .catch(error => {
+    //       console.error('API Request failed:', error);
+    //       location.reload(); // Refresh the page
+    //   });
+    // }
+
+    function generateToken(secretKey, time) {
+      const dataToHash = secretKey + time;
+      const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
+      return hash;
+    }
+</script>
     
     
     <script>
