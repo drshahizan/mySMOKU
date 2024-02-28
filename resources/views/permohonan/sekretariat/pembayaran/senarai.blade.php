@@ -504,12 +504,12 @@
         }
     </style>
     <style>
-        #token {
+        /* #token {
           display: none;
         }
         #data {
           display: none;
-        }
+        } */
       </style>
 
 <!--begin::Javascript-->
@@ -541,15 +541,18 @@
         // console.log("Data JSON:", dataTextarea.value);
 
         // Parse the values as JSON
-        const tokenJSON = tokenArray;
-        const dataJSON = dataArray;
+        const tokenJSON = JSON.stringify(tokenArray, null, 2);
+        const dataJSON = JSON.stringify(dataArray, null, 2);
+        console.log("Token JSON:", tokenJSON);
+        console.log("Data JSON:", dataJSON);
 
-        //  console.log("Data JSON:", dataJSON);
+        console.log("Data JSON:", tokenJSON,dataJSON);
+        const data = (tokenJSON,dataJSON);
 
         // Make a POST request to the API
         fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
             method: 'POST',
-            body: JSON.stringify({ token: tokenJSON[0].token, data: dataJSON })
+            body: data
         })
         .then(response => {
             if (!response.ok) {
