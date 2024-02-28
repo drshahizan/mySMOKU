@@ -2005,7 +2005,9 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
-        return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','saringan'));
+        $secretKey = 't73QYeipBMmHcDuzGAcNSXP_bgbOFXMyLM99OARs';
+
+        return view('tuntutan.sekretariat.pembayaran.papar',compact('permohonan','secretKey','tuntutan','tuntutan_item','smoku','akademik','saringan'));
     }
 
     public function kemaskiniPembayaran($id)
