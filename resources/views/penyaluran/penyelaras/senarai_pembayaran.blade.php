@@ -200,8 +200,8 @@
                                             <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
-                                                    <option value="Aktif">Aktif</option>
-                                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                                    <option value="AKTIF">Aktif</option>
+                                                    <option value="TIDAK AKTIF">Tidak Aktif</option>
                                                 </select>
                                             </div>
                                             
@@ -648,6 +648,26 @@
         </script>
 
         <script>
+            function applyStatusFilter() 
+            {
+                console.log("Status filter button clicked");
+
+                var selectedStatus = $('#kutipan_status_filter').val();
+                console.log("Selected Status:", selectedStatus);
+
+                // Apply filter based on selected status
+                if (datatable3) {
+                    // Clear previous search
+                    datatable3.columns().search('').draw();
+
+                    // Apply status filter
+                    if (selectedStatus == 'AKTIF' || selectedStatus == 'TIDAK AKTIF') {
+                        datatable3.column(4).search(selectedStatus).draw();
+                        console.log("Search", datatable3.column(4).search(selectedStatus).draw());
+                    }
+                }
+            }
+
             $(document).ready(function() {
                 $('.export-container[data-program-code="permohonan"]').show();
                 $('.export-container[data-program-code="tuntutan"]').hide();
@@ -659,6 +679,11 @@
                     var activeTabId = $(this).attr('id');
                     clearFilters();
                     updateExportContainers(activeTabId);
+                });
+
+                // Bind applyStatusFilter function to click event of filter button
+                $('#kutipan-toolbar button').on('click', function() {
+                        applyStatusFilter();
                 });
 
                 function clearFilters() {
@@ -691,7 +716,6 @@
                     // Show the corresponding export container based on the program code
                     $('.export-container[data-program-code="' + programCode + '"]').show();
                 }
-
 
                 function getProgramCode(activeTabId) {
                     switch (activeTabId) {
@@ -737,18 +761,6 @@
                     $('#tuntutan_hidden_start_date').val(startDate);
                     $('#tuntutan_hidden_end_date').val(endDate);
                 });
-
-                function applyStatusFilter(status) {
-                    if (datatable3) {
-                        // Clear previous search
-                        datatable3.columns().search('').draw();
-
-                        // Apply status filter
-                        if (status !== '') {
-                            datatable3.column(4).search(status).draw();
-                        }
-                    }
-                }
             });
         </script>
 
