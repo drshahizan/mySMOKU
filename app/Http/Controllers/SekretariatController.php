@@ -1681,9 +1681,75 @@ class SekretariatController extends Controller
     }
 
     //Sejarah
+    public function senaraiTuntutan()
+    {
+        $permohonan = Permohonan::orderBy('created_at', 'DESC')->get();
+
+        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        
+        return view('tuntutan.sekretariat.sejarah.senarai_tuntutan',compact('permohonan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+    }
+
+    public function getDataSenaraiBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                        });
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku', 'tuntutan'])
+                    ->get();
+
+
+        return response()->json($permohonan);
+    }
+
+    public function getDataSenaraiUA()
+    {
+        $permohonanUA = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku', 'tuntutan'])
+                    ->get();
+
+
+        return response()->json($permohonanUA);
+    }
+
+    public function getDataSenaraiPPK()
+    {
+        $permohonanPPK = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku', 'tuntutan'])
+                    ->get();
+
+
+        return response()->json($permohonanPPK);
+    }
+
     public function sejarahTuntutan()
     {
-        $tuntutan = Tuntutan::where('status', '!=','4')->orderBy('created_at', 'DESC')->get();
+        $tuntutan = Tuntutan::orderBy('created_at', 'DESC')->get();
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();

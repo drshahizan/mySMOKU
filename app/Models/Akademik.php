@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\InfoIpt;
+
 class Akademik extends Model
 {
     use HasFactory;
@@ -29,5 +31,10 @@ class Akademik extends Model
         'penaja_lain',
         'status',
     ];
+
+    public function infoipt()
+    {
+        return $this->hasOne(InfoIpt::class, 'id_institusi', 'id_institusi');
+    }
 
 }

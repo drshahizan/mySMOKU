@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Akademik;
+use App\Models\Smoku;
+use App\Models\Tuntutan;
+
 class Permohonan extends Model
 {
     use HasFactory;
@@ -35,4 +39,22 @@ class Permohonan extends Model
         'status_pemohon',
         'sesi_bayaran',
     ];
+
+    // Define the relationship with Akademik
+    public function akademik()
+    {
+        return $this->hasOne(Akademik::class, 'smoku_id', 'smoku_id');
+    }
+
+    public function smoku()
+    {
+        return $this->belongsTo(Smoku::class, 'smoku_id', 'id');
+    }
+
+    public function tuntutan()
+    {
+        // Define the relationship with the Tuntutan model
+        // Select only the latest record for each smoku_id
+        return $this->hasOne(Tuntutan::class)->latest();
+    }
 }

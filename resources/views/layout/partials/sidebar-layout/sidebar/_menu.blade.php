@@ -344,7 +344,7 @@
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('tuntutan/sekretariat/sejarah/sejarah-tuntutan')}}">
+					<a class="menu-link" href="{{ route('senarai.tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
 						<span class="menu-title">Sejarah ({{$totalT}})</span>
 					</a>
