@@ -291,6 +291,10 @@
                 { 
                     data: 'akademik.nama_kursus',
                     render: function(data, type, row) {
+                        // Check if data is null
+                        if (data === null) {
+                            return ''; // Return an empty string or any other placeholder value
+                        }
                         // Define conjunctions to be handled differently
                         var conjunctions_lower = ['of', 'in', 'with', 'and'];
 
@@ -485,6 +489,10 @@
                 { 
                     data: 'akademik.nama_kursus',
                     render: function(data, type, row) {
+                        // Check if data is null
+                        if (data === null) {
+                            return ''; // Return an empty string or any other placeholder value
+                        }
                         // Define conjunctions to be handled differently
                         var conjunctions_lower = ['of', 'in', 'with', 'and'];
 
@@ -679,6 +687,11 @@
                 { 
                     data: 'akademik.nama_kursus',
                     render: function(data, type, row) {
+                        // Check if data is null
+                        if (data === null) {
+                            return ''; // Return an empty string or any other placeholder value
+                        }
+
                         // Define conjunctions to be handled differently
                         var conjunctions_lower = ['of', 'in', 'with', 'and'];
 
