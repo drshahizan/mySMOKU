@@ -1696,17 +1696,17 @@ class SekretariatController extends Controller
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
                     ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                        $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '!=', 'UA');
-                        });
+                        $query->where('status', 1)
+                            ->whereHas('infoipt', function ($subQuery) {
+                                $subQuery->where('jenis_institusi', '!=', 'UA');
+                            });
                     })
+                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
                     ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1)
+                            ->with('infoipt');
                     }, 'smoku', 'tuntutan'])
                     ->get();
-
 
         return response()->json($permohonan);
     }
@@ -1720,6 +1720,7 @@ class SekretariatController extends Controller
                             $subQuery->where('jenis_institusi', '=', 'UA');
                         });
                     })
+                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
                         $query->with('infoipt');
@@ -1737,6 +1738,7 @@ class SekretariatController extends Controller
                         $query->where('status', 1);
                         $query->whereHas('infoipt');
                     })
+                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
                         $query->with('infoipt');
