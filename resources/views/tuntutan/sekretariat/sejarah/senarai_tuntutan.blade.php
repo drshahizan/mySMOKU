@@ -832,52 +832,49 @@
 
     });
 </script>
-
-        
+      
 <script>
 
+    function applyFilter() {
 
+        // Reinitialize DataTables
+        initDataTable('#sortTable1', 'datatable1');
+        initDataTable('#sortTable1a', 'datatable');
+        initDataTable('#sortTable2', 'datatable2');
 
-function applyFilter() {
+        function initDataTable(tableId, variableName) {
+            // Check if the datatable is already initialized
+            if ($.fn.DataTable.isDataTable(tableId)) {
+                // Destroy the existing DataTable instance
+                $(tableId).DataTable().destroy();
+            }
 
-    // Reinitialize DataTables
-    initDataTable('#sortTable1', 'datatable1');
-    initDataTable('#sortTable1a', 'datatable');
-    initDataTable('#sortTable2', 'datatable2');
-
-    function initDataTable(tableId, variableName) {
-        // Check if the datatable is already initialized
-        if ($.fn.DataTable.isDataTable(tableId)) {
-            // Destroy the existing DataTable instance
-            $(tableId).DataTable().destroy();
+            // Initialize the datatable and assign it to the global variable
+            window[variableName] = $(tableId).DataTable({
+                ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+                columnDefs: [
+                    { orderable: false, targets: [0] }
+                ]
+            });
         }
 
-        // Initialize the datatable and assign it to the global variable
-        window[variableName] = $(tableId).DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            columnDefs: [
-                { orderable: false, targets: [0] }
-            ]
-        });
+        var selectedInstitusi = $('[name="institusi"]').val();
+
+        // Apply search filter and log data for all tables
+        applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+        applyAndLogFilter('Table 2', datatable, selectedInstitusi);
+        applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
     }
 
-    var selectedInstitusi = $('[name="institusi"]').val();
+    function applyAndLogFilter(tableName, table, filterValue) {
+        // Apply search filter to the table
+        table.column(3).search(filterValue).draw();
 
-    // Apply search filter and log data for all tables
-    applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-    applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-    applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-}
+        // Go to the first page for the table
+        table.page(0).draw(false);
 
-function applyAndLogFilter(tableName, table, filterValue) {
-    // Apply search filter to the table
-    table.column(3).search(filterValue).draw();
-
-    // Go to the first page for the table
-    table.page(0).draw(false);
-
-}
+    }
 
 </script>
 
