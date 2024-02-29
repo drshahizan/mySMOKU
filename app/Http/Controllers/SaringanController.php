@@ -506,6 +506,61 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.sejarah.sejarah_permohonan',compact('permohonan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
+    public function getDataSejarahBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                        });
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+
+        return response()->json($permohonan);
+    }
+
+    public function getDataSejarahUA()
+    {
+        $permohonanUA = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+
+        return response()->json($permohonanUA);
+    }
+
+    public function getDataSejarahPPK()
+    {
+        $permohonanPPK = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+
+        return response()->json($permohonanPPK);
+    }
+
     public function rekodPermohonan($id)
     {
         $permohonan = Permohonan::orderBy('id', 'DESC')->where('id', $id)->first();

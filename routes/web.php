@@ -227,7 +227,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/surat-tawaran/{permohonanId}', [SekretariatController::class, 'muatTurunSuratTawaran'])->name('generate-pdf');
 
     //Permohonan - Sekretariat - Sejarah
-    Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan']);
+    Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan'])->name('sejarah.permohonan');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataBKOKU', [SaringanController::class, 'getDataSejarahBKOKU'])->name('sejarah.permohonan.dataBKOKU');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataUA', [SaringanController::class, 'getDataSejarahUA'])->name('sejarah.permohonan.dataUA');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataPPK', [SaringanController::class, 'getDataSejarahPPK'])->name('sejarah.permohonan.dataPPK');
+
+
+
     Route::get('permohonan/sekretariat/sejarah/rekod-permohonan/{id}', [SaringanController::class, 'rekodPermohonan'])->name('rekod.permohonan.id');
     Route::get('permohonan/sekretariat/sejarah/papar-permohonan/{id}', [SaringanController::class, 'paparRekodPermohonan'])->name('papar.rekod.permohonan.id');
     Route::get('permohonan/sekretariat/sejarah/papar-pembayaran/{id}', [SaringanController::class, 'paparRekodPembayaran'])->name('papar.rekod.pembayaran.id');
