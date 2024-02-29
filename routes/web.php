@@ -265,9 +265,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/sejarah/senarai/dataBKOKU', [SekretariatController::class, 'getDataSenaraiBKOKU'])->name('senarai.tuntutan.dataBKOKU');
     Route::get('tuntutan/sekretariat/sejarah/senarai/dataUA', [SekretariatController::class, 'getDataSenaraiUA'])->name('senarai.tuntutan.dataUA');
     Route::get('tuntutan/sekretariat/sejarah/senarai/dataPPK', [SekretariatController::class, 'getDataSenaraiPPK'])->name('senarai.tuntutan.dataPPK');
+    Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan/{id}', [SekretariatController::class, 'sejarahTuntutan'])->name('sejarah.tuntutan');
+    Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan/data/{id}', [SekretariatController::class, 'getDataSejarahTuntutan'])->name('sejarah.tuntutan.data');
 
-
-    Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan', [SekretariatController::class, 'sejarahTuntutan']);
+    
+    
     Route::get('tuntutan/sekretariat/sejarah/rekod-tuntutan/{id}', [SekretariatController::class, 'rekodTuntutan'])->name('rekod.tuntutan.id');
     Route::get('tuntutan/sekretariat/sejarah/papar-tuntutan/{id}', [SekretariatController::class, 'paparRekodTuntutan'])->name('papar.rekod.tuntutan.id');
     Route::get('tuntutan/sekretariat/sejarah/papar-saringan/{id}', [SekretariatController::class, 'paparRekodSaringanTuntutan'])->name('papar.rekod.saringan.tuntutan.id');

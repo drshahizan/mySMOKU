@@ -56,7 +56,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melakukan melihat rekod tuntutan</small></h2>
+                                <h2>Senarai Tuntutan<br><small>Klik ID Tuntutan untuk melakukan melihat sejarah tuntutan</small></h2>
                             </div>
 
                             {{-- top nav bar --}}
@@ -242,8 +242,8 @@
                     data: 'no_rujukan_permohonan',
                     render: function(data, type, row) {
                         // Construct the URL using the no_rujukan_permohonan value
-                        var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
-                        // Create and return the link element
+                        // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                        var url = "{{ route('sejarah.tuntutan', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);                        // Create and return the link element
                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                     }
                 }, 
@@ -425,7 +425,7 @@
                     data: 'no_rujukan_permohonan',
                     render: function(data, type, row) {
                         // Construct the URL using the no_rujukan_permohonan value
-                        var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
+                        var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
                         // Create and return the link element
                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                     }
@@ -607,7 +607,7 @@
                     data: 'no_rujukan_permohonan',
                     render: function(data, type, row) {
                         // Construct the URL using the no_rujukan_permohonan value
-                        var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
+                        var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
                         // Create and return the link element
                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                     }

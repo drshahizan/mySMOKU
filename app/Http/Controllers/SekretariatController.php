@@ -1747,15 +1747,19 @@ class SekretariatController extends Controller
         return response()->json($permohonanPPK);
     }
 
-    public function sejarahTuntutan()
+    public function sejarahTuntutan($id)
     {
-        $tuntutan = Tuntutan::orderBy('created_at', 'DESC')->get();
+        $smoku_id = $id;
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
-        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
-        
-        return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('tuntutan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('tuntutan.sekretariat.sejarah.sejarah_tuntutan',compact('smoku_id'));
+    }
+
+    public function getDataSejarahTuntutan($id)
+    {
+        $tuntutan = Tuntutan::where('smoku_id', $id)->get();
+
+
+        return response()->json($tuntutan);
     }
 
     public function rekodTuntutan($id)
