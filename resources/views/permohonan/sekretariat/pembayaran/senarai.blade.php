@@ -303,31 +303,31 @@
 <script>
 
     // Define toggle function in the global scope
-function toggle(tab) {
-    var selectAllCheckbox = document.getElementById('select-all-' + tab);
-    var isChecked = selectAllCheckbox.checked;
+    function toggle(tab) {
+        var selectAllCheckbox = document.getElementById('select-all-' + tab);
+        var isChecked = selectAllCheckbox.checked;
 
-    // Get all checkboxes in the active tab
-    var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
+        // Get all checkboxes in the active tab
+        var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
 
-    // Set the checked property of all checkboxes to match the "Select All" checkbox
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = isChecked;
-    });
+        // Set the checked property of all checkboxes to match the "Select All" checkbox
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = isChecked;
+        });
 
-    // Prepare an array to hold selected values
-    var selectedid = [];
+        // Prepare an array to hold selected values
+        var selectedid = [];
 
-    // Loop through all checkboxes and get selected values
-    checkboxes.forEach(function(checkbox) {
-        if (checkbox.checked) {
-            selectedid.push(checkbox.value);
-        }
-    });
+        // Loop through all checkboxes and get selected values
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                selectedid.push(checkbox.value);
+            }
+        });
 
-    // Log the selected values to the console
-    console.log(selectedid);
-}
+        // Log the selected values to the console
+        console.log(selectedid);
+    }
 
 
     $(document).ready(function() {
