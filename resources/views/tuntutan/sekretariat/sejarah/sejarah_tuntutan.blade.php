@@ -56,7 +56,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk melakukan melihat rekod tuntutan</small></h2>
+                                <h2>Sejarah Tuntutan<br><small>Klik ID Tuntutan untuk papar rekod tuntutan</small></h2>
                             </div>
 
 

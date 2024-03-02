@@ -710,6 +710,66 @@ class SaringanController extends Controller
         return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
     }
 
+    public function getPembayaranPermohonanBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                        });
+                    })
+                    ->where('status', 8)
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+
+        return response()->json($permohonan);
+    }
+
+    public function getPembayaranPermohonanUA()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                    })
+                    ->where('status', 8)
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+
+        return response()->json($permohonan);
+    }
+
+    public function getPembayaranPermohonanPPK()
+    {
+        $permohonanPPK = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt');
+                    })
+                    ->where('status', 8)                    
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku', 'tuntutan'])
+                    ->get();
+
+
+        return response()->json($permohonanPPK);
+    }
+
+
+
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
     {
         $institusi = $request->input('institusi');
