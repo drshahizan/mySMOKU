@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Akademik;
+use App\Models\Smoku;
+use App\Models\Permohonan;
+
 class Tuntutan extends Model
 {
     use HasFactory;
@@ -39,4 +43,21 @@ class Tuntutan extends Model
         'status_pemohon',
         'sesi_bayaran',
     ];
+
+    public function akademik()
+    {
+        return $this->hasOne(Akademik::class, 'smoku_id', 'smoku_id');
+    }
+
+    public function smoku()
+    {
+        return $this->belongsTo(Smoku::class, 'smoku_id', 'id');
+    }
+
+    public function permohonan()
+    {
+        return $this->hasOne(Permohonan::class, 'id', 'permohonan_id');
+    }
+
+    
 }

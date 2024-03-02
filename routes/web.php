@@ -262,9 +262,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     //Tuntutan - Sekretariat - Pembayaran
     Route::get('tuntutan/sekretariat/pembayaran/senarai', [SekretariatController::class, 'senaraiPembayaran']);
-    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataBKOKU', [SekretariatController::class, 'getDataSenaraiBKOKU'])->name('senarai.pembayaran.tuntutan.dataBKOKU');
-    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataUA', [SekretariatController::class, 'getDataSenaraiUA'])->name('senarai.pembayaran.tuntutan.dataUA');
-    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPPK', [SekretariatController::class, 'getDataSenaraiPPK'])->name('senarai.pembayaran.tuntutan.dataPPK');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataBKOKU', [SekretariatController::class, 'getPembayaranTuntutanBKOKU'])->name('senarai.pembayaran.tuntutan.dataBKOKU');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataUA', [SekretariatController::class, 'getPembayaranTuntutanUA'])->name('senarai.pembayaran.tuntutan.dataUA');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPPK', [SekretariatController::class, 'getPembayaranTuntutanPPK'])->name('senarai.pembayaran.tuntutan.dataPPK');
     
     
     

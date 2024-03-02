@@ -57,4 +57,11 @@ class Permohonan extends Model
         // Select only the latest record for each smoku_id
         return $this->hasOne(Tuntutan::class)->latest();
     }
+
+    public function tuntutanAll()
+    {
+        return $this->hasMany(Tuntutan::class, 'id', 'permohonan_id');
+    }
+
+   
 }
