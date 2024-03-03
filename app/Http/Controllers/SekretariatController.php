@@ -68,12 +68,6 @@ class SekretariatController extends Controller
         ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
             return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
         })
-        ->when($status == '!=9', function ($q) {
-            return $q->where('status', '!=', 9);
-        })
-        ->when($request->status != null && $status != '!=9', function ($q) use ($request) {
-            return $q->where('status', $request->status);
-        })
         ->where('program', 'BKOKU')->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));

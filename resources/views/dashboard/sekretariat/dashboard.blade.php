@@ -343,7 +343,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.permohonan', ['status' => '!=9']) }}">
+													<a href="{{ route('keseluruhanB.permohonan') }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanB}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>

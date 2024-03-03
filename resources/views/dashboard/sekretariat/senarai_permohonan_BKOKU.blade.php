@@ -55,7 +55,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             {{-- Filter section --}}
-                            <form action="{{ route('keseluruhanB.permohonan', ['status' => '!=9']) }}" method="GET">
+                            <form action="{{ route('keseluruhanB.permohonan') }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
@@ -88,7 +88,8 @@
                                     <tbody>
                                         @foreach ($permohonan as $item)
                                             @php
-                                                $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )
+                                                $jenis_institusi = DB::table('smoku_akademik')
+                                                                        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )
                                                                         ->where('smoku_id', $item['smoku_id'])
                                                                         ->value('bk_info_institusi.jenis_institusi');
 
@@ -136,6 +137,10 @@
                                                         <td class="text-center"><button type="button" class="btn btn-danger text-white">{{ucwords(strtolower($status))}}</button></td>
                                                     @elseif($item['status'] == "8")
                                                         <td class="text-center"><button type="button" class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif($item['status'] == "9")
+                                                        <td class="text-center"><button type="button" class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                    @elseif($item['status'] == "10")
+                                                        <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
                                                     @endif
                                                 </tr>
                                             @endif

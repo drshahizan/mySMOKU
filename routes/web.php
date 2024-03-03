@@ -179,7 +179,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Dashboard
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboardSekretariat'])->name('sekretariat.dashboard');
-    Route::get('sekretariat/permohonan/BKOKU/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanBKOKU'])->name('keseluruhanB.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU'])->name('keseluruhanB.permohonan');
     Route::get('sekretariat/permohonan/BKOKU/UA/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanUA'])->name('keseluruhanUA.permohonan');
     Route::get('sekretariat/permohonan/PPK/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanPPK'])->name('keseluruhanP.permohonan');
 
