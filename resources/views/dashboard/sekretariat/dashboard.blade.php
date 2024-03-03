@@ -65,8 +65,9 @@
 								$query->where('bk_info_institusi.jenis_institusi', 'IPTS')
 									->orWhere('bk_info_institusi.jenis_institusi', 'KK')
 									->orWhere('bk_info_institusi.jenis_institusi', 'P');
-							})
-							->count();
+							});
+							$sql = $query->toSql();
+							dd($sql); 
 
 							$derafB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '1')
 							->whereNotExists(function ($query) {
