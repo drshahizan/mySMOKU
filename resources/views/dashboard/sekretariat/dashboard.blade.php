@@ -57,7 +57,7 @@
 							$derafB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '1')
+							->where('permohonan.status', '=', '1')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -65,7 +65,7 @@
 							$baharuB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '2')
+							->where('permohonan.status', '=', '2')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -73,7 +73,7 @@
 							$saringanB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '3')
+							->where('permohonan.status', '=', '3')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -81,7 +81,7 @@
 							$disokongB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '4')
+							->where('permohonan.status', '=', '4')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -89,7 +89,7 @@
 							$dikembalikanB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '5')
+							->where('permohonan.status', '=', '5')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -97,7 +97,7 @@
 							$layakB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '6')
+							->where('permohonan.status', '=', '6')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -105,7 +105,7 @@
 							$tidaklayakB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '7')
+							->where('permohonan.status', '=', '7')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -113,7 +113,7 @@
 							$dibayarB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('status', '=', '8')
+							->where('permohonan.status', '=', '8')
 							->where('permohonan.program', 'BKOKU')
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
@@ -128,48 +128,56 @@
 
 							$UApermohonan1 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 1)
 							->count();
 
 							$UApermohonan2 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 2)
 							->count();
 
 							$UApermohonan3 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 3)
 							->count();
 
 							$UApermohonan4 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 4)
 							->count();
 
 							$UApermohonan5 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 5)
 							->count();
 
 							$UApermohonan6 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 6)
 							->count();
 
 							$UApermohonan7 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 7)
 							->count();
 
 							$UApermohonan8 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
 							->where('permohonan.status', 8)
 							->count();
