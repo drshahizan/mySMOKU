@@ -47,7 +47,7 @@
 
 						{{-- COUNT PERMOHONAN --}}
 						@php
-							$keseluruhanB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '!=', '9')
+							$keseluruhanB = DB::table('permohonan')->where('program', 'BKOKU')
 							->whereNotExists(function ($query) {
 								$query->select(DB::raw(1))
 									  ->from('smoku_akademik')
@@ -142,7 +142,6 @@
 							$UApermohonanAll = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->where('permohonan.status', '!=','9')
 							->count();
 
 							$UApermohonan1 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
