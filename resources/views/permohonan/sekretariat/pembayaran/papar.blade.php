@@ -421,7 +421,7 @@
                                     <!--begin::Button-->
                                     <div class="row">
                                         <div class="col-md-12 text-left">
-                                            <input type="button" value="Requery" onclick="sendData()" class="btn btn-danger">
+                                            <input type="button" value="Set Semula" onclick="sendData()" class="btn btn-danger">
                                         </div>
                                     </div>
                                     <!--end::Button-->
@@ -432,8 +432,6 @@
                                         <button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali</button>
                                     </a>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -441,6 +439,7 @@
             </div>
         </div>
     </div>
+
     <style>
         #token {
           display: none;
@@ -449,94 +448,95 @@
           display: none;
         }
     </style>
+
     <!--begin::Javascript-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
-  <script>
+    <script>
 
-    function sendData() {
-        const secretKey = "{{ $secretKey }}";
-        const time = {{ time() }}; 
-        const token = generateToken(secretKey, time);
+        function sendData() {
+            const secretKey = "{{ $secretKey }}";
+            const time = {{ time() }}; 
+            const token = generateToken(secretKey, time);
 
-        const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
-        // alert(id_permohonan);
-        const noic = "{{$smoku->no_kp}}";
-        const id_tuntutan = "";
+            const id_permohonan = "{{$permohonan->no_rujukan_permohonan}}";
+            // alert(id_permohonan);
+            const noic = "{{$smoku->no_kp}}";
+            const id_tuntutan = "";
 
-        // Construct the JSON array with the token
-        const tokenArray = [{ "token": token }];
+            // Construct the JSON array with the token
+            const tokenArray = [{ "token": token }];
 
-        // Set the JSON array in the textarea
-        const tokenTextarea = document.getElementById('token');
-        tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-        // console.log("Token JSON:", tokenTextarea.value);
+            // Set the JSON array in the textarea
+            const tokenTextarea = document.getElementById('token');
+            tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
+            // console.log("Token JSON:", tokenTextarea.value);
 
-        const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
-        // Set the JSON array in the textarea
-        const dataTextarea = document.getElementById('data');
-        dataTextarea.value = JSON.stringify(dataArray, null, 2);
-        // console.log("Data JSON:", dataTextarea.value);
+            const dataArray = [{ "id_permohonan": id_permohonan, "id_tuntutan": id_tuntutan, "noic": noic}];
+            // Set the JSON array in the textarea
+            const dataTextarea = document.getElementById('data');
+            dataTextarea.value = JSON.stringify(dataArray, null, 2);
+            // console.log("Data JSON:", dataTextarea.value);
 
-        const form = document.getElementById('hantar_maklumat');
-        const data = new FormData(form);
+            const form = document.getElementById('hantar_maklumat');
+            const data = new FormData(form);
 
-        fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Log the API response to the console
+            fetch('https://espb.mohe.gov.my/api/studentsStatus.php', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Log the API response to the console
 
-            // Convert the API response to a string for display in the alert
-            const responseDataString = JSON.stringify(data, null, 2);
-            if (data.status === 'error'){
-                Swal.fire({
-                icon: 'error',
-                title: 'Tidak Berjaya',
-                text: 'Sila cuba sekali lagi.',
-                }).then((result) => {
-                    // Check if the user clicked OK
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-                // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
-                // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
-                
-            }else{
-                Swal.fire({
-                icon: 'success',
-                title: 'Berjaya',
-                text: 'Requery berjaya.',
-                }).then((result) => {
-                    // Check if the user clicked OK
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
+                // Convert the API response to a string for display in the alert
+                const responseDataString = JSON.stringify(data, null, 2);
+                if (data.status === 'error'){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya',
+                    text: 'Sila cuba sekali lagi.',
+                    }).then((result) => {
+                        // Check if the user clicked OK
+                        if (result.isConfirmed) {
+                            // Reload the page
+                            location.reload();
+                        }
+                    });
+                    // alert(`Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.`);
+                    // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
+                    
+                }else{
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya',
+                    text: 'Requery berjaya.',
+                    }).then((result) => {
+                        // Check if the user clicked OK
+                        if (result.isConfirmed) {
+                            // Reload the page
+                            location.reload();
+                        }
+                    });
 
-                // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
-                // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
-            }
+                    // alert(`Data berjaya di hantar ke ESP. Semak ESP`); // Show success message and API response in alert
+                    // alert(`Data berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`); // Show success message and API response in alert
+                }
 
-            // location.reload(); // Refresh the page
-        })
+                // location.reload(); // Refresh the page
+            })
 
-        .catch(error => {
-            console.error('API Request failed:', error);
-            location.reload(); // Refresh the page
-        });
-    }
+            .catch(error => {
+                console.error('API Request failed:', error);
+                location.reload(); // Refresh the page
+            });
+        }
 
-    function generateToken(secretKey, time) {
-      const dataToHash = secretKey + time;
-      const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
-      return hash;
-    }
-  </script>
-  <!--end::Javascript-->
+        function generateToken(secretKey, time) {
+        const dataToHash = secretKey + time;
+        const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
+        return hash;
+        }
+    </script>
+    <!--end::Javascript-->
 </x-default-layout>
