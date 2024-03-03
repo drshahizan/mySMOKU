@@ -54,84 +54,68 @@
 							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$derafB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '1')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$derafB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '1')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$baharuB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '2')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$baharuB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '2')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$saringanB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '3')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$saringanB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '3')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$disokongB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '4')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$disokongB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '4')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$dikembalikanB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '5')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$dikembalikanB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '5')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$layakB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '6')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$layakB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '6')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$tidaklayakB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '7')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$tidaklayakB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '7')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 
-							$dibayarB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '8')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							$dibayarB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('status', '=', '8')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
 							->count();
 						@endphp
 
@@ -140,7 +124,6 @@
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
 							->where('program', 'BKOKU')
 							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->where('permohonan.status', '!=', 9)
 							->count();
 
 							$UApermohonan1 = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
