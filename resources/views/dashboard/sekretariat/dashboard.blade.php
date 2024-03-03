@@ -60,9 +60,12 @@
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
 							->where('permohonan.program', 'BKOKU')
-							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) // Exclude jenis_institusi 'UA'
+							->where(function ($query) {
+								$query->where('bk_info_institusi.jenis_institusi', 'IPTS')
+									->orWhere('bk_info_institusi.jenis_institusi', 'KK')
+									->orWhere('bk_info_institusi.jenis_institusi', 'P');
+							})
 							->count();
-
 
 							$derafB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '1')
 							->whereNotExists(function ($query) {
