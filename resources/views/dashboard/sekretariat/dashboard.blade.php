@@ -56,7 +56,7 @@
 							// 		  ->where('bk_info_institusi.jenis_institusi', 'UA');
 							// })
 							// ->count();
-							$keseluruhanB = DB::table('permohonan')
+							$query = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
 							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
 							->where('permohonan.status', '!=', 9)
