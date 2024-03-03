@@ -871,7 +871,7 @@
 							<div class="tab-pane fade" id="bkoku2" role="tabpanel" aria-labelledby="bkoku2-tab">
 								{{-- Permohonan --}}
 								<div class="header">
-									<h2>Permohonan BKOKU</h2>
+									<h2>Permohonan BKOKU Universiti Awam</h2>
 								</div>
 								<div class="body">
 										<!--begin::First Row-->
@@ -1139,7 +1139,7 @@
 
 								{{-- Tuntutan --}}
 								<div class="header">
-									<h2>Tuntutan BKOKU</h2>
+									<h2>Tuntutan BKOKU Universiti Awam</h2>
 								</div>
 								<div class="body">
 									<!--begin::First Row-->
