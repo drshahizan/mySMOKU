@@ -59,7 +59,7 @@ class SekretariatController extends Controller
     }
 
     //BKOKU
-    public function statusPermohonanBKOKU(Request $request, $status)
+    public function statusPermohonanBKOKU(Request $request)
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
