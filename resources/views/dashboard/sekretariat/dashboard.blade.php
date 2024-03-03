@@ -47,15 +47,22 @@
 
 						{{-- COUNT PERMOHONAN --}}
 						@php
-							$keseluruhanB = DB::table('permohonan')->where('program', 'BKOKU')
-							->whereNotExists(function ($query) {
-								$query->select(DB::raw(1))
-									  ->from('smoku_akademik')
-									  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-									  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
-									  ->where('bk_info_institusi.jenis_institusi', 'UA');
-							})
+							// $keseluruhanB = DB::table('permohonan')->where('program', 'BKOKU')
+							// ->whereNotExists(function ($query) {
+							// 	$query->select(DB::raw(1))
+							// 		  ->from('smoku_akademik')
+							// 		  ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							// 		  ->whereColumn('smoku_akademik.smoku_id', 'permohonan.smoku_id')
+							// 		  ->where('bk_info_institusi.jenis_institusi', 'UA');
+							// })
+							// ->count();
+							$keseluruhanB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) // Exclude jenis_institusi 'UA'
 							->count();
+
 
 							$derafB = DB::table('permohonan')->where('program', 'BKOKU')->where('status', '=', '1')
 							->whereNotExists(function ($query) {
