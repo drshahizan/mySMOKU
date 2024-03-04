@@ -1658,6 +1658,7 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
+        $sesiBayaran = '';
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
@@ -1691,6 +1692,7 @@ class PenyelarasController extends Controller
                                         $query->whereColumn('tuntutan.yuran_dibayar', '!=', 'tuntutan.yuran_disokong')
                                             ->orWhereColumn('tuntutan.wang_saku_dibayar', '!=', 'tuntutan.wang_saku_disokong');
                                     });
+
         $kutipanBalik = $permohonanBerhenti->union($tuntutanBerhenti)->union($permohonanDibayar)->union($tuntutanDibayar)->get();
 
         // dd($kutipanBalik);
