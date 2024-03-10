@@ -28,7 +28,7 @@ class PentadbirController extends Controller
     
     public function daftar()
     {
-        $user = User::leftjoin('roles','roles.id','=','users.tahap')
+        $user = User::where('users.tahap','!=', '1') ->leftjoin('roles','roles.id','=','users.tahap')
         ->orderBy('users.created_at', 'desc')
         ->get(['users.*', 'roles.name']);
 
