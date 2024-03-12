@@ -56,8 +56,7 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
         } elseif ($currentMonth == 10) {
             $sesiBayaran = '3/' . $currentYear;
         } else {
-            // Default to current month and year if not February, April, or October
-            $sesiBayaran = $currentMonth . '/' . $currentYear;
+            $sesiBayaran = '4/' . $currentYear;
         }
 
         foreach ($this->modifiedData as $modifiedRecord) {

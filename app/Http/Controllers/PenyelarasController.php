@@ -1668,6 +1668,8 @@ class PenyelarasController extends Controller
             $sesiBayaran = '2/' . $currentYear;
         } elseif ($currentMonth == 10) {
             $sesiBayaran = '3/' . $currentYear;
+        } else{
+            $sesiBayaran = '4/' . $currentYear;
         }
 
         $user = auth()->user();

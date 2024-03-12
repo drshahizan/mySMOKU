@@ -37,12 +37,14 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         $currentYear = Carbon::now()->year;
 
         // Determine the sesi_bayaran based on the current month and year
-        if ($currentMonth == 3) {
+        if ($currentMonth == 2) {
             $sesiBayaran = '1/' . $currentYear;
         } elseif ($currentMonth == 4) {
             $sesiBayaran = '2/' . $currentYear;
         } elseif ($currentMonth == 10) {
             $sesiBayaran = '3/' . $currentYear;
+        } else{
+            $sesiBayaran = '4/' . $currentYear;
         }
 
         // Fetch data from Tuntutan table
@@ -137,14 +139,14 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         // Prepare array elements
         return [
             '',
-            Carbon::parse($row['tarikh_transaksi'])->format('d/m/Y'), // Access using array notation
+            Carbon::parse($row['tarikh_transaksi'])->format('d/m/Y'), 
             $perkaraTerimaan,
-            $row['no_cek'], // Access using array notation
-            number_format($row['total_disokong'], 2, '.', ''),  // Access using object notation
-            Carbon::parse($row['tarikh_baucer'])->format('d/m/Y'), // Access using array notation
+            $row['no_cek'], 
+            number_format($row['total_disokong'], 2, '.', ''), 
+            Carbon::parse($row['tarikh_baucer'])->format('d/m/Y'), 
             $perkaraBayaran,
             'SPBB2',
-            number_format($row['total_bayaran'], 2, '.', ''),  // Access using object notation
+            number_format($row['total_bayaran'], 2, '.', ''), 
         ];
     }
 
@@ -182,12 +184,14 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         $currentYear = Carbon::now()->year;
 
         // Determine the sesi_bayaran based on the current month and year
-        if ($currentMonth == 3) {
+        if ($currentMonth == 2) {
             $sesiBayaran = '1 ' . $currentYear . '/'. $currentYear+1;
         } elseif ($currentMonth == 4) {
             $sesiBayaran = '2 ' . $currentYear . '/'. $currentYear+1;
         } elseif ($currentMonth == 10) {
             $sesiBayaran = '3 ' . $currentYear . '/'. $currentYear+1;
+        } else {
+            $sesiBayaran = '4 ' . $currentYear . '/'. $currentYear+1;
         }
 
         return $sesiBayaran;

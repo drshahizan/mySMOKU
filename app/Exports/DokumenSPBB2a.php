@@ -45,6 +45,8 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
              $sesiBayaran = '2/' . $currentYear;
          } elseif ($currentMonth == 10) {
              $sesiBayaran = '3/' . $currentYear;
+         } else{
+            $sesiBayaran = '4/' . $currentYear;
          }
 
         // Fetch data from Tuntutan table with status 10
