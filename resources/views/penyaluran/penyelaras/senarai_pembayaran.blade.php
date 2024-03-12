@@ -530,6 +530,10 @@
                                                             <td class="text-center" style="width: 15%">
                                                                 @if ($item->yuran_dibayar !== null && is_numeric($item->yuran_dibayar) && $item->wang_saku_dibayar !== null && is_numeric($item->wang_saku_dibayar))
                                                                     RM {{ number_format($item->yuran_dibayar + $item->wang_saku_dibayar, 2) }}
+                                                                @elseif ($item->yuran_dibayar == null && $item->wang_saku_dibayar !== null && is_numeric($item->wang_saku_dibayar))
+                                                                    RM {{ number_format($item->wang_saku_dibayar, 2) }} 
+                                                                @elseif ($item->yuran_dibayar !== null && is_numeric($item->yuran_dibayar) && $item->wang_saku_dibayar == null)
+                                                                    RM {{ number_format($item->yuran_dibayar, 2) }}  
                                                                 @endif
                                                             </td>
                                                             <td class="text-center" style="width: 10%">{{strtoupper($item->status_pemohon)}}</td>
