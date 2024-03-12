@@ -145,8 +145,8 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
             number_format($row['total_disokong'], 2, '.', ''), 
             Carbon::parse($row['tarikh_baucer'])->format('d/m/Y'), 
             $perkaraBayaran,
-            'SPBB2',
-            number_format($row['total_bayaran'], 2, '.', ''), 
+            '',
+            '', 
         ];
     }
 
@@ -384,11 +384,11 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
                 // Add a row at the end to display the total values
                 $event->sheet->append([
-                    ['', '', 'JUMLAH TERIMAAN (i)', '', $totalDisokongFormatted, 'JUMLAH BAYARAN (ii)', '', '', $totalBayaranFormatted],
-                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', '', '', $bakiFormatted],
+                    ['', '', 'JUMLAH TERIMAAN (i)', '', $totalDisokongFormatted, 'JUMLAH BAYARAN (ii)', '', '', ''],
+                    ['','','','','','BAKI PERUNTUKAN [(iii) = (i) - (ii)]', '', '', ''],
                     [''],
                     // Custom row for total
-                    ['', '', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', $totalBayaranFormatted],
+                    ['', '', 'JUMLAH (RM)', '', $totalDisokongFormatted, '', 'JUMLAH (RM)', '', ''],
                 ]);
 
                 // Set the border for custom footer
