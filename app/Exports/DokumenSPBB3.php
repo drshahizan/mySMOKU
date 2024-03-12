@@ -182,7 +182,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         $currentYear = Carbon::now()->year;
 
         // Determine the sesi_bayaran based on the current month and year
-        if ($currentMonth == 2) {
+        if ($currentMonth == 3) {
             $sesiBayaran = '1 ' . $currentYear . '/'. $currentYear+1;
         } elseif ($currentMonth == 4) {
             $sesiBayaran = '2 ' . $currentYear . '/'. $currentYear+1;
