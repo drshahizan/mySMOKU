@@ -523,7 +523,7 @@
                                                                     RM {{ number_format($item->yuran_disokong + $item->wang_saku_disokong, 2) }}                                                                    
                                                                 @elseif ($item->yuran_disokong == null && $item->wang_saku_disokong !== null && is_numeric($item->wang_saku_disokong))
                                                                     RM {{ number_format($item->wang_saku_disokong, 2) }} 
-                                                                @if ($item->yuran_disokong !== null && is_numeric($item->yuran_disokong) && $item->wang_saku_disokong == null)
+                                                                @elseif ($item->yuran_disokong !== null && is_numeric($item->yuran_disokong) && $item->wang_saku_disokong == null)
                                                                     RM {{ number_format($item->yuran_disokong, 2) }}  
                                                                 @endif
                                                             </td>
