@@ -270,7 +270,7 @@ class PenyelarasController extends Controller
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
-        $peringkat = PeringkatPengajian::all()->sortBy('id');
+        $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
         $keturunan = Keturunan::all()->sortBy('id');

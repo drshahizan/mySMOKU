@@ -75,7 +75,7 @@ class PermohonanController extends Controller
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
         $infoipt = InfoIpt::all()->where('jenis_institusi','IPTS')->sortBy('nama_institusi');
-        $peringkat = PeringkatPengajian::orderby("id","asc")->select('kod_peringkat','peringkat')->get();
+        $peringkat = PeringkatPengajian::orderby("kod_peringkat","asc")->select('kod_peringkat','peringkat')->get();
         $permohonan = Permohonan::orderby("id","desc")->where('smoku_id', $smoku_id->id)->first();
         
         $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
