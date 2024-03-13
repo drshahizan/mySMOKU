@@ -55,7 +55,9 @@ class SekretariatController extends Controller
     //PERMOHONAN
     public function dashboardSekretariat()
     {
-        return view('dashboard.sekretariat.dashboard');
+        $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')->where('program', 'BKOKU')->get();
+
+        return view('dashboard.sekretariat.dashboard', compact('permohonan'));
     }
 
     //BKOKU
