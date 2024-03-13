@@ -50,7 +50,8 @@
 							$keseluruhanB = 0;
 						@endphp
 
-						@foreach ($permohonan as $item)
+						{{-- syafiqah komen jap --}}
+						{{-- @foreach ($permohonan as $item)
 							@php
 								$jenis_institusi = DB::table('smoku_akademik')
 														->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
@@ -61,7 +62,7 @@
 									$keseluruhanB++;
 								}
 							@endphp
-						@endforeach
+						@endforeach --}}
 
 
 						@php
