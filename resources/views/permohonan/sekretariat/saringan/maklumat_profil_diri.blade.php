@@ -126,13 +126,13 @@
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel (HP)</td>
                 <td style="width: 2%">:</td>
-                <td>{{$smoku->tel_bimbit}}</td>
+                <td>{{$pelajar->tel_bimbit}}</td>
             </tr>
-            @if ($smoku->tel_rumah != null) {
+            @if ($pelajar->tel_rumah != null) {
                 <tr class="gap-left">
                     <td style="width: 16%">No. Tel Rumah</td>
                     <td style="width: 2%">:</td>
-                    <td>{{$smoku->tel_rumah}}</td>
+                    <td>{{$pelajar->tel_rumah}}</td>
                 </tr>
             }
             @endif
