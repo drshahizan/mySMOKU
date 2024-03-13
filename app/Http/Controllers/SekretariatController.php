@@ -848,11 +848,81 @@ class SekretariatController extends Controller
 
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->Orwhere('id_institusi', '=', '01055')->orderBy('nama_institusi')->get();
 
         $notifikasi = null;
 
         return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+    }
+
+    public function getKeputusanBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                        });
+                        $query->whereHas('peringkat');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                        $query->with('peringkat');
+                    }, 'smoku','kelulusan'])
+                    ->get();
+
+                    
+
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getKeputusanBKOKUUA()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                        $query->whereHas('peringkat');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                        $query->with('peringkat');
+                    }, 'smoku','kelulusan'])
+                    ->get();
+
+                    
+
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getKeputusanPPK()
+    {
+        $permohonan = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt');
+                        $query->whereHas('peringkat');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                        $query->with('peringkat');
+                    }, 'smoku','kelulusan'])
+                    ->get();
+
+                    
+
+
+        return response()->json($permohonan);
+
     }
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)

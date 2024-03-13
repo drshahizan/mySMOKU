@@ -135,7 +135,7 @@
                                             <div class="col-md-2">
                                                 <select id="status" name="status" class="form-select">
                                                     <option value="">Pilih Keputusan</option>
-                                                    <option value="Ya Lulus">Layak</option>
+                                                    <option value="Lulus">Layak</option>
                                                     <option value="Tidak Lulus">Tidak Layak</option>
                                                 </select>
                                             </div> 
@@ -206,8 +206,7 @@
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white;">
-                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
+                                                    <tr>
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -219,81 +218,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    @php
-                                                        $i = 1;
-                                                    @endphp
-                                                        
-                                                    @foreach ($kelulusan as $item)
-                                                        @php
-                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                                                                        ->where('permohonan.id', $item['permohonan_id'])
-                                                                        ->value('smoku.nama');
-                                                            $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                                                   ->where('permohonan.id', $item['permohonan_id'])
-                                                                                   ->value('bk_info_institusi.jenis_institusi');
-
-                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                            ->where('permohonan.id', $item['permohonan_id'])
-                                                            ->value('bk_info_institusi.nama_institusi');
-                                                            $id_institusi = $item['id_institusi'];
-
-
-                                                            //peringkat pengajian
-                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
-                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
-                                                         
-                                                            //nama pelajar
-                                                            $text = ucwords(strtolower($nama));
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-
-                                                        @endphp
-
-                                                        @if($program == "BKOKU")
-                                                            @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
-                                                                <tr>
-                                                                    {{-- <td class="text-center no-sort" style="width: 3%">{{$i++}}</td> --}}
-                                                                    <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
-                                                                    <td style="width: 30%">{{$pemohon}}</td>
-                                                                    <td style="width: 15%">{{$institusi_pengajian}}</td>
-                                                                    <td style="width: 15%">{{$id_institusi}}</td>
-                                                                    <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                    <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                    <td class="text-center" style="width: 10%">
-                                                                        @if($item->keputusan == "Lulus")
-                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
-                                                                            </a>
-                                                                        @elseif($item->keputusan == "Tidak Lulus")
-                                                                            <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
-                                                                        @endif
-                                                                    </td>
-                                                                    @if($item->keputusan == "Lulus")
-                                                                        <td style="width: 15%">Ya Lulus</td>
-                                                                    @elseif($item->keputusan == "Tidak Lulus")
-                                                                        <td style="width: 15%">Tidak Lulus</td>
-                                                                    @endif
-                                                                </tr>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
+                                               
                                             </table>
                                         </div>
                                     </div>
@@ -303,10 +228,9 @@
                                 <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable1a" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white;">
-                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
+                                                    <tr>
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -318,79 +242,6 @@
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    @php
-                                                        $i = 1;
-                                                    @endphp
-                                                        
-                                                    @foreach ($kelulusan as $item)
-                                                        @php
-                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-                                                                        ->where('permohonan.id', $item['permohonan_id'])
-                                                                        ->value('smoku.nama');
-                                                            $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							                                                       ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                                                   ->where('permohonan.id', $item['permohonan_id'])
-                                                                                   ->value('bk_info_institusi.jenis_institusi');
-                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                                                    ->where('permohonan.id', $item['permohonan_id'])
-                                                                                    ->value('bk_info_institusi.nama_institusi');
-                                                            $id_institusi = $item['id_institusi'];
-
-                                                            //peringkat pengajian
-                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
-                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
-                                                         
-                                                            //nama pelajar
-                                                            $text = ucwords(strtolower($nama));
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-
-                                                        @endphp
-
-                                                        @if($program == "BKOKU")
-                                                            @if ($jenis_institusi == "UA")
-                                                                <tr>
-                                                                    {{-- <td class="text-center" style="width: 3%">{{$i++}}</td> --}}
-                                                                    <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
-                                                                    <td style="width: 30%">{{$pemohon}}</td>
-                                                                    <td style="width: 15%">{{$institusi_pengajian}}</td>
-                                                                    <td style="width: 15%">{{$id_institusi}}</td>
-                                                                    <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                    <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                    <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                    <td class="text-center" style="width: 10%">
-                                                                        @if($item->keputusan == "Lulus")
-                                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                                <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
-                                                                            </a>
-                                                                        @elseif($item->keputusan == "Tidak Lulus")
-                                                                            <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
-                                                                        @endif
-                                                                    </td>
-                                                                    @if($item->keputusan == "Lulus")
-                                                                        <td style="width: 15%">Ya Lulus</td>
-                                                                    @elseif($item->keputusan == "Tidak Lulus")
-                                                                        <td style="width: 15%">Tidak Lulus</td>
-                                                                    @endif
-                                                                </tr>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -400,10 +251,9 @@
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white;">
-                                                        {{-- <th style="width: 3%" class="text-center no-sort"><b>No.</b></th> --}}
+                                                    <tr>
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 30%"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
@@ -415,71 +265,6 @@
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    @php
-                                                        $i = 1;
-                                                    @endphp
-                                                    
-                                                    @foreach ($kelulusan as $item)
-                                                        @php
-                                                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                                                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                                                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-                                                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                                                    ->where('permohonan.id', $item['permohonan_id'])
-                                                                                    ->value('bk_info_institusi.nama_institusi');
-                                                            $id_institusi = $item['id_institusi'];
-
-                                                            //peringkat pengajian
-                                                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
-                                                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                                                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
-
-                                                            // nama pemohon
-                                                            $text = ucwords(strtolower($nama));
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $pemohon = implode(' ', $result);
-
-                                                        @endphp
-
-                                                        @if($program == "PPK")
-                                                            <tr>
-                                                                {{-- <td class="text-center" style="width: 3%">{{$i++}}</td> --}}
-                                                                <td style="width: 10%">{{$no_rujukan_permohonan}}</td>
-                                                                <td style="width: 30%">{{$pemohon}}</td>
-                                                                <td style="width: 15%">{{$institusi_pengajian}}</td>
-                                                                <td style="width: 15%">{{$id_institusi}}</td>
-                                                                <td class="text-center" style="width: 10%">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                                                <td class="text-center" style="width: 10%">{{$item->no_mesyuarat}}</td>
-                                                                <td class="text-center" style="width: 12%">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
-                                                                <td class="text-center" style="width: 10%">
-                                                                    @if($item->keputusan == "Lulus")
-                                                                        <a href="{{ route('generate-pdf', ['permohonanId' => $item->permohonan_id]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
-                                                                            <i class="fa fa-download custom-white-icon" style="color: white !important; padding-right:7px;"></i> Layak
-                                                                        </a>
-                                                                    @elseif($item->keputusan == "Tidak Lulus")
-                                                                        <div class="btn btn-danger btn-round btn-sm">Tidak Layak</div>
-                                                                    @endif
-                                                                </td>
-                                                                @if($item->keputusan == "Lulus")
-                                                                    <td style="width: 15%">Ya Lulus</td>
-                                                                @elseif($item->keputusan == "Tidak Lulus")
-                                                                    <td style="width: 15%">Tidak Lulus</td>
-                                                                @endif
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -491,251 +276,644 @@
             </div>
         </div>
 
-        <!-- Javascript -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        
-        <script>
-            // Initialize JavaScript variables with data from Blade
-            var bkokuList = @json($institusiPengajian);
-            var bkokuUAList = @json($institusiPengajianUA);
-            var ppkList = @json($institusiPengajianPPK);
+<!-- Javascript -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-            $(document).ready(function() {
-                $('.export-container[data-program-code="BKOKU"]').show();
-                $('.export-container[data-program-code="UA"]').hide();
-                $('.export-container[data-program-code="PPK"]').hide();
+<script> 
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+</script>   
 
-                $('.none-container').show(); // Hide export elements
+<style>
+    .custom-width-btn {
+        width: 105px; 
+        height: 35px;
+    }
+    .custom-width-select {
+        width: 400px !important; /* Important to override other styles */
+    }
+    .form-select {
+        margin-left: 10px !important; 
+    }
+</style>
 
-                // Add an event listener for tab clicks
-                $('.nav-link').on('click', function() {
-                    // Get the ID of the active tab
-                    var activeTabId = $(this).attr('id');
+<script>
+    $(document).ready(function() {
+        // Initialize JavaScript variables with data from Blade
+        var bkokuList = @json($institusiPengajian);
+        var bkokuUAList = @json($institusiPengajianUA);
+        var ppkList = @json($institusiPengajianPPK);
 
-                    // Clear filters when changing tabs
-                    clearFilters();
+        $('.export-container[data-program-code="BKOKU"]').show();
+        $('.export-container[data-program-code="UA"]').hide();
+        $('.export-container[data-program-code="PPK"]').hide();
 
-                    updateExportContainers(activeTabId);
+        $('.none-container').show(); // Hide export elements
 
-                    // Update the institution dropdown based on the active tab
-                    switch (activeTabId) {
-                        case 'bkoku-tab':
-                            updateInstitusiDropdown(bkokuList);
-                            break;
-                        case 'bkokuUA-tab':
-                            updateInstitusiDropdown(bkokuUAList);
-                            break;
-                        case 'ppk-tab':
-                            updateInstitusiDropdown(ppkList);
-                            break;
-                        // Add more cases if you have additional tabs
-                    }
-                });
 
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuList);
-
-                // Function to clear filters for all tables
-                function clearFilters() {
-                    if (datatable1) {
-                        datatable1.search('').columns().search('').draw();
-                    }
-                    if (datatable) {
-                        datatable.search('').columns().search('').draw();
-                    }
-                    if (datatable2) {
-                        datatable2.search('').columns().search('').draw();
-                    }
-                }
-
-                function updateExportContainers(activeTabId) {
-                    // Hide all export containers initially
-                    $('.export-container').hide();
-
-                    // Show the export container based on the active tab
-                    var programCode = getProgramCode(activeTabId);
-                    $('.export-container[data-program-code="' + programCode + '"]').show();
-                }
-
-                function getProgramCode(activeTabId) {
-                    switch (activeTabId) {
-                        case 'bkoku-tab':
-                            return 'BKOKU';
-                        case 'bkokuUA-tab':
-                            return 'UA';
-                        case 'ppk-tab':
-                            return 'PPK';
-                        // Add more cases if you have additional tabs
-                        default:
-                            return '';
-                    }
-                }
-
-                // Function to update the institution dropdown
-                function updateInstitusiDropdown(institusiList) {
-                    // Clear existing options
-                    $('#institusiDropdown').empty();
-
-                    // Add default option
-                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
-                    // Add options based on the selected tab
-                    for (var i = 0; i < institusiList.length; i++) {
-                        $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-                    }
-                }
-            });
-        </script>
-
-        <script>
-            // Declare datatables in a higher scope to make them accessible
-            var datatable1, datatable, datatable2;
-
-            $(document).ready(function() {
-                // Initialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable2', 'datatable');
-                initDataTable('#sortTable3', 'datatable2');
-
-                // Log data for all tables
-                logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable);
-                logTableData('Table 3 Data:', datatable2);
-            });
-
-            function initDataTable(tableId, variableName) {
-                // Check if the datatable is already initialized
-                if ($.fn.DataTable.isDataTable(tableId)) {
-                    // Destroy the existing DataTable instance
-                    $(tableId).DataTable().destroy();
-                }
-
-                // Initialize the datatable and assign it to the global variable
-                window[variableName] = $(tableId).DataTable({
-                    ordering: true, // Enable manual sorting
+        // DataTable initialization functions
+        function initializeDataTable1() {
+            $('#sortTable1').DataTable({
+                ordering: true, // Enable manual sorting
                     order: [], // Disable initial sorting
                     columnDefs: [
                         { orderable: false, targets: [0] },
                         { targets: [3], visible: false }, // Hide column (index 4)
-                        { type: 'date', targets: [6] },
                         { targets: [8], visible: false } // Hide column (index 9)
-                    ]
-                });
-            }
+                    ],
+                ajax: {
+                    url: '{{ route("senarai.keputusan.BKOKU") }}', // URL to fetch data from
+                    dataSrc: '' // Property in the response object containing the data array
+                    
+                },
+                columns: [
+                    { 
+                        data: 'no_rujukan_permohonan',
+                        // render: function(data, type, row) {
+                        //     // Construct the URL using the no_rujukan_permohonan value
+                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        // }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
 
-            function applyFilter() {
-                var selectedInstitusi = $('[name="institusi"]').val();
-                var startDate = $('#start_date').val();
-                var endDate = $('#end_date').val();
-                var status = $('#status').val();
-                console.log(selectedInstitusi);
-                console.log(startDate);
-                console.log(endDate);
-                console.log(status);
-                
-                // Apply search filter and log data for all tables
-                applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
-            
+                            // Split the nama field into words
+                            var words = data.split(' ');
 
-                
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-                
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
 
-                var exportUA = document.getElementById('exportUA');
-                exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-
-
-                var exportPPK = document.getElementById('exportPPK');
-                exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-            
-            }
-
-            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
-                // Reset the search for all columns to ensure a clean filter
-                table.columns().search('').draw();
-
-                // Clear the previous search functions
-                $.fn.dataTable.ext.search = [];
-
-                // Apply date range filter
-                if (startDate || endDate) {
-                    $.fn.dataTable.ext.search.push(
-                        function (settings, data, dataIndex) {
-                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-
-                            let dateAdded = moment(data[6], 'DD/MM/YYYY');
-
-                            // Check if the date falls within the specified range
-                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                            if (result) {
-                                console.log('Date Range Filter Result: true');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                            } else {
-                                console.log('Date Range Filter Result: false');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
                             }
 
-                            return result;
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
                         }
-                    );
-                }
+                    },
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.infoipt.id_institusi' },
+                    {
+                        data: 'akademik.peringkat.peringkat',
+                        render: function(data, type, row) {
+                            // Split the string into an array of words
+                            var words = data.split(' ');
 
-                // Apply search filter for institusi
-                if (institusi) {
-                    table.column(3).search(institusi).draw();
-                }
+                            // Capitalize the first letter of each word
+                            for (var i = 0; i < words.length; i++) {
+                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                            }
 
-                // Apply search filter for status
-                if (status) {
-                    console.log('Applying Status Filter:', status);
-                    table.column(8).search(status).draw();
-                } else {
-                    console.log('No Status Filter Applied');
-                }
+                            // Join the words back into a single string
+                            var formatted_data = words.join(' ');
 
-                // Log filtered data
-                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+                            return formatted_data;
+                        }
+                    },
+                    { data: 'kelulusan.no_mesyuarat' },
+                    {
+                        data: 'kelulusan.tarikh_mesyuarat',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                if (data === null) {
+                                    return '';
+                                } else {
+                                    // Convert the date to a JavaScript Date object
+                                    var date = new Date(data);
 
-                // Go to the first page for the table
-                table.page(0).draw(false);
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                // Log the data of visible rows on the first page for the table
-                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-            }
+                                    // Return the formatted date as DD/MM/YYYY
+                                    return day + '/' + month + '/' + year;
+                                }
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'kelulusan.keputusan',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
 
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case 'Lulus':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    break;
+                                case 'Tidak Lulus':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
 
-            function logTableData(message, table) {
-                console.log(message, table.rows().data().toArray());
-            }
-        </script>
+                            return status;
+                        }
+                    },
+                    { data: 'kelulusan.keputusan' }
+                ]
+                
 
-        <script> 
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
             });
-        </script>   
+        }
 
-        <style>
-            .custom-width-btn {
-                width: 105px; 
-                height: 35px;
+        function initializeDataTable1a() {
+            $('#sortTable1a').DataTable({
+                ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] },
+                        { targets: [3], visible: false }, // Hide column (index 4)
+                        { targets: [8], visible: false } // Hide column (index 9)
+                    ],
+                ajax: {
+                    url: '{{ route("senarai.keputusan.BKOKUUA") }}', // URL to fetch data from
+                    dataSrc: '' // Property in the response object containing the data array
+                    
+                },
+                columns: [
+                    { 
+                        data: 'no_rujukan_permohonan',
+                        // render: function(data, type, row) {
+                        //     // Construct the URL using the no_rujukan_permohonan value
+                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        // }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.infoipt.id_institusi' },
+                    {
+                        data: 'akademik.peringkat.peringkat',
+                        render: function(data, type, row) {
+                            // Split the string into an array of words
+                            var words = data.split(' ');
+
+                            // Capitalize the first letter of each word
+                            for (var i = 0; i < words.length; i++) {
+                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_data = words.join(' ');
+
+                            return formatted_data;
+                        }
+                    },
+                    { data: 'kelulusan.no_mesyuarat' },
+                    {
+                        data: 'kelulusan.tarikh_mesyuarat',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                if (data === null) {
+                                    return '';
+                                } else {
+                                    // Convert the date to a JavaScript Date object
+                                    var date = new Date(data);
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as DD/MM/YYYY
+                                    return day + '/' + month + '/' + year;
+                                }
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'kelulusan.keputusan',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case 'Lulus':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    break;
+                                case 'Tidak Lulus':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+
+                            return status;
+                        }
+                    },
+                    { data: 'kelulusan.keputusan' }
+                ]
+                
+
+            });
+        }
+
+        function initializeDataTable2() {
+            $('#sortTable2').DataTable({
+                ordering: true, // Enable manual sorting
+                    order: [], // Disable initial sorting
+                    columnDefs: [
+                        { orderable: false, targets: [0] },
+                        { targets: [3], visible: false }, // Hide column (index 4)
+                        { targets: [8], visible: false } // Hide column (index 9)
+                    ],
+                ajax: {
+                    url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
+                    dataSrc: '' // Property in the response object containing the data array
+                    
+                },
+                columns: [
+                    { 
+                        data: 'no_rujukan_permohonan',
+                        // render: function(data, type, row) {
+                        //     // Construct the URL using the no_rujukan_permohonan value
+                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        // }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.infoipt.id_institusi' },
+                    {
+                        data: 'akademik.peringkat.peringkat',
+                        render: function(data, type, row) {
+                            // Split the string into an array of words
+                            var words = data.split(' ');
+
+                            // Capitalize the first letter of each word
+                            for (var i = 0; i < words.length; i++) {
+                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_data = words.join(' ');
+
+                            return formatted_data;
+                        }
+                    },
+                    { data: 'kelulusan.no_mesyuarat' },
+                    {
+                        data: 'kelulusan.tarikh_mesyuarat',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                if (data === null) {
+                                    return '';
+                                } else {
+                                    // Convert the date to a JavaScript Date object
+                                    var date = new Date(data);
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as DD/MM/YYYY
+                                    return day + '/' + month + '/' + year;
+                                }
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'kelulusan.keputusan',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case 'Lulus':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    break;
+                                case 'Tidak Lulus':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+
+                            return status;
+                        }
+                    },
+                    { data: 'kelulusan.keputusan' }
+                ]
+                
+
+            });
+        }
+
+        // Function to clear filters for all tables
+        function clearFilters() {
+            if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                $('#sortTable1').DataTable().destroy();
             }
-            .custom-width-select {
-                width: 400px !important; /* Important to override other styles */
+            if ($.fn.DataTable.isDataTable('#sortTable1a')) {
+                $('#sortTable1a').DataTable().destroy();
             }
-            .form-select {
-                margin-left: 10px !important; 
+            if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                $('#sortTable2').DataTable().destroy();
             }
-        </style>
+        }
+
+        // Function to update the institution dropdown
+        function updateInstitusiDropdown(institusiList) {
+            // Clear existing options
+            $('#institusiDropdown').empty();
+
+            // Add default option
+            $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+            // Add options based on the selected tab
+            for (var i = 0; i < institusiList.length; i++) {
+                $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+            }
+        }
+
+        function updateExportContainers(activeTabId) {
+            // Hide all export containers initially
+            $('.export-container').hide();
+
+            // Show the export container based on the active tab
+            var programCode = getProgramCode(activeTabId);
+            $('.export-container[data-program-code="' + programCode + '"]').show();
+        }
+
+        function getProgramCode(activeTabId) {
+            switch (activeTabId) {
+                case 'bkoku-tab':
+                    return 'BKOKU';
+                case 'bkokuUA-tab':
+                    return 'UA';
+                case 'ppk-tab':
+                    return 'PPK';
+                // Add more cases if you have additional tabs
+                default:
+                    return '';
+            }
+        }
+
+        // Add an event listener for tab clicks
+        $('.nav-link').on('click', function() {
+            // Get the ID of the active tab
+            var activeTabId = $(this).attr('id');
+
+            // Clear filters when changing tabs
+            clearFilters();
+
+            updateExportContainers(activeTabId);
+
+            // Update the institution dropdown based on the active tab
+            switch (activeTabId) {
+                case 'bkoku-tab':
+                    updateInstitusiDropdown(bkokuList);
+                    initializeDataTable1();
+                    break;
+                case 'bkokuUA-tab':
+                    updateInstitusiDropdown(bkokuUAList);
+                    initializeDataTable1a();
+                    break;
+                case 'ppk-tab':
+                    updateInstitusiDropdown(ppkList);
+                    initializeDataTable2();
+                    break;
+                // Add more cases if you have additional tabs
+            }
+        });
+
+        // Trigger the function for the default active tab (bkoku-tab)
+        updateInstitusiDropdown(bkokuList);
+        initializeDataTable1(); // Initialize DataTable1 on page load
+
+        
+
+    });
+</script>
+      
+<script>
+
+    function applyFilter() {
+
+        // Reinitialize DataTables
+        initDataTable('#sortTable1', 'datatable1');
+        initDataTable('#sortTable1a', 'datatable');
+        initDataTable('#sortTable2', 'datatable2');
+
+        function initDataTable(tableId, variableName) {
+            // Check if the datatable is already initialized
+            if ($.fn.DataTable.isDataTable(tableId)) {
+                // Destroy the existing DataTable instance
+                $(tableId).DataTable().destroy();
+            }
+
+            // Initialize the datatable and assign it to the global variable
+            window[variableName] = $(tableId).DataTable({
+                ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+                columnDefs: [
+                        { orderable: false, targets: [0] },
+                        { targets: [3], visible: false }, // Hide column (index 4)
+                        { targets: [8], visible: false } // Hide column (index 9)
+                    ]
+            });
+        }
+
+        var selectedInstitusi = $('[name="institusi"]').val();
+        var startDate = $('#start_date').val();
+        var endDate = $('#end_date').val();
+        var status = $('#status').val();
+        console.log(selectedInstitusi);
+        console.log(startDate);
+        console.log(endDate);
+        console.log(status);
+
+        // Apply search filter and log data for all tables
+        applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
+        applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
+        applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
+
+        var exportBKOKU = document.getElementById('exportBKOKU');
+        exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+        
+
+        var exportUA = document.getElementById('exportUA');
+        exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+
+
+        var exportPPK = document.getElementById('exportPPK');
+        exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+
+    }
+
+    function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
+        // Reset the search for all columns to ensure a clean filter
+        table.columns().search('').draw();
+
+        // Clear the previous search functions
+        $.fn.dataTable.ext.search = [];
+
+        // Apply date range filter
+        if (startDate || endDate) {
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                    let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                    let dateAdded = moment(data[6], 'DD/MM/YYYY');
+
+                    // Check if the date falls within the specified range
+                    let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                    if (result) {
+                        console.log('Date Range Filter Result: true');
+                        console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                        console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                        console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                    } else {
+                        console.log('Date Range Filter Result: false');
+                        console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                        console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                        console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                    }
+
+                    return result;
+                }
+            );
+        }
+
+        // Apply search filter for institusi
+        if (institusi) {
+            table.column(2).search(institusi).draw();
+        }
+
+        // Apply search filter for status
+        if (status) {
+            console.log('Applying Status Filter:', status);
+            table.column(8).search(status).draw();
+        } else {
+            console.log('No Status Filter Applied');
+        }
+
+        // Log filtered data
+        console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+        // Go to the first page for the table
+        table.page(0).draw(false);
+
+        // Log the data of visible rows on the first page for the table
+        console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+    }
+
+</script>
     </body>
 </x-default-layout> 
