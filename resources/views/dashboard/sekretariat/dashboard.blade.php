@@ -47,37 +47,12 @@
 
 						{{-- COUNT PERMOHONAN --}}
 						@php
-							$keseluruhanB = 0;
-						@endphp
-
-						{{-- syafiqah komen jap --}}
-						{{-- @foreach ($permohonan as $item)
-							@php
-								$jenis_institusi = DB::table('smoku_akademik')
-														->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
-														->where('smoku_id', $item->smoku_id)
-														->value('bk_info_institusi.jenis_institusi');
-
-								if ($jenis_institusi != "UA") {
-									$keseluruhanB++;
-								}
-							@endphp
-						@endforeach --}}
-
-
-						@php
-							// $keseluruhanB = DB::table('permohonan')
-							// ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							// ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							// ->where('permohonan.program', 'BKOKU')
-							// ->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
-							// ->count();
-							// $keseluruhanB = DB::table('permohonan')
-							// ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							// ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							// ->where('permohonan.program', 'BKOKU')
-							// ->where('bk_info_institusi.jenis_institusi', '<>', 'UA') // Not equal to 'UA'
-							// ->count();
+							$keseluruhanB = DB::table('permohonan')
+							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+							->where('permohonan.program', 'BKOKU')
+							->whereNotIn('bk_info_institusi.jenis_institusi', ['UA']) 
+							->count();
 						
 							$derafB = DB::table('permohonan')
 							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
