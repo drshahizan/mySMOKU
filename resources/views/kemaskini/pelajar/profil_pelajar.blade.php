@@ -327,7 +327,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-							<div class="col-md-5 fv-row">
+							<div class="col-md-5 fv-row" id="divdun">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
 								<!--end::Label-->
@@ -1067,6 +1067,17 @@
 					});
 				});
 
+			});
+
+			//negeri takde dun
+			$(document).ready(function(){
+				$('#alamat_tetap_negeri').on('change', function() {
+					if (['14', '15', '16', '17'].includes(this.value)) {
+						$("#divdun").hide();
+					} else {
+						$("#divdun").show();
+					}
+				});
 			});
 
 			//DUN

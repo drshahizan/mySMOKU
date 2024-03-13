@@ -163,10 +163,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/pembayaran/senarai/dataUA', [SaringanController::class, 'getPembayaranPermohonanUA'])->name('senarai.pembayaran.dataUA');
     Route::get('permohonan/sekretariat/pembayaran/senarai/dataPPK', [SaringanController::class, 'getPembayaranPermohonanPPK'])->name('senarai.pembayaran.dataPPK');
 
-
-
-
-
     Route::post('permohonan/sekretariat/hantar/info-cek', [SaringanController::class, 'kemaskiniInfoCek'])->name('sekretariat.infocek.submit');
     Route::get('senarai-penyaluran-excel/{programCode}', [SaringanController::class, 'cetakSenaraiPenyaluranExcel'])->name('senarai.penyaluran.excel');
     Route::post('permohonan/sekretariat/kembali/{id}', [SaringanController::class, 'returnToPenyelaras'])->name('sekretariat.return.infobaucer');
@@ -234,7 +230,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('permohonan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanPPK'])->name('senarai.keputusan.PPK');
 
 
-    
+
     Route::get('senarai-keputusan-permohonan-BKOKU-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanBKOKU'])->name('senarai.keputusan.BKOKU.pdf');
     Route::get('senarai-keputusan-permohonan-BKOKU-UA-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanUA'])->name('senarai.keputusan.BKOKU.UA.pdf');
     Route::get('senarai-keputusan-permohonan-PPK-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPPK'])->name('senarai.keputusan.PPK.pdf');
@@ -272,12 +268,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tuntutan/sekretariat/pembayaran/senarai/dataUA', [SekretariatController::class, 'getPembayaranTuntutanUA'])->name('senarai.pembayaran.tuntutan.dataUA');
     Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPPK', [SekretariatController::class, 'getPembayaranTuntutanPPK'])->name('senarai.pembayaran.tuntutan.dataPPK');
     
-    
-    
-    
-    
-    
-    
     Route::get('tuntutan/sekretariat/pembayaran/maklumat/{id}', [SekretariatController::class, 'maklumatPembayaran'])->name('t.maklumat.pembayaran.id');
     Route::post('tuntutan/sekretariat/pembayaran/saring/{id}', [SekretariatController::class, 'saringPembayaran'])->name('t.saring.pembayaran.id');;
     Route::get('tuntutan/sekretariat/pembayaran/papar/{id}', [SekretariatController::class, 'paparPembayaran'])->name('t.papar.pembayaran.id');
@@ -288,6 +278,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Keputusan
     Route::get('tuntutan/sekretariat/keputusan/keputusan-tuntutan', [SekretariatController::class, 'keputusanTuntutan'])->name('keputusan.tuntutan');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKU', [SekretariatController::class, 'getKeputusanTuntutanBKOKU'])->name('senarai.keputusan.tuntutan.BKOKU');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKUUA', [SekretariatController::class, 'getKeputusanTuntutanBKOKUUA'])->name('senarai.keputusan.tuntutan.BKOKUUA');
+    Route::get('tuntutan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanTuntutanPPK'])->name('senarai.keputusan.tuntutan.PPK');
+
+
     Route::get('tuntutan/sekretariat/keputusan/filter-tuntutan', [SekretariatController::class, 'filterTuntutan'])->name('filter.tuntutan');
 
     //Tuntutan - Sekretariat - Sejarah

@@ -1756,7 +1756,7 @@
 							}
 						},
 						error: function () {
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 						}
 					});
 				}
@@ -1798,7 +1798,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1853,7 +1853,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1897,7 +1897,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1939,7 +1939,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -2048,7 +2048,7 @@
 									}
 								},
 								error: function () {
-									alert('AJAX load did not work');
+									// alert('AJAX load did not work');
 								}
 							});
 						}

@@ -1654,7 +1654,7 @@
 			}
 		}	
 
-		$(document).ready(function () {
+			$(document).ready(function () {
 				var previousIdNegeri = $('#alamat_negeri').val();
 
 				function getBandarData(idnegeri) {
@@ -1681,7 +1681,7 @@
 							}
 						},
 						error: function () {
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 						}
 					});
 				}
@@ -1711,7 +1711,7 @@
 							}
 						},
 						error: function () {
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 						}
 					});
 				}
@@ -1767,7 +1767,7 @@
 							}
 						},
 						error: function () {
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 						}
 					});
 				}
@@ -1818,7 +1818,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1860,7 +1860,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1973,7 +1973,7 @@
 									}
 								},
 								error: function () {
-									alert('AJAX load did not work');
+									// alert('AJAX load did not work');
 								}
 							});
 						}
