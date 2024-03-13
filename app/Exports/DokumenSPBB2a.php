@@ -39,7 +39,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
          $currentYear = Carbon::now()->year;
  
          // Determine the sesi_bayaran based on the current month and year
-         if ($currentMonth == 3) {
+         if ($currentMonth == 2) {
              $sesiBayaran = '1/' . $currentYear;
          } elseif ($currentMonth == 4) {
              $sesiBayaran = '2/' . $currentYear;
