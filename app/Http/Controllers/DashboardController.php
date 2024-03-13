@@ -34,7 +34,7 @@ class DashboardController extends Controller
         else if(Auth::user()->tahap=='2')
         {
             $bank = MaklumatBank::where('institusi_id', Auth::user()->id_institusi)->first();
-            $idInstitusi = InfoIpt::where('institusi_id', Auth::user()->id_institusi)->first();
+            $idInstitusi = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
             if ($bank || ($idInstitusi->jenis_institusi === 'P' || $idInstitusi->jenis_institusi === 'KK')) {
                 return redirect()->route('penyelaras.dashboard');
