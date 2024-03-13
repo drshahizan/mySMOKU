@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\InfoIpt;
+use App\Models\PeringkatPengajian;
 
 class Akademik extends Model
 {
@@ -36,5 +37,11 @@ class Akademik extends Model
     {
         return $this->hasOne(InfoIpt::class, 'id_institusi', 'id_institusi');
     }
+
+    public function peringkat()
+    {
+        return $this->belongsTo(PeringkatPengajian::class, 'peringkat_pengajian', 'kod_peringkat');
+    }
+
 
 }

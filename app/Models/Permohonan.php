@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Akademik;
 use App\Models\Smoku;
 use App\Models\Tuntutan;
+use App\Models\Kelulusan;
 
 class Permohonan extends Model
 {
@@ -61,6 +62,11 @@ class Permohonan extends Model
     public function tuntutanAll()
     {
         return $this->hasMany(Tuntutan::class, 'id', 'permohonan_id');
+    }
+
+    public function kelulusan()
+    {
+        return $this->belongsTo(Kelulusan::class, 'id', 'permohonan_id');
     }
 
    
