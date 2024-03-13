@@ -478,10 +478,10 @@
                                         <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 25%"><b>Nama</b></th>
-                                                    <th style="width: 35%"><b>Nama Kursus</b></th> 
-                                                    <th class="text-center" style="width: 15%"><b>Jumlah Disokong</b></th>
-                                                    <th class="text-center" style="width: 15%"><b>Jumlah Dibayar</b></th>
+                                                    <th style="width: 35%"><b>Nama</b></th>
+                                                    <th style="width: 30%"><b>Nama Kursus</b></th> 
+                                                    <th class="text-center" style="width: 13%"><b>Jumlah Disokong</b></th>
+                                                    <th class="text-center" style="width: 12%"><b>Jumlah Dibayar</b></th>
                                                     <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                 </tr>
                                             </thead>
@@ -490,7 +490,6 @@
                                                 @php
                                                     require_once app_path('helpers.php');
                                                     // dd($kutipanBalik);
-                                                    // dd(count($kutipanBalik));
                                                 @endphp
                                             
                                                 @foreach ($kutipanBalik as $item)
@@ -516,9 +515,9 @@
                                                     
                                                     @if ($institusiId == $institusi_pelajar)
                                                         <tr>
-                                                            <td style="width: 25%">{{$pemohon}}</td>
-                                                            <td style="width: 35%">{{$nama_kursus}}</td> 
-                                                            <td class="text-center" style="width: 15%">
+                                                            <td style="width: 35%">{{$pemohon}}</td>
+                                                            <td style="width: 30%">{{$nama_kursus}}</td> 
+                                                            <td class="text-center" style="width: 13%">
                                                                 @if ($item->yuran_disokong !== null && is_numeric($item->yuran_disokong) && $item->wang_saku_disokong !== null && is_numeric($item->wang_saku_disokong))
                                                                     RM {{ number_format($item->yuran_disokong + $item->wang_saku_disokong, 2) }}                                                                    
                                                                 @elseif ($item->yuran_disokong == null && $item->wang_saku_disokong !== null && is_numeric($item->wang_saku_disokong))
@@ -527,7 +526,7 @@
                                                                     RM {{ number_format($item->yuran_disokong, 2) }}  
                                                                 @endif
                                                             </td>
-                                                            <td class="text-center" style="width: 15%">
+                                                            <td class="text-center" style="width: 12%">
                                                                 @if ($item->yuran_dibayar !== null && is_numeric($item->yuran_dibayar) && $item->wang_saku_dibayar !== null && is_numeric($item->wang_saku_dibayar))
                                                                     RM {{ number_format($item->yuran_dibayar + $item->wang_saku_dibayar, 2) }}
                                                                 @elseif ($item->yuran_dibayar == null && $item->wang_saku_dibayar !== null && is_numeric($item->wang_saku_dibayar))

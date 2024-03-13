@@ -1697,8 +1697,6 @@ class PenyelarasController extends Controller
 
         $kutipanBalik = $permohonanBerhenti->union($tuntutanBerhenti)->union($permohonanDibayar)->union($tuntutanDibayar)->get();
 
-        // dd($kutipanBalik);
-
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak','institusiId','kutipanBalik'));
     }
 
