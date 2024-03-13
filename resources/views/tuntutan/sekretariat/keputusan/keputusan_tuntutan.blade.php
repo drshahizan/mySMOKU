@@ -158,14 +158,14 @@
                                             <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                        <th style="width: 25%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center" style="width: 15%">Status Tuntutan</th>
-                                                        <th class="text-center" style="width: 15%">Status</th>
+                                                        <th><b>ID Tuntutan</b></th>
+                                                        <th><b>Nama</b></th>
+                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center"><b>ID Institusi</b></th>
+                                                        <th><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
+                                                        <th class="text-center">Status Tuntutan</th>
+                                                        <th class="text-center">Status</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -179,14 +179,14 @@
                                             <table id="sortTable1a" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                        <th style="width: 25%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center" style="width: 15%">Status Tuntutan</th>
-                                                        <th class="text-center" style="width: 15%">Status</th>
+                                                        <th><b>ID Tuntutan</b></th>
+                                                        <th><b>Nama</b></th>
+                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center"><b>ID Institusi</b></th>
+                                                        <th><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
+                                                        <th class="text-center">Status Tuntutan</th>
+                                                        <th class="text-center">Status</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -200,14 +200,14 @@
                                             <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                        <th style="width: 25%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
-                                                        <th style="width: 15%"><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center" style="width: 15%">Status Tuntutan</th>
-                                                        <th class="text-center" style="width: 15%">Status</th>
+                                                        <th><b>ID Tuntutan</b></th>
+                                                        <th><b>Nama</b></th>
+                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center"><b>ID Institusi</b></th>
+                                                        <th><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
+                                                        <th class="text-center">Status Tuntutan</th>
+                                                        <th class="text-center">Status</th>
                                                     </tr>
                                                 </thead>
                                             </table>
