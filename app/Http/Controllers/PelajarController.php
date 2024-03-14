@@ -133,10 +133,25 @@ class PelajarController extends Controller
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku->id)->first();
 
-        // Retrieve uploaded file information from the TamatPengajian model
-        $uploadedSijilTamat = is_array($tamat_pengajian->sijil_tamat) ? $tamat_pengajian->sijil_tamat : [$tamat_pengajian->sijil_tamat];
-        $uploadedTranskrip = is_array($tamat_pengajian->transkrip) ? $tamat_pengajian->transkrip : [$tamat_pengajian->transkrip];
-        $perakuan = session('perakuan', 1);
+        // Initialize variables to hold uploaded file information
+        $uploadedSijilTamat = [];
+        $uploadedTranskrip = [];
+        $perakuan = session('perakuan', 0);
+
+        // Check if $tamat_pengajian is not null and has uploaded files
+        if ($tamat_pengajian) {
+            if ($tamat_pengajian->sijil_tamat) {
+                $uploadedSijilTamat = is_array($tamat_pengajian->sijil_tamat) ? $tamat_pengajian->sijil_tamat : [$tamat_pengajian->sijil_tamat];
+            }
+
+            if ($tamat_pengajian->transkrip) {
+                $uploadedTranskrip = is_array($tamat_pengajian->transkrip) ? $tamat_pengajian->transkrip : [$tamat_pengajian->transkrip];
+            }
+
+            if($tamat_pengajian->perakuan){
+                $perakuan = session('perakuan', 1);
+            }
+        }
 
         return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
     }

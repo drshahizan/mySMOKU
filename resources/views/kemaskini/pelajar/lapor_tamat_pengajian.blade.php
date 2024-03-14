@@ -49,7 +49,7 @@
 													<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
 													@if($uploadedSijilTamat)
 														@foreach($uploadedSijilTamat as $sijil)
-															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil }}</a>
+															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil}}</a>
 														@endforeach
 													@endif
 												</td>
@@ -72,6 +72,7 @@
 												</td>
 											</tr>
 								
+											{{-- NOTES --}}
 											<tr>
 												<td colspan="2">
 													<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
