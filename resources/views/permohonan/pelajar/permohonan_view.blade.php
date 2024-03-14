@@ -1349,6 +1349,9 @@
 							$saring_bank = Str::contains($saringan, 'Ralat pada penyata bank');
 							$saring_surat = Str::contains($saringan, 'Ralat pada surat tawaran');
 							$saring_resit = Str::contains($saringan, 'Ralat pada resit');
+
+							//user migrate
+							$user = DB::table('users')->where('no_kp', Auth::user()->no_kp)->first();
 							
 						@endphp
 						<!--begin::Table-->
@@ -1364,75 +1367,91 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
-								@if (!$dokumen->isEmpty() && $dokumen->count() >= 3)
-								@foreach($dokumen as $dok)
-									<tr>
-										<td class="text-gray-800">
-											@if($dok->id_dokumen == '1')
-												Salinan Penyata Bank
-											@elseif($dok->id_dokumen == '2')
-												Salinan Surat Tawaran Pengajian
-											@elseif($dok->id_dokumen == '3')
-												Salinan Resit/Invois
-											@else
-												Resit/Invois Tambahan (Jika Ada)	
-											@endif
-										</td>
-										@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
-											@if($butiranPelajar->status == 5 && $saringan !=null)
-												@php
-												$id = ''; // Initialize $id variable
-												@endphp
-										
+								@if (!$dokumen->isEmpty() && ($dokumen->count() >= 3) || ($user->data_migrate == 1 && $dokumen->count() >= 2))
+									@foreach($dokumen as $dok)
+										<tr>
+											<td class="text-gray-800">
 												@if($dok->id_dokumen == '1')
-													@php
-														$id='akaunBank';
-													@endphp
+													Salinan Penyata Bank
 												@elseif($dok->id_dokumen == '2')
-													@php
-														$id='suratTawaran';
-													@endphp
+													Salinan Surat Tawaran Pengajian
 												@elseif($dok->id_dokumen == '3')
-													@php
-														$id='invoisResit';
-													@endphp
-												@endif
-												@if($id == 'akaunBank' && $saring_bank)
-													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
-												@elseif($id == 'suratTawaran' && $saring_surat)
-													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
-												@elseif($id == 'invoisResit' && $saring_resit)
-													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													Salinan Resit/Invois
 												@else
-													<td class="fv-row"></td>
+													Resit/Invois Tambahan (Jika Ada)	
 												@endif
-											@endif
-											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
-											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
+											</td>
+											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
+												@if($butiranPelajar->status == 5 && $saringan !=null)
+													@php
+													$id = ''; // Initialize $id variable
+													@endphp
 											
-										@else
-											<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
-											<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
-										@endif
+													@if($dok->id_dokumen == '1')
+														@php
+															$id='akaunBank';
+														@endphp
+													@elseif($dok->id_dokumen == '2')
+														@php
+															$id='suratTawaran';
+														@endphp
+													@elseif($dok->id_dokumen == '3')
+														@php
+															$id='invoisResit';
+														@endphp
+													@endif
+													@if($id == 'akaunBank' && $saring_bank)
+														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@elseif($id == 'suratTawaran' && $saring_surat)
+														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@elseif($id == 'invoisResit' && $saring_resit)
+														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
+													@else
+														<td class="fv-row"></td>
+													@endif
+												@endif
+												<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
+												<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
+												
+											@else
+												<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
+												<td><textarea type="text" class="form-control form-control-sm" id="catatan" rows="1" name="catatan" readonly>{{ $dok->catatan }}</textarea></td>
+											@endif
+										</tr>
+									@endforeach	
+								@elseif ($dokumen->isEmpty() && $user->data_migrate == 1)
+									<tr>
+										<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row">N/A</td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 									</tr>
-								@endforeach	
+									<tr>
+										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row">N/A</td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row">N/A</td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
+									</tr>
 								@else
-								<tr>
-									<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
-								</tr>
-								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
-								</tr>
-								<tr>
-									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
-								</tr>
-								 @endif	
+									<tr>
+										<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
+									</tr>
+								@endif	
 								
 							</tbody>
 							
