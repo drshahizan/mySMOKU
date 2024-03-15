@@ -4,9 +4,6 @@
 		.bs-example{
 			margin: 60px 0;
 		}
-		a, button{
-			margin-right: 30px;
-		  }
 		i{
 			font-size: 22px;
 		}
@@ -92,8 +89,31 @@
 						<!--end::Label-->
 					</div>
 					<!--end::Wrapper-->
+					<!--begin::Line-->
+					<div class="stepper-line h-40px"></div>
+					<!--end::Line-->
 				</div>
 				<!--end::Step 3-->
+				<!--begin::Step 4-->
+                <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+					<!--begin::Wrapper-->
+					<div class="stepper-wrapper">
+						<!--begin::Icon-->
+						<div class="stepper-icon w-40px h-40px">
+							<i class="ki-duotone ki-check fs-2 stepper-check"></i>
+							<span class="stepper-number">4</span>
+						</div>
+						<!--end::Icon-->
+						<!--begin::Label-->
+						<div class="stepper-label">
+							<h3 class="stepper-title">Dokumen</h3>
+							<div class="stepper-desc fw-semibold">Salinan Dokumen</div>
+						</div>
+						<!--end::Label-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 4-->
 			</div>
 			<!--end::Nav-->
 		</div>
@@ -774,112 +794,211 @@
 
 				<!--begin::Step 3-->
 				<div data-kt-stepper-element="content">
-					@csrf		
-						<!--begin::Wrapper-->
-						<div class="w-100">
-							<!--begin::Heading-->
-							<div class="pb-10 pb-lg-15">
-								<!--begin::Title-->
-								<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
-								<!--end::Title-->
-								<!--begin::Notice-->
-								<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
-								<!--end::Notice-->
-							</div>
-							<!--end::Heading-->
-							<!--begin::Input group-->
-							<div class="d-flex flex-column mb-7 fv-row">
+				@csrf		
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Maklumat Akademik</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Profil Akademik</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Input group-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Pusat Pengajian</span>
+							</label>
+							<!--end::Label-->
+							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
+								@foreach ($institusi as $institusi)
+									<option value="{{$institusi->id_institusi}}" {{$akademik->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
+								@endforeach
+								</select>							 
+						</div>
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Pusat Pengajian</span>
+									<span class="">No Pendaftaran Pelajar</span>
 								</label>
 								<!--end::Label-->
-								<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
-									@foreach ($institusi as $institusi)
-										<option value="{{$institusi->id_institusi}}" {{$akademik->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
-									@endforeach
-								 </select>							 
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$akademik->no_pendaftaran_pelajar}}" />
 							</div>
-							<!--begin::Input group-->
-							<div class="row mb-10">
-								<div class="col-md-6 fv-row">
-									<!--begin::Label-->
-									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-										<span class="">No Pendaftaran Pelajar</span>
-									</label>
-									<!--end::Label-->
-									<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$akademik->no_pendaftaran_pelajar}}" />
-								</div>
-								<!--begin::Col-->
-								<div class="col-md-6 fv-row">
-									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
-									<!--end::Label-->
-									<!--begin::Row-->
-									<div class="row fv-row">
-										<!--begin::Input wrapper-->
-										<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
-										<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option value=""></option>
-										</select>
-										<!--end::Input wrapper-->
-									</div>
-									<!--end::Row-->
-								</div>
-								<!--end::Col-->
-							</div>
-							<!--end::Input group-->
-							<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">Nama Kursus</span>
-								</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 								<!--end::Label-->
-								<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									<option value="{{ $akademik->nama_kursus}}">{{ strtoupper($akademik->nama_kursus)}}</option>
-								</select>
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
+									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option value=""></option>
+									</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
 							</div>
-							<!--end::Input group-->
-							<div class="row mb-10">
-								<div class="col-md-6 fv-row">
-									<!--begin::Label-->
-									<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
-									<!--end::Label-->
-										<!--begin::Input wrapper-->
-										<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
-											<option></option>
-											@for($i = 1; $i <= 4; $i += 0.5)
-												@if($akademik->tempoh_pengajian == ($i == (int)$i ? (int)$i : number_format($i, 1)))
-													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}" selected>{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
-												@else
-													<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
-												@endif
-											@endfor
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Kursus</span>
+							</label>
+							<!--end::Label-->
+							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<option value="{{ $akademik->nama_kursus}}">{{ strtoupper($akademik->nama_kursus)}}</option>
+							</select>
+						</div>
+						<!--end::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
+								<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+										<option></option>
+										@for($i = 1; $i <= 4; $i += 0.5)
+											@if($akademik->tempoh_pengajian == ($i == (int)$i ? (int)$i : number_format($i, 1)))
+												<option value="{{ ($i == (int)$i) ? (int)$i : $i }}" selected>{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+											@else
+												<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
+											@endif
+										@endfor
+									</select>
+									<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class=" fs-6 fw-semibold form-label mb-2">Bilangan Bulan Persemester</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option value="4" {{$akademik->bil_bulan_per_sem == "4" ? 'selected' : ''}}>4</option>
+										<option value="6" {{$akademik->bil_bulan_per_sem == "6" ? 'selected' : ''}}>6</option>
 										</select>
-										<!--end::Input wrapper-->
+									<!--end::Input wrapper-->
 								</div>
-								<!--end::Col-->
-								<div class="col-md-6 fv-row">
-									<!--begin::Label-->
-									<label class=" fs-6 fw-semibold form-label mb-2">Bilangan Bulan Persemester</label>
-									<!--end::Label-->
-									<!--begin::Row-->
-									<div class="row fv-row">
-										<!--begin::Input wrapper-->
-											<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-											<option value="4" {{$akademik->bil_bulan_per_sem == "4" ? 'selected' : ''}}>4</option>
-											<option value="6" {{$akademik->bil_bulan_per_sem == "6" ? 'selected' : ''}}>6</option>
-											</select>
-										<!--end::Input wrapper-->
-									</div>
-									<!--end::Row-->
-								</div>
+								<!--end::Row-->
 							</div>
 						</div>
-						<!--end::Wrapper-->
-						
 					</div>
-					<!--end::Step 3-->
+					<!--end::Wrapper-->
+					
+				</div>
+				<!--end::Step 3-->
+
+				<!--begin::Step 4-->
+				<div data-kt-stepper-element="content">
+				@csrf
+					<!--begin::Wrapper-->
+					<div class="w-100">
+						<!--begin::Heading-->
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Title-->
+							<h2 class="fw-bold text-dark">Dokumen</h2>
+							<!--end::Title-->
+							<!--begin::Notice-->
+							<div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
+							<!--end::Notice-->
+						</div>
+						<!--end::Heading-->
+						@php
+						
+							//user migrate
+							$user = DB::table('users')->where('no_kp', Auth::user()->no_kp)->first();
+							
+						@endphp
+						<!--begin::Table-->
+						<table class="table table-row-dashed fs-6 gy-5">
+							<thead>
+								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+									<th class="min-w-100px">Nama</th>
+									<th class="min-w-100px">Dokumen</th>
+									<th class="w-110px">Catatan</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
+									@foreach($dokumen as $dok)
+										
+										<tr>
+											<td class="text-gray-800">
+												@if($dok->id_dokumen == '1')
+													Salinan Penyata Bank
+												@elseif($dok->id_dokumen == '2')
+													Salinan Surat Tawaran Pengajian
+												@else
+													Resit/Invois Tambahan (Jika Ada)	
+												@endif
+											</td>
+											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2')
+											@php
+											if($dok->id_dokumen == '1')
+												$namaDok='akaunBank';
+											elseif($dok->id_dokumen == '2')
+												$namaDok='suratTawaran';
+											@endphp
+												<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
+												<td><textarea type="text" class="form-control form-control-sm" id="nota_{{ $namaDok }}" rows="1" name="nota_{{ $namaDok }}">{{ $dok->catatan }}</textarea></td>
+											@endif
+										</tr>
+									@endforeach	
+								@else
+									<tr>
+										<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+									</tr>
+
+								@endif	
+								
+							</tbody>
+							
+						</table>
+						<!--end::Table-->
+						
+
+						<br>
+						<br>
+
+						<div class="pb-10 pb-lg-15">
+							<!--begin::Notice-->
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange;'></i>&nbsp;
+								Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini </a>untuk mengurangkan saiz fail sebelum memuat naik fail.
+							</div>
+
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+								Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png' dan '.jpeg'.
+							</div>
+							
+							<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange'></i>&nbsp; 
+								Saiz maksimum fail adalah 2 MB.
+							</div>
+							<!--end::Notice-->
+						</div>
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Step 4-->
 
 				<!--begin::Actions-->
 				<div class="d-flex flex-stack pt-10">

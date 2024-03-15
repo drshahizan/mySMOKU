@@ -6,6 +6,7 @@ use App\Models\Agama;
 use App\Models\Akademik;
 use App\Models\Bandar;
 use App\Models\ButiranPelajar;
+use App\Models\Dokumen;
 use App\Models\Dun;
 use App\Models\Hubungan;
 use App\Models\InfoIpt;
@@ -379,7 +380,10 @@ class PelajarController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
 
-        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi'));
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
+        $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
+
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','dokumen'));
     }
 
     public function simpanProfilPelajar(Request $request)
@@ -388,6 +392,11 @@ class PelajarController extends Controller
         $butiran_pelajar = ButiranPelajar::where('smoku_id',$smoku->id)->first();
         $waris = Waris::where('smoku_id',$smoku->id)->first();
         $akademik = Akademik::where('smoku_id',$smoku->id)->where('status', 1)->first();
+
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+
+        $dokumen1 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 1)->first();
+        $dokumen2 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 2)->first();
 
         // Get the current values
         $currentValues = [
@@ -431,6 +440,10 @@ class PelajarController extends Controller
             'nama_kursus' => $akademik->nama_kursus,
             'tempoh_pengajian' => $akademik->tempoh_pengajian,
             'bil_bulan_per_sem' => $akademik->bil_bulan_per_sem,
+            'dokumen' => $dokumen1->dokumen ?? '',
+            'catatan' => $dokumen1->catatan ?? '',
+            'dokumen' => $dokumen2->dokumen ?? '',
+            'catatan' => $dokumen2->catatan ?? ''
         ];
         
 
@@ -501,7 +514,57 @@ class PelajarController extends Controller
                     'bil_bulan_per_sem' => $request->bil_bulan_per_sem
                 ]);
         }
-    
+
+        $runningNumber = rand(1000, 9999);
+
+        $documentTypes = [
+            'akaunBank' => 1,
+            'suratTawaran' => 2,
+            'invoisResit' => 3,
+        ];
+
+        foreach ($documentTypes as $inputName => $idDokumen) {
+            $file = $request->file($inputName);
+
+            if ($file) {
+                $originalFilename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
+                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $file->move('assets/dokumen/permohonan', $newFilename);
+
+                // Check if the document already exists
+                $existingDocument = Dokumen::where('permohonan_id', $permohonan->id)
+                    ->where('id_dokumen', $idDokumen)
+                    ->first();
+                    
+                if ($existingDocument) {
+                    // Update the existing document
+                    $existingDocument->dokumen = $newFilename;
+                    $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->save();
+                } else {
+                    // Create a new instance of dokumen and set its properties
+                    $data = new Dokumen();
+                    $data->permohonan_id = $permohonan->id;
+                    $data->id_dokumen = $idDokumen;
+                    $data->dokumen = $newFilename;
+                    $data->catatan = $request->input("nota_$inputName");
+
+                    // Save the new instance to the database
+                    $data->save();
+                }
+            }
+            else {
+                // Update all documents that match the conditions
+                Dokumen::where('permohonan_id', $permohonan->id)
+                ->where('id_dokumen', $idDokumen)
+                ->update(['catatan' => $request->input("nota_$inputName")]);
+            }
+
+            
+        }
+
         // Check if any updates were made
         $updatedValues = [
             'nama' => $request->nama_pelajar,
@@ -543,11 +606,15 @@ class PelajarController extends Controller
             'peringkat_pengajian' => $request->peringkat_pengajian,
             'nama_kursus' => $request->nama_kursus,
             'tempoh_pengajian' => $request->tempoh_pengajian,
-            'bil_bulan_per_sem' => $request->bil_bulan_per_sem
+            'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
+            'dokumen' => $dokumen1->dokumen ?? '',
+            'catatan' => $request->input("nota_akaunBank"),
+            'dokumen' => $dokumen2->dokumen ?? '',
+            'catatan' => $request->input("nota_suratTawaran")
         ];
 
         
-        if ($currentValues !== $updatedValues) {    
+        if ($currentValues != $updatedValues) {    
             return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
         }
 
