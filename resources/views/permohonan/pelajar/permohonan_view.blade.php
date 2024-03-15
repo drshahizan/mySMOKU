@@ -1077,16 +1077,9 @@
 												<option value="{{ $sesi }}">{{ $sesi }}</option>
 											@endfor
 										@else
-											@for($year = date('Y') - 1; $year <= (date('Y') + 1); $year++)
-												@php
-													$sesi = $year . '/' . ($year + 1);
-												@endphp
-												@if($butiranPelajar->sesi == $sesi)
-													<option value="{{ $sesi }}" selected>{{ $sesi }}</option>
-												@else
-													<option value="{{ $sesi }}">{{ $sesi }}</option>
-												@endif
-											@endfor
+											
+											<option value="{{ $butiranPelajar->sesi }}" selected>{{ $butiranPelajar->sesi }}</option>
+												
 										@endif
 									</select>
 									<!--end::Input wrapper-->
