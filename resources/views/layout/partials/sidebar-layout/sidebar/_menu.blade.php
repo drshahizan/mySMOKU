@@ -249,7 +249,7 @@
 		$total = DB::table('permohonan')->count();
 		$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
 		// $keputusanT = DB::table('tuntutan')->whereIn('status', ['6', '7'])->count();
-		$layakT = DB::table('tuntutan')->where('status', '=', '6')->where('data_migrate', '!=', '1')->count();
+		$layakT = DB::table('tuntutan')->where('status', '=', '6')->count();
 		$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
 		$totalT = DB::table('tuntutan')->count();
 
