@@ -191,17 +191,47 @@ axios.post(submitButton.closest('form').getAttribute('action'), new FormData(for
     .catch(function (error) {
         // Error occurred during the request
         console.error('Error submitting reset request:', error);
-
-        Swal.fire({
-            text: "Maaf, nampaknya terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Ok",
-            customClass: {
-                confirmButton: "btn btn-primary"
+    
+        if (error.response && error.response.status === 400) {
+            // Handle 400 errors
+            if (error.response.data && error.response.data.message === 'User email is null.') {
+                // Handle null email error
+                Swal.fire({
+                    text: "Emel pengguna tidak dijumpai. Sila hubungi Sekretariat KPT untuk kemaskini emel.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            } else {
+                // Handle other 400 errors
+                Swal.fire({
+                    text: "Terdapat ralat semasa memproses permintaan. Sila cuba lagi.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
-        });
+        } else {
+            // Handle other errors
+            Swal.fire({
+                text: "Maaf, nampaknya terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
+        }
     })
+    
+    
     .then(() => {
         // This block runs regardless of success or error
         // Hide loading indication

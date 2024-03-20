@@ -51,26 +51,29 @@ class PasswordResetLinkController extends Controller
     public function store(Request $request)
     {
         $user = User::where('no_kp', $request->no_kp)->first();
-        $emel = $user->email;
         if ($user) {
-
-            $token = Str::random(64); // Generate a unique token
-            DB::table('password_resets')->insert([
-                'email' => $emel,
-                'token' => $token,
-                'created_at' => now(),
-            ]);
-            
-            $resetLink = route('password.reset', ['token' => $token]);
-
-            // Send the email with the reset link and token
-            Mail::to($emel)->send(new ResetPassword($token));
-            return response()->json(['success' => true, 'message' => 'Password reset email sent successfully.'], 200);
-
+            $emel = $user->email;
+        
+            if ($emel) {
+                $token = Str::random(64); // Generate a unique token
+                DB::table('password_resets')->insert([
+                    'email' => $emel,
+                    'token' => $token,
+                    'created_at' => now(),
+                ]);
+        
+                $resetLink = route('password.reset', ['token' => $token]);
+        
+                // Send the email with the reset link and token
+                Mail::to($emel)->send(new ResetPassword($token));
+                return response()->json(['success' => true, 'message' => 'Password reset email sent successfully.'], 200);
+            } else {
+                return response()->json(['success' => false, 'message' => 'User email is null.'], 400);
+            }
         }
         else{
 
-            return response()->json(['success' => false, 'message' => 'Alamat emel tidak wujud.'], 200);
+            return response()->json(['success' => false, 'message' => 'Pengguna tidak wujud.'], 200);
 
         }    
                             
