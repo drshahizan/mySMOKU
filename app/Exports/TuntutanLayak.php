@@ -37,6 +37,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('tuntutan.status', 6)
+            ->whereNull('tuntutan.data_migrate')
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date') {

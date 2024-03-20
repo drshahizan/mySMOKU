@@ -34,6 +34,7 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('permohonan.status', 6)
+            ->whereNull('permohonan.data_migrate')
             ->where('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date'){
