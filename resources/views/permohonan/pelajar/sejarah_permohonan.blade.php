@@ -55,7 +55,8 @@
                         <div class="header">
                             <h2>Sejarah Permohonan<br>
                                 <small>
-                                    Sejarah pembayaran hanya disediakan bagi peringkat pengajian terkini sahaja. Untuk mendapatkan sejarah pembayaran bagi peringkat pengajian terdahulu, sila buat semakan di pautan: 
+                                    Sejarah pembayaran hanya disediakan bagi peringkat pengajian terkini sahaja. 
+                                    <br> Jika ingin mendapatkan sejarah pembayaran bagi peringkat pengajian terdahulu, sila buat semakan di pautan: 
                                     <a href="https://biasiswa.mohe.gov.my/ledger/home.php">https://biasiswa.mohe.gov.my/ledger/home.php</a> 
                                 </small>
                             </h2>
