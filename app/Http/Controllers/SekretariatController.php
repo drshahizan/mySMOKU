@@ -928,7 +928,7 @@ class SekretariatController extends Controller
                 return $q->where('permohonan_kelulusan.keputusan', $status);
             })
             ->when(!empty($institusi), function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.id_institusi', $institusi);
+                return $q->where('bk_info_institusi.nama_institusi', $institusi);
             })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 
@@ -983,7 +983,7 @@ class SekretariatController extends Controller
                 return $q->where('permohonan_kelulusan.keputusan', $status);
             })
             ->when($institusi, function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.id_institusi', $institusi);
+                return $q->where('bk_info_institusi.nama_institusi', $institusi);
             })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 
@@ -1037,7 +1037,7 @@ class SekretariatController extends Controller
                 return $q->where('permohonan_kelulusan.keputusan', $status);
             })
             ->when($institusi, function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.id_institusi', $institusi);
+                return $q->where('bk_info_institusi.nama_institusi', $institusi);
             })
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 

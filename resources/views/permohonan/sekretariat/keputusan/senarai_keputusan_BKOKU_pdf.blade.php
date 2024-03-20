@@ -160,7 +160,7 @@
                                     <td>{{$nama_institusi}}</td>
                                     <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
                                     <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                    <td class="text-center">{{date('d/m/Y', strtotime($item->tarikh_mesyuarat))}}</td>
+                                    <td class="text-center">{{ $item->tarikh_mesyuarat ? date('d/m/Y', strtotime($item->tarikh_mesyuarat)) : '' }}</td>
                                     @if($item->keputusan == "Lulus")
                                         <td class="text-center">Layak</td>
                                     @elseif($item->keputusan == "Tidak Lulus")
