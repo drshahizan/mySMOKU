@@ -1675,8 +1675,8 @@ class PenyelarasController extends Controller
         $user = auth()->user();
         $institusiId = $user->id_institusi;
 
-        $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->where('permohonan.data_migrate', '!=', '1')->get();
-        $tuntutanLayak = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '6')->where('tuntutan.data_migrate', '!=', '1')->get();
+        $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->where('permohonan.data_migrate', 'NULL')->get();
+        $tuntutanLayak = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '6')->where('tuntutan.data_migrate', 'NULL')->get();
 
         $permohonanBerhenti = Permohonan::orderBy('id', 'desc')->where('permohonan.sesi_bayaran', $sesiBayaran)
                                         ->where('permohonan.status', '=', '10');
