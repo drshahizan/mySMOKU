@@ -53,7 +53,13 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Sejarah Tuntutan</h2>
+                            <h2>Sejarah Tuntutan<br>
+                                <small>
+                                    Sejarah pembayaran hanya disediakan bagi peringkat pengajian terkini sahaja. 
+                                    <br> Jika ingin mendapatkan sejarah pembayaran bagi peringkat pengajian terdahulu, sila buat semakan di pautan: 
+                                    <a href="https://biasiswa.mohe.gov.my/ledger/home.php" target="_blank">Sistem Semakan Penyata</a> 
+                                </small>
+                            </h2>
                         </div>
 
                         <div class="tab-content" id="myTabContent">
