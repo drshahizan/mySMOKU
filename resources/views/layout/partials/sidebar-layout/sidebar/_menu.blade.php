@@ -244,7 +244,7 @@
 		$baharu = DB::table('permohonan')->where('status', '=', '2')->count();
 		$sokong = DB::table('permohonan')->where('status', '=', '4')->count();
 		// $keputusan = DB::table('permohonan')->whereIn('status', ['6', '7'])->count();
-		$layak = DB::table('permohonan')->where('status', '=', '6')->count();
+		$layak = DB::table('permohonan')->where('status', '=', '6')->where('data_migrate', '!=', '1')->count();
 		$bayar = DB::table('permohonan')->where('status', '=', '8')->count();
 		$total = DB::table('permohonan')->count();
 		$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
