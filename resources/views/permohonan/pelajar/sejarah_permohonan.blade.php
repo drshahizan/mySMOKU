@@ -114,9 +114,13 @@
                                                         <td class="text-center">{{$formattedDate}}</td>
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
                                                         @if ($program->program == 'BKOKU')
-                                                        <td class="text-center">RM {{$item['yuran_dibayar']}}</td>
+                                                        <td class="text-center">
+                                                            {{ !empty($item['yuran_dibayar']) ? 'RM '.$item['yuran_dibayar'] : '-' }}
+                                                        </td>
                                                         @endif
-                                                        <td class="text-center">RM {{$item['wang_saku_dibayar']}}</td>
+                                                        <td class="text-center">
+                                                            {{ !empty($item['wang_saku_dibayar']) ? 'RM '.$item['wang_saku_dibayar'] : '-' }}
+                                                        </td>
                                                         <td class="text-center">{{$tarikh_transaksi}}</td>
 
                                                         @if ($item['status']=='1')
