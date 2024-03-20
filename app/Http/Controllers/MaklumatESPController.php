@@ -21,7 +21,7 @@ class MaklumatESPController extends Controller
 {
     public function permohonan()
     {
-        $kelulusan = Permohonan::orderBy('tarikh_hantar', 'desc')->where('status', '=','6')->get();
+        $kelulusan = Permohonan::orderBy('tarikh_hantar', 'desc')->where('status', '=','6')->where('data_migrate', '!=','1')->get();
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
 
