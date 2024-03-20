@@ -68,7 +68,7 @@
                     <tr style="border: none!important; font-size:12px;">
                         <td style="border: none!important;"><b>Tarikh Cetak </b></td>
                         <td style="border: none!important;"><b>:</b></td>
-                        <td style="border: none!important;"><input type="text" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 10px; vertical-align:middle;"></td>
+                        <td style="border: none!important;">{{ date('d/m/Y') }}</td>
                     </tr>
                 </table>
             </div>     
