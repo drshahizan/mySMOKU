@@ -276,644 +276,644 @@
             </div>
         </div>
 
-<!-- Javascript -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <!-- Javascript -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script> 
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>   
+        <script> 
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>   
 
-<style>
-    .custom-width-btn {
-        width: 105px; 
-        height: 35px;
-    }
-    .custom-width-select {
-        width: 400px !important; /* Important to override other styles */
-    }
-    .form-select {
-        margin-left: 10px !important; 
-    }
-</style>
+        <style>
+            .custom-width-btn {
+                width: 105px; 
+                height: 35px;
+            }
+            .custom-width-select {
+                width: 400px !important; /* Important to override other styles */
+            }
+            .form-select {
+                margin-left: 10px !important; 
+            }
+        </style>
 
-<script>
-    $(document).ready(function() {
-        // Initialize JavaScript variables with data from Blade
-        var bkokuList = @json($institusiPengajian);
-        var bkokuUAList = @json($institusiPengajianUA);
-        var ppkList = @json($institusiPengajianPPK);
+        <script>
+            $(document).ready(function() {
+                // Initialize JavaScript variables with data from Blade
+                var bkokuList = @json($institusiPengajian);
+                var bkokuUAList = @json($institusiPengajianUA);
+                var ppkList = @json($institusiPengajianPPK);
 
-        $('.export-container[data-program-code="BKOKU"]').show();
-        $('.export-container[data-program-code="UA"]').hide();
-        $('.export-container[data-program-code="PPK"]').hide();
+                $('.export-container[data-program-code="BKOKU"]').show();
+                $('.export-container[data-program-code="UA"]').hide();
+                $('.export-container[data-program-code="PPK"]').hide();
 
-        $('.none-container').show(); // Hide export elements
+                $('.none-container').show(); // Hide export elements
 
 
-        // DataTable initialization functions
-        function initializeDataTable1() {
-            $('#sortTable1').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] },
-                        { targets: [3], visible: false }, // Hide column (index 4)
-                        { targets: [8], visible: false } // Hide column (index 9)
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.keputusan.BKOKU") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                    { 
-                        data: 'no_rujukan_permohonan',
-                        // render: function(data, type, row) {
-                        //     // Construct the URL using the no_rujukan_permohonan value
-                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                        // }
-                    }, 
-                    { 
-                        data: 'smoku.nama', 
-                        render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
+                // DataTable initialization functions
+                function initializeDataTable1() {
+                    $('#sortTable1').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [8], visible: false } // Hide column (index 9)
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.BKOKU") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                            { 
+                                data: 'no_rujukan_permohonan',
+                                // render: function(data, type, row) {
+                                //     // Construct the URL using the no_rujukan_permohonan value
+                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                // }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                            // Split the nama field into words
-                            var words = data.split(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama;
                                 }
-                            }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
 
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
 
-                            return formatted_nama;
-                        }
-                    },
-                    { data: 'akademik.infoipt.nama_institusi' }, 
-                    { data: 'akademik.infoipt.id_institusi' },
-                    {
-                        data: 'akademik.peringkat.peringkat',
-                        render: function(data, type, row) {
-                            // Split the string into an array of words
-                            var words = data.split(' ');
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
 
-                            // Capitalize the first letter of each word
-                            for (var i = 0; i < words.length; i++) {
-                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_data = words.join(' ');
-
-                            return formatted_data;
-                        }
-                    },
-                    { data: 'kelulusan.no_mesyuarat' },
-                    {
-                        data: 'kelulusan.tarikh_mesyuarat',
-                        render: function(data, type, row) {
-                            if (type === 'display' || type === 'filter') {
-                                if (data === null) {
-                                    return '';
-                                } else {
-                                    // Convert the date to a JavaScript Date object
-                                    var date = new Date(data);
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as DD/MM/YYYY
-                                    return day + '/' + month + '/' + year;
+                                    return formatted_data;
                                 }
-                            } else {
-                                // For sorting and other purposes, return the original data
-                                return data;
-                            }
-                        }
-                    },
-                    {
-                        data: 'kelulusan.keputusan',
-                        render: function(data, type, row) {
-                            var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'kelulusan.no_mesyuarat' },
+                            {
+                                data: 'kelulusan.tarikh_mesyuarat',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
 
-                            // Define the button HTML based on the status value
-                            switch (data) {
-                                case 'Lulus':
-                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                    var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    break;
-                                case 'Tidak Lulus':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                    break;
-                                default:
-                                    status = ''; // Set empty string for unknown status values
-                                    break;
-                            }
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                            return status;
-                        }
-                    },
-                    { data: 'kelulusan.keputusan' }
-                ]
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'kelulusan.keputusan',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case 'Lulus':
+                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.id);
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case 'Tidak Lulus':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            { data: 'kelulusan.keputusan' }
+                        ]
+                        
+
+                    });
+                }
+
+                function initializeDataTable1a() {
+                    $('#sortTable1a').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [8], visible: false } // Hide column (index 9)
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.BKOKUUA") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                            { 
+                                data: 'no_rujukan_permohonan',
+                                // render: function(data, type, row) {
+                                //     // Construct the URL using the no_rujukan_permohonan value
+                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                // }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama;
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
+
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
+
+                                    return formatted_data;
+                                }
+                            },
+                            { data: 'kelulusan.no_mesyuarat' },
+                            {
+                                data: 'kelulusan.tarikh_mesyuarat',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
+
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'kelulusan.keputusan',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case 'Lulus':
+                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.id);
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case 'Tidak Lulus':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            { data: 'kelulusan.keputusan' }
+                        ]
+                        
+
+                    });
+                }
+
+                function initializeDataTable2() {
+                    $('#sortTable2').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [8], visible: false } // Hide column (index 9)
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                            { 
+                                data: 'no_rujukan_permohonan',
+                                // render: function(data, type, row) {
+                                //     // Construct the URL using the no_rujukan_permohonan value
+                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                // }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama;
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
+
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
+
+                                    return formatted_data;
+                                }
+                            },
+                            { data: 'kelulusan.no_mesyuarat' },
+                            {
+                                data: 'kelulusan.tarikh_mesyuarat',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
+
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'kelulusan.keputusan',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case 'Lulus':
+                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.id);
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case 'Tidak Lulus':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            { data: 'kelulusan.keputusan' }
+                        ]
+                        
+
+                    });
+                }
+
+                // Function to clear filters for all tables
+                function clearFilters() {
+                    if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                        $('#sortTable1').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable1a')) {
+                        $('#sortTable1a').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                        $('#sortTable2').DataTable().destroy();
+                    }
+                }
+
+                // Function to update the institution dropdown
+                function updateInstitusiDropdown(institusiList) {
+                    // Clear existing options
+                    $('#institusiDropdown').empty();
+
+                    // Add default option
+                    $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                    // Add options based on the selected tab
+                    for (var i = 0; i < institusiList.length; i++) {
+                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                    }
+                }
+
+                function updateExportContainers(activeTabId) {
+                    // Hide all export containers initially
+                    $('.export-container').hide();
+
+                    // Show the export container based on the active tab
+                    var programCode = getProgramCode(activeTabId);
+                    $('.export-container[data-program-code="' + programCode + '"]').show();
+                }
+
+                function getProgramCode(activeTabId) {
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            return 'BKOKU';
+                        case 'bkokuUA-tab':
+                            return 'UA';
+                        case 'ppk-tab':
+                            return 'PPK';
+                        // Add more cases if you have additional tabs
+                        default:
+                            return '';
+                    }
+                }
+
+                // Add an event listener for tab clicks
+                $('.nav-link').on('click', function() {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
+
+                    // Clear filters when changing tabs
+                    clearFilters();
+
+                    updateExportContainers(activeTabId);
+
+                    // Update the institution dropdown based on the active tab
+                    switch (activeTabId) {
+                        case 'bkoku-tab':
+                            updateInstitusiDropdown(bkokuList);
+                            initializeDataTable1();
+                            break;
+                        case 'bkokuUA-tab':
+                            updateInstitusiDropdown(bkokuUAList);
+                            initializeDataTable1a();
+                            break;
+                        case 'ppk-tab':
+                            updateInstitusiDropdown(ppkList);
+                            initializeDataTable2();
+                            break;
+                        // Add more cases if you have additional tabs
+                    }
+                });
+
+                // Trigger the function for the default active tab (bkoku-tab)
+                updateInstitusiDropdown(bkokuList);
+                initializeDataTable1(); // Initialize DataTable1 on page load
+
                 
 
             });
-        }
-
-        function initializeDataTable1a() {
-            $('#sortTable1a').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] },
-                        { targets: [3], visible: false }, // Hide column (index 4)
-                        { targets: [8], visible: false } // Hide column (index 9)
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.keputusan.BKOKUUA") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                    { 
-                        data: 'no_rujukan_permohonan',
-                        // render: function(data, type, row) {
-                        //     // Construct the URL using the no_rujukan_permohonan value
-                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                        // }
-                    }, 
-                    { 
-                        data: 'smoku.nama', 
-                        render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
-                        }
-                    },
-                    { data: 'akademik.infoipt.nama_institusi' }, 
-                    { data: 'akademik.infoipt.id_institusi' },
-                    {
-                        data: 'akademik.peringkat.peringkat',
-                        render: function(data, type, row) {
-                            // Split the string into an array of words
-                            var words = data.split(' ');
-
-                            // Capitalize the first letter of each word
-                            for (var i = 0; i < words.length; i++) {
-                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_data = words.join(' ');
-
-                            return formatted_data;
-                        }
-                    },
-                    { data: 'kelulusan.no_mesyuarat' },
-                    {
-                        data: 'kelulusan.tarikh_mesyuarat',
-                        render: function(data, type, row) {
-                            if (type === 'display' || type === 'filter') {
-                                if (data === null) {
-                                    return '';
-                                } else {
-                                    // Convert the date to a JavaScript Date object
-                                    var date = new Date(data);
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as DD/MM/YYYY
-                                    return day + '/' + month + '/' + year;
-                                }
-                            } else {
-                                // For sorting and other purposes, return the original data
-                                return data;
-                            }
-                        }
-                    },
-                    {
-                        data: 'kelulusan.keputusan',
-                        render: function(data, type, row) {
-                            var status = ''; // Initialize an empty string for the button HTML
-
-                            // Define the button HTML based on the status value
-                            switch (data) {
-                                case 'Lulus':
-                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                    var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    break;
-                                case 'Tidak Lulus':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                    break;
-                                default:
-                                    status = ''; // Set empty string for unknown status values
-                                    break;
-                            }
-
-                            return status;
-                        }
-                    },
-                    { data: 'kelulusan.keputusan' }
-                ]
-                
-
-            });
-        }
-
-        function initializeDataTable2() {
-            $('#sortTable2').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] },
-                        { targets: [3], visible: false }, // Hide column (index 4)
-                        { targets: [8], visible: false } // Hide column (index 9)
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                    { 
-                        data: 'no_rujukan_permohonan',
-                        // render: function(data, type, row) {
-                        //     // Construct the URL using the no_rujukan_permohonan value
-                        //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                        //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                        // }
-                    }, 
-                    { 
-                        data: 'smoku.nama', 
-                        render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
-                        }
-                    },
-                    { data: 'akademik.infoipt.nama_institusi' }, 
-                    { data: 'akademik.infoipt.id_institusi' },
-                    {
-                        data: 'akademik.peringkat.peringkat',
-                        render: function(data, type, row) {
-                            // Split the string into an array of words
-                            var words = data.split(' ');
-
-                            // Capitalize the first letter of each word
-                            for (var i = 0; i < words.length; i++) {
-                                words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_data = words.join(' ');
-
-                            return formatted_data;
-                        }
-                    },
-                    { data: 'kelulusan.no_mesyuarat' },
-                    {
-                        data: 'kelulusan.tarikh_mesyuarat',
-                        render: function(data, type, row) {
-                            if (type === 'display' || type === 'filter') {
-                                if (data === null) {
-                                    return '';
-                                } else {
-                                    // Convert the date to a JavaScript Date object
-                                    var date = new Date(data);
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as DD/MM/YYYY
-                                    return day + '/' + month + '/' + year;
-                                }
-                            } else {
-                                // For sorting and other purposes, return the original data
-                                return data;
-                            }
-                        }
-                    },
-                    {
-                        data: 'kelulusan.keputusan',
-                        render: function(data, type, row) {
-                            var status = ''; // Initialize an empty string for the button HTML
-
-                            // Define the button HTML based on the status value
-                            switch (data) {
-                                case 'Lulus':
-                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                    var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    break;
-                                case 'Tidak Lulus':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                    break;
-                                default:
-                                    status = ''; // Set empty string for unknown status values
-                                    break;
-                            }
-
-                            return status;
-                        }
-                    },
-                    { data: 'kelulusan.keputusan' }
-                ]
-                
-
-            });
-        }
-
-        // Function to clear filters for all tables
-        function clearFilters() {
-            if ($.fn.DataTable.isDataTable('#sortTable1')) {
-                $('#sortTable1').DataTable().destroy();
-            }
-            if ($.fn.DataTable.isDataTable('#sortTable1a')) {
-                $('#sortTable1a').DataTable().destroy();
-            }
-            if ($.fn.DataTable.isDataTable('#sortTable2')) {
-                $('#sortTable2').DataTable().destroy();
-            }
-        }
-
-        // Function to update the institution dropdown
-        function updateInstitusiDropdown(institusiList) {
-            // Clear existing options
-            $('#institusiDropdown').empty();
-
-            // Add default option
-            $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
-            // Add options based on the selected tab
-            for (var i = 0; i < institusiList.length; i++) {
-                $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-            }
-        }
-
-        function updateExportContainers(activeTabId) {
-            // Hide all export containers initially
-            $('.export-container').hide();
-
-            // Show the export container based on the active tab
-            var programCode = getProgramCode(activeTabId);
-            $('.export-container[data-program-code="' + programCode + '"]').show();
-        }
-
-        function getProgramCode(activeTabId) {
-            switch (activeTabId) {
-                case 'bkoku-tab':
-                    return 'BKOKU';
-                case 'bkokuUA-tab':
-                    return 'UA';
-                case 'ppk-tab':
-                    return 'PPK';
-                // Add more cases if you have additional tabs
-                default:
-                    return '';
-            }
-        }
-
-        // Add an event listener for tab clicks
-        $('.nav-link').on('click', function() {
-            // Get the ID of the active tab
-            var activeTabId = $(this).attr('id');
-
-            // Clear filters when changing tabs
-            clearFilters();
-
-            updateExportContainers(activeTabId);
-
-            // Update the institution dropdown based on the active tab
-            switch (activeTabId) {
-                case 'bkoku-tab':
-                    updateInstitusiDropdown(bkokuList);
-                    initializeDataTable1();
-                    break;
-                case 'bkokuUA-tab':
-                    updateInstitusiDropdown(bkokuUAList);
-                    initializeDataTable1a();
-                    break;
-                case 'ppk-tab':
-                    updateInstitusiDropdown(ppkList);
-                    initializeDataTable2();
-                    break;
-                // Add more cases if you have additional tabs
-            }
-        });
-
-        // Trigger the function for the default active tab (bkoku-tab)
-        updateInstitusiDropdown(bkokuList);
-        initializeDataTable1(); // Initialize DataTable1 on page load
-
-        
-
-    });
-</script>
+        </script>
       
-<script>
+        <script>
 
-    function applyFilter() {
+            function applyFilter() {
 
-        // Reinitialize DataTables
-        initDataTable('#sortTable1', 'datatable1');
-        initDataTable('#sortTable1a', 'datatable');
-        initDataTable('#sortTable2', 'datatable2');
+                // Reinitialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable1a', 'datatable');
+                initDataTable('#sortTable2', 'datatable2');
 
-        function initDataTable(tableId, variableName) {
-            // Check if the datatable is already initialized
-            if ($.fn.DataTable.isDataTable(tableId)) {
-                // Destroy the existing DataTable instance
-                $(tableId).DataTable().destroy();
-            }
-
-            // Initialize the datatable and assign it to the global variable
-            window[variableName] = $(tableId).DataTable({
-                ordering: true, // Enable manual sorting
-                order: [], // Disable initial sorting
-                columnDefs: [
-                        { orderable: false, targets: [0] },
-                        { targets: [3], visible: false }, // Hide column (index 4)
-                        { targets: [8], visible: false } // Hide column (index 9)
-                    ]
-            });
-        }
-
-        var selectedInstitusi = $('[name="institusi"]').val();
-        var startDate = $('#start_date').val();
-        var endDate = $('#end_date').val();
-        var status = $('#status').val();
-        console.log(selectedInstitusi);
-        console.log(startDate);
-        console.log(endDate);
-        console.log(status);
-
-        // Apply search filter and log data for all tables
-        applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
-        applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
-        applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
-
-        var exportBKOKU = document.getElementById('exportBKOKU');
-        exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-        
-
-        var exportUA = document.getElementById('exportUA');
-        exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-
-
-        var exportPPK = document.getElementById('exportPPK');
-        exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-
-    }
-
-    function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
-        // Reset the search for all columns to ensure a clean filter
-        table.columns().search('').draw();
-
-        // Clear the previous search functions
-        $.fn.dataTable.ext.search = [];
-
-        // Apply date range filter
-        if (startDate || endDate) {
-            $.fn.dataTable.ext.search.push(
-                function (settings, data, dataIndex) {
-                    let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                    let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-
-                    let dateAdded = moment(data[6], 'DD/MM/YYYY');
-
-                    // Check if the date falls within the specified range
-                    let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                    if (result) {
-                        console.log('Date Range Filter Result: true');
-                        console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                        console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                        console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                    } else {
-                        console.log('Date Range Filter Result: false');
-                        console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                        console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                        console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                function initDataTable(tableId, variableName) {
+                    // Check if the datatable is already initialized
+                    if ($.fn.DataTable.isDataTable(tableId)) {
+                        // Destroy the existing DataTable instance
+                        $(tableId).DataTable().destroy();
                     }
 
-                    return result;
+                    // Initialize the datatable and assign it to the global variable
+                    window[variableName] = $(tableId).DataTable({
+                        ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [8], visible: false } // Hide column (index 9)
+                            ]
+                    });
                 }
-            );
-        }
 
-        // Apply search filter for institusi
-        if (institusi) {
-            table.column(2).search(institusi).draw();
-        }
+                var selectedInstitusi = $('[name="institusi"]').val();
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+                var status = $('#status').val();
+                console.log(selectedInstitusi);
+                console.log(startDate);
+                console.log(endDate);
+                console.log(status);
 
-        // Apply search filter for status
-        if (status) {
-            console.log('Applying Status Filter:', status);
-            table.column(8).search(status).draw();
-        } else {
-            console.log('No Status Filter Applied');
-        }
+                // Apply search filter and log data for all tables
+                applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
 
-        // Log filtered data
-        console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+                var exportBKOKU = document.getElementById('exportBKOKU');
+                exportBKOKU.href = "{{ route('senarai.keputusan.BKOKU.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+                
 
-        // Go to the first page for the table
-        table.page(0).draw(false);
+                var exportUA = document.getElementById('exportUA');
+                exportUA.href = "{{ route('senarai.keputusan.BKOKU.UA.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
 
-        // Log the data of visible rows on the first page for the table
-        console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-    }
 
-</script>
+                var exportPPK = document.getElementById('exportPPK');
+                exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
+
+            }
+
+            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
+                // Reset the search for all columns to ensure a clean filter
+                table.columns().search('').draw();
+
+                // Clear the previous search functions
+                $.fn.dataTable.ext.search = [];
+
+                // Apply date range filter
+                if (startDate || endDate) {
+                    $.fn.dataTable.ext.search.push(
+                        function (settings, data, dataIndex) {
+                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+
+                            let dateAdded = moment(data[6], 'DD/MM/YYYY');
+
+                            // Check if the date falls within the specified range
+                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
+                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
+
+                            if (result) {
+                                console.log('Date Range Filter Result: true');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            } else {
+                                console.log('Date Range Filter Result: false');
+                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
+                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            }
+
+                            return result;
+                        }
+                    );
+                }
+
+                // Apply search filter for institusi
+                if (institusi) {
+                    table.column(2).search(institusi).draw();
+                }
+
+                // Apply search filter for status
+                if (status) {
+                    console.log('Applying Status Filter:', status);
+                    table.column(8).search(status).draw();
+                } else {
+                    console.log('No Status Filter Applied');
+                }
+
+                // Log filtered data
+                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
+
+                // Go to the first page for the table
+                table.page(0).draw(false);
+
+                // Log the data of visible rows on the first page for the table
+                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
+            }
+
+        </script>
     </body>
 </x-default-layout> 

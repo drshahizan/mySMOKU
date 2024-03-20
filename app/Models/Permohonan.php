@@ -39,6 +39,7 @@ class Permohonan extends Model
         'status',
         'status_pemohon',
         'sesi_bayaran',
+        'data_migrate',
     ];
 
     // Define the relationship with Akademik

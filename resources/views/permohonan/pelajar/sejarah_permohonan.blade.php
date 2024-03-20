@@ -151,7 +151,6 @@
                                                         @endif
                                                         
                                                         @if ($institusi->jenis_institusi == 'IPTS')
-
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center">
                                                                     <div>

@@ -44,6 +44,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
             ->where('tuntutan.status', 6)
+            ->where('tuntutan.data_migrate', '!=', '1')
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(

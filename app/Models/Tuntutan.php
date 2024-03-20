@@ -42,6 +42,7 @@ class Tuntutan extends Model
         'tarikh_hantar',
         'status_pemohon',
         'sesi_bayaran',
+        'data_migrate',
     ];
 
     public function akademik()

@@ -633,7 +633,6 @@ class SekretariatController extends Controller
         // Split the comma-separated string into an array
         $catatanArray = explode(', ', $catatan);
 
-        // COMMENT PROD
         // Email notification
         $studentEmail = ButiranPelajar::where('smoku_id', $smoku_id)->value('emel');
         $emailLulus = EmelKemaskini::where("emel_id",2)->first();
@@ -778,7 +777,6 @@ class SekretariatController extends Controller
                         ]);
                     }
 
-                    // COMMENT PROD
                     // Send email notifications to all student email addresses
                     $studentEmail = ButiranPelajar::where('smoku_id',  $item->smoku_id)->value('emel');
                     if ($studentEmail) {
@@ -845,7 +843,6 @@ class SekretariatController extends Controller
                     ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
                     
-
         $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->Orwhere('id_institusi', '=', '01055')->orderBy('nama_institusi')->get();
@@ -872,11 +869,7 @@ class SekretariatController extends Controller
                     }, 'smoku','kelulusan'])
                     ->get();
 
-                    
-
-
         return response()->json($permohonan);
-
     }
 
     public function getKeputusanBKOKUUA()
@@ -896,11 +889,7 @@ class SekretariatController extends Controller
                     }, 'smoku','kelulusan'])
                     ->get();
 
-                    
-
-
         return response()->json($permohonan);
-
     }
 
     public function getKeputusanPPK()
@@ -918,11 +907,7 @@ class SekretariatController extends Controller
                     }, 'smoku','kelulusan'])
                     ->get();
 
-                    
-
-
         return response()->json($permohonan);
-
     }
 
     public function cetakKeputusanPermohonanBKOKU(Request $request)
