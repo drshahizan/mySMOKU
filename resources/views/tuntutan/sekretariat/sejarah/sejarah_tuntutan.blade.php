@@ -88,172 +88,171 @@
             </div>
         </div>
 
-<style>
-    .custom-width-select {
-        width: 400px !important; 
-    }
-    .form-select {
-            margin-left: 10px !important; 
-    }
-</style>
+        <style>
+            .custom-width-select {
+                width: 400px !important; 
+            }
+            .form-select {
+                    margin-left: 10px !important; 
+            }
+        </style>
 
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>
-<script>
-    const smoku_id = "{{ $smoku_id }}";
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
 
-    $(document).ready(function() {
+        <script>
+            const smoku_id = "{{ $smoku_id }}";
 
-        // DataTable initialization functions
-        function initializeDataTable1() {
-            $('#sortTable1').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ],
-                ajax: {
-                    url: '{{ route("sejarah.tuntutan.data", ["id" => ":smoku_id"]) }}'.replace(':smoku_id', smoku_id),
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                { 
-                    data: 'no_rujukan_tuntutan',
-                    render: function(data, type, row) {
-                        // Construct the URL using the no_rujukan_permohonan value
-                        var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.smoku_id;
-                        // Create and return the link element
-                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                    }
-                },
-                { data: 'no_baucer' },  
-                { data: 'tarikh_baucer' },  
-                {
-                    data: 'yuran_dibayar',
-                    render: function(data, type, row) {
-                        // If the data is being displayed, add .00 to the end
-                        if (data === null) {
-                            return '-';
-                        }
-                        // If the data is being displayed, add .00 to the end
-                        else if (type === 'display' || type === 'filter') {
-                            return data + '.00';
-                        }
-                        return data;
-                    }
-                },  
-                {
-                    data: 'wang_saku_dibayar',
-                    render: function(data, type, row) {
-                        // If the data is being displayed, add .00 to the end
-                        if (data === null) {
-                            return '-';
-                        }
-                        // If the data is being displayed, add .00 to the end
-                        else if (type === 'display' || type === 'filter') {
-                            return data + '.00';
-                        }
-                        return data;
-                    }
-                },  
-                {
-                    data: 'tarikh_hantar',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
+            $(document).ready(function() {
 
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                // DataTable initialization functions
+                function initializeDataTable1() {
+                    $('#sortTable1').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("sejarah.tuntutan.data", ["id" => ":smoku_id"]) }}'.replace(':smoku_id', smoku_id),
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                        { 
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                // Construct the URL using the no_rujukan_permohonan value
+                                var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.smoku_id;
+                                // Create and return the link element
+                                return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                            }
+                        },
+                        { data: 'no_baucer' },  
+                        { data: 'tarikh_baucer' },  
+                        {
+                            data: 'yuran_dibayar',
+                            render: function(data, type, row) {
+                                // If the data is being displayed, add .00 to the end
+                                if (data === null) {
+                                    return '-';
+                                }
+                                // If the data is being displayed, add .00 to the end
+                                else if (type === 'display' || type === 'filter') {
+                                    return data + '.00';
+                                }
+                                return data;
+                            }
+                        },  
+                        {
+                            data: 'wang_saku_dibayar',
+                            render: function(data, type, row) {
+                                // If the data is being displayed, add .00 to the end
+                                if (data === null) {
+                                    return '-';
+                                }
+                                // If the data is being displayed, add .00 to the end
+                                else if (type === 'display' || type === 'filter') {
+                                    return data + '.00';
+                                }
+                                return data;
+                            }
+                        },  
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    // Convert the date to a JavaScript Date object
+                                    var date = new Date(data);
 
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                },
-                {
-                    data: 'tarikh_transaksi',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'tarikh_transaksi',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    // Convert the date to a JavaScript Date object
+                                    var date = new Date(data);
 
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                }, 
-                {
-                    data: 'status',
-                    render: function(data, type, row) {
-                        var status = ''; // Initialize an empty string for the button HTML
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                        // Define the button HTML based on the status value
-                        switch (data) {
-                            case '1':
-                                status = '<button class="btn bg-info text-white">Deraf</button>';
-                                break;
-                            case '2':
-                                status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                break;
-                            case '3':
-                                status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                break;
-                            case '4':
-                                status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                break;
-                            case '5':
-                                status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                break;
-                            case '6':
-                                status = '<button class="btn bg-success text-white">Layak</button>';
-                                break;
-                            case '7':
-                                status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                break;
-                            case '8':
-                                status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                break;
-                            case '9':
-                                status = '<button class="btn bg-batal text-white">Batal</button>';
-                                break;
-                            case '10':
-                                status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                break;    
-                            default:
-                                status = ''; // Set empty string for unknown status values
-                                break;
-                        }
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        }, 
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
 
-                        return status;
-                    }
-                }]
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        }]
+
+                    });
+                }
+
+                initializeDataTable1(); // Initialize DataTable1 on page load
 
             });
-        }
-
-        initializeDataTable1(); // Initialize DataTable1 on page load
-
-    });
-</script>
-
-
-</body>
+        </script>
+    </body>
 </x-default-layout>
