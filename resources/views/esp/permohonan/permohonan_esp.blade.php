@@ -59,16 +59,23 @@
 
             {{-- Javascript Nav Bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="bkoku-tab" data-toggle="tab" data-target="#bkoku" type="button" role="tab" aria-controls="bkoku" aria-selected="true">BKOKU</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
-              </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
+                </li>
             </ul>
+
             <!--begin::Card title-->
             <div class="card-title">
               <!--begin::Search-->
@@ -78,6 +85,7 @@
               <!--end::Search-->
             </div>
             <!--begin::Card title-->
+            
             <!--begin::Card toolbar-->
             <div class="card-toolbar" style="margin-bottom: 0px!important; margin-top: 10px!important;">
                 <!--begin::Toolbar-->
