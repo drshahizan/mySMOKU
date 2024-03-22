@@ -740,20 +740,22 @@ class SaringanController extends Controller
         $status_kod=0;
         $status = null;
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
-        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.pembayaran.senarai',compact('permohonan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK'));
     }
 
-    public function getPembayaranPermohonanBKOKU()
+    public function getPembayaranPermohonanIPTS()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                            $subQuery->where('jenis_institusi', '=', 'IPTS');
                         });
                     })
                     ->where('status', 8)
@@ -763,6 +765,43 @@ class SaringanController extends Controller
                     }, 'smoku'])
                     ->get();
 
+        return response()->json($permohonan);
+    }
+
+    public function getPembayaranPermohonanPOLI()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'P');
+                        });
+                    })
+                    ->where('status', 8)
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
+
+        return response()->json($permohonan);
+    }
+
+    public function getPembayaranPermohonanKK()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'KK');
+                        });
+                    })
+                    ->where('status', 8)
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->get();
 
         return response()->json($permohonan);
     }
