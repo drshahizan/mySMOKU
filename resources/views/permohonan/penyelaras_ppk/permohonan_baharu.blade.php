@@ -502,9 +502,6 @@
 									<!--begin::Input-->
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 										<option value="{{$cityID}}">{{$selectedCity}}</option>
-										{{-- @foreach ($bandar as $bandartetap)	
-										<option value="{{$bandartetap->id}}" {{$bandartetap->bandar == $selectedCity ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
-										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -689,8 +686,8 @@
 										<!--begin::Input-->
 										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											<option></option>
-											@foreach ($bandar as $bandar)	
-											<option value="{{$bandar->id}}" {{$bandar->bandar == $selectedCity_surat ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
+											@foreach ($bandar as $bandar_surat)	
+												<option value="{{$bandar_surat->id}}" {{$bandar_surat->bandar == $selectedCity_surat ? 'selected' : ''}}>{{ $bandar_surat->bandar}}</option>
 											@endforeach
 										</select>
 										<!--end::Input-->
@@ -968,6 +965,24 @@
 							<!--end::Label-->
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-7">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack">
+									<!--begin::Label-->
+									<div class="me-5">
+										<!--begin::Input-->
+										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" />
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-label">Sama seperti Alamat Tetap Pelajar</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Label-->
+								</div>
+								<!--begin::Wrapper-->
+							</div>
+							<!--end::Input group-->
 							<!--begin::Input-->
 							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;"></textarea>
 							<!--end::Input-->
@@ -999,6 +1014,9 @@
 									<!--begin::Input-->
 									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 										<option></option>
+										@foreach ($bandar as $bandar)	
+											<option value="{{$bandar->id}}">{{ $bandar->bandar}}</option>
+										@endforeach
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1585,6 +1603,45 @@
 					$(alamat_surat_bandar).trigger('change.select2');
 				}
 			}	
+
+			function alamatWaris() {
+				var checkBox = document.getElementById("sama_waris");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				console.log('negeri_p:', alamat_tetap_negeri);
+				console.log('bandar_p:', alamat_tetap_bandar);
+
+				var alamat_waris = document.getElementById("alamat_waris");
+				var alamat_negeri_waris = document.getElementById("alamat_negeri_waris");
+				var alamat_bandar_waris = document.getElementById("alamat_bandar_waris");
+				var alamat_poskod_waris = document.getElementById("alamat_poskod_waris");
+				console.log('negeri_w:', alamat_negeri_waris);
+				console.log('bandar_w:', alamat_bandar_waris);
+
+				if (checkBox.checked == true){
+					alamat_waris.value=alamat_tetap.value; 
+					alamat_negeri_waris.value=alamat_tetap_negeri.value;
+					alamat_bandar_waris.value=alamat_tetap_bandar.value;
+					console.log('negeri:', alamat_negeri_waris.value);
+					console.log('bandar:', alamat_bandar_waris.value);
+					alamat_poskod_waris.value=alamat_tetap_poskod.value;
+					
+					// Trigger select2 update
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				} else {
+					alamat_waris.value = '';
+					alamat_negeri_waris.value = '';
+					alamat_bandar_waris.value = '';
+					alamat_poskod_waris.value = '';
+
+					// Trigger select2 update.
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				}
+			}
 
 			//negeri bandar alamat tetap
 			$(document).ready(function () {
