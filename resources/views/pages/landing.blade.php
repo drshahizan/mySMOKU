@@ -24,7 +24,7 @@
 	<!--end::Head-->
 
 	<!--begin::Body-->
-	<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
+	<body id="laman_utama" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
@@ -32,11 +32,8 @@
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
 			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
-				<!--begin::Wrapper-->
-				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom" style="background-image: url(assets/media/KPT1.jpg);">
-					<!--begin::Header-->
+				<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-							
 						<!--begin::Container-->
 						<div class="container">
 							<!--begin::Wrapper-->
@@ -61,13 +58,13 @@
 								<!--end::Logo-->
 								<!--begin::Menu wrapper-->
 								<div class="d-lg-block" id="kt_header_nav_wrapper" >
-									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}" >
+									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}" >
 										<!--begin::Menu-->
 										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
+												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
@@ -119,13 +116,12 @@
 							<!--end::Wrapper-->
 						</div>
 						<!--end::Container-->
-								
-						
 					</div>
-					<!--end::Header-->
+				<!--end::Header-->
+				<!--begin::Wrapper-->
+				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center" style="background-image: url(assets/media/KPT1.jpg);">
 					<!--begin::Landing hero-->
-					<div class="d-flex flex-column flex-center w-100 min-h-400px min-h-lg-400px">
-						
+					<div class="d-flex flex-column flex-center w-100 min-h-400px min-h-lg-500px">
 						
 					</div>
 					<!--end::Landing hero-->
@@ -158,7 +154,7 @@
 						<!--begin::Col-->
 						<div class="col-md-2 px-1">
 							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
+							<div class="text-center mb-12 mb-md-0">
 								<!--begin::Illustration-->
 								<img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
 								<!--end::Illustration-->
@@ -168,13 +164,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
 								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun (Kolej Komuniti dan Politeknik Sahaja)
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)
+								<br/>(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)
 								</div>
 								<!--end::Description-->
 							</div>
@@ -703,15 +699,15 @@
 					<div class="row g-lg-12 mb-20 mb-lg-20 justify-content-between">
 						<!--begin::Col-->
 						<div class="col-lg-4">
-							<!--begin::Hubungi-->
+							<!--begin::Alamat-->
 							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">Alamat :</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Alamat :</div>
 									<!--end::Title-->
 									<!--begin::Alamat-->
-									<div class="text-gray-500 fw-semibold fs-4">Kementerian Pendidikan Tinggi,
+									<div class="text-gray-500 fw-semibold fs-6">Kementerian Pendidikan Tinggi,
 										<br /> Bahagian Biasiswa,
 										<br /> Unit Pra Perkhidmatan,
 										<br /> Aras 2, No. 2, Menara 2,
@@ -722,67 +718,68 @@
 								</div>
 								<!--end::Wrapper-->
 							</div>
-							<!--end::Hubungi-->
+							<!--end::Alamat-->
 						</div>
 						<!--end::Col-->
 						<!--begin::Col-->
-						<div class="col-lg-4">
-							<!--begin::Testimonial-->
+						<div class="col-lg-5">
+							<!--begin::Hubungi-->
 							<div class="d-flex flex-column justify-content-between h-lg-200 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
+									<div class="fs-6 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
 									<!--end::Title-->
 									<!--begin::Telefon-->
-									<div class="text-gray-500 fw-semibold fs-4">Cik Nur Dayana binti Rozaini : 03-8870 6373
+									<div class="text-gray-500 fw-semibold fs-7">Cik Nur Dayana binti Rozaini : 03-8870 6373
 									<br />Cik Nurul Atiqah Noor Azmir binti Abdul Muhaymin : 03-8870 6347</div>
+									
 									<!--end::Telefon-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">Emel Unit BKOKU :</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Emel Unit BKOKU :</div>
 									<!--end::Title-->
 									<!--begin::Emel-->
-									<div class="text-gray-500 fw-semibold fs-4">bkoku@mohe.gov.my</div>
-									<div class="text-gray-500 fw-semibold fs-4">iptabkoku@mohe.gov.my</div>
+									<div class="text-gray-500 fw-semibold fs-6">bkoku@mohe.gov.my</div>
+									<div class="text-gray-500 fw-semibold fs-6">iptabkoku@mohe.gov.my</div>
 									<!--end::Emel-->
 								</div>
 								<!--end::Wrapper-->
 								
 							</div>
-							<!--end::Testimonial-->
+							<!--end::Hubungi-->
 						</div>
 						<!--end::Col-->
 						<!--begin::Col-->
-						<div class="col-lg-4">
-							<!--begin::Testimonial-->
+						<div class="col-lg-3">
+							<!--begin::Waktu-->
 							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-10 mb-lg-0">
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">Waktu pejabat SAHAJA</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Waktu pejabat SAHAJA</div>
 									<!--end::Title-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-4">Isnin hingga Jumaat 
+									<div class="text-gray-500 fw-semibold fs-6">Isnin hingga Jumaat 
 									<br /> 9.00 pagi - 4.30 petang</div>
 									<!--end::Waktu-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Waktu Rehat</div>
 									<!--end::Title-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-4">Isnin hingga Khamis 
+									<div class="text-gray-500 fw-semibold fs-6">Isnin hingga Khamis 
 									<br /> (1.00 tengah hari - 2.00 petang)</div>
 									<!--end::Waktu-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-4">Jumaat 
+									<div class="text-gray-500 fw-semibold fs-6">Jumaat 
 									<br /> (12.15 tengah hari - 2.45 petang)</div>
 									<!--end::Waktu-->
 								</div>
 								<!--end::Wrapper-->
 								
 							</div>
-							<!--end::Testimonial-->
+							<!--end::Waktu-->
 						</div>
 						<!--end::Col-->
 					</div>
