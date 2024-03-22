@@ -238,7 +238,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Sejarah
     Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan', [SaringanController::class, 'sejarahPermohonan'])->name('sejarah.permohonan');
-    Route::get('permohonan/sekretariat/sejarah/sejarah/dataBKOKU', [SaringanController::class, 'getDataSejarahBKOKU'])->name('sejarah.permohonan.dataBKOKU');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataIPTS', [SaringanController::class, 'getDataSejarahIPTS'])->name('sejarah.permohonan.dataIPTS');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataPOLI', [SaringanController::class, 'getDataSejarahPOLI'])->name('sejarah.permohonan.dataPOLI');
+    Route::get('permohonan/sekretariat/sejarah/sejarah/dataKK', [SaringanController::class, 'getDataSejarahKK'])->name('sejarah.permohonan.dataKK');
     Route::get('permohonan/sekretariat/sejarah/sejarah/dataUA', [SaringanController::class, 'getDataSejarahUA'])->name('sejarah.permohonan.dataUA');
     Route::get('permohonan/sekretariat/sejarah/sejarah/dataPPK', [SaringanController::class, 'getDataSejarahPPK'])->name('sejarah.permohonan.dataPPK');
 
