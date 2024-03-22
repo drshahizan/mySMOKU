@@ -44,14 +44,18 @@
         @endphp
         <!--begin::Menu wrapper-->
         @if($fullname)
+       
             <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
+                <i class="ki-solid ki-menu" style="color: #3d0066;"></i>
                 {{$fullname}}
             </div>
         @elseif($nama)
+            <i class="ki-solid ki-menu" style="color: #3d0066;"></i>
             <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
                 {{$nama}}
             </div>
         @else
+            <i class="ki-solid ki-menu" style="color: #3d0066;"></i>
             <div class="cursor-pointer symbol  symbol-35px symbol-2by3 fs-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#3d0066">
                 {{Auth::user()->email}}
             </div>
