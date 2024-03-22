@@ -167,20 +167,10 @@ var KTSignupGeneral = function () {
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
                         if (response) {
                             // Check if the user chose 'Ya'
-                            const terimHLPValue = form.querySelector('input[name="terimHLP"]:checked').value;
                             const cutiValue = form.querySelector('input[name="cuti"]:checked').value;
 
-                            console.log("Before if statement");
-
-                            if (terimHLPValue === 'ya' || cutiValue === 'ya') {
-                                console.log("Inside if statement");
-                                let errorMessage = "Anda tidak layak daftar kerana anda penerima ";
-                                if (terimHLPValue === 'ya') {
-                                    errorMessage += "HLP";
-                                }
-                                if (cutiValue === 'ya') {
-                                    errorMessage += (terimHLPValue === 'ya' ? ' dan ' : '') + "Cuti Belajar Bergaji Penuh";
-                                }
+                            if (cutiValue === 'ya') {
+                                let errorMessage = "Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh";
                             
                                 Swal.fire({
                                     text: errorMessage,
@@ -196,7 +186,6 @@ var KTSignupGeneral = function () {
                                     }
                                 });
                             } else {
-                                console.log("Inside else statement");
                                 form.reset();
 
                                 const redirectUrl = form.getAttribute('data-kt-redirect-url');

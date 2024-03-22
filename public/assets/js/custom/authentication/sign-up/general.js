@@ -188,18 +188,47 @@ var KTSignupGeneral = function () {
                                 message: 'Katalaluan diperlukan'
                             },
                             callback: {
-                                message: 'Sila masukkan katalaluan yang sah',
+                                message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
                                 callback: function (input) {
-                                    if (input.value.length >= 12) {
-                                        return validatePassword();
-                                    } else {
-                                        // Password length is less than 12 characters, so it's not valid
-                                        return false;
+                                    // Check length
+                                    if (input.value.length < 12) {
+                                        return {
+                                            valid: false,
+                                            message: 'Katalaluan perlu sekurang-kurangnya 12 aksara'
+                                        };
                                     }
+
+                                    // Check for at least one letter
+                                    if (!/[a-zA-Z]/.test(input.value)) {
+                                        return {
+                                            valid: false,
+                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu huruf'
+                                        };
+                                    }
+                                    
+                                    // Check for at least one number
+                                    if (!/\d/.test(input.value)) {
+                                        return {
+                                            valid: false,
+                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu nombor'
+                                        };
+                                    }
+                                    
+                                    // Check for at least one symbol (you can adjust the symbols based on your requirement)
+                                    if (!/[@$!%*?&]/.test(input.value)) {
+                                        return {
+                                            valid: false,
+                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu simbol seperti @$!%*?&'
+                                        };
+                                    }
+                    
+                                    // All conditions met, password is valid
+                                    return validatePassword();
                                 }
                             }
                         }
                     },
+                    
                     'password_confirmation': {
                         validators: {
                             notEmpty: {

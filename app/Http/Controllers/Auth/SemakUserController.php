@@ -58,7 +58,6 @@ class SemakUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'terimHLP' => ['required'],
             'cuti' => ['required'],
             'id_institusi' => ['required'],
             'peringkat_pengajian' => ['required'],
@@ -66,17 +65,13 @@ class SemakUserController extends Controller
             
         ]);
 
-        $terimHLP = $request->terimHLP;
+
         $cuti = $request->cuti;
         
-        if ($terimHLP == 'ya' || $cuti == 'ya') {
-            $message = 'Anda tidak layak daftar kerana anda penerima ';
-            if ($terimHLP == 'ya') {
-                $message .= 'HLP';
-            }
-            if ($cuti == 'ya') {
-                $message .= ($terimHLP == 'ya' ? ' dan ' : '') . 'Cuti Belajar Bergaji Penuh';
-            }
+        if ($cuti == 'ya') {
+            
+            $message = 'Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh';
+            
         
             return redirect()->route('login')->with('message', $message);
         } 

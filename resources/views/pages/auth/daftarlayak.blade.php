@@ -111,10 +111,8 @@
             <div class="form-check form-check-custom form-check-solid form-check-inline">
                 <input class="form-check-input" type="checkbox" name="toc" value="1"/>
 
-                <label class="form-check-label fw-semibold text-gray-700 fs-6">
-                    Saya Setuju &
-
-                    <a href="#" class="ms-1 link-primary">Terma dan syarat</a>.
+                <label class="form-check-label fw-semibold text-gray-700 fs-9">
+                    Saya dengan ini mengesahkan bahawa maklumat yang diberikan adalah benar.
                 </label>
             </div>
         </div>

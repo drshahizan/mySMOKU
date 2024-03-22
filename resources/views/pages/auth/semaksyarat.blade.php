@@ -25,7 +25,7 @@
             </h3>
         </div>
        
-        <div class="fv-row mb-10">
+        {{-- <div class="fv-row mb-10">
 			<label class="form-label required">Adakah anda penerima Hadiah Latihan Persekutuan?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
                 <div class="col">
@@ -39,7 +39,7 @@
                     <span class="fw-bold fs-3">Tidak</span></label>
                 </div>
 			</div>
-		</div>
+		</div> --}}
 
         <div class="fv-row mb-10">
 			<label class="form-label required">Adakah anda penerima Cuti Belajar Bergaji Penuh?</label>	
