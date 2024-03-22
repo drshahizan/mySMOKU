@@ -838,6 +838,24 @@
 							<!--end::Label-->
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-7">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack">
+									<!--begin::Label-->
+									<div class="me-5">
+										<!--begin::Input-->
+										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" @if($butiranPelajar->alamat_waris == $butiranPelajar->alamat_tetap_baru) checked @endif/>
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-label">Sama seperti Alamat Tetap Pelajar</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Label-->
+								</div>
+								<!--begin::Wrapper-->
+							</div>
+							<!--end::Input group-->
 							<!--begin::Input-->
 							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>{{$butiranPelajar->alamat_waris}}</textarea>
 							<!--end::Input-->
@@ -1637,34 +1655,73 @@
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
 			function myFunction() {
-			var checkBox = document.getElementById("sama");  
-			var alamat_tetap = document.getElementById("alamat_tetap");
-			var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
-			var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
-			var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var checkBox = document.getElementById("sama");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
 
-			var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
-			var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
-			var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
-			var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
-			if (checkBox.checked == true){
-				alamat_surat_menyurat.value=alamat_tetap.value; 
-				alamat_surat_negeri.value=alamat_tetap_negeri.value;
-				alamat_surat_bandar.value=alamat_tetap_bandar.value;
-				alamat_surat_poskod.value=alamat_tetap_poskod.value;
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
-			} else {
-				alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
-				alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
-				alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
-				alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
-				// Trigger select2 update
-				$(alamat_surat_negeri).trigger('change.select2');
-        		$(alamat_surat_bandar).trigger('change.select2');
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+				if (checkBox.checked == true){
+					alamat_surat_menyurat.value=alamat_tetap.value; 
+					alamat_surat_negeri.value=alamat_tetap_negeri.value;
+					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					alamat_surat_poskod.value=alamat_tetap_poskod.value;
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				} else {
+					alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
+					alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
+					alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
+					alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
+					// Trigger select2 update
+					$(alamat_surat_negeri).trigger('change.select2');
+					$(alamat_surat_bandar).trigger('change.select2');
+				}
+			}	
+
+			function alamatWaris() {
+				var checkBox = document.getElementById("sama_waris");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				console.log('negeri_p:', alamat_tetap_negeri);
+				console.log('bandar_p:', alamat_tetap_bandar);
+
+				var alamat_waris = document.getElementById("alamat_waris");
+				var alamat_negeri_waris = document.getElementById("alamat_negeri_waris");
+				var alamat_bandar_waris = document.getElementById("alamat_bandar_waris");
+				var alamat_poskod_waris = document.getElementById("alamat_poskod_waris");
+				console.log('negeri_w:', alamat_negeri_waris);
+				console.log('bandar_w:', alamat_bandar_waris);
+
+				if (checkBox.checked == true){
+					alamat_waris.value=alamat_tetap.value; 
+					alamat_negeri_waris.value=alamat_tetap_negeri.value;
+					alamat_bandar_waris.value=alamat_tetap_bandar.value;
+					console.log('negeri:', alamat_negeri_waris.value);
+					console.log('bandar:', alamat_bandar_waris.value);
+					alamat_poskod_waris.value=alamat_tetap_poskod.value;
+					
+					// Trigger select2 update
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				} else {
+					alamat_waris.value = '';
+					alamat_negeri_waris.value = '';
+					alamat_bandar_waris.value = '';
+					alamat_poskod_waris.value = '';
+
+					// Trigger select2 update.
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				}
 			}
-		}	
 
 			$(document).ready(function () {
 				var previousIdNegeri = $('#alamat_negeri').val();
