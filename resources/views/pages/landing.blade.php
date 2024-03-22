@@ -33,90 +33,97 @@
 			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
 				<!--begin::Header-->
-					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-						<!--begin::Container-->
-						<div class="container">
-							<!--begin::Wrapper-->
-							<div class="d-flex align-items-center justify-content-between">
-								<!--begin::Logo-->
-								<div class="d-flex align-items-center flex-equal">
-									<!--begin::Mobile menu toggle-->
-									<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
-										<i class="ki-duotone ki-abstract-14 fs-2hx">
-											<span class="path1"></span>
-											<span class="path2"></span>
-										</i>
-									</button>
-									<!--end::Mobile menu toggle-->
-									<!--begin::Logo image-->
-									<a href="/landing">
-										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-25px h-lg-50px" />
-										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-20px h-lg-50px" />
-									</a>
-									<!--end::Logo image-->
-								</div>
-								<!--end::Logo-->
-								<!--begin::Menu wrapper-->
-								<div class="d-lg-block" id="kt_header_nav_wrapper" >
-									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}" >
-										<!--begin::Menu-->
-										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#info" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Info</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#syarat" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Syarat-syarat</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bayaran" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Maklumat Pembiayaan</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Toolbar-->
-											<div class="flex-equal text-end ms-1">
-												<a href="http://bkoku.mohe.gov.my/login" class="btn btn-primary">Permohonan</a>
-											</div>
-											<!--end::Toolbar-->
-											
-										</div>
-										<!--end::Menu-->
-									</div>
-								</div>
-								<!--end::Menu wrapper-->
-								<!--begin::Toolbar-->
-								<div class="flex-equal text-end ms-1">
-									
-								</div>
-								<!--end::Toolbar-->
+				<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Wrapper-->
+						<div class="d-flex align-items-center justify-content-between">
+							<!--begin::Logo-->
+							<div class="d-flex align-items-center flex-equal">
+								<!--begin::Mobile menu toggle-->
+								<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+									<i class="ki-duotone ki-abstract-14 fs-2hx">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</button>
+								<!--end::Mobile menu toggle-->
+								<!--begin::Logo image-->
+								<a href="/landing">
+									<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-25px h-lg-50px" />
+									<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-20px h-lg-50px" />
+								</a>
+								<!--end::Logo image-->
 							</div>
-							<!--end::Wrapper-->
+							<!--end::Logo-->
+							<!--begin::Menu wrapper-->
+							<div class="d-lg-block" id="kt_header_nav_wrapper" >
+								<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}" >
+									<!--begin::Menu-->
+									<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#info" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Info</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#syarat" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Syarat</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#tempoh" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Tempoh Pembiayaan</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bayaran" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Maklumat Pembiayaan</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Toolbar-->
+										<div class="flex-equal text-end ms-1">
+											<a href="http://bkoku.mohe.gov.my/login" class="btn btn-primary">Permohonan</a>
+										</div>
+										<!--end::Toolbar-->
+										
+									</div>
+									<!--end::Menu-->
+								</div>
+							</div>
+							<!--end::Menu wrapper-->
+							<!--begin::Toolbar-->
+							<div class="flex-equal text-end ms-1">
+								
+							</div>
+							<!--end::Toolbar-->
 						</div>
-						<!--end::Container-->
+						<!--end::Wrapper-->
 					</div>
+					<!--end::Container-->
+				</div>
 				<!--end::Header-->
 				<!--begin::Wrapper-->
 				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center" style="background-image: url(assets/media/KPT1.jpg);">
@@ -134,181 +141,122 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Header Section-->
+
 			<!--begin::Info Section-->
-			<div class="mb-n20 mb-lg-n20 z-index-2">
-				<!--begin::Container-->
-				<div class="container">
-					<!--begin::Heading-->
-					<div class="text-center mb-10">
-						<!--begin::Title-->
-						<h3 class="fs-2hx text-dark mb-2" id="info" data-kt-scroll-offset="{default: 100, lg: 150}">TEMPOH PEMBIAYAAN</h3>
-						<!--end::Title-->
-						<!--begin::Text-->
-						<div class="fs-5 text-muted fw-bold">Tempoh tajaan ini adalah tertakluk kepada surat tawaran asal institusi pengajian 
-						<br />dan tidak melebihi tempoh maksimum penajaan seperti berikut :</div>
-						<!--end::Text-->
-					</div>
-					<!--end::Heading-->
-					<!--begin::Row-->
-					<div class="row w-100 gy-10 mb-md-20">
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-12 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun (Kolej Komuniti dan Politeknik Sahaja)
-								<br/>(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)
-								</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">3 Tahun 
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM15,000.00)</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM20,000.00)</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">4</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma Lepasan Ijazah</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">5</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-2 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<!--begin::Illustration-->
-								<img src="assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
-								<!--end::Illustration-->
-								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Badge-->
-									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">6</span>
-									<!--end::Badge-->
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
-									<!--end::Title-->
-								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-								<br />(Had Pembiayaan RM5,000.00 sehingga RM20,000.00)</div>
-								<!--end::Description-->
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-					</div>
-					<!--end::Row-->
-					
+			<div class="py-10 py-lg-20">
+				<!--begin::Curve top-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+					</svg>
 				</div>
-				<!--end::Container-->
+				<!--end::Curve top-->
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::Heading-->
+							<div class="mb-13 text-center">
+								<h1 class="fs-2hx fw-bold" style="color: white;" id="info" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT DAN SKOP PEMBIAYAAN</h1>
+							</div>
+							<!--end::Heading-->
+							<!--begin::Syarat-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100 align-items-center">
+											<!--begin::Option-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
+												<!--begin::Features-->
+												<div class="w-100 mb-10">
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5" style="background-color: rgb(97, 183, 220); padding: 5px; border-radius: 5px;">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">SYARAT DAN GARIS PANDUAN UMUM</span>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Bantuan ini merupakan keistimewaan yang diberikan kepada pelajar OKU. Oleh itu, ianya harus dibezakan dengan kemudahan-kemudahan lain yang turut diterima oleh pelajar bukan OKU. Ini bermakna sekiranya seseorang pelajar OKU itu menerima biasiswa atau kemudahan lain yang juga turut dinikmati oleh pelajar bukan OKU, maka pelajar OKU tersebut adalah layak menerima elaun ini.</span>
+														<i class="ki-duotone ki-verify fs-1 text-danger">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Elaun khas ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan.</span>
+														<i class="ki-duotone ki-verify fs-1 text-danger">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5" style="background-color: rgb(97, 183, 220); padding: 5px; border-radius: 5px;">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">SKOP PEMBIAYAAN ELAUN KHAS</span>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Skop pembiayaan OKU adalah tertumpu kepada institusi yang terletak dibawah pengurusan dan kawalan Kementerian Pendidikan Tinggi (KPT) iaitu semua IPTA, IPTS, Politeknik dan Kolej Komuniti sahaja;</span>
+														<i class="ki-duotone ki-pin fs-1 text-danger">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Skop peringkat pengajian pula adalah tertakluk kepada tafsiran pengajian tinggi (tertiary) iaitu peringkat diploma dan ke atas sahaja. Walau bagaimanapun, kursus peringkat sijil jangka panjang di politeknik dan kolej komuniti yang di bawah tanggungjawab KPT boleh dipertimbangkan untuk bantuan kewangan OKU ini;</span>
+														<i class="ki-duotone ki-pin fs-1 text-danger">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Pelajar OKU yang menuntut di institusi-institusi latihan bukan bertaraf IPT yang dikawal oleh kementerian-kementerian lain dan institusi-institusi pengajian tinggi luar negara adalah di luar skop pembiayaan.</span>
+														<i class="ki-duotone ki-pin fs-1 text-danger">
+															<span class="path1"></span>
+															<span class="path2"></span>
+														</i>
+													</div>
+													<!--end::Item-->
+													
+												</div>
+												<!--end::Features-->
+												
+											</div>
+											<!--end::Option-->
+										</div>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Syarat-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+				<!--begin::Curve bottom-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+					</svg>
+				</div>
+				<!--end::Curve bottom-->
 			</div>
 			<!--end::Info Section-->
+
 			<!--begin::Syarat Section-->
 			<div class="py-10 py-lg-20">
 				<!--begin::Curve top-->
@@ -439,6 +387,182 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Syarat Section-->
+
+			<!--begin::Tempoh Section-->
+			<div class="mb-n20 mb-lg-n20 z-index-2">
+				<!--begin::Container-->
+				<div class="container">
+					<!--begin::Heading-->
+					<div class="text-center mb-10">
+						<!--begin::Title-->
+						<h3 class="fs-2hx text-dark mb-2" id="tempoh" data-kt-scroll-offset="{default: 100, lg: 150}">TEMPOH PEMBIAYAAN</h3>
+						<!--end::Title-->
+						<!--begin::Text-->
+						<div class="fs-5 text-muted fw-bold">Tempoh tajaan ini adalah tertakluk kepada surat tawaran asal institusi pengajian 
+						<br />dan tidak melebihi tempoh maksimum penajaan seperti berikut :</div>
+						<!--end::Text-->
+					</div>
+					<!--end::Heading-->
+					<!--begin::Row-->
+					<div class="row w-100 gy-10 mb-md-20">
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-12 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun (Kolej Komuniti dan Politeknik Sahaja)
+								<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)
+								</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">3 Tahun 
+								<br />(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
+								<br />(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">4</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma Lepasan Ijazah</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
+								<br />(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">5</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
+								<br />(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
+								<!--begin::Heading-->
+								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">6</span>
+									<!--end::Badge-->
+									<!--begin::Title-->
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
+									<!--end::Title-->
+								</div>
+								<!--end::Heading-->
+								<!--begin::Description-->
+								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
+								<br />(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+								<!--end::Description-->
+							</div>
+							<!--end::Story-->
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Row-->
+					
+				</div>
+				<!--end::Container-->
+			</div>
+			<!--end::Tempoh Section-->
 			
 			<!--begin::Bayaran Section-->
 			<div class="py-10 py-lg-20">
@@ -681,6 +805,7 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Bayaran Section-->
+
 			<!--begin::Hubungi Section-->
 			<div class="mb-n20 mb-lg-n20 z-index-2">
 				<!--begin::Container-->
@@ -788,6 +913,7 @@
 				<!--end::Container-->
 			</div>
 			<!--end::Hubungi Section-->
+
 			<!--begin::Footer Section-->
 			<div class="mb-0">
 				<!--begin::Curve top-->
