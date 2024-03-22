@@ -174,11 +174,13 @@ class PenyelarasController extends Controller
             );
 
             $smoku=Smoku::where([['no_kp', '=', $no_kp]])->first();
+            // dd($smoku);
             $penyelaras=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
             ->first();
             $penyelaras_sama=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
             ->where([['penyelaras_id', '=', Auth::user()->id]])
             ->first();
+            // dd($penyelaras_sama);
 
             if ($smoku != null && $penyelaras_sama == null) {
                 if ($penyelaras == null) {
