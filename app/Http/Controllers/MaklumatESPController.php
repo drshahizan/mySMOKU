@@ -37,7 +37,7 @@ class MaklumatESPController extends Controller
     {
         $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')
         ->join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
-        ->where('tuntutan.status', '=','6')->where('tuntutan.data_migrate', '!=','1')
+        ->where('tuntutan.status', '=','6')->whereNull('tuntutan.data_migrate')
         ->get(['permohonan.no_rujukan_permohonan','tuntutan.*']);
         // dd($kelulusan);
 
