@@ -227,13 +227,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Keputusan
     Route::get('permohonan/sekretariat/keputusan', [SekretariatController::class, 'senaraiKeputusanPermohonan']);
-    Route::get('permohonan/sekretariat/keputusan/BKOKU', [SekretariatController::class, 'getKeputusanBKOKU'])->name('senarai.keputusan.BKOKU');
-    Route::get('permohonan/sekretariat/keputusan/BKOKUUA', [SekretariatController::class, 'getKeputusanBKOKUUA'])->name('senarai.keputusan.BKOKUUA');
+    Route::get('permohonan/sekretariat/keputusan/BKOKU-IPTS', [SekretariatController::class, 'getKeputusanIPTS'])->name('senarai.keputusan.IPTS');
+    Route::get('permohonan/sekretariat/keputusan/BKOKU-POLI', [SekretariatController::class, 'getKeputusanPOLI'])->name('senarai.keputusan.POLI');
+    Route::get('permohonan/sekretariat/keputusan/BKOKU-KK', [SekretariatController::class, 'getKeputusanKK'])->name('senarai.keputusan.KK');
+    Route::get('permohonan/sekretariat/keputusan/BKOKU-UA', [SekretariatController::class, 'getKeputusanUA'])->name('senarai.keputusan.UA');
     Route::get('permohonan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanPPK'])->name('senarai.keputusan.PPK');
 
-
-
-    Route::get('senarai-keputusan-permohonan-BKOKU-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanBKOKU'])->name('senarai.keputusan.BKOKU.pdf');
+    Route::get('senarai-keputusan-permohonan-BKOKU-IPTS-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanIPTS'])->name('senarai.keputusan.BKOKU.IPTS.pdf');
+    Route::get('senarai-keputusan-permohonan-BKOKU-POLI-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPOLI'])->name('senarai.keputusan.BKOKU.POLI.pdf');
+    Route::get('senarai-keputusan-permohonan-BKOKU-KK-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanKK'])->name('senarai.keputusan.BKOKU.KK.pdf');
     Route::get('senarai-keputusan-permohonan-BKOKU-UA-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanUA'])->name('senarai.keputusan.BKOKU.UA.pdf');
     Route::get('senarai-keputusan-permohonan-PPK-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPPK'])->name('senarai.keputusan.PPK.pdf');
     Route::get('/surat-tawaran/{permohonanId}', [SekretariatController::class, 'muatTurunSuratTawaran'])->name('generate-pdf');

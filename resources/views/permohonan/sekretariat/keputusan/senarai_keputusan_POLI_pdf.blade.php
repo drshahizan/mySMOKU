@@ -152,7 +152,7 @@
                         @endphp
 
                         @if($program == "BKOKU")
-                            @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                            @if ($jenis_institusi == "P")
                                 <tr>
                                     <td class="text-center">{{$i++}}</td>
                                     <td>{{$no_rujukan_permohonan}}</td>

@@ -842,23 +842,25 @@ class SekretariatController extends Controller
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
                     ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
-                    
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->Orwhere('id_institusi', '=', '01055')->orderBy('nama_institusi')->get();
 
         $notifikasi = null;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
     }
 
-    public function getKeputusanBKOKU()
+    public function getKeputusanIPTS()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '!=', 'UA');
+                            $subQuery->where('jenis_institusi', '=', 'IPTS');
                         });
                         $query->whereHas('peringkat');
                     })
@@ -872,7 +874,47 @@ class SekretariatController extends Controller
         return response()->json($permohonan);
     }
 
-    public function getKeputusanBKOKUUA()
+    public function getKeputusanPOLI()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'P');
+                        });
+                        $query->whereHas('peringkat');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                        $query->with('peringkat');
+                    }, 'smoku','kelulusan'])
+                    ->get();
+
+        return response()->json($permohonan);
+    }
+
+    public function getKeputusanKK()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'KK');
+                        });
+                        $query->whereHas('peringkat');
+                    })
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                        $query->with('peringkat');
+                    }, 'smoku','kelulusan'])
+                    ->get();
+
+        return response()->json($permohonan);
+    }
+
+    public function getKeputusanUA()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
                     ->whereHas('akademik', function ($query) {
@@ -910,7 +952,7 @@ class SekretariatController extends Controller
         return response()->json($permohonan);
     }
 
-    public function cetakKeputusanPermohonanBKOKU(Request $request)
+    public function cetakKeputusanPermohonanIPTS(Request $request)
     {
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
@@ -935,7 +977,7 @@ class SekretariatController extends Controller
         $permohonan = $query->get();
 
         // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_pdf', compact('permohonan'))->render();
+        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_IPTS_pdf', compact('permohonan'))->render();
         
         // Create Dompdf options
         $options = new Options();
@@ -962,7 +1004,117 @@ class SekretariatController extends Controller
         $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
     
         // Save the PDF to a file or stream it
-        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU.pdf');
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-IPTS.pdf');
+    }
+
+    public function cetakKeputusanPermohonanPOLI(Request $request)
+    {
+        // Retrieve filter parameters from the request
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+        $status = $request->query('status');
+        $institusi = $request->query('institusi');
+
+        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when(!empty($status), function ($q) use ($status) {
+                return $q->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when(!empty($institusi), function ($q) use ($institusi) {
+                return $q->where('bk_info_institusi.nama_institusi', $institusi);
+            })
+            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
+
+        $permohonan = $query->get();
+
+        // Load your HTML content
+        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_POLI_pdf', compact('permohonan'))->render();
+        
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('chroot', public_path());
+    
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+    
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+    
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+    
+        // Render the PDF
+        $pdf->render();
+    
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+    
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+    
+        // Save the PDF to a file or stream it
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-POLI.pdf');
+    }
+
+    public function cetakKeputusanPermohonanKK(Request $request)
+    {
+        // Retrieve filter parameters from the request
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+        $status = $request->query('status');
+        $institusi = $request->query('institusi');
+
+        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
+                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when(!empty($status), function ($q) use ($status) {
+                return $q->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when(!empty($institusi), function ($q) use ($institusi) {
+                return $q->where('bk_info_institusi.nama_institusi', $institusi);
+            })
+            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
+
+        $permohonan = $query->get();
+
+        // Load your HTML content
+        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_KK_pdf', compact('permohonan'))->render();
+        
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('chroot', public_path());
+    
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+    
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+    
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+    
+        // Render the PDF
+        $pdf->render();
+    
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+    
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+    
+        // Save the PDF to a file or stream it
+        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
     }
 
     public function cetakKeputusanPermohonanUA(Request $request)
