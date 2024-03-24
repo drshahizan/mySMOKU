@@ -161,7 +161,7 @@
                             $institusi_pengajian = transformBracketsToUppercase($institusiPengajian);
                         @endphp
                         
-                        @if ($jenis_institusi != "UA")
+                        @if ($jenis_institusi == "KK")
                             <tr>
                                 <td class="text-center">{{$i}}</td>                                           
                                 <td>{{$item['no_rujukan_permohonan']}}</td>

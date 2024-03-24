@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 
-class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
+class SenaraiPendekKK implements FromCollection, WithHeadings, WithColumnWidths, WithEvents, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -34,7 +34,7 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
             ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
             ->join('bk_info_institusi as c', function ($join) {
                 $join->on('c.id_institusi', '=', 'b.id_institusi')
-                    ->where('c.jenis_institusi', '=', 'IPTS');
+                    ->where('c.jenis_institusi', '=', 'KK');
             })
             ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
             ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')

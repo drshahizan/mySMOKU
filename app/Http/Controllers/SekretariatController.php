@@ -6,6 +6,8 @@ use App\Exports\BorangSPPB;
 use App\Exports\PenyaluranTuntutan;
 use App\Exports\SenaraiPendek;
 use App\Exports\SenaraiPendekBKOKU;
+use App\Exports\SenaraiPendekPOLI;
+use App\Exports\SenaraiPendekKK;
 use App\Exports\SenaraiPendekUA;
 use App\Mail\KeputusanLayak;
 use App\Mail\KeputusanTidakLayak;
@@ -467,11 +469,13 @@ class SekretariatController extends Controller
             ->where('permohonan.status', '=', '4')
             ->orderBy('id', 'desc')->get();
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
         
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK'));
     }
 
     public function cetakSenaraiDisokongPDF(Request $request, $programCode)
@@ -492,8 +496,12 @@ class SekretariatController extends Controller
         $kelulusan = $query->get();
 
         //check programCode
-        if ($programCode == 'BKOKU')
-            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_bkoku_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        if ($programCode == 'IPTS')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_ipts_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        elseif ($programCode == 'POLI')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_poli_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        elseif ($programCode == 'KK')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_kk_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
         elseif ($programCode == 'UA')
             $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_ua_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
         else
@@ -521,33 +529,37 @@ class SekretariatController extends Controller
         $kelulusan = $query->get();
 
         //check programCode
-        if ($programCode == 'BKOKU')
-            return Excel::download(new SenaraiPendekBKOKU($programCode, $filters), 'Permohonan_BKOKU_Disokong.xlsx');
+        if ($programCode == 'IPTS')
+            return Excel::download(new SenaraiPendekBKOKU($programCode, $filters), 'Permohonan_BKOKU_IPTS_Disokong.xlsx');
+        elseif ($programCode == 'POLI')
+            return Excel::download(new SenaraiPendekPOLI($programCode, $filters), 'Permohonan_BKOKU_POLI_Disokong.xlsx');
+        elseif ($programCode == 'KK')
+            return Excel::download(new SenaraiPendekKK($programCode, $filters), 'Permohonan_BKOKU_KK_Disokong.xlsx');
         elseif ($programCode == 'UA')
             return Excel::download(new SenaraiPendekUA($programCode, $filters), 'Permohonan_BKOKU_UA_Disokong.xlsx');
         else        
             return Excel::download(new SenaraiPendek($programCode, $filters), 'Permohonan_PPK_Disokong.xlsx');
     }
 
-    public function cetakBorangSppbExcel(Request $request, $programCode)
-    {
-        $filters = $request->only(['institusi']);
+    // public function cetakBorangSppbExcel(Request $request, $programCode)
+    // {
+    //     $filters = $request->only(['institusi']);
 
-        $query = Permohonan::where('permohonan.status', '4')
-            ->where('permohonan.program', $programCode);
+    //     $query = Permohonan::where('permohonan.status', '4')
+    //         ->where('permohonan.program', $programCode);
 
-        // Join the necessary tables to access jenis_institusi
-        $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
-              ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
-              ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi');
+    //     // Join the necessary tables to access jenis_institusi
+    //     $query->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+    //           ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+    //           ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi');
 
-        // Add a condition to check if jenis_institusi is 'UA'
-        $query->where('bk_info_institusi.jenis_institusi', 'UA');
+    //     // Add a condition to check if jenis_institusi is 'UA'
+    //     $query->where('bk_info_institusi.jenis_institusi', 'UA');
 
-        $kelulusan = $query->get();
+    //     $kelulusan = $query->get();
 
-        return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan BKOKU.xlsx');
-    }
+    //     return Excel::download(new BorangSPPB($programCode, $filters), 'Borang Permohonan Peruntukan BKOKU.xlsx');
+    // }
 
     public function maklumatKelulusanPermohonan($id)
     {
@@ -639,27 +651,16 @@ class SekretariatController extends Controller
         $emailTidakLulus = EmelKemaskini::where("emel_id",3)->first();
         Mail::to($studentEmail)->send($keputusan == "Lulus" ? new KeputusanLayak($emailLulus) : new KeputusanTidakLayak($emailTidakLulus,$catatanArray));
 
-        // Filter kelulusan
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
                     ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                     ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-                    })
-                    ->when($request->status, function ($q) use ($request) {
-                        return $q->where('permohonan_kelulusan.keputusan', $request->status);
-                    })
-                    ->when($request->institusi, function ($q) use ($request) {
-                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
-                    })
-                    ->select('permohonan_kelulusan.*')
+                    ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
@@ -667,7 +668,7 @@ class SekretariatController extends Controller
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
     }
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
@@ -802,27 +803,16 @@ class SekretariatController extends Controller
             }
         }
 
-        // Filter kelulusan
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
         $kelulusan = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
                     ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                     ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                     ->orderBy('permohonan_kelulusan.updated_at', 'desc')
-                    ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                        return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-                    })
-                    ->when($request->status, function ($q) use ($request) {
-                        return $q->where('permohonan_kelulusan.keputusan', $request->status);
-                    })
-                    ->when($request->institusi, function ($q) use ($request) {
-                        return $q->where('bk_info_institusi.id_institusi', $request->institusi);
-                    })
-                    ->select('permohonan_kelulusan.*')
+                    ->select('permohonan_kelulusan.*','smoku_akademik.id_institusi')
                     ->get();
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
@@ -830,7 +820,7 @@ class SekretariatController extends Controller
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK' ,'institusiPengajianUA','institusiPengajianPPK'));
     }
 
     //PERMOHONAN - KEPUTUSAN

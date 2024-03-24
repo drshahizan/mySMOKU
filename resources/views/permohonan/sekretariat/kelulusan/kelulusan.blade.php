@@ -123,11 +123,29 @@
                                                 <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-3 fv-row export-container" data-program-code="BKOKU" style="margin-left:65px;">
-                                                <a id="exportBKOKU" href="{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                            <div class="col-md-3 fv-row export-container" data-program-code="IPTS" style="margin-left:65px;">
+                                                <a id="exportIPTS" href="{{ route('senarai.disokong.pdf', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportBKOKUExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportIPTSExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>
+                                            </div>
+
+                                            <div class="col-md-3 fv-row export-container" data-program-code="POLI" style="margin-left:65px;">
+                                                <a id="exportPOLI" href="{{ route('senarai.disokong.pdf', ['programCode' => 'POLI']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a id="exportPOLIExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'POLI']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> Excel
+                                                </a>
+                                            </div>
+
+                                            <div class="col-md-3 fv-row export-container" data-program-code="KK" style="margin-left:65px;">
+                                                <a id="exportKK" href="{{ route('senarai.disokong.pdf', ['programCode' => 'KK']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                    <i class="fa fa-file-pdf" style="color: black;"></i> PDF
+                                                </a>
+                                                <a id="exportKKExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'KK']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
@@ -160,8 +178,8 @@
 
 
                             <div class="tab-content mt-0" id="myTabContent">
-                                {{-- BKOKU IPTS, KK, P --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
@@ -247,7 +265,313 @@
                                                                 $institusipengajian = transformBracketsToUppercase($institusi);
                                                             @endphp
                                                             
-                                                            @if ($jenis_institusi != "UA")
+                                                            @if ($jenis_institusi == "IPTS")
+                                                                <tr>
+                                                                    <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                    <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td style="width: 20%">{{$pemohon}}</td>
+                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
+                                                                    <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                </tr>
+                                                            @endif  
+                                                        @endif
+                                                    @endforeach 
+                                                </tbody>
+                                            </table>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                                Sahkan
+                                            </button>
+                                        
+                                            {{-- Modal --}}
+                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                    <option value="">Pilih Keputusan</option>
+                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <br><br>                                       
+                                        </form>
+                                    </div>
+                                </div>
+
+                                {{-- BKOKU POLI --}}
+                                <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
+                                    <div class="body">
+                                        <form action="{{ route('bulk.approval') }}" method="POST">
+                                            {{csrf_field()}}
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @php
+                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                    @endphp
+                                                
+                                                    @foreach ($kelulusan as $item)
+                                                        @if ($item['program']=="BKOKU")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
+                                                                $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                                                                
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); 
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $pemohon = implode(' ', $result);
+
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
+
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            @if ($jenis_institusi == "P")
+                                                                <tr>
+                                                                    <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
+                                                                    <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
+                                                                    <td style="width: 20%">{{$pemohon}}</td>
+                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
+                                                                    <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
+                                                                    <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
+                                                                </tr>
+                                                            @endif  
+                                                        @endif
+                                                    @endforeach 
+                                                </tbody>
+                                            </table>
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                                Sahkan
+                                            </button>
+                                        
+                                            {{-- Modal --}}
+                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
+                                                                    <option value="">Pilih Keputusan</option>
+                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
+                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <textarea class="form-control" id="catatan" name="catatan"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                            <br><br>                                       
+                                        </form>
+                                    </div>
+                                </div>
+
+                                {{-- BKOKU KK --}}
+                                <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
+                                    <div class="body">
+                                        <form action="{{ route('bulk.approval') }}" method="POST">
+                                            {{csrf_field()}}
+                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
+                                                        <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
+                                                        <th class="text-center" style="width: 20%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @php
+                                                        require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                                                    @endphp
+                                                
+                                                    @foreach ($kelulusan as $item)
+                                                        @if ($item['program']=="BKOKU")
+                                                            @php
+                                                                $i++;
+                                                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
+                                                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
+                                                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                                $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
+                                                                $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
+                                                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
+                                                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
+                                                                
+                                                                // nama pemohon
+                                                                $text = ucwords(strtolower($nama_pemohon)); 
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $pemohon = implode(' ', $result);
+
+                                                                //nama kursus
+                                                                $text2 = ucwords(strtolower($nama_kursus)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text2);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $kursus = implode(' ', $result);
+                                                                $namakursus = transformBracketsToCapital($kursus);
+
+                                                                //institusi pengajian
+                                                                $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                                $conjunctions = ['of', 'in', 'and'];
+                                                                $words = explode(' ', $text3);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $institusi = implode(' ', $result);
+                                                                $institusipengajian = transformBracketsToUppercase($institusi);
+                                                            @endphp
+                                                            
+                                                            @if ($jenis_institusi == "KK")
                                                                 <tr>
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
@@ -318,7 +642,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="kt_subscriptions_table" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -471,7 +795,7 @@
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable5" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -622,7 +946,9 @@
             </div>
         </div>
 
-        {{-- // check all checkboxes at once for bulk approval "kelulusan" --}}
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        {{-- check all checkboxes at once for bulk approval "kelulusan" --}}
         <script>
             function toggle(source) {
                 var checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
@@ -635,20 +961,21 @@
 			    $('.js-example-basic-single').select2();
 			});
         </script>
-
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         
         <script>
             // Initialize JavaScript variables with data from Blade
-            var bkokuList = @json($institusiPengajian);
+            var bkokuIPTSList = @json($institusiPengajianIPTS);
+            var bkokuPOLIList = @json($institusiPengajianPOLI);
+            var bkokuKKList = @json($institusiPengajianKK);
             var bkokuUAList = @json($institusiPengajianUA);
             var ppkList = @json($institusiPengajianPPK);
 
             $(document).ready(function() {
-                $('.export-container[data-program-code="BKOKU"]').show();
+                $('.export-container[data-program-code="IPTS"]').show();
+                $('.export-container[data-program-code="POLI"]').hide();
+                $('.export-container[data-program-code="KK"]').hide();
                 $('.export-container[data-program-code="UA"]').hide();
                 $('.export-container[data-program-code="PPK"]').hide();
-
                 $('.none-container').show(); // Hide export elements
 
                 // Add an event listener for tab clicks
@@ -658,13 +985,18 @@
 
                     // Clear filters when changing tabs
                     clearFilters();
-
                     updateExportContainers(activeTabId);
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
-                        case 'bkoku-tab':
-                            updateInstitusiDropdown(bkokuList);
+                        case 'bkokuIPTS-tab':
+                            updateInstitusiDropdown(bkokuIPTSList);
+                            break;
+                        case 'bkokuPOLI-tab':
+                            updateInstitusiDropdown(bkokuPOLIList);
+                            break;
+                        case 'bkokuKK-tab':
+                            updateInstitusiDropdown(bkokuKKList);
                             break;
                         case 'bkokuUA-tab':
                             updateInstitusiDropdown(bkokuUAList);
@@ -672,23 +1004,28 @@
                         case 'ppk-tab':
                             updateInstitusiDropdown(ppkList);
                             break;
-                        // Add more cases if you have additional tabs
                     }
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuList);
+                updateInstitusiDropdown(bkokuIPTSList);
 
                 // Function to clear filters for all tables
                 function clearFilters() {
                     if (datatable1) {
                         datatable1.search('').columns().search('').draw();
                     }
-                    if (datatable) {
-                        datatable.search('').columns().search('').draw();
-                    }
                     if (datatable2) {
                         datatable2.search('').columns().search('').draw();
+                    }
+                    if (datatable3) {
+                        datatable3.search('').columns().search('').draw();
+                    }
+                    if (datatable4) {
+                        datatable4.search('').columns().search('').draw();
+                    }
+                    if (datatable5) {
+                        datatable5.search('').columns().search('').draw();
                     }
                 }
 
@@ -703,13 +1040,16 @@
 
                 function getProgramCode(activeTabId) {
                     switch (activeTabId) {
-                        case 'bkoku-tab':
-                            return 'BKOKU';
+                        case 'bkokuIPTS-tab':
+                            return 'IPTS';
+                        case 'bkokuPOLI-tab':
+                            return 'POLI';
+                        case 'bkokuKK-tab':
+                            return 'KK';
                         case 'bkokuUA-tab':
                             return 'UA';
                         case 'ppk-tab':
                             return 'PPK';
-                        // Add more cases if you have additional tabs
                         default:
                             return '';
                     }
@@ -734,18 +1074,22 @@
 
         <script>
             // Declare datatables in a higher scope to make them accessible
-            var datatable1, datatable, datatable2;
+            var datatable1, datatable3, datatable2, datatable4, datatable5;
 
             $(document).ready(function() {
                 // Initialize DataTables
                 initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#kt_subscriptions_table', 'datatable');
                 initDataTable('#sortTable2', 'datatable2');
+                initDataTable('#sortTable3', 'datatable3');
+                initDataTable('#sortTable4', 'datatable4');
+                initDataTable('#sortTable5', 'datatable5');
 
                 // Log data for all tables
                 logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable);
-                logTableData('Table 3 Data:', datatable2);
+                logTableData('Table 2 Data:', datatable2);
+                logTableData('Table 3 Data:', datatable3);
+                logTableData('Table 4 Data:', datatable4);
+                logTableData('Table 5 Data:', datatable5);
             });
 
             function initDataTable(tableId, variableName) {
@@ -771,14 +1115,26 @@
 
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-                applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-                applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
+                applyAndLogFilter('Table 2', datatable2, selectedInstitusi);
+                applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
+                applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
+                applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
 
                 // Update the export link with the selected institusi for Table 2
-                var exportBKOKU = document.getElementById('exportBKOKU');
-                exportBKOKU.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-                var exportBKOKUExcel = document.getElementById('exportBKOKUExcel');
-                exportBKOKUExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                var exportIPTS = document.getElementById('exportIPTS');
+                exportIPTS.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'IPTS']) }}?institusi=" + selectedInstitusi;
+                var exportIPTSExcel = document.getElementById('exportIPTSExcel');
+                exportIPTSExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'IPTS']) }}?institusi=" + selectedInstitusi;
+
+                var exportPOLI = document.getElementById('exportPOLI');
+                exportPOLI.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'POLI']) }}?institusi=" + selectedInstitusi;
+                var exportPOLIExcel = document.getElementById('exportPOLIExcel');
+                exportPOLIExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'POLI']) }}?institusi=" + selectedInstitusi;
+
+                var exportKK = document.getElementById('exportKK');
+                exportKK.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'KK']) }}?institusi=" + selectedInstitusi;
+                var exportKKExcel = document.getElementById('exportKKExcel');
+                exportKKExcel.href = "{{ route('senarai.disokong.excel', ['programCode' => 'KK']) }}?institusi=" + selectedInstitusi;
 
                 var exportUA = document.getElementById('exportUA');
                 exportUA.href = "{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}?institusi=" + selectedInstitusi;
