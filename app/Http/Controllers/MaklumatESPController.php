@@ -25,11 +25,13 @@ class MaklumatESPController extends Controller
 
         $secretKey = '2z_JoT4dDCNe_bkT9y6kEhc_4plRkUW7Ci1hzoyH';
 
-        $institusiPengajian = InfoIpt::where('jenis_institusi', '!=', 'UA')->where('jenis_permohonan', 'BKOKU')->orderBy('nama_institusi')->get();
+        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
+        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
-        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey','institusiPengajian','institusiPengajianUA','institusiPengajianPPK'));     
+        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));     
         
     }
 
