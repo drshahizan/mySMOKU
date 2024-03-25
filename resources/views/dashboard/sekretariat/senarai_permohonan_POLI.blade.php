@@ -55,7 +55,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             {{-- Filter section --}}
-                            <form action="{{ route('keseluruhanB.permohonan') }}" method="GET">
+                            <form action="{{ route('keseluruhanPOLI.permohonan') }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>

@@ -595,7 +595,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.permohonan') }}">
+													<a href="{{ route('keseluruhanIPTS.permohonan') }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -624,7 +624,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -652,7 +652,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -682,7 +682,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -709,7 +709,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -736,7 +736,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -768,7 +768,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '8']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -796,7 +796,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -825,7 +825,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -863,7 +863,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
+													<a href="{{ route('keseluruhanIPTS.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -892,7 +892,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -920,7 +920,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -950,7 +950,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -977,7 +977,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1004,7 +1004,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1036,7 +1036,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1064,7 +1064,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1093,7 +1093,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
+													<a href="{{ route('statusIPTS.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanIPTS}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1134,7 +1134,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.permohonan') }}">
+													<a href="{{ route('keseluruhanPOLI.permohonan') }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1163,7 +1163,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1191,7 +1191,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1221,7 +1221,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1248,7 +1248,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1275,7 +1275,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1307,7 +1307,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '8']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1335,7 +1335,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1364,7 +1364,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusPOLI.permohonan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1402,7 +1402,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
+													<a href="{{ route('keseluruhanPOLI.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1431,7 +1431,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1459,7 +1459,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1489,7 +1489,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1516,7 +1516,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1543,7 +1543,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1575,7 +1575,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1603,7 +1603,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1632,7 +1632,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
+													<a href="{{ route('statusPOLI.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1673,7 +1673,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.permohonan') }}">
+													<a href="{{ route('keseluruhanKK.permohonan') }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1702,7 +1702,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '1']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1730,7 +1730,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '2']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1760,7 +1760,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '3']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1787,7 +1787,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '4']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1814,7 +1814,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '5']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1846,7 +1846,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '8']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1874,7 +1874,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '6']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1903,7 +1903,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.permohonan', ['status' => '7']) }}">
+													<a href="{{ route('statusKK.permohonan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1941,7 +1941,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
+													<a href="{{ route('keseluruhanKK.tuntutan', ['status' => '!=9']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1970,7 +1970,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '1']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -1998,7 +1998,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '2']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2028,7 +2028,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '3']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2055,7 +2055,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '4']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2082,7 +2082,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '5']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2114,7 +2114,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '8']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2142,7 +2142,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '6']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
@@ -2171,7 +2171,7 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
+													<a href="{{ route('statusKK.tuntutan', ['status' => '7']) }}">
 														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
