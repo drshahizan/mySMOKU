@@ -624,7 +624,7 @@ class SekretariatController extends Controller
         $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
         
         return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK'));
     }
@@ -813,7 +813,7 @@ class SekretariatController extends Controller
         $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
 
         // Pop up notification
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
@@ -965,7 +965,7 @@ class SekretariatController extends Controller
         $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); = InfoIpt::where('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
         // Pop up notification
         $keputusan = $request->get('keputusan');
@@ -2393,7 +2393,7 @@ class SekretariatController extends Controller
     public function senaraiPembayaran()
     {
         $tuntutan = Tuntutan::where('status', '8')->orderBy('created_at', 'DESC')->get();
-        $status_kod=0;
+        $status_kod = 0;
         $status = null;
 
         $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
@@ -2407,7 +2407,6 @@ class SekretariatController extends Controller
 
     public function getPembayaranTuntutanBKOKU()
     {
-        
         $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
                 $query->where('status', 1)
                     ->whereHas('infoipt', function ($subQuery) {
@@ -2424,7 +2423,6 @@ class SekretariatController extends Controller
             ->get();
 
         return response()->json($tuntutan);
-      
     }
 
     public function getPembayaranTuntutanUA()
@@ -2497,8 +2495,8 @@ class SekretariatController extends Controller
         return back()->with('success', 'No Cek dan Tarikh Transaksi berjaya dikemaskini');
     }
 
-    public function maklumatPembayaran($id){
-
+    public function maklumatPembayaran($id)
+    {
         $tuntutan = Tuntutan::where('id', $id)->first();
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
@@ -2628,7 +2626,5 @@ class SekretariatController extends Controller
             // Redirect to the original page
             return redirect()->back();
         }
-
-        
     }
 }
