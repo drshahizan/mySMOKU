@@ -60,7 +60,7 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.dashboard');
     }
 
-    //BKOKU
+    //BKOKU IPTS
     public function statusPermohonanBKOKU(Request $request)
     {
         $startDate = $request->input('start_date');
@@ -72,7 +72,7 @@ class SekretariatController extends Controller
         })
         ->where('program', 'BKOKU')->get();
 
-        return view('dashboard.sekretariat.senarai_permohonan_BKOKU', compact('permohonan'));
+        return view('dashboard.sekretariat.senarai_permohonan_IPTS', compact('permohonan'));
     }
 
     public function statusTuntutanBKOKU(Request $request, $status)
@@ -91,7 +91,7 @@ class SekretariatController extends Controller
                     })
                     ->get();
 
-        return view('dashboard.sekretariat.senarai_tuntutan_BKOKU', compact('tuntutan'));
+        return view('dashboard.sekretariat.senarai_tuntutan_IPTS', compact('tuntutan'));
     }
 
     public function filterStatusPermohonanBKOKU(Request $request, $status)
@@ -110,7 +110,7 @@ class SekretariatController extends Controller
         })
         ->where('program', 'BKOKU')->get();
 
-        return view('dashboard.sekretariat.filter_senarai_permohonan_BKOKU', compact('permohonan', 'status'));
+        return view('dashboard.sekretariat.filter_senarai_permohonan_IPTS', compact('permohonan', 'status'));
     }
 
     public function filterStatusTuntutanBKOKU(Request $request, $status)
@@ -126,7 +126,7 @@ class SekretariatController extends Controller
                     })
                     ->get();
 
-        return view('dashboard.sekretariat.filter_senarai_tuntutan_BKOKU', compact('tuntutan','status'));
+        return view('dashboard.sekretariat.filter_senarai_tuntutan_IPTS', compact('tuntutan','status'));
     }
 
     //BKOKU UA

@@ -121,7 +121,7 @@
                                                 @endphp
 
                                                 @if ($program == "BKOKU")
-                                                    @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                                                    @if ($jenis_institusi == "IPTS")
                                                         <tr>
                                                             <td>{{$item->no_rujukan_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>

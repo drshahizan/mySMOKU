@@ -115,7 +115,7 @@
 								                $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                             @endphp
 
-                                            @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                                            @if ($jenis_institusi == "P")
                                                 <tr>
                                                     <td>{{$item->no_rujukan_permohonan}}</td>
                                                     <td>{{$pemohon}}</td>

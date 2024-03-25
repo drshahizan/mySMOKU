@@ -55,7 +55,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             {{-- Filter section --}}
-                            <form action="{{ url('sekretariat/tuntutan/BKOKU/status/' . $status) }}" method="GET">
+                            <form action="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}" method="GET">
                                 <div class="row" style="margin-left:15px; margin-top:30px;">
                                     <div class="col-md-2">
                                         <label for="start_date"><b>Dari:</b></label>
@@ -121,7 +121,7 @@
                                                 @endphp
 
                                                 @if ($program == "BKOKU")
-                                                    @if ($jenis_institusi == "IPTS" || $jenis_institusi == "KK" || $jenis_institusi == "P")
+                                                    @if ($jenis_institusi == "KK")
                                                         <tr>
                                                             <td>{{$item->no_rujukan_tuntutan}}</td>
                                                             <td>{{$pemohon}}</td>

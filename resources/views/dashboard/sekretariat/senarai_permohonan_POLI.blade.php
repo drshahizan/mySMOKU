@@ -116,7 +116,7 @@
 								                $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
                                             @endphp
 
-                                            @if ($jenis_institusi != "UA")
+                                            @if ($jenis_institusi == "P")
                                                 <tr>
                                                     <td>{{$item->no_rujukan_permohonan}}</td>
                                                     <td>{{$pemohon}}</td>
