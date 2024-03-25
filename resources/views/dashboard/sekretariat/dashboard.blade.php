@@ -415,6 +415,7 @@
 												->where('permohonan.program','=','BKOKU')
 												->where('bk_info_institusi.jenis_institusi', 'IPTS')
 												->select(
+													DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanIPTS'),
 													DB::raw('COUNT(CASE WHEN tuntutan.status != 9 THEN 1 END) AS keseluruhanTuntutanIPTS'),
 													DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanIPTS'),
 													DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanIPTS'),
@@ -440,86 +441,100 @@
 						@endphp
 
 						@php
-							$UAtuntutanAll = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '!=', 9)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+							$tuntutanPOLI = DB::table('tuntutan')
+												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+												->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+												->where('permohonan.program','=','BKOKU')
+												->where('bk_info_institusi.jenis_institusi', 'P')
+												->select(
+													DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanPOLI'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanPOLI')
+												)
+												->first();
 
-							$UAtuntutan1 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 1)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+							// Access the counts like this:
+							$keseluruhanTuntutanPOLI = $tuntutanPOLI->keseluruhanTuntutanPOLI ?? 0;
+							$derafTuntutanPOLI = $tuntutanPOLI->derafTuntutanPOLI ?? 0;
+							$baharuTuntutanPOLI = $tuntutanPOLI->baharuTuntutanPOLI ?? 0;
+							$saringanTuntutanPOLI = $tuntutanPOLI->saringanTuntutanPOLI ?? 0;
+							$disokongTuntutanPOLI = $tuntutanPOLI->disokongTuntutanPOLI ?? 0;
+							$dikembalikanTuntutanPOLI = $tuntutanPOLI->dikembalikanTuntutanPOLI ?? 0;
+							$layakTuntutanPOLI = $tuntutanPOLI->layakTuntutanPOLI ?? 0;
+							$tidakLayakTuntutanPOLI = $tuntutanPOLI->tidakLayakTuntutanPOLI ?? 0;
+							$dibayarTuntutanPOLI = $tuntutanPOLI->dibayarTuntutanPOLI ?? 0;
+						@endphp
 
-							$UAtuntutan2 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 2)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+						@php
+							$tuntutanKK = DB::table('tuntutan')
+												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+												->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+												->where('permohonan.program','=','BKOKU')
+												->where('bk_info_institusi.jenis_institusi', 'KK')
+												->select(
+													DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status != 9 THEN 1 END) AS keseluruhanTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanKK'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanKK')
+												)
+												->first();
 
-							$UAtuntutan3 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 3)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+							// Access the counts like this:
+							$keseluruhanTuntutanKK = $tuntutanKK->keseluruhanTuntutanKK ?? 0;
+							$derafTuntutanKK = $tuntutanKK->derafTuntutanKK ?? 0;
+							$baharuTuntutanKK = $tuntutanKK->baharuTuntutanKK ?? 0;
+							$saringanTuntutanKK = $tuntutanKK->saringanTuntutanKK ?? 0;
+							$disokongTuntutanKK = $tuntutanKK->disokongTuntutanKK ?? 0;
+							$dikembalikanTuntutanKK = $tuntutanKK->dikembalikanTuntutanKK ?? 0;
+							$layakTuntutanKK = $tuntutanKK->layakTuntutanKK ?? 0;
+							$tidakLayakTuntutanKK = $tuntutanKK->tidakLayakTuntutanKK ?? 0;
+							$dibayarTuntutanKK = $tuntutanKK->dibayarTuntutanKK ?? 0;
+						@endphp
 
-							$UAtuntutan4 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 4)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+						@php
+							$tuntutanUA = DB::table('tuntutan')
+												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+												->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+												->where('permohonan.program','=','BKOKU')
+												->where('bk_info_institusi.jenis_institusi', 'UA')
+												->select(
+													DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanUA'),
+													DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanUA')
+												)
+												->first();
 
-							$UAtuntutan5 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 5)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
-
-							$UAtuntutan6 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 6)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
-
-							$UAtuntutan7 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 7)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
-
-							$UAtuntutan8 = DB::table('tuntutan')
-							->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('tuntutan.status', '=', 8)
-							->where('permohonan.program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'UA') 
-							->count();
+							// Access the counts like this:
+							$keseluruhanTuntutanUA = $tuntutanUA->keseluruhanTuntutanUA ?? 0;
+							$derafTuntutanUA = $tuntutanUA->derafTuntutanUA ?? 0;
+							$baharuTuntutanUA = $tuntutanUA->baharuTuntutanUA ?? 0;
+							$saringanTuntutanUA = $tuntutanUA->saringanTuntutanUA ?? 0;
+							$disokongTuntutanUA = $tuntutanUA->disokongTuntutanUA ?? 0;
+							$dikembalikanTuntutanUA = $tuntutanUA->dikembalikanTuntutanUA ?? 0;
+							$layakTuntutanUA = $tuntutanUA->layakTuntutanUA ?? 0;
+							$tidakLayakTuntutanUA = $tuntutanUA->tidakLayakTuntutanUA ?? 0;
+							$dibayarTuntutanUA = $tuntutanUA->dibayarTuntutanUA ?? 0;
 						@endphp
 
 						@php
@@ -1388,7 +1403,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1417,7 +1432,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1445,7 +1460,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1475,7 +1490,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1502,7 +1517,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1529,7 +1544,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1561,7 +1576,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1589,7 +1604,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1618,7 +1633,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanPOLI}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1927,7 +1942,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanB.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1956,7 +1971,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1984,7 +1999,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2014,7 +2029,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2041,7 +2056,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2068,7 +2083,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2100,7 +2115,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2128,7 +2143,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2157,7 +2172,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusB.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{0}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanKK}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2466,7 +2481,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanUA.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutanAll}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2495,7 +2510,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan1}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2523,7 +2538,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan2}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2553,7 +2568,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan3}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2580,7 +2595,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan4}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2607,7 +2622,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan5}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2639,7 +2654,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan8}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2667,7 +2682,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan6}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2696,7 +2711,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$UAtuntutan7}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanUA}}</span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
