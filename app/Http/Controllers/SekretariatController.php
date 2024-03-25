@@ -1894,13 +1894,12 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
     }
 
-    public function getKeputusanTuntutanBKOKU()
+    public function getKeputusanTuntutanIPTS()
     {
-       
         $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
                 $query->where('status', 1)
                     ->whereHas('infoipt', function ($subQuery) {
-                        $subQuery->where('jenis_institusi', '!=', 'UA');
+                        $subQuery->where('jenis_institusi', '=', 'IPTS');
                     });
                 $query->whereHas('peringkat');
             })
@@ -1914,7 +1913,48 @@ class SekretariatController extends Controller
             ->get();
 
         return response()->json($tuntutan);
+    }
 
+    public function getKeputusanTuntutanPOLI()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'P');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['5','6','7'])
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt')->with('peringkat');
+            }, 'smoku', 'permohonan'])
+            ->get();
+
+        return response()->json($tuntutan);
+    }
+
+    public function getKeputusanTuntutanKK()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'KK');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['5','6','7'])
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt')->with('peringkat');
+            }, 'smoku', 'permohonan'])
+            ->get();
+
+        return response()->json($tuntutan);
     }
 
     public function getKeputusanTuntutanBKOKUUA()

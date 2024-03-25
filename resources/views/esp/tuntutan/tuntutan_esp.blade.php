@@ -1355,8 +1355,7 @@
         const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
         return hash;
       }
-      
-    </script>
 
+    </script>
   </body>
 </x-default-layout>

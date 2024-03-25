@@ -294,11 +294,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Keputusan
     Route::get('tuntutan/sekretariat/keputusan/keputusan-tuntutan', [SekretariatController::class, 'keputusanTuntutan'])->name('keputusan.tuntutan');
-    Route::get('tuntutan/sekretariat/keputusan/BKOKU', [SekretariatController::class, 'getKeputusanTuntutanBKOKU'])->name('senarai.keputusan.tuntutan.BKOKU');
-    Route::get('tuntutan/sekretariat/keputusan/BKOKUUA', [SekretariatController::class, 'getKeputusanTuntutanBKOKUUA'])->name('senarai.keputusan.tuntutan.BKOKUUA');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKU/IPTS', [SekretariatController::class, 'getKeputusanTuntutanIPTS'])->name('senarai.keputusan.tuntutan.IPTS');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKU/POLI', [SekretariatController::class, 'getKeputusanTuntutanPOLI'])->name('senarai.keputusan.tuntutan.POLI');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKU/KK', [SekretariatController::class, 'getKeputusanTuntutanKK'])->name('senarai.keputusan.tuntutan.KK');
+    Route::get('tuntutan/sekretariat/keputusan/BKOKU/UA', [SekretariatController::class, 'getKeputusanTuntutanBKOKUUA'])->name('senarai.keputusan.tuntutan.BKOKUUA');
     Route::get('tuntutan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanTuntutanPPK'])->name('senarai.keputusan.tuntutan.PPK');
-
-
     Route::get('tuntutan/sekretariat/keputusan/filter-tuntutan', [SekretariatController::class, 'filterTuntutan'])->name('filter.tuntutan');
 
     //Tuntutan - Sekretariat - Sejarah

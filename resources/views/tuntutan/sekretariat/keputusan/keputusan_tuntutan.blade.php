@@ -145,7 +145,6 @@
                                                 </button>
                                                 <!--end::Actions-->
                                             </div>
-                                        
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -157,8 +156,8 @@
 
                             {{-- Content Navigation Bar --}}
                             <div class="tab-content mt-0" id="myTabContent">
-                                {{-- BKOKU --}}
-                                <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable1" class="table table-bordered table-striped">
@@ -178,11 +177,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                 {{-- BKOKU UA--}}
-                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1a" class="table table-bordered table-striped">
+                                            <table id="sortTable2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th><b>ID Tuntutan</b></th>
@@ -199,11 +199,56 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
+                                    <div class="body">
+                                        <div class="table-responsive" id="table-responsive">
+                                            <table id="sortTable3" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                        <th><b>ID Tuntutan</b></th>
+                                                        <th><b>Nama</b></th>
+                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center"><b>ID Institusi</b></th>
+                                                        <th><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
+                                                        <th class="text-center">Status Tuntutan</th>
+                                                        <th class="text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 {{-- BKOKU UA--}}
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                    <div class="body">
+                                        <div class="table-responsive" id="table-responsive">
+                                            <table id="sortTable4" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
+                                                        <th><b>ID Tuntutan</b></th>
+                                                        <th><b>Nama</b></th>
+                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center"><b>ID Institusi</b></th>
+                                                        <th><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
+                                                        <th class="text-center">Status Tuntutan</th>
+                                                        <th class="text-center">Status</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{-- PKK --}}
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                            <table id="sortTable5" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th><b>ID Tuntutan</b></th>
@@ -252,7 +297,9 @@
         <script>
             $(document).ready(function() {
                 // Initialize JavaScript variables with data from Blade
-                var bkokuList = @json($institusiPengajian);
+                var bkokuIPTSList = @json($institusiPengajianIPTS);
+                var bkokuPOLIList = @json($institusiPengajianPOLI);
+                var bkokuKKList = @json($institusiPengajianKK);
                 var bkokuUAList = @json($institusiPengajianUA);
                 var ppkList = @json($institusiPengajianPPK);
 
@@ -267,7 +314,7 @@
                                 { targets: [7], visible: false } // Hide column (index 9)
                             ],
                         ajax: {
-                            url: '{{ route("senarai.keputusan.tuntutan.BKOKU") }}', // URL to fetch data from
+                            url: '{{ route("senarai.keputusan.tuntutan.IPTS") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
@@ -386,8 +433,262 @@
                     });
                 }
 
-                function initializeDataTable1a() {
-                    $('#sortTable1a').DataTable({
+                function initializeDataTable2() {
+                    $('#sortTable2').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [7], visible: false } // Hide column (index 9)
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.tuntutan.POLI") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                            { 
+                                data: 'no_rujukan_tuntutan',
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama;
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
+
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
+
+                                    return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'updated_at',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
+
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.permohonan_id);
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            { data: 'status' }
+                        ]
+                    });
+                }
+
+                function initializeDataTable3() {
+                    $('#sortTable3').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] },
+                                { targets: [3], visible: false }, // Hide column (index 4)
+                                { targets: [7], visible: false } // Hide column (index 9)
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.tuntutan.KK") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                            { 
+                                data: 'no_rujukan_tuntutan',
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama;
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
+
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
+
+                                    return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'updated_at',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
+
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.permohonan_id);
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            { data: 'status' }
+                        ]
+                    });
+                }
+
+                function initializeDataTable4() {
+                    $('#sortTable4').DataTable({
                         ordering: true, // Enable manual sorting
                             order: [], // Disable initial sorting
                             columnDefs: [
@@ -515,8 +816,8 @@
                     });
                 }
 
-                function initializeDataTable2() {
-                    $('#sortTable2').DataTable({
+                function initializeDataTable5() {
+                    $('#sortTable5').DataTable({
                         ordering: true, // Enable manual sorting
                             order: [], // Disable initial sorting
                             columnDefs: [
@@ -649,11 +950,17 @@
                     if ($.fn.DataTable.isDataTable('#sortTable1')) {
                         $('#sortTable1').DataTable().destroy();
                     }
-                    if ($.fn.DataTable.isDataTable('#sortTable1a')) {
-                        $('#sortTable1a').DataTable().destroy();
-                    }
                     if ($.fn.DataTable.isDataTable('#sortTable2')) {
                         $('#sortTable2').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable3')) {
+                        $('#sortTable3').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable4')) {
+                        $('#sortTable4').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable5')) {
+                        $('#sortTable5').DataTable().destroy();
                     }
                 }
 
@@ -682,39 +989,45 @@
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
-                        case 'bkoku-tab':
-                            updateInstitusiDropdown(bkokuList);
+                        case 'bkokuIPTS-tab':
+                            updateInstitusiDropdown(bkokuIPTSList);
                             initializeDataTable1();
+                            break;
+                        case 'bkokuPOLI-tab':
+                            updateInstitusiDropdown(bkokuPOLIList);
+                            initializeDataTable2();
+                            break;
+                        case 'bkokuKK-tab':
+                            updateInstitusiDropdown(bkokuKKList);
+                            initializeDataTable3();
                             break;
                         case 'bkokuUA-tab':
                             updateInstitusiDropdown(bkokuUAList);
-                            initializeDataTable1a();
+                            initializeDataTable4();
                             break;
                         case 'ppk-tab':
                             updateInstitusiDropdown(ppkList);
-                            initializeDataTable2();
+                            initializeDataTable5();
                             break;
-                        // Add more cases if you have additional tabs
                     }
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuList);
+                updateInstitusiDropdown(bkokuIPTSList);
                 initializeDataTable1(); // Initialize DataTable1 on page load
-
-                
-
             });
         </script>
             
         <script>
 
-            function applyFilter() {
-
+            function applyFilter() 
+            {
                 // Reinitialize DataTables
                 initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable1a', 'datatable');
                 initDataTable('#sortTable2', 'datatable2');
+                initDataTable('#sortTable3', 'datatable3');
+                initDataTable('#sortTable4', 'datatable4');
+                initDataTable('#sortTable5', 'datatable5');
 
                 function initDataTable(tableId, variableName) {
                     // Check if the datatable is already initialized
@@ -746,11 +1059,10 @@
 
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 2', datatable, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 3', datatable2, selectedInstitusi, startDate, endDate, status);
-
-                
-
+                applyAndLogFilter('Table 2', datatable2, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 3', datatable3, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 4', datatable4, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 5', datatable5, selectedInstitusi, startDate, endDate, status); 
             }
 
             function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
@@ -812,9 +1124,6 @@
                 // Log the data of visible rows on the first page for the table
                 console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
             }
-
         </script>
-
-
     </body>
 </x-default-layout>
