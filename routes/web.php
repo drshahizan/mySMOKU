@@ -280,7 +280,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     //Tuntutan - Sekretariat - Pembayaran
     Route::get('tuntutan/sekretariat/pembayaran/senarai', [SekretariatController::class, 'senaraiPembayaran']);
-    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataBKOKU', [SekretariatController::class, 'getPembayaranTuntutanBKOKU'])->name('senarai.pembayaran.tuntutan.dataBKOKU');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataIPTS', [SekretariatController::class, 'getPembayaranTuntutanIPTS'])->name('senarai.pembayaran.tuntutan.dataIPTS');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPOLI', [SekretariatController::class, 'getPembayaranTuntutanPOLI'])->name('senarai.pembayaran.tuntutan.dataPOLI');
+    Route::get('tuntutan/sekretariat/pembayaran/senarai/dataKK', [SekretariatController::class, 'getPembayaranTuntutanKK'])->name('senarai.pembayaran.tuntutan.dataKK');
     Route::get('tuntutan/sekretariat/pembayaran/senarai/dataUA', [SekretariatController::class, 'getPembayaranTuntutanUA'])->name('senarai.pembayaran.tuntutan.dataUA');
     Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPPK', [SekretariatController::class, 'getPembayaranTuntutanPPK'])->name('senarai.pembayaran.tuntutan.dataPPK');
     
@@ -303,7 +305,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Tuntutan - Sekretariat - Sejarah
     Route::get('tuntutan/sekretariat/sejarah/senarai-tuntutan', [SekretariatController::class, 'senaraiTuntutan'])->name('senarai.tuntutan');
-    Route::get('tuntutan/sekretariat/sejarah/senarai/dataBKOKU', [SekretariatController::class, 'getDataSenaraiBKOKU'])->name('senarai.tuntutan.dataBKOKU');
+    Route::get('tuntutan/sekretariat/sejarah/senarai/dataIPTS', [SekretariatController::class, 'getDataSenaraiIPTS'])->name('senarai.tuntutan.dataIPTS');
+    Route::get('tuntutan/sekretariat/sejarah/senarai/dataPOLI', [SekretariatController::class, 'getDataSenaraiPOLI'])->name('senarai.tuntutan.dataPOLI');
+    Route::get('tuntutan/sekretariat/sejarah/senarai/dataKK', [SekretariatController::class, 'getDataSenaraiKK'])->name('senarai.tuntutan.dataKK');
     Route::get('tuntutan/sekretariat/sejarah/senarai/dataUA', [SekretariatController::class, 'getDataSenaraiUA'])->name('senarai.tuntutan.dataUA');
     Route::get('tuntutan/sekretariat/sejarah/senarai/dataPPK', [SekretariatController::class, 'getDataSenaraiPPK'])->name('senarai.tuntutan.dataPPK');
     Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan/{id}', [SekretariatController::class, 'sejarahTuntutan'])->name('sejarah.tuntutan');

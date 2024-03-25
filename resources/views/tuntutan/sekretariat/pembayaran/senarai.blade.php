@@ -152,9 +152,10 @@
                             <!--end::Group actions-->
                         </div>
                         <!--end::Card toolbar-->
+
                         <div class="tab-content" id="myTabContent">
-                            {{-- BKOKU --}}
-                            <div class="tab-pane fade show active" id="bkoku" role="tabpanel" aria-labelledby="bkoku-tab">
+                            {{-- BKOKU IPTS --}}
+                            <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                 <div class="body">
                                     <div class="table-responsive">
                                         <br>
@@ -168,13 +169,57 @@
                                                     <th>Tarikh Tuntutan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status</th>
-                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- BKOKU POLI --}}
+                            <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <br>
+                                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Tuntutan</th>
+                                                    <th>Nama</th>
+                                                    <th>Nama Kursus</th>
+                                                    <th>Institusi Pengajian</th>
+                                                    <th>Tarikh Tuntutan</th>
+                                                    <th>Tarikh Dibayar</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- BKOKU KK --}}
+                            <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <br>
+                                        <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Tuntutan</th>
+                                                    <th>Nama</th>
+                                                    <th>Nama Kursus</th>
+                                                    <th>Institusi Pengajian</th>
+                                                    <th>Tarikh Tuntutan</th>
+                                                    <th>Tarikh Dibayar</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                             {{-- BKOKU UA --}}
                             <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
@@ -182,7 +227,7 @@
                                     <form action="{{ route('t.sekretariat.infocek.submit') }}" method="POST">
                                     {{csrf_field()}}
                                         <!--begin::Table-->
-                                        <table id="sortTable1a" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
@@ -194,8 +239,6 @@
                                                     <th>No Cek</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status</th>
-                                                    {{-- <th></th> --}}
-                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
@@ -233,12 +276,13 @@
                                     </form>
                                 </div>
                             </div>
+
                             {{-- PPK --}}
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                 <div class="body">
                                     <div class="table-responsive">
                                         <br>
-                                        <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable5" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th>ID Tuntutan</th>
@@ -248,7 +292,6 @@
                                                     <th>Tarikh Tuntutan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status</th>
-                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
@@ -258,768 +301,1157 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-<style>
-    .custom-width-select {
-        width: 400px !important; /* Important to override other styles */
-    }
-    .form-select {
-            margin-left: 10px !important; 
-    }
-</style>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-    
-    
-</script>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
-<script>
-
-    // Define toggle function in the global scope
-    function toggle(tab) {
-        var selectAllCheckbox = document.getElementById('select-all-' + tab);
-        var isChecked = selectAllCheckbox.checked;
-
-        // Get all checkboxes in the active tab
-        var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
-
-        // Set the checked property of all checkboxes to match the "Select All" checkbox
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = isChecked;
-        });
-
-        // Prepare an array to hold selected values
-        var selectedid = [];
-
-        // Loop through all checkboxes and get selected values
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                selectedid.push(checkbox.value);
-            }
-        });
-
-        // Log the selected values to the console
-        console.log(selectedid);
-    }
-
-
-    $(document).ready(function() {
-        // Initialize JavaScript variables with data from Blade
-        var bkokuList = @json($institusiPengajian);
-        var bkokuUAList = @json($institusiPengajianUA);
-        var ppkList = @json($institusiPengajianPPK);
-
-
-        // DataTable initialization functions
-        function initializeDataTable1() {
-            $('#sortTable1').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.pembayaran.tuntutan.dataBKOKU") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                { 
-                    data: 'no_rujukan_tuntutan',
-                    render: function(data, type, row) {
-                        // Construct the URL using the no_rujukan_permohonan value
-                        // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
-                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                    }
-                }, 
-                { 
-                    data: 'smoku.nama', 
-                    render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
-                    }
-                },
-                { 
-                    data: 'akademik.nama_kursus',
-                    render: function(data, type, row) {
-                        // Check if data is null
-                        if (data === null) {
-                            return ''; // Return an empty string or any other placeholder value
-                        }
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (word.includes('(') && word.includes(')')) {
-                                // Retain the original casing of words within brackets
-                                // Extract the content within the brackets
-                                var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                // Capitalize the first letter of the content within brackets
-                                var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                // Replace the content within brackets with the capitalized version
-                                words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-
-
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_kursus = words.join(' ');
-
-                        return formatted_kursus;
-                    }
-                }, 
-                { data: 'akademik.infoipt.nama_institusi' }, 
-                {
-                    data: 'tarikh_hantar',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                },
-                {
-                    data: 'tarikh_transaksi',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                }, 
-                {
-                    data: 'status',
-                    render: function(data, type, row) {
-                        var status = ''; // Initialize an empty string for the button HTML
-
-                        // Define the button HTML based on the status value
-                        switch (data) {
-                            case '1':
-                                status = '<button class="btn bg-info text-white">Deraf</button>';
-                                break;
-                            case '2':
-                                status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                break;
-                            case '3':
-                                status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                break;
-                            case '4':
-                                status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                break;
-                            case '5':
-                                status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                break;
-                            case '6':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Lulus</button>';
-                                break;
-                            case '7':
-                                status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                break;
-                            case '8':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Dibayar</button>';
-                                break;
-                            case '9':
-                                status = '<button class="btn bg-batal text-white">Batal</button>';
-                                break;
-                            case '10':
-                                status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                break;    
-                            default:
-                                status = ''; // Set empty string for unknown status values
-                                break;
-                        }
-
-                        return status;
-                    }
-                }]
-
-            });
+    <style>
+        .custom-width-select {
+            width: 400px !important; /* Important to override other styles */
         }
+        .form-select {
+                margin-left: 10px !important; 
+        }
+    </style>
 
-        function initializeDataTable1a() {
-            $('#sortTable1a').DataTable({
-                ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.pembayaran.tuntutan.dataUA") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                {
-                    // Checkbox column
-                    data: null,
-                    render: function(data, type, row) {
-                        return '<input type="checkbox" name="selected_items[]" value="' + row.id + '" />';
-                    }
-                },   
-                { 
-                    data: 'no_rujukan_tuntutan',
-                    render: function(data, type, row) {
-                        // Construct the URL using the no_rujukan_permohonan value
-                        // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        // var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                        
-                        var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
-                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                    }
-                }, 
-                { 
-                    data: 'smoku.nama', 
-                    render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 
-                        // Split the nama field into words
-                        var words = data.split(' ');
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
+    <script>
+        // Define toggle function in the global scope
+        function toggle(tab) {
+            var selectAllCheckbox = document.getElementById('select-all-' + tab);
+            var isChecked = selectAllCheckbox.checked;
 
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
+            // Get all checkboxes in the active tab
+            var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
 
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
+            // Set the checked property of all checkboxes to match the "Select All" checkbox
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked;
+            });
 
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
+            // Prepare an array to hold selected values
+            var selectedid = [];
 
-                        return formatted_nama;
-                    }
-                },
-                { data: 'akademik.infoipt.nama_institusi' }, 
-                { data: 'no_baucer' }, 
-                {
-                    data: 'tarikh_baucer',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                }, 
-                { data: 'no_cek' }, 
-                {
-                    data: 'tarikh_transaksi',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                }, 
-                {
-                    data: 'status',
-                    render: function(data, type, row) {
-                        var status = ''; // Initialize an empty string for the button HTML
-
-                        // Define the button HTML based on the status value
-                        switch (data) {
-                            case '1':
-                                status = '<button class="btn bg-info text-white">Deraf</button>';
-                                break;
-                            case '2':
-                                status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                break;
-                            case '3':
-                                status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                break;
-                            case '4':
-                                status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                break;
-                            case '5':
-                                status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                break;
-                                case '6':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Lulus</button>';
-                                break;
-                            case '7':
-                                status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                break;
-                            case '8':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Dibayar</button>';
-                                break;
-                            case '9':
-                                status = '<button class="btn bg-batal text-white">Batal</button>';
-                                break;
-                            case '10':
-                                status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                break;    
-                            default:
-                                status = ''; // Set empty string for unknown status values
-                                break;
-                        }
-
-                        return status;
-                    }
+            // Loop through all checkboxes and get selected values
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    selectedid.push(checkbox.value);
                 }
-                // ,
-                // {
-                //     // Checkbox column
-                //     data: null,
-                //     render: function(data, type, row) {
-                //         return '<td class="text-center" data-id="' + row.id + '" data-action="return">' +
-                //             '<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kembali Kepada Penyelaras" style="cursor: pointer;">' +
-                //             '<i class="fa fa-undo fa-sm custom-white-icon" style="color: #000000;"></i>' +
-                //             '</span>' +
-                //             '</td>';
-                //     }
-                // }
-                ]
-
             });
+
+            // Log the selected values to the console
+            console.log(selectedid);
         }
 
-        function initializeDataTable2() {
-            $('#sortTable2').DataTable({
-                ordering: true, // Enable manual sorting
+
+        $(document).ready(function() {
+            // Initialize JavaScript variables with data from Blade
+            var bkokuIPTSList = @json($institusiPengajianIPTS);
+            var bkokuPOLIList = @json($institusiPengajianPOLI);
+            var bkokuKKList = @json($institusiPengajianKK);
+            var bkokuUAList = @json($institusiPengajianUA);
+            var ppkList = @json($institusiPengajianPPK);
+
+            // DataTable initialization functions
+            function initializeDataTable1() {
+                $('#sortTable1').DataTable({
+                    ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                    ajax: {
+                        url: '{{ route("senarai.pembayaran.tuntutan.dataIPTS") }}', // URL to fetch data from
+                        dataSrc: '' // Property in the response object containing the data array
+                        
+                    },
+                    columns: [
+                    { 
+                        data: 'no_rujukan_tuntutan',
+                        render: function(data, type, row) {
+                            // Construct the URL using the no_rujukan_permohonan value
+                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                            var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                            return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { 
+                        data: 'akademik.nama_kursus',
+                        render: function(data, type, row) {
+                            // Check if data is null
+                            if (data === null) {
+                                return ''; // Return an empty string or any other placeholder value
+                            }
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (word.includes('(') && word.includes(')')) {
+                                    // Retain the original casing of words within brackets
+                                    // Extract the content within the brackets
+                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
+                                    // Capitalize the first letter of the content within brackets
+                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
+                                    // Replace the content within brackets with the capitalized version
+                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+                            // Join the words back into a single string
+                            var formatted_kursus = words.join(' ');
+
+                            return formatted_kursus;
+                        }
+                    }, 
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    {
+                        data: 'tarikh_hantar',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'tarikh_transaksi',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    {
+                        data: 'status',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case '1':
+                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    break;
+                                case '2':
+                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    break;
+                                case '3':
+                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    break;
+                                case '4':
+                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    break;
+                                case '5':
+                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    break;
+                                case '6':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    break;
+                                case '7':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                case '8':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    break;
+                                case '9':
+                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    break;
+                                case '10':
+                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    break;    
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+                            return status;
+                        }
+                    }]
+                });
+            }
+
+            function initializeDataTable2() {
+                $('#sortTable2').DataTable({
+                    ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                    ajax: {
+                        url: '{{ route("senarai.pembayaran.tuntutan.dataPOLI") }}', // URL to fetch data from
+                        dataSrc: '' // Property in the response object containing the data array
+                        
+                    },
+                    columns: [
+                    { 
+                        data: 'no_rujukan_tuntutan',
+                        render: function(data, type, row) {
+                            // Construct the URL using the no_rujukan_permohonan value
+                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                            var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                            return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { 
+                        data: 'akademik.nama_kursus',
+                        render: function(data, type, row) {
+                            // Check if data is null
+                            if (data === null) {
+                                return ''; // Return an empty string or any other placeholder value
+                            }
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (word.includes('(') && word.includes(')')) {
+                                    // Retain the original casing of words within brackets
+                                    // Extract the content within the brackets
+                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
+                                    // Capitalize the first letter of the content within brackets
+                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
+                                    // Replace the content within brackets with the capitalized version
+                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_kursus = words.join(' ');
+
+                            return formatted_kursus;
+                        }
+                    }, 
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    {
+                        data: 'tarikh_hantar',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'tarikh_transaksi',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    {
+                        data: 'status',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case '1':
+                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    break;
+                                case '2':
+                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    break;
+                                case '3':
+                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    break;
+                                case '4':
+                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    break;
+                                case '5':
+                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    break;
+                                case '6':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    break;
+                                case '7':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                case '8':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    break;
+                                case '9':
+                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    break;
+                                case '10':
+                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    break;    
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+                            return status;
+                        }
+                    }]
+                });
+            }
+
+            function initializeDataTable3() {
+                $('#sortTable3').DataTable({
+                    ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                    ajax: {
+                        url: '{{ route("senarai.pembayaran.tuntutan.dataKK") }}', // URL to fetch data from
+                        dataSrc: '' // Property in the response object containing the data array
+                        
+                    },
+                    columns: [
+                    { 
+                        data: 'no_rujukan_tuntutan',
+                        render: function(data, type, row) {
+                            // Construct the URL using the no_rujukan_permohonan value
+                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                            var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                            return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { 
+                        data: 'akademik.nama_kursus',
+                        render: function(data, type, row) {
+                            // Check if data is null
+                            if (data === null) {
+                                return ''; // Return an empty string or any other placeholder value
+                            }
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (word.includes('(') && word.includes(')')) {
+                                    // Retain the original casing of words within brackets
+                                    // Extract the content within the brackets
+                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
+                                    // Capitalize the first letter of the content within brackets
+                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
+                                    // Replace the content within brackets with the capitalized version
+                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_kursus = words.join(' ');
+
+                            return formatted_kursus;
+                        }
+                    }, 
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    {
+                        data: 'tarikh_hantar',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'tarikh_transaksi',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    {
+                        data: 'status',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case '1':
+                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    break;
+                                case '2':
+                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    break;
+                                case '3':
+                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    break;
+                                case '4':
+                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    break;
+                                case '5':
+                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    break;
+                                case '6':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    break;
+                                case '7':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                case '8':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    break;
+                                case '9':
+                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    break;
+                                case '10':
+                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    break;    
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+                            return status;
+                        }
+                    }]
+                });
+            }
+
+            function initializeDataTable4() {
+                $('#sortTable4').DataTable({
+                    ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                    ajax: {
+                        url: '{{ route("senarai.pembayaran.tuntutan.dataUA") }}', // URL to fetch data from
+                        dataSrc: '' // Property in the response object containing the data array
+                        
+                    },
+                    columns: [
+                    {
+                        // Checkbox column
+                        data: null,
+                        render: function(data, type, row) {
+                            return '<input type="checkbox" name="selected_items[]" value="' + row.id + '" />';
+                        }
+                    },   
+                    { 
+                        data: 'no_rujukan_tuntutan',
+                        render: function(data, type, row) {
+                            // Construct the URL using the no_rujukan_permohonan value
+                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                            // var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            
+                            var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                            return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'no_baucer' }, 
+                    {
+                        data: 'tarikh_baucer',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    { data: 'no_cek' }, 
+                    {
+                        data: 'tarikh_transaksi',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    {
+                        data: 'status',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case '1':
+                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    break;
+                                case '2':
+                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    break;
+                                case '3':
+                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    break;
+                                case '4':
+                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    break;
+                                case '5':
+                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    break;
+                                    case '6':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    break;
+                                case '7':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                case '8':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    break;
+                                case '9':
+                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    break;
+                                case '10':
+                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    break;    
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+
+                            return status;
+                        }
+                    }
+                    // ,
+                    // {
+                    //     // Checkbox column
+                    //     data: null,
+                    //     render: function(data, type, row) {
+                    //         return '<td class="text-center" data-id="' + row.id + '" data-action="return">' +
+                    //             '<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kembali Kepada Penyelaras" style="cursor: pointer;">' +
+                    //             '<i class="fa fa-undo fa-sm custom-white-icon" style="color: #000000;"></i>' +
+                    //             '</span>' +
+                    //             '</td>';
+                    //     }
+                    // }
+                    ]
+
+                });
+            }
+
+            function initializeDataTable5() {
+                $('#sortTable5').DataTable({
+                    ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                    ajax: {
+                        url: '{{ route("senarai.pembayaran.tuntutan.dataPPK") }}', // URL to fetch data from
+                        dataSrc: '' // Property in the response object containing the data array
+                        
+                    },
+                    columns: [
+                    { 
+                        data: 'no_rujukan_tuntutan',
+                        render: function(data, type, row) {
+                            // Construct the URL using the no_rujukan_permohonan value
+                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
+                            var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                            return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                        }
+                    }, 
+                    { 
+                        data: 'smoku.nama', 
+                        render: function(data, type, row) {
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['bin', 'binti'];
+                            var conjunctions_upper = ['A/L', 'A/P'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                    // Convert the word to uppercase
+                                    words[i] = word.toUpperCase();
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_nama = words.join(' ');
+
+                            return formatted_nama;
+                        }
+                    },
+                    { 
+                        data: 'akademik.nama_kursus',
+                        render: function(data, type, row) {
+                            // Check if data is null
+                            if (data === null) {
+                                return ''; // Return an empty string or any other placeholder value
+                            }
+
+                            // Define conjunctions to be handled differently
+                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
+
+                            // Split the nama field into words
+                            var words = data.split(' ');
+
+                            // Process each word
+                            for (var i = 0; i < words.length; i++) {
+                                var word = words[i];
+
+                                // Check if the word is a conjunction to be displayed in lowercase
+                                if (conjunctions_lower.includes(word.toLowerCase())) {
+                                    // Convert the word to lowercase
+                                    words[i] = word.toLowerCase();
+                                } else if (word.includes('(') && word.includes(')')) {
+                                    // Retain the original casing of words within brackets
+                                    // Extract the content within the brackets
+                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
+                                    // Capitalize the first letter of the content within brackets
+                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
+                                    // Replace the content within brackets with the capitalized version
+                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
+                                } else {
+                                    // Capitalize the first letter of other words
+                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                }
+
+
+                            }
+
+                            // Join the words back into a single string
+                            var formatted_kursus = words.join(' ');
+
+                            return formatted_kursus;
+                        }
+                    }, 
+                    { data: 'akademik.infoipt.nama_institusi' }, 
+                    {
+                        data: 'tarikh_hantar',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        data: 'tarikh_transaksi',
+                        render: function(data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                // Convert the date to a JavaScript Date object
+                                var date = new Date(data);
+
+                                // Get the year, month, and day components
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                // Return the formatted date as YYYY/MM/DD
+                                return day + '/' + month + '/' + year;
+                            } else {
+                                // For sorting and other purposes, return the original data
+                                return data;
+                            }
+                        }
+                    }, 
+                    {
+                        data: 'status',
+                        render: function(data, type, row) {
+                            var status = ''; // Initialize an empty string for the button HTML
+
+                            // Define the button HTML based on the status value
+                            switch (data) {
+                                case '1':
+                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    break;
+                                case '2':
+                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    break;
+                                case '3':
+                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    break;
+                                case '4':
+                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    break;
+                                case '5':
+                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    break;
+                                    case '6':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    break;
+                                case '7':
+                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    break;
+                                case '8':
+                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var url = route.replace(':permohonanId', row.id);
+                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
+                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
+                                            '</a>';
+                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    break;
+                                case '9':
+                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    break;
+                                case '10':
+                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    break;    
+                                default:
+                                    status = ''; // Set empty string for unknown status values
+                                    break;
+                            }
+
+                            return status;
+                        }
+                    }]
+
+                });
+            }
+
+            // Function to clear filters for all tables
+            function clearFilters() {
+                if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                    $('#sortTable1').DataTable().destroy();
+                }
+                if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                    $('#sortTable2').DataTable().destroy();
+                }
+                if ($.fn.DataTable.isDataTable('#sortTable3')) {
+                    $('#sortTable3').DataTable().destroy();
+                }
+                if ($.fn.DataTable.isDataTable('#sortTable4')) {
+                    $('#sortTable4').DataTable().destroy();
+                }
+                if ($.fn.DataTable.isDataTable('#sortTable5')) {
+                    $('#sortTable5').DataTable().destroy();
+                }
+            }
+
+            // Function to update the institution dropdown
+            function updateInstitusiDropdown(institusiList) {
+                // Clear existing options
+                $('#institusiDropdown').empty();
+
+                // Add default option
+                $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
+
+                // Add options based on the selected tab
+                for (var i = 0; i < institusiList.length; i++) {
+                    $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                }
+            }
+
+            $('.export-container').hide(); // Hide export elements
+            $('.none-container').show(); // Hide export elements
+
+            // Add an event listener for tab clicks
+            $('.nav-link').on('click', function() {
+                // Get the ID of the active tab
+                var activeTabId = $(this).attr('id');
+
+                // Clear filters when changing tabs
+                clearFilters();
+
+                // Check if the active tab is bkokuUA-tab
+                if (activeTabId === 'bkokuUA-tab') {
+                    $('.export-container').show(); // Show export elements
+                    $('.none-container').hide(); // Hide export elements
+                } else {
+                    $('.export-container').hide(); // Hide export elements
+                    $('.none-container').show(); // Hide export elements
+                }
+
+                // Update the institution dropdown based on the active tab
+                switch (activeTabId) {
+                    case 'bkokuIPTS-tab':
+                        updateInstitusiDropdown(bkokuIPTSList);
+                        initializeDataTable1();
+                        break;
+                    case 'bkokuPOLI-tab':
+                        updateInstitusiDropdown(bkokuPOLIList);
+                        initializeDataTable2();
+                        break;
+                    case 'bkokuKK-tab':
+                        updateInstitusiDropdown(bkokuKKList);
+                        initializeDataTable3();
+                        break;
+                    case 'bkokuUA-tab':
+                        updateInstitusiDropdown(bkokuUAList);
+                        initializeDataTable4();
+                        break;
+                    case 'ppk-tab':
+                        updateInstitusiDropdown(ppkList);
+                        initializeDataTable5();
+                        break;
+                }
+            });
+
+            // Trigger the function for the default active tab (bkoku-tab)
+            updateInstitusiDropdown(bkokuIPTSList);
+            initializeDataTable1(); // Initialize DataTable1 on page load
+        });
+    </script>
+        
+    <script>
+        function applyFilter() {
+
+            // Reinitialize DataTables
+            initDataTable('#sortTable1', 'datatable1');
+            initDataTable('#sortTable2', 'datatable2');
+            initDataTable('#sortTable3', 'datatable3');
+            initDataTable('#sortTable4', 'datatable4');
+            initDataTable('#sortTable5', 'datatable5');
+
+            function initDataTable(tableId, variableName) {
+                // Check if the datatable is already initialized
+                if ($.fn.DataTable.isDataTable(tableId)) {
+                    // Destroy the existing DataTable instance
+                    $(tableId).DataTable().destroy();
+                }
+
+                // Initialize the datatable and assign it to the global variable
+                window[variableName] = $(tableId).DataTable({
+                    ordering: true, // Enable manual sorting
                     order: [], // Disable initial sorting
                     columnDefs: [
                         { orderable: false, targets: [0] }
-                    ],
-                ajax: {
-                    url: '{{ route("senarai.pembayaran.tuntutan.dataPPK") }}', // URL to fetch data from
-                    dataSrc: '' // Property in the response object containing the data array
-                    
-                },
-                columns: [
-                { 
-                    data: 'no_rujukan_tuntutan',
-                    render: function(data, type, row) {
-                        // Construct the URL using the no_rujukan_permohonan value
-                        // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                        var url = "{{ url('tuntutan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
-                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                    }
-                }, 
-                { 
-                    data: 'smoku.nama', 
-                    render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
+                    ]
+                });
+            }
 
-                        // Split the nama field into words
-                        var words = data.split(' ');
+            var selectedInstitusi = $('[name="institusi"]').val();
 
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
+            // Apply search filter and log data for all tables
+            applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
+            applyAndLogFilter('Table 2', datatable2, selectedInstitusi);
+            applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
+            applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
+            applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
 
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
-                    }
-                },
-                { 
-                    data: 'akademik.nama_kursus',
-                    render: function(data, type, row) {
-                        // Check if data is null
-                        if (data === null) {
-                            return ''; // Return an empty string or any other placeholder value
-                        }
-
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (word.includes('(') && word.includes(')')) {
-                                // Retain the original casing of words within brackets
-                                // Extract the content within the brackets
-                                var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                // Capitalize the first letter of the content within brackets
-                                var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                // Replace the content within brackets with the capitalized version
-                                words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-
-
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_kursus = words.join(' ');
-
-                        return formatted_kursus;
-                    }
-                }, 
-                { data: 'akademik.infoipt.nama_institusi' }, 
-                {
-                    data: 'tarikh_hantar',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                },
-                {
-                    data: 'tarikh_transaksi',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Convert the date to a JavaScript Date object
-                            var date = new Date(data);
-
-                            // Get the year, month, and day components
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                            // Return the formatted date as YYYY/MM/DD
-                            return day + '/' + month + '/' + year;
-                        } else {
-                            // For sorting and other purposes, return the original data
-                            return data;
-                        }
-                    }
-                }, 
-                {
-                    data: 'status',
-                    render: function(data, type, row) {
-                        var status = ''; // Initialize an empty string for the button HTML
-
-                        // Define the button HTML based on the status value
-                        switch (data) {
-                            case '1':
-                                status = '<button class="btn bg-info text-white">Deraf</button>';
-                                break;
-                            case '2':
-                                status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                break;
-                            case '3':
-                                status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                break;
-                            case '4':
-                                status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                break;
-                            case '5':
-                                status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                break;
-                                case '6':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Lulus</button>';
-                                break;
-                            case '7':
-                                status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                break;
-                            case '8':
-                                var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
-                                var url = route.replace(':permohonanId', row.id);
-                                status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                            '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                        '</a>';
-                                // status = '<button class="btn bg-danger text-white">Dibayar</button>';
-                                break;
-                            case '9':
-                                status = '<button class="btn bg-batal text-white">Batal</button>';
-                                break;
-                            case '10':
-                                status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                break;    
-                            default:
-                                status = ''; // Set empty string for unknown status values
-                                break;
-                        }
-
-                        return status;
-                    }
-                }]
-
-            });
+            // Update the export link with the selected institusi for Table 2
+            var exportLink = document.getElementById('exportLink');
+            exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
         }
 
-        // Function to clear filters for all tables
-        function clearFilters() {
-            if ($.fn.DataTable.isDataTable('#sortTable1')) {
-                $('#sortTable1').DataTable().destroy();
-            }
-            if ($.fn.DataTable.isDataTable('#sortTable1a')) {
-                $('#sortTable1a').DataTable().destroy();
-            }
-            if ($.fn.DataTable.isDataTable('#sortTable2')) {
-                $('#sortTable2').DataTable().destroy();
-            }
+        function applyAndLogFilter(tableName, table, filterValue) {
+            // Apply search filter to the table
+            table.column(3).search(filterValue).draw();
+
+            // Go to the first page for the table
+            table.page(0).draw(false);
         }
-
-        // Function to update the institution dropdown
-        function updateInstitusiDropdown(institusiList) {
-            // Clear existing options
-            $('#institusiDropdown').empty();
-
-            // Add default option
-            $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-
-            // Add options based on the selected tab
-            for (var i = 0; i < institusiList.length; i++) {
-                $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
-            }
-        }
-
-        $('.export-container').hide(); // Hide export elements
-        $('.none-container').show(); // Hide export elements
-
-        // Add an event listener for tab clicks
-        $('.nav-link').on('click', function() {
-            // Get the ID of the active tab
-            var activeTabId = $(this).attr('id');
-
-            // Clear filters when changing tabs
-            clearFilters();
-
-            // Check if the active tab is bkokuUA-tab
-            if (activeTabId === 'bkokuUA-tab') {
-                $('.export-container').show(); // Show export elements
-                $('.none-container').hide(); // Hide export elements
-            } else {
-                $('.export-container').hide(); // Hide export elements
-                $('.none-container').show(); // Hide export elements
-            }
-
-            // Update the institution dropdown based on the active tab
-            switch (activeTabId) {
-                case 'bkoku-tab':
-                    updateInstitusiDropdown(bkokuList);
-                    initializeDataTable1();
-                    break;
-                case 'bkokuUA-tab':
-                    updateInstitusiDropdown(bkokuUAList);
-                    initializeDataTable1a();
-                    break;
-                case 'ppk-tab':
-                    updateInstitusiDropdown(ppkList);
-                    initializeDataTable2();
-                    break;
-                // Add more cases if you have additional tabs
-            }
-        });
-
-        // Trigger the function for the default active tab (bkoku-tab)
-        updateInstitusiDropdown(bkokuList);
-        initializeDataTable1(); // Initialize DataTable1 on page load
-
-
-
-
-
-    });
-</script>
-      
-<script>
-
-    function applyFilter() {
-
-        // Reinitialize DataTables
-        initDataTable('#sortTable1', 'datatable1');
-        initDataTable('#sortTable1a', 'datatable');
-        initDataTable('#sortTable2', 'datatable2');
-
-        function initDataTable(tableId, variableName) {
-            // Check if the datatable is already initialized
-            if ($.fn.DataTable.isDataTable(tableId)) {
-                // Destroy the existing DataTable instance
-                $(tableId).DataTable().destroy();
-            }
-
-            // Initialize the datatable and assign it to the global variable
-            window[variableName] = $(tableId).DataTable({
-                ordering: true, // Enable manual sorting
-                order: [], // Disable initial sorting
-                columnDefs: [
-                    { orderable: false, targets: [0] }
-                ]
-            });
-        }
-
-        var selectedInstitusi = $('[name="institusi"]').val();
-
-        // Apply search filter and log data for all tables
-        applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-        applyAndLogFilter('Table 2', datatable, selectedInstitusi);
-        applyAndLogFilter('Table 3', datatable2, selectedInstitusi);
-
-        // Update the export link with the selected institusi for Table 2
-        var exportLink = document.getElementById('exportLink');
-        exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
-    }
-
-    function applyAndLogFilter(tableName, table, filterValue) {
-        // Apply search filter to the table
-        table.column(3).search(filterValue).draw();
-
-        // Go to the first page for the table
-        table.page(0).draw(false);
-
-    }
-
-</script>
-
-<!--begin::Javascript-->
+    </script>
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="/assets/js/scripts.bundle.js"></script>
@@ -1027,31 +1459,27 @@
 
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="/assets/js/custom/apps/subscriptions/list/list.js"></script>
-    
     <!--end::Custom Javascript-->
-<!--end::Javascript-->
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Berjaya!',
-            text: ' {!! session('success') !!}',
-            confirmButtonText: 'OK'
-        });
-    @endif
-    @if(session('failed'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Tiada Berjaya!',
-            text: ' {!! session('failed') !!}',
-            confirmButtonText: 'OK'
-        });
-    @endif
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-</script>
-
-
+    <script>
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: ' {!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        @if(session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tiada Berjaya!',
+                text: ' {!! session('failed') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 </body>
 </x-default-layout>
