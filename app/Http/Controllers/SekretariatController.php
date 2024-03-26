@@ -61,6 +61,65 @@ class SekretariatController extends Controller
     }
 
     //BKOKU IPTS
+    // public function getKeputusanTuntutanKK()
+    // {
+    //     $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+    //             $query->where('status', 1)
+    //                 ->whereHas('infoipt', function ($subQuery) {
+    //                     $subQuery->where('jenis_institusi', '=', 'KK');
+    //                 });
+    //             $query->whereHas('peringkat');
+    //         })
+    //         ->whereHas('permohonan', function ($query) {
+    //             $query->where('program', 'BKOKU');
+    //         })
+    //         ->whereIn('status', ['5','6','7'])
+    //         ->with(['akademik' => function ($query) {
+    //             $query->where('status', 1)->with('infoipt')->with('peringkat');
+    //         }, 'smoku', 'permohonan'])
+    //         ->get();
+
+    //     return response()->json($tuntutan);
+    // }
+
+    // public function getKeputusanIPTS()
+    // {
+    //     $permohonan = Permohonan::where('program', 'BKOKU')
+    //                 ->whereHas('akademik', function ($query) {
+    //                     $query->where('status', 1);
+    //                     $query->whereHas('infoipt', function ($subQuery) {
+    //                         $subQuery->where('jenis_institusi', '=', 'IPTS');
+    //                     });
+    //                     $query->whereHas('peringkat');
+    //                 })
+    //                 ->with(['akademik' => function ($query) {
+    //                     $query->where('status', 1);
+    //                     $query->with('infoipt');
+    //                     $query->with('peringkat');
+    //                 }, 'smoku','kelulusan'])
+    //                 ->get();
+
+    //     return response()->json($permohonan);
+    // }
+
+    public function getListPermohonanBKOKU()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+            ->whereNotIn('status', [9, 10])
+            ->whereHas('akademik', function ($q) {
+                $q->whereHas('infoipt', function ($q) {
+                    $q->where('jenis_institusi', 'IPTS');
+                });
+            })
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1);
+                $query->with('infoipt');
+            }, 'smoku'])
+            ->get();
+
+        return response()->json($permohonan);
+    }
+
     public function statusPermohonanBKOKU(Request $request)
     {
         $startDate = $request->input('start_date');
