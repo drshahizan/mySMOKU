@@ -178,11 +178,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Permohonan - Sekretariat - Dashboard
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboardSekretariat'])->name('sekretariat.dashboard');
     Route::get('sekretariat/permohonan/BKOKU/IPTS/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU'])->name('keseluruhanIPTS.permohonan');
-    Route::get('sekretariat/permohonan/dashboard/BKOKU/IPTS/', [SekretariatController::class, 'getListPermohonanBKOKU'])->name('dashboardIPTS.permohonan');
+    Route::get('sekretariat/permohonan/senarai/BKOKU/IPTS', [SekretariatController::class, 'getListPermohonanIPTS'])->name('senaraiIPTS.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/POLI/keseluruhan', [SekretariatController::class, 'statusPermohonanPOLI'])->name('keseluruhanPOLI.permohonan');
+    Route::get('sekretariat/permohonan/senarai/BKOKU/POLI', [SekretariatController::class, 'getListPermohonanPOLI'])->name('senaraiPOLI.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/KK/keseluruhan', [SekretariatController::class, 'statusPermohonanKK'])->name('keseluruhanKK.permohonan');
+    Route::get('sekretariat/permohonan/senarai/BKOKU/KK', [SekretariatController::class, 'getListPermohonanKK'])->name('senaraiKK.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/UA/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanUA'])->name('keseluruhanUA.permohonan');
+    Route::get('sekretariat/permohonan/senarai/BKOKU/UA', [SekretariatController::class, 'getListPermohonanUA'])->name('senaraiUA.permohonan');
+
     Route::get('sekretariat/permohonan/PPK/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanPPK'])->name('keseluruhanP.permohonan');
+    Route::get('sekretariat/permohonan/senarai/PPK', [SekretariatController::class, 'getListPermohonanPPK'])->name('senaraiPPK.permohonan');
 
     Route::get('sekretariat/tuntutan/BKOKU/IPTS/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanBKOKU'])->name('keseluruhanIPTS.tuntutan');
     Route::get('sekretariat/tuntutan/BKOKU/POLI/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanPOLI'])->name('keseluruhanPOLI.tuntutan');

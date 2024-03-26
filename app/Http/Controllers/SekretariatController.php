@@ -61,48 +61,23 @@ class SekretariatController extends Controller
     }
 
     //BKOKU IPTS
-    // public function getKeputusanTuntutanKK()
-    // {
-    //     $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-    //             $query->where('status', 1)
-    //                 ->whereHas('infoipt', function ($subQuery) {
-    //                     $subQuery->where('jenis_institusi', '=', 'KK');
-    //                 });
-    //             $query->whereHas('peringkat');
-    //         })
-    //         ->whereHas('permohonan', function ($query) {
-    //             $query->where('program', 'BKOKU');
-    //         })
-    //         ->whereIn('status', ['5','6','7'])
-    //         ->with(['akademik' => function ($query) {
-    //             $query->where('status', 1)->with('infoipt')->with('peringkat');
-    //         }, 'smoku', 'permohonan'])
-    //         ->get();
+    public function statusPermohonanBKOKU(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-    //     return response()->json($tuntutan);
-    // }
+        $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')
+        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
+            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
+        })
+        ->where('program', 'BKOKU')
+        ->whereNotIn('status', [9, 10])
+        ->get();
 
-    // public function getKeputusanIPTS()
-    // {
-    //     $permohonan = Permohonan::where('program', 'BKOKU')
-    //                 ->whereHas('akademik', function ($query) {
-    //                     $query->where('status', 1);
-    //                     $query->whereHas('infoipt', function ($subQuery) {
-    //                         $subQuery->where('jenis_institusi', '=', 'IPTS');
-    //                     });
-    //                     $query->whereHas('peringkat');
-    //                 })
-    //                 ->with(['akademik' => function ($query) {
-    //                     $query->where('status', 1);
-    //                     $query->with('infoipt');
-    //                     $query->with('peringkat');
-    //                 }, 'smoku','kelulusan'])
-    //                 ->get();
+        return view('dashboard.sekretariat.senarai_permohonan_IPTS', compact('permohonan'));
+    }
 
-    //     return response()->json($permohonan);
-    // }
-
-    public function getListPermohonanBKOKU()
+    public function getListPermohonanIPTS()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
             ->whereNotIn('status', [9, 10])
@@ -118,22 +93,6 @@ class SekretariatController extends Controller
             ->get();
 
         return response()->json($permohonan);
-    }
-
-    public function statusPermohonanBKOKU(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $permohonan = Permohonan::orderBy('tarikh_hantar', 'DESC')
-        ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-            return $q->whereBetween('tarikh_hantar', [$startDate, $endDate]);
-        })
-        ->where('program', 'BKOKU')
-        ->whereNotIn('status', [9, 10])
-        ->get();
-
-        return view('dashboard.sekretariat.senarai_permohonan_IPTS', compact('permohonan'));
     }
 
     public function statusTuntutanBKOKU(Request $request)
@@ -222,6 +181,24 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_permohonan_POLI', compact('permohonan'));
     }
 
+    public function getListPermohonanPOLI()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+            ->whereNotIn('status', [9, 10])
+            ->whereHas('akademik', function ($q) {
+                $q->whereHas('infoipt', function ($q) {
+                    $q->where('jenis_institusi', 'P');
+                });
+            })
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1);
+                $query->with('infoipt');
+            }, 'smoku'])
+            ->get();
+
+        return response()->json($permohonan);
+    }
+
     public function statusTuntutanPOLI(Request $request)
     {
         $startDate = $request->input('start_date');
@@ -287,6 +264,24 @@ class SekretariatController extends Controller
         ->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_KK', compact('permohonan'));
+    }
+
+    public function getListPermohonanKK()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+            ->whereNotIn('status', [9, 10])
+            ->whereHas('akademik', function ($q) {
+                $q->whereHas('infoipt', function ($q) {
+                    $q->where('jenis_institusi', 'KK');
+                });
+            })
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1);
+                $query->with('infoipt');
+            }, 'smoku'])
+            ->get();
+
+        return response()->json($permohonan);
     }
 
     public function statusTuntutanKK(Request $request)
@@ -359,6 +354,24 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.senarai_permohonan_BKOKU_UA', compact('permohonan'));
     }
 
+    public function getListPermohonanUA()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+            ->whereNotIn('status', [9, 10])
+            ->whereHas('akademik', function ($q) {
+                $q->whereHas('infoipt', function ($q) {
+                    $q->where('jenis_institusi', 'UA');
+                });
+            })
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1);
+                $query->with('infoipt');
+            }, 'smoku'])
+            ->get();
+
+        return response()->json($permohonan);
+    }
+
     public function statusTuntutanUA(Request $request, $status)
     {
         $startDate = $request->input('start_date');
@@ -428,6 +441,19 @@ class SekretariatController extends Controller
         ->where('program', 'PPK')->get();
 
         return view('dashboard.sekretariat.senarai_permohonan_PPK', compact('permohonan'));
+    }
+
+    public function getListPermohonanPPK()
+    {
+        $permohonan = Permohonan::where('program', 'PPK')
+            ->whereNotIn('status', [9, 10])
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1);
+                $query->with('infoipt');
+            }, 'smoku'])
+            ->get();
+
+        return response()->json($permohonan);
     }
 
     public function statusTuntutanPPK(Request $request, $status)

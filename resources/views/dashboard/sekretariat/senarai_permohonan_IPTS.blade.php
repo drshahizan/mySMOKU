@@ -157,26 +157,27 @@
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
                                         <div class="row form-filter" >
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
+                                            <div class="col-md-4" style="display: flex; align-items: center; padding-left:40px;">
+                                                <div class="flex-grow-1" style="padding-right: 10px;">
+                                                    <label for="start_date"><b>Dari:</b></label>
                                                     <input type="date" name="start_date" id="start_date" value="" class="form-control" />
                                                 </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
+                                                
                                                 <div class="flex-grow-1">
+                                                    <label for="end_date"><b>Hingga:</b></label>
                                                     <input type="date" name="end_date" id="end_date" value="" class="form-control" />
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-1 fv-row">
+                                            <div class="col-md-1 fv-row" style="padding-left:20px;">
                                                 <!--begin::Actions-->
+                                                <br>
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
-                                                </button>
+                                                </button>                                                
                                                 <!--end::Actions-->
                                             </div>
                                         </div>
@@ -213,12 +214,14 @@
 
         <script>
             $(document).ready(function() {
+                var permohonanTable; 
+
                 function initializeDataTable() {
                     $('#permohonanTable').DataTable({
                         ordering: true, // Enable manual sorting
                         order: [], // Disable initial sorting
                         ajax: {
-                            url: '{{ route("dashboardIPTS.permohonan") }}', // URL to fetch data from
+                            url: '{{ route("senaraiIPTS.permohonan") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                         },
                         columns: [
@@ -318,79 +321,81 @@
                                             statusText = 'Unknown';
                                     }
                                     return statusText;
-                                }
+                                },
+                                className: 'text-center'
                             }
                         ]
                     });
                 }
 
                 initializeDataTable();
-                // Attach the submit event listener to the form
-                $("#filterForm").submit(function(event) {
-                    event.preventDefault(); // Prevent form submission
-                    applyFilter(permohonanTable); // Apply filter
-                });
-            });
 
-            // Function to apply filter
-            function applyFilter(table) {
-                var startDate = $('#start_date').val();
-                var endDate = $('#end_date').val();
-                console.log(startDate);
-                console.log(endDate);
+                function applyFilter() {
+                    var startDate = $('#start_date').val();
+                    var endDate = $('#end_date').val();
+                    console.log(startDate);
+                    console.log(endDate);
 
-                // Apply search filter and log data for the table
-                applyAndLogFilter('Table 1', table, startDate, endDate);
-            }
-            // function applyFilter() 
-            // {
-            //     event.preventDefault();
-            //     var startDate = $('#start_date').val();
-            //     var endDate = $('#end_date').val();
-            //     console.log(startDate);
-            //     console.log(endDate);
+                    // Apply search filter and log data for all tables
+                    applyAndLogFilter('Table 1', permohonanTable, startDate, endDate);
+                }
 
-            //     // Apply search filter and log data for all tables
-            //     applyAndLogFilter('Table 1', permohonanTable, startDate, endDate);
-            // }
+                function applyAndLogFilter(tableName, table, startDate, endDate) {
+                    // Clear the previous search functions
+                    $.fn.dataTable.ext.search = [];
 
-            function applyAndLogFilter(tableName, table, startDate, endDate) {
-                // Reset the search for all columns to ensure a clean filter
-                table.columns().search('').draw();
+                    // Apply date range filter
+                    if (startDate || endDate) {
+                        $.fn.dataTable.ext.search.push(function(settings, searchData, dataIndex) {
+                            var dateColumnIndex = 2; // Index of the date column in the table
+                            var dateStr = searchData[dateColumnIndex]; // Get the date string from the data
 
-                // Clear the previous search functions
-                $.fn.dataTable.ext.search = [];
-
-                // Apply date range filter
-                if (startDate || endDate) {
-                    $.fn.dataTable.ext.search.push(
-                        function (settings, data, dataIndex) {
-                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-
-                            let dateAdded = moment(data[2], 'DD/MM/YYYY');
-
-                            // Check if the date falls within the specified range
-                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                            if (result) {
-                                console.log('Date Range Filter Result: true');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                            } else {
-                                console.log('Date Range Filter Result: false');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
+                            if (!dateStr) {
+                                // Return true if the date string is empty or null
+                                return true;
                             }
 
-                            return result;
-                        }
-                    );
+                            var dateParts = dateStr.split('/'); // Split the date string into parts (assuming 'DD/MM/YYYY' format)
+                            var dateObj = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Create a Date object
+
+                            // Convert start and end date strings to Date objects for comparison
+                            var startDateObj = startDate ? moment(startDate, 'DD/MM/YYYY').toDate() : null;
+                            var endDateObj = endDate ? moment(endDate, 'DD/MM/YYYY').toDate() : null;
+
+                            // Check if the date falls within the specified range
+                            var dateInRange = (!startDateObj || dateObj >= startDateObj) &&
+                                            (!endDateObj || dateObj <= endDateObj);
+
+                            return dateInRange; // Return true if the date is within the range, otherwise false
+                        });
+                    }
                 }
-            }
+            });
+
+            // function applyFilter() {
+            //     event.preventDefault(); // Prevent form submission
+            //     var startDate = $('#start_date').val();
+            //     var endDate = $('#end_date').val();
+
+            //     // Format the dates as 'DD/MM/YYYY' for filtering
+            //     var formattedStartDate = startDate ? moment(startDate).format('DD/MM/YYYY') : '';
+            //     var formattedEndDate = endDate ? moment(endDate).format('DD/MM/YYYY') : '';
+
+            //     console.log('Formatted Start Date:', formattedStartDate);
+            //     console.log('Formatted End Date:', formattedEndDate);
+
+            //     // Retrieve the DataTable instance
+            //     var table = $('#permohonanTable').DataTable();
+
+            //     // Apply search filter
+            //     table.columns().search('').draw(); // Reset the search for all columns
+            //     table.draw(); // Redraw the table
+
+            //     // Apply date range filter
+            //     if (formattedStartDate || formattedEndDate) {
+            //         table.column(2).search(formattedStartDate + '|' + formattedEndDate, true, false).draw(); // Apply search to the third column (index 2) for date filtering
+            //     }
+            // }
         </script>
     </body>
 </x-default-layout> 
