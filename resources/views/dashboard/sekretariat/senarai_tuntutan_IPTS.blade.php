@@ -39,7 +39,7 @@
 			<!--end::Item-->
             
             <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU Institusi Pengajian Tinggi Swasta</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->

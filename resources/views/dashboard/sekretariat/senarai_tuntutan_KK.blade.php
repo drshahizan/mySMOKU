@@ -39,7 +39,7 @@
 			<!--end::Item-->
             
             <!--begin::Item-->
-			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU</li>
+			<li class="breadcrumb-item text-dark" style="color:darkblue">BKOKU Kolej Komuniti</li>
 			<!--end::Item-->
 		</ul>
         <!--end::Breadcrumb-->

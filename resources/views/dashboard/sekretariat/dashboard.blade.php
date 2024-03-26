@@ -482,7 +482,7 @@
 							<div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
 								{{-- Permohonan --}}
 								<div class="header">
-									<h2>Permohonan BKOKU IPTS</h2>
+									<h2>Permohonan BKOKU Institusi Pengajian Tinggi Swasta</h2>
 								</div>
 								<div class="body">
 									<!--begin::First Row-->
