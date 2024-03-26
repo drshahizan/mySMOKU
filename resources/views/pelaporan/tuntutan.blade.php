@@ -27,7 +27,7 @@
 	<!--end::Accordion-->
 	<script>
 		// Set the iframe source dynamically using JavaScript
-		document.getElementById('myIframe').src = 'https://app.powerbi.com/view?r=eyJrIjoiNTU0Mjk0NGQtMTUyZi00MTI2LTlmMjMtZjc3YzU3N2IyNThhIiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D&pageName=ReportSectionad7e6b1492b68e275ed3';
+		document.getElementById('myIframe').src = 'https://app.powerbi.com/view?r=eyJrIjoiMTNmMjQ5YmYtZGQ4OC00YTU4LTkyZGQtN2Q1NzFkNDI1ZWYwIiwidCI6ImJiMmIwZjRjLTU2NzAtNDY3ZC1iN2NkLTgwZDI3YTAzMDAyMyIsImMiOjEwfQ%3D%3D';
 	</script>
 
 </x-default-layout>
