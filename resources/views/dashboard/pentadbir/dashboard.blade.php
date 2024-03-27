@@ -38,7 +38,7 @@
                         $count_penyelaras_bkoku = DB::table('users')->where('tahap', 2)->count();
                     @endphp
                     <div class="card card-border border-success flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold pb-1 px-2">Penyelaras BKOKU IPT</span>
+                        <span class="fs-6 fw-semibold pb-1 px-2">Penyelaras BKOKU IPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
                             <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_bkoku}}">{{$count_penyelaras_bkoku}}</span>
                         </span>
@@ -51,7 +51,7 @@
                         $count_penyelaras_ppk = DB::table('users')->where('tahap', 6)->count();
                     @endphp
                     <div class="card card-border border-danger flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold pb-1 px-2">Penyelaras PPK IPT</span>
+                        <span class="fs-6 fw-semibold pb-1 px-2">Penyelaras PPK IPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
                             <span data-kt-countup="true" data-kt-countup-value="{{$count_penyelaras_ppk}}">{{$count_penyelaras_ppk}}</span>
                         </span>
@@ -64,7 +64,7 @@
                         $count_sekretariat = DB::table('users')->where('tahap', 3)->count();
                     @endphp
                     <div class="card card-border border-warning flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold pb-1 px-2">Sekretariat KPT</span>
+                        <span class="fs-6 fw-semibold pb-1 px-2">Sekretariat KPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
                             <span data-kt-countup="true" data-kt-countup-value="{{$count_sekretariat}}">{{$count_sekretariat}}</span>
                         </span>
@@ -77,7 +77,7 @@
                         $count_pegawai = DB::table('users')->where('tahap', 4)->count();
                     @endphp
                     <div class="card card-border border-info flex-center min-w-175px my-3 p-6">
-                        <span class="fs-4 fw-semibold pb-1 px-2">Pengawai Atasan KPT</span>
+                        <span class="fs-6 fw-semibold pb-1 px-2">Pengawai Atasan KPT</span>
                         <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
                             <span data-kt-countup="true" data-kt-countup-value="{{$count_pegawai}}">{{$count_pegawai}}</span>
                         </span>
