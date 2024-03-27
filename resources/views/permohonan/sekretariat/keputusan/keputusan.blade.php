@@ -235,15 +235,15 @@
                                             <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                                
@@ -259,15 +259,15 @@
                                             <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -282,14 +282,14 @@
                                             <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
@@ -305,14 +305,14 @@
                                             <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 27% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 13% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
@@ -329,12 +329,12 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 30%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th> 
+                                                        <th style="width: 27%"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 12%"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
@@ -458,9 +458,20 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'kelulusan.no_mesyuarat',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
-                            { data: 'kelulusan.no_mesyuarat' },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
                                 render: function(data, type, row) {
@@ -483,7 +494,8 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                }
+                                },
+                                className: 'text-center'
                             },
                             {
                                 data: 'kelulusan.keputusan',
@@ -585,9 +597,20 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'kelulusan.no_mesyuarat',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
-                            { data: 'kelulusan.no_mesyuarat' },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
                                 render: function(data, type, row) {
@@ -610,7 +633,8 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                }
+                                },
+                                className: 'text-center'
                             },
                             {
                                 data: 'kelulusan.keputusan',
@@ -630,7 +654,7 @@
                                             status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
                                             break;
                                         default:
-                                            status = ''; // Set empty string for unknown status values
+                                            status = ''; 
                                             break;
                                     }
 
@@ -659,12 +683,6 @@
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
-                                // render: function(data, type, row) {
-                                //     // Construct the URL using the no_rujukan_permohonan value
-                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                // }
                             }, 
                             { 
                                 data: 'smoku.nama', 
@@ -716,9 +734,20 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'kelulusan.no_mesyuarat',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
-                            { data: 'kelulusan.no_mesyuarat' },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
                                 render: function(data, type, row) {
@@ -741,7 +770,8 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                }
+                                },
+                                className: 'text-center'
                             },
                             {
                                 data: 'kelulusan.keputusan',
@@ -790,12 +820,6 @@
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
-                                // render: function(data, type, row) {
-                                //     // Construct the URL using the no_rujukan_permohonan value
-                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                // }
                             }, 
                             { 
                                 data: 'smoku.nama', 
@@ -847,9 +871,20 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'kelulusan.no_mesyuarat',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
-                            { data: 'kelulusan.no_mesyuarat' },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
                                 render: function(data, type, row) {
@@ -872,7 +907,8 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                }
+                                },
+                                className: 'text-center'
                             },
                             {
                                 data: 'kelulusan.keputusan',
@@ -895,7 +931,6 @@
                                             status = ''; // Set empty string for unknown status values
                                             break;
                                     }
-
                                     return status;
                                 }
                             },
@@ -923,12 +958,6 @@
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
-                                // render: function(data, type, row) {
-                                //     // Construct the URL using the no_rujukan_permohonan value
-                                //     // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                                //     var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
-                                //     return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                // }
                             }, 
                             { 
                                 data: 'smoku.nama', 
@@ -980,9 +1009,20 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'kelulusan.no_mesyuarat',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
-                            { data: 'kelulusan.no_mesyuarat' },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
                                 render: function(data, type, row) {
@@ -1005,7 +1045,8 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                }
+                                },
+                                className: 'text-center'
                             },
                             {
                                 data: 'kelulusan.keputusan',
@@ -1028,7 +1069,6 @@
                                             status = ''; // Set empty string for unknown status values
                                             break;
                                     }
-
                                     return status;
                                 }
                             },
