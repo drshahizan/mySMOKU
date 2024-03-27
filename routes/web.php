@@ -187,40 +187,56 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/permohonan/BKOKU/KK/keseluruhan', [SekretariatController::class, 'statusPermohonanKK'])->name('keseluruhanKK.permohonan');
     Route::get('sekretariat/permohonan/senarai/BKOKU/KK', [SekretariatController::class, 'getListPermohonanKK'])->name('senaraiKK.permohonan');
 
-    Route::get('sekretariat/permohonan/BKOKU/UA/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanUA'])->name('keseluruhanUA.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/UA/keseluruhan', [SekretariatController::class, 'statusPermohonanUA'])->name('keseluruhanUA.permohonan');
     Route::get('sekretariat/permohonan/senarai/BKOKU/UA', [SekretariatController::class, 'getListPermohonanUA'])->name('senaraiUA.permohonan');
 
-    Route::get('sekretariat/permohonan/PPK/keseluruhan/{status}', [SekretariatController::class, 'statusPermohonanPPK'])->name('keseluruhanP.permohonan');
+    Route::get('sekretariat/permohonan/PPK/keseluruhan', [SekretariatController::class, 'statusPermohonanPPK'])->name('keseluruhanP.permohonan');
     Route::get('sekretariat/permohonan/senarai/PPK', [SekretariatController::class, 'getListPermohonanPPK'])->name('senaraiPPK.permohonan');
 
-    Route::get('sekretariat/tuntutan/BKOKU/IPTS/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanBKOKU'])->name('keseluruhanIPTS.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/IPTS/keseluruhan', [SekretariatController::class, 'statusTuntutanBKOKU'])->name('keseluruhanIPTS.tuntutan');
     Route::get('sekretariat/tuntutan/senarai/BKOKU/IPTS', [SekretariatController::class, 'getListTuntutanIPTS'])->name('senaraiIPTS.tuntutan');
 
-    Route::get('sekretariat/tuntutan/BKOKU/POLI/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanPOLI'])->name('keseluruhanPOLI.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/POLI/keseluruhan', [SekretariatController::class, 'statusTuntutanPOLI'])->name('keseluruhanPOLI.tuntutan');
     Route::get('sekretariat/tuntutan/senarai/BKOKU/POLI', [SekretariatController::class, 'getListTuntutanPOLI'])->name('senaraiPOLI.tuntutan');
 
-    Route::get('sekretariat/tuntutan/BKOKU/KK/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanKK'])->name('keseluruhanKK.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/KK/keseluruhan', [SekretariatController::class, 'statusTuntutanKK'])->name('keseluruhanKK.tuntutan');
     Route::get('sekretariat/tuntutan/senarai/BKOKU/KK', [SekretariatController::class, 'getListTuntutanKK'])->name('senaraiKK.tuntutan');
 
-    Route::get('sekretariat/tuntutan/BKOKU/UA/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanUA'])->name('keseluruhanUA.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/UA/keseluruhan', [SekretariatController::class, 'statusTuntutanUA'])->name('keseluruhanUA.tuntutan');
     Route::get('sekretariat/tuntutan/senarai/BKOKU/UA', [SekretariatController::class, 'getListTuntutanUA'])->name('senaraiUA.tuntutan');
 
-    Route::get('sekretariat/tuntutan/PPK/keseluruhan/{status}', [SekretariatController::class, 'statusTuntutanPPK'])->name('keseluruhanP.tuntutan');
+    Route::get('sekretariat/tuntutan/PPK/keseluruhan', [SekretariatController::class, 'statusTuntutanPPK'])->name('keseluruhanP.tuntutan');
     Route::get('sekretariat/tuntutan/senarai/PPK', [SekretariatController::class, 'getListTuntutanPPK'])->name('senaraiPPK.tuntutan');
 
-
     Route::get('sekretariat/permohonan/BKOKU/IPTS/status/{status}', [SekretariatController::class, 'filterStatusPermohonanBKOKU'])->name('statusIPTS.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/IPTS/senarai/{status}', [SekretariatController::class, 'getListStatusPermohonanIPTS'])->name('senaraiStatusIPTS.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/POLI/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPOLI'])->name('statusPOLI.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/POLI/senarai/{status}', [SekretariatController::class, 'getListStatusPermohonanPOLI'])->name('senaraiStatusPOLI.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/KK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanKK'])->name('statusKK.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/KK/senarai/{status}', [SekretariatController::class, 'getListStatusPermohonanKK'])->name('senaraiStatusKK.permohonan');
+
     Route::get('sekretariat/permohonan/BKOKU/UA/status/{status}', [SekretariatController::class, 'filterStatusPermohonanUA'])->name('statusUA.permohonan');
+    Route::get('sekretariat/permohonan/BKOKU/UA/senarai/{status}', [SekretariatController::class, 'getListStatusPermohonanUA'])->name('senaraiStatusUA.permohonan');
+
     Route::get('sekretariat/permohonan/PPK/status/{status}', [SekretariatController::class, 'filterStatusPermohonanPPK'])->name('statusP.permohonan');
+    Route::get('sekretariat/permohonan/PPK/senarai/{status}', [SekretariatController::class, 'getListStatusPermohonanPPK'])->name('senaraiStatusPPK.permohonan');
 
     Route::get('sekretariat/tuntutan/BKOKU/IPTS/status/{status}', [SekretariatController::class, 'filterStatusTuntutanBKOKU'])->name('statusIPTS.tuntutan');
-    Route::get('sekretariat/tuntutan/BKOKU/POLI/status/{status}', [SekretariatController::class, 'filterStatusTuntutanPOLI'])->name('statusPOLI.tuntutan');
-    Route::get('sekretariat/tuntutan/BKOKU/KK/status/{status}', [SekretariatController::class, 'filterStatusTuntutanKK'])->name('statusKK.tuntutan');
-    Route::get('sekretariat/tuntutan/BKOKU/UA/status/{status}', [SekretariatController::class, 'filterStatusTuntutanUA'])->name('statusUA.tuntutan');
-    Route::get('sekretariat/tuntutan/PPK/status/{status}', [SekretariatController::class, 'filterStatusTuntutanPPK'])->name('statusP.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/IPTS/senarai/{status}', [SekretariatController::class, 'getFilterListTuntutanIPTS'])->name('senaraiStatusIPTS.tuntutan');
 
+    Route::get('sekretariat/tuntutan/BKOKU/POLI/status/{status}', [SekretariatController::class, 'filterStatusTuntutanPOLI'])->name('statusPOLI.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/POLI/senarai/{status}', [SekretariatController::class, 'getFilterListTuntutanPOLI'])->name('senaraiStatusPOLI.tuntutan');
+
+    Route::get('sekretariat/tuntutan/BKOKU/KK/status/{status}', [SekretariatController::class, 'filterStatusTuntutanKK'])->name('statusKK.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/KK/senarai/{status}', [SekretariatController::class, 'getFilterListTuntutanKK'])->name('senaraiStatusKK.tuntutan');
+
+    Route::get('sekretariat/tuntutan/BKOKU/UA/status/{status}', [SekretariatController::class, 'filterStatusTuntutanUA'])->name('statusUA.tuntutan');
+    Route::get('sekretariat/tuntutan/BKOKU/UA/senarai/{status}', [SekretariatController::class, 'getFilterListTuntutanUA'])->name('senaraiStatusUA.tuntutan');
+
+    Route::get('sekretariat/tuntutan/PPK/status/{status}', [SekretariatController::class, 'filterStatusTuntutanPPK'])->name('statusP.tuntutan');
+    Route::get('sekretariat/tuntutan/PPK/senarai/{status}', [SekretariatController::class, 'getFilterListTuntutanPPK'])->name('senaraiStatusPPK.tuntutan');
 
     //Kemaskini - Sekretariat - Pengajian
     Route::get('sekretariat/kemaskini/peringkat/pengajian', [SekretariatController::class, 'peringkatPengajian'])->name('peringkat.pengajian');
