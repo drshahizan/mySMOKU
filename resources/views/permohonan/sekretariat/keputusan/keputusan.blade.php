@@ -306,11 +306,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 27% !important;"><b>Nama</b></th>
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 13% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
@@ -858,6 +858,7 @@
                             { data: 'akademik.infoipt.id_institusi' },
                             {
                                 data: 'akademik.peringkat.peringkat',
+                                className: 'text-center',
                                 render: function(data, type, row) {
                                     // Split the string into an array of words
                                     var words = data.split(' ');
@@ -871,8 +872,7 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
-                                },
-                                className: 'text-center'
+                                }
                             },
                             {
                                 data: 'kelulusan.no_mesyuarat',
@@ -887,6 +887,7 @@
                             },
                             {
                                 data: 'kelulusan.tarikh_mesyuarat',
+                                className: 'text-center',
                                 render: function(data, type, row) {
                                     if (type === 'display' || type === 'filter') {
                                         if (data === null) {
@@ -907,11 +908,11 @@
                                         // For sorting and other purposes, return the original data
                                         return data;
                                     }
-                                },
-                                className: 'text-center'
+                                }
                             },
                             {
                                 data: 'kelulusan.keputusan',
+                                className: 'text-center',
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
 
