@@ -177,6 +177,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Permohonan - Sekretariat - Dashboard
     Route::get('dashboard/sekretariat', [SekretariatController::class, 'dashboardSekretariat'])->name('sekretariat.dashboard');
+    Route::get('dashboard/sekretariat/getPermohonanIPTS', [SekretariatController::class, 'getPermohonanIPTS'])->name('dashboard.getPermohonanIPTS');
+    Route::get('dashboard/sekretariat/getTuntutanIPTS', [SekretariatController::class, 'getTuntutanIPTS'])->name('dashboard.getTuntutanIPTS');
+    Route::get('dashboard/sekretariat/getPermohonanPOLI', [SekretariatController::class, 'getPermohonanPOLI'])->name('dashboard.getPermohonanPOLI');
+    Route::get('dashboard/sekretariat/getTuntutanPOLI', [SekretariatController::class, 'getTuntutanPOLI'])->name('dashboard.getTuntutanPOLI');
+    Route::get('dashboard/sekretariat/getPermohonanKK', [SekretariatController::class, 'getPermohonanKK'])->name('dashboard.getPermohonanKK');
+    Route::get('dashboard/sekretariat/getTuntutanKK', [SekretariatController::class, 'getTuntutanKK'])->name('dashboard.getTuntutanKK');
+    Route::get('dashboard/sekretariat/getPermohonanUA', [SekretariatController::class, 'getPermohonanUA'])->name('dashboard.getPermohonanUA');
+    Route::get('dashboard/sekretariat/getTuntutanUA', [SekretariatController::class, 'getTuntutanUA'])->name('dashboard.getTuntutanUA');
+    Route::get('dashboard/sekretariat/getPermohonanP', [SekretariatController::class, 'getPermohonanP'])->name('dashboard.getPermohonanP');
+    Route::get('dashboard/sekretariat/getTuntutanP', [SekretariatController::class, 'getTuntutanP'])->name('dashboard.getTuntutanP');
     
     Route::get('sekretariat/permohonan/BKOKU/IPTS/keseluruhan', [SekretariatController::class, 'statusPermohonanBKOKU'])->name('keseluruhanIPTS.permohonan');
     Route::get('sekretariat/permohonan/senarai/BKOKU/IPTS', [SekretariatController::class, 'getListPermohonanIPTS'])->name('senaraiIPTS.permohonan');

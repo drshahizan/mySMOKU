@@ -45,278 +45,9 @@
 							<h2>Bilangan Permohonan dan Tuntutan<br><small>Sila klik tab BKOKU IPTS, BKOKU POLI, BKOKU KK, BKOKU UA atau PPK untuk lihat jumlah terperinci.</small></h2>
 						</div>
 
-						{{-- COUNT PERMOHONAN --}}
-						{{-- @php
-							$keseluruhanIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-						
-							$derafIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '1')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$baharuIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '2')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$saringanIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '3')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$disokongIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '4')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$dikembalikanIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '5')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$layakIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '6')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$tidaklayakIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '7')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-
-							$dibayarIPTS = DB::table('permohonan')
-							->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-							->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-							->where('permohonan.status', '=', '8')
-							->where('program', 'BKOKU')
-							->where('bk_info_institusi.jenis_institusi', 'IPTS') 
-							->count();
-						@endphp --}}
-						@php
-							$permohonanIPTS = DB::table('permohonan')
-								->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-								->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-								->selectRaw('
-									COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanIPTS,
-									COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafIPTS,
-									COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuIPTS,
-									COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanIPTS,
-									COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongIPTS,
-									COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanIPTS,
-									COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakIPTS,
-									COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakIPTS,
-									COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarIPTS
-								')
-								->where('program', 'BKOKU')
-								->where('bk_info_institusi.jenis_institusi', 'IPTS')
-								->first();
-							
-							$keseluruhanIPTS = $permohonanIPTS->keseluruhanIPTS ?? 0;
-							$derafIPTS = $permohonanIPTS->derafIPTS ?? 0;
-							$baharuIPTS = $permohonanIPTS->baharuIPTS ?? 0;
-							$saringanIPTS = $permohonanIPTS->saringanIPTS ?? 0;
-							$disokongIPTS = $permohonanIPTS->disokongIPTS ?? 0;
-							$dikembalikanIPTS = $permohonanIPTS->dikembalikanIPTS ?? 0;
-							$layakIPTS = $permohonanIPTS->layakIPTS ?? 0;
-							$tidaklayakIPTS = $permohonanIPTS->tidaklayakIPTS ?? 0;
-							$dibayarIPTS = $permohonanIPTS->dibayarIPTS ?? 0;
-						@endphp
-
-						@php
-							$permohonanPOLI = DB::table('permohonan')
-								->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-								->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-								->selectRaw('
-									COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanPOLI,
-									COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafPOLI,
-									COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuPOLI,
-									COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanPOLI,
-									COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongPOLI,
-									COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanPOLI,
-									COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakPOLI,
-									COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakPOLI,
-									COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarPOLI
-								')
-								->where('program', 'BKOKU')
-								->where('bk_info_institusi.jenis_institusi', 'P')
-								->first();
-							
-							$keseluruhanPOLI = $permohonanPOLI->keseluruhanPOLI ?? 0;
-							$derafPOLI = $permohonanPOLI->derafPOLI ?? 0;
-							$baharuPOLI = $permohonanPOLI->baharuPOLI ?? 0;
-							$saringanPOLI = $permohonanPOLI->saringanPOLI ?? 0;
-							$disokongPOLI = $permohonanPOLI->disokongPOLI ?? 0;
-							$dikembalikanPOLI = $permohonanPOLI->dikembalikanPOLI ?? 0;
-							$layakPOLI = $permohonanPOLI->layakPOLI ?? 0;
-							$tidaklayakPOLI = $permohonanPOLI->tidaklayakPOLI ?? 0;
-							$dibayarPOLI = $permohonanPOLI->dibayarPOLI ?? 0;
-						@endphp
-
-						@php
-							$permohonanKK = DB::table('permohonan')
-								->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-								->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-								->selectRaw('
-									COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanKK,
-									COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafKK,
-									COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuKK,
-									COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanKK,
-									COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongKK,
-									COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanKK,
-									COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakKK,
-									COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakKK,
-									COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarKK
-								')
-								->where('program', 'BKOKU')
-								->where('bk_info_institusi.jenis_institusi', 'KK')
-								->first();
-
-							$keseluruhanKK = $permohonanKK->keseluruhanKK ?? 0;
-							$derafKK = $permohonanKK->derafKK ?? 0;
-							$baharuKK = $permohonanKK->baharuKK ?? 0;
-							$saringanKK = $permohonanKK->saringanKK ?? 0;
-							$disokongKK = $permohonanKK->disokongKK ?? 0;
-							$dikembalikanKK = $permohonanKK->dikembalikanKK ?? 0;
-							$layakKK = $permohonanKK->layakKK ?? 0;
-							$tidaklayakKK = $permohonanKK->tidaklayakKK ?? 0;
-							$dibayarKK = $permohonanKK->dibayarKK ?? 0;
-						@endphp
-
-						@php
-							$permohonanUA = DB::table('permohonan')
-								->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-								->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-								->selectRaw('
-									COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanUA,
-									COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafUA,
-									COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuUA,
-									COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanUA,
-									COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongUA,
-									COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanUA,
-									COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakUA,
-									COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakUA,
-									COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarUA
-								')
-								->where('program', 'BKOKU')
-								->where('bk_info_institusi.jenis_institusi', 'UA')
-								->first();
-
-							$keseluruhanUA = $permohonanUA->keseluruhanUA ?? 0;
-							$derafUA = $permohonanUA->derafUA ?? 0;
-							$baharuUA = $permohonanUA->baharuUA ?? 0;
-							$saringanUA = $permohonanUA->saringanUA ?? 0;
-							$disokongUA = $permohonanUA->disokongUA ?? 0;
-							$dikembalikanUA = $permohonanUA->dikembalikanUA ?? 0;
-							$layakUA = $permohonanUA->layakUA ?? 0;
-							$tidaklayakUA = $permohonanUA->tidaklayakUA ?? 0;
-							$dibayarUA = $permohonanUA->dibayarUA ?? 0;
-						@endphp
-
-						@php
-							$keseluruhanP = DB::table('permohonan')->where('program','=','PPK')->count();
-							$derafP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','1')->count();
-							$baharuP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','2')->count();
-							$saringanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','3')->count();
-							$disokongP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','4')->count();
-							$dikembalikanP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','5')->count();
-							$layakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','6')->count();
-							$tidaklayakP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','7')->count();
-							$dibayarP = DB::table('permohonan')->where('program','=','PPK')->where('status','=','8')->count();
-						@endphp
-
 						{{-- COUNT TUNTUTAN --}}
+						
 						{{-- @php
-							$keseluruhanTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-														->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-														->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-														->where('permohonan.program','=','BKOKU')
-														->where('bk_info_institusi.jenis_institusi', 'IPTS')
-														->where('tuntutan.status', '!=', 9)
-														->count();
-							$derafTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 1)
-													->count();
-							$baharuTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 2)
-													->count();
-							$saringanTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 3)
-													->count();
-							$disokongTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 4)
-													->count();
-							$dikembalikanTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 5)
-													->count();
-							$layakTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 6)
-													->count();
-							$tidakLayakTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 7)
-													->count();
-							$dibayarTuntutanIPTS = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-													->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-													->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-													->where('permohonan.program','=','BKOKU')
-													->where('bk_info_institusi.jenis_institusi', 'IPTS')
-													->where('tuntutan.status', '=', 8)
-													->count();
-						@endphp --}}
-						@php
 							$tuntutanIPTS = DB::table('tuntutan')
 												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
 												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -347,9 +78,9 @@
 							$layakTuntutanIPTS = $tuntutanIPTS->layakTuntutanIPTS ?? 0;
 							$tidakLayakTuntutanIPTS = $tuntutanIPTS->tidakLayakTuntutanIPTS ?? 0;
 							$dibayarTuntutanIPTS = $tuntutanIPTS->dibayarTuntutanIPTS ?? 0;
-						@endphp
+						@endphp --}}
 
-						@php
+						{{-- @php
 							$tuntutanPOLI = DB::table('tuntutan')
 												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
 												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -379,9 +110,9 @@
 							$layakTuntutanPOLI = $tuntutanPOLI->layakTuntutanPOLI ?? 0;
 							$tidakLayakTuntutanPOLI = $tuntutanPOLI->tidakLayakTuntutanPOLI ?? 0;
 							$dibayarTuntutanPOLI = $tuntutanPOLI->dibayarTuntutanPOLI ?? 0;
-						@endphp
+						@endphp --}}
 
-						@php
+						{{-- @php
 							$tuntutanKK = DB::table('tuntutan')
 												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
 												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -412,9 +143,9 @@
 							$layakTuntutanKK = $tuntutanKK->layakTuntutanKK ?? 0;
 							$tidakLayakTuntutanKK = $tuntutanKK->tidakLayakTuntutanKK ?? 0;
 							$dibayarTuntutanKK = $tuntutanKK->dibayarTuntutanKK ?? 0;
-						@endphp
+						@endphp --}}
 
-						@php
+						{{-- @php
 							$tuntutanUA = DB::table('tuntutan')
 												->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
 												->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -456,7 +187,7 @@
 							$layakTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 6)->where('permohonan.program','=','PPK')->count();
 							$tidaklayakTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 7)->where('permohonan.program','=','PPK')->count();
 							$dibayarTP = DB::table('tuntutan')->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
-						@endphp
+						@endphp --}}
 
 						{{-- top nav bar --}}
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -480,7 +211,7 @@
 						<div class="tab-content" id="myTabContent">
 							{{-- BKOKU IPTS --}}
 							<div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
-								{{-- Permohonan --}}
+								<!--Permohonan-->
 								<div class="header">
 									<h2>Permohonan BKOKU Institusi Pengajian Tinggi Swasta</h2>
 								</div>
@@ -493,19 +224,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanIPTS.permohonan') }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -521,20 +250,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -550,19 +277,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -592,7 +317,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -619,7 +344,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -646,7 +371,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -666,19 +391,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -694,19 +417,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -722,20 +443,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -748,7 +467,7 @@
 									<!--end::Row-->
 								</div>
 
-								{{-- Tuntutan --}}
+								<!--Tuntutan-->
 								<div class="header">
 									<h2>Tuntutan BKOKU Institusi Pengajian Tinggi Swasta</h2>
 								</div>
@@ -761,19 +480,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanIPTS.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -789,20 +506,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -818,19 +533,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -860,7 +573,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -887,7 +600,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -914,7 +627,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -934,19 +647,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -962,19 +673,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -990,20 +699,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusIPTS.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanIPTS}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakTuntutanIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1019,7 +726,7 @@
 
 							{{-- BKOKU POLI --}}
 							<div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
-								{{-- Permohonan --}}
+								<!--Permohonan-->
 								<div class="header">
 									<h2>Permohonan BKOKU Politeknik</h2>
 								</div>
@@ -1032,19 +739,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanPOLI.permohonan') }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1060,20 +765,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1089,19 +792,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1131,7 +832,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1158,7 +859,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1185,7 +886,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1205,19 +906,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1233,19 +932,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1261,20 +958,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1287,7 +982,7 @@
 									<!--end::Row-->
 								</div>
 
-								{{-- Tuntutan --}}
+								<!--Tuntutan-->
 								<div class="header">
 									<h2>Tuntutan BKOKU Politeknik</h2>
 								</div>
@@ -1300,19 +995,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanPOLI.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1328,20 +1021,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1357,19 +1048,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1399,7 +1088,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1426,7 +1115,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1453,7 +1142,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1473,19 +1162,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1501,19 +1188,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1529,20 +1214,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusPOLI.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanPOLI}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakTuntutanPOLI"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1558,7 +1241,7 @@
 
 							{{-- BKOKU KK --}}
 							<div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
-								{{-- Permohonan --}}
+								<!--Permohonan-->
 								<div class="header">
 									<h2>Permohonan BKOKU Kolej Komuniti</h2>
 								</div>
@@ -1571,19 +1254,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanKK.permohonan') }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1599,20 +1280,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1628,19 +1307,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1670,7 +1347,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1697,7 +1374,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1724,7 +1401,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1744,19 +1421,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1772,19 +1447,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1800,20 +1473,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1826,7 +1497,7 @@
 									<!--end::Row-->
 								</div>
 
-								{{-- Tuntutan --}}
+								<!--Tuntutan-->
 								<div class="header">
 									<h2>Tuntutan Kolej Komuniti</h2>
 								</div>
@@ -1839,19 +1510,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanKK.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1867,20 +1536,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1896,19 +1563,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1938,7 +1603,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1965,7 +1630,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -1992,7 +1657,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2012,19 +1677,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2040,19 +1703,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2068,20 +1729,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusKK.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanKK}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakTuntutanKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2097,7 +1756,7 @@
 
 							{{-- BKOKU UA --}}
 							<div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
-								{{-- Permohonan --}}
+								<!--Permohonan-->
 								<div class="header">
 									<h2>Permohonan BKOKU Universiti Awam</h2>
 								</div>
@@ -2110,19 +1769,17 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('keseluruhanUA.permohonan', ['status' => '!=9']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{ $keseluruhanUA }}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2138,20 +1795,18 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="path3"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '1']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2167,19 +1822,17 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '2']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2209,7 +1862,7 @@
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '3']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2236,7 +1889,7 @@
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '4']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2263,7 +1916,7 @@
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '5']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2283,19 +1936,17 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '8']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2311,19 +1962,17 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fas fa-user-check text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '6']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2339,20 +1988,18 @@
 												<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 													<!--begin::Symbol-->
 													<div class="symbol symbol-30px me-0 mb-5">
-														{{-- <span class="symbol-label"> --}}
 															<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 																<span class="path1"></span>
 																<span class="path2"></span>
 																<span class="path3"></span>
 																<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 															</i>
-														{{-- </span> --}}
 													</div>
 													<!--end::Symbol-->
 													<!--begin::Stats-->
 													<div class="m-0">
 														<a href="{{ route('statusUA.permohonan', ['status' => '7']) }}">
-															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakUA}}</span>
+															<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakUA"></span>
 															<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 														</a>
 													</div>
@@ -2365,7 +2012,7 @@
 										<!--end::Row-->
 								</div>
 
-								{{-- Tuntutan --}}
+								<!--Tuntutan-->
 								<div class="header">
 									<h2>Tuntutan BKOKU Universiti Awam</h2>
 								</div>
@@ -2378,19 +2025,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanUA.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2406,20 +2051,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2435,19 +2078,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2477,7 +2118,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2504,7 +2145,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2531,7 +2172,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2551,19 +2192,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2579,19 +2218,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2607,20 +2244,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusUA.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidakLayakTuntutanUA}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakTuntutanUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2636,7 +2271,7 @@
 
 							{{-- PPK --}}
 							<div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
-								{{-- Permohonan --}}
+								<!--Permohonan-->
 								<div class="header">
 									<h2>Permohonan PPK</h2>
 								</div>
@@ -2649,19 +2284,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanP.permohonan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2677,20 +2310,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2706,19 +2337,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2748,7 +2377,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2775,7 +2404,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2802,7 +2431,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2822,19 +2451,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2850,19 +2477,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2878,20 +2503,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2904,7 +2527,7 @@
 									<!--end::Row-->
 								</div>
 
-								{{-- Tuntutan --}}
+								<!--Tuntutan-->
 								<div class="header">
 									<h2>Tuntutan PPK</h2>
 								</div>
@@ -2917,19 +2540,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-list-ol text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('keseluruhanP.tuntutan', ['status' => '!=9']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhanTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2945,20 +2566,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Deraf</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '1']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$derafTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -2974,19 +2593,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #186ee6">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-file-circle-plus text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '2']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baharuTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 baharuTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3016,7 +2633,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '3']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$saringanTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 saringanTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3043,7 +2660,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '4']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$disokongTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 disokongTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3070,7 +2687,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '5']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dikembalikanTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dikembalikanTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3090,19 +2707,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #0ca1ab">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-money-bill-transfer text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Dibayar</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$dibayarTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3118,19 +2733,17 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fas fa-user-check text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '6']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$layakTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 layakTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3146,20 +2759,18 @@
 											<div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
 												<!--begin::Symbol-->
 												<div class="symbol symbol-30px me-0 mb-5">
-													{{-- <span class="symbol-label"> --}}
 														<i class="fa-solid fa-user-xmark text-light" style="font-size: 20px;">
 															<span class="path1"></span>
 															<span class="path2"></span>
 															<span class="path3"></span>
 															<span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Layak</span>
 														</i>
-													{{-- </span> --}}
 												</div>
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('statusP.tuntutan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidaklayakTP}}</span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakTP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -3172,10 +2783,318 @@
 									<!--end::Row-->
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+        $(document).ready(function() {
+			$.ajax({
+				url: '{{ route("dashboard.getPermohonanIPTS") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanIPTS = response.keseluruhanIPTS ?? 0;
+					var derafIPTS = response.derafIPTS ?? 0;
+					var baharuIPTS = response.baharuIPTS ?? 0;
+					var saringanIPTS = response.saringanIPTS ?? 0;
+					var disokongIPTS = response.disokongIPTS ?? 0;
+					var dikembalikanIPTS = response.dikembalikanIPTS ?? 0;
+					var layakIPTS = response.layakIPTS ?? 0;
+					var tidaklayakIPTS = response.tidaklayakIPTS ?? 0;
+					var dibayarIPTS = response.dibayarIPTS ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanIPTS").text(keseluruhanIPTS);
+					$(".derafIPTS").text(derafIPTS);
+					$(".baharuIPTS").text(baharuIPTS);
+					$(".saringanIPTS").text(saringanIPTS);
+					$(".disokongIPTS").text(disokongIPTS);
+					$(".dikembalikanIPTS").text(dikembalikanIPTS);
+					$(".layakIPTS").text(layakIPTS);
+					$(".tidaklayakIPTS").text(tidaklayakIPTS);
+					$(".dibayarIPTS").text(dibayarIPTS);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getTuntutanIPTS") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanTuntutanIPTS = response.keseluruhanTuntutanIPTS ?? 0;
+					var derafTuntutanIPTS = response.derafTuntutanIPTS ?? 0;
+					var baharuTuntutanIPTS = response.baharuTuntutanIPTS ?? 0;
+					var saringanTuntutanIPTS = response.saringanTuntutanIPTS ?? 0;
+					var disokongTuntutanIPTS = response.disokongTuntutanIPTS ?? 0;
+					var dikembalikanTuntutanIPTS = response.dikembalikanTuntutanIPTS ?? 0;
+					var layakTuntutanIPTS = response.layakTuntutanIPTS ?? 0;
+					var tidaklayakTuntutanIPTS = response.tidaklayakTuntutanIPTS ?? 0;
+					var dibayarTuntutanIPTS = response.dibayarTuntutanIPTS ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanTuntutanIPTS").text(keseluruhanTuntutanIPTS);
+					$(".derafTuntutanIPTS").text(derafTuntutanIPTS);
+					$(".baharuTuntutanIPTS").text(baharuTuntutanIPTS);
+					$(".saringanTuntutanIPTS").text(saringanTuntutanIPTS);
+					$(".disokongTuntutanIPTS").text(disokongTuntutanIPTS);
+					$(".dikembalikanTuntutanIPTS").text(dikembalikanTuntutanIPTS);
+					$(".layakTuntutanIPTS").text(layakTuntutanIPTS);
+					$(".tidaklayakTuntutanIPTS").text(tidaklayakTuntutanIPTS);
+					$(".dibayarTuntutanIPTS").text(dibayarTuntutanIPTS);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getPermohonanPOLI") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanPOLI = response.keseluruhanPOLI ?? 0;
+					var derafPOLI = response.derafPOLI ?? 0;
+					var baharuPOLI = response.baharuPOLI ?? 0;
+					var saringanPOLI = response.saringanPOLI ?? 0;
+					var disokongPOLI = response.disokongPOLI ?? 0;
+					var dikembalikanPOLI = response.dikembalikanPOLI ?? 0;
+					var layakPOLI = response.layakPOLI ?? 0;
+					var tidaklayakPOLI = response.tidaklayakPOLI ?? 0;
+					var dibayarPOLI = response.dibayarPOLI ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanPOLI").text(keseluruhanPOLI);
+					$(".derafPOLI").text(derafPOLI);
+					$(".baharuPOLI").text(baharuPOLI);
+					$(".saringanPOLI").text(saringanPOLI);
+					$(".disokongPOLI").text(disokongPOLI);
+					$(".dikembalikanPOLI").text(dikembalikanPOLI);
+					$(".layakPOLI").text(layakPOLI);
+					$(".tidaklayakPOLI").text(tidaklayakPOLI);
+					$(".dibayarPOLI").text(dibayarPOLI);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getTuntutanPOLI") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanTuntutanPOLI = response.keseluruhanTuntutanPOLI ?? 0;
+					var derafTuntutanPOLI = response.derafTuntutanPOLI ?? 0;
+					var baharuTuntutanPOLI = response.baharuTuntutanPOLI ?? 0;
+					var saringanTuntutanPOLI = response.saringanTuntutanPOLI ?? 0;
+					var disokongTuntutanPOLI = response.disokongTuntutanPOLI ?? 0;
+					var dikembalikanTuntutanPOLI = response.dikembalikanTuntutanPOLI ?? 0;
+					var layakTuntutanPOLI = response.layakTuntutanPOLI ?? 0;
+					var tidaklayakTuntutanPOLI = response.tidaklayakTuntutanPOLI ?? 0;
+					var dibayarTuntutanPOLI = response.dibayarTuntutanPOLI ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanTuntutanPOLI").text(keseluruhanTuntutanPOLI);
+					$(".derafTuntutanPOLI").text(derafTuntutanPOLI);
+					$(".baharuTuntutanPOLI").text(baharuTuntutanPOLI);
+					$(".saringanTuntutanPOLI").text(saringanTuntutanPOLI);
+					$(".disokongTuntutanPOLI").text(disokongTuntutanPOLI);
+					$(".dikembalikanTuntutanPOLI").text(dikembalikanTuntutanPOLI);
+					$(".layakTuntutanPOLI").text(layakTuntutanPOLI);
+					$(".tidaklayakTuntutanPOLI").text(tidaklayakTuntutanPOLI);
+					$(".dibayarTuntutanPOLI").text(dibayarTuntutanPOLI);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getPermohonanKK") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanKK = response.keseluruhanKK ?? 0;
+					var derafKK = response.derafKK ?? 0;
+					var baharuKK = response.baharuKK ?? 0;
+					var saringanKK = response.saringanKK ?? 0;
+					var disokongKK = response.disokongKK ?? 0;
+					var dikembalikanKK = response.dikembalikanKK ?? 0;
+					var layakKK = response.layakKK ?? 0;
+					var tidaklayakKK = response.tidaklayakKK ?? 0;
+					var dibayarKK = response.dibayarKK ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanKK").text(keseluruhanKK);
+					$(".derafKK").text(derafKK);
+					$(".baharuKK").text(baharuKK);
+					$(".saringanKK").text(saringanKK);
+					$(".disokongKK").text(disokongKK);
+					$(".dikembalikanKK").text(dikembalikanKK);
+					$(".layakKK").text(layakKK);
+					$(".tidaklayakKK").text(tidaklayakKK);
+					$(".dibayarKK").text(dibayarKK);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getTuntutanKK") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanTuntutanKK = response.keseluruhanTuntutanKK ?? 0;
+					var derafTuntutanKK = response.derafTuntutanKK ?? 0;
+					var baharuTuntutanKK = response.baharuTuntutanKK ?? 0;
+					var saringanTuntutanKK = response.saringanTuntutanKK ?? 0;
+					var disokongTuntutanKK = response.disokongTuntutanKK ?? 0;
+					var dikembalikanTuntutanKK = response.dikembalikanTuntutanKK ?? 0;
+					var layakTuntutanKK = response.layakTuntutanKK ?? 0;
+					var tidaklayakTuntutanKK = response.tidaklayakTuntutanKK ?? 0;
+					var dibayarTuntutanKK = response.dibayarTuntutanKK ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanTuntutanKK").text(keseluruhanTuntutanKK);
+					$(".derafTuntutanKK").text(derafTuntutanKK);
+					$(".baharuTuntutanKK").text(baharuTuntutanKK);
+					$(".saringanTuntutanKK").text(saringanTuntutanKK);
+					$(".disokongTuntutanKK").text(disokongTuntutanKK);
+					$(".dikembalikanTuntutanKK").text(dikembalikanTuntutanKK);
+					$(".layakTuntutanKK").text(layakTuntutanKK);
+					$(".tidaklayakTuntutanKK").text(tidaklayakTuntutanKK);
+					$(".dibayarTuntutanKK").text(dibayarTuntutanKK);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getPermohonanUA") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanUA = response.keseluruhanUA ?? 0;
+					var derafUA = response.derafUA ?? 0;
+					var baharuUA = response.baharuUA ?? 0;
+					var saringanUA = response.saringanUA ?? 0;
+					var disokongUA = response.disokongUA ?? 0;
+					var dikembalikanUA = response.dikembalikanUA ?? 0;
+					var layakUA = response.layakUA ?? 0;
+					var tidaklayakUA = response.tidaklayakUA ?? 0;
+					var dibayarUA = response.dibayarUA ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanUA").text(keseluruhanUA);
+					$(".derafUA").text(derafUA);
+					$(".baharuUA").text(baharuUA);
+					$(".saringanUA").text(saringanUA);
+					$(".disokongUA").text(disokongUA);
+					$(".dikembalikanUA").text(dikembalikanUA);
+					$(".layakUA").text(layakUA);
+					$(".tidaklayakUA").text(tidaklayakUA);
+					$(".dibayarUA").text(dibayarUA);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getTuntutanUA") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanTuntutanUA = response.keseluruhanTuntutanUA ?? 0;
+					var derafTuntutanUA = response.derafTuntutanUA ?? 0;
+					var baharuTuntutanUA = response.baharuTuntutanUA ?? 0;
+					var saringanTuntutanUA = response.saringanTuntutanUA ?? 0;
+					var disokongTuntutanUA = response.disokongTuntutanUA ?? 0;
+					var dikembalikanTuntutanUA = response.dikembalikanTuntutanUA ?? 0;
+					var layakTuntutanUA = response.layakTuntutanUA ?? 0;
+					var tidaklayakTuntutanUA = response.tidaklayakTuntutanUA ?? 0;
+					var dibayarTuntutanUA = response.dibayarTuntutanUA ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanTuntutanUA").text(keseluruhanTuntutanUA);
+					$(".derafTuntutanUA").text(derafTuntutanUA);
+					$(".baharuTuntutanUA").text(baharuTuntutanUA);
+					$(".saringanTuntutanUA").text(saringanTuntutanUA);
+					$(".disokongTuntutanUA").text(disokongTuntutanUA);
+					$(".dikembalikanTuntutanUA").text(dikembalikanTuntutanUA);
+					$(".layakTuntutanUA").text(layakTuntutanUA);
+					$(".tidaklayakTuntutanUA").text(tidaklayakTuntutanUA);
+					$(".dibayarTuntutanUA").text(dibayarTuntutanUA);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getPermohonanP") }}',
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanP = response.keseluruhanP ?? 0;
+					var derafP = response.derafP ?? 0;
+					var baharuP = response.baharuP ?? 0;
+					var saringanP = response.saringanP ?? 0;
+					var disokongP = response.disokongP ?? 0;
+					var dikembalikanP = response.dikembalikanP ?? 0;
+					var layakP = response.layakP ?? 0;
+					var tidaklayakP = response.tidaklayakP ?? 0;
+					var dibayarP = response.dibayarP ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanP").text(keseluruhanP);
+					$(".derafP").text(derafP);
+					$(".baharuP").text(baharuP);
+					$(".saringanP").text(saringanP);
+					$(".disokongP").text(disokongP);
+					$(".dikembalikanP").text(dikembalikanP);
+					$(".layakP").text(layakP);
+					$(".tidaklayakP").text(tidaklayakP);
+					$(".dibayarP").text(dibayarP);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("dashboard.getTuntutanP") }}', // Update route name
+				type: 'GET',
+				success: function(response) {
+					var keseluruhanTP = response.keseluruhanTP ?? 0;
+					var derafTP = response.derafTP ?? 0;
+					var baharuTP = response.baharuTP ?? 0;
+					var saringanTP = response.saringanTP ?? 0;
+					var disokongTP = response.disokongTP ?? 0;
+					var dikembalikanTP = response.dikembalikanTP ?? 0;
+					var layakTP = response.layakTP ?? 0;
+					var tidaklayakTP = response.tidaklayakTP ?? 0;
+					var dibayarTP = response.dibayarTP ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".keseluruhanTP").text(keseluruhanTP);
+					$(".derafTP").text(derafTP);
+					$(".baharuTP").text(baharuTP);
+					$(".saringanTP").text(saringanTP);
+					$(".disokongTP").text(disokongTP);
+					$(".dikembalikanTP").text(dikembalikanTP);
+					$(".layakTP").text(layakTP);
+					$(".tidaklayakTP").text(tidaklayakTP);
+					$(".dibayarTP").text(dibayarTP);
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+
+		});
+    </script>	
+
 </x-default-layout>

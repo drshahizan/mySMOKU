@@ -45,7 +45,8 @@ class DashboardController extends Controller
         }
         else if(Auth::user()->tahap=='3')
         {
-            return view('dashboard.sekretariat.dashboard')->with('message', 'Selamat Datang ke Laman Utama Sekretariat');
+            return redirect()->route('sekretariat.dashboard');
+            // return view('dashboard.sekretariat.dashboard')->with('message', 'Selamat Datang ke Laman Utama Sekretariat');
         }
         else if(Auth::user()->tahap=='4')
         {
