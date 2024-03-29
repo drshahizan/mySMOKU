@@ -1576,13 +1576,16 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanIPTS(Request $request)
     {
+        set_time_limit(1200);
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
         $status = $request->query('status');
         $institusi = $request->query('institusi');
 
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+        $query = Kelulusan::where('bk_info_institusi.jenis_institusi', '=', 'IPTS')
+            ->where('permohonan.program', '=', 'BKOKU')
+            ->join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
             ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
             ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
@@ -1597,6 +1600,7 @@ class SekretariatController extends Controller
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 
         $permohonan = $query->get();
+        //  dd($permohonan);
 
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_IPTS_pdf', compact('permohonan'))->render();
@@ -1631,6 +1635,7 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanPOLI(Request $request)
     {
+        set_time_limit(1200);
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
@@ -1652,9 +1657,10 @@ class SekretariatController extends Controller
             ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 
         $permohonan = $query->get();
-
+        
         // Load your HTML content
         $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_POLI_pdf', compact('permohonan'))->render();
+        
         
         // Create Dompdf options
         $options = new Options();
@@ -1686,6 +1692,7 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanKK(Request $request)
     {
+        set_time_limit(1200);
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
@@ -1741,6 +1748,7 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanUA(Request $request)
     {
+        set_time_limit(1200);
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
@@ -1795,6 +1803,7 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanPPK(Request $request)
     {
+        set_time_limit(1200);
         // Retrieve filter parameters from the request
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
