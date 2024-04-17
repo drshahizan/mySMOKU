@@ -20,6 +20,22 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+		<style>
+			/* CSS for table */
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 20px;
+			}
+			th, td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+			}
+			th {
+				background-color: #f2f2f2;
+			}
+		</style>
 	</head>
 	<!--end::Head-->
 
@@ -64,7 +80,7 @@
 										<!--begin::Menu item-->
 										<div class="menu-item">
 											<!--begin::Menu link-->
-											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Utama</a>
 											<!--end::Menu link-->
 										</div>
 										<!--end::Menu item-->
@@ -85,7 +101,14 @@
 										<!--begin::Menu item-->
 										<div class="menu-item">
 											<!--begin::Menu link-->
-											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#tempoh" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Tempoh Pembiayaan</a>
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#kategori" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Kategori</a>
+											<!--end::Menu link-->
+										</div>
+										<!--end::Menu item-->
+										<!--begin::Menu item-->
+										<div class="menu-item">
+											<!--begin::Menu link-->
+											<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#tempoh" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Tempoh</a>
 											<!--end::Menu link-->
 										</div>
 										<!--end::Menu item-->
@@ -387,6 +410,153 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Syarat Section-->
+
+			<!--begin::Kategori Section-->
+			<div class="py-10 py-lg-20">
+				<!--begin::Curve top-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+					</svg>
+				</div>
+				<!--end::Curve top-->
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::Heading-->
+							<div class="mb-13 text-center">
+								<h1 class="fs-2hx fw-bold" style="color: white;" id="kategori" data-kt-scroll-offset="{default: 100, lg: 150}">KATEGORI YURAN YANG LAYAK DAN TIDAK LAYAK DITUNTUT</h1>
+							</div>
+							<!--end::Heading-->
+							<!--begin::Kategori-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100 align-items-center">
+											<!--begin::Option-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
+												<!--begin::Features-->
+												<div class="w-100 mb-10">
+													<!-- Table Start -->
+													<table>
+														<thead>
+															<tr>
+																<th>Bil.</th>
+																<th>Yuran Pengajian Yang LAYAK Dituntut</th>
+																<th>Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>1.</td>
+																<td>Yuran Pendaftaran Pengajian</td>
+																<td>Yuran Penempatan / Yuran Asrama</td>
+															</tr>
+															<tr>
+																<td>2.</td>
+																<td>Kad Kampus / Kad Matrik</td>
+																<td>Insuran Kesihatan / Perlindungan Insuran</td>
+															</tr>
+															<tr>
+																<td>3.</td>
+																<td>Yuran Perpustakaan</td>
+																<td>Yuran Kebajikan / Persatuan / Alumni / Aktiviti / Khairiat</td>
+															</tr>
+															<tr>
+																<td>4.</td>
+																<td>Yuran Peperiksaan</td>
+																<td>Yuran Kelengkapan / Tabung Pengurusan MPA</td>
+															</tr>
+															<tr>
+																<td>5.</td>
+																<td>Yuran Perkhidmatan</td>
+																<td>Yuran Pencalonan</td>
+															</tr>
+															<tr>
+																<td>6.</td>
+																<td>Yuran Ko-Kurikulum / Sukan</td>
+																<td>Tabung Kecemasan</td>
+															</tr>
+															<tr>
+																<td>7.</td>
+																<td>Yuran Graduasi (Jika bergraduat dalam tempoh tajaan sahaja)</td>
+																<td>Elaun Buku</td>
+															</tr>
+															<tr>
+																<td>8.</td>
+																<td>Yuran Pemeriksaan / Yuran Tesis</td>
+																<td>Elaun Sara Hidup</td>
+															</tr>
+															<tr>
+																<td>9.</td>
+																<td>Yuran Komputer</td>
+																<td>Elaun Tesis</td>
+															</tr>
+															<tr>
+																<td>10.</td>
+																<td>Yuran Peralatan / Bahan Makmal</td>
+																<td>Elaun Latihan Amali / Klinikal / Kerja Lapangan</td>
+															</tr>
+															<tr>
+																<td>11.</td>
+																<td></td>
+																<td>Elaun Perjalanan / Tambang</td>
+															</tr>
+															<tr>
+																<td>12.</td>
+																<td></td>
+																<td>Elaun Akhir Pengajian</td>
+															</tr>
+															<tr>
+																<td>13.</td>
+																<td></td>
+																<td>Elaun Penyelidikan</td>
+															</tr>
+															<tr>
+																<td>14.</td>
+																<td></td>
+																<td>Elaun Pengangkutan</td>
+															</tr>
+														</tbody>
+													</table>
+													<!-- Table End -->
+													<!--begin::Nota-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-start fw-bold" style="color: red;">Nota : Bagi tuntutan lain yang tidak tersenarai dalam senarai yuran yang LAYAK atau TIDAK LAYAK seperti di atas adalah tidak layak dituntut.</span>
+													</div>
+													<!--end::Nota-->
+												</div>
+												<!--end::Features-->
+												
+											</div>
+											<!--end::Option-->
+										</div>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Kategori-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+				<!--begin::Curve bottom-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+					</svg>
+				</div>
+				<!--end::Curve bottom-->
+			</div>
+			<!--end::Kategori Section-->
 
 			<!--begin::Tempoh Section-->
 			<div class="mb-n20 mb-lg-n20 z-index-2">
