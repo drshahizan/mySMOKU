@@ -7,6 +7,13 @@
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
         @csrf
+         <!--begin::Subtitle-->
+         <div class="text-gray-500 fw-semibold fs-6">
+            <a href="/" class="text-gray-500 fw-semibold fs-6"><i class="fa-solid fa-house"></i> 
+                Laman Utama
+            </a>
+        </div>
+        <!--end::Subtitle--->
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Logo-->
