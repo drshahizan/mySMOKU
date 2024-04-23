@@ -269,10 +269,10 @@ var KTCreateAccount = function () {
 						validators: {
 							regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Bukan alamat emel yang sah',
+                                message: 'Bukan alamat e-mel yang sah',
                             },
 							notEmpty: {
-								message: 'Alamat emel diperlukan'
+								message: 'Alamat e-mel diperlukan'
 							}
 						}
 					},

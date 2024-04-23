@@ -751,10 +751,10 @@
 						<div class="d-flex flex-column container pt-lg-15">
 							<!--begin::Heading-->
 							<div class="mb-15 text-center">
-								<h1 class="fs-2hx fw-bold text-white mb-5" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">Maklumat Pembiayaan</h1>
+								<h1 class="fs-2hx fw-bold text-white mb-5" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">MAKLUMAT PEMBIAYAAN</h1>
 							</div>
 							<!--end::Heading-->
-							<!--begin::Pricing-->
+							<!--begin::Bayaran-->
 							<div class="text-center">
 								<!--begin::Row-->
 								<div class="row g-10">
@@ -959,7 +959,7 @@
 								</div>
 								<!--end::Row-->
 							</div>
-							<!--end::Pricing-->
+							<!--end::Bayaran-->
 						</div>
 						<!--end::Plans-->
 					</div>
@@ -975,6 +975,84 @@
 				<!--end::Curve bottom-->
 			</div>
 			<!--end::Bayaran Section-->
+
+			<!--begin::PPK Section-->
+			<div class="py-10 py-lg-20">
+				<!--begin::Curve top-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+					</svg>
+				</div>
+				<!--end::Curve top-->
+				<!--begin::Wrapper-->
+				<div class="py-10 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::Heading-->
+							<div class="mb-13 text-center">
+								<h1 class="fs-2hx fw-bold" style="color: white;" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">PROGRAM PENDIDIKAN KHAS (PPK)</h1>
+							</div>
+							<!--end::Heading-->
+							<!--begin::PPK-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100 align-items-center">
+											<!--begin::Option-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
+												<!--begin::Features-->
+												<div class="w-100 mb-10">
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">i. Skop pembiayaan PPK adalah tertumpu kepada <b>Kolej Komuniti</b> dan <b>Politeknik</b> terpilih sahaja dari Sijil Kemahiran Khas.</span>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Kadar Bayaran PPK adalah sebanyak :</span>
+													</div>
+													<div class="d-flex flex-stack">
+														<span class="fw-semibold fs-6 text-gray-800 text-start">
+															<ul>
+																<li>RM 4260 / Semester 1 sahaja.</li>
+																<li>RM 3960 / Semester 2 hingga 4.</li>
+															</ul>
+														</span>
+													</div>
+													
+													<!--end::Item-->
+												</div>
+												<!--end::Features-->
+												
+											</div>
+											<!--end::Option-->
+										</div>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::PPK-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+				<!--begin::Curve bottom-->
+				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
+					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+					</svg>
+				</div>
+				<!--end::Curve bottom-->
+			</div>
+			<!--end::PPK Section-->
 
 			<!--begin::Hubungi Section-->
 			<div class="mb-n20 mb-lg-n20 z-index-2">
@@ -1023,7 +1101,7 @@
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Pegawai Untuk Dihubungi :</div>
 									<!--end::Title-->
 									<!--begin::Telefon-->
 									<div class="text-gray-500 fw-semibold fs-7">Cik Nur Dayana binti Rozaini : 03-8870 6373
@@ -1032,7 +1110,7 @@
 									<!--end::Telefon-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Emel Unit BKOKU :</div>
+									<div class="fs-6 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
 									<!--end::Title-->
 									<!--begin::Emel-->
 									<div class="text-gray-500 fw-semibold fs-6">bkoku@mohe.gov.my</div>
@@ -1052,7 +1130,7 @@
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Waktu pejabat SAHAJA</div>
+									<div class="fs-6 fw-bold text-dark mb-3">Waktu Pejabat</div>
 									<!--end::Title-->
 									<!--begin::Waktu-->
 									<div class="text-gray-500 fw-semibold fs-6">Isnin hingga Jumaat 

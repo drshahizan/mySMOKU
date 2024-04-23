@@ -27,10 +27,10 @@ var KTSignupGeneral = function () {
                         validators: {
                             regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Alamat Emel tidak sah',
+                                message: 'Alamat E-mel tidak sah',
                             },
                             notEmpty: {
-                                message: 'Alamat Emel diperlukan'
+                                message: 'Alamat E-mel diperlukan'
                             }
                         }
                     },
@@ -175,10 +175,10 @@ var KTSignupGeneral = function () {
                         validators: {
                             regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'Bukan alamat emel yang sah',
+                                message: 'Bukan Alamat E-mel yang sah',
                             },
                             notEmpty: {
-                                message: 'Alamat emel diperlukan'
+                                message: 'Alamat E-mel diperlukan'
                             }
                         }
                     },
