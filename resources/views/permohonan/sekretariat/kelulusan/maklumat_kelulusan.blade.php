@@ -102,7 +102,7 @@
                                     {{csrf_field()}}
                                     <table>
                                         <tr>
-                                            <td><b>No. Mesyuarat</b></td>
+                                            <td><b>Bil. Mesyuarat</b></td>
                                             <td><b>:</b></td>
                                             <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:150px;" required></td>
                                         </tr>

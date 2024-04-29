@@ -66,7 +66,7 @@
                     <div class="row clearfix">
                         <div class="card">
                             <div class="header">
-                                <h2>Senarai Permohonan untuk Kelulusan JKKBKOKU<br><small>Klik ID Permohonan untuk meluluskan permohonan pelajar tersebut.</small></h2>
+                                <h2>Senarai Permohonan untuk Kelulusan Jawatankuasa Kerja BKOKU (JKBKOKU)<br><small>Klik ID Permohonan untuk meluluskan permohonan pelajar tersebut.</small></h2>
                             </div>
 
                             {{-- top nav bar --}}
@@ -299,7 +299,7 @@
 
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <label for="recipient-name" class="col-form-label">Bil. Mesyuarat:</label>
                                                                 <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
                                                             <div class="mb-3">
