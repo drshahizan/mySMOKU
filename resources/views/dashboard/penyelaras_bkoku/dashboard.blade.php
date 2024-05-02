@@ -5,8 +5,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-    </head>    
+        <script src="/assets/lang/Malay.json"></script>    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/sweetalert2.min.css">
+    </head>
+        
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
@@ -203,9 +205,16 @@
             <!--end::Table Widget 9-->
         </div>
         </div> <script>
-                $('#sortTable1').DataTable();
-            </script>
+            $(document).ready(function() {
+                $('#sortTable1').DataTable({
+                    "language": {
+                        "url": "/assets/lang/Malay.json"
+                    }
+                });
+            });
+        </script>
         </div>
+  
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

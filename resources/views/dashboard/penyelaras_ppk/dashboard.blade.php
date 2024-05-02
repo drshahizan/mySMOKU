@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/lang/Malay.json"></script>    
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     </head>
     <!--begin::Page title-->
@@ -200,8 +201,14 @@
             <!--end::Table Widget 9-->
         </div>
         </div> <script>
-                $('#sortTable').DataTable();
-            </script>
+            $(document).ready(function() {
+                $('#sortTable').DataTable({
+                    "language": {
+                        "url": "/assets/lang/Malay.json"
+                    }
+                });
+            });
+        </script>
         </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
