@@ -22,6 +22,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/lang/Malay.json"></script>
 
         <style>
             .nav{
@@ -960,6 +961,15 @@
             $(document).ready(function() {
 			    $('.js-example-basic-single').select2();
 			});
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#sortTable1, #sortTable2, #sortTable3, #sortTable4, #sortTable5').DataTable({
+                    "language": {
+                        "url": "/assets/lang/Malay.json"
+                    }
+                });
+            });
         </script>
         
         <script>

@@ -12,7 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        
+        <script src="/assets/lang/Malay.json"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
@@ -404,6 +404,9 @@
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
@@ -543,6 +546,9 @@
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
@@ -680,6 +686,9 @@
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                             { 
                                 data: 'no_rujukan_permohonan',
@@ -816,6 +825,9 @@
                             url: '{{ route("senarai.keputusan.UA") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                             
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
                         },
                         columns: [
                             { 
@@ -955,6 +967,9 @@
                             url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                             
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
                         },
                         columns: [
                             { 
