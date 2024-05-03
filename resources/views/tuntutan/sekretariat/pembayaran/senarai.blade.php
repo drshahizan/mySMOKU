@@ -13,7 +13,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <script src="/assets/lang/Malay.json"></script>
+        <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
         <style>
             .nav{
@@ -372,6 +373,9 @@
                         dataSrc: '' // Property in the response object containing the data array
                         
                     },
+                    language: {
+                        url: "/assets/lang/Malay.json"
+                    },
                     columns: [
                     { 
                         data: 'no_rujukan_tuntutan',
@@ -564,6 +568,9 @@
                         url: '{{ route("senarai.pembayaran.tuntutan.dataPOLI") }}', // URL to fetch data from
                         dataSrc: '' // Property in the response object containing the data array
                         
+                    },
+                    language: {
+                        url: "/assets/lang/Malay.json"
                     },
                     columns: [
                     { 
@@ -759,6 +766,9 @@
                         dataSrc: '' // Property in the response object containing the data array
                         
                     },
+                    language: {
+                        url: "/assets/lang/Malay.json"
+                    },
                     columns: [
                     { 
                         data: 'no_rujukan_tuntutan',
@@ -953,6 +963,9 @@
                         dataSrc: '' // Property in the response object containing the data array
                         
                     },
+                    language: {
+                        url: "/assets/lang/Malay.json"
+                    },
                     columns: [
                     {
                         // Checkbox column
@@ -1131,6 +1144,9 @@
                         url: '{{ route("senarai.pembayaran.tuntutan.dataPPK") }}', // URL to fetch data from
                         dataSrc: '' // Property in the response object containing the data array
                         
+                    },
+                    language: {
+                        url: "/assets/lang/Malay.json"
                     },
                     columns: [
                     { 

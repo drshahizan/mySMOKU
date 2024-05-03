@@ -14,6 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/lang/Malay.json"></script>
         <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
         <style>
@@ -293,6 +294,9 @@
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                         { 
                             data: 'no_rujukan_permohonan',
@@ -480,6 +484,9 @@
                             url: '{{ route("senarai.tuntutan.dataPOLI") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                             
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
                         },
                         columns: [
                         { 
@@ -669,6 +676,9 @@
                             dataSrc: '' // Property in the response object containing the data array
                             
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                         { 
                             data: 'no_rujukan_permohonan',
@@ -856,6 +866,9 @@
                             url: '{{ route("senarai.tuntutan.dataUA") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                         },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columns: [
                         { 
                             data: 'no_rujukan_permohonan',
@@ -1041,6 +1054,9 @@
                         ajax: {
                             url: '{{ route("senarai.tuntutan.dataPPK") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
                         },
                         columns: [
                         { 
