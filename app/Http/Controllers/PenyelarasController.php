@@ -1952,6 +1952,7 @@ class PenyelarasController extends Controller
     //PENYALURAN - DIBAYAR
     public function senaraiPemohonDibayar(Request $request)
     {
+        set_time_limit(1200);
         $permohonanDibayar = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '8')->get();
         $tuntutanDibayar = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '=', '8')->get();
 
