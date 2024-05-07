@@ -1028,12 +1028,10 @@ class PenyelarasPPKController extends Controller
 
     public function sejarahPermohonan()
     {
-        $permohonan = Permohonan::where('permohonan.status', '!=','4')
-        ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
-        ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
-        ->select('permohonan.*')
-        ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get();
+        $permohonan = Permohonan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
+        ->orderBy('permohonan.id', 'DESC')
+        ->get(['permohonan.*']);
         
         return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
     }
@@ -1154,9 +1152,10 @@ class PenyelarasPPKController extends Controller
         $smoku = Smoku::leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('permohonan.status','=', '8')
-        ->where('penyelaras_id','=', Auth::user()->id)
+        ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
+        // ->where('penyelaras_id','=', Auth::user()->id)
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'permohonan.id as permohonan_id', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
@@ -1169,10 +1168,12 @@ class PenyelarasPPKController extends Controller
         ->leftJoin('tuntutan','permohonan.id','=','tuntutan.permohonan_id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('tuntutan.status','=', '8')
-        ->where('penyelaras_id','=', Auth::user()->id)
-        ->orderBy('tuntutan.tarikh_hantar', 'DESC')
+        ->where('permohonan.program','=', 'PPK')
+        // ->where('penyelaras_id','=', Auth::user()->id)
+        ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
+        ->orderBy('tuntutan.id', 'DESC')
         ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'tuntutan.*', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
         return view('tuntutan.penyelaras_ppk.tuntutan_dibayar', compact('smoku'));

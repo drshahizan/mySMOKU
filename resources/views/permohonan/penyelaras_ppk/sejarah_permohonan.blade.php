@@ -98,8 +98,12 @@
 
                                                         $permohonan_latest = DB::table('permohonan')->orderBy('id', 'DESC')->first();
 
-                                                        $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
-								                        $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
+                                                        if ($item['tarikh_hantar'] !== null) {
+                                                            $item['tarikh_hantar'] = new DateTime($item['tarikh_hantar']);
+                                                            $formattedDate = $item['tarikh_hantar']->format('d/m/Y');
+                                                        } else {
+                                                            $formattedDate = '-';
+                                                        }
 
                                                     @endphp
                                                     <tr>
