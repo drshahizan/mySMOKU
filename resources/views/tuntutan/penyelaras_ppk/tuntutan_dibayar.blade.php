@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="/assets/lang/Malay.json"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>	 
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -104,13 +105,12 @@
 	}
 </style>
 <script>
-	$('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
 	$('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
+            order: [], // Disable initial sorting
+			language: {
+				url: "/assets/lang/Malay.json"
+			}
+    });
 </script>		                             
 </x-default-layout> 
