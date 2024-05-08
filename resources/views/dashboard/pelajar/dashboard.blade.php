@@ -4,6 +4,7 @@
    <link rel="stylesheet" href="/assets/css/saringan.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+   <script src="/assets/lang/Malay.json"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>
 	<!--begin::Page title-->
@@ -235,8 +236,20 @@
 	<div>
 </div>
 <script>
-	$('#sortTable1').DataTable();
-	$('#sortTable2').DataTable();
+	$('#sortTable1').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [], // Disable initial sorting
+			language: {
+				url: "/assets/lang/Malay.json"
+			}
+        });
+	$('#sortTable2').DataTable({
+            ordering: true, // Enable manual sorting
+            order: [], // Disable initial sorting
+			language: {
+				url: "/assets/lang/Malay.json"
+			}
+        });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
