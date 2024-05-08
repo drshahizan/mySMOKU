@@ -1230,11 +1230,12 @@ class PenyelarasController extends Controller
 
     public function sejarahTuntutan()
     {
-        $tuntutan = Tuntutan::where('tuntutan.status', '!=', '4')
-        ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'tuntutan.smoku_id')
-        ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
+        $tuntutan = Tuntutan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
+        // join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'tuntutan.smoku_id')
+        // ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
+        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
         ->select('tuntutan.*')
-        ->orderBy('created_at', 'DESC')
+        ->orderBy('tuntutan.id', 'DESC')
         ->get();
 
         return view('tuntutan.penyelaras_bkoku.sejarah_tuntutan',compact('tuntutan'));
@@ -1287,9 +1288,10 @@ class PenyelarasController extends Controller
 
     public function sejarahPermohonan()
     {
-        $permohonan = Permohonan::where('permohonan.status', '!=','4')
-        ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
-        ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
+        $permohonan = Permohonan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+        // ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
+        // ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
+        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
         ->select('permohonan.*')
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get();
@@ -2046,7 +2048,7 @@ class PenyelarasController extends Controller
     {
         $pelajar = Smoku::join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->join('users','users.no_kp','=','smoku.no_kp')
         ->leftJoin('tukar_institusi', 'tukar_institusi.smoku_id', '=', 'smoku.id')
         ->where(function($query) {
