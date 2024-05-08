@@ -460,6 +460,7 @@
 	<!--end::Global Javascript Bundle-->
 	<!--begin::Vendors Javascript(used for this page only)-->
 	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="/assets/lang/Malay.json"></script>
 	<!--end::Vendors Javascript-->
 	<!--begin::Custom Javascript(used for this page only)-->
 	<script src="/assets/js/custom/apps/customers/list/export.js"></script>
@@ -468,7 +469,21 @@
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+	<script>
+	
+		$(document).ready(function() {
+			// Destroy existing DataTable instance
+			$('#kt_customers_table').DataTable().destroy();
+			$('#kt_customers_table').DataTable({
+				ordering: true, // Enable manual sorting
+				order: [], // Disable initial sorting
+				language: {
+					url: "assets/lang/Malay.json" // Adjust the path accordingly
+				}
+			});
+		});
+	</script>
+	
 	<script>
 		$(document).ready(function() {
 			$('.js-example-basic-single').select2();
