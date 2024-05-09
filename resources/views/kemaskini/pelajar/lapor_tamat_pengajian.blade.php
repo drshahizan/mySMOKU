@@ -43,10 +43,11 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Sijil Tamat Pengajian / Surat Senat&nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
-												<td style="width: 55% !important;">
-													<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
+												<td>
+													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf" style="display: none;" onchange="displayFileName()">
+													<div class="d-flex"><button type="button" onclick="document.getElementById('sijilTamat').click();" class="form-control">Pilih Fail</button>&nbsp;<span id="fileName"></span></div>
 													@if($uploadedSijilTamat)
 														@foreach($uploadedSijilTamat as $sijil)
 															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil}}</a>
@@ -54,16 +55,23 @@
 													@endif
 												</td>
 											</tr>
-								
+											<script>
+												function displayFileName() {
+													var input = document.getElementById('sijilTamat');
+													var output = document.getElementById('fileName');
+													output.innerText = input.files[0].name;
+												}
+											</script>
 											{{-- TRANSKRIP --}}
 											<tr>
 												<td style="width: 45% !important;">
 													Salinan Transkrip &nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												
-												<td style="width: 55% !important;">
-													<input type="file" id="transkrip" name="transkrip[]" required/>
+												<td>
+													<input type="file" id="transkrip" name="transkrip[]" required accept=".pdf" style="display: none;" onchange="displayFileNameTranskrip()">
+													<div class="d-flex"><button type="button" onclick="document.getElementById('transkrip').click();" class="form-control">Pilih Fail</button>&nbsp;<span id="fileNameTranskrip"></span></div>
 													@if($uploadedTranskrip)
 														@foreach($uploadedTranskrip as $transkrip)
 															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
@@ -71,7 +79,13 @@
 													@endif
 												</td>
 											</tr>
-								
+											<script>
+												function displayFileNameTranskrip() {
+													var input = document.getElementById('transkrip');
+													var output = document.getElementById('fileNameTranskrip');
+													output.innerText = input.files[0].name;
+												}
+											</script>
 											{{-- NOTES --}}
 											<tr>
 												<td colspan="2">
@@ -107,28 +121,28 @@
 													<!--begin::Input-->
 													<select id="status_pekerjaan" name="status_pekerjaan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="PILIH" >
 														<option></option>
-														<option value="TIDAK BEKERJA">TIDAK BEKERJA</option>
-														<option value="BEKERJA">BEKERJA</option>
+														<option value="TIDAK BEKERJA" {{$status_pekerjaan == "TIDAK BEKERJA" ? 'selected' : ''}}>TIDAK BEKERJA</option>
+														<option value="BEKERJA" {{$status_pekerjaan == "BEKERJA" ? 'selected' : ''}}>BEKERJA</option>
 													</select>
 													<!--end::Input-->
 												</td>
 											</tr>
 								
 											{{-- Pekerjaan --}}
-											<tr>
+											<tr id="div_pekerjaan">
 												<td style="width: 45% !important;">
 													Pekerjaan
 												</td>
 												
 												<td style="width: 55% !important;">
 													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" style="text-transform: uppercase;" placeholder="Polis" value="" />
+													<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" style="text-transform: uppercase;" placeholder="Polis" value="{{ $pekerjaan }}" />
 													<!--end::Input-->
 												</td>
 											</tr>
 
 											{{-- Pendapatan --}}
-											<tr>
+											<tr id="div_pendapatan">
 												<td style="width: 45% !important;">
 													Pendapatan&nbsp;
 													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
@@ -140,7 +154,7 @@
 													<!--begin::Input-->
 													<div class="d-flex">
 														<span class="input-group-text">RM</span>
-														<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="2500" value="" />
+														<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="2500" value="{{ $pendapatan }}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5"/>
 													</div>
 													<!--end::Input-->
 												</td>
@@ -155,7 +169,7 @@
 										<tbody>
 											<tr>
 												<td colspan="2" style="text-align: justify;">
-													<input type="checkbox" value="1" id="perakuan" name="perakuan" @if($perakuan) checked @endif required/>
+													<input type="checkbox" value="1" id="perakuan" name="perakuan" @if($perakuan) checked @endif required oninvalid="this.setCustomValidity('Sila tandakan kotak ini jika anda ingin teruskan.')" oninput="setCustomValidity('')"/>
 													Saya mengaku bahawa maklumat dan dokumen yang disertakan adalah betul dan benar dan bertanggungjawab ke atas maklumat dan dokumen tersebut. 
 													Saya memahami bahawa saya boleh dikenakan tindakan sekiranya mana-mana maklumat dan/atau dokumen yang disertakan adalah tidak benar.
 												</td>											
@@ -184,6 +198,32 @@
 		<!--end::Content-->
 
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script>
+			//BEKERJA
+			$(document).ready(function(){
+				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
+				if ( status_pekerjaan == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else{
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				
+				$('#status_pekerjaan').on('change', function() {
+				if ( this.value == "BEKERJA"){
+					$("#div_pekerjaan").show();
+					$("#div_pendapatan").show();
+				}
+				else {
+					$("#div_pekerjaan").hide();
+					$("#div_pendapatan").hide();
+				}
+				});
+
+			});
+		</script>
 		<script>
 			// Submit the form using JavaScript
 			function submitForm() {

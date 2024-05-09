@@ -133,11 +133,16 @@ class PelajarController extends Controller
         $user = Auth::user();
         $smoku = Smoku::where('no_kp', $user->no_kp)->first();
         $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku->id)->first();
+        $maklumat_kerja = ButiranPelajar::where('smoku_id', $smoku->id)->first();
 
+       
         // Initialize variables to hold uploaded file information
         $uploadedSijilTamat = [];
         $uploadedTranskrip = [];
-        $perakuan = session('perakuan', 0);
+        $perakuan = '';
+        $status_pekerjaan = '';
+        $pekerjaan = '';
+        $pendapatan = '';
 
         // Check if $tamat_pengajian is not null and has uploaded files
         if ($tamat_pengajian) {
@@ -150,11 +155,29 @@ class PelajarController extends Controller
             }
 
             if($tamat_pengajian->perakuan){
-                $perakuan = session('perakuan', 1);
+                $perakuan = $tamat_pengajian->perakuan;
+            }
+        }
+        // Check if $maklumat_kerja is not null
+        if ($maklumat_kerja) {
+           
+
+            if ($maklumat_kerja->status_pekerjaan) {
+                $status_pekerjaan = $maklumat_kerja->status_pekerjaan ? $maklumat_kerja->status_pekerjaan : [$maklumat_kerja->status_pekerjaan];
+            }
+            
+            if ($maklumat_kerja->pekerjaan) {
+                $pekerjaan = $maklumat_kerja->pekerjaan ? $maklumat_kerja->pekerjaan : [$maklumat_kerja->pekerjaan];
+            }
+
+            if($maklumat_kerja->pendapatan){
+                $pendapatan = $maklumat_kerja->pendapatan ? $maklumat_kerja->pendapatan : [$maklumat_kerja->pendapatan];
             }
         }
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan'));
+        // dd($pekerjaan);
+
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan', 'status_pekerjaan', 'pekerjaan', 'pendapatan'));
     }
 
     public function hantarTamatPengajian(Request $request)
@@ -207,6 +230,24 @@ class PelajarController extends Controller
                 }
             }
         }
+
+        //update maklumat pekerjaan
+        $status_pekerjaan = $request->status_pekerjaan;
+        $pekerjaan = strtoupper($request->pekerjaan);
+        $pendapatan = $request->pendapatan;
+
+        // Check if status_pekerjaan is 'TIDAK BEKERJA'
+        if ($status_pekerjaan === 'TIDAK BEKERJA') {
+            $pekerjaan = null;
+            $pendapatan = null;
+        }
+
+        ButiranPelajar::where('smoku_id', $smoku->id)
+            ->update([
+                'status_pekerjaan' => $status_pekerjaan,
+                'pekerjaan' => $pekerjaan,
+                'pendapatan' => $pendapatan
+            ]);
 
         // Store the uploaded file names or URLs in the session
         session()->put('uploadedSijilTamat', $uploadedSijilTamat);
