@@ -43,7 +43,7 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Sijil Tamat Pengajian / Surat Senat&nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												<td style="width: 55% !important;">
 													<input type="file" id="sijilTamat" name="sijilTamat[]" required/>
@@ -59,7 +59,7 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Salinan Transkrip &nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												
 												<td style="width: 55% !important;">
@@ -79,13 +79,70 @@
 														Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
 													</div>
 								
-													<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
+													<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
 														Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png', dan '.jpeg'.
 													</div>
 								
-													<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style='color:gray; font-size:15px;'></i>&nbsp; 
+													<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
 														Saiz maksimum fail adalah 2 MB.
 													</div>
+												</td>
+											</tr>
+										</tbody>
+
+										{{-- MAKLUMAT PEKERJAAN --}}
+										<thead>
+											<tr>
+												<th colspan="2" class="text-center">Maklumat Pekerjaan Terkini</th>
+											</tr>
+										</thead>
+								
+										<tbody>
+											{{-- Status --}}
+											<tr>
+												<td style="width: 45% !important;">
+													Status Pekerjaan
+												</td>
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<select id="status_pekerjaan" name="status_pekerjaan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="PILIH" >
+														<option></option>
+														<option value="TIDAK BEKERJA">TIDAK BEKERJA</option>
+														<option value="BEKERJA">BEKERJA</option>
+													</select>
+													<!--end::Input-->
+												</td>
+											</tr>
+								
+											{{-- Pekerjaan --}}
+											<tr>
+												<td style="width: 45% !important;">
+													Pekerjaan
+												</td>
+												
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" style="text-transform: uppercase;" placeholder="Polis" value="" />
+													<!--end::Input-->
+												</td>
+											</tr>
+
+											{{-- Pendapatan --}}
+											<tr>
+												<td style="width: 45% !important;">
+													Pendapatan&nbsp;
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
+														<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+													</span>
+												</td>
+												
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<div class="d-flex">
+														<span class="input-group-text">RM</span>
+														<input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" placeholder="2500" value="" />
+													</div>
+													<!--end::Input-->
 												</td>
 											</tr>
 										</tbody>
