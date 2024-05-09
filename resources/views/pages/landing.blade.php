@@ -4,8 +4,8 @@
 	<head><base href=""/>
 		<title>Selamat Datang - Sistem BKOKU</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="description" content="Bantuan ini merupakan keistimewaan yang diberikan kepada pelajar OKU. Oleh itu, ianya harus dibezakan dengan kemudahan-kemudahan lain yang turut diterima oleh pelajar bukan OKU. Ini bermakna sekiranya seseorang pelajar OKU itu menerima biasiswa atau kemudahan lain yang juga turut dinikmati oleh pelajar bukan OKU, maka pelajar OKU tersebut adalah layak menerima elaun ini." />
+		<meta name="keywords" content="bkoku, ppk, bantuan, oku" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
@@ -197,8 +197,8 @@
 												<!--begin::Features-->
 												<div class="w-100 mb-10">
 													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: rgb(97, 183, 220); padding: 5px; border-radius: 5px;">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">SYARAT DAN GARIS PANDUAN UMUM</span>
+													<div class="d-flex flex-stack mb-5" style="background-color: #f78112; padding: 5px; border-radius: 5px;">
+														<span class="fw-semibold fs-6" style="color: white;">SYARAT DAN GARIS PANDUAN UMUM</span>
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
@@ -220,8 +220,8 @@
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: rgb(97, 183, 220); padding: 5px; border-radius: 5px;">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">SKOP PEMBIAYAAN ELAUN KHAS</span>
+													<div class="d-flex flex-stack mb-5" style="background-color: #f78112; padding: 5px; border-radius: 5px;">
+														<span class="fw-semibold fs-6" style="color: white;">SKOP PEMBIAYAAN ELAUN KHAS</span>
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
