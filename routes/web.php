@@ -260,6 +260,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('sekretariat/kemaskini/senarai/pelajar', [SekretariatController::class, 'senaraiTukarInstitusi'])->name('senarai.tukar.institusi');
     Route::post('sekretariat/kemaskini/hantar/maklumat/institusi/{id}', [SekretariatController::class, 'kemaskiniTukarInstitusi'])->name('kemaskini.tukar.institusi');
 
+    //Kemaskini - Sekretariat - Pengesahan CGPA
+    Route::get('sekretariat/kemaskini/senarai/cgpa/pelajar', [SekretariatController::class, 'senaraiPengesahanCGPA'])->name('senarai.pengesahan.cgpa');
+    Route::post('sekretariat/kemaskini/hantar/pengesahan/cgpa/{id}', [SekretariatController::class, 'kemaskiniPengesahanCGPA'])->name('kemaskini.pengesahan.cgpa');
+
     //Kemaskini - Sekretariat - Surat Tawaran
     Route::get('kemaskini/sekretariat/surat/tawaran/preview', [SekretariatController::class, 'previewSuratTawaran'])->name('preview');
     Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');

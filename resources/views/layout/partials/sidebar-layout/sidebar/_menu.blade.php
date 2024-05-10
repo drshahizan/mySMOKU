@@ -255,6 +255,7 @@
 
 		//tukar institusi
 		$tukarInstitusi = DB::table('tukar_institusi')->where('status', '=', '0')->count();
+		$pengesahanCGPA = DB::table('permohonan_peperiksaan')->where('pengesahan_rendah', '=', '1')->count();
 	@endphp
 
 	<!--begin::sidebar menu-->
@@ -371,6 +372,12 @@
 					<a class="menu-link" href="{{ route('senarai.tukar.institusi')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 						<span class="menu-title">Tukar Institusi ({{$tukarInstitusi}}) </span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('senarai.pengesahan.cgpa')}}">
+						<span class="menu-icon">{!! getIcon('key', 'fs-2') !!}</span>
+						<span class="menu-title">Pengesahan CGPA ({{$pengesahanCGPA}}) </span>
 					</a>
 				</div>
 				<div class="menu-item">

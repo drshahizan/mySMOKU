@@ -3240,4 +3240,41 @@ class SekretariatController extends Controller
             return redirect()->back();
         }
     }
+
+    public function senaraiPengesahanCGPA()
+    {
+        $pengesahan_cgpa = Peperiksaan::join('permohonan','permohonan.id','=','permohonan_peperiksaan.permohonan_id')
+        ->join('smoku','smoku.id','=','permohonan.smoku_id')
+        ->orderBy('permohonan_peperiksaan.id', 'DESC')
+        ->get(['smoku.*','permohonan_peperiksaan.*']);
+        //  dd($pengesahan_cgpa);
+
+        // $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
+        // $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
+        // $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get();
+        // $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
+        // dd($infoipt); 
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_pengesahan_cgpa', compact('pengesahan_cgpa'));
+    }
+
+    public function kemaskiniPengesahanCGPA(Request $request, $id)
+    {
+        $pengesahan_cgpa = Peperiksaan::updateOrCreate(['permohonan_id' => $id]);
+        $pengesahan_cgpa->pengesahan_rendah = $request->input('status');
+        $pengesahan_cgpa->save();
+
+        if ($request->input('status') === '2') {
+            // Redirect to the original page
+            return redirect()->back()->with('success', 'Pengesahan CGPA diluluskan.');
+        }
+        else if ($request->input('status') === '0') {
+            // Redirect to the original page
+            return redirect()->back()->with('failed', 'Pengesahan CGPA tidak diluluskan.');
+        }
+        else {
+            // Redirect to the original page
+            return redirect()->back();
+        }
+    }
 }
