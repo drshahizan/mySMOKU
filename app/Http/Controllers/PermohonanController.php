@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PengesahanCGPA;
 
 use App\Http\Controllers\Controller;
 use App\Mail\PermohonanHantar;
@@ -784,8 +785,10 @@ class PermohonanController extends Controller
 
     public function save(Request $request)
     {   
+
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
+        $emailmain = "bkoku@mohe.gov.my";
 
         $kepPeperiksaan=$request->kepPeperiksaan;
         $counter = 1; 
@@ -802,12 +805,32 @@ class PermohonanController extends Controller
             }
             $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
 
+            $cgpa = $request->cgpa;
+            if($cgpa >= 0.0 && $cgpa < 2.0){
+                $pengesahan = 1;
+                $catatan = "Pelajar telah menghantar keputusan peperiksaan terdahulu. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
+                if (empty($invalidEmails)) 
+                {            
+                    // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+                    Mail::to($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+
+                } 
+                else 
+                {
+                    foreach ($invalidEmails as $invalidEmail) {
+                        Log::error('Invalid email address: ' . $invalidEmail);
+                    }
+                }
+            }else{
+                $pengesahan = null;
+            }
             
             $data=new peperiksaan();
             $data->permohonan_id=$permohonan->id;
             $data->sesi=$request->sesi;
             $data->semester=$request->semester;
             $data->cgpa=$request->cgpa;
+            $data->pengesahan_rendah=$pengesahan;
             $data->kepPeperiksaan=$uniqueFilename;
             $data->save();
 

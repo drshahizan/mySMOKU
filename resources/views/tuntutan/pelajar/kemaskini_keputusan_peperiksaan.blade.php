@@ -18,7 +18,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-12">
 						<!--begin::Form-->
-						<form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+						<form action="{{ route('save') }}" method="post" enctype="multipart/form-data" id="keputusan">
 							@csrf
 							<div class="d-flex flex-column align-items-start flex-xxl-row">
 								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
@@ -51,7 +51,7 @@
 									<div class="col-lg-10">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 											</span>
 										</label>
 										<div class="mb-5">
-											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
+											<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -74,10 +74,14 @@
 								<!--begin::Action-->
 								@if(!$result)
 								<div class="d-flex flex-center mt-15">
-									<button type="submit"  class="btn btn-primary">
+									<button id="submitButton" type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
+								@elseif($result && $result->pengesahan_rendah==1)
+									<div class="alert alert-danger mt-15" role="alert" style="color: black;">
+										Keputusan peperiksaan telah dihantar untuk semakan Sekretariat KPT.
+									</div>
 								@else
 									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
 										Keputusan peperiksaan lepas sudah dikemaskini.
@@ -145,6 +149,27 @@
 		
 <!--begin::Javascript-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	//cgpa
+	$(document).ready(function(){
+		$('#cgpa').on('change', function() {
+			var cgpa = parseFloat($(this).val());
+			if (cgpa >= 0.0 && cgpa < 2.0) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Tidak Berjaya!',
+					text: 'CGPA anda bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+					confirmButtonText: 'OK'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						// Change button text to "Hantar Pengesahan"
+						$('#submitButton').text('Hantar Pengesahan');
+					}
+				});
+			} 
+		});
+	});
+	</script>
 <script>
 	@if(session('success'))
 		Swal.fire({

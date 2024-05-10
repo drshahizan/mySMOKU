@@ -129,7 +129,11 @@ class TuntutanController extends Controller
                             return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
                         }
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                    }elseif($result && $result->pengesahan_rendah== 1){
+                        return redirect()->route('kemaskini.keputusan')->with('error', 'Pengesahan duluuuuu.');
+
                     }
+
                 }
             }
 
