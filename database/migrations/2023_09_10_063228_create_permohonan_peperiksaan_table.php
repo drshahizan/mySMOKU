@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sesi');
             $table->integer('semester');
             $table->string('cgpa');
+            $table->string('pengesahan_rendah');
             $table->string('kepPeperiksaan');
             $table->string('nota_kepPeperiksaan')->nullable();
             $table->foreign('permohonan_id')

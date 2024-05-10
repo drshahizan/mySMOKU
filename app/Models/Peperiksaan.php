@@ -15,6 +15,7 @@ class Peperiksaan extends Model
         'sesi',
         'semester',
         'cgpa',
+        'pengesahan_rendah',
         'kepPeperiksaan',
         'nota_kepPeperiksaan',
     ];
