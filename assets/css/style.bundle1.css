@@ -47367,7 +47367,7 @@ a:hover {
 }
 
 .landing-dark-bg {
-  background-color: #13263C;
+  background-color: #e2cfea;
 }
 
 .landing-dark-color {
@@ -49400,7 +49400,7 @@ body,
   }
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar {
-  background-color: #11772b;
+  background-color: #461177;
   border-right: 0;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .scroll-y,
@@ -49627,7 +49627,7 @@ body,
 
 @media (min-width: 992px) {
   [data-kt-app-layout=dark-sidebar] .app-sidebar .menu-sub-lg-dropdown {
-    background-color: #11772b;
+    background-color: #461177;
   }
 }
 [data-bs-theme=dark] [data-kt-app-layout=dark-sidebar] .app-sidebar {
