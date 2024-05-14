@@ -171,8 +171,19 @@
 														<a href="{{ route('permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
 													@elseif (($permohonan_id->status == 5) && ($permohonan->kod_status === $permohonan_id->status) && ($jenis_institusi == 'IPTS'))														<a href="{{ route('pelajar.sejarah.permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
 													@else
-														{{ ucwords(strtolower($permohonan->status)) }}
+													<?php //dd($permohonan->status); ?>
+														@if ($permohonan->status == 'LAYAK')
+															<?php $status = 'Berjaya'; ?>
+														@elseif ($permohonan->status == 'DIHANTAR')
+															<?php $status = 'Berjaya Dihantar'; ?>
+														@else
+															<?php $status = ucwords(strtolower($permohonan->status)); ?>
+														@endif
+														{{ $status }}
 													@endif
+													{{-- @else
+														{{ ucwords(strtolower($permohonan->status)) }}
+													@endif --}}
 												</td>												
 											</tr>
 											@endforeach
@@ -217,7 +228,17 @@
 													@if ($tuntutan->status_semasa == 1)
 														<a href="{{ route('tuntutan.baharu') }}">{{ ucwords(strtolower($tuntutan->status)) }}</a>
 													@else
-														{{ ucwords(strtolower($tuntutan->status)) }}
+													<?php //dd($tuntutan->status); ?>
+														@if ($tuntutan->status == 'LAYAK')
+															<?php $status = 'Berjaya'; ?>
+														@elseif ($tuntutan->status == 'TIDAK LAYAK')
+															<?php $status = 'Tidak Berjaya'; ?>
+														@elseif ($tuntutan->status == 'DIHANTAR')
+															<?php $status = 'Berjaya Dihantar'; ?>
+														@else
+															<?php $status = ucwords(strtolower($tuntutan->status)); ?>
+														@endif
+														{{ $status }}
 													@endif
 												</td>	
 												{{-- <td>{{ucwords(strtolower($tuntutan->status))}}</td> --}}
