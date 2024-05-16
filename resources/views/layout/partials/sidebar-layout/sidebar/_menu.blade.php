@@ -452,12 +452,24 @@
 						<span class="menu-heading fw-bold text-uppercase fs-7">Pelaporan</span>
 					</div>
 				</div>
+
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('laporan.permohonan') }}">
 						<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
 						<span class="menu-title">Permohonan</span>
 					</a>
+					<!-- Start of submenu -->
+					<ul> 
+						<a class="menu-link" href="{{ route('laporan.statistik') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Statistik</span>
+						</a>
+					</ul> 
+					<!-- End of submenu -->
 				</div>
+				
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('laporan.tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('chart-line', 'fs-2') !!}</span>

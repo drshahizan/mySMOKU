@@ -12,6 +12,12 @@ class LaporanController extends Controller
         return view('pelaporan.permohonan');
        
     }
+    public function statistik()
+    {
+        
+        return view('pelaporan.statistik');
+       
+    }
     public function tuntutan()
     {
         
