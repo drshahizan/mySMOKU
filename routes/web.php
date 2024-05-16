@@ -56,6 +56,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    Route::get('/laporan/keseluruhan', [LaporanController::class, 'keseluruhan'])->name('laporan.keseluruhan');
     Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
     Route::get('/laporan/statistik', [LaporanController::class, 'statistik'])->name('laporan.statistik');
     Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
