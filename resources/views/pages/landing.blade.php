@@ -158,7 +158,7 @@
 				</div>
 				<!--end::Wrapper-->
 				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+				<div class="landing-curve landing-dark-color mb-5 mb-lg-5">
 					
 				</div>
 				<!--end::Curve bottom-->
@@ -197,8 +197,8 @@
 												<!--begin::Features-->
 												<div class="w-100 mb-10">
 													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: #f78112; padding: 5px; border-radius: 5px;">
-														<span class="fw-semibold fs-6" style="color: white;">SYARAT DAN GARIS PANDUAN UMUM</span>
+													<div class="d-flex flex-stack mb-5" style="background-color: #96b6cd; padding: 5px; border-radius: 5px;">
+														<span class="fw-bold fs-6">SYARAT DAN GARIS PANDUAN UMUM</span>
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
@@ -220,8 +220,8 @@
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: #f78112; padding: 5px; border-radius: 5px;">
-														<span class="fw-semibold fs-6" style="color: white;">SKOP PEMBIAYAAN ELAUN KHAS</span>
+													<div class="d-flex flex-stack mb-5" style="background-color: #96b6cd; padding: 5px; border-radius: 5px;">
+														<span class="fw-bold fs-6">SKOP PEMBIAYAAN ELAUN KHAS</span>
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
@@ -446,9 +446,9 @@
 													<table>
 														<thead>
 															<tr>
-																<th>Bil.</th>
-																<th>Yuran Pengajian Yang LAYAK Dituntut</th>
-																<th>Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
+																<th style="background-color: #96b6cd;">Bil.</th>
+																<th style="background-color: #96b6cd;">Yuran Pengajian Yang LAYAK Dituntut</th>
+																<th style="background-color: #96b6cd;">Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
 															</tr>
 														</thead>
 														<tbody>
@@ -588,12 +588,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun (Kolej Komuniti dan Politeknik Sahaja)
+								<div class="fs-6 fs-lg-6">2 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Kolej Komuniti dan Politeknik)
 								<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)
 								</div>
 								<!--end::Description-->
@@ -614,13 +615,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">3 Tahun 
-								<br />(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
+								<div class="fs-6 fs-lg-6">3 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
 								<!--end::Description-->
 							</div>
 							<!--end::Story-->
@@ -639,13 +640,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-								<br />(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+								<div class="fs-6 fs-lg-6">4 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
 								<!--end::Description-->
 							</div>
 							<!--end::Story-->
@@ -659,7 +660,7 @@
 								<img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
 								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<div class="d-flex flex-center mb-5">
+								<div class="d-flex mb-0">
 									<!--begin::Badge-->
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">4</span>
 									<!--end::Badge-->
@@ -669,8 +670,8 @@
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-								<br />(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+								<div class="fs-6 fs-lg-6">2 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
 								<!--end::Description-->
 							</div>
 							<!--end::Story-->
@@ -689,13 +690,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">5</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-								<br />(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+								<div class="fs-6 fs-lg-6">2 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
 								<!--end::Description-->
 							</div>
 							<!--end::Story-->
@@ -714,13 +715,13 @@
 									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">6</span>
 									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
 								<!--begin::Description-->
-								<div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-								<br />(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+								<div class="fs-6 fs-lg-6">4 Tahun</div>
+								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
 								<!--end::Description-->
 							</div>
 							<!--end::Story-->
@@ -770,7 +771,7 @@
 												<!-- begin::Heading -->
 												<div class="mb-4">
 													<!-- begin::Title -->
-													<div class="text-dark fw-bold" style="font-size:24px;">Sepenuh Masa</div>
+													<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
@@ -778,11 +779,11 @@
 											<!-- end::Option for Sepenuh Masa -->
 
 											<!-- begin::Option for Separuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-6 px-6">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6" style="background-color: #96b6cd;">
 												<!-- begin::Heading -->
 												<div class="mb-4">
 													<!-- begin::Title -->
-													<div class="text-white fw-bold" style="font-size:24px;">Separuh Masa</div>
+													<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
@@ -803,7 +804,7 @@
 												<!-- begin::Heading -->
 												<div class="mb-2">
 													<!-- begin::Title -->
-													<div class="text-dark fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+													<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
@@ -812,7 +813,7 @@
 												<!-- begin::Heading -->
 												<div class="mb-2">
 													<!-- begin::Title -->
-													<div class="text-dark fw-bold" style="font-size:14px;">Biasiswa</div>
+													<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
@@ -820,20 +821,20 @@
 											<!-- end::Option for Sepenuh Masa -->
 
 											<!-- begin::Option for Separuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-2 px-6 mb-2">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
 												<!-- begin::Heading -->
 												<div class="mb-2">
 													<!-- begin::Title -->
-													<div class="text-white fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+													<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
 											</div>
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-2 px-6 mb-8">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-8" style="background-color: #96b6cd;">
 												<!-- begin::Heading -->
 												<div class="mb-2">
 													<!-- begin::Title -->
-													<div class="text-white fw-bold" style="font-size:14px;">Biasiswa</div>
+													<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
 													<!-- end::Title -->
 												</div>
 												<!-- end::Heading -->
@@ -1014,7 +1015,12 @@
 													<!--end::Item-->
 													<!--begin::Item-->
 													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Kadar Bayaran PPK adalah sebanyak :</span>
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar OKU yang mempunyai kod DD atau DE (Pendengaran sahaja) di <b>Kolej Komuniti</b> dan <b>Politeknik</b> terpilih.</span>
+													</div>
+													<!--end::Item-->
+													<!--begin::Item-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iii. Kadar Bayaran PPK adalah sebanyak :</span>
 													</div>
 													<div class="d-flex flex-stack">
 														<span class="fw-semibold fs-6 text-gray-800 text-start">
@@ -1024,8 +1030,80 @@
 															</ul>
 														</span>
 													</div>
-													
 													<!--end::Item-->
+													<!--begin::Senarai Kursus-->
+													<div class="d-flex flex-stack mb-5">
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iv. Senarai institusi dan nama program yang terlibat :</span>
+													</div>
+													<div class="text-center">
+														<!--begin::Row-->
+														<div class="row g-10">
+															<!--begin::Col-->
+															<div class="col-xl-12">
+																<div class="d-flex h-100 align-items-center">
+																	<!--begin::Option-->
+																	<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
+																		<!--begin::Features-->
+																		<div class="w-100 mb-10">
+																			<!-- Table Start -->
+																			<table>
+																				<thead>
+																					<tr>
+																						<th style="background-color: #96b6cd;">Bil.</th>
+																						<th style="background-color: #96b6cd;">Institusi</th>
+																						<th style="background-color: #96b6cd;">Nama Program</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<td>1.</td>
+																						<td>Politeknik Ungku Omar</td>
+																						<td>Sijil Khas Pembinaan</td>
+																					</tr>
+																					<tr>
+																						<td>2.</td>
+																						<td>Politeknik Sultan Salahuddin Abdul Aziz Shah</td>
+																						<td>Sijil Khas Penyenggaraan Mekanikal</td>
+																					</tr>
+																					<tr>
+																						<td>3.</td>
+																						<td>Politeknik Kota Kinabalu</td>
+																						<td>Sijil Khas Operasi Katering</td>
+																					</tr>
+																					<tr>
+																						<td>4.</td>
+																						<td>Politeknik Tuanku Syed Sirajuddin</td>
+																						<td>Sijil Khas Operasi Katering</td>
+																					</tr>
+																					<tr>
+																						<td>5.</td>
+																						<td>Politeknik Ibrahim Sultan</td>
+																						<td>
+																							<ul>a. Sijil Khas Operasi Katering</ul>
+																							<ul>b. Sijil Khas Reka Bentuk Fesyen</ul>
+																							<ul>c. Sijil Khas Reka Bentuk Grafik</ul>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td>6.</td>
+																						<td>Kolej Komuniti Selayang</td>
+																						<td>Sijil Asas Kulinari</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!-- Table End -->
+																		</div>
+																		<!--end::Features-->
+																		
+																	</div>
+																	<!--end::Option-->
+																</div>
+															</div>
+															<!--end::Col-->
+														</div>
+														<!--end::Row-->
+													</div>
+													<!--end::Senarai Kursus-->
 												</div>
 												<!--end::Features-->
 												
@@ -1077,10 +1155,10 @@
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Alamat :</div>
+									<div class="fs-4 fw-bold text-dark mb-3">Alamat :</div>
 									<!--end::Title-->
 									<!--begin::Alamat-->
-									<div class="text-gray-500 fw-semibold fs-6">Kementerian Pendidikan Tinggi,
+									<div class="fw-semibold fs-6">Kementerian Pendidikan Tinggi,
 										<br /> Bahagian Biasiswa,
 										<br /> Unit Pra Perkhidmatan,
 										<br /> Aras 2, No. 2, Menara 2,
@@ -1101,20 +1179,20 @@
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Pegawai Untuk Dihubungi :</div>
+									<div class="fs-4 fw-bold text-dark mb-3">Pegawai Untuk Dihubungi :</div>
 									<!--end::Title-->
 									<!--begin::Telefon-->
-									<div class="text-gray-500 fw-semibold fs-7">Cik Nur Dayana binti Rozaini : 03-8870 6373
-									<br />Cik Nurul Atiqah Noor Azmir binti Abdul Muhaymin : 03-8870 6347</div>
+									<div class="fw-semibold fs-7">Cik Nur Dayana binti Rozaini : 03-8870 6373</div>
+									<div class="fw-semibold fs-7">Cik Nurul Atiqah Noor Azmir binti Abdul Muhaymin : 03-8870 6347</div>
 									
 									<!--end::Telefon-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
+									<div class="fs-4 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
 									<!--end::Title-->
 									<!--begin::Emel-->
-									<div class="text-gray-500 fw-semibold fs-6">bkoku@mohe.gov.my</div>
-									<div class="text-gray-500 fw-semibold fs-6">iptabkoku@mohe.gov.my</div>
+									<div class="fw-semibold fs-6">bkoku@mohe.gov.my</div>
+									<div class="fw-semibold fs-6">iptabkoku@mohe.gov.my</div>
 									<!--end::Emel-->
 								</div>
 								<!--end::Wrapper-->
@@ -1130,22 +1208,22 @@
 								<!--begin::Wrapper-->
 								<div class="mb-7">
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Waktu Pejabat</div>
+									<div class="fs-4 fw-bold text-dark mb-3">Waktu Pejabat</div>
 									<!--end::Title-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-6">Isnin hingga Jumaat 
+									<div class="fw-semibold fs-6">Isnin hingga Jumaat 
 									<br /> 9.00 pagi - 4.30 petang</div>
 									<!--end::Waktu-->
 									<br />
 									<!--begin::Title-->
-									<div class="fs-6 fw-bold text-dark mb-3">Waktu Rehat</div>
+									<div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat</div>
 									<!--end::Title-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-6">Isnin hingga Khamis 
+									<div class="fw-semibold fs-6">Isnin hingga Khamis 
 									<br /> (1.00 tengah hari - 2.00 petang)</div>
 									<!--end::Waktu-->
 									<!--begin::Waktu-->
-									<div class="text-gray-500 fw-semibold fs-6">Jumaat 
+									<div class="fw-semibold fs-6">Jumaat 
 									<br /> (12.15 tengah hari - 2.45 petang)</div>
 									<!--end::Waktu-->
 								</div>
