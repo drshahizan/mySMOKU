@@ -1015,7 +1015,7 @@
 													<!--end::Item-->
 													<!--begin::Item-->
 													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar OKU yang mempunyai kod DD atau DE (Pendengaran sahaja) di <b>Kolej Komuniti</b> dan <b>Politeknik</b> terpilih.</span>
+														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar OKU yang mempunyai kod DD atau DE <b>(Pendengaran sahaja)</b> di Kolej Komuniti dan Politeknik terpilih.</span>
 													</div>
 													<!--end::Item-->
 													<!--begin::Item-->
