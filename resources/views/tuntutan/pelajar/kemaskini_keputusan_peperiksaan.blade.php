@@ -51,7 +51,7 @@
 									<div class="col-lg-10">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required accept=".pdf, .jpg, .png, .jpeg" oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -116,7 +116,7 @@
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 											<th>Sesi</th>
 											<th>Semester</th>
-											<th>Keputusan (PNGK)</th>
+											<th>Keputusan (PNG)</th>
 											<th>Salinan</th>
 										</tr>
 									</thead>

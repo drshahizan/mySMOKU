@@ -46,7 +46,7 @@
 													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												<td>
-													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
+													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf, .jpg, .png, .jpeg" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
 													@if($uploadedSijilTamat)
 														@foreach($uploadedSijilTamat as $sijil)
 															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil}}</a>
@@ -63,7 +63,7 @@
 												</td>
 												
 												<td>
-													<input type="file" id="transkrip" name="transkrip[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
+													<input type="file" id="transkrip" name="transkrip[]" required accept=".pdf, .jpg, .png, .jpeg" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
 													@if($uploadedTranskrip)
 														@foreach($uploadedTranskrip as $transkrip)
 															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
