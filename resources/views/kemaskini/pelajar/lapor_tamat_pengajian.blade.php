@@ -43,7 +43,7 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Sijil Tamat Pengajian / Surat Senat&nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/senat.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												<td>
 													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf, .jpg, .png, .jpeg" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
@@ -59,7 +59,7 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Salinan Transkrip &nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/transkrip.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												
 												<td>

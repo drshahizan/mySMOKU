@@ -49,7 +49,7 @@
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-10">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/cgpa.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
 											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan[]" required accept=".pdf, .jpg, .png, .jpeg" oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
 										</div>
@@ -71,6 +71,21 @@
 									</div>
 								</div>
 								<!--end::Row-->
+
+								{{-- NOTES --}}
+								<div>
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
+										Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+									</div>
+				
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
+										Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png', dan '.jpeg'.
+									</div>
+				
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
+										Saiz maksimum fail adalah 2 MB.
+									</div>
+								</div>
 								<!--begin::Action-->
 								@if(!$result)
 								<div class="d-flex flex-center mt-15">
