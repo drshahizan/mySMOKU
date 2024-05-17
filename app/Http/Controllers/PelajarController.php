@@ -146,6 +146,7 @@ class PelajarController extends Controller
         $kelas_p = '';
         $perakuan = '';
         $status_pekerjaan = '';
+        $sektor = '';
         $pekerjaan = '';
         $pendapatan = '';
 
@@ -178,6 +179,10 @@ class PelajarController extends Controller
             if ($maklumat_kerja->status_pekerjaan) {
                 $status_pekerjaan = $maklumat_kerja->status_pekerjaan ? $maklumat_kerja->status_pekerjaan : [$maklumat_kerja->status_pekerjaan];
             }
+
+            if ($maklumat_kerja->sektor) {
+                $sektor = $maklumat_kerja->sektor ? $maklumat_kerja->sektor : [$maklumat_kerja->sektor];
+            }
             
             if ($maklumat_kerja->pekerjaan) {
                 $pekerjaan = $maklumat_kerja->pekerjaan ? $maklumat_kerja->pekerjaan : [$maklumat_kerja->pekerjaan];
@@ -190,7 +195,7 @@ class PelajarController extends Controller
 
         // dd($pekerjaan);
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'status_pekerjaan', 'pekerjaan', 'pendapatan', 'kelas'));
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'status_pekerjaan', 'sektor', 'pekerjaan', 'pendapatan', 'kelas'));
     }
 
     public function hantarTamatPengajian(Request $request)
@@ -252,11 +257,13 @@ class PelajarController extends Controller
 
         //update maklumat pekerjaan
         $status_pekerjaan = $request->status_pekerjaan;
+        $sektor = $request->sektor;
         $pekerjaan = strtoupper($request->pekerjaan);
         $pendapatan = $request->pendapatan;
 
         // Check if status_pekerjaan is 'TIDAK BEKERJA'
         if ($status_pekerjaan === 'TIDAK BEKERJA') {
+            $sektor = null;
             $pekerjaan = null;
             $pendapatan = null;
         }
@@ -264,6 +271,7 @@ class PelajarController extends Controller
         ButiranPelajar::where('smoku_id', $smoku->id)
             ->update([
                 'status_pekerjaan' => $status_pekerjaan,
+                'sektor' => $sektor,
                 'pekerjaan' => $pekerjaan,
                 'pendapatan' => $pendapatan
             ]);

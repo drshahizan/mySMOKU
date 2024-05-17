@@ -87,6 +87,7 @@
 													<!--end::Input-->
 												</td>
 											</tr>
+
 											{{-- Kelas --}}
 											<tr>
 												<td style="width: 45% !important;">
@@ -140,6 +141,22 @@
 														<option></option>
 														<option value="TIDAK BEKERJA" {{$status_pekerjaan == "TIDAK BEKERJA" ? 'selected' : ''}}>TIDAK BEKERJA</option>
 														<option value="BEKERJA" {{$status_pekerjaan == "BEKERJA" ? 'selected' : ''}}>BEKERJA</option>
+													</select>
+													<!--end::Input-->
+												</td>
+											</tr>
+
+											{{-- Sektor --}}
+											<tr id="div_sektor">
+												<td style="width: 45% !important;">
+													Sektor Pekerjaan
+												</td>
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<select id="sektor" name="sektor" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="PILIH" >
+														<option></option>
+														<option value="KERAJAAN" {{$sektor == "KERAJAAN" ? 'selected' : ''}}>KERAJAAN</option>
+														<option value="SWASTA" {{$sektor == "SWASTA" ? 'selected' : ''}}>SWASTA</option>
 													</select>
 													<!--end::Input-->
 												</td>
@@ -220,20 +237,24 @@
 			$(document).ready(function(){
 				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
 				if ( status_pekerjaan == "BEKERJA"){
+					$("#div_sektor").show();
 					$("#div_pekerjaan").show();
 					$("#div_pendapatan").show();
 				}
 				else{
+					$("#div_sektor").hide();
 					$("#div_pekerjaan").hide();
 					$("#div_pendapatan").hide();
 				}
 				
 				$('#status_pekerjaan').on('change', function() {
 				if ( this.value == "BEKERJA"){
+					$("#div_sektor").show();
 					$("#div_pekerjaan").show();
 					$("#div_pendapatan").show();
 				}
 				else {
+					$("#div_sektor").hide();
 					$("#div_pekerjaan").hide();
 					$("#div_pendapatan").hide();
 				}

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('tel_bimbit');
             $table->string('tel_rumah')->nullable();
             $table->string('status_pekerjaan')->nullable();
+            $table->string('sektor')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->string('pendapatan')->nullable();
             $table->foreign('smoku_id')
