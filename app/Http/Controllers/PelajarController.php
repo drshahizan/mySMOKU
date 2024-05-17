@@ -10,6 +10,7 @@ use App\Models\Dokumen;
 use App\Models\Dun;
 use App\Models\Hubungan;
 use App\Models\InfoIpt;
+use App\Models\KelasPenganugerahan;
 use App\Models\Keturunan;
 use App\Models\LanjutPengajian;
 use App\Models\Negeri;
@@ -135,10 +136,14 @@ class PelajarController extends Controller
         $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku->id)->first();
         $maklumat_kerja = ButiranPelajar::where('smoku_id', $smoku->id)->first();
 
+        $kelas = KelasPenganugerahan::all()->sortBy('id');
+
        
         // Initialize variables to hold uploaded file information
         $uploadedSijilTamat = [];
         $uploadedTranskrip = [];
+        $cgpa = '';
+        $kelas_p = '';
         $perakuan = '';
         $status_pekerjaan = '';
         $pekerjaan = '';
@@ -152,6 +157,14 @@ class PelajarController extends Controller
 
             if ($tamat_pengajian->transkrip) {
                 $uploadedTranskrip = is_array($tamat_pengajian->transkrip) ? $tamat_pengajian->transkrip : [$tamat_pengajian->transkrip];
+            }
+
+            if($tamat_pengajian->cgpa){
+                $cgpa = $tamat_pengajian->cgpa;
+            }
+
+            if($tamat_pengajian->kelas){
+                $kelas_p = $tamat_pengajian->kelas;
             }
 
             if($tamat_pengajian->perakuan){
@@ -177,7 +190,7 @@ class PelajarController extends Controller
 
         // dd($pekerjaan);
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'perakuan', 'status_pekerjaan', 'pekerjaan', 'pendapatan'));
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'status_pekerjaan', 'pekerjaan', 'pendapatan', 'kelas'));
     }
 
     public function hantarTamatPengajian(Request $request)
@@ -196,6 +209,8 @@ class PelajarController extends Controller
         $transkrip = $request->file('transkrip');
         $uploadedSijilTamat = [];
         $uploadedTranskrip = [];
+        $cgpa = $request->cgpa;
+        $kelas = $request->kelas;
 
         // Check if a record already exists
         $existingRecord = TamatPengajian::where('smoku_id', $smoku->id)
@@ -216,6 +231,8 @@ class PelajarController extends Controller
                     // Update the existing record with the new file names
                     $existingRecord->sijil_tamat = $uniqueFilenameSijil;
                     $existingRecord->transkrip = $uniqueFilenameTranskrip;
+                    $existingRecord->cgpa = $request->cgpa;
+                    $existingRecord->kelas = $request->kelas;
                     $existingRecord->perakuan = $request->perakuan;
                     $existingRecord->save();
                 } else {
@@ -225,6 +242,8 @@ class PelajarController extends Controller
                     $tamatPengajian->permohonan_id = $permohonan->id;
                     $tamatPengajian->sijil_tamat = $uniqueFilenameSijil;
                     $tamatPengajian->transkrip = $uniqueFilenameTranskrip;
+                    $tamatPengajian->cgpa = $request->cgpa;
+                    $tamatPengajian->kelas = $request->kelas;
                     $tamatPengajian->perakuan = $request->perakuan;
                     $tamatPengajian->save();
                 }

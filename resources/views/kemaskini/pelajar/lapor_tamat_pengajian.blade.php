@@ -43,11 +43,10 @@
 											<tr>
 												<td style="width: 45% !important;">
 													Sijil Tamat Pengajian / Surat Senat&nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												<td>
-													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf" style="display: none;" onchange="displayFileName()">
-													<div class="d-flex"><button type="button" onclick="document.getElementById('sijilTamat').click();" class="form-control">Pilih Fail</button>&nbsp;<span id="fileName"></span></div>
+													<input type="file" id="sijilTamat" name="sijilTamat[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
 													@if($uploadedSijilTamat)
 														@foreach($uploadedSijilTamat as $sijil)
 															<a href="{{ asset('assets/dokumen/sijil_tamat/' . $sijil) }}" target="_blank">{{ $sijil}}</a>
@@ -55,23 +54,16 @@
 													@endif
 												</td>
 											</tr>
-											<script>
-												function displayFileName() {
-													var input = document.getElementById('sijilTamat');
-													var output = document.getElementById('fileName');
-													output.innerText = input.files[0].name;
-												}
-											</script>
+
 											{{-- TRANSKRIP --}}
 											<tr>
 												<td style="width: 45% !important;">
 													Salinan Transkrip &nbsp;
-													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
+													<a href="/assets/contoh/surat_tamat_pengajian__transkrip_akademik.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar Contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a>
 												</td>
 												
 												<td>
-													<input type="file" id="transkrip" name="transkrip[]" required accept=".pdf" style="display: none;" onchange="displayFileNameTranskrip()">
-													<div class="d-flex"><button type="button" onclick="document.getElementById('transkrip').click();" class="form-control">Pilih Fail</button>&nbsp;<span id="fileNameTranskrip"></span></div>
+													<input type="file" id="transkrip" name="transkrip[]" required accept=".pdf" oninvalid="this.setCustomValidity('Sila muat naik fail.')" oninput="setCustomValidity('')">
 													@if($uploadedTranskrip)
 														@foreach($uploadedTranskrip as $transkrip)
 															<a href="{{ asset('assets/dokumen/salinan_transkrip/' . $transkrip) }}" target="_blank">{{ $transkrip }}</a>
@@ -79,13 +71,38 @@
 													@endif
 												</td>
 											</tr>
-											<script>
-												function displayFileNameTranskrip() {
-													var input = document.getElementById('transkrip');
-													var output = document.getElementById('fileNameTranskrip');
-													output.innerText = input.files[0].name;
-												}
-											</script>
+
+											{{-- PNGK --}}
+											<tr>
+												<td style="width: 45% !important;">
+													PNGK&nbsp;
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Purata Nilai Gred Kumulatif">
+														<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+													</span>
+												</td>
+												
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="3.50" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" value="{{ $cgpa }}"/>
+													<!--end::Input-->
+												</td>
+											</tr>
+											{{-- Kelas --}}
+											<tr>
+												<td style="width: 45% !important;">
+													Kelas Penganugerahan
+												</td>
+												<td style="width: 55% !important;">
+													<!--begin::Input-->
+													<select id="kelas" name="kelas" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="PILIH" required oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
+														<option></option>
+														@foreach ($kelas as $kelas)
+															<option value="{{$kelas->id}}" {{$kelas_p == $kelas->id ? 'selected' : ''}}>{{ $kelas->kelas}}</option>
+														@endforeach
+													</select>
+													<!--end::Input-->
+												</td>
+											</tr>
 											{{-- NOTES --}}
 											<tr>
 												<td colspan="2">

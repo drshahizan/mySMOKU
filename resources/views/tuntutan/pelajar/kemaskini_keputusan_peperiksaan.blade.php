@@ -34,13 +34,13 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" />
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" />
 										</div>
 									</div>
 									<!--end::Col-->
@@ -60,13 +60,13 @@
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
 										<label class="fs-6 fw-semibold form-label mb-2">
-											CGPA&nbsp;
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
+											PNG&nbsp;
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Purata Nilai Gred">
 												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 											</span>
 										</label>
 										<div class="mb-5">
-											<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
+											<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="3.50" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -116,7 +116,7 @@
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 											<th>Sesi</th>
 											<th>Semester</th>
-											<th>Keputusan (CGPA)</th>
+											<th>Keputusan (PNGK)</th>
 											<th>Salinan</th>
 										</tr>
 									</thead>

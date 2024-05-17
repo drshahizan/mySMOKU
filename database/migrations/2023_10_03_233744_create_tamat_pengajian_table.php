@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('permohonan_id');
             $table->string('sijil_tamat'); 
             $table->string('transkrip'); 
+            $table->string('cgpa'); 
+            $table->integer('kelas'); 
             $table->string('perakuan')->nullable();
             $table->timestamps();
         });
