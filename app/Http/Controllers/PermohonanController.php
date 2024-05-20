@@ -808,7 +808,7 @@ class PermohonanController extends Controller
             $cgpa = $request->cgpa;
             if($cgpa >= 0.0 && $cgpa < 2.0){
                 $pengesahan = 1;
-                $catatan = "Pelajar telah menghantar keputusan peperiksaan terdahulu. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
+                $catatan = "Pelajar telah menghantar keputusan peperiksaan semester lepas. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
                 if (empty($invalidEmails)) 
                 {            
                     // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 

@@ -60,7 +60,7 @@
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
 										<label class="fs-6 fw-semibold form-label mb-2">
-											PNG&nbsp;
+											GPA&nbsp;
 											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Purata Nilai Gred">
 												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 											</span>
@@ -131,7 +131,7 @@
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 											<th>Sesi</th>
 											<th>Semester</th>
-											<th>Keputusan (PNG)</th>
+											<th>Keputusan (GPA)</th>
 											<th>Salinan</th>
 										</tr>
 									</thead>
@@ -171,9 +171,9 @@
 			var cgpa = parseFloat($(this).val());
 			if (cgpa >= 0.0 && cgpa < 2.0) {
 				Swal.fire({
-					icon: 'error',
-					title: 'Tidak Berjaya!',
-					text: 'CGPA anda bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+					icon: 'warning',
+					title: 'Pengesahan Keputusan Peperiksaan!',
+					text: 'GPA anda bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
 					confirmButtonText: 'OK'
 				}).then((result) => {
 					if (result.isConfirmed) {

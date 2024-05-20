@@ -7,6 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/lang/Malay.json"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">
 
     </head>
@@ -53,9 +54,9 @@
                                 <th class="text-center"><b>Nama</b></th>                                        
 								<th class="text-center"><b>No. Kad Pengenalan</b></th>
 								<th class="text-center"><b>Semester</b></th>
-                                <th class="text-center"><b>CGPA</b></th>
+                                <th class="text-center"><b>GPA</b></th>
                                 <th class="text-center"><b>Status</b></th>
-                                <th class="text-center"><b>Kemaskini</b></th>
+                                <th class="text-center"><b>Pengesahan</b></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,7 +99,7 @@
                                         @if($pelajar->pengesahan_rendah == 2)
 											<div class="badge badge-light-success fw-bold">Berjaya</div>
 										@elseif($pelajar->pengesahan_rendah == 1)
-                                            <div class="badge badge-light-warning fw-bold">Pengesahan CGPA</div>
+                                            <div class="badge badge-light-warning fw-bold">Pengesahan GPA</div>
                                         @else    
 											<div class="badge badge-light-danger fw-bold">Tidak Berjaya</div>
 										@endif
@@ -113,8 +114,8 @@
                                         @csrf
                                         <select name="status" style="padding: 6px;" class="form-select" onchange="submitForm(this)">
                                             <option>Pilih</option>
-                                            <option value="2">Berjaya</option>
-                                            <option value="0">Tidak Berjaya</option>
+                                            <option value="2">Disokong</option>
+                                            <option value="0">Tidak Disokong</option>
                                             
                                         </select>
                                     </form>
@@ -138,7 +139,7 @@
 <script>
     function submitForm(selectElement) {
         // Show confirmation dialog
-        const confirmation = confirm("Teruskan untuk kemaskini pengesahan CGPA pelajar?");
+        const confirmation = confirm("Teruskan untuk kemaskini pengesahan GPA pelajar?");
         
         // If user confirms, proceed to submit the form
         if (confirmation) {
@@ -162,13 +163,12 @@
 
 </script>
 <script>
-    $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
-        });
 	$('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
-            order: [] // Disable initial sorting
+            order: [], // Disable initial sorting
+            language: {
+                "url": "/assets/lang/Malay.json"
+            }
         });
 </script>
 
@@ -178,7 +178,7 @@
 	@if(session('success'))
 		Swal.fire({
 			icon: 'success',
-			title: 'Lulus!',
+			title: 'Disokong!',
 			text: ' {!! session('success') !!}',
 			confirmButtonText: 'OK'
 		});
@@ -186,7 +186,7 @@
 	@if(session('failed'))
 		Swal.fire({
 			icon: 'error',
-			title: 'Tidak Lulus!',
+			title: 'Tidak Disokong!',
 			text: ' {!! session('failed') !!}',
 			confirmButtonText: 'OK'
 		});

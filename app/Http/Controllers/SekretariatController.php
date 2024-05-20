@@ -3266,11 +3266,11 @@ class SekretariatController extends Controller
 
         if ($request->input('status') === '2') {
             // Redirect to the original page
-            return redirect()->back()->with('success', 'Pengesahan CGPA diluluskan.');
+            return redirect()->back()->with('success', 'Pengesahan GPA disokong.');
         }
         else if ($request->input('status') === '0') {
             // Redirect to the original page
-            return redirect()->back()->with('failed', 'Pengesahan CGPA tidak diluluskan.');
+            return redirect()->back()->with('failed', 'Pengesahan GPA tidak disokong.');
         }
         else {
             // Redirect to the original page
