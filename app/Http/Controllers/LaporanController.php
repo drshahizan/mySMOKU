@@ -38,7 +38,7 @@ class LaporanController extends Controller
             ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
             ->selectRaw('
                 COUNT(CASE WHEN smoku_akademik.tarikh_tamat BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 3 MONTH) THEN 1 END) AS dibayarIPTS,
-                COUNT(CASE WHEN smoku_akademik.tarikh_tamat < NOW() THEN 1 END) AS tidaklayakIPTS
+                COUNT(CASE WHEN smoku_akademik.tarikh_tamat < CURDATE() THEN 1 END) AS tidaklayakIPTS
             ')
             ->where('smoku_akademik.status', 1)
             // ->where('program', 'BKOKU')
