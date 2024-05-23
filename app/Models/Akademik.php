@@ -25,6 +25,7 @@ class Akademik extends Model
         'no_pendaftaran_pelajar',
         'tarikh_mula',
         'tarikh_tamat',
+        'emel_tamat',
         'sem_semasa',
         'sumber_biaya',
         'sumber_lain',

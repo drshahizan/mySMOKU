@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('reset:saringan')->everyMinute();
+        $schedule->command('makluman:tamatPenajaan')->everyMinute();
         $schedule->command('data:mqr')->dailyAt('03:00');;
         $schedule->command('data:mqrpa')->dailyAt('03:00');;
     }

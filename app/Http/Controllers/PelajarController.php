@@ -689,4 +689,5 @@ class PelajarController extends Controller
         // No updates were made
         return back();
     }
+
 }

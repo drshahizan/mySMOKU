@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('sesi')->nullable();
             $table->date('tarikh_mula')->nullable();
             $table->date('tarikh_tamat')->nullable();
+            $table->integer('emel_tamat')->nullable();
             $table->string('sem_semasa')->nullable();
             $table->string('tempoh_pengajian')->nullable();
             $table->string('bil_bulan_per_sem')->nullable();
