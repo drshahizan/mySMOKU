@@ -503,6 +503,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');
+    
+    //status penajaan
+    Route::get('senarai', [LaporanController::class,'senaraiPenajaan'])->name('status.penajaan');
+    Route::get('senarai/penajaan/getStatusKeseluruhan', [LaporanController::class, 'getStatusKeseluruhan'])->name('status.getStatusKeseluruhan');
+    Route::get('status/keseluruhan', [LaporanController::class, 'statusKeseluruhan'])->name('status.keseluruhan');
+    Route::get('status/keseluruhan/senarai', [LaporanController::class, 'getListKeseluruhan'])->name('senarai.keseluruhan');
+    Route::get('status/keseluruhan/tamat', [LaporanController::class, 'statusKeseluruhanTamat'])->name('status.keseluruhan.tamat');
+    Route::get('status/keseluruhan/senarai/tamat', [LaporanController::class, 'getListKeseluruhanTamat'])->name('senarai.keseluruhan.tamat');
  });
 
 Route::get('/error', function () {

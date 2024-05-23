@@ -10,4 +10,5 @@ class PegawaiController extends Controller
     {  
         return view('dashboard.pegawai.dashboard');
     }
+
 }
