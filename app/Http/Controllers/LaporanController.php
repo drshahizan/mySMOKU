@@ -101,7 +101,7 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        $query->where('status', 1);
+                        // $query->where('status', 1);
                         $query->with('infoipt');
                     }, 'smoku'])
                     ->get();
