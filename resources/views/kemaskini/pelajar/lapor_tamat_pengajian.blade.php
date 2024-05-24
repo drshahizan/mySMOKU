@@ -75,7 +75,7 @@
 											{{-- CGPA --}}
 											<tr>
 												<td style="width: 45% !important;">
-													CGPA&nbsp;
+													PNGK&nbsp;
 													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Purata Nilai Gred Kumulatif">
 														<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 													</span>

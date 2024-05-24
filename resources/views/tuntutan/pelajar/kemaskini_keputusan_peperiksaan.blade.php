@@ -60,7 +60,7 @@
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
 										<label class="fs-6 fw-semibold form-label mb-2">
-											GPA&nbsp;
+											PNG&nbsp;
 											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Purata Nilai Gred">
 												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 											</span>
@@ -131,7 +131,7 @@
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
 											<th>Sesi</th>
 											<th>Semester</th>
-											<th>Keputusan (GPA)</th>
+											<th>Keputusan (PNG)</th>
 											<th>Salinan</th>
 										</tr>
 									</thead>
