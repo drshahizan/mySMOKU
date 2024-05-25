@@ -26,7 +26,7 @@ class MailTamatPenajaanKemaskini extends Mailable
     public function build()
     {
         
-        $subject = "3 BULAN LEPAS TAMAT PENAJAAN";
+        $subject = "PERINGATAN MESRA PENGEMASKINIAN MAKLUMAT PEKERJAAN DALAM SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)";
         return $this->subject($subject)
                     ->view('kemaskini.pelajar.tamat_penajaan')
                     ->with([

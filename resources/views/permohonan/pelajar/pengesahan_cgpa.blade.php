@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SistemBKOKU: PENGESAHAN CGPA BAGI PELAJAR BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK) BAWAH 2.0</title>
+    <title>SistemBKOKU: PENGESAHAN PURATA NILAIAN GRED (PNG) DI BAWAH 2.0 BAGI PELAJAR PENERIMA BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK) </title>
 </head>
 <body>
-    <h3>PENGESAHAN CGPA BAGI PELAJAR BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK) BAWAH 2.0</h3>
-    <p>Assalamualaikum WBT & Salam Sejahtera,</p>
+    <p>Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
     <br>
-    <p>Untuk makluman :</p>
-    <br>
-    <p>{!! $catatan !!} 
+    <p>Untuk makluman, PNG Tuan/Puan berada di bawah 2.0 dan perlu mendapat pengesahan dari Sekretariat Kementerian sebelum tuntutan dapat dibuat oleh pihak Tuan/Puan.</p>
     <br>
     <br>
     <br>

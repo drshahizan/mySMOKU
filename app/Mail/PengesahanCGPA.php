@@ -26,7 +26,7 @@ class PengesahanCGPA extends Mailable
     public function build()
     {
         
-        $subject = "PENGESAHAN CGPA BAGI PELAJAR BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK) BAWAH 2.0";
+        $subject = "PENGESAHAN PURATA NILAIAN GRED (PNG) DI BAWAH 2.0 BAGI PELAJAR PENERIMA BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)";
         return $this->subject($subject)
                     ->view('permohonan.pelajar.pengesahan_cgpa')
                     ->with([

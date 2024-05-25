@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SistemBKOKU: PERMAKLUMAN 3 BULAN TAMAT PENAJAAN</title>
+    <title>SistemBKOKU: PERINGATAN MESRA PENGEMASKINIAN MAKLUMAT PEKERJAAN DALAM SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)</title>
 </head>
 <body>
-    <h3>3 BULAN TAMAT PENAJAAN</h3>
-    <p>Assalamualaikum WBT & Salam Sejahtera,</p>
+    <p>Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
     <br>
-    <p>Untuk makluman :</p>
-    <br>
-    <p>{!! $catatan !!} </p>
-    <p>Tajaan anda telah tamat 3 bulan lepas. Sila log masuk ke Sistem BKOKU untuk kemaskini maklumat Lapor Tamat Pengajian.okaaayy! </p>
+    <p>Untuk makluman, Bahagian Biasiswa adalah dalam proses pengumpulan maklumat pelajar yang telah menamatkan pengajian. 
+        Kerjasama Tuan/Puan adalah dipohon untuk mengemaskini maklumat pekerjaan dalam Sistem Bantuan Kewangan Orang Kurang Upaya (BKOKU) / Program Pendidikan Khas (PPK) bagi tujuan rekod Kementerian.</p>
     <br>
     <br>
     <br>

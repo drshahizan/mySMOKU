@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SistemBKOKU: PERMAKLUMAN AWAL TAMAT PENAJAAN</title>
+    <title>SistemBKOKU: PEMAKLUMAN AWAL PENAMATAN BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)</title>
 </head>
 <body>
-    <h3>PERMAKLUMAN AWAL TAMAT PENAJAAN</h3>
-    <p>Assalamualaikum WBT & Salam Sejahtera,</p>
+    <p>Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
     <br>
-    <p>Untuk makluman :</p>
+    <p>2.	Untuk makluman Tuan/Puan, sesi pengajian tuan/puan akan berakhir dalam masa terdekat. 
+        Tuan/Puan adalah dimohon untuk mengemaskini maklumat tamat pengajian di <a href="https://bkoku.mohe.gov.my/login">Sistem BKOKU</a> setelah mendapat Keputusan Senat.</p>
     <br>
-    <p>{!! $catatan !!} </p>
-    <p>Tajaan anda akan tamat dalam tempoh 3 bulan akan datang.okaaayy! </p>
+    <p>3.	Kementerian mengucapkan selamat maju jaya. </p>
     <br>
     <br>
     <br>
