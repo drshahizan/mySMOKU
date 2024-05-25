@@ -295,7 +295,7 @@
                 
             }
 
-            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) 
+            function applyAndLogFilter(tableName, table, startDate, endDate) 
             {
                 // Reset the search for all columns to ensure a clean filter
                 table.columns().search('').draw();
@@ -310,7 +310,7 @@
                             let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
                             let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
 
-                            let dateAdded = moment(data[2], 'DD/MM/YYYY');
+                            let dateAdded = moment(data[5], 'DD/MM/YYYY');
 
                             // Check if the date falls within the specified range
                             let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
