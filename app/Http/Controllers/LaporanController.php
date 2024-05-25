@@ -60,21 +60,20 @@ class LaporanController extends Controller
 
     public function getListKeseluruhan()
     {
-        $permohonan = Permohonan::
-                    // where('program', 'BKOKU')
-                    // ->whereNotIn('status', [9, 10])
-                    whereHas('akademik', function ($q) {
+        $permohonan = Permohonan::whereHas('akademik', function ($q) {
+                        
                         $q->whereHas('infoipt', function ($q) {
                             // $q->where('jenis_institusi', 'IPTS');
                             $q->where('tarikh_tamat', '>=', now());
                             $q->where('tarikh_tamat', '<=', now()->addMonths(3));
                             
-                        });
+                        });                        
                     })
+                    
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -102,7 +101,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -149,8 +148,8 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -177,7 +176,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -224,8 +223,8 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -252,7 +251,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -299,8 +298,8 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -327,7 +326,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -374,8 +373,8 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -402,7 +401,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -449,8 +448,8 @@ class LaporanController extends Controller
                     })
                     ->with(['akademik' => function ($query) {
                         
-                        // $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 
@@ -477,7 +476,7 @@ class LaporanController extends Controller
                     ->with(['akademik' => function ($query) {
                         
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);  // Ensure peringkat is included here
                     }, 'smoku'])
                     ->get();
 

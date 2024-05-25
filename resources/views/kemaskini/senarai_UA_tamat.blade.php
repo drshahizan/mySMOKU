@@ -99,9 +99,12 @@
                                     <thead>
                                         <tr style="color: white;">
                                             <th style="width: 15%"><b>ID Permohonan</b></th>                                        
-                                            <th style="width: 45%"><b>Nama</b></th>
+                                            <th style="width: 40%"><b>Nama</b></th>
+                                            <th style="width: 40%"><b>Nama Institusi</b></th>
+                                            <th style="width: 25%"><b>Peringkat Pengajian</b></th>
+                                            <th style="width: 13%" class="text-center"><b>Tarikh Mula</b></th>
                                             <th style="width: 13%" class="text-center"><b>Tarikh Tamat</b></th> 
-                                            <th class="text-center" style="width: 15%">Status Permohonan</th>
+                                            <th class="text-center" style="width: 15%">Status</th>
                                         </tr>
                                     </thead>
                                     
@@ -166,6 +169,50 @@
                                     return formatted_nama;
                                 }
                             },
+                            { data: 'akademik.infoipt.nama_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    // Split the string into an array of words
+                                    var words = data.split(' ');
+
+                                    // Capitalize the first letter of each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_data = words.join(' ');
+
+                                    return formatted_data;
+                                },
+                                className: 'text-center'
+                            },
+                            { 
+                                data: 'akademik.tarikh_mula',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (data === null) {
+                                            return '';
+                                        } else {
+                                            // Convert the date to a JavaScript Date object
+                                            var date = new Date(data);
+
+                                            // Get the year, month, and day components
+                                            var year = date.getFullYear();
+                                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                            var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                            // Return the formatted date as DD/MM/YYYY
+                                            return day + '/' + month + '/' + year;
+                                        }
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                },
+                                className: 'text-center'
+                            },
                             { 
                                 data: 'akademik.tarikh_tamat',
                                 render: function(data, type, row) {
@@ -191,45 +238,12 @@
                                 },
                                 className: 'text-center'
                             },
-                            { 
-                                data: 'status',
+                            {
+                                data: null,
                                 render: function(data, type, row) {
-                                    var statusText;
-                                    switch (data) {
-                                        case '1':
-                                            statusText = '<button class="btn bg-info text-white">Deraf</button>';
-                                            break;
-                                        case '2':
-                                            statusText = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                            break;
-                                        case '3':
-                                            statusText = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                            break;
-                                        case '4':
-                                            statusText = '<button class="btn bg-warning text-white">Disokong</button>';
-                                            break;
-                                        case '5':
-                                            statusText = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                            break;
-                                        case '6':
-                                            statusText = '<button class="btn bg-success text-white">Layak</button>';
-                                            break;
-                                        case '7':
-                                            statusText = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                            break;
-                                        case '8':
-                                            statusText = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                            break;
-                                        case '9':
-                                            statusText = '<button class="btn bg-batal text-white">Batal</button>';
-                                            break;
-                                        case '10':
-                                            statusText = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                            break;    
-                                        default:
-                                            statusText = 'Unknown';
-                                    }
-                                    return statusText;
+                                    var now = new Date();
+                                    var tarikhTamat = new Date(row.akademik.tarikh_tamat);
+                                    return tarikhTamat >= now ? '<button class="btn bg-dibayar text-white">Aktif</button>' : '<button class="btn bg-danger text-white">Tidak Aktif</button>';
                                 },
                                 className: 'text-center'
                             }
