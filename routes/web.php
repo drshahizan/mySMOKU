@@ -511,6 +511,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('status/keseluruhan/senarai', [LaporanController::class, 'getListKeseluruhan'])->name('senarai.keseluruhan');
     Route::get('status/keseluruhan/tamat', [LaporanController::class, 'statusKeseluruhanTamat'])->name('status.keseluruhan.tamat');
     Route::get('status/keseluruhan/senarai/tamat', [LaporanController::class, 'getListKeseluruhanTamat'])->name('senarai.keseluruhan.tamat');
+
+    Route::get('senarai/penajaan/getStatusIPTS', [LaporanController::class, 'getStatusIPTS'])->name('status.getStatusIPTS');
+    Route::get('status/IPTS', [LaporanController::class, 'statusIPTS'])->name('status.IPTS');
+    Route::get('status/IPTS/senarai', [LaporanController::class, 'getListIPTS'])->name('senarai.IPTS');
+    Route::get('status/IPTS/tamat', [LaporanController::class, 'statusIPTSTamat'])->name('status.IPTS.tamat');
+    Route::get('status/IPTS/senarai/tamat', [LaporanController::class, 'getListIPTSTamat'])->name('senarai.IPTS.tamat');
+
+    Route::get('senarai/penajaan/getStatusP', [LaporanController::class, 'getStatusP'])->name('status.getStatusP');
+    Route::get('status/P', [LaporanController::class, 'statusP'])->name('status.P');
+    Route::get('status/P/senarai', [LaporanController::class, 'getListP'])->name('senarai.P');
+    Route::get('status/P/tamat', [LaporanController::class, 'statusPTamat'])->name('status.P.tamat');
+    Route::get('status/P/senarai/tamat', [LaporanController::class, 'getListPTamat'])->name('senarai.P.tamat');
+
+    Route::get('senarai/penajaan/getStatusKK', [LaporanController::class, 'getStatusKK'])->name('status.getStatusKK');
+    Route::get('status/KK', [LaporanController::class, 'statusKK'])->name('status.KK');
+    Route::get('status/KK/senarai', [LaporanController::class, 'getListKK'])->name('senarai.KK');
+    Route::get('status/KK/tamat', [LaporanController::class, 'statusKKTamat'])->name('status.KK.tamat');
+    Route::get('status/KK/senarai/tamat', [LaporanController::class, 'getListKKTamat'])->name('senarai.KK.tamat');
+
+    Route::get('senarai/penajaan/getStatusUA', [LaporanController::class, 'getStatusUA'])->name('status.getStatusUA');
+    Route::get('status/UA', [LaporanController::class, 'statusUA'])->name('status.UA');
+    Route::get('status/UA/senarai', [LaporanController::class, 'getListUA'])->name('senarai.UA');
+    Route::get('status/UA/tamat', [LaporanController::class, 'statusUATamat'])->name('status.UA.tamat');
+    Route::get('status/UA/senarai/tamat', [LaporanController::class, 'getListUATamat'])->name('senarai.UA.tamat');
+
+    Route::get('senarai/penajaan/getStatusPPK', [LaporanController::class, 'getStatusPPK'])->name('status.getStatusPPK');
+    Route::get('status/PPK', [LaporanController::class, 'statusPPK'])->name('status.PPK');
+    Route::get('status/PPK/senarai', [LaporanController::class, 'getListPPK'])->name('senarai.PPK');
+    Route::get('status/PPK/tamat', [LaporanController::class, 'statusPPKTamat'])->name('status.PPK.tamat');
+    Route::get('status/PPK/senarai/tamat', [LaporanController::class, 'getListPPKTamat'])->name('senarai.PPK.tamat');
  });
 
 Route::get('/error', function () {

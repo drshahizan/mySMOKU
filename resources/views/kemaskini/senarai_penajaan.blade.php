@@ -93,7 +93,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('status.keseluruhan') }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -120,7 +120,7 @@
 												<!--begin::Stats-->
 												<div class="m-0">
 													<a href="{{ route('status.keseluruhan.tamat') }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -138,7 +138,7 @@
 							<div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
 								<!--Permohonan-->
 								<div class="header">
-									<h2>Senarai Penajaan</h2>
+									<h2>Senarai Penajaan IPTS</h2>
 								</div>
 								<div class="body">
 									<!--begin:: Row-->
@@ -158,8 +158,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+													<a href="{{ route('status.IPTS') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -185,8 +185,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+													<a href="{{ route('status.IPTS.tamat') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatIPTS"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -204,7 +204,7 @@
 							<div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
 								<!--Permohonan-->
 								<div class="header">
-									<h2>Permohonan BKOKU Politeknik</h2>
+									<h2>Senarai Penajaan Politeknik</h2>
 								</div>
 								<div class="body">
 									<!--begin:: Row-->
@@ -224,8 +224,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+													<a href="{{ route('status.P') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -251,8 +251,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+													<a href="{{ route('status.P.tamat') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatP"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -270,7 +270,7 @@
 							<div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
 								<!--Permohonan-->
 								<div class="header">
-									<h2>Permohonan BKOKU Kolej Komuniti</h2>
+									<h2>Senarai Penajaan Kolej Komuniti</h2>
 								</div>
 								<div class="body">
 									<!--begin:: Row-->
@@ -290,8 +290,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+													<a href="{{ route('status.KK') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -317,8 +317,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+													<a href="{{ route('status.KK.tamat') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatKK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -336,7 +336,7 @@
 							<div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
 								<!--Permohonan-->
 								<div class="header">
-									<h2>Permohonan BKOKU Universiti Awam</h2>
+									<h2>Senarai Penajaan Universiti Awam</h2>
 								</div>
 								<div class="body">
 									<!--begin:: Row-->
@@ -356,8 +356,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+													<a href="{{ route('status.UA') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -383,8 +383,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+													<a href="{{ route('status.UA.tamat') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatUA"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -402,7 +402,7 @@
 							<div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
 								<!--Permohonan-->
 								<div class="header">
-									<h2>Permohonan PPK</h2>
+									<h2>Senarai Penajaan PPK</h2>
 								</div>
 								<div class="body">
 									<!--begin:: Row-->
@@ -422,8 +422,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '8']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 dibayarIPTS"></span>
+													<a href="{{ route('status.PPK') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 semAkhirPPK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -449,8 +449,8 @@
 												<!--end::Symbol-->
 												<!--begin::Stats-->
 												<div class="m-0">
-													<a href="{{ route('statusIPTS.permohonan', ['status' => '7']) }}">
-														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 tidaklayakIPTS"></span>
+													<a href="{{ route('status.PPK.tamat') }}">
+														<span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 telahTamatPPK"></span>
 														<span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
 													</a>
 												</div>
@@ -477,12 +477,97 @@
 				url: '{{ route("status.getStatusKeseluruhan") }}', // Replace with actual server URL
 				type: 'GET',
 				success: function(response) {
-					var dibayarIPTS = response.dibayarIPTS ?? 0;
-					var tidaklayakIPTS = response.tidaklayakIPTS ?? 0;
+					var semAkhirK = response.semAkhirK ?? 0;
+					var telahTamatK = response.telahTamatK ?? 0;
 
 					// Update HTML content with the obtained variables
-					$(".dibayarIPTS").text(dibayarIPTS);
-					$(".tidaklayakIPTS").text(tidaklayakIPTS);
+					$(".semAkhirK").text(semAkhirK);
+					$(".telahTamatK").text(telahTamatK);
+
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("status.getStatusIPTS") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var semAkhirIPTS = response.semAkhirIPTS ?? 0;
+					var telahTamatIPTS = response.telahTamatIPTS ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".semAkhirIPTS").text(semAkhirIPTS);
+					$(".telahTamatIPTS").text(telahTamatIPTS);
+
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("status.getStatusP") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var semAkhirP = response.semAkhirP ?? 0;
+					var telahTamatP = response.telahTamatP ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".semAkhirP").text(semAkhirP);
+					$(".telahTamatP").text(telahTamatP);
+
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("status.getStatusKK") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var semAkhirKK = response.semAkhirKK ?? 0;
+					var telahTamatKK = response.telahTamatKK ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".semAkhirKK").text(semAkhirKK);
+					$(".telahTamatKK").text(telahTamatKK);
+
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("status.getStatusUA") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var semAkhirUA = response.semAkhirUA ?? 0;
+					var telahTamatUA = response.telahTamatUA ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".semAkhirUA").text(semAkhirUA);
+					$(".telahTamatUA").text(telahTamatUA);
+
+				},
+				error: function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+
+			$.ajax({
+				url: '{{ route("status.getStatusPPK") }}', // Replace with actual server URL
+				type: 'GET',
+				success: function(response) {
+					var semAkhirPPK = response.semAkhirPPK ?? 0;
+					var telahTamatPPK = response.telahTamatPPK ?? 0;
+
+					// Update HTML content with the obtained variables
+					$(".semAkhirPPK").text(semAkhirPPK);
+					$(".telahTamatPPK").text(telahTamatPPK);
 
 				},
 				error: function(xhr, status, error) {
