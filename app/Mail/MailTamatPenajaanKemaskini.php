@@ -28,7 +28,7 @@ class MailTamatPenajaanKemaskini extends Mailable
         
         $subject = "PERINGATAN MESRA PENGEMASKINIAN MAKLUMAT PEKERJAAN DALAM SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)";
         return $this->subject($subject)
-                    ->view('kemaskini.pelajar.tamat_penajaan')
+                    ->view('kemaskini.pelajar.tamat_penajaan_kemaskini')
                     ->with([
                         'catatan' => $this->catatan,
                         

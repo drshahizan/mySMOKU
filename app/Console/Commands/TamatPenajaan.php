@@ -36,8 +36,11 @@ class TamatPenajaan extends Command
 
         $akademik = Akademik::where('status', 1)
         ->where('emel_tamat', null)->get();
+
+        //test
+        // $akademik = Akademik::where('smoku_id', 3725)->get();
         
-        //komen jap. nnati dapat emel semua
+        //komen jap. nanti dapat emel semua
         // foreach ($akademik as $item) {
         //     $emel = ButiranPelajar::where('smoku_id','=',$item['smoku_id'])->first();
         //     $emel_pelajar = $emel->emel;
@@ -50,7 +53,7 @@ class TamatPenajaan extends Command
         //             'emel_tamat' => 1,
         //         ]);
 
-        //         $catatan = "hahahaha";
+        //         $catatan = "SEBELUM";
         //         if (empty($invalidEmails)) 
         //         {            
         //             // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
