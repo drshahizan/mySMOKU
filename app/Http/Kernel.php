@@ -64,10 +64,12 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'isPelajar' => App\Http\Middleware\PelajarMiddleware::class,
-        'isPenyelaras' => App\Http\Middleware\PenyelarasMiddleware::class,
-        'isSekretariat' => App\Http\Middleware\SekretariatMiddleware::class,
-        'isPegawai' => App\Http\Middleware\PegawaiMiddleware::class,
+        'isPelajar' => \App\Http\Middleware\PelajarMiddleware::class,
+        'isPenyelaras' => \App\Http\Middleware\PenyelarasMiddleware::class,
+        'isSekretariat' => \App\Http\Middleware\SekretariatMiddleware::class,
+        'isPegawai' => \App\Http\Middleware\PegawaiMiddleware::class,
+
+        'check.tahap' => \App\Http\Middleware\CheckTahap::class,
 
         'api.token' => \App\Http\Middleware\ApiTokenMiddleware::class,
     ];

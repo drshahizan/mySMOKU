@@ -54,6 +54,10 @@ Route::get('/', function () {
 })->name('home');
 
 
+Route::get('/unauthorized', function () {
+    return view('unauthorized');
+})->name('unauthorized');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/laporan/keseluruhan', [LaporanController::class, 'keseluruhan'])->name('laporan.keseluruhan');
@@ -485,21 +489,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('penyelaras/ppk/senarai/tuntutan-dibayar', [PenyelarasPPKController::class, 'tuntutanDibayar'])->name('senarai.ppk.tuntutanDibayar');
 
     //Pentadbir
-    Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
-    Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
-    Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
-    Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnection'])->name('semak.api');
-    // Route::get('pentadbir/api-connection/esp', [PentadbirController::class, 'checkConnectionESP'])->name('esp.api');
-    // Route::get('pentadbir/api-connection/mqa', [PentadbirController::class, 'checkConnectionMQA'])->name('mqa.api');
-    Route::get('pentadbir/alamat', [PentadbirController::class, 'alamat'])->name('alamat');
-    Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
-    Route::get('pentadbir/tarikh', [PentadbirController::class, 'tarikh'])->name('tarikh');
-    Route::post('pentadbir/tarikh', [PentadbirController::class, 'simpanTarikh'])->name('simpan.tarikh');
-    Route::get('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'jumlahTuntutan'])->name('jumlah.tuntutan');
-    Route::post('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'simpanJumlah'])->name('simpan.jumlah');
-    Route::get('pentadbir/kod-esp/institusi', [PentadbirController::class, 'viewESPInstitusi'])->name('esp.institusi');
-    Route::get('/fetch-institusi-esp', [PentadbirController::class, 'fetchInstitusiEsp']);
-    Route::post('pentadbir/kemaskini/kod-esp/institusi', [PentadbirController::class, 'kemaskiniESPInstitusi'])->name('kemaskini.esp.institusi');
+    Route::middleware(['auth', 'check.tahap:5'])->group(function () {
+        Route::get('pentadbir/dashboard', [PentadbirController::class,'index'])->name('pentadbir.dashboard');
+        Route::get('daftarpengguna', [PentadbirController::class, 'daftar'])->name('daftarpengguna');
+        Route::post('daftarpengguna', [PentadbirController::class, 'store'])->name('daftarpengguna.post');
+        Route::get('pentadbir/api-connection', [PentadbirController::class, 'checkConnection'])->name('semak.api');
+        // Route::get('pentadbir/api-connection/esp', [PentadbirController::class, 'checkConnectionESP'])->name('esp.api');
+        // Route::get('pentadbir/api-connection/mqa', [PentadbirController::class, 'checkConnectionMQA'])->name('mqa.api');
+        Route::get('pentadbir/alamat', [PentadbirController::class, 'alamat'])->name('alamat');
+        Route::post('pentadbir/alamat', [PentadbirController::class, 'save'])->name('alamat.save');
+        Route::get('pentadbir/tarikh', [PentadbirController::class, 'tarikh'])->name('tarikh');
+        Route::post('pentadbir/tarikh', [PentadbirController::class, 'simpanTarikh'])->name('simpan.tarikh');
+        Route::get('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'jumlahTuntutan'])->name('jumlah.tuntutan');
+        Route::post('pentadbir/jumlah-tuntutan', [PentadbirController::class, 'simpanJumlah'])->name('simpan.jumlah');
+        Route::get('pentadbir/kod-esp/institusi', [PentadbirController::class, 'viewESPInstitusi'])->name('esp.institusi');
+        Route::get('/fetch-institusi-esp', [PentadbirController::class, 'fetchInstitusiEsp']);
+        Route::post('pentadbir/kemaskini/kod-esp/institusi', [PentadbirController::class, 'kemaskiniESPInstitusi'])->name('kemaskini.esp.institusi');
+    });
 
     //Pegawai
     Route::get('pegawai/dashboard', [PegawaiController::class,'index'])->name('pegawai.dashboard');
