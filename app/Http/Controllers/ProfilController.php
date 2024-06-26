@@ -20,17 +20,44 @@ class ProfilController extends Controller
 
     public function simpanProfil(Request $request)
     {  
-        if($request->hasFile('profile_photo_path')){
+        // if($request->hasFile('profile_photo_path')){
             
-            $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
+        //     $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
 
-            $request->profile_photo_path->move('assets/profile_photo_path',$filename);
+        //     $request->profile_photo_path->move('assets/profile_photo_path',$filename);
 
-            User::where('no_kp',Auth::user()->no_kp)
-            ->update([
+        //     User::where('no_kp',Auth::user()->no_kp)
+        //     ->update([
+        //         'profile_photo_path' => $filename,
+        //     ]);
+
+        // }
+
+
+        // Validate the file tak test lagi
+        $request->validate([
+            'profile_photo_path' => 'required|file|mimes:jpg,jpeg,png,gif|max:2048', // 2MB max
+        ]);
+
+        if ($request->hasFile('profile_photo_path')) {
+            // Get the original file name
+            $originalFilename = $request->file('profile_photo_path')->getClientOriginalName();
+            
+            // Sanitize the filename by removing special characters
+            $sanitizedFilename = preg_replace('/[^a-zA-Z0-9._-]/', '', $originalFilename);
+            
+            // Generate a unique filename
+            $filename = Auth::user()->no_kp . "_" . time() . "_" . $sanitizedFilename;
+
+            // Move the file to the designated directory
+            $request->file('profile_photo_path')->move(public_path('assets/profile_photo_path'), $filename);
+
+            // Update the user profile photo path in the database
+            User::where('no_kp', Auth::user()->no_kp)->update([
                 'profile_photo_path' => $filename,
             ]);
 
+            return response()->json(['message' => 'File uploaded successfully.']);
         }
 
         
