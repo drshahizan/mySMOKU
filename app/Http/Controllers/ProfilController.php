@@ -57,7 +57,7 @@ class ProfilController extends Controller
                 'profile_photo_path' => $filename,
             ]);
 
-            return response()->json(['message' => 'File uploaded successfully.']);
+            // return response()->json(['message' => 'File uploaded successfully.']);
         }
 
         
