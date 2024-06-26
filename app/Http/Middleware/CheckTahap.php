@@ -18,7 +18,7 @@ class CheckTahap
     {
         $user = Auth::user();
         if (!$user || $user->tahap != $tahap) {
-            return redirect('/unauthorized')->with('error', 'You do not have access to this page');
+            return redirect('/unauthorized')->with('error', 'Tidak dibenarkan.');
         }
 
         return $next($request);

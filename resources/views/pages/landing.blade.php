@@ -1305,6 +1305,7 @@
 		<!--begin::Custom Javascript(used for this page only)-->
 		<script src="assets/js/custom/landing.js"></script>
 		<!--end::Custom Javascript-->
+		
 		<!--end::Javascript-->
 	</body>
 </html>
