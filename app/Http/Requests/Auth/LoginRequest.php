@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\LoginLog;
 use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -68,6 +69,13 @@ class LoginRequest extends FormRequest
                     'email_verified_at' => trans('auth.email_not_verified'),
                 ]);
             }
+
+            //create log
+            LoginLog::create([
+                'user_id' => $user->id,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->header('User-Agent')
+            ]);
     
             RateLimiter::clear($this->throttleKey());
     
