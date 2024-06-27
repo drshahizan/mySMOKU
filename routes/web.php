@@ -568,22 +568,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     //Pelaporan- Sekretariat, Pegawai, Pentadbir
-    Route::middleware(['auth', 'check.tahap:5'])->group(function () {
-        // Routes with middleware ['auth', 'check.tahap:5']
-    
-        Route::middleware(['check.tahap:4'])->group(function () {
-            // Routes with middleware ['auth', 'check.tahap:5', 'check.tahap:4']
-    
-            Route::middleware(['check.tahap:3'])->group(function () {
-                // Routes with middleware ['auth', 'check.tahap:5', 'check.tahap:4', 'check.tahap:3']
-    
-                Route::get('/laporan/keseluruhan', [LaporanController::class, 'keseluruhan'])->name('laporan.keseluruhan');
-                Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
-                Route::get('/laporan/statistik', [LaporanController::class, 'statistik'])->name('laporan.statistik');
-                Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
-            });
-        });
+    Route::middleware(['auth', 'check.tahap:3,4,5'])->group(function () {
+        // Routes with middleware ['auth', 'check.tahap:5', 'check.tahap:4', 'check.tahap:3']
+
+        Route::get('/laporan/keseluruhan', [LaporanController::class, 'keseluruhan'])->name('laporan.keseluruhan');
+        Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
+        Route::get('/laporan/statistik', [LaporanController::class, 'statistik'])->name('laporan.statistik');
+        Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
     });
+        
     
 
 

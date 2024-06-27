@@ -17,7 +17,9 @@ class CheckTahap
     public function handle(Request $request, Closure $next, $tahap)
     {
         $user = Auth::user();
-        if (!$user || $user->tahap != $tahap) {
+        $allowedTahaps = explode(',', $tahap);
+
+        if (!$user || !in_array($user->tahap, $allowedTahaps)) {
             return redirect('/unauthorized')->with('error', 'Tidak dibenarkan.');
         }
 
