@@ -130,7 +130,7 @@ class TuntutanController extends Controller
                         }
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }elseif($result && $result->pengesahan_rendah== 1){
-                        return redirect()->route('kemaskini.keputusan')->with('error', 'Pengesahan duluuuuu.');
+                        return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan perlu pengesahan terlebih dahulu.');
 
                     }
 
