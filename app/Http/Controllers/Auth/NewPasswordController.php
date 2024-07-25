@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\TarikhIklan;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -42,8 +43,11 @@ class NewPasswordController extends Controller
             return redirect()->route('password.reset')->with('error', 'Token has expired. Please request a new one.');
         }
 
+        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+        $catatan = $iklan->catatan ?? "";
+
         // Step 4: Token is valid, show the password reset form
-        return view('pages.auth.reset-password', ['token' => $token, 'email' =>  $email]);
+        return view('pages.auth.reset-password', compact('token', 'email', 'catatan'));
     }
 
 

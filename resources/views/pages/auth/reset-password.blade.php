@@ -1,4 +1,8 @@
 <x-auth-layout>
+    @section('announcement')
+        <h2>Hebahan</h2>
+        <p>{!! $catatan !!}</p> 
+    @endsection
 
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('password.update') }}" method="POST">
