@@ -87,6 +87,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
     Route::get('/getParlimen/{id}', [PermohonanController::class, 'getParlimen']);
     Route::get('/getDun/{id}', [PermohonanController::class, 'getDun']);
+    Route::get('/getPenaja/{id}', [PermohonanController::class, 'getPenaja']);
+
 
     //Pelajar
     Route::middleware(['auth', 'check.tahap:1'])->group(function () {
@@ -106,7 +108,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
         Route::get('/peringkat/{id}', [PermohonanController::class, 'peringkat']);
         Route::get('/kursus/{kodperingkat}/{id}', [PermohonanController::class, 'kursus']);
-        Route::get('/getPenaja/{id}', [PermohonanController::class, 'getPenaja']);
         Route::get('/fetch-amaun/bkoku', [PermohonanController::class, 'fetchAmaun']);
         Route::post('permohonan/baharu', [PermohonanController::class, 'simpanPermohonan'])->name('permohonan.simpan');
         Route::post('permohonan/hantar', [PermohonanController::class, 'hantarPermohonan'])->name('permohonan.hantar');
