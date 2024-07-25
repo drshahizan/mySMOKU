@@ -176,7 +176,7 @@
 										@endforeach	
 									</tbody>
 								</table>
-								<div style="font-size: 11px;"> Double click row untuk kemaskini item tuntutan. </div>
+								<div style="font-size: 11px;"> Klik dua kali untuk kemaskini item tuntutan. </div>
 							</div>
 						</div>
 						@endif
