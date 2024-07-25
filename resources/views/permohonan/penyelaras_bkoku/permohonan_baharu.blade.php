@@ -1803,7 +1803,7 @@
 							}
 						},
 						error: function () {
-							alert('BANDAR TETAP did not work');
+							// alert('BANDAR TETAP did not work');
 						}
 					});
 				}
@@ -1845,7 +1845,7 @@
 									}
 							}, 
 							error: function(){
-							alert('PARLIMEN did not work');
+							// alert('PARLIMEN did not work');
 							}
 
 					});
@@ -1900,7 +1900,7 @@
 									}
 							}, 
 							error: function(){
-							alert('DUN did not work');
+							// alert('DUN did not work');
 							}
 
 					});
@@ -1943,7 +1943,7 @@
 									}
 							}, 
 							error: function(){
-							alert('NEGERI SURAT did not work');
+							// alert('NEGERI SURAT did not work');
 							}
 
 					});
@@ -1985,7 +1985,7 @@
 									}
 							}, 
 							error: function(){
-							// alert('BANDAR WARIS did not work');
+							alert('BANDAR WARIS did not work');
 							}
 
 					});
