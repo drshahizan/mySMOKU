@@ -1775,7 +1775,7 @@
 
 					// AJAX request 
 					$.ajax({
-						url: 'getBandar/' + idnegeri,
+						url: '/getBandar/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function (response) {
@@ -1919,7 +1919,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'getBandar/'+idnegeri,
+						url: '/getBandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
