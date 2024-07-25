@@ -1775,7 +1775,7 @@
 
 					// AJAX request 
 					$.ajax({
-						url: '/getBandar/' + idnegeri,
+						url: 'getBandar/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function (response) {
@@ -1803,7 +1803,7 @@
 							}
 						},
 						error: function () {
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 						}
 					});
 				}
@@ -1845,7 +1845,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1900,7 +1900,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1919,7 +1919,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: '/getBandar/'+idnegeri,
+						url: 'getBandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1943,7 +1943,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -1961,7 +1961,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: '/bandar/'+idnegeri,
+						url: 'bandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1985,7 +1985,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							// alert('AJAX load did not work');
 							}
 
 					});
@@ -2093,7 +2093,7 @@
 									}
 								},
 								error: function () {
-									alert('AJAX load did not work');
+									// alert('AJAX load did not work');
 								}
 							});
 						}
@@ -2200,7 +2200,7 @@
 	
 						},
 						error: function(){
-						alert('AJAX load did not work');
+						// alert('AJAX load did not work');
 						}
 					});
 	
