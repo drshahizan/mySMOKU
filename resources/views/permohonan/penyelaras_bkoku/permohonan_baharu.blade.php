@@ -1961,7 +1961,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: 'bandar/'+idnegeri,
+						url: '/getBandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1985,7 +1985,7 @@
 									}
 							}, 
 							error: function(){
-							alert('BANDAR WARIS did not work');
+							// alert('BANDAR WARIS did not work');
 							}
 
 					});
