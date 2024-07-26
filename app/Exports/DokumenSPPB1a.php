@@ -68,7 +68,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'permohonan.yuran',    
                 'permohonan.wang_saku',    
             )
-            ->get();
+            ->get();  
 
         // Add the calculated "jenis_permohonan" column to the collection
         $senarai = $senarai->map(function ($item, $key) {
@@ -81,7 +81,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
 
             return $item;
         });
-        
+         
         return $senarai;
     }
 
@@ -112,7 +112,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'TAJAAN (SENDIRI / BIASISWA / PINJAMAN)',
                 'MOD PENGAJIAN (SEPENUH MASA / SEPARUH MASA / JARAK JAUH / DALAM TALIAN)',
                 'BILANGAN BULAN PER SEMESTER (4/6 BULAN)',
-                'KOS SILING BKOKU (RM5,000 SETAHUN)',
+                'KOS SILING BKOKU (RM6,200 SETAHUN)',
                 'YURAN SEMESTER SEMASA (RM)',
                 'ELAUN SEMESTER SEMASA (RM)',
                 'BAKI KELAYAKAN (RM)',
@@ -369,7 +369,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $event->sheet->setCellValue('A' . ($lastRow + 6), 'i) Yuran mengikut semester');
 
                 $event->sheet->getStyle('A' . ($lastRow + 7))->getFont()->setSize(9);
-                $event->sheet->setCellValue('A' . ($lastRow + 7), 'ii) Elaun Wang Saku RM300/ bulan');
+                $event->sheet->setCellValue('A' . ($lastRow + 7), 'ii) Elaun Wang Saku RM400/ bulan');
 
                 $event->sheet->getStyle('B' . ($lastRow + 9))->getFont()->setSize(9);
                 $event->sheet->setCellValue('B' . ($lastRow + 9), 'Disediakan oleh:');

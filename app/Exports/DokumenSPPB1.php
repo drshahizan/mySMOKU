@@ -45,7 +45,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
             ->where('tuntutan.status', 6)
             ->whereNull('tuntutan.data_migrate')
-            ->where('tuntutan.data_migrate', '!=', '1')
+            // ->where('tuntutan.data_migrate', '!=', '1')
             ->where('d.jenis', 'Yuran')
             ->where('f.id_institusi', $this->instiusi_user)
             ->select(
@@ -71,7 +71,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 'tuntutan.wang_saku',    
             )
             ->get();
-
+            
         // Add the calculated "jenis_permohonan" column to the collection
         $senarai = $senarai->map(function ($item, $key) {
             $jenis_permohonan = $this->calculateJenisPermohonan($item);
@@ -82,7 +82,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
             return $item;
         });
-        
+        // dd($senarai);
         return $senarai;
     }
 
@@ -113,7 +113,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 'TAJAAN (SENDIRI / BIASISWA / PINJAMAN)',
                 'MOD PENGAJIAN (SEPENUH MASA / SEPARUH MASA / JARAK JAUH / DALAM TALIAN)',
                 'BILANGAN BULAN PER SEMESTER (4/6 BULAN)',
-                'KOS SILING BKOKU (RM5,000 SETAHUN)',
+                'KOS SILING BKOKU (RM6,200 SETAHUN)',
                 'YURAN SEMESTER SEMASA (RM)',
                 'ELAUN SEMESTER SEMASA (RM)',
                 'BAKI KELAYAKAN (RM)',
@@ -370,7 +370,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
                 $event->sheet->setCellValue('A' . ($lastRow + 6), 'i) Yuran mengikut semester');
 
                 $event->sheet->getStyle('A' . ($lastRow + 7))->getFont()->setSize(9);
-                $event->sheet->setCellValue('A' . ($lastRow + 7), 'ii) Elaun Wang Saku RM300/ bulan');
+                $event->sheet->setCellValue('A' . ($lastRow + 7), 'ii) Elaun Wang Saku RM400/ bulan');
 
                 $event->sheet->getStyle('B' . ($lastRow + 9))->getFont()->setSize(9);
                 $event->sheet->setCellValue('B' . ($lastRow + 9), 'Disediakan oleh:');

@@ -1858,7 +1858,7 @@ class PenyelarasController extends Controller
         $this->updateTuntutanRecords($import->getModifiedData());
         
         // You may add a success message or redirect to a success page
-        return redirect()->back()->with('success', 'File processed successfully');
+        return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
     }
 
     private function updateTuntutanRecords($modifiedData)
