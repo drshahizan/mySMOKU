@@ -12,7 +12,7 @@ class LandingPageController extends Controller
     {   
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan ? $iklan->catatan : "";
-        Log::info('Catatan: ' . $catatan); // Log the content of $catatan
-        return view('pages.landing', compact('catatan'));// CATATAN
+        // Log::info('Catatan: ' . $catatan); // Log the content of $catatan
+        return view('pages.landing_page', compact('catatan'));// CATATAN
     }   
 }
