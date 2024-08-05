@@ -448,10 +448,12 @@ class PelajarController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
         $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
 
+        $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
+
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
 
-        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','dokumen'));
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','peringkat','dokumen'));
     }
 
     public function simpanProfilPelajar(Request $request)

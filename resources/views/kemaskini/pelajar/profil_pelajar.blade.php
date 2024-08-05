@@ -840,7 +840,9 @@
 									<!--begin::Input wrapper-->
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value=""></option>
+										@foreach ($peringkat as $peringkat)
+											<option value="{{$peringkat->kod_peringkat}}" {{$butiranPelajar->peringkat_pengajian == $peringkat->kod_peringkat ? 'selected' : ''}}>{{ $peringkat->peringkat}}</option>
+										@endforeach
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -1135,7 +1137,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							alert('AJAX load did not work tetap bandar');
 							}
 
 					});
@@ -1180,7 +1182,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							alert('AJAX load did not work parlimen');
 							}
 
 					});
@@ -1235,7 +1237,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							alert('AJAX load did not work dun');
 							}
 
 					});
@@ -1278,7 +1280,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work');
+							alert('AJAX load did not work bandar waris');
 							}
 
 					});
@@ -1338,7 +1340,7 @@
 
 					// institusi id
 					var id_institusi = document.getElementById("id_institusi").value; 
-					//alert (id_institusi);
+					alert (id_institusi);
 
 					// Empty the dropdown
 					$('#peringkat_pengajian').find('option').not(':first').remove();
@@ -1346,11 +1348,11 @@
 
 					// AJAX request 
 					$.ajax({
-						url: '/peringkat/'+id_institusi,
+						url: '/getPeringkat/'+id_institusi,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
-							//alert('AJAX loaded something');
+							alert('AJAX loaded something');
 
 							var len = 0;
 							if(response['data'] != null){
@@ -1359,7 +1361,7 @@
 
 							if(len > 0){
 								var selectedValue = document.getElementById("peringkat").value; 
-								// alert(selectedValue);
+								alert(selectedValue);
 								// Read data and create <option >
 								for(var i=0; i<len; i++){
 
@@ -1377,7 +1379,7 @@
 
 						},
 						error: function(){
-						alert('AJAX load did not work');
+						alert('AJAX load did not work peringkat');
 						}
 					});
 
