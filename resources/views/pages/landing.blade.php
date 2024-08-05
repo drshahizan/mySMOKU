@@ -328,7 +328,7 @@
 						<div class="left">HEBAHAN</div>
 						<!-- div class="moving-icon">PENTING</div-->
 						<div class="middle">
-							<span style="font-size: 1.5rem;">{{ isset($catatan) ? $catatan : 'Variable $catatan is not set' }}</span>
+							<span style="font-size: 1.5rem;">{!! $catatan !!}</span>
 						</div>
 					</div>
 					

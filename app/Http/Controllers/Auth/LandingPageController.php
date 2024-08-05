@@ -7,15 +7,11 @@ use App\Models\TarikhIklan;
 
 class LandingPageController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
+
     public function index()
     {   
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
-        $catatan = $iklan ? $iklan->catatan : "";
-        return view('pages.landing', compact('catatan'));
+        $catatan = $iklan->catatan ?? "";
+        return view('pages.landing', compact('catatan'));// CATATAN
     }   
 }
