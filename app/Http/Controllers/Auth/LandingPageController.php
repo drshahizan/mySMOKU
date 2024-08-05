@@ -7,6 +7,11 @@ use App\Models\TarikhIklan;
 
 class LandingPageController extends Controller
 {
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {   
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
