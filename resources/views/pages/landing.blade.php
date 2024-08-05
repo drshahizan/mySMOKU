@@ -328,7 +328,9 @@
 						<div class="left">HEBAHAN</div>
 						<!-- div class="moving-icon">PENTING</div-->
 						<div class="middle">
-							<span style="font-size: 1.5rem;">{!! $catatan !!}</span>
+							{{-- Debug the content --}}
+							<pre>{{ var_dump($catatan) }}</pre>
+        <span style="font-size: 1.5rem;">{!! $catatan !!}</span>
 						</div>
 					</div>
 					
