@@ -21,6 +21,7 @@ use App\Http\Controllers\PentadbirController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PelajarController;
+use App\Models\TarikhIklan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -56,7 +57,11 @@ Route::get('/', function () {
     // Check if a flash message indicating the session has been flushed exists
     if (Session::has('session_flushed')) {
         Session::forget('session_flushed');
-        return view('pages.landing');
+         // Retrieve the latest 'catatan'
+         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+         $catatan = $iklan->catatan ?? "";
+ 
+         return view('pages.landing', ['catatan' => $catatan]);
     }
 
     // Flush the session
