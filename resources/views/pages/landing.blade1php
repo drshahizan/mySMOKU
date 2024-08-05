@@ -39,25 +39,15 @@
 
 			.header-background {
 				position: relative;
+				background-image: linear-gradient(rgba(207, 13, 59, 0), rgba(76, 114, 148, 0.75) 100.57%), url('assets/media/KPT_1042.jpg');
+				/* background-image: url('assets/media/KPT_1042.jpg'); */
+				background-size: cover;
+				background-position: center;
 				min-height: 100px;
-				min-height: 800px;
+				min-height: 900px;
 			}
-
-			.background-video {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transform: translate(-50%, -50%);
-				z-index: 0;
-			}
-
 											
 			.landing-header {
-				/* background-color: white;  */
-
 				position: absolute;
 				top: 0;
 				width: 100%;
@@ -71,11 +61,11 @@
 			}
 
 			.menu-link {
-				color: rgb(106, 190, 232);
+				color: white;
 			}
 
 			.menu-link:hover {
-				color: #ddd; 
+				color: #ddd; /* Lighter color on hover */
 			}
 
 			.btn-permohonan {
@@ -91,7 +81,6 @@
 				position: absolute;
 				left: 50%;
 				top: 50%;
-				width: 100%;
 				transform: translate(-50%, -50%);
 				z-index: 20;
 				color: white;
@@ -107,7 +96,7 @@
 			}
 
 			.content-left h4 .id-color {
-				color: #f9b200;
+				color: #371174;
 			}
 
 			.text-transition {
@@ -116,50 +105,11 @@
 			}
 
 			.text-transition:hover {
-				color: #0570ea;
+				color: #000000;
 				transform: scale(1.1);
 			}
 		</style>
 		<style>
-			.card-container {
-				display: flex;
-				gap: 20px;
-				width: 100%;
-				overflow-x: auto;
-				/* padding: 10px; */
-			}
-
-			.card {
-				position: relative;
-				width: 500px;
-				height: 300px;
-				border-radius: 15px;
-				overflow: hidden;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				transition: transform 0.3s;
-			}
-
-			.card img {
-				width: 100%;
-				height: 300px;
-				display: block;
-			}
-
-			.card-text {
-				position: absolute;
-				bottom: 20px;
-				left: 20px;
-				right: 20px;
-				color: white;
-				font-size: 1rem;
-				font-weight: bold;
-				text-align: center;
-			}
-
-			.card:hover {
-				transform: translateY(-10px);
-			}
-
 			.box {
 				position: absolute;
 				left: 50%;
@@ -182,14 +132,14 @@
 				padding: 10px 30px;
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
+				/* justify-content: space-between; */
 			}
 
-			/* .moving-icon {
+			.moving-icon {
 				display: inline-block;
 				padding: 5px 5px;
-				background-color: #ffeb3b; 
-				color: #333; 
+				background-color: #ffeb3b; /* Yellow background color */
+				color: #333; /* Dark text color */
 				font-weight: bold;
 				font-family: Arial, sans-serif;
 				border-radius: 10px;
@@ -200,7 +150,7 @@
 				0% { transform: translateX(0); }
 				50% { transform: translateX(10px); }
 				100% { transform: translateX(0); }
-			} */
+			}
 		</style>
 	</head>
 	<!--end::Head-->
@@ -216,9 +166,6 @@
 			<div class="mb-0" id="home">
 				<!--begin::Wrapper-->
 				<div class="header-background">
-					<video autoplay loop muted class="background-video">
-						<source src="assets/media/ICON_VERSION8.mp4" type="video/mp4">
-					</video>
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 						<!--begin::Container-->
@@ -237,8 +184,8 @@
 									<!--end::Mobile menu toggle-->
 									<!--begin::Logo image-->
 									<a href="/landing">
-										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px" />
-										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px" />
+										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-25px h-lg-50px" />
+										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-20px h-lg-50px" />
 									</a>
 									<!--end::Logo image-->
 								</div>
@@ -247,7 +194,7 @@
 								<div class="d-lg-block" id="kt_header_nav_wrapper">
 									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
 										<!--begin::Menu-->
-										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
+										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-800 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
@@ -300,7 +247,7 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem; color:#f2f2f2" href="http://bkoku.mohe.gov.my/login" class=" menu-link nav-link py-3 px-4 px-xxl-6 btn btn-permohonan">Permohonan</a>
+												<a style="font-size: 1.0rem; color:#f2f2f2" href="http://bkoku.mohe.gov.my/login" class=" menu-link nav-link py-3 px-4 px-xxl-6 btn btn-permohonan">Permohonan</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
@@ -317,12 +264,11 @@
 					<!--end::Header-->
 					<!--begin::Center content-->
 					<div class="content-left">
-						<!--img src="assets/media/jata_kpt.svg" alt="KPT Malaysia" width="25%" style="padding-bottom:30px"-->
+						<img src="assets/media/jata_kpt.svg" alt="KPT Malaysia" width="25%" style="padding-bottom:30px">
 						<h4 class="text-transition" style="font-size: 3.5rem;"><span class="id-color">Selamat Datang ke</span></h4>
-						<h1 class="text-transition" style="font-size: 3.5rem;"><span style="text-transform:uppercase">Sistem Bantuan Kewangan OKU & PPK</span></h1>
+						<h1 class="text-transition" style="font-size: 3.0rem;"><span style="text-transform:uppercase">Sistem Bantuan Kewangan OKU & PPK</span></h1>
 					</div>
 					<!--end::Center content-->
-
 					<!--begin::Hebahan content-->
 					<div class="box">
 						<div class="left">HEBAHAN</div>
@@ -752,17 +698,21 @@
 					</div>
 					<!--end::Heading-->
 					<!--begin::Row-->
-					<div class="card-container">
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Digital Services">
-							<div class="card-text">
+					<div class="row w-100 gy-10 mb-md-20">
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-12 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">1</span></div>
-								<!--end::Badge-->
 								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
@@ -773,17 +723,23 @@
 								</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Shared Services">
-							<div class="card-text">
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">2</span></div>
-								<!--end::Badge-->
 								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
@@ -792,17 +748,23 @@
 								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Technical Approval">
-							<div class="card-text">
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">3</span></div>
-								<!--end::Badge-->
 								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
@@ -811,15 +773,21 @@
 								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">4</span></div>
-								<!--end::Badge-->
 								<div class="d-flex mb-0">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">4</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
 									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma Lepasan Ijazah</div>
 									<!--end::Title-->
@@ -830,17 +798,23 @@
 								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">5</span></div>
-								<!--end::Badge-->
 								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">5</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
@@ -849,17 +823,23 @@
 								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-2 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<!--begin::Illustration-->
+								<img src="assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
+								<!--end::Illustration-->
 								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">6</span></div>
-								<!--end::Badge-->
 								<div class="d-flex flex-center mb-5">
+									<!--begin::Badge-->
+									<span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">6</span>
+									<!--end::Badge-->
 									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
+									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 									<!--end::Title-->
 								</div>
 								<!--end::Heading-->
@@ -868,7 +848,9 @@
 								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
 								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
+						<!--end::Col-->
 					</div>
 					<!--end::Row-->
 					
@@ -1442,8 +1424,10 @@
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
+		<script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
+		<script src="assets/js/custom/landing.js"></script>
 		<!--end::Custom Javascript-->
 		
 		<!--end::Javascript-->
