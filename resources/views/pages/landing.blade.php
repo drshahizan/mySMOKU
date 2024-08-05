@@ -217,7 +217,7 @@
 				<!--begin::Wrapper-->
 				<div class="header-background">
 					<video autoplay loop muted class="background-video">
-						<source src="assets/media/ICON_VERSION8.mp4" type="video/mp4">
+						<source src="assets/media/video_landing.mp4" type="video/mp4">
 					</video>
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
