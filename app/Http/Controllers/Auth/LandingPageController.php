@@ -19,6 +19,6 @@ class LandingPageController extends Controller
     {   
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
-        return view('pages.landing', compact('catatan'));
+        return view('pages.landing', compact('catatan'));// CATATAN
     }   
 }
