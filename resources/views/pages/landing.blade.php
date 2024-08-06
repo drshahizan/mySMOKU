@@ -36,6 +36,19 @@
 				background-color: #f2f2f2;
 			}
 
+			.table-style-2 {
+				width: 100%;
+			}
+
+			.table-style-2 th, .table-style-2 td {
+				border: 1px solid transparent;
+				text-align: center;
+			}
+
+			.table-style-2 th {
+				background-color: transparent;
+			}
+
 
 			.header-background {
 				position: relative;
@@ -951,200 +964,200 @@
 								<!--begin::Row-->
 								<div class="row g-10">
 									<!--begin::Col-->
-									<div class="col-xl-4">
-										<div class="d-flex h-100 flex-column align-items-center">
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-8" >
-												<!-- begin::Heading -->
-												<!-- end::Heading -->
+									<div class="col-xl-12">
+										<div class="d-flex h-100 align-items-center">
+											<!--begin::Features-->
+											<div class="w-100 mb-10">
+												<!-- Table Start -->
+												<table  class="table-style-2">
+													<thead>
+														<tr>
+															<th></th>
+															<th></th>
+															<th>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="text-light fw-bold" style="font-size:14px;">Yuran </div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</th>
+															<th>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="text-light fw-bold" style="font-size:14px;">Wang Saku</div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td rowspan="2">
+																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-4">
+																	<!-- begin::Heading -->
+																	<div class="mb-4">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td rowspan="2">
+																<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #96b6cd;">
+																	<!-- begin::Heading -->
+																	<div class="mb-4">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																	<!-- begin::Heading -->
+																	<div class="mb-2">
+																		<!-- begin::Title -->
+																		<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
+																		<!-- end::Title -->
+																	</div>
+																	<!-- end::Heading -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+															<td>
+																<div class="mb-2">
+																	<!-- begin::Title -->
+																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																	<!-- end::Title -->
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+												<!-- Table End -->
 											</div>
-											<!-- begin::Option for Sepenuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-8">
-												<!-- begin::Heading -->
-												<div class="mb-4">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<!-- end::Option for Sepenuh Masa -->
-
-											<!-- begin::Option for Separuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6" style="background-color: #96b6cd;">
-												<!-- begin::Heading -->
-												<div class="mb-4">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<!-- end::Option for Separuh Masa -->
-										</div>
-									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
-									<div class="col-xl-4">
-										<div class="d-flex h-100 flex-column align-items-center">
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-8">
-												<!-- begin::Heading -->
-												<!-- end::Heading -->
-											</div>
-											<!-- begin::Option for Sepenuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-8">
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<!-- end::Option for Sepenuh Masa -->
-
-											<!-- begin::Option for Separuh Masa -->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-8" style="background-color: #96b6cd;">
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<!-- end::Option for Separuh Masa -->
-										</div>
-									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
-									<div class="col-xl-2">
-										<div class="d-flex h-100 flex-column align-items-center">
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-4 px-6 mb-5" style="background-color: grey;">
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="text-dark fw-bold" style="font-size:14px;">Yuran </div>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											</div>
-											<!-- begin::Option for Sepenuh Masa -->
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-cross-circle text-danger  mb-6" style="font-size: 3em; ">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											<!-- end::Option for Sepenuh Masa -->
-
-											<!-- begin::Option for Separuh Masa -->
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											<!-- end::Option for Separuh Masa -->
-										</div>
-									</div>
-									<!--end::Col-->
-									<!--begin::Col-->
-									<div class="col-xl-2">
-										<div class="d-flex h-100 flex-column align-items-center">
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-4 px-6 mb-5" style="background-color: grey;">
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<div class="text-dark fw-bold" style="font-size:14px;">Wang Saku</div>
-													<!-- end::Title -->
-												</div>
-											</div>
-											<!-- begin::Option for Sepenuh Masa -->
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-check-circle text-success"  style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-check-circle text-success  mb-6" style="font-size: 3em; ">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											<!-- end::Option for Sepenuh Masa -->
-
-											<!-- begin::Option for Separuh Masa -->
-												<!-- begin::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-cross-circle text-danger"  style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-												<div class="mb-2">
-													<!-- begin::Title -->
-													<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-													<!-- end::Title -->
-												</div>
-												<!-- end::Heading -->
-											<!-- end::Option for Separuh Masa -->
+											<!--end::Features-->	
 										</div>
 									</div>
 									<!--end::Col-->
