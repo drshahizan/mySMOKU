@@ -132,8 +132,8 @@
 
 			.card {
 				position: relative;
-				width: 500px;
-				height: 300px;
+				width: 100%;
+				height: 200px;
 				border-radius: 15px;
 				overflow: hidden;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -142,13 +142,13 @@
 
 			.card img {
 				width: 100%;
-				height: 300px;
+				height: 100%;
 				display: block;
 			}
 
 			.card-text {
 				position: absolute;
-				bottom: 20px;
+				bottom: 35px;
 				left: 20px;
 				right: 20px;
 				color: white;
@@ -763,124 +763,162 @@
 					</div>
 					<!--end::Heading-->
 					<!--begin::Row-->
-					<div class="card-container">
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Digital Services">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">1</span></div>
-								<!--end::Badge-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil Asas / Sijil</div>
-									<!--end::Title-->
+					<div class="row w-100 gy-10 mb-md-20">
+						<!--begin::Col-->
+						<div class="col-md-4 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-12 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">1</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Sijil Asas / Sijil</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">2 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Kolej Komuniti dan Politeknik)<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+										<!--end::Description-->
+									</div>
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">2 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Kolej Komuniti dan Politeknik)
-								<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)
-								</div>
-								<!--end::Description-->
 							</div>
-						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Shared Services">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">2</span></div>
-								<!--end::Badge-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
-									<!--end::Title-->
+							<!--end::Story-->
+
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">2</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">3 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
+										<!--end::Description-->
+									</div>	
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">3 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
-								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Technical Approval">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">3</span></div>
-								<!--end::Badge-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
-									<!--end::Title-->
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-4 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">3</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana Muda</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">4 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+										<!--end::Description-->
+									</div>	
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">4 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
-								<!--end::Description-->
 							</div>
-						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">4</span></div>
-								<!--end::Badge-->
-								<div class="d-flex mb-0">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma Lepasan Ijazah</div>
-									<!--end::Title-->
+							<!--end::Story-->
+
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">4</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma Lepasan Ijazah</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">2 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+										<!--end::Description-->
+									</div>	
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">2 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
-								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">5</span></div>
-								<!--end::Badge-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
-									<!--end::Title-->
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-4 px-1">
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">5</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">2 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+										<!--end::Description-->
+									</div>	
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">2 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
-								<!--end::Description-->
 							</div>
-						</div>
-						<div class="card">
-							<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-							<div class="card-text">
-								<!--begin::Heading-->
-								<!--begin::Badge-->
-									<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-success fw-bold fs-3">6</span></div>
-								<!--end::Badge-->
-								<div class="d-flex flex-center mb-5">
-									<!--begin::Title-->
-									<div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
-									<!--end::Title-->
+							<!--end::Story-->
+
+							<!--begin::Story-->
+							<div class="text-center mb-10 mb-md-0">
+								<div class="card">
+									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
+									<div class="card-text">
+										<!--begin::Heading-->
+										<!--begin::Badge-->
+										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">6</span></div>
+										<!--end::Badge-->
+										<div class="d-flex flex-center mb-5">
+											<!--begin::Title-->
+											<div class="fs-5 fs-lg-1 fw-bold text-light">Ph.D</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Heading-->
+										<!--begin::Description-->
+										<div class="fs-6 fs-lg-4">4 Tahun</div>
+										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+										<!--end::Description-->
+									</div>	
 								</div>
-								<!--end::Heading-->
-								<!--begin::Description-->
-								<div class="fs-6 fs-lg-6">4 Tahun</div>
-								<div class="fs-7 fs-lg-7">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
-								<!--end::Description-->
 							</div>
+							<!--end::Story-->
 						</div>
+						<!--end::Col-->
 					</div>
+
 					<!--end::Row-->
 					
 				</div>
