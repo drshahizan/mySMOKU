@@ -218,7 +218,7 @@
 				<!--begin::Wrapper-->
 				<div class="header-background">
 					<video autoplay loop muted class="background-video">
-						<source src="assets/media/background_1.mp4" type="video/mp4">
+						<source src="assets/media/blue_plate.mp4" type="video/mp4">
 					</video>
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
@@ -227,7 +227,6 @@
 						<div>
 							<a href="/landing">
 								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
 						</div>
 						<!--end::Kementerian-->

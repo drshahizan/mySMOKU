@@ -56,7 +56,7 @@
 
 											
 			.landing-header {
-				background-color: white; 
+				/* background-color: white;  */
 
 				position: absolute;
 				top: 0;
@@ -71,8 +71,7 @@
 			}
 
 			.menu-link {
-				/* color: rgb(106, 190, 232); */
-				color: rgb(0, 0, 0);
+				color: rgb(106, 190, 232);
 			}
 
 			.menu-link:hover {
@@ -218,42 +217,32 @@
 				<!--begin::Wrapper-->
 				<div class="header-background">
 					<video autoplay loop muted class="background-video">
-						<source src="assets/media/background_1.mp4" type="video/mp4">
+						<source src="assets/media/video_landing.mp4" type="video/mp4">
 					</video>
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-						<!--begin::Logo-->
-						<!--begin::Kementerian-->
-						<div>
-							<a href="/landing">
-								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
-						</div>
-						<!--end::Kementerian-->
-						<!--begin::Logo image-->
-						<div>
-							<a href="/landing">
-								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
-						</div>
-						<!--end::Logo image-->
-						<!--end::Logo-->
 						<!--begin::Container-->
 						<div class="container">
-							<!--begin::Mobile menu toggle-->
-								<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
-									<i class="ki-duotone ki-abstract-14 fs-2hx">
-										<span class="path1"></span>
-										<span class="path2"></span>
-									</i>
-								</button>
-							<!--end::Mobile menu toggle-->
-							
 							<!--begin::Wrapper-->
 							<div class="d-flex align-items-center justify-content-between">
-								
+								<!--begin::Logo-->
+								<div class="d-flex align-items-center flex-equal">
+									<!--begin::Mobile menu toggle-->
+									<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+										<i class="ki-duotone ki-abstract-14 fs-2hx">
+											<span class="path1"></span>
+											<span class="path2"></span>
+										</i>
+									</button>
+									<!--end::Mobile menu toggle-->
+									<!--begin::Logo image-->
+									<a href="/landing">
+										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px" />
+										<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px" />
+									</a>
+									<!--end::Logo image-->
+								</div>
+								<!--end::Logo-->
 								<!--begin::Menu wrapper-->
 								<div class="d-lg-block" id="kt_header_nav_wrapper">
 									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">

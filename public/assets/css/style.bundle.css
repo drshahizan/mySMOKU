@@ -29656,7 +29656,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .menu-column {
   flex-direction: column;
-  width: 200%;
+  width: 100%;
 }
 
 .menu-row {
@@ -47406,7 +47406,7 @@ a:hover {
   color: #ffffff;
 }
 [data-kt-sticky-landing-header=on] .landing-header .menu .menu-link.active {
-  color: #0c4277;
+  color: #3E97FF;
   background-color: rgba(239, 242, 245, 0.4);
 }
 [data-kt-sticky-landing-header=on] .landing-header {
