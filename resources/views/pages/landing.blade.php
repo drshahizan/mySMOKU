@@ -177,26 +177,78 @@
 			.box {
 				position: absolute;
 				left: 50%;
-				top: 100%;
-				transform: translate(-50%, -50%);
+				top: 100%; /* Center vertically */
+				transform: translate(-50%, -50%); /* Center horizontally */
 				display: flex;
 				align-items: center;
-				width: 70%;
-				height: 50px;
+				width: 100%; /* Adjust width to a percentage */
+				max-width: 70%; /* Set a maximum width */
+				height: auto; /* Allow height to adjust based on content */
+				padding: 10px; /* Add padding for better spacing */
 				background-color: #333;
 				color: white;
+				box-sizing: border-box; /* Ensure padding is included in the width/height */
 			}
+
 			.box .left {
 				background-color: #e91e63;
-				padding: 10px 30px;
+				padding: 10px 20px; /* Adjust padding for better responsiveness */
 				font-weight: bold;
 			}
-			.box .middle {
-				flex-grow: 1;
-				padding: 10px 30px;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+
+			.middle {
+				flex: 1;
+				text-align: center;
+			}
+
+			.middle span {
+				font-size: 1.5rem; /* Default size */
+			}
+
+			/* Responsive styles */
+			@media (max-width: 1200px) {
+				.box {
+					width: 100%;
+					padding: 8px; /* Reduce padding for medium screens */
+				}
+
+				.box .left {
+					padding: 8px 16px;
+				}
+
+				.middle span {
+					font-size: 1.2rem; /* Size for medium screens */
+				}
+			}
+
+			@media (max-width: 800px) {
+				.box {
+					width: 90%;
+					padding: 6px; /* Further reduce padding for smaller screens */
+				}
+
+				.box .left {
+					padding: 6px 12px;
+				}
+
+				.middle span {
+					font-size: 1rem; /* Size for smaller screens */
+				}
+			}
+
+			@media (max-width: 500px) {
+				.box {
+					width: 95%;
+					padding: 4px; /* Minimal padding for very small screens */
+				}
+
+				.box .left {
+					padding: 4px 8px;
+				}
+
+				.middle span {
+					font-size: 0.8rem; /* Size for very small screens */
+				}
 			}
 
 			/* .moving-icon {
@@ -238,7 +290,7 @@
 						<!--begin::Logo-->
 						<!--begin::Kementerian-->
 						<div>
-							<a href="/landing">
+							<a href="/">
 								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-default h-35px h-lg-60px"/>
 								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
@@ -246,7 +298,7 @@
 						<!--end::Kementerian-->
 						<!--begin::Logo image-->
 						<div>
-							<a href="/landing">
+							<a href="/">
 								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px"/>
 								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
@@ -352,7 +404,7 @@
 						<div class="left">HEBAHAN</div>
 						<!-- div class="moving-icon">PENTING</div-->
 						<div class="middle">
-        					<span style="font-size: 1.5rem;">{!! $catatan  ?? 'No notes available' !!}</span>
+        					<span>{!! $catatan  ?? 'No notes available' !!}</span>
 						</div>
 					</div>
 					
