@@ -297,12 +297,12 @@
 						</div>
 						<!--end::Kementerian-->
 						<!--begin::Logo image-->
-						<div>
-							<a href="/">
-								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
-						</div>
+						<!--div>
+							<!--a href="/">
+								<!--img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px"/-->
+								<!--img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px"/-->
+							<!--/a>
+						<!--/div>
 						<!--end::Logo image-->
 						<!--end::Logo-->
 						<!--begin::Container-->
