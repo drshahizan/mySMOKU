@@ -60,8 +60,8 @@
 						<!--end::Icon-->
 						<!--begin::Label-->
 						<div class="stepper-label">
-							<h3 class="stepper-title">Maklumat Waris</h3>
-							<div class="stepper-desc fw-semibold">Profil Waris</div>
+							<h3 class="stepper-title">Maklumat Ibu Bapa / Penjaga</h3>
+							<div class="stepper-desc fw-semibold">Profil Ibu Bapa / Penjaga</div>
 						</div>
 						<!--end::Label-->
 					</div>
@@ -332,7 +332,7 @@
 						<div class="row mb-10">
 							<div class="col-md-7 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen (Jika ada)</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -349,7 +349,7 @@
 							</div>
 							<div class="col-md-5 fv-row" id="divdun">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">DUN</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">DUN (Jika ada)</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -582,6 +582,7 @@
 									<!--end::Title-->
 									<!--begin::Notice-->
 									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
+									<div class="fw-semibold fs-4" style="color: red">* Pelajar perlu memastikan akaun bank berstatus aktif</div>
 									<!--end::Notice-->
 								</div>
 								<div class="col-md-6 fv-row">
@@ -617,10 +618,10 @@
 						<!--begin::Heading-->
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Title-->
-							<h2 class="fw-bold text-dark">Maklumat Waris</h2>
+							<h2 class="fw-bold text-dark">Maklumat Ibu Bapa / Penjaga</h2>
 							<!--end::Title-->
 							<!--begin::Notice-->
-							<div class="text-muted fw-semibold fs-6">Profil Waris</div>
+							<div class="text-muted fw-semibold fs-6">Profil Ibu Bapa / Penjaga</div>
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
@@ -651,7 +652,7 @@
 							</div>
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">No Pasport</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">No Pasport (Jika ada)</label>
 								<!--end::Label-->
 								<!--begin::Row-->
 								<div class="row fv-row">
@@ -757,8 +758,7 @@
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan Waris
-								</label>
+								<label class="fs-6 fw-semibold form-label mb-2">Pekerjaan</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
@@ -771,7 +771,7 @@
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">
-									Pendapatan Bulanan Waris&nbsp;
+									Pendapatan Bulanan&nbsp;
 									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
 										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 									</span>
@@ -943,8 +943,6 @@
 													Salinan Penyata Bank
 												@elseif($dok->id_dokumen == '2')
 													Salinan Surat Tawaran Pengajian
-												@else
-													Resit/Invois Tambahan (Jika Ada)	
 												@endif
 											</td>
 											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2')
