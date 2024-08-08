@@ -78,7 +78,7 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -87,7 +87,7 @@
                                     <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                    <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -149,12 +149,12 @@
                             <!--end::Card toolbar-->
 
                             <div class="tab-content" id="myTabContent">
-                                {{-- BKOKU IPTS --}}
-                                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
+                                {{-- BKOKU UA --}}
+                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
@@ -166,32 +166,54 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @php
-                                                        $i=0;
-                                                    @endphp
-                                                    @foreach ($permohonan as $item)
+                                                @php
+                                                    $i=0;
+                                                @endphp
+                                                @foreach ($permohonan as $item)
                                                     @if ($item['program']=="BKOKU")
-                                                    @php
-                                                        $i++;
+                                                        @php
+                                                            $i++;
 
-                                                        $rujukan = explode("/", $item['no_rujukan_permohonan']);
-                                                        $peringkat = $rujukan[1];
-                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
-                                                        $bil_akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->count();
-                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                            $rujukan = explode("/", $item['no_rujukan_permohonan']);
+                                                            $peringkat = $rujukan[1];
+                                                            $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                            $bil_akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->count();
+                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
 
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                        $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                            $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                            $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                        if($user_id==null){
-                                                            $user_name = "Tiada Maklumat";
-                                                        }
-                                                        else{
-                                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                            $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                            if($user_id==null){
+                                                                $user_name = "Tiada Maklumat";
+                                                            }
+                                                            else{
+                                                                $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                                                $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                                $conjunctions = ['bin', 'binti'];
+                                                                $words = explode(' ', $text);
+                                                                $result = [];
+                                                                foreach ($words as $word) {
+                                                                    if (in_array(Str::lower($word), $conjunctions)) {
+                                                                        $result[] = Str::lower($word);
+                                                                    } else {
+                                                                        $result[] = $word;
+                                                                    }
+                                                                }
+                                                                $user_name = implode(' ', $result);
+                                                            }
+
+                                                            if ($item['status']==2){
+                                                                $status='Baharu';
+                                                            }
+                                                            if ($item['status']==3){
+                                                                $status='Sedang Disaring';
+                                                            }
+
+                                                            //nama pemohon
+                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -202,93 +224,71 @@
                                                                     $result[] = $word;
                                                                 }
                                                             }
-                                                            $user_name = implode(' ', $result);
-                                                        }
+                                                            $pemohon = implode(' ', $result);
 
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
-                                                        }
-                                                        if ($item['status']==3){
-                                                            $status='Sedang Disaring';
-                                                        }
-
-                                                        //nama pemohon
-                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
+                                                            //institusi pengajian
+                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                            $conjunctions = ['of', 'in', 'and'];
+                                                            $words = explode(' ', $text3);
+                                                            $result = [];
+                                                            foreach ($words as $word) {
+                                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                                    $result[] = Str::lower($word);
+                                                                } else {
+                                                                    $result[] = $word;
+                                                                }
                                                             }
-                                                        }
-                                                        $pemohon = implode(' ', $result);
-
-                                                        //institusi pengajian
-                                                        $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                                        $conjunctions = ['of', 'in', 'and'];
-                                                        $words = explode(' ', $text3);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $institusi = implode(' ', $result);
-                                                        $institusipengajian = transformBracketsToUppercase($institusi);
-                                                    @endphp
-                                                        @if ($jenis_institusi == "IPTS")
-                                                        <tr>
-                                                            <td>
-                                                                @if($item['status']==4 || $item['status']==5)
-                                                                    @if($bil_akademik>1)
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                            $institusi = implode(' ', $result);
+                                                            $institusipengajian = transformBracketsToUppercase($institusi);
+                                                        @endphp
+                                                        @if ($jenis_institusi=="UA")
+                                                            <tr>
+                                                                <td style="width: 12%!important;">
+                                                                    @if($item['status']==4 || $item['status']==5)
+                                                                        @if($bil_akademik>1)
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @else
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @endif
+                                                                    @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                        @if($bil_akademik>1)
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @else
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @endif
+                                                                    @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                        {{$item['no_rujukan_permohonan']}}
                                                                     @else
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @if($bil_akademik>1)
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @else
+                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                        @endif
                                                                     @endif
-                                                                @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                    @if($bil_akademik>1)
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                    @else
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                    @endif
-                                                                @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                    {{$item['no_rujukan_permohonan']}}
-                                                                @else
-                                                                    @if($bil_akademik>1)
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                    @else
-                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                    @endif
-                                                                @endif
-                                                            </td>
-                                                            <td>{{$pemohon}}</td>
-                                                            <td>{{$institusipengajian}}</td>
-                                                            <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
+                                                                </td>
+                                                                <td style="width: 25%!important">{{$pemohon}}</td>
+                                                                <td style="width: 23%!important">{{$institusipengajian}}</td>
+                                                                <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
                                                                 @if ($item['status']=='2')
-                                                                    <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='3')
-                                                                    <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='4')
-                                                                    <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @elseif ($item['status']=='5')
-                                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
                                                                 @endif
-                                                            <td>{{$user_name}}</td>
-                                                        </tr>
+                                                                <td style="width: 13%!important">{{$user_name}}</td>
+                                                            </tr>
                                                         @endif
                                                     @endif
-                                                    @endforeach
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-
+                                
                                 {{-- BKOKU POLI --}}
                                 <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
                                     <br>
@@ -428,7 +428,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 {{-- BKOKU KK --}}
                                 <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
@@ -570,12 +569,12 @@
                                     </div>
                                 </div>
 
-                                {{-- BKOKU UA --}}
-                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 12%"><b>ID Permohonan</b></th>
@@ -587,54 +586,34 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                @php
-                                                    $i=0;
-                                                @endphp
-                                                @foreach ($permohonan as $item)
+                                                    @php
+                                                        $i=0;
+                                                    @endphp
+                                                    @foreach ($permohonan as $item)
                                                     @if ($item['program']=="BKOKU")
-                                                        @php
-                                                            $i++;
+                                                    @php
+                                                        $i++;
 
-                                                            $rujukan = explode("/", $item['no_rujukan_permohonan']);
-                                                            $peringkat = $rujukan[1];
-                                                            $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
-                                                            $bil_akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->count();
-                                                            $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                            $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
+                                                        $rujukan = explode("/", $item['no_rujukan_permohonan']);
+                                                        $peringkat = $rujukan[1];
+                                                        // dd($item['smoku_id']);
+                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian', $peringkat)->first();
+                                                        // dd($akademik);
+                                                        $bil_akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->count();
+                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
+                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
 
-                                                            $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                            $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                            $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                            $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+                                                        $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
+                                                        $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
+                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
+                                                        $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                            if($user_id==null){
-                                                                $user_name = "Tiada Maklumat";
-                                                            }
-                                                            else{
-                                                                $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                                $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $user_name = implode(' ', $result);
-                                                            }
-
-                                                            if ($item['status']==2){
-                                                                $status='Baharu';
-                                                            }
-                                                            if ($item['status']==3){
-                                                                $status='Sedang Disaring';
-                                                            }
-
-                                                            //nama pemohon
-                                                            $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                        if($user_id==null){
+                                                            $user_name = "Tiada Maklumat";
+                                                        }
+                                                        else{
+                                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                                            $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
                                                             $conjunctions = ['bin', 'binti'];
                                                             $words = explode(' ', $text);
                                                             $result = [];
@@ -645,65 +624,87 @@
                                                                     $result[] = $word;
                                                                 }
                                                             }
-                                                            $pemohon = implode(' ', $result);
+                                                            $user_name = implode(' ', $result);
+                                                        }
 
-                                                            //institusi pengajian
-                                                            $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                                            $conjunctions = ['of', 'in', 'and'];
-                                                            $words = explode(' ', $text3);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
+                                                        if ($item['status']==2){
+                                                            $status='Baharu';
+                                                        }
+                                                        if ($item['status']==3){
+                                                            $status='Sedang Disaring';
+                                                        }
+
+                                                        //nama pemohon
+                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
+                                                        $conjunctions = ['bin', 'binti'];
+                                                        $words = explode(' ', $text);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
                                                             }
-                                                            $institusi = implode(' ', $result);
-                                                            $institusipengajian = transformBracketsToUppercase($institusi);
-                                                        @endphp
-                                                        @if ($jenis_institusi=="UA")
-                                                            <tr>
-                                                                <td style="width: 12%!important;">
-                                                                    @if($item['status']==4 || $item['status']==5)
-                                                                        @if($bil_akademik>1)
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @else
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @endif
-                                                                    @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                        @if($bil_akademik>1)
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @else
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @endif
-                                                                    @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                        {{$item['no_rujukan_permohonan']}}
+                                                        }
+                                                        $pemohon = implode(' ', $result);
+
+                                                        //institusi pengajian
+                                                        $text3 = ucwords(strtolower($institusi_pengajian)); 
+                                                        $conjunctions = ['of', 'in', 'and'];
+                                                        $words = explode(' ', $text3);
+                                                        $result = [];
+                                                        foreach ($words as $word) {
+                                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                                $result[] = Str::lower($word);
+                                                            } else {
+                                                                $result[] = $word;
+                                                            }
+                                                        }
+                                                        $institusi = implode(' ', $result);
+                                                        $institusipengajian = transformBracketsToUppercase($institusi);
+                                                    @endphp
+                                                        @if ($jenis_institusi == "IPTS")
+                                                        <tr>
+                                                            <td>
+                                                                @if($item['status']==4 || $item['status']==5)
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                     @else
-                                                                        @if($bil_akademik>1)
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @else
-                                                                            <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
-                                                                        @endif
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/papar-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                                     @endif
-                                                                </td>
-                                                                <td style="width: 25%!important">{{$pemohon}}</td>
-                                                                <td style="width: 23%!important">{{$institusipengajian}}</td>
-                                                                <td class="text-center" style="width: 17%!important;">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                                @if ($item['status']=='2')
-                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='3')
-                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='4')
-                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='5')
-                                                                    <td class="text-center" style="width: 10%!important;"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif($item['status']==3 && $user_id==Auth::user()->id)
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @endif
+                                                                @elseif($item['status']==3 && $user_id!=Auth::user()->id)
+                                                                    {{$item['no_rujukan_permohonan']}}
+                                                                @else
+                                                                    @if($bil_akademik>1)
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @else
+                                                                        <a href="{{ url('permohonan/sekretariat/saringan/maklumat-permohonan/'. $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
+                                                                    @endif
                                                                 @endif
-                                                                <td style="width: 13%!important">{{$user_name}}</td>
-                                                            </tr>
+                                                            </td>
+                                                            <td>{{$pemohon}}</td>
+                                                            <td>{{$institusipengajian}}</td>
+                                                            <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
+                                                                @if ($item['status']=='2')
+                                                                    <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='3')
+                                                                    <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='4')
+                                                                    <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @elseif ($item['status']=='5')
+                                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                                @endif
+                                                            <td>{{$user_name}}</td>
+                                                        </tr>
                                                         @endif
                                                     @endif
-                                                @endforeach
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -919,7 +920,7 @@
                 });
         
                 // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuIPTSList);
+                updateInstitusiDropdown(bkokuUAList);
         
                 // Function to clear filters for all tables
                 function clearFilters() {
