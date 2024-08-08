@@ -62,7 +62,7 @@
                         {{-- top nav bar --}}
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                                <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -71,7 +71,7 @@
                                 <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -133,12 +133,12 @@
                         <!--end::Card toolbar-->
 
                         <div class="tab-content" id="myTabContent">
-                            {{-- BKOKU IPTS --}}
-                            <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
+                            {{-- BKOKU UA --}}
+                            <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th>ID Permohonan</th>
@@ -148,6 +148,7 @@
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
+                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
@@ -198,13 +199,13 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            {{-- BKOKU UA --}}
-                            <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+
+                            {{-- BKOKU IPTS --}}
+                            <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                 <br>
                                 <div class="body">
                                     <div class="table-responsive">
-                                        <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
+                                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th>ID Permohonan</th>
@@ -214,13 +215,13 @@
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
-                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+
                             {{-- PPK --}}
                             <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                 <br>
@@ -1354,8 +1355,8 @@
             });
 
             // Trigger the function for the default active tab (bkoku-tab)
-            updateInstitusiDropdown(bkokuIPTSList);
-            initializeDataTable1(); // Initialize DataTable1 on page load
+            updateInstitusiDropdown(bkokuUAList);
+            initializeDataTable4(); // Initialize DataTable1 on page load
         });
     </script>
     
@@ -1380,6 +1381,9 @@
                 window[variableName] = $(tableId).DataTable({
                     ordering: true, // Enable manual sorting
                     order: [], // Disable initial sorting
+                    language: {
+                        url: "/assets/lang/Malay.json"
+                    },
                     columnDefs: [
                         { orderable: false, targets: [0] }
                     ]
