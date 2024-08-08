@@ -1218,6 +1218,9 @@
                     window[variableName] = $(tableId).DataTable({
                         ordering: true, // Enable manual sorting
                         order: [], // Disable initial sorting
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)

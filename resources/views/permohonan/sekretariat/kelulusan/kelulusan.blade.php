@@ -1113,6 +1113,9 @@
                 window[variableName] = $(tableId).DataTable({
                     ordering: true, // Enable manual sorting
                     order: [], // Disable initial sorting
+                    language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                     columnDefs: [
                         { orderable: false, targets: [0] },
                         { targets: [6], visible: false } // Hide the seventh column (index 6)
@@ -1121,6 +1124,32 @@
             }
 
             function applyFilter() {
+                // Reinitialize DataTables
+                initDataTable('#sortTable1', 'datatable1');
+                initDataTable('#sortTable2', 'datatable2');
+                initDataTable('#sortTable3', 'datatable3');
+                initDataTable('#sortTable4', 'datatable4');
+                initDataTable('#sortTable5', 'datatable5');
+
+                function initDataTable(tableId, variableName) {
+                    // Check if the datatable is already initialized
+                    if ($.fn.DataTable.isDataTable(tableId)) {
+                        // Destroy the existing DataTable instance
+                        $(tableId).DataTable().destroy();
+                    }
+
+                    // Initialize the datatable and assign it to the global variable
+                    window[variableName] = $(tableId).DataTable({
+                        ordering: true, // Enable manual sorting
+                        order: [], // Disable initial sorting
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ]
+                    });
+                }
                 var selectedInstitusi = $('[name="institusi"]').val();
 
                 // Apply search filter and log data for all tables
