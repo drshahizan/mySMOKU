@@ -1137,7 +1137,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work tetap bandar');
+							// alert('AJAX load did not work tetap bandar');
 							}
 
 					});
@@ -1182,7 +1182,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work parlimen');
+							// alert('AJAX load did not work parlimen');
 							}
 
 					});
@@ -1237,7 +1237,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work dun');
+							// alert('AJAX load did not work dun');
 							}
 
 					});
@@ -1280,7 +1280,7 @@
 									}
 							}, 
 							error: function(){
-							alert('AJAX load did not work bandar waris');
+							// alert('AJAX load did not work bandar waris');
 							}
 
 					});
@@ -1340,7 +1340,7 @@
 
 					// institusi id
 					var id_institusi = document.getElementById("id_institusi").value; 
-					alert (id_institusi);
+					// alert (id_institusi);
 
 					// Empty the dropdown
 					$('#peringkat_pengajian').find('option').not(':first').remove();
@@ -1379,7 +1379,7 @@
 
 						},
 						error: function(){
-						alert('AJAX load did not work peringkat');
+						// alert('AJAX load did not work peringkat');
 						}
 					});
 
