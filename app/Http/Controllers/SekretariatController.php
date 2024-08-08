@@ -1479,7 +1479,7 @@ class SekretariatController extends Controller
     public function getKeputusanIPTS()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereNotIn('status', [1, 2, 3, 4, 5])
+                    ->whereNotIn('status', [1, 2, 3, 4, 5, 9, 10])
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
@@ -1500,7 +1500,7 @@ class SekretariatController extends Controller
     public function getKeputusanPOLI()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereNotIn('status', [1, 2, 3, 4, 5])
+                    ->whereNotIn('status', [1, 2, 3, 4, 5, 9, 10])
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
@@ -1521,7 +1521,7 @@ class SekretariatController extends Controller
     public function getKeputusanKK()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereNotIn('status', [1, 2, 3, 4, 5])
+                    ->whereNotIn('status', [1, 2, 3, 4, 5, 9, 10])
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
@@ -1542,7 +1542,7 @@ class SekretariatController extends Controller
     public function getKeputusanUA()
     {
         $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereNotIn('status', [1, 2, 3, 4, 5])
+                    ->whereNotIn('status', [1, 2, 3, 4, 5, 9, 10])
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt', function ($subQuery) {
@@ -1563,7 +1563,7 @@ class SekretariatController extends Controller
     public function getKeputusanPPK()
     {
         $permohonan = Permohonan::where('program', 'PPK')
-                    ->whereNotIn('status', [1, 2, 3, 4, 5])
+                    ->whereNotIn('status', [1, 2, 3, 4, 5, 9, 10])
                     ->whereHas('akademik', function ($query) {
                         $query->where('status', 1);
                         $query->whereHas('infoipt');
