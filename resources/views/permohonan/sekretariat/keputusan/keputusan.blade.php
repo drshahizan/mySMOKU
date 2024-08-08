@@ -1191,7 +1191,7 @@
 
                 // Trigger the function for the default active tab (bkoku-tab)
                 updateInstitusiDropdown(bkokuUAList);
-                initializeDataTable1(); // Initialize DataTable1 on page load
+                initializeDataTable4(); // Initialize DataTable1 on page load
             });
 
         </script>
