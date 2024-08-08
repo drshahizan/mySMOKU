@@ -23,7 +23,7 @@
             <!--end::Body-->
 
             <!--begin::Aside-->
-            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku1.jpg') }})">
+            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku1.JPG') }})">
                 {{-- <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: linear-gradient(rgba(207, 13, 59, 0), rgba(76, 114, 148, 0.75) 100.57%), url({{ image('misc/oku1.jpg') }})"> --}}
     
                 <!--begin::Wrapper-->
