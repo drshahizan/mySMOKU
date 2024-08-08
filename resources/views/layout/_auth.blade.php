@@ -23,17 +23,18 @@
             <!--end::Body-->
 
             <!--begin::Aside-->
-            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/login2.jpeg') }})">
-                <!--begin::Content-->
-                <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
+            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku1.jpg') }})">
+                {{-- <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: linear-gradient(rgba(207, 13, 59, 0), rgba(76, 114, 148, 0.75) 100.57%), url({{ image('misc/oku1.jpg') }})"> --}}
+    
+                <!--begin::Wrapper-->
+                <div class="w-lg-500px p-10">
                     <!-- Announcement Content -->
                     <div class="announcement-box">
-                       
                         @yield('announcement')
-                        
                     </div>
                 </div>
-                <!--end::Content-->
+                <!--end::Wrapper-->
+                
             </div>
             <!--end::Aside-->
         </div>
@@ -42,7 +43,12 @@
     <!--end::App-->
     <style>
         .announcement-box {
-            background-color: rgba(254, 255, 255, 0.895); /* Background color with 80% opacity (adjust as needed) */
+            position: relative;
+            top: 20%;
+            /* left: 10px; */
+            /* width: 300px; */
+            height: 120px;
+            background-color: rgba(255, 255, 255, 0.826); /* Background color with 80% opacity (adjust as needed) */
             padding: 20px; /* Padding around the content inside the box */
             border-radius: 10px; /* Optional: Rounded corners for the box */
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* Optional: Box shadow for a subtle depth effect */

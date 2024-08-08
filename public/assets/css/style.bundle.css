@@ -45592,6 +45592,28 @@ label.rating-label:hover ~ .rating-label > i, label.rating-label:hover ~ .rating
   background-attachment: scroll;
 }
 
+/* Styles for small screens (e.g., mobile devices) */
+@media (max-width: 600px) {
+  .announcement-box {
+    width: 90%; /* Make the box take up most of the screen width */
+    height: auto; /* Adjust height as needed */
+    left: 5%; /* Center the box horizontally */
+    top: 5%; /* Adjust vertical positioning */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+}
+
+/* Styles for large screens (e.g., desktops) */
+@media (min-width: 1200px) {
+  .announcement-box {
+    width: 600px; /* Increase the width for larger screens */
+    height: 150px; /* Adjust height as needed */
+    left: 20px; /* Adjust horizontal positioning */
+    top: 15%; /* Adjust vertical positioning */
+    padding: 30px; /* Increase padding for larger screens */
+  }
+}
+
 @media (min-width: 576px) {
   .bgi-size-sm-auto {
     background-size: auto;
