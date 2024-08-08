@@ -205,13 +205,13 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					'parlimen': {
-						validators: {
-							notEmpty: {
-								message: 'Parlimen diperlukan'
-							}
-						}
-					},
+					// 'parlimen': {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: 'Parlimen diperlukan'
+					// 		}
+					// 	}
+					// },
 					
 					'alamat_surat_bandar': {
 						validators: {
