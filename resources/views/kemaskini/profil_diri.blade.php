@@ -113,7 +113,7 @@
                                         <div class="fv-row mb-5">
                                             <!--begin::Label-->
                                             <label class="fs-5 fw-semibold mb-2">
-                                                <span class="required">Emel</span>
+                                                <span class="required">E-mel</span>
                                                 <span class="ms-1" data-bs-toggle="tooltip" title="Alamat emel mesti aktif.">
                                                     <i class="ki-duotone ki-information fs-7">
                                                         <span class="path1"></span>
