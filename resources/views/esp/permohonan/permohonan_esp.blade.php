@@ -61,7 +61,7 @@
             {{-- Javascript Nav Bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                  <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -70,7 +70,7 @@
                     <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
+                  <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -134,18 +134,18 @@
 
             {{-- Content Navigation Bar --}}
             <div class="tab-content" id="myTabContent">
-                {{-- BKOKU IPTS --}}
-                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
+                {{-- BKOKU UA--}}
+                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                   <br>
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
                       <!--begin::Table-->
                       <div class="table-responsive">
-                        <table id="sortTable1" class="table table-bordered table-striped">
+                        <table id="sortTable4" class="table table-bordered table-striped">
                           <thead>
                             <tr>
-                              <th class="text-center" style="width:4%;">
-                                <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
+                              <th class="text-center" style="width:3%;">
+                                <input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggleSelectAll('bkokuUA');" />
                               </th>
                               <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                               <th class="text-center" style="width: 20%"><b>Nama</b></th>
@@ -155,12 +155,13 @@
                               <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-                          <tbody>
-                              @php
-                                $i=0;
-                              @endphp
 
-                              @foreach ($kelulusan as $bkoku)
+                          <tbody>
+                            @php
+                              $i=0;
+                            @endphp
+
+                            @foreach ($kelulusan as $bkoku)
                                 @php
                                   $i++;
                                   $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
@@ -220,22 +221,22 @@
                                   $institusipengajian = transformBracketsToUppercase($institusi);
                                 @endphp
                                 @if($program == "BKOKU") 
-                                  @if ($jenis_institusi == "IPTS") 
+                                  @if ($jenis_institusi=="UA") 
                                     <tr>
-                                      <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
+                                      <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                       <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenIPTS{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
+                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenUA{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
                                       </td>
-                                      <td>{{$pemohon}}</td>
-                                      <td>{{$namakursus}}</td>
-                                      <td>{{$institusipengajian}}</td>
-                                      <td class="text-right">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right">{{$bkoku->wang_saku_disokong}}</td>
+                                      <td style="width: 20%">{{$pemohon}}</td>
+                                      <td style="width: 20%">{{$namakursus}}</td>
+                                      <td style="width: 15%">{{$institusipengajian}}</td>
+                                      <td class="text-right" style="width: 13%">{{$bkoku->yuran_disokong}}</td>
+                                      <td class="text-right" style="width: 13%">{{$bkoku->wang_saku_disokong}}</td>
                                     </tr>
-                                  @endif  
+                                  @endif   
                                 @endif
                                 {{-- Modal --}}
-                                <div class="modal fade" id="dokumenIPTS{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenIPTS{{$bkoku['id']}}" aria-hidden="true">
+                                <div class="modal fade" id="dokumenUA{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenUA{{$bkoku['id']}}" aria-hidden="true">
                                   <div class="modal-dialog modal-lg">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -641,18 +642,18 @@
                     <!--end::Card body-->
                 </div>
 
-                {{-- BKOKU UA--}}
-                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                {{-- BKOKU IPTS --}}
+                <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                   <br>
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
                       <!--begin::Table-->
                       <div class="table-responsive">
-                        <table id="sortTable4" class="table table-bordered table-striped">
+                        <table id="sortTable1" class="table table-bordered table-striped">
                           <thead>
                             <tr>
-                              <th class="text-center" style="width:3%;">
-                                <input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggleSelectAll('bkokuUA');" />
+                              <th class="text-center" style="width:4%;">
+                                <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
                               </th>
                               <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                               <th class="text-center" style="width: 20%"><b>Nama</b></th>
@@ -662,13 +663,12 @@
                               <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-
                           <tbody>
-                            @php
-                              $i=0;
-                            @endphp
+                              @php
+                                $i=0;
+                              @endphp
 
-                            @foreach ($kelulusan as $bkoku)
+                              @foreach ($kelulusan as $bkoku)
                                 @php
                                   $i++;
                                   $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
@@ -728,22 +728,22 @@
                                   $institusipengajian = transformBracketsToUppercase($institusi);
                                 @endphp
                                 @if($program == "BKOKU") 
-                                  @if ($jenis_institusi=="UA") 
+                                  @if ($jenis_institusi == "IPTS") 
                                     <tr>
-                                      <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
+                                      <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
                                       <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenUA{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
+                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenIPTS{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
                                       </td>
-                                      <td style="width: 20%">{{$pemohon}}</td>
-                                      <td style="width: 20%">{{$namakursus}}</td>
-                                      <td style="width: 15%">{{$institusipengajian}}</td>
-                                      <td class="text-right" style="width: 13%">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right" style="width: 13%">{{$bkoku->wang_saku_disokong}}</td>
+                                      <td>{{$pemohon}}</td>
+                                      <td>{{$namakursus}}</td>
+                                      <td>{{$institusipengajian}}</td>
+                                      <td class="text-right">{{$bkoku->yuran_disokong}}</td>
+                                      <td class="text-right">{{$bkoku->wang_saku_disokong}}</td>
                                     </tr>
-                                  @endif   
+                                  @endif  
                                 @endif
                                 {{-- Modal --}}
-                                <div class="modal fade" id="dokumenUA{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenUA{{$bkoku['id']}}" aria-hidden="true">
+                                <div class="modal fade" id="dokumenIPTS{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenIPTS{{$bkoku['id']}}" aria-hidden="true">
                                   <div class="modal-dialog modal-lg">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -810,7 +810,7 @@
                     </div>
                     <!--end::Card body-->
                 </div>
-
+                
                 {{-- PKK --}}
                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                   <br>
@@ -1174,7 +1174,7 @@
           });
 
           // Trigger the function for the default active tab (bkoku-tab)
-          updateInstitusiDropdown(bkokuIPTSList);
+          updateInstitusiDropdown(bkokuUAList);
 
           // Function to clear filters for all tables
           function clearFilters() {
@@ -1250,6 +1250,32 @@
       }
 
       function applyFilter() {
+          // Reinitialize DataTables
+          initDataTable('#sortTable1', 'datatable1');
+          initDataTable('#sortTable2', 'datatable2');
+          initDataTable('#sortTable3', 'datatable3');
+          initDataTable('#sortTable4', 'datatable4');
+          initDataTable('#sortTable5', 'datatable5');
+
+          function initDataTable(tableId, variableName) {
+              // Check if the datatable is already initialized
+              if ($.fn.DataTable.isDataTable(tableId)) {
+                  // Destroy the existing DataTable instance
+                  $(tableId).DataTable().destroy();
+              }
+
+              // Initialize the datatable and assign it to the global variable
+              window[variableName] = $(tableId).DataTable({
+                  ordering: true, // Enable manual sorting
+                  order: [], // Disable initial sorting
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ]
+              });
+          }
           var selectedInstitusi = $('[name="institusi"]').val();
 
           // Apply search filter and log data for all tables
