@@ -73,7 +73,7 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -82,7 +82,7 @@
                                     <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                    <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -179,12 +179,12 @@
 
 
                             <div class="tab-content mt-0" id="myTabContent">
-                                {{-- BKOKU IPTS --}}
-                                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
+                                {{-- BKOKU UA --}}
+                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -266,7 +266,7 @@
                                                                 $institusipengajian = transformBracketsToUppercase($institusi);
                                                             @endphp
                                                             
-                                                            @if ($jenis_institusi == "IPTS")
+                                                            @if ($jenis_institusi == "UA")
                                                                 <tr>
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
@@ -278,29 +278,29 @@
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
-                                                            @endif  
+                                                            @endif
                                                         @endif
                                                     @endforeach 
                                                 </tbody>
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">Bil. Mesyuarat:</label>
+                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
                                                                 <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
                                                             <div class="mb-3">
@@ -637,13 +637,13 @@
                                         </form>
                                     </div>
                                 </div>
-
-                                {{-- BKOKU UA --}}
-                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <div class="body">
                                         <form action="{{ route('bulk.approval') }}" method="POST">
                                             {{csrf_field()}}
-                                            <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
@@ -725,7 +725,7 @@
                                                                 $institusipengajian = transformBracketsToUppercase($institusi);
                                                             @endphp
                                                             
-                                                            @if ($jenis_institusi == "UA")
+                                                            @if ($jenis_institusi == "IPTS")
                                                                 <tr>
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
@@ -737,29 +737,29 @@
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
-                                                            @endif
+                                                            @endif  
                                                         @endif
                                                     @endforeach 
                                                 </tbody>
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
+                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU1">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <label for="recipient-name" class="col-form-label">Bil. Mesyuarat:</label>
                                                                 <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
                                                             <div class="mb-3">
@@ -1018,7 +1018,7 @@
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuIPTSList);
+                updateInstitusiDropdown(bkokuUAList);
 
                 // Function to clear filters for all tables
                 function clearFilters() {
