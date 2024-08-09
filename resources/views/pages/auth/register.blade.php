@@ -1,7 +1,7 @@
 <x-auth-layout>
    
 @section('announcement')
-    <h2>Hebahan</h2>
+    <h2 style="font-size: 30px; color:rgb(0, 46, 110)">Hebahan</h2>
     <p>{!! $catatan !!}</p> 
 @endsection  
 
@@ -28,7 +28,7 @@
         <div class="text-center mb-11">
             <!--begin::Title-->
             <!-- <h1 class="text-dark fw-bolder mb-3" > -->
-            <img alt="Logo" src="{{ image('logos/logo.png') }}" class="h-100px h-lg-90px"/>
+            <img alt="Logo" src="{{ image('logos/logo.png') }}" class="h-100px h-lg-100px"/>
           
                 
            
@@ -37,7 +37,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Name-->
-            <input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent"  value=""/>
+            <input style="font-size: 20px" type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent"  value=""/>
             <!--end::Name-->
         </div>
 
@@ -46,14 +46,14 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit"  class="btn" style="background-color: #3d0066; color: #ffffff;">
+            <button type="submit"  class="btn" style="background-color: #3d0066; color: #ffffff; font-size: 20px">
                 Semak
             </button>
         </div>
         <!--end::Submit button-->
 
         <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
+        <div class="text-gray-500 text-center fw-semibold fs-2">
             Mempunyai akaun?
 
             <a href="/login" class="link-primary fw-semibold">

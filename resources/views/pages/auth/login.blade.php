@@ -1,6 +1,6 @@
 <x-auth-layout>
     @section('announcement')
-        <h2>Hebahan</h2>
+        <h2 style="font-size: 30px; color:rgb(0, 46, 110)">Hebahan</h2>
         <p>{!! $catatan !!}</p> 
     @endsection
 
@@ -8,8 +8,8 @@
     <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
         @csrf
          <!--begin::Subtitle-->
-         <div class="text-gray-500 fw-semibold fs-6">
-            <a href="/" class="text-gray-500 fw-semibold fs-6"><i class="fa-solid fa-house"></i> 
+         <div class="text-gray-500 fw-semibold fs-2">
+            <a href="/" class="text-gray-500 fw-semibold fs-2"><i class="fa-solid fa-house"></i> 
                 Laman Utama
             </a>
         </div>
@@ -17,16 +17,16 @@
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Logo-->
-            <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-90px"/>
+            <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-100px"/>
             <br>
             <br>
             <br>
             <br>
-            <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-70px"/>
+            <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-100px"/>
             <!--end::Logo-->
 
             <!--begin::Subtitle-->
-            <div class="text-gray-500 fw-semibold fs-6">
+            <div class="text-gray-500 fw-semibold fs-4">
                 Log Masuk
             </div>
             <!--end::Subtitle--->
@@ -63,13 +63,13 @@
 
         <!--begin::Email-->
         <div class="fv-row mb-8">
-            <input type="text" placeholder="Masukkan No. Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
+            <input style="font-size: 20px" type="text" placeholder="Masukkan No. Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" value=""/>
         </div>
         <!--end::Email-->
 
          <!--begin::Password-->
         <div class="fv-row mb-3">
-            <input type="password" placeholder="Masukkan Kata Laluan" name="password" autocomplete="off" class="form-control bg-transparent" value=""/>
+            <input style="font-size: 20px" type="password" placeholder="Masukkan Kata Laluan" name="password" autocomplete="off" class="form-control bg-transparent" value=""/>
             <div style="position: absolute; right: 20px; top: 0; bottom: 0; display: flex; align-items: center; cursor: pointer;">
                 <span id="togglePassword">
                     <i class="bi bi-eye" id="toggleIcon"></i>
@@ -79,7 +79,7 @@
          <!--end::Password-->
 
         <!--begin::Wrapper-->
-        <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+        <div class="d-flex flex-stack flex-wrap gap-3 fs-2 fw-semibold mb-8">
             <div></div>
             <!--begin::Link-->
             <a href="/forgot-password" class="link-primary">
@@ -91,14 +91,14 @@
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
-            <button type="submit" id="kt_sign_in_submit" class="btn" style="background-color: #3d0066; color: #ffffff;">
+            <button type="submit" id="kt_sign_in_submit" class="btn" style="background-color: #3d0066; color: #ffffff; font-size: 20px">
                 @include('partials/general/_button-indicator', ['label' => 'Log Masuk'])
             </button>
         </div>
         <!--end::Submit button-->
 
         <!--begin::Sign up-->
-        <div class="text-gray-500 text-center fw-semibold fs-6">
+        <div class="text-gray-500 text-center fw-semibold fs-2">
             Belum Mempunyai Akaun?
             <a href="/register" class="link-primary">
                 Daftar

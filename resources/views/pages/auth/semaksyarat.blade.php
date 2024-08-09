@@ -1,7 +1,7 @@
 <x-auth-layout>
     
 @section('announcement')
-    <h2>Hebahan</h2>
+    <h2 style="font-size: 30px; color:rgb(0, 46, 110)">Hebahan</h2>
     <p>{!! $catatan !!}</p> 
 @endsection      
 
@@ -20,7 +20,7 @@
             <!--end::Title-->
             <br>
             <br>
-            <h3 class="text-dark fw-bolder mb-3">
+            <h3 class="text-dark fw-bolder mb-3" style="font-size: 20px">
                 Semakan Kelayakan Syarat Daftar Pengguna
             </h3>
         </div>
@@ -42,7 +42,7 @@
 		</div> --}}
 
         <div class="fv-row mb-10">
-			<label class="form-label required">Adakah anda penerima Cuti Belajar Bergaji Penuh?</label>	
+			<label style="font-size: 20px" class="form-label required">Adakah anda penerima Cuti Belajar Bergaji Penuh?</label>	
 			<div class="row mb-2" data-kt-buttons="true">
                 <div class="col">
                     <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
@@ -58,18 +58,18 @@
 		</div>
   
         <div class="text-center mb-11">
-            <h2 class="text-dark fw-bolder mb-3">
+            <h2 style="font-size: 20px" class="text-dark fw-bolder mb-3">
                 Semakan Agensi Kelayakan Malaysia (MQA)
             </h2>
         </div>
         <div class="text-center mb-11">
-            <img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-100px h-lg-90px"/>
+            <img alt="Logo" src="{{ image('logos/mqalogo.png') }}" class="h-100px h-lg-100px"/>
         </div>
 
         <!-- institusi Dropdown -->
         <div class="fv-row mb-10">													
-            <label class="form-label">Nama Pusat Pengajian</label>
-            <select id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
+            <label style="font-size: 20px" class="form-label">Nama Pusat Pengajian</label>
+            <select style="font-size: 20px" id="id_institusi" name="id_institusi" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
                 @foreach ($ipt as $ipt)	
                 <option value="{{ $ipt->id_institusi}}">{{ strtoupper($ipt->nama_institusi)}}</option> 
@@ -78,8 +78,8 @@
         </div>
 
         <div class="fv-row mb-10">
-            <label class="form-label">Peringkat Pengajian</label>
-            <select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true" required>
+            <label style="font-size: 20px" class="form-label">Peringkat Pengajian</label>
+            <select style="font-size: 20px" id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
                 @foreach ($kod_peringkat as $kod_peringkat)	
                 <option value="{{ $kod_peringkat->kod_peringkat}}">{{ $kod_peringkat->peringkat}}</option> 
@@ -88,8 +88,8 @@
         </div>
 
         <div class="fv-row mb-10">
-            <label class="form-label">Nama Kursus</label>
-            <select id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
+            <label style="font-size: 20px" class="form-label">Nama Kursus</label>
+            <select style="font-size: 20px" id='nama_kursus'  name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" required>
                 <option value="">Pilih</option>
             </select>
         </div>
@@ -204,7 +204,7 @@
             {{--<button type="submit"  class="btn btn-primary">
                 Semak
             </button>--}}
-            <button type="submit" id="kt_semak_submit" class="btn" style="background-color: #3d0066; color: #ffffff;">
+            <button type="submit" id="kt_semak_submit" class="btn" style="background-color: #3d0066; color: #ffffff; font-size: 20px">
                 @include('partials/general/_button-indicator', ['label' => 'Seterusnya'])
             </button>
         </div>
