@@ -76,7 +76,7 @@
                             {{-- Javascript Nav Bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -85,7 +85,7 @@
                                     <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                    <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
@@ -157,11 +157,11 @@
 
                             {{-- Content Navigation Bar --}}
                             <div class="tab-content mt-0" id="myTabContent">
-                                {{-- BKOKU IPTS --}}
-                                <div class="tab-pane fade show active" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
+                                {{-- BKOKU UA--}}
+                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                            <table id="sortTable4" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th><b>ID Tuntutan</b></th>
@@ -179,7 +179,7 @@
                                     </div>
                                 </div>
 
-                                {{-- BKOKU IPTS --}}
+                                {{-- BKOKU POLI --}}
                                 <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
@@ -201,7 +201,7 @@
                                     </div>
                                 </div>
 
-                                {{-- BKOKU IPTS --}}
+                                {{-- BKOKU KK --}}
                                 <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
@@ -223,11 +223,11 @@
                                     </div>
                                 </div>
 
-                                 {{-- BKOKU UA--}}
-                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                {{-- BKOKU IPTS --}}
+                                <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable4" class="table table-bordered table-striped">
+                                            <table id="sortTable1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                         <th><b>ID Tuntutan</b></th>
@@ -1029,8 +1029,8 @@
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuIPTSList);
-                initializeDataTable1(); // Initialize DataTable1 on page load
+                updateInstitusiDropdown(bkokuUAList);
+                initializeDataTable4(); // Initialize DataTable1 on page load
             });
         </script>
             
@@ -1056,6 +1056,9 @@
                     window[variableName] = $(tableId).DataTable({
                         ordering: true, // Enable manual sorting
                         order: [], // Disable initial sorting
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
                         columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
