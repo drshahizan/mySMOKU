@@ -163,6 +163,7 @@
 
                             @foreach ($kelulusan as $bkoku)
                                 @php
+                                
                                   $i++;
                                   $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
                                   $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
@@ -173,7 +174,7 @@
                                   $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
                                   $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
                                   $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-
+                                  
                                   $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
 
                                   // nama pemohon
