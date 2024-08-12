@@ -99,11 +99,11 @@
                                
                                     <td class="text-center">
                                         @if($pelajar->status == 1)
-											<div class="badge badge-light-success fw-bold">Berjaya</div>
+											<div class="badge badge-light-success fw-bold" style="color: rgb(9, 171, 19)">Berjaya</div>
 										@elseif($pelajar->status == 0)
-                                            <div class="badge badge-light-warning fw-bold">Tukar Institusi</div>
+                                            <div class="badge badge-light-warning fw-bold" style="color: rgb(214, 164, 0)">Tukar Institusi</div>
                                         @else    
-											<div class="badge badge-light-danger fw-bold">Tidak Berjaya</div>
+											<div class="badge badge-light-danger fw-bold" style="color: rgb(255, 0, 0)">Tidak Berjaya</div>
 										@endif
                                         
                                     </td>

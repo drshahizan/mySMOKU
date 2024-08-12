@@ -3228,6 +3228,16 @@ class SekretariatController extends Controller
         $tukar_institusi->save();
 
         if ($request->input('status') === '1') {
+
+            $institusi_baru = TukarInstitusi::value('id_institusi_baru');
+
+            // Update or create an Akademik record based on smoku_id
+            Akademik::updateOrCreate(
+                ['smoku_id' => $id, 'status' => 1], // Condition to find the record
+                [
+                    'id_institusi' => $institusi_baru,
+                ]
+            );
             // Redirect to the original page
             return redirect()->back()->with('success', 'Tukar institusi diluluskan.');
         }
