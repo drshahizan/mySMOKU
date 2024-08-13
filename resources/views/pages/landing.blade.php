@@ -133,6 +133,14 @@
 				color: #0570ea;
 				transform: scale(1.1);
 			}
+
+			.content-right {
+				position: absolute;
+				left: 90%;
+				top: 50%;
+				width: 100%;
+				transform: translate(-50%, -50%);
+			}
 		</style>
 		<style>
 			.card-container {
@@ -283,7 +291,7 @@
 				<!--begin::Wrapper-->
 				<div class="header-background">
 					<video autoplay loop muted class="background-video">
-						<source src="assets/media/background_1.mp4" type="video/mp4">
+						<source src="assets/media/background_9.mp4" type="video/mp4">
 					</video>
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
@@ -291,8 +299,8 @@
 						<!--begin::Kementerian-->
 						<div>
 							<a href="/">
-								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_jata.png" class="logo-sticky h-30px h-lg-60px"/>
+								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
+								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
 						</div>
 						<!--end::Kementerian-->
@@ -306,7 +314,7 @@
 						<!--end::Logo image-->
 						<!--end::Logo-->
 						<!--begin::Container-->
-						<div class="container">
+						<div class="content-right">
 							<!--begin::Mobile menu toggle-->
 								<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
 									<i class="ki-duotone ki-abstract-14 fs-2hx">
