@@ -81,6 +81,13 @@
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack flex-wrap gap-3 fs-2 fw-semibold mb-8">
             <div></div>
+            {{-- <div class="checkbox-inline">
+                <label class="checkbox checkbox-outline m-0 text-muted">
+                    <input type="checkbox" name="remember" id="remember">
+                    <span></span>
+                    Ingat Saya
+                </label>
+            </div> --}}
             <!--begin::Link-->
             <a href="/forgot-password" class="link-primary">
                 Lupa Kata Laluan ?
