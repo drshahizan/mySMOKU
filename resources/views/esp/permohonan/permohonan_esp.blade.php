@@ -1323,8 +1323,9 @@
       console.log("Token JSON:", tokenTextarea.value);
 
       const form = document.getElementById('hantar_maklumat');
+      console.log("Data JSON:", form);
       const data = new FormData(form);
-      console.log("Data JSON:", data);
+      
 
 
       fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
