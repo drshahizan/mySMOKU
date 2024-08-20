@@ -1320,10 +1320,12 @@
       // Set the JSON array in the textarea
       const tokenTextarea = document.getElementById('token');
       tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-      // console.log("Token JSON:", tokenTextarea.value);
+      console.log("Token JSON:", tokenTextarea.value);
 
       const form = document.getElementById('hantar_maklumat');
       const data = new FormData(form);
+      console.log("Data JSON:", data.value);
+
 
       fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
           method: 'POST',
