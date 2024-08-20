@@ -1313,6 +1313,8 @@
       const secretKey = "{{ $secretKey }}";
       const time = {{ time() }}; 
       const token = generateToken(secretKey, time);
+      console.log("Time:", time);
+
 
       // Construct the JSON array with the token
       const tokenArray = [{ "token": token }];
