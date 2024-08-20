@@ -100,7 +100,7 @@ class MaklumatESPController extends Controller
                 DB::raw('CONCAT( c.tempoh_pengajian * 12) as tempoh_taja'),
                 DB::raw('DATE_FORMAT(c.tarikh_mula, "%d/%m/%Y") AS tarikh_taja'),
                 DB::raw('SUBSTRING_INDEX(c.sesi, "/", 1) AS sesi_mula'),
-                DB::raw('CONCAT(SUBSTRING_INDEX(c.sesi, "/", 1) + c.tempoh_pengajian) AS sesi_tamat'),
+                DB::raw('CONCAT(SUBSTRING_INDEX(c.sesi, "/", 1) + ROUND(c.tempoh_pengajian)) AS sesi_tamat'),
                 'g.institusi_esp as institut',
                 'c.nama_kursus as kursus',
                 DB::raw('DATE_FORMAT(c.tarikh_tamat, "%d/%m/%Y") AS tarikh_tamat'),
