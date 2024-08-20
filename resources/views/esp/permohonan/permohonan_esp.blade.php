@@ -1125,12 +1125,12 @@
   </script>
 
   <style>
-    #token {
+    /* #token {
       display: none;
     }
     #data {
       display: none;
-    }
+    }  */
   </style>
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -1320,12 +1320,10 @@
       // Set the JSON array in the textarea
       const tokenTextarea = document.getElementById('token');
       tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
-      console.log("Token JSON:", tokenTextarea.value);
+      // console.log("Token JSON:", tokenTextarea.value);
 
       const form = document.getElementById('hantar_maklumat');
-      console.log("Data JSON:", form);
       const data = new FormData(form);
-      
 
 
       fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
