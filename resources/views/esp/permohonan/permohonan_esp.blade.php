@@ -1125,12 +1125,12 @@
   </script>
 
   <style>
-    /* #token {
+    #token {
       display: none;
     }
     #data {
       display: none;
-    }  */
+    } 
   </style>
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -1336,6 +1336,7 @@
 
           // Convert the API response to a string for display in the alert
           const responseDataString = JSON.stringify(data, null, 2);
+          console.log(data.status);
           if (data.status === 'error'){
             Swal.fire({
               icon: 'error',
