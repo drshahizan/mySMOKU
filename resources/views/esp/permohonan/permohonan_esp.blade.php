@@ -1338,6 +1338,7 @@
 
           // Convert the API response to a string for display in the alert
           const responseDataString = JSON.stringify(data, null, 2);
+          console.log(responseDataString);
           console.log(data.status);
           if (data.status === 'error'){
             Swal.fire({
