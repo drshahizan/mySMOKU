@@ -1319,7 +1319,7 @@
       function sendData() {
         const secretKey = "{{ $secretKey }}";
         const time = {{ time() }}; 
-        const token = generateToken(secretKey, time);
+        const token = generateToken(secretKey);
 
         // console.log("Token:", token);
 
@@ -1387,8 +1387,8 @@
         
 
       }
-      function generateToken(secretKey, time) {
-        const dataToHash = secretKey + time;
+      function generateToken(secretKey) {
+        const dataToHash = secretKey;
         const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
         return hash;
       }
