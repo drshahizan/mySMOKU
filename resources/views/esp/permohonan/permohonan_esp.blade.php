@@ -1312,9 +1312,8 @@
     function sendData() {
       const secretKey = "{{ $secretKey }}";
       const time = {{ time() }}; 
-      const token = generateToken(secretKey, time);
+      const token = generateToken(secretKey);
       // console.log("Time:", time);
-
 
       // Construct the JSON array with the token
       const tokenArray = [{ "token": token }];
