@@ -1380,8 +1380,14 @@
       });
     }
 
-    function generateToken(secretKey, time) {
-      const dataToHash = secretKey + time;
+    // function generateToken(secretKey, time) {
+    //   const dataToHash = secretKey + time;
+    //   const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
+    //   return hash;
+    // }
+
+    function generateToken(secretKey) {
+      const dataToHash = secretKey;
       const hash = CryptoJS.SHA256(dataToHash).toString(CryptoJS.enc.Hex);
       return hash;
     }
