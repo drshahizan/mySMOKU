@@ -316,7 +316,7 @@
                           <thead>
                             <tr>
                               <th class="text-center" style="width:4%;">
-                                <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
+                                <input type="checkbox" name="select-all" id="select-all-bkokuPOLI" onclick="toggleSelectAll('bkokuPOLI');" />
                               </th>
                               <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                               <th class="text-center" style="width: 20%"><b>Nama</b></th>
@@ -485,7 +485,7 @@
                           <thead>
                             <tr>
                               <th class="text-center" style="width:4%;">
-                                <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkokuKK');" />
+                                <input type="checkbox" name="select-all" id="select-all-bkokuKK" onclick="toggleSelectAll('bkokuKK');" />
                               </th>
                               <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                               <th class="text-center" style="width: 20%"><b>Nama</b></th>
@@ -654,7 +654,7 @@
                           <thead>
                             <tr>
                               <th class="text-center" style="width:4%;">
-                                <input type="checkbox" name="select-all" id="select-all-bkoku" onclick="toggleSelectAll('bkoku');" />
+                                <input type="checkbox" name="select-all" id="select-all-bkokuIPTS" onclick="toggleSelectAll('bkokuIPTS');" />
                               </th>
                               <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
                               <th class="text-center" style="width: 20%"><b>Nama</b></th>
@@ -1027,11 +1027,21 @@
 
     function toggleSelectAll(tab) {
         var selectAllCheckbox = document.getElementById('select-all-' + tab);
+        if (!selectAllCheckbox) {
+            console.error('Select All checkbox not found for tab:', tab);
+            return;
+        }
+
         var isChecked = selectAllCheckbox.checked;
 
         // Get all checkboxes in the active tab
         var checkboxes = document.querySelectorAll('#' + tab + ' input[name="selected_items[]"]');
-        
+
+        if (checkboxes.length === 0) {
+            console.warn('No checkboxes found in tab:', tab);
+            return;
+        }
+
         // Set the checked property of all checkboxes to match the "Select All" checkbox
         checkboxes.forEach(function(checkbox) {
             checkbox.checked = isChecked;
@@ -1047,10 +1057,16 @@
             }
         });
 
+        // If no checkboxes are checked, clear the data in the textarea
+        if (selectedNokps.length === 0) {
+            $('#data').val('');
+            return;
+        }
+
         // Send selectedNokps to the controller via AJAX
         $.ajax({
             type: "POST",
-            url: "{{ route('maklumat.esp') }}",
+            url: "{{ route('maklumat.esp') }}", // Ensure this URL is correct
             data: {
                 selectedNokps: selectedNokps
             },
@@ -1059,21 +1075,21 @@
             },
             success: function(response) {
                 // Handle the response from the controller here
-                var jsonData = response.data;
-                var jsonString = JSON.stringify(jsonData, null, 2);
-                $('#data').val(jsonString);
+                if (response.data) {
+                    var jsonData = response.data;
+                    var jsonString = JSON.stringify(jsonData, null, 2);
+                    $('#data').val(jsonString);
+                } else {
+                    console.warn('Unexpected response format:', response);
+                }
             },
             error: function(xhr, status, error) {
                 // Handle AJAX errors here if needed
-                console.error(xhr.responseText);
+                console.error('AJAX Error:', xhr.responseText);
             }
         });
-
-        // If no checkboxes are checked, clear the data in the textarea
-        if (selectedNokps.length === 0) {
-            $('#data').val('');
-        }
     }
+
 
     // jQuery script to handle checkbox selection and update textarea
     $(document).ready(function() {
