@@ -101,11 +101,11 @@
 				background-color: #10355a;
 				border-color: #10355a;
 			}
-			.content-left {
+			.content-center {
 				position: absolute;
 				left: 50%;
 				top: 50%;
-				width: 100%;
+				width: auto;
 				transform: translate(-50%, -50%);
 				z-index: 20;
 				color: white;
@@ -116,11 +116,11 @@
 				border-radius: 10px;
 			}
 
-			.content-left img {
+			.content-center img {
 				padding-bottom: 30px;
 			}
 
-			.content-left h4 .id-color {
+			.content-center h4 .id-color {
 				color: #f9b200;
 			}
 
@@ -136,10 +136,18 @@
 
 			.content-right {
 				position: absolute;
-				left: 90%;
+				right: 1%;
 				top: 50%;
-				width: 100%;
-				transform: translate(-50%, -50%);
+				transform: translate(0, -50%); /* Adjust only vertical translation */
+				width: auto; /* Adjust width as needed */
+			}
+
+			.content-jata {
+				position: absolute;
+				left: 1%;
+				top: 50%;
+				transform: translate(0, -50%); /* Adjust only vertical translation */
+				width: auto; /* Adjust width as needed */
 			}
 		</style>
 		<style>
@@ -297,22 +305,13 @@
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 						<!--begin::Logo-->
 						<!--begin::Kementerian-->
-						<div>
+						<div class="content-jata">
 							<a href="/">
 								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
 								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
 						</div>
 						<!--end::Kementerian-->
-						<!--begin::Logo image-->
-						<!--div>
-							<!--a href="/">
-								<!--img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-35px h-lg-60px"/-->
-								<!--img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-30px h-lg-60px"/-->
-							<!--/a>
-						<!--/div>
-						<!--end::Logo image-->
-						<!--end::Logo-->
 						<!--begin::Container-->
 						<div class="content-right">
 							<!--begin::Mobile menu toggle-->
@@ -400,7 +399,7 @@
 					</div>
 					<!--end::Header-->
 					<!--begin::Center content-->
-					<div class="content-left">
+					<div class="content-center">
 						<!--img src="assets/media/jata_kpt.svg" alt="KPT Malaysia" width="25%" style="padding-bottom:30px"-->
 						<h4 class="text-transition" style="font-size: 3.5rem;"><span class="id-color">Selamat Datang ke</span></h4>
 						<h1 class="text-transition" style="font-size: 3.5rem;"><span style="text-transform:uppercase">Sistem Bantuan Kewangan OKU & PPK</span></h1>
