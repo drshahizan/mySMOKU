@@ -1333,12 +1333,12 @@
       })
       .then(response => response.json())
       .then(data => {
-          console.log(data); // Log the API response to the console
+          // console.log(data); // Log the API response to the console
 
           // Convert the API response to a string for display in the alert
           const responseDataString = JSON.stringify(data, null, 2);
-          console.log(responseDataString);
-          console.log(data.status);
+          // console.log(responseDataString);
+          // console.log(data.status);
           if (data.status === 'error'){
             Swal.fire({
               icon: 'error',
