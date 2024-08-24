@@ -14,12 +14,14 @@
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+		<link href="https://fonts.googleapis.com/css2?family=Blacksword&display=swap" rel="stylesheet">
+
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+		
 		<style>
 			/* CSS for table */
 			table {
@@ -38,6 +40,7 @@
 
 			.table-style-2 {
 				width: 100%;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 			}
 
 			.table-style-2 th, .table-style-2 td {
@@ -52,10 +55,15 @@
 
 			.header-background {
 				position: relative;
-				min-height: 100px;
-				min-height: 800px;
+				width: 100%;
+				height: 100vh; /* Full viewport height */
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				overflow: hidden; /* To ensure any overflow is hidden */
 			}
 
+			/* Background video styling */
 			.background-video {
 				position: absolute;
 				top: 50%;
@@ -64,7 +72,7 @@
 				height: 100%;
 				object-fit: cover;
 				transform: translate(-50%, -50%);
-				z-index: 0;
+				z-index: 0; /* Background video behind everything */
 			}
 
 											
@@ -92,36 +100,94 @@
 				color: #ddd; 
 			}
 
-			.btn-permohonan {
-				background-color: #0c4277;
-				border-color: #0c4277;
+			/* Basic styling for the left content */
+			.content-left {
+				width: 50%; /* Each content takes up 50% of the container width */
+				padding: 0; /* Add padding for better spacing */
+				box-sizing: border-box; /* Include padding in width */
+				/* background: rgba(134, 188, 222, 0.5);  */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				z-index: 5; /* Ensure content is above the video but below the header */
 			}
 
+			.content-right {
+				width: 50%; /* Each content takes up 50% of the container width */
+				padding: 1px; /* Add padding for better spacing */
+				box-sizing: border-box; /* Include padding in width */
+				/* background: rgba(134, 188, 222, 0.5);  */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				z-index: 5; /* Ensure content is above the video but below the header */
+			}
+
+			/* Optional background color for each side */
+			.content-left {
+				text-align: left;
+			}
+
+			.content-right {
+				text-align: center;
+			}
+
+			/* Optional styles for better layout and appearance */
+			.content-left img {
+				max-width: 80%;
+				height: auto;
+			}
+
+			/* Style for the overlay text */
+			.content-left span {
+				position: absolute; /* Position the span absolutely within the container */
+				top: 40%; /* Center vertically */
+				left: 50%; /* Center horizontally */
+				transform: translate(-50%, -50%); /* Adjust position to center the element */
+				text-align: left; /* Center text */
+				color: #fff; /* Ensure text is visible against background */
+				font-family: 'Georgia', sans-serif;
+				font-size: 3.0rem;
+			}
+
+			/* Button styling */
+			.btn-permohonan {
+				background-color: #c60000;
+				border-color: #0c4277;
+				font-size: 1rem; /* Reduce button font size */
+				padding: 8px 16px; /* Adjust padding for better button appearance */
+				margin-top: 10px; /* Add margin to separate from other elements */
+				display: inline-block; /* Ensure it behaves properly in different layouts */
+				color: #f2f2f2;
+				text-decoration: none;
+				text-align: center;
+				align-items: center;
+			}
+
+			/* Hover effect for button */
 			.btn-permohonan:hover {
-				background-color: #10355a;
+				background-color: #ffb004;
 				border-color: #10355a;
 			}
-			.content-center {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				width: auto;
-				transform: translate(-50%, -50%);
-				z-index: 20;
-				color: white;
-				text-align: center;
-				/* background: rgba(134, 188, 222, 0.5);  */
-				/* Optional: add background to make text more readable */
-				padding: 20px;
-				border-radius: 10px;
+
+			.content-right img {
+				max-width: 35%;
+				height: auto;
+
 			}
 
-			.content-center img {
-				padding-bottom: 30px;
-			}
-
-			.content-center h4 .id-color {
+			.content-right h4 .id-color {
 				color: #f9b200;
+				font-size: 5.0rem;
+				font-family: 'Brush Script MT', cursive;
+			}
+
+			.content-right h1 {
+				margin-bottom: 20%; /* Adjust this value as needed */
+				display: block; /* Allows margin-bottom to work */
+				font-family: 'Georgia', sans-serif;
 			}
 
 			.text-transition {
@@ -134,17 +200,106 @@
 				transform: scale(1.1);
 			}
 
-			.content-right {
+			
+			/* Responsive styles */
+			@media (max-width: 1200px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+
+				}
+			}
+
+			@media (max-width: 800px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+
+				}
+			}
+
+			@media (max-width: 500px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+
+				}
+			}
+
+			.content-menu {
 				position: absolute;
 				right: 1%;
 				top: 50%;
 				transform: translate(0, -50%); /* Adjust only vertical translation */
 				width: auto; /* Adjust width as needed */
+				font-family: 'Georgia', sans-serif;
 			}
 
 			.content-jata {
 				position: absolute;
 				left: 1%;
+				top: 50%;
+				transform: translate(0, -50%); /* Adjust only vertical translation */
+				width: auto; /* Adjust width as needed */
+			}
+
+			.content-logo {
+				position: absolute;
+				left: 30%;
 				top: 50%;
 				transform: translate(0, -50%); /* Adjust only vertical translation */
 				width: auto; /* Adjust width as needed */
@@ -192,18 +347,17 @@
 
 			.box {
 				position: absolute;
-				left: 50%;
-				top: 100%; /* Center vertically */
-				transform: translate(-50%, -50%); /* Center horizontally */
+				bottom: 0;
+				left: 0;
+				right: 0;
 				display: flex;
+				justify-content: center;
 				align-items: center;
-				width: 100%; /* Adjust width to a percentage */
-				max-width: 70%; /* Set a maximum width */
-				height: auto; /* Allow height to adjust based on content */
-				padding: 10px; /* Add padding for better spacing */
-				background-color: #333;
-				color: white;
-				box-sizing: border-box; /* Ensure padding is included in the width/height */
+				background: rgba(255, 255, 255, 0.8); /* Optional background for readability */
+				padding: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				text-align: center;
+				font-size: 2.5rem;
 			}
 
 			.box .left {
@@ -214,11 +368,11 @@
 
 			.middle {
 				flex: 1;
-				text-align: center;
+				text-align: left;
 			}
 
 			.middle span {
-				font-size: 1.5rem; /* Default size */
+				font-size: 2.0rem; /* Default size */
 			}
 
 			/* Responsive styles */
@@ -283,6 +437,29 @@
 				50% { transform: translateX(10px); }
 				100% { transform: translateX(0); }
 			} */
+
+		</style>
+		<style>
+			.text-justify {
+				text-align: justify; /* Justifies text within its container */
+			}
+
+			.card-bkoku {
+				position: relative;
+				width: 100%;
+				height: 200px;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 10px 20px rgba(227, 16, 16, 0.1);
+				transition: transform 0.3s;
+				background-color: white;
+			}
+
+			.card-bkoku.active {
+				box-shadow: 0 10px 20px rgba(16, 82, 227, 0.5); /* Change the box-shadow color */
+				border: 5px solid rgba(16, 82, 227, 1); /* Add an outer border color */
+				transform: scale(1.05); /* Optional: Add a scale effect */
+			}
 		</style>
 	</head>
 	<!--end::Head-->
@@ -306,14 +483,15 @@
 						<!--begin::Logo-->
 						<!--begin::Kementerian-->
 						<div class="content-jata">
-							<a href="/">
+							<a href="#laman_utama">
 								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
 								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
 							</a>
 						</div>
 						<!--end::Kementerian-->
+						
 						<!--begin::Container-->
-						<div class="content-right">
+						<div class="content-menu">
 							<!--begin::Mobile menu toggle-->
 								<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
 									<i class="ki-duotone ki-abstract-14 fs-2hx">
@@ -329,64 +507,39 @@
 								<!--begin::Menu wrapper-->
 								<div class="d-lg-block" id="kt_header_nav_wrapper">
 									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
+										
 										<!--begin::Menu-->
 										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
+											
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#laman_utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Utama</a>
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#info" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Info</a>
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#syarat" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Syarat</a>
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#kategori" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Kategori</a>
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#tempoh" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Tempoh</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bayaran" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Maklumat Pembiayaan</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item">
-												<!--begin::Menu link-->
-												<a style="font-size: 1.5rem; color:#f2f2f2" href="http://bkoku.mohe.gov.my/login" class=" menu-link nav-link py-3 px-4 px-xxl-6 btn btn-permohonan">Permohonan</a>
-												<!--end::Menu link-->
-											</div>
-											<!--end::Menu item-->
+											
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -398,17 +551,36 @@
 						<!--end::Container-->
 					</div>
 					<!--end::Header-->
-					<!--begin::Center content-->
-					<div class="content-center">
-						<!--img src="assets/media/jata_kpt.svg" alt="KPT Malaysia" width="25%" style="padding-bottom:30px"-->
-						<h4 class="text-transition" style="font-size: 3.5rem;"><span class="id-color">Selamat Datang ke</span></h4>
-						<h1 class="text-transition" style="font-size: 3.5rem;"><span style="text-transform:uppercase">Sistem Bantuan Kewangan OKU & PPK</span></h1>
+					<!--begin::Left content-->
+					<div class="content-left">
+						<div>
+							<!-- Image -->
+							<img src="assets/media/picture3.png" alt="KPT Malaysia">
+							<!-- Text overlay -->
+							<span>
+								Klik di sini untuk permohonan<br>
+								<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan" style="font-size: 2rem; color: #f2f2f2; margin-top: 10px; display: inline-block; align-items: center; padding: 8px 16px;">
+									PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;">
+								</a>
+							</span>
+						</div>
 					</div>
-					<!--end::Center content-->
+
+					<!--end::Left content-->
+					<!--begin::Right content-->
+					<div class="content-right">
+						<div>
+							<br><br>
+							<img src="assets/media/sispo.png" alt="SisPO"><br>
+							<h4 class="text-transition"><span class="id-color">Selamat Datang ke</span></h4>
+							<h1 class="text-transition" style="font-size: 3.5rem;"><span style="text-transform:uppercase">Sistem Penajaan OKU </span><span>(SisPO)</span></h1>
+						</div>
+					</div>
+					<!--end::Right content-->
 
 					<!--begin::Hebahan content-->
 					<div class="box">
-						<div class="left">HEBAHAN</div>
+						<div class="left">HEBAHAN&nbsp;<img src="assets/media/megaphone.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;"></div>
 						<!-- div class="moving-icon">PENTING</div-->
 						<div class="middle">
         					<span>{!! $catatan  ?? 'No notes available' !!}</span>
@@ -426,983 +598,782 @@
 			</div>
 			<!--end::Header Section-->
 
-			<!--begin::Info Section-->
-			<div class="py-10 py-lg-20">
-				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve top-->
+			<!--begin::Utama Section-->
+			<div class="py-10 py-lg-20" id="utama">
 				<!--begin::Wrapper-->
-				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(255, 255, 255);">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Plans-->
 						<div class="d-flex flex-column container pt-lg-15">
-							<!--begin::Heading-->
-							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold" style="color: white;" id="info" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT DAN SKOP PEMBIAYAAN</h1>
-							</div>
-							<!--end::Heading-->
-							<!--begin::Syarat-->
+							<!--begin::Utama-->
 							<div class="text-center">
 								<!--begin::Row-->
 								<div class="row g-10">
 									<!--begin::Col-->
 									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-												<!--begin::Features-->
-												<div class="w-100 mb-10">
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: #96b6cd; padding: 5px; border-radius: 5px;">
-														<span class="fw-bold fs-6">SYARAT DAN GARIS PANDUAN UMUM</span>
+										<div class="d-flex h-100">
+											<!--begin::Card 1-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(84, 95, 251);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold fs-2 mb-2">LATAR BELAKANG</span>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<i class="ki-duotone ki-verify fs-1 text-danger me-3">
+																	<span class="path1"></span>
+																	<span class="path2"></span>
+																</i>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
+																</span>
+	
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<i class="ki-duotone ki-verify fs-1 text-danger me-3">
+																	<span class="path1"></span>
+																	<span class="path2"></span>
+																</i>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
+																</span>
+															</div>
+															<!--end::Item-->
+														</div>
+														<!--end::Features-->
 													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Bantuan ini merupakan keistimewaan yang diberikan kepada pelajar OKU. Oleh itu, ianya harus dibezakan dengan kemudahan-kemudahan lain yang turut diterima oleh pelajar bukan OKU. Ini bermakna sekiranya seseorang pelajar OKU itu menerima biasiswa atau kemudahan lain yang juga turut dinikmati oleh pelajar bukan OKU, maka pelajar OKU tersebut adalah layak menerima elaun ini.</span>
-														<i class="ki-duotone ki-verify fs-1 text-danger">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Elaun khas ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan.</span>
-														<i class="ki-duotone ki-verify fs-1 text-danger">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5" style="background-color: #96b6cd; padding: 5px; border-radius: 5px;">
-														<span class="fw-bold fs-6">SKOP PEMBIAYAAN ELAUN KHAS</span>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Skop pembiayaan OKU adalah tertumpu kepada institusi yang terletak dibawah pengurusan dan kawalan Kementerian Pendidikan Tinggi (KPT) iaitu semua IPTA, IPTS, Politeknik dan Kolej Komuniti sahaja;</span>
-														<i class="ki-duotone ki-pin fs-1 text-danger">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Skop peringkat pengajian pula adalah tertakluk kepada tafsiran pengajian tinggi (tertiary) iaitu peringkat diploma dan ke atas sahaja. Walau bagaimanapun, kursus peringkat sijil jangka panjang di politeknik dan kolej komuniti yang di bawah tanggungjawab KPT boleh dipertimbangkan untuk bantuan kewangan OKU ini;</span>
-														<i class="ki-duotone ki-pin fs-1 text-danger">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Pelajar OKU yang menuntut di institusi-institusi latihan bukan bertaraf IPT yang dikawal oleh kementerian-kementerian lain dan institusi-institusi pengajian tinggi luar negara adalah di luar skop pembiayaan.</span>
-														<i class="ki-duotone ki-pin fs-1 text-danger">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													
 												</div>
-												<!--end::Features-->
-												
 											</div>
-											<!--end::Option-->
-										</div>
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-							</div>
-							<!--end::Syarat-->
-						</div>
-						<!--end::Plans-->
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Wrapper-->
-				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve bottom-->
-			</div>
-			<!--end::Info Section-->
+											<!--end::Card 1-->
 
-			<!--begin::Syarat Section-->
-			<div class="py-10 py-lg-20">
-				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve top-->
-				<!--begin::Wrapper-->
-				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
-					<!--begin::Container-->
-					<div class="container">
-						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-15">
-							<!--begin::Heading-->
-							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold" style="color: white;" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
-							</div>
-							<!--end::Heading-->
-							<!--begin::Syarat-->
-							<div class="text-center">
-								<!--begin::Row-->
-								<div class="row g-10">
-									<!--begin::Col-->
-									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-												<!--begin::Features-->
-												<div class="w-100 mb-10">
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">i. Pelajar warganegara Malaysia;</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar berdaftar dengan Jabatan Kebajikan Masyarakat (JKM) dan telah mempunyai kad OKU;</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iii. Kursus yang diikuti hendaklah diiktiraf oleh Agensi Kelayakan Malaysia (MQA) atau Jabatan Perkhidmatan Awam (JPA).</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iv. Pelajar OKU yang menerima pinjaman pelajaran atau pembiayaan sendiri adalah layak menerima elemen wangsaku dan yuran pengajian. Penerima biasiswa pula layak mendapat wang saku sahaja;</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">v. Pelajar hendaklah sedang melanjutkan pengajian di mana-mana universiti awam atau IPTS (bawah seliaan KPT) atau Kolej Komuniti dan Politeknik;</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">vi. Pelajar yang mengikuti kursus separuh masa atau pengajian jarak jauh layak menerima bantuan kewangan ini;dan</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">vii. Pelajar OKU hendaklah bukan dalam tempoh cuti belajar bergaji (penuh/sebahagian).</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">viii. Bagi pelajar yang ingin memohon perlanjutan tempoh pengajian adalah tidak layak mendapat bantuan dalam proses perlanjutan tersebut. Hal ini kerana tempoh tajaan Bantuan kewangan ini adalah mengikut tempoh surat tawaran asal. Pelajar yang ingin menukar tempat pengajian dalam tempoh pembiayaan BKOKU, hendaklah maklum kepada pihak kementerian secara bertulis dan juga kepada pihak institusi pengajian sebelum dari tempoh lapor diri di tempat pengajian baru</span>
-														<i class="ki-duotone ki-check-circle fs-1 text-success">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Item-->
-												</div>
-												<!--end::Features-->
-												
-											</div>
-											<!--end::Option-->
-										</div>
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-							</div>
-							<!--end::Syarat-->
-						</div>
-						<!--end::Plans-->
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Wrapper-->
-				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve bottom-->
-			</div>
-			<!--end::Syarat Section-->
-
-			<!--begin::Kategori Section-->
-			<div class="py-10 py-lg-20">
-				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve top-->
-				<!--begin::Wrapper-->
-				<div class="py-1 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
-					<!--begin::Container-->
-					<div class="container">
-						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-15">
-							<!--begin::Heading-->
-							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold" style="color: white;" id="kategori" data-kt-scroll-offset="{default: 100, lg: 150}">KATEGORI YURAN YANG LAYAK DAN TIDAK LAYAK DITUNTUT</h1>
-							</div>
-							<!--end::Heading-->
-							<!--begin::Kategori-->
-							<div class="text-center">
-								<!--begin::Row-->
-								<div class="row g-10">
-									<!--begin::Col-->
-									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-												<!--begin::Features-->
-												<div class="w-100 mb-10">
-													<!-- Table Start -->
-													<table>
-														<thead>
-															<tr>
-																<th style="background-color: #96b6cd;">Bil.</th>
-																<th style="background-color: #96b6cd;">Yuran Pengajian Yang LAYAK Dituntut</th>
-																<th style="background-color: #96b6cd;">Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>1.</td>
-																<td>Yuran Pendaftaran Pengajian</td>
-																<td>Yuran Penempatan / Yuran Asrama</td>
-															</tr>
-															<tr>
-																<td>2.</td>
-																<td>Kad Kampus / Kad Matrik</td>
-																<td>Insuran Kesihatan / Perlindungan Insuran</td>
-															</tr>
-															<tr>
-																<td>3.</td>
-																<td>Yuran Perpustakaan</td>
-																<td>Yuran Kebajikan / Persatuan / Alumni / Aktiviti / Khairiat</td>
-															</tr>
-															<tr>
-																<td>4.</td>
-																<td>Yuran Peperiksaan</td>
-																<td>Yuran Kelengkapan / Tabung Pengurusan MPA</td>
-															</tr>
-															<tr>
-																<td>5.</td>
-																<td>Yuran Perkhidmatan</td>
-																<td>Yuran Pencalonan</td>
-															</tr>
-															<tr>
-																<td>6.</td>
-																<td>Yuran Ko-Kurikulum / Sukan</td>
-																<td>Tabung Kecemasan</td>
-															</tr>
-															<tr>
-																<td>7.</td>
-																<td>Yuran Graduasi (Jika bergraduat dalam tempoh tajaan sahaja)</td>
-																<td>Elaun Buku</td>
-															</tr>
-															<tr>
-																<td>8.</td>
-																<td>Yuran Pemeriksaan / Yuran Tesis</td>
-																<td>Elaun Sara Hidup</td>
-															</tr>
-															<tr>
-																<td>9.</td>
-																<td>Yuran Komputer</td>
-																<td>Elaun Tesis</td>
-															</tr>
-															<tr>
-																<td>10.</td>
-																<td>Yuran Peralatan / Bahan Makmal</td>
-																<td>Elaun Latihan Amali / Klinikal / Kerja Lapangan</td>
-															</tr>
-															<tr>
-																<td>11.</td>
-																<td></td>
-																<td>Elaun Perjalanan / Tambang</td>
-															</tr>
-															<tr>
-																<td>12.</td>
-																<td></td>
-																<td>Elaun Akhir Pengajian</td>
-															</tr>
-															<tr>
-																<td>13.</td>
-																<td></td>
-																<td>Elaun Penyelidikan</td>
-															</tr>
-															<tr>
-																<td>14.</td>
-																<td></td>
-																<td>Elaun Pengangkutan</td>
-															</tr>
-														</tbody>
-													</table>
-													<!-- Table End -->
-													<!--begin::Nota-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-start fw-bold" style="color: red;">Nota : Bagi tuntutan lain yang tidak tersenarai dalam senarai yuran yang LAYAK atau TIDAK LAYAK seperti di atas adalah tidak layak dituntut.</span>
-													</div>
-													<!--end::Nota-->
-												</div>
-												<!--end::Features-->
-												
-											</div>
-											<!--end::Option-->
-										</div>
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-							</div>
-							<!--end::Kategori-->
-						</div>
-						<!--end::Plans-->
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Wrapper-->
-				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve bottom-->
-			</div>
-			<!--end::Kategori Section-->
-
-			<!--begin::Tempoh Section-->
-			<div class="mb-n20 mb-lg-n20 z-index-2">
-				<!--begin::Container-->
-				<div class="container">
-					<!--begin::Heading-->
-					<div class="text-center mb-10">
-						<!--begin::Title-->
-						<h3 class="fs-2hx text-dark mb-2" id="tempoh" data-kt-scroll-offset="{default: 100, lg: 150}">TEMPOH PEMBIAYAAN</h3>
-						<!--end::Title-->
-						<!--begin::Text-->
-						<div class="fs-5 text-muted fw-bold">Tempoh tajaan ini adalah tertakluk kepada surat tawaran asal institusi pengajian 
-						<br />dan tidak melebihi tempoh maksimum penajaan seperti berikut :</div>
-						<!--end::Text-->
-					</div>
-					<!--end::Heading-->
-					<!--begin::Row-->
-					<div class="row w-100 gy-10 mb-md-20">
-						<!--begin::Col-->
-						<div class="col-md-4 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-12 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">1</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Sijil Asas / Sijil</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">2 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Kolej Komuniti dan Politeknik)<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
-										<!--end::Description-->
-									</div>
-								</div>
-							</div>
-							<!--end::Story-->
-
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">2</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">3 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
-										<!--end::Description-->
-									</div>	
-								</div>
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-4 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">3</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana Muda</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">4 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
-										<!--end::Description-->
-									</div>	
-								</div>
-							</div>
-							<!--end::Story-->
-
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">4</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma Lepasan Ijazah</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">2 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
-										<!--end::Description-->
-									</div>	
-								</div>
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-						<!--begin::Col-->
-						<div class="col-md-4 px-1">
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">5</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">2 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
-										<!--end::Description-->
-									</div>	
-								</div>
-							</div>
-							<!--end::Story-->
-
-							<!--begin::Story-->
-							<div class="text-center mb-10 mb-md-0">
-								<div class="card">
-									<img src="assets/media/patterns/pattern-1.jpg" alt="Project Management">
-									<div class="card-text">
-										<!--begin::Heading-->
-										<!--begin::Badge-->
-										<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">6</span></div>
-										<!--end::Badge-->
-										<div class="d-flex flex-center mb-5">
-											<!--begin::Title-->
-											<div class="fs-5 fs-lg-1 fw-bold text-light">Ph.D</div>
-											<!--end::Title-->
-										</div>
-										<!--end::Heading-->
-										<!--begin::Description-->
-										<div class="fs-6 fs-lg-4">4 Tahun</div>
-										<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
-										<!--end::Description-->
-									</div>	
-								</div>
-							</div>
-							<!--end::Story-->
-						</div>
-						<!--end::Col-->
-					</div>
-
-					<!--end::Row-->
-					
-				</div>
-				<!--end::Container-->
-			</div>
-			<!--end::Tempoh Section-->
-			
-			<!--begin::Bayaran Section-->
-			<div class="py-10 py-lg-20">
-				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve top-->
-				<!--begin::Wrapper-->
-				<div class="py-10 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
-					<!--begin::Container-->
-					<div class="container">
-						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-15">
-							<!--begin::Heading-->
-							<div class="mb-15 text-center">
-								<h1 class="fs-2hx fw-bold text-white mb-5" id="bayaran" data-kt-scroll-offset="{default: 100, lg: 150}">MAKLUMAT PEMBIAYAAN</h1>
-							</div>
-							<!--end::Heading-->
-							<!--begin::Bayaran-->
-							<div class="text-center">
-								<!--begin::Row-->
-								<div class="row g-10">
-									<!--begin::Col-->
-									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Features-->
-											<div class="w-100 mb-10">
-												<!-- Table Start -->
-												<table  class="table-style-2">
-													<thead>
-														<tr>
-															<th></th>
-															<th></th>
-															<th>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="text-light fw-bold" style="font-size:14px;">Yuran </div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</th>
-															<th>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="text-light fw-bold" style="font-size:14px;">Wang Saku</div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td rowspan="2">
-																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-4">
-																	<!-- begin::Heading -->
-																	<div class="mb-4">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td rowspan="2">
-																<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #96b6cd;">
-																	<!-- begin::Heading -->
-																	<div class="mb-4">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
-																	<!-- begin::Heading -->
-																	<div class="mb-2">
-																		<!-- begin::Title -->
-																		<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
-																		<!-- end::Title -->
-																	</div>
-																	<!-- end::Heading -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-															<td>
-																<div class="mb-2">
-																	<!-- begin::Title -->
-																	<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																	<!-- end::Title -->
-																</div>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-												<!-- Table End -->
-											</div>
-											<!--end::Features-->	
-										</div>
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-							</div>
-							<!--end::Bayaran-->
-						</div>
-						<!--end::Plans-->
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Wrapper-->
-				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve bottom-->
-			</div>
-			<!--end::Bayaran Section-->
-
-			<!--begin::PPK Section-->
-			<div class="py-10 py-lg-20">
-				<!--begin::Curve top-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve top-->
-				<!--begin::Wrapper-->
-				<div class="py-10 landing-dark-bg" style="background-color: rgb(2, 2, 55);">
-					<!--begin::Container-->
-					<div class="container">
-						<!--begin::Plans-->
-						<div class="d-flex flex-column container pt-lg-15">
-							<!--begin::Heading-->
-							<div class="mb-13 text-center">
-								<h1 class="fs-2hx fw-bold" style="color: white;" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">PROGRAM PENDIDIKAN KHAS (PPK)</h1>
-							</div>
-							<!--end::Heading-->
-							<!--begin::PPK-->
-							<div class="text-center">
-								<!--begin::Row-->
-								<div class="row g-10">
-									<!--begin::Col-->
-									<div class="col-xl-12">
-										<div class="d-flex h-100 align-items-center">
-											<!--begin::Option-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-												<!--begin::Features-->
-												<div class="w-100 mb-10">
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">i. Skop pembiayaan PPK adalah tertumpu kepada <b>Kolej Komuniti</b> dan <b>Politeknik</b> terpilih sahaja dari Sijil Kemahiran Khas.</span>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar OKU yang mempunyai kod DD atau DE <b>(Pendengaran sahaja)</b> di Kolej Komuniti dan Politeknik terpilih.</span>
-													</div>
-													<!--end::Item-->
-													<!--begin::Item-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iii. Kadar Bayaran PPK adalah sebanyak :</span>
-													</div>
-													<div class="d-flex flex-stack">
-														<span class="fw-semibold fs-6 text-gray-800 text-start">
-															<ul>
-																<li>RM 4260 / Semester 1 sahaja.</li>
-																<li>RM 3960 / Semester 2 hingga 4.</li>
-															</ul>
-														</span>
-													</div>
-													<!--end::Item-->
-													<!--begin::Senarai Kursus-->
-													<div class="d-flex flex-stack mb-5">
-														<span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iv. Senarai institusi dan nama program yang terlibat :</span>
-													</div>
-													<div class="text-center">
-														<!--begin::Row-->
-														<div class="row g-10">
-															<!--begin::Col-->
-															<div class="col-xl-12">
-																<div class="d-flex h-100 align-items-center">
-																	<!--begin::Option-->
-																	<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-10 px-10">
-																		<!--begin::Features-->
-																		<div class="w-100 mb-10">
-																			<!-- Table Start -->
-																			<table>
-																				<thead>
-																					<tr>
-																						<th style="background-color: #96b6cd;">Bil.</th>
-																						<th style="background-color: #96b6cd;">Institusi</th>
-																						<th style="background-color: #96b6cd;">Nama Program</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<tr>
-																						<td>1.</td>
-																						<td>Politeknik Ungku Omar</td>
-																						<td>Sijil Khas Pembinaan</td>
-																					</tr>
-																					<tr>
-																						<td>2.</td>
-																						<td>Politeknik Sultan Salahuddin Abdul Aziz Shah</td>
-																						<td>Sijil Khas Penyenggaraan Mekanikal</td>
-																					</tr>
-																					<tr>
-																						<td>3.</td>
-																						<td>Politeknik Kota Kinabalu</td>
-																						<td>Sijil Khas Operasi Katering</td>
-																					</tr>
-																					<tr>
-																						<td>4.</td>
-																						<td>Politeknik Tuanku Syed Sirajuddin</td>
-																						<td>Sijil Khas Operasi Katering</td>
-																					</tr>
-																					<tr>
-																						<td>5.</td>
-																						<td>Politeknik Ibrahim Sultan</td>
-																						<td>
-																							<ul>a. Sijil Khas Operasi Katering</ul>
-																							<ul>b. Sijil Khas Reka Bentuk Fesyen</ul>
-																							<ul>c. Sijil Khas Reka Bentuk Grafik</ul>
-																						</td>
-																					</tr>
-																					<tr>
-																						<td>6.</td>
-																						<td>Kolej Komuniti Selayang</td>
-																						<td>Sijil Asas Kulinari</td>
-																					</tr>
-																				</tbody>
-																			</table>
-																			<!-- Table End -->
+											<!--begin::Card 2-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3" style="flex-grow: 1; background-color: rgb(250, 75, 0);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span>
+																<span class="fw-bold fs-6">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<form class="w-100" style="text-align: left;">
+																	<div class="row mb-3">
+																		<div class="col-md-6">
+																			<label for="nama" class="form-label">Nama</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-user"></i>
+																				</span>
+																				<input type="text" class="form-control" id="nama">
+																			</div>
 																		</div>
-																		<!--end::Features-->
-																		
+																		<div class="col-md-6">
+																			<label for="telefon" class="form-label">Telefon</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-phone"></i>
+																				</span>
+																				<input type="tel" class="form-control" id="telefon">
+																			</div>
+																		</div>
 																	</div>
-																	<!--end::Option-->
+																	<div class="row mb-3">
+																		<div class="col-md-6">
+																			<label for="emel" class="form-label">Emel</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-envelope"></i>
+																				</span>
+																				<input type="email" class="form-control" id="emel">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<label for="tajuk" class="form-label">Tajuk</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-tag"></i>
+																				</span>
+																				<input type="text" class="form-control" id="tajuk">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="mb-3">
+																		<label for="mesej" class="form-label">Mesej</label>
+																		<textarea class="form-control" id="mesej" rows="3" placeholder="Masukkan mesej anda"></textarea>
+																	</div>
+																	<button type="submit" class="btn btn-primary">Hantar</button>
+																</form>
+															</div>
+															<!--end::Item-->
+														</div>
+														<!--end::Features-->
+													</div>
+												</div>
+											</div>
+											<!--end::Card 2-->
+										</div>
+
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Utama-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Utama Section-->
+
+			<!--begin::Maklumat BKOKU Section-->
+			<div class="py-10 py-lg-20" id="bkoku">
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(255, 255, 255);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::BKOKU-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100">
+											<!--begin::Card 1-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(241, 241, 241); box-shadow: 0 30px 20px rgba(0, 0, 0, 0.1);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold fs-2 mb-2">Bantuan Kewangan Pelajar Orang Kurang Upaya (OKU)</span>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5 align-items-start">
+																<label class="mb-2 fw-bold fs-2 text-justify flex-grow-1"><b>Objektif:</b></label>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Program ini bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang melanjutkan pengajian di UA, IPTS, Kolej Komuniti dan Politeknik di bawah seliaan KPT
+																</span><br><br>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5 align-items-start">
+																<label class="mb-2 fw-bold fs-2 text-justify flex-grow-1"><b>Tatacara Permohonan:</b></label>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	i.	Pemohon perlu membuat permohonan dengan mengemukakan salinan dokumen yang dinyatakan dengan lengkap melalui sistem Penajaan OKU (SisPo).
+																</span><br><br>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	ii.	Hanya Invois Asal yang perlu dimuatnaik melalui Sistem Penajaan OKU (SisPo).
+																</span><br><br>
+															</div>
+															<!--end::Item-->
+
+															<!--begin::Item-->
+															<div class="container">
+																<div class="row">
+																	<!-- Card 1 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_skop_bkoku" href="#skop_bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-bkoku">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/human-resource.png" alt="Skop" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Skop Pembiayaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>
+																	</div>
+																	<!-- Card 2 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_syarat_bkoku" href="#syarat_bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-bkoku">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/file.png" alt="Syarat" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Syarat Pembiayaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
+																	<!-- Card 3 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_elemen_bkoku" href="#elemen_bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-bkoku">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/business-aggrement.png" alt="Elemen" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Elemen Tajaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
+																	<!-- Card 4 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_tempoh_bkoku" href="#tempoh_bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-bkoku">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/timetable.png" alt="Tempoh" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Tempoh Penajaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
 																</div>
 															</div>
-															<!--end::Col-->
+															<!--end::Item-->
+															<div class="container" style="text-align: left;">
+																<!--begin::Skop BKOKU-->
+																<div class="flex-column mb-5" id="skop_bkoku" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		i. Skop pembiayaan OKU adalah tertumpu kepada institusi yang terletak dibawah pengurusan dan kawalan Kementerian Pendidikan Tinggi (KPT) iaitu semua IPTA, IPTS, Politeknik dan Kolej Komuniti sahaja;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		ii. Skop peringkat pengajian pula adalah tertakluk kepada tafsiran pengajian tinggi (tertiary) iaitu peringkat diploma dan ke atas sahaja. Walau bagaimanapun, kursus peringkat sijil jangka panjang di politeknik dan kolej komuniti yang di bawah tanggungjawab KPT boleh dipertimbangkan untuk bantuan kewangan OKU ini;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		iii. Pelajar OKU yang menuntut di institusi-institusi latihan bukan bertaraf IPT yang dikawal oleh kementerian-kementerian lain dan institusi-institusi pengajian tinggi luar negara adalah di luar skop pembiayaan.
+																	</span><br><br>
+																</div>
+																<!--end::Skop BKOKU-->
+																<!--begin::Syarat BKOKU-->
+																<div class="flex-column mb-5" id="syarat_bkoku" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		i. Pelajar warganegara Malaysia;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		ii. Pelajar berdaftar dengan Jabatan Kebajikan Masyarakat (JKM) dan telah mempunyai kad OKU;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		iii. Kursus yang diikuti hendaklah diiktiraf oleh Agensi Kelayakan Malaysia (MQA) atau Jabatan Perkhidmatan Awam (JPA);
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		iv.	Pelajar OKU yang menerima pinjaman pelajaran atau pembiayaan sendiri adalah layak menerima elemen wangsaku dan yuran pengajian. Penerima biasiswa pula layak mendapat wang saku sahaja;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		v.	Pelajar hendaklah sedang melanjutkan pengajian di mana-mana universiti awam atau IPTS (bawah seliaan KPT) atau Kolej Komuniti dan Politeknik;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		vi.	Pelajar yang mengikuti kursus separuh masa atau pengajian jarak jauh layak menerima bantuan kewangan ini;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		vii. Pelajar OKU yang menerima biasiswa atas dasar kurang upayanya semasa melanjutkan pengajiannya tidak layak menerima bantuan kewangan ini. Misalnya jika seseorang pelajar OKU itu telah menerima biasiswa khas untuk melanjutkan pengajian di IPT kerana keistimewaannya, elaun khas ini tidak akan dipanjangkan kepada beliau;
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		viii. Pelajar OKU hendaklah bukan dalam tempoh cuti belajar bergaji (penuh/sebahagian);dan
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		ix. Bagi pelajar yang ingin memohon perlanjutan tempoh pengajian adalah tidak layak mendapat bantuan dalam proses perlanjutan tersebut. Hal ini kerana tempoh tajaan Bantuan kewangan ini adalah mengikut tempoh surat tawaran asal. Pelajar yang ingin menukar tempat pengajian dalam tempoh pembiayaan BKOKU, hendaklah maklum kepada pihak kementerian secara bertulis dan juga kepada pihak institusi pengajian sebelum dari tempoh lapor diri di tempat pengajian baru.
+																	</span><br><br>
+																</div>
+																<!--end::Syarat BKOKU-->
+																<!--begin::Elemen BKOKU-->
+																<div class="flex-column mb-5" id="elemen_bkoku" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		i. Pembiayaan ini meliputi yuran pengajian dan elaun wang saku sebanyak RM400 sebulan dengan kadar maksimum RM6,200 setahun (mengikut kalendar akademik) atau RM24,800 sepanjang tempoh pengajian.
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		ii. Senarai Yuran Layak dan Yuran Tidak Layak:<br><br>
+																		<!-- Table Start -->
+																		<table style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+																			<thead>
+																				<tr>
+																					<th style="background-color: #96b6cd;">Bil.</th>
+																					<th style="background-color: #96b6cd;">Yuran Pengajian Yang LAYAK Dituntut</th>
+																					<th style="background-color: #96b6cd;">Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>1.</td>
+																					<td>Yuran Pendaftaran Pengajian</td>
+																					<td>Yuran Penempatan / Yuran Asrama</td>
+																				</tr>
+																				<tr>
+																					<td>2.</td>
+																					<td>Kad Kampus / Kad Matrik</td>
+																					<td>Insuran Kesihatan / Perlindungan Insuran</td>
+																				</tr>
+																				<tr>
+																					<td>3.</td>
+																					<td>Yuran Perpustakaan</td>
+																					<td>Yuran Kebajikan / Persatuan / Alumni / Aktiviti / Khairiat</td>
+																				</tr>
+																				<tr>
+																					<td>4.</td>
+																					<td>Yuran Peperiksaan</td>
+																					<td>Yuran Kelengkapan / Tabung Pengurusan MPA</td>
+																				</tr>
+																				<tr>
+																					<td>5.</td>
+																					<td>Yuran Perkhidmatan</td>
+																					<td>Yuran Pencalonan</td>
+																				</tr>
+																				<tr>
+																					<td>6.</td>
+																					<td>Yuran Ko-Kurikulum / Sukan</td>
+																					<td>Tabung Kecemasan</td>
+																				</tr>
+																				<tr>
+																					<td>7.</td>
+																					<td>Yuran Graduasi (Jika bergraduat dalam tempoh tajaan sahaja)</td>
+																					<td>Elaun Buku</td>
+																				</tr>
+																				<tr>
+																					<td>8.</td>
+																					<td>Yuran Pemeriksaan / Yuran Tesis</td>
+																					<td>Elaun Sara Hidup</td>
+																				</tr>
+																				<tr>
+																					<td>9.</td>
+																					<td>Yuran Komputer</td>
+																					<td>Elaun Tesis</td>
+																				</tr>
+																				<tr>
+																					<td>10.</td>
+																					<td>Yuran Peralatan / Bahan Makmal</td>
+																					<td>Elaun Latihan Amali / Klinikal / Kerja Lapangan</td>
+																				</tr>
+																				<tr>
+																					<td>11.</td>
+																					<td></td>
+																					<td>Elaun Perjalanan / Tambang</td>
+																				</tr>
+																				<tr>
+																					<td>12.</td>
+																					<td></td>
+																					<td>Elaun Akhir Pengajian</td>
+																				</tr>
+																				<tr>
+																					<td>13.</td>
+																					<td></td>
+																					<td>Elaun Penyelidikan</td>
+																				</tr>
+																				<tr>
+																					<td>14.</td>
+																					<td></td>
+																					<td>Elaun Pengangkutan</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																		<!-- Table End -->
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		iii. Maklumat Pembiayaan:<br><br>
+																		<!-- Table Start -->
+																		<table  class="table-style-2">
+																			<thead>
+																				<tr>
+																					<th></th>
+																					<th></th>
+																					<th>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="text-light fw-bold" style="font-size:14px;">Yuran </div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</th>
+																					<th>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="text-light fw-bold" style="font-size:14px;">Wang Saku</div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td rowspan="2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-4">
+																							<!-- begin::Heading -->
+																							<div class="mb-4">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td rowspan="2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #96b6cd;">
+																							<!-- begin::Heading -->
+																							<div class="mb-4">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																					<td>
+																						<div class="mb-2">
+																							<!-- begin::Title -->
+																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
+																								<span class="path1"></span>
+																								<span class="path2"></span>
+																							</i>
+																							<!-- end::Title -->
+																						</div>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																		<!-- Table End -->
+																	</span><br><br>
+																</div>
+																<!--end::Elemen BKOKU-->
+																<!--begin::Tempoh BKOKU-->
+																<div class="flex-column mb-5" id="tempoh_bkoku" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		<!--begin::Card Tempoh-->
+																		<div class="row w-100 gy-10 mb-md-20">
+																			<!--begin::Col-->
+																			<div class="col-md-4 px-1">
+																				<!--begin::Sijil Asas / Sijil-->
+																				<div class="text-center mb-12 mb-md-0">
+																					<div class="card" style="background-color: #F26A2E">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">1</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Sijil Asas / Sijil</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">2 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Kolej Komuniti dan Politeknik)<br/>(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+																							<!--end::Description-->
+																						</div>
+																					</div>
+																				</div>
+																				<!--end::Sijil Asas / Sijil-->
+
+																				<!--begin::Diploma-->
+																				<div class="text-center mb-10 mb-md-0">
+																					<div class="card" style="background-color: #59BA47">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">2</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">3 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM18,600.00)</div>
+																							<!--end::Description-->
+																						</div>	
+																					</div>
+																				</div>
+																				<!--end::Diploma-->
+																			</div>
+																			<!--end::Col-->
+																			<!--begin::Col-->
+																			<div class="col-md-4 px-1">
+																				<!--begin::Sarjana Muda-->
+																				<div class="text-center mb-10 mb-md-0">
+																					<div class="card" style="background-color: #E01483">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">3</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana Muda</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">4 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+																							<!--end::Description-->
+																						</div>	
+																					</div>
+																				</div>
+																				<!--end::Sarjana Muda-->
+
+																				<!--begin::Diploma Lepasan Ijazah-->
+																				<div class="text-center mb-10 mb-md-0">
+																					<div class="card" style="background-color: #136A9F">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">4</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Diploma Lepasan Ijazah</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">2 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+																							<!--end::Description-->
+																						</div>	
+																					</div>
+																				</div>
+																				<!--end::Diploma Lepasan Ijazah-->
+																			</div>
+																			<!--end::Col-->
+																			<!--begin::Col-->
+																			<div class="col-md-4 px-1">
+																				<!--begin::Sarjana-->
+																				<div class="text-center mb-10 mb-md-0">
+																					<div class="card" style="background-color: #F89D2A">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">5</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Sarjana</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">2 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM12,400.00)</div>
+																							<!--end::Description-->
+																						</div>	
+																					</div>
+																				</div>
+																				<!--end::Sarjana-->
+
+																				<!--begin::Ph.D-->
+																				<div class="text-center mb-10 mb-md-0">
+																					<div class="card" style="background-color: #14496B">
+																						<div class="card-text">
+																							<!--begin::Heading-->
+																							<!--begin::Badge-->
+																							<div class="fs-6 fs-lg-6"><span class="badge badge-circle badge-light-danger fw-bold fs-3">6</span></div>
+																							<!--end::Badge-->
+																							<div class="d-flex flex-center mb-5">
+																								<!--begin::Title-->
+																								<div class="fs-5 fs-lg-1 fw-bold text-light">Ph.D</div>
+																								<!--end::Title-->
+																							</div>
+																							<!--end::Heading-->
+																							<!--begin::Description-->
+																							<div class="fs-6 fs-lg-4">4 Tahun</div>
+																							<div class="fs-7 fs-lg-6">(Had Pembiayaan RM6,200.00 sehingga RM24,800.00)</div>
+																							<!--end::Description-->
+																						</div>	
+																					</div>
+																				</div>
+																				<!--end::Ph.D-->
+																			</div>
+																			<!--end::Col-->
+																		</div>
+																		<!--end::Card Tempoh-->
+																	</span><br><br>
+																</div>
+																<!--end::Tempoh BKOKU-->
+															</div>
 														</div>
-														<!--end::Row-->
+														<!--end::Features-->
 													</div>
-													<!--end::Senarai Kursus-->
 												</div>
-												<!--end::Features-->
-												
 											</div>
-											<!--end::Option-->
+											<!--end::Card 1-->
 										</div>
+
 									</div>
 									<!--end::Col-->
 								</div>
 								<!--end::Row-->
 							</div>
-							<!--end::PPK-->
+							<!--end::BKOKU-->
 						</div>
 						<!--end::Plans-->
 					</div>
 					<!--end::Container-->
 				</div>
 				<!--end::Wrapper-->
-				<!--begin::Curve bottom-->
-				<div class="landing-curve landing-dark-color" style="color: rgb(2, 2, 55);">
-					<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-					</svg>
-				</div>
-				<!--end::Curve bottom-->
 			</div>
-			<!--end::PPK Section-->
+			<!--end::Maklumat BKOKU Section-->
 
 			<!--begin::Hubungi Section-->
-			<div class="mb-n20 mb-lg-n20 z-index-2">
+			<div class="mb-n20 mb-lg-n20 z-index-2" id="hubungi">
 				<!--begin::Container-->
 				<div class="container">
 					<!--begin::Heading-->
 					<div class="text-center mb-15">
 						<!--begin::Title-->
-						<h3 class="fs-2hx text-dark mb-5" id="hubungi" data-kt-scroll-offset="{default: 125, lg: 150}">PERMOHONAN / PERTANYAAN</h3>
+						<h3 class="fs-2hx text-dark mb-5" data-kt-scroll-offset="{default: 125, lg: 150}">HUBUNGI KAMI</h3>
 						<!--end::Title-->
 						<!--begin::Description-->
 						<div class="fs-5 text-muted fw-bold">Untuk sebarang pertanyaan, sila hubungi:</div>
@@ -1565,8 +1536,72 @@
 		<!--begin::Vendors Javascript(used for this page only)-->
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
+		<!-- Include jQuery -->
+			
 		<!--end::Custom Javascript-->
-		
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$('#show-utama').click(function(event) {
+				$('#utama').show();
+				$('#hubungi').show();
+				$('#bkoku').hide();
+			});
+
+			$('#show-bkoku').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').show();
+			});
+
+			$('#show-hubungi').click(function(event) {
+				$('#utama').show();
+				$('#hubungi').show();
+				$('#bkoku').hide();
+			});
+		</script>
+
+		<script>
+			$(document).ready(function() {
+				$('.card-bkoku').click(function() {
+					// Remove 'active' class from all cards
+					$('.card-bkoku').removeClass('active');
+					
+					// Add 'active' class to the clicked card
+					$(this).addClass('active');
+				});
+			});
+			// Hide all sections initially
+    		$('#skop_bkoku, #syarat_bkoku, #elemen_bkoku, #tempoh_bkoku').hide();
+
+			$('#show_skop_bkoku').click(function(event) {
+				$('#skop_bkoku').show();
+				$('#syarat_bkoku').hide();
+				$('#elemen_bkoku').hide();
+				$('#tempoh_bkoku').hide();
+			});
+
+			$('#show_syarat_bkoku').click(function(event) {
+				$('#skop_bkoku').hide();
+				$('#syarat_bkoku').show();
+				$('#elemen_bkoku').hide();
+				$('#tempoh_bkoku').hide();
+			});
+
+			$('#show_elemen_bkoku').click(function(event) {
+				$('#skop_bkoku').hide();
+				$('#syarat_bkoku').hide();
+				$('#elemen_bkoku').show();
+				$('#tempoh_bkoku').hide();
+
+			});
+
+			$('#show_tempoh_bkoku').click(function(event) {
+				$('#skop_bkoku').hide();
+				$('#syarat_bkoku').hide();
+				$('#elemen_bkoku').hide();
+				$('#tempoh_bkoku').show();
+			});
+		</script>
 		<!--end::Javascript-->
 	</body>
 </html>
