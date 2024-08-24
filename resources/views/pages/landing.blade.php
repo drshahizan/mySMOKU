@@ -555,7 +555,7 @@
 					<div class="content-left">
 						<div>
 							<!-- Image -->
-							<img src="assets/media/picture3.png" alt="KPT Malaysia">
+							<img src="assets/media/Picture3.png" alt="KPT Malaysia">
 							<!-- Text overlay -->
 							<span>
 								Klik di sini untuk permohonan<br>
