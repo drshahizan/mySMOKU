@@ -1786,6 +1786,9 @@
 		<!--end::Custom Javascript-->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script>
+			// Hide all sections initially
+			$(`#utama, #hubungi, #bkoku, #ppk`).hide();
+
 			$('#show-utama').click(function(event) {
 				$('#utama').show();
 				$('#hubungi').show();
