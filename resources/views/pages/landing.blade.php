@@ -21,7 +21,6 @@
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-		
 		<style>
 			/* CSS for table */
 			table {
@@ -1862,18 +1861,7 @@
 				initializeCardToggle('ppk');
 			});
 		</script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-		<script>
-			@if(session('success'))
-				Swal.fire({
-					icon: 'success',
-					title: 'Hantar!',
-					text: ' {!! session('success') !!}',
-					confirmButtonText: 'OK'
-				});
-			@endif
-		</script>
+		
 		<!--end::Javascript-->
 	</body>
 </html>

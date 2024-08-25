@@ -20,41 +20,33 @@ class LandingPageController extends Controller
 
     public function sendEmail(Request $request)
     {
-        // Check if the form was submitted
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // Get form data
-            $nama = trim($_POST['nama']);
-            $telefon = trim($_POST['telefon']);
-            $emel = trim($_POST['emel']);
-            $tajuk = trim($_POST['tajuk']);
-            $mesej = trim($_POST['mesej']);
-            
-            // Basic validation (you can expand this as needed)
-            if (empty($nama) || empty($telefon) || empty($emel) || empty($tajuk) || empty($mesej)) {
-                echo "Sila isi semua medan.";
-                return;
-            }
+        // Validate the input
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'telefon' => 'required|string|max:20',
+            'emel' => 'required|email|max:255',
+            'tajuk' => 'required|string|max:255',
+            'mesej' => 'required|string|max:2000',
+        ]);
 
-            // Email details
-            $to = "bkoku@mohe.gov.my"; // Replace with your email
-            $subject = "SistemBKOKU $tajuk";
-            $body = "
-                Nama: $nama\n
-                Telefon: $telefon\n
-                Emel: $emel\n
-                Tajuk: $tajuk\n
-                Mesej:\n$mesej
-            ";
-            $headers = "From: $emel";
+        // Prepare email data
+        $emailData = [
+            'nama' => $validatedData['nama'],
+            'telefon' => $validatedData['telefon'],
+            'emel' => $validatedData['emel'],
+            'tajuk' => $validatedData['tajuk'],
+            'mesej' => $validatedData['mesej'],
+        ];
 
-            // Send email
-            if (mail($to, $subject, $body, $headers)) {
-                // Return response
-                return back()->with('success', 'Terima kasih! Cadangan anda telah dihantar.');
-            } 
-        }
-        
+        // Send email
+        Mail::send('pages.auth.suggestion', $emailData, function ($message) use ($emailData) {
+            $message->from($emailData['emel'], "SisPO") // Set the "From" address using the form data
+                    ->replyTo($emailData['emel'], $emailData['nama']) // Set the reply-to as the user's email
+                    ->to('bkoku@mohe.gov.my') // Replace with the recipient email
+                    ->subject($emailData['tajuk']);
+        });
 
-        
+        // Return response
+        return back()->with('success', 'Terima kasih! Cadangan anda telah dihantar.');
     }
 }
