@@ -460,6 +460,23 @@
 				border: 5px solid rgba(16, 82, 227, 1); /* Add an outer border color */
 				transform: scale(1.05); /* Optional: Add a scale effect */
 			}
+
+			.card-ppk {
+				position: relative;
+				width: 100%;
+				height: 200px;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 10px 20px rgba(227, 16, 16, 0.1);
+				transition: transform 0.3s;
+				background-color: white;
+			}
+
+			.card-ppk.active {
+				box-shadow: 0 10px 20px rgba(16, 82, 227, 0.5); /* Change the box-shadow color */
+				border: 5px solid rgba(16, 82, 227, 1); /* Add an outer border color */
+				transform: scale(1.05); /* Optional: Add a scale effect */
+			}
 		</style>
 	</head>
 	<!--end::Head-->
@@ -614,14 +631,14 @@
 									<div class="col-xl-12">
 										<div class="d-flex h-100">
 											<!--begin::Card 1-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(84, 95, 251);">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: #ffffff;box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
 												<div class="card-utama border-0">
 													<div class="card-body">
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
-																<span class="fw-bold fs-2 mb-2">LATAR BELAKANG</span>
+															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">LATAR BELAKANG</span>
 															</div>
 															<!--end::Item-->
 															<!--begin::Item-->
@@ -655,17 +672,18 @@
 											<!--end::Card 1-->
 
 											<!--begin::Card 2-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3" style="flex-grow: 1; background-color: rgb(250, 75, 0);">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3" style="flex-grow: 1; background-color: #ffffff;box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
 												<div class="card-utama border-0">
 													<div class="card-body">
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
-																<span class="fw-bold fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span>
-																<span class="fw-bold fs-6">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
+															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span><br>
+																<span class="fw-bold text-light fs-4">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
 															</div>
 															<!--end::Item-->
+															<br><br>
 															<!--begin::Item-->
 															<div class="d-flex flex-stack mb-5">
 																<form class="w-100" style="text-align: left;">
@@ -762,8 +780,8 @@
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #96b6cd; padding: 15px; border-radius: 5px;">
-																<span class="fw-bold fs-2 mb-2">Bantuan Kewangan Pelajar Orang Kurang Upaya (OKU)</span>
+															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">BANTUAN KEWANGAN ORANG KURANG UPAYA (OKU)</span>
 															</div>
 															<!--end::Item-->
 															<!--begin::Item-->
@@ -778,10 +796,10 @@
 															<div class="d-flex flex-column mb-5 align-items-start">
 																<label class="mb-2 fw-bold fs-2 text-justify flex-grow-1"><b>Tatacara Permohonan:</b></label>
 																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																	i.	Pemohon perlu membuat permohonan dengan mengemukakan salinan dokumen yang dinyatakan dengan lengkap melalui sistem Penajaan OKU (SisPo).
+																	i.	Pemohon perlu membuat permohonan dengan mengemukakan salinan dokumen yang dinyatakan dengan lengkap melalui sistem Penajaan OKU (SisPO).
 																</span><br><br>
 																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																	ii.	Hanya Invois Asal yang perlu dimuatnaik melalui Sistem Penajaan OKU (SisPo).
+																	ii.	Hanya Invois Asal yang perlu dimuatnaik melalui Sistem Penajaan OKU (SisPO).
 																</span><br><br>
 															</div>
 															<!--end::Item-->
@@ -1026,7 +1044,7 @@
 																			<tbody>
 																				<tr>
 																					<td rowspan="2">
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-6 px-6 mb-4">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #59BA47;">
 																							<!-- begin::Heading -->
 																							<div class="mb-4">
 																								<!-- begin::Title -->
@@ -1037,7 +1055,7 @@
 																						</div>
 																					</td>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #59BA47;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1070,7 +1088,7 @@
 																				</tr>
 																				<tr>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-2 px-6 mb-2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #59BA47;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1103,7 +1121,7 @@
 																				</tr>
 																				<tr>
 																					<td rowspan="2">
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #96b6cd;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-4">
 																								<!-- begin::Title -->
@@ -1114,7 +1132,7 @@
 																						</div>
 																					</td>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1147,7 +1165,7 @@
 																				</tr>
 																				<tr>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #96b6cd;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1366,6 +1384,233 @@
 			</div>
 			<!--end::Maklumat BKOKU Section-->
 
+			<!--begin::Maklumat PPK Section-->
+			<div class="py-10 py-lg-20" id="ppk">
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(255, 255, 255);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::PPK-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100">
+											<!--begin::Card 1-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(241, 241, 241); box-shadow: 0 30px 20px rgba(0, 0, 0, 0.1);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">PROGRAM PENDIDIKAN KHAS (PPK)</span>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5 align-items-start">
+																<label class="mb-2 fw-bold fs-2 text-justify flex-grow-1"><b>Objektif:</b></label>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Program ini bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang melanjutkan pengajian di UA, IPTS, Kolej Komuniti dan Politeknik di bawah seliaan KPT
+																</span><br><br>
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5 align-items-start">
+																<label class="mb-2 fw-bold fs-2 text-justify flex-grow-1"><b>Tatacara Permohonan:</b></label>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	i.	Pemohon perlu membuat permohonan dengan mengemukakan salinan dokumen yang dinyatakan dengan lengkap melalui sistem Penajaan OKU (SisPO).
+																</span><br><br>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	ii.	Hanya Invois Asal yang perlu dimuatnaik melalui Sistem Penajaan OKU (SisPO).
+																</span><br><br>
+															</div>
+															<!--end::Item-->
+
+															<!--begin::Item-->
+															<div class="container">
+																<div class="row">
+																	<!-- Card 1 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_skop_ppk" href="#skop_ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-ppk">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/human-resource.png" alt="Skop" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Skop Pembiayaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>
+																	</div>
+																	<!-- Card 2 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_syarat_ppk" href="#syarat_ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-ppk">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/file.png" alt="Syarat" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Syarat Pembiayaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
+																	<!-- Card 3 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_elemen_ppk" href="#elemen_ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-ppk">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/business-aggrement.png" alt="Elemen" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Elemen Tajaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
+																	<!-- Card 4 -->
+																	<div class="col-md-3 mb-4">
+																		<a id="show_tempoh_ppk" href="#tempoh_ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+																			<div class="card-ppk">
+																				<div class="card-body">
+																					<div class="justify-content-center" >
+																						<img src="assets/media/timetable.png" alt="Tempoh" style="width: 80px; height: auto; margin-top: 20px;">
+																					</div>
+																					<div class="d-flex justify-content-center mb-5">
+																						<div class="fs-5 fs-lg-1 fw-bold text-dark">Tempoh Penajaan</div>
+																					</div>
+																				</div>
+																			</div>
+																		</a>	
+																	</div>
+																</div>
+															</div>
+															<!--end::Item-->
+															<div class="container" style="text-align: left;">
+																<!--begin::Skop PPK-->
+																<div class="flex-column mb-5" id="skop_ppk" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		i. Skop pembiayaan PPK adalah tertumpu kepada Kolej Komuniti dan Politeknik terpilih sahaja dari Sijil Kemahiran Khas.
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		ii. Senarai Institusi dan Nama Program yang Terlibat:
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		<!-- Table Start -->
+																		<table style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+																			<thead>
+																				<tr>
+																					<th style="background-color: #96b6cd;">Bil.</th>
+																					<th style="background-color: #96b6cd;">Institusi</th>
+																					<th style="background-color: #96b6cd;">Nama Program</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr>
+																					<td>1.</td>
+																					<td>Politeknik Ungku Omar</td>
+																					<td>Sijil Khas Pembinaan</td>
+																				</tr>
+																				<tr>
+																					<td>2.</td>
+																					<td>Politeknik Sultan Salahuddin Abdul Aziz Shah</td>
+																					<td>Sijil Khas Penyenggaraan Mekanikal</td>
+																				</tr>
+																				<tr>
+																					<td>3.</td>
+																					<td>Politeknik Kota Kinabalu</td>
+																					<td>Sijil Khas Operasi Katering</td>
+																				</tr>
+																				<tr>
+																					<td>4.</td>
+																					<td>Politeknik Tuanku Syed Sirajuddin</td>
+																					<td>Sijil Khas Operasi Katering</td>
+																				</tr>
+																				<tr>
+																					<td>5.</td>
+																					<td>Politeknik Ibrahim Sultan</td>
+																					<td>
+																						<ul>a. Sijil Khas Operasi Katering</ul>
+																						<ul>b. Sijil Khas Reka Bentuk Fesyen</ul>
+																						<ul>c. Sijil Khas Reka Bentuk Grafik</ul>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td>6.</td>
+																					<td>Kolej Komuniti Selayang</td>
+																					<td>Sijil Asas Kulinari</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																		<!-- Table End -->
+																	</span><br><br>
+																</div>
+																<!--end::Skop PPK-->
+																<!--begin::Syarat PPK-->
+																<div class="flex-column mb-5" id="syarat_ppk" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		Pelajar OKU yang mempunyai kod DD atau DE (Pendengaran sahaja) di Kolej Komuniti dan Politeknik terpilih.
+																	</span><br><br>
+																</div>
+																<!--end::Syarat PPK-->
+																<!--begin::Elemen PPK-->
+																<div class="flex-column mb-5" id="elemen_ppk" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		i. Kadar Bayaran PPK adalah sebanyak :
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		<i class="fa-solid fa-check"></i> RM 4260 / Semester 1 sahaja; dan
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		<i class="fa-solid fa-check"></i> RM 3960 / Semester 2 hingga 4
+																	</span><br><br>
+																</div>
+																<!--end::Elemen PPK-->
+																<!--begin::Tempoh PPK-->
+																<div class="flex-column mb-5" id="tempoh_ppk" style="display:none;">
+																	<br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																		2 Tahun
+																	</span><br><br>
+																</div>
+																<!--end::Tempoh PPK-->
+															</div>
+														</div>
+														<!--end::Features-->
+													</div>
+												</div>
+											</div>
+											<!--end::Card 1-->
+										</div>
+
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::PPK-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Maklumat PPK Section-->
+
 			<!--begin::Hubungi Section-->
 			<div class="mb-n20 mb-lg-n20 z-index-2" id="hubungi">
 				<!--begin::Container-->
@@ -1545,63 +1790,75 @@
 				$('#utama').show();
 				$('#hubungi').show();
 				$('#bkoku').hide();
+				$('#ppk').hide();
 			});
 
 			$('#show-bkoku').click(function(event) {
 				$('#utama').hide();
 				$('#hubungi').hide();
 				$('#bkoku').show();
+				$('#ppk').hide();
+			});
+
+			$('#show-ppk').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').hide();
+				$('#ppk').show();
 			});
 
 			$('#show-hubungi').click(function(event) {
 				$('#utama').show();
 				$('#hubungi').show();
 				$('#bkoku').hide();
+				$('#ppk').hide();
 			});
 		</script>
 
 		<script>
 			$(document).ready(function() {
-				$('.card-bkoku').click(function() {
-					// Remove 'active' class from all cards
-					$('.card-bkoku').removeClass('active');
-					
-					// Add 'active' class to the clicked card
-					$(this).addClass('active');
-				});
-			});
-			// Hide all sections initially
-    		$('#skop_bkoku, #syarat_bkoku, #elemen_bkoku, #tempoh_bkoku').hide();
+				function initializeCardToggle(section) {
+					$(`.card-${section}`).click(function() {
+						// Remove 'active' class from all cards
+						$(`.card-${section}`).removeClass('active');
 
-			$('#show_skop_bkoku').click(function(event) {
-				$('#skop_bkoku').show();
-				$('#syarat_bkoku').hide();
-				$('#elemen_bkoku').hide();
-				$('#tempoh_bkoku').hide();
-			});
+						// Add 'active' class to the clicked card
+						$(this).addClass('active');
+					});
 
-			$('#show_syarat_bkoku').click(function(event) {
-				$('#skop_bkoku').hide();
-				$('#syarat_bkoku').show();
-				$('#elemen_bkoku').hide();
-				$('#tempoh_bkoku').hide();
-			});
+					// Hide all sections initially
+					$(`#skop_${section}, #syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
 
-			$('#show_elemen_bkoku').click(function(event) {
-				$('#skop_bkoku').hide();
-				$('#syarat_bkoku').hide();
-				$('#elemen_bkoku').show();
-				$('#tempoh_bkoku').hide();
+					// Click event handlers for showing and hiding sections
+					$(`#show_skop_${section}`).click(function() {
+						$(`#skop_${section}`).show();
+						$(`#syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+					});
 
-			});
+					$(`#show_syarat_${section}`).click(function() {
+						$(`#skop_${section}`).hide();
+						$(`#syarat_${section}`).show();
+						$(`#elemen_${section}, #tempoh_${section}`).hide();
+					});
 
-			$('#show_tempoh_bkoku').click(function(event) {
-				$('#skop_bkoku').hide();
-				$('#syarat_bkoku').hide();
-				$('#elemen_bkoku').hide();
-				$('#tempoh_bkoku').show();
+					$(`#show_elemen_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}`).hide();
+						$(`#elemen_${section}`).show();
+						$(`#tempoh_${section}`).hide();
+					});
+
+					$(`#show_tempoh_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}, #elemen_${section}`).hide();
+						$(`#tempoh_${section}`).show();
+					});
+				}
+
+				// Initialize for both BKOKU and PPK sections
+				initializeCardToggle('bkoku');
+				initializeCardToggle('ppk');
 			});
 		</script>
+		
 		<!--end::Javascript-->
 	</body>
 </html>
