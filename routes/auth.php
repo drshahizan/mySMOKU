@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/landing', [LandingPageController::class, 'index'])
                 ->name('landing');
+Route::post('sendEmail', [LandingPageController::class, 'sendEmail'])->name('sendEmail');                
 
 Route::middleware('guest')->group(function () {
 
