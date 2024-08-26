@@ -169,6 +169,7 @@
 				text-decoration: none;
 				text-align: center;
 				align-items: center;
+				font-weight: bold;
 			}
 
 			.btn-permohonan:hover {
