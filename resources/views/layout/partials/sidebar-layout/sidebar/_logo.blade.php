@@ -7,10 +7,10 @@
 	} */
 </style>
 <!--begin::Logo-->
-<div class="app-sidebar-logo px-8" id="kt_app_sidebar_logo">
+<div class="app-sidebar-logo px-4" id="kt_app_sidebar_logo">
 	<!--begin::Logo image-->
 	<a href="/">
-		<img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-50px app-sidebar-logo-default" />
+		<img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-70px app-sidebar-logo-default" />
 		<img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-20px app-sidebar-logo-minimize" />
 	</a>
 	
