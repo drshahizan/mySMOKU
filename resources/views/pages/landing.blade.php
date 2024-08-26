@@ -107,10 +107,6 @@
 				padding: 10px; /* Optional: Add padding for spacing */
 			}
 
-			.content-logo {
-				width: 150px;
-			}
-
 			/* Basic styling for the left content */
 			.content-left, .content-right {
 				width: 50%;
@@ -231,11 +227,6 @@
 					height: auto;
 				}
 
-				.content-logo {
-					max-width: 45%;
-					height: auto;
-				}
-
 				.btn-permohonan {
 					font-size: 1rem;
 				}
@@ -265,11 +256,6 @@
 					height: auto;
 				}
 
-				.content-logo {
-					max-width: 45%;
-					height: auto;
-				}
-
 				.btn-permohonan {
 					font-size: 1rem;
 				}
@@ -295,11 +281,6 @@
 				}
 
 				.content-right img {
-					max-width: 45%;
-					height: auto;
-				}
-
-				.content-logo {
 					max-width: 45%;
 					height: auto;
 				}
@@ -526,7 +507,9 @@
 							<!--end::Kementerian-->
 							<!--begin::Logo-->
 								<a href="#laman_utama">
-									<img alt="sispo" src="assets/media/sispo.png" class="content-logo"/>
+									<!--img alt="sispo" src="assets/media/sispo.png" class="content-logo"/-->
+									<img alt="sispo" src="assets/media/sispo.png" class="logo-default h-35px h-lg-60px"/>
+									<img alt="sispo" src="assets/media/sispo.png" class="logo-sticky h-30px h-lg-60px"/>
 								</a>
 							<!--end::Logo-->
 						</div>

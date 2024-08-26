@@ -22,7 +22,7 @@
             <br>
             <br>
             <br>
-            <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-100px"/>
+            <img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-150px h-lg-150px"/>
             <!--end::Logo-->
 
             <!--begin::Subtitle-->
