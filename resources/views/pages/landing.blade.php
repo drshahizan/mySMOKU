@@ -55,9 +55,9 @@
 			.header-background {
 				position: relative;
 				width: 100%;
-				height: 100vh; /* Full viewport height */
+				height: 100vh; 
 				display: flex;
-				justify-content: space-between;
+				/* justify-content: space-between; */
 				align-items: center;
 				overflow: hidden; /* To ensure any overflow is hidden */
 			}
@@ -99,94 +99,100 @@
 				color: #ddd; 
 			}
 
+			.content-jata {
+				position: relative;
+				display: flex;
+				justify-content: space-between; /* Align the left and right content to the edges */
+				align-items: center; /* Vertically centers the content */
+				padding: 10px; /* Optional: Add padding for spacing */
+			}
+
+			.content-logo {
+				width: 150px;
+			}
+
 			/* Basic styling for the left content */
-			.content-left {
-				width: 50%; /* Each content takes up 50% of the container width */
-				padding: 0; /* Add padding for better spacing */
-				box-sizing: border-box; /* Include padding in width */
-				/* background: rgba(134, 188, 222, 0.5);  */
+			.content-left, .content-right {
+				width: 50%;
+				padding: 0;
+				box-sizing: border-box;
+				position: relative;
+				z-index: 5;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				position: relative;
-				z-index: 5; /* Ensure content is above the video but below the header */
 			}
 
-			.content-right {
-				width: 50%; /* Each content takes up 50% of the container width */
-				padding: 1px; /* Add padding for better spacing */
-				box-sizing: border-box; /* Include padding in width */
-				/* background: rgba(134, 188, 222, 0.5);  */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				position: relative;
-				z-index: 5; /* Ensure content is above the video but below the header */
-			}
-
-			/* Optional background color for each side */
 			.content-left {
 				text-align: left;
+				padding-left: 2%; /* Optional: Add padding for more balanced spacing */
 			}
 
 			.content-right {
 				text-align: center;
 			}
 
-			/* Optional styles for better layout and appearance */
+			/* Image container settings */
+			.image-container {
+				position: absolute;
+				top: 60px; /* Adjust this value to move the image higher or lower */
+				left: 0%; /* Adjust horizontal alignment */
+				width: 80%; /* Ensures image container spans appropriate width */
+			}
+
 			.content-left img {
-				max-width: 80%;
+				max-width: 100%; /* Allow image to scale within its container */
 				height: auto;
 			}
 
-			/* Style for the overlay text */
+			/* Overlay text styling */
 			.content-left span {
-				position: absolute; /* Position the span absolutely within the container */
-				top: 40%; /* Center vertically */
-				left: 50%; /* Center horizontally */
-				transform: translate(-50%, -50%); /* Adjust position to center the element */
-				text-align: left; /* Center text */
-				color: #fff; /* Ensure text is visible against background */
+				position: absolute;
+				left: 50%;
+				transform: translate(-30%, -90%);
+				text-align: left;
+				color: #fff;
 				font-family: 'Georgia', sans-serif;
 				font-size: 3.0rem;
+				font-weight: bold;
 			}
 
 			/* Button styling */
 			.btn-permohonan {
 				background-color: #c60000;
 				border-color: #0c4277;
-				font-size: 1rem; /* Reduce button font size */
-				padding: 8px 16px; /* Adjust padding for better button appearance */
-				margin-top: 10px; /* Add margin to separate from other elements */
-				display: inline-block; /* Ensure it behaves properly in different layouts */
+				font-size: 2.0rem;
+				padding: 8px 16px;
+				margin-top: 10px;
+				display: inline-block;
 				color: #f2f2f2;
 				text-decoration: none;
 				text-align: center;
 				align-items: center;
 			}
 
-			/* Hover effect for button */
 			.btn-permohonan:hover {
 				background-color: #ffb004;
 				border-color: #10355a;
 			}
 
+			/* Image styling for right content */
 			.content-right img {
 				max-width: 35%;
 				height: auto;
-
 			}
 
+			/* Styling for right content heading */
 			.content-right h4 .id-color {
-				color: #f9b200;
-				font-size: 5.0rem;
+				color: #d8d8d8;
+				font-size: 7rem;
 				font-family: 'Brush Script MT', cursive;
 			}
 
 			.content-right h1 {
-				margin-bottom: 20%; /* Adjust this value as needed */
-				display: block; /* Allows margin-bottom to work */
+				/* margin-bottom: 20%; */
 				font-family: 'Georgia', sans-serif;
+				display: block;
 			}
 
 			.text-transition {
@@ -199,7 +205,6 @@
 				transform: scale(1.1);
 			}
 
-			
 			/* Responsive styles */
 			@media (max-width: 1200px) {
 				.content-left, .content-right {
@@ -209,7 +214,7 @@
 				}
 
 				.content-left span {
-					font-size: 1.5rem; /* Adjust font size for smaller screens */
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
 				}
 
 				.content-right h4 span {
@@ -223,7 +228,15 @@
 				.content-right img {
 					max-width: 45%;
 					height: auto;
+				}
 
+				.content-logo {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
 				}
 			}
 
@@ -235,7 +248,7 @@
 				}
 
 				.content-left span {
-					font-size: 1.5rem; /* Adjust font size for smaller screens */
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
 				}
 
 				.content-right h4 span {
@@ -249,7 +262,15 @@
 				.content-right img {
 					max-width: 45%;
 					height: auto;
+				}
 
+				.content-logo {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
 				}
 			}
 
@@ -261,7 +282,7 @@
 				}
 
 				.content-left span {
-					font-size: 1.5rem; /* Adjust font size for smaller screens */
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
 				}
 
 				.content-right h4 span {
@@ -275,9 +296,18 @@
 				.content-right img {
 					max-width: 45%;
 					height: auto;
+				}
 
+				.content-logo {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
 				}
 			}
+
 
 			.content-menu {
 				position: absolute;
@@ -288,21 +318,9 @@
 				font-family: 'Georgia', sans-serif;
 			}
 
-			.content-jata {
-				position: absolute;
-				left: 1%;
-				top: 50%;
-				transform: translate(0, -50%); /* Adjust only vertical translation */
-				width: auto; /* Adjust width as needed */
-			}
+			
 
-			.content-logo {
-				position: absolute;
-				left: 30%;
-				top: 50%;
-				transform: translate(0, -50%); /* Adjust only vertical translation */
-				width: auto; /* Adjust width as needed */
-			}
+
 		</style>
 		<style>
 			.card-container {
@@ -497,14 +515,21 @@
 					<!--begin::Header-->
 					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 						<!--begin::Logo-->
-						<!--begin::Kementerian-->
+						
 						<div class="content-jata">
-							<a href="#laman_utama">
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
+							<!--begin::Kementerian-->
+								<a href="#laman_utama">
+									<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
+									<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
+								</a>
+							<!--end::Kementerian-->
+							<!--begin::Logo-->
+								<a href="#laman_utama">
+									<img alt="sispo" src="assets/media/sispo.png" class="content-logo"/>
+								</a>
+							<!--end::Logo-->
 						</div>
-						<!--end::Kementerian-->
+						
 						
 						<!--begin::Container-->
 						<div class="content-menu">
@@ -571,11 +596,13 @@
 					<div class="content-left">
 						<div>
 							<!-- Image -->
-							<img src="assets/media/Picture3.png" alt="KPT Malaysia">
+							<div class="image-container">
+								<img src="assets/media/tangan.png" alt="KPT Malaysia">
+							</div>
 							<!-- Text overlay -->
 							<span>
 								Klik di sini untuk permohonan<br>
-								<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan" style="font-size: 2rem; color: #f2f2f2; margin-top: 10px; display: inline-block; align-items: center; padding: 8px 16px;">
+								<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan" >
 									PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;">
 								</a>
 							</span>
@@ -586,17 +613,16 @@
 					<!--begin::Right content-->
 					<div class="content-right">
 						<div>
-							<br><br>
-							<img src="assets/media/sispo.png" alt="SisPO"><br>
+							<!--img src="assets/media/sispo.png" alt="SisPO"-->
 							<h4 class="text-transition"><span class="id-color">Selamat Datang ke</span></h4>
-							<h1 class="text-transition" style="font-size: 3.5rem;"><span style="text-transform:uppercase">Sistem Penajaan OKU </span><span>(SisPO)</span></h1>
+							<h1 class="text-transition" style="font-size: 4.5rem;"><span style="text-transform:uppercase">Sistem Penajaan OKU </span><span>(SisPO)</span></h1>
 						</div>
 					</div>
 					<!--end::Right content-->
 
 					<!--begin::Hebahan content-->
 					<div class="box">
-						<div class="left">HEBAHAN&nbsp;<img src="assets/media/megaphone.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;"></div>
+						<div class="left" style="color:white;">HEBAHAN&nbsp;<img src="assets/media/megaphone.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;"></div>
 						<!-- div class="moving-icon">PENTING</div-->
 						<div class="middle">
         					<span>{!! $catatan  ?? 'No notes available' !!}</span>

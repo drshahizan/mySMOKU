@@ -47416,7 +47416,7 @@ a:hover {
 .landing-header {
   display: flex;
   align-items: center;
-  height: 100px;
+  height: 70px;
 }
 .landing-header .logo-default {
   display: block;
