@@ -45595,30 +45595,22 @@ label.rating-label:hover ~ .rating-label > i, label.rating-label:hover ~ .rating
 /* Styles for small screens (e.g., mobile devices) */
 @media (max-width: 600px) {
   .announcement-box {
-      position: absolute;
-      top: 1px; /* Position it near the top */
-      left: 5%;
-      right: 5%;
-      width: auto; /* Use most of the screen width */
-      padding: 10px;
-      font-size: 10px !important; /* Adjust font size for better readability */
-      z-index: 10; /* Ensure it stays on top */
-      background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
+    width: auto; /* Make the box take up most of the screen width */
+    height: auto; /* Adjust height as needed */
+    left: 5%; /* Center the box horizontally */
+    top: 1%; /* Adjust vertical positioning */
+    padding: 1px; /* Reduce padding for smaller screens */
   }
 }
 
 /* Styles for large screens (e.g., desktops) */
 @media (min-width: 1200px) {
   .announcement-box {
-    position: absolute;
-    top: 1px; /* Position it near the top */
-    left: 5%;
-    right: 5%;
-    width: auto; /* Use most of the screen width */
-    padding: 10px;
-    font-size: 10px !important; /* Adjust font size for better readability */
-    z-index: 10; /* Ensure it stays on top */
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
+    width: auto; /* Increase the width for larger screens */
+    height: auto; /* Adjust height as needed */
+    left: 20px; /* Adjust horizontal positioning */
+    top: 15%; /* Adjust vertical positioning */
+    padding: 30px; /* Increase padding for larger screens */
   }
 }
 
