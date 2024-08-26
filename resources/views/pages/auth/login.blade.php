@@ -1,6 +1,6 @@
 <x-auth-layout>
     @section('announcement')
-        <h2 style="font-size: 30px; color:rgb(0, 46, 110)">Hebahan</h2>
+        <h2 style="font-size: 25px; color:rgb(0, 46, 110)">Hebahan</h2>
         <p>{!! $catatan !!}</p> 
     @endsection
 
@@ -21,12 +21,11 @@
             <br>
             <br>
             <br>
-            <br>
-            <img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-150px h-lg-150px"/>
+            <img alt="Logo" src="{{ image('logos/sispo.png') }}" class="h-100px h-lg-100px"/>
             <!--end::Logo-->
 
             <!--begin::Subtitle-->
-            <div class="text-gray-500 fw-semibold fs-4">
+            <div class="text-gray-500 fw-semibold fs-6">
                 Log Masuk
             </div>
             <!--end::Subtitle--->

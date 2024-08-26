@@ -11,7 +11,7 @@
                 <!--begin::Form-->
                 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
                     <!--begin::Wrapper-->
-                    <div class="w-lg-600px">
+                    <div class="w-lg-500px">
                         <!--begin::Page-->
                         {{ $slot }}
                         <!--end::Page-->
@@ -44,15 +44,15 @@
     <style>
         .announcement-box {
             position: relative;
-            top: 75%;
+            top: 65%;
             left: 20px;
             width: 95%;
             height: auto;
-            background-color: rgba(255, 255, 255, 0.826); /* Background color with 80% opacity (adjust as needed) */
-            padding: 20px; /* Padding around the content inside the box */
-            border-radius: 10px; /* Optional: Rounded corners for the box */
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* Optional: Box shadow for a subtle depth effect */
-            font-size: 25px; /* Adjust the font size as needed */
+            background-color: rgba(255, 255, 255, 0.826); /* Semi-transparent white */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
         }
     </style>
     

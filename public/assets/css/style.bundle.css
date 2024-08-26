@@ -45595,22 +45595,30 @@ label.rating-label:hover ~ .rating-label > i, label.rating-label:hover ~ .rating
 /* Styles for small screens (e.g., mobile devices) */
 @media (max-width: 600px) {
   .announcement-box {
-    width: 90%; /* Make the box take up most of the screen width */
-    height: auto; /* Adjust height as needed */
-    left: 5%; /* Center the box horizontally */
-    top: 5%; /* Adjust vertical positioning */
-    padding: 10px; /* Reduce padding for smaller screens */
+      position: absolute;
+      top: 1px; /* Position it near the top */
+      left: 5%;
+      right: 5%;
+      width: auto; /* Use most of the screen width */
+      padding: 10px;
+      font-size: 10px !important; /* Adjust font size for better readability */
+      z-index: 10; /* Ensure it stays on top */
+      background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
   }
 }
 
 /* Styles for large screens (e.g., desktops) */
 @media (min-width: 1200px) {
   .announcement-box {
-    width: 600px; /* Increase the width for larger screens */
-    height: 150px; /* Adjust height as needed */
-    left: 20px; /* Adjust horizontal positioning */
-    top: 15%; /* Adjust vertical positioning */
-    padding: 30px; /* Increase padding for larger screens */
+    position: absolute;
+    top: 1px; /* Position it near the top */
+    left: 5%;
+    right: 5%;
+    width: auto; /* Use most of the screen width */
+    padding: 10px;
+    font-size: 10px !important; /* Adjust font size for better readability */
+    z-index: 10; /* Ensure it stays on top */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
   }
 }
 
