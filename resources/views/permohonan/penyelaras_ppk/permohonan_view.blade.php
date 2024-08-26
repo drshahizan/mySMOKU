@@ -421,7 +421,7 @@
 							</div>
 						</div>
 						<!--end::Input group-->
-						<div class="row mb-10">
+						{{-- <div class="row mb-10">
 							<div class="col-md-7 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen (Jika ada)</label>
@@ -447,15 +447,12 @@
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="dunn" name="dunn" value="{{$butiranPelajar->dun}}" />
 									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
-										{{-- @foreach ($dun as $dun)	
-										<option value="{{$dun->id}}" {{$butiranPelajar->dun == $dun->id ? 'selected' : ''}}>{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
-										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-						</div>
+						</div> --}}
 							<!--begin::Alamat Surat-->
 							<div class="fv-row mb-10">
 								<!--end::Label-->

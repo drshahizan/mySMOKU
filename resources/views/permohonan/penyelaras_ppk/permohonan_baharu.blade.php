@@ -521,7 +521,7 @@
 								<!--end::Input wrapper-->
 							</div>
 						</div>
-						<div class="row mb-10">
+						{{-- <div class="row mb-10">
 							<div class="col-md-7 fv-row">
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Parlimen (Jika ada)</label>
@@ -556,7 +556,7 @@
 								</div>
 								<!--end::Input wrapper-->
 							</div>
-						</div>
+						</div> --}}
 						<!--end::Input group-->
 						@php
 						if (!empty($smoku->alamat_surat_menyurat)) {
