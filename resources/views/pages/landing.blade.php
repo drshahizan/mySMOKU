@@ -646,9 +646,12 @@
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+															<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
 																<span class="fw-bold text-light fs-2 mb-2">LATAR BELAKANG</span>
 															</div>
+															<br>
+															<br>
+															<br>
 															<!--end::Item-->
 															<!--begin::Item-->
 															<div class="d-flex flex-stack mb-5">
@@ -659,8 +662,8 @@
 																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
 																	Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
 																</span>
-	
 															</div>
+															<br>
 															<!--end::Item-->
 															<!--begin::Item-->
 															<div class="d-flex flex-stack mb-5">
@@ -687,12 +690,12 @@
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+															<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
 																<span class="fw-bold text-light fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span><br>
 																<span class="fw-bold text-light fs-4">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
 															</div>
 															<!--end::Item-->
-															<br><br>
+															<br><br><br>
 															<!--begin::Item-->
 															<div class="d-flex flex-stack mb-5">
 																<form class="w-100" style="text-align: left;"  method="POST" action="{{ route('sendEmail') }}">
@@ -790,7 +793,7 @@
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+															<div class="d-flex flex-column mb-5" style="background-color: #EF402D; padding: 15px; border-radius: 5px;">
 																<span class="fw-bold text-light fs-2 mb-2">BANTUAN KEWANGAN ORANG KURANG UPAYA (OKU)</span>
 															</div>
 															<!--end::Item-->
@@ -1416,7 +1419,7 @@
 														<!--begin::Features-->
 														<div class="w-100 mb-10">
 															<!--begin::Item-->
-															<div class="d-flex flex-column mb-5" style="background-color: #005a9a; padding: 15px; border-radius: 5px;">
+															<div class="d-flex flex-column mb-5" style="background-color: #EF402D; padding: 15px; border-radius: 5px;">
 																<span class="fw-bold text-light fs-2 mb-2">PROGRAM PENDIDIKAN KHAS (PPK)</span>
 															</div>
 															<!--end::Item-->
