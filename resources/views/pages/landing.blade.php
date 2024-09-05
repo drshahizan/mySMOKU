@@ -1641,7 +1641,27 @@
 					<!--begin::Row-->
 					<div class="row g-lg-12 mb-20 mb-lg-20 justify-content-between">
 						<!--begin::Col-->
-						<div class="col-lg-4">
+						<div class="col-lg-3">
+							<!--begin::Alamat-->
+							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+								<!--begin::Wrapper-->
+								<div class="mb-7">
+									<!--begin::Alamat-->
+									<!--begin::Block-->
+									<div>
+										<!--begin::Text-->
+										<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.721301282511!2d101.66520007654144!3d2.8964460546508257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb7a1f5e8db05%3A0xd07cf0be45f8944c!2sMinistry%20of%20Higher%20Education!5e0!3m2!1sen!2smy!4v1725518423614!5m2!1sen!2smy" width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>										<!--end::Text-->
+									</div>
+									<!--end::Block-->
+									<!--end::Alamat-->
+								</div>
+								<!--end::Wrapper-->
+							</div>
+							<!--end::Alamat-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-lg-3">
 							<!--begin::Alamat-->
 							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
 								<!--begin::Wrapper-->
@@ -1665,7 +1685,7 @@
 						</div>
 						<!--end::Col-->
 						<!--begin::Col-->
-						<div class="col-lg-5">
+						<div class="col-lg-3">
 							<!--begin::Hubungi-->
 							<div class="d-flex flex-column justify-content-between h-lg-200 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
 								<!--begin::Wrapper-->
@@ -1674,8 +1694,8 @@
 									<div class="fs-4 fw-bold text-dark mb-3">Pegawai Untuk Dihubungi :</div>
 									<!--end::Title-->
 									<!--begin::Telefon-->
-									<div class="fw-semibold fs-7">Cik Nur Dayana binti Rozaini : 03-8870 6373</div>
-									<div class="fw-semibold fs-7">Cik Nurul Atiqah Noor Azmir binti Abdul Muhaymin : 03-8870 6347</div>
+									<div class="fw-semibold fs-7">Puan Rohaiza binti Mokhtar : 03-8870 6373</div>
+									<div class="fw-semibold fs-7">Cik Nurin Aina binti Yacob : 03-8870 6347</div>
 									
 									<!--end::Telefon-->
 									<br />
