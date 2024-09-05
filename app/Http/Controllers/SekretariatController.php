@@ -1977,7 +1977,57 @@ class SekretariatController extends Controller
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
         
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
+        // Extract ID values from the collections
+        $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
+        $idsPOLI = $institusiPengajianPOLI->pluck('id_institusi')->toArray();
+        $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
+        $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
+        $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+
+        // Count the number of applications for each institution type with smoku_akademik join
+        $countUA = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsUA)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();               
+
+        $countPOLI = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsPOLI)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
+
+        $countKK = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsKK)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
+
+        $countIPTS = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsIPTS)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
+
+        $countPPK = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsPPK)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
+
+        // Debug output
+        // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
+
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
     }
 
     public function keputusanPeperiksaan($id)
