@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TarikhIklan;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -19,10 +21,20 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         addJavascriptFile('assets/js/custom/authentication/sign-in/general.js');
-        $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
-        $catatan = $iklan->catatan ?? "";
-
-        return view('pages.auth.login', compact('catatan'));
+        try {
+            // Try to retrieve the latest 'catatan'
+            $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+            $catatan = $iklan->catatan ?? "";
+    
+            return view('pages.auth.login', compact('catatan'));
+        } catch (QueryException $e) {
+            // Log the error message or handle the exception
+            Log::error("Database connection failed: " . $e->getMessage());
+    
+            // Optionally, display a custom error message to the user
+            return view('pages.auth.login', ['catatan' => 'Sambungan ke pangkalan data gagal. Sila cuba lagi kemudian.']);
+        }
+        
     }
 
     /**

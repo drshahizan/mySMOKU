@@ -22,7 +22,9 @@ use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PelajarController;
 use App\Models\TarikhIklan;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -57,11 +59,19 @@ Route::get('/', function () {
     // Check if a flash message indicating the session has been flushed exists
     if (Session::has('session_flushed')) {
         Session::forget('session_flushed');
-         // Retrieve the latest 'catatan'
-         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
-         $catatan = $iklan->catatan ?? "";
- 
-         return view('pages.landing', ['catatan' => $catatan]);
+        try {
+            // Try to retrieve the latest 'catatan'
+            $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+            $catatan = $iklan->catatan ?? "";
+    
+            return view('pages.landing', ['catatan' => $catatan]);
+        } catch (QueryException $e) {
+            // Log the error message or handle the exception
+            Log::error("Database connection failed: " . $e->getMessage());
+    
+            // Optionally, display a custom error message to the user
+            return view('pages.landing', ['catatan' => 'Sambungan ke pangkalan data gagal. Sila cuba lagi kemudian.']);
+        }
     }
 
     // Flush the session
