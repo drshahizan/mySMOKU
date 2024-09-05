@@ -4,36 +4,34 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
+        
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9">
-
-         <!-- Bootstrap --> 
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
-        {{-- JAVASCRIPT --}}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-tqwTpH3BFMiws2EGV+BLfCS8aefTkXvqHcbWRsPfpLW+pUSOk5tG2ABWtMdP8BOs" crossorigin="anonymous">
+        
+        <!-- JAVASCRIPT -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
-
+    
         <style>
-            .nav{
-                margin-left: 20px!important;
+            .nav {
+                margin-left: 20px !important;
             }
-
             .form-select {
                 margin-left: 20px !important; 
             }
         </style>
     </head>
+    
+    
 
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -73,19 +71,19 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                    <button class="nav-link active" id="bkokuUA-tab" data-bs-toggle="tab" data-bs-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
+                                    <button class="nav-link" id="bkokuPOLI-tab" data-bs-toggle="tab" data-bs-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
+                                    <button class="nav-link" id="bkokuKK-tab" data-bs-toggle="tab" data-bs-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                                    <button class="nav-link" id="bkokuIPTS-tab" data-bs-toggle="tab" data-bs-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
+                                    <button class="nav-link" id="ppk-tab" data-bs-toggle="tab" data-bs-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
                                 </li>
                             </ul>
 
@@ -285,48 +283,47 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU2">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKUUA">
                                                 Sahkan
                                             </button>
-                                        
-                                            {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU2" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU2" aria-hidden="true">
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="pengesahanModalBKOKUUA" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKUUA" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Rekod Keputusan Permohonan</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No. Mesyuarat:</label>
+                                                                <label for="noMesyuarat" class="col-form-label">No. Mesyuarat:</label>
                                                                 <input type="text" class="form-control" id="noMesyuarat" name="noMesyuarat">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Tarikh Mesyuarat:</label>
+                                                                <label for="tarikhMesyuarat" class="col-form-label">Tarikh Mesyuarat:</label>
                                                                 <input type="date" class="form-control" id="tarikhMesyuarat" name="tarikhMesyuarat">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Keputusan Permohonan:</label>
+                                                                <label for="keputusan" class="col-form-label">Keputusan Permohonan:</label>
                                                                 <select onchange="select1()" class="form-control" id="keputusan" name="keputusan">
                                                                     <option value="">Pilih Keputusan</option>
-                                                                    <option value="Lulus" {{Request::get('status') == 'Lulus' ? 'selected':'' }} >Lulus</option>
-                                                                    <option value="Tidak Lulus" {{Request::get('status') == 'Tidak Lulus' ? 'selected':'' }} >Tidak Lulus</option>
+                                                                    <option value="Lulus" {{ Request::get('status') == 'Lulus' ? 'selected' : '' }}>Lulus</option>
+                                                                    <option value="Tidak Lulus" {{ Request::get('status') == 'Tidak Lulus' ? 'selected' : '' }}>Tidak Lulus</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Catatan:</label>
+                                                                <label for="catatan" class="col-form-label">Catatan:</label>
                                                                 <textarea class="form-control" id="catatan" name="catatan"></textarea>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                            </div>
                                                         </div>
-                                                    </div> 
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <br><br>                                       
                                         </form>
                                     </div>
@@ -438,12 +435,12 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKUPOLI">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKUPOLI" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKUPOLI" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -591,12 +588,12 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKUKK">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKUKK" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKUKK" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -744,12 +741,12 @@
                                             </table>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKU1">
+                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#pengesahanModalBKOKUIPTS">
                                                 Sahkan
                                             </button>
                                         
                                             {{-- Modal --}}
-                                            <div class="modal fade" id="pengesahanModalBKOKU1" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKU1" aria-hidden="true">
+                                            <div class="modal fade" id="pengesahanModalBKOKUIPTS" tabindex="-1" aria-labelledby="pengesahanModalLabelBKOKUIPTS" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -786,6 +783,7 @@
                                                     </div> 
                                                 </div>
                                             </div> 
+                                            
                                             <br><br>                                       
                                         </form>
                                     </div>
