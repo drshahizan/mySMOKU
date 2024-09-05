@@ -63,19 +63,44 @@
             {{-- Javascript Nav Bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                  <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
+                    BKOKU UA
+                    @if ($countUA > 0)
+                      <span class="badge badge-danger">{{ $countUA }}</span>
+                    @endif
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
+                    <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">
+                      BKOKU POLI
+                      @if ($countPOLI > 0)
+                        <span class="badge badge-danger">{{ $countPOLI }}</span>
+                      @endif
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">BKOKU KK</button>
+                    <button class="nav-link" id="bkokuKK-tab" data-toggle="tab" data-target="#bkokuKK" type="button" role="tab" aria-controls="bkokuKK" aria-selected="true">
+                      BKOKU KK
+                      @if ($countKK > 0)
+                        <span class="badge badge-danger">{{ $countKK }}</span>
+                      @endif
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">BKOKU IPTS</button>
+                  <button class="nav-link" id="bkokuIPTS-tab" data-toggle="tab" data-target="#bkokuIPTS" type="button" role="tab" aria-controls="bkokuIPTS" aria-selected="true">
+                    BKOKU IPTS
+                    @if ($countIPTS > 0)
+                      <span class="badge badge-danger">{{ $countIPTS }}</span>
+                    @endif
+                  </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">PPK</button>
+                    <button class="nav-link" id="ppk-tab" data-toggle="tab" data-target="#ppk" type="button" role="tab" aria-controls="ppk" aria-selected="false">
+                      PPK
+                      @if ($countPPK > 0)
+                        <span class="badge badge-danger">{{ $countPPK }}</span>
+                      @endif
+                    </button>
                 </li>
             </ul>
 
