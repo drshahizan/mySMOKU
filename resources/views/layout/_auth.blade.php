@@ -68,11 +68,11 @@
         document.addEventListener('DOMContentLoaded', function() {
           const slideshow = document.getElementById('slideshow');
           const images = [
-            '{{ image('misc/oku1.jpg') }}',
+            '{{ image('misc/oku1.JPG') }}',
             '{{ image('misc/oku2.jpeg') }}',
-            '{{ image('misc/oku3.jpg') }}',
-            '{{ image('misc/oku4.jpg') }}',
-            '{{ image('misc/oku5.jpg') }}',
+            '{{ image('misc/oku3.JPG') }}',
+            '{{ image('misc/oku4.JPG') }}',
+            '{{ image('misc/oku5.JPG') }}',
             '{{ image('misc/oku6.jpeg') }}'
           ];
           let currentIndex = 0;
