@@ -23,7 +23,7 @@
             <!--end::Body-->
 
             <!--begin::Aside-->
-            <div id="slideshow" class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku2.JPEG') }})">       
+            <div id="slideshow" class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku2.jpeg') }})">       
                 {{-- <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url({{ image('misc/oku2.JPEG') }})"> --}}
                 {{-- <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: linear-gradient(rgba(207, 13, 59, 0), rgba(76, 114, 148, 0.75) 100.57%), url({{ image('misc/oku1.jpg') }})"> --}}
     
@@ -68,12 +68,12 @@
         document.addEventListener('DOMContentLoaded', function() {
           const slideshow = document.getElementById('slideshow');
           const images = [
-            '{{ image('misc/oku1.JPG') }}',
-            '{{ image('misc/oku2.JPEG') }}',
-            '{{ image('misc/oku3.JPG') }}',
-            '{{ image('misc/oku4.JPG') }}',
-            '{{ image('misc/oku5.JPG') }}',
-            '{{ image('misc/oku6.JPEG') }}'
+            '{{ image('misc/oku1.jpg') }}',
+            '{{ image('misc/oku2.jpeg') }}',
+            '{{ image('misc/oku3.jpg') }}',
+            '{{ image('misc/oku4.jpg') }}',
+            '{{ image('misc/oku5.jpg') }}',
+            '{{ image('misc/oku6.jpeg') }}'
           ];
           let currentIndex = 0;
           const intervalTime = 3000; // Change image every 3 seconds
