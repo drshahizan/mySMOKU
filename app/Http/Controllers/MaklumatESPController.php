@@ -34,7 +34,57 @@ class MaklumatESPController extends Controller
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
-        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));     
+        // Extract ID values from the collections
+        $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
+        $idsPOLI = $institusiPengajianPOLI->pluck('id_institusi')->toArray();
+        $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
+        $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
+        $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+
+        // Count the number of applications for each institution type with smoku_akademik join
+        $countUA = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsUA)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();               
+
+        $countPOLI = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsPOLI)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();
+
+        $countKK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsKK)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();
+
+        $countIPTS = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'BKOKU')
+                            ->whereIn('smoku_akademik.id_institusi', $idsIPTS)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();
+
+        $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsPPK)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();
+
+        // Debug output
+        // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
+
+        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));     
         
     }
 
