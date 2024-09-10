@@ -22,138 +22,6 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<style>
-			.background-container {
-				position: relative;
-				width: 100%;
-				height: 100%; /* Full viewport height */
-				overflow: hidden;
-			}
-
-			.header-background {
-				position: relative;
-				width: 100%;
-				height: 100vh; 
-				display: flex;
-				/* justify-content: space-between; */
-				align-items: center;
-				overflow: hidden; /* To ensure any overflow is hidden */
-			}
-
-			/* Background video styling */
-			.background-video {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transform: translate(-50%, -50%);
-				z-index: 0; /* Background video behind everything */
-			}
-
-			.overlay {
-				position: absolute; /* Ensure it's positioned relative to its closest positioned ancestor */
-				/* top: 1%; */
-				left: 0;
-				width: 100%;
-				z-index: 1; /* Ensure content is above the video */
-				/* background: rgba(255, 255, 255, 0.8);  */
-				padding: 100px; /* Add padding if needed */
-
-			}
-
-			
-
-			.bg-card-container {
-				position: relative;
-				overflow: hidden;
-				height: 100%; /* Adjust height as needed */
-			}
-
-			.bg-card-wrapper {
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-				animation: verticalScroll 15s linear infinite;
-			}
-
-			.bg-card {
-				width: 100%;
-				background-color: #bac0d457; /* Background color for each card */
-				padding: 10px;
-				margin-bottom: 10px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-				font-family: 'Inter', sans-serif;
-				font-size: 1.5rem;
-				font-weight: 400;
-				color: white;
-				overflow: hidden; /* Ensure content outside the card is hidden */
-			}
-
-			.bg-card-st {
-				width: 100%;
-				background-color: #bac0d457; /* Background color for each card */
-				padding: 10px;
-				margin-bottom: 10px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-				font-family: 'Inter', sans-serif;
-				font-size: 1.5rem;
-				font-weight: 400;
-				color: white;
-				overflow: hidden; /* Ensure content outside the card is hidden */
-			}
-
-			/* Keyframes for vertical scrolling */
-			@keyframes verticalScroll {
-				0% {
-					transform: translateY(0%);
-				}
-				100% {
-					transform: translateY(-100%);
-				}
-			}
-
-			.text-transition {
-				transition: all 0.5s linear;
-				color: #FFFFFF;
-			}
-
-			.text-transition:hover {
-				color: #0570ea;
-				transform: scale(1.1);
-			}
-
-			.id-color {
-				/* Style for the id-color span if needed */
-			}
-
-			/* Button styling */
-			.btn-permohonan {
-				background-color: #c60000;
-				border-color: #0c4277;
-				font-size: 1.5rem;
-				width: 100%;
-				padding: 8px 16px;
-				margin-top: 10px;
-				display: inline-block;
-				color: #f2f2f2;
-				text-decoration: none;
-				text-align: center;
-				align-items: center;
-				font-weight: bold;
-			}
-
-			.btn-permohonan:hover {
-				background-color: #ffb004;
-				border-color: #10355a;
-			}
-			.card-container {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
-		</style>
-		<style>
 			/* CSS for table */
 			table {
 				width: 100%;
@@ -182,7 +50,395 @@
 			.table-style-2 th {
 				background-color: transparent;
 			}
+
+
+			.header-background {
+				position: relative;
+				width: 100%;
+				height: 100vh; 
+				display: flex;
+				/* justify-content: space-between; */
+				align-items: center;
+				overflow: hidden; /* To ensure any overflow is hidden */
+			}
+
+			/* Background video styling */
+			.background-video {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transform: translate(-50%, -50%);
+				z-index: 0; /* Background video behind everything */
+			}
+
+											
+			.landing-header {
+				background-color: white; 
+
+				position: absolute;
+				top: 0;
+				width: 100%;
+				z-index: 10; /* Ensure the header stays above other elements */
+			}
+
+			.landing-header .container {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.menu-link {
+				/* color: rgb(106, 190, 232); */
+				color: rgb(0, 0, 0);
+			}
+
+			.menu-link:hover {
+				color: #ddd; 
+			}
+
+			.content-jata {
+				position: relative;
+				display: flex;
+				justify-content: space-between; /* Align the left and right content to the edges */
+				align-items: center; /* Vertically centers the content */
+				padding: 10px; /* Optional: Add padding for spacing */
+			}
+
+			/* Basic styling for the left content */
+			.content-left, .content-right {
+				width: 50%;
+				padding: 0;
+				box-sizing: border-box;
+				position: relative;
+				z-index: 5;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.content-left {
+				text-align: left;
+				padding-left: 2%; /* Optional: Add padding for more balanced spacing */
+			}
+
+			.content-right {
+				text-align: center;
+			}
+
+			/* Image container settings */
+			.image-container {
+				position: absolute;
+				top: 60px; /* Adjust this value to move the image higher or lower */
+				left: 0%; /* Adjust horizontal alignment */
+				width: 80%; /* Ensures image container spans appropriate width */
+			}
+
+			.content-left img {
+				max-width: 100%; /* Allow image to scale within its container */
+				height: auto;
+			}
+
+			/* Overlay text styling */
+			.content-left span {
+				position: absolute;
+				left: 50%;
+				transform: translate(-30%, -90%);
+				text-align: left;
+				color: #fff;
+				font-family: 'Verdana', sans-serif;
+				font-size: 3.0rem;
+				font-weight: bold;
+			}
+
+			/* Button styling */
+			.btn-permohonan {
+				background-color: #c60000;
+				border-color: #0c4277;
+				font-size: 2.0rem;
+				padding: 8px 16px;
+				margin-top: 10px;
+				display: inline-block;
+				color: #f2f2f2;
+				text-decoration: none;
+				text-align: center;
+				align-items: center;
+				font-weight: bold;
+			}
+
+			.btn-permohonan:hover {
+				background-color: #ffb004;
+				border-color: #10355a;
+			}
+
+			/* Image styling for right content */
+			.content-right img {
+				max-width: 35%;
+				height: auto;
+			}
+
+			/* Styling for right content heading */
+			.content-right h4 .id-color {
+				color: #d8d8d8;
+				font-size: 7rem;
+				font-family: 'Brush Script MT', cursive;
+			}
+
+			.content-right h1 {
+				/* margin-bottom: 20%; */
+				font-family: 'Georgia', sans-serif;
+				display: block;
+			}
+
+			.text-transition {
+				transition: all 0.5s linear;
+				color: #FFFFFF;
+			}
+
+			.text-transition:hover {
+				color: #0570ea;
+				transform: scale(1.1);
+			}
+
+			/* Responsive styles */
+			@media (max-width: 1200px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
+				}
+			}
+
+			@media (max-width: 800px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
+				}
+			}
+
+			@media (max-width: 500px) {
+				.content-left, .content-right {
+					width: 100%; /* Each content takes up 100% of the container width */
+					flex-direction: column; /* Stack content vertically */
+					text-align: center; /* Center-align text for better readability on small screens */
+				}
+
+				.content-left span {
+					font-size: 1.5rem !important; /* Adjust font size for smaller screens */
+				}
+
+				.content-right h4 span {
+					font-size: 2.5rem !important;
+				}
+
+				.content-right h1 span {
+					font-size: 2.0rem !important; /* Adjust font size for headings */
+				}
+
+				.content-right img {
+					max-width: 45%;
+					height: auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem;
+				}
+			}
+
+
+			.content-menu {
+				position: absolute;
+				right: 1%;
+				top: 50%;
+				transform: translate(0, -50%); /* Adjust only vertical translation */
+				width: auto; /* Adjust width as needed */
+				font-family: 'Georgia', sans-serif;
+			}
+
 			
+
+
+		</style>
+		<style>
+			.card-container {
+				display: flex;
+				gap: 20px;
+				width: 100%;
+				overflow-x: auto;
+				/* padding: 10px; */
+			}
+
+			.card {
+				position: relative;
+				width: 100%;
+				height: 200px;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s;
+			}
+
+			.card img {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+
+			.card-text {
+				position: absolute;
+				bottom: 35px;
+				left: 20px;
+				right: 20px;
+				color: white;
+				font-size: 1rem;
+				font-weight: bold;
+				text-align: center;
+			}
+
+			.card:hover {
+				transform: translateY(-10px);
+			}
+
+			.box {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: rgba(255, 255, 255, 0.8); /* Optional background for readability */
+				padding: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				text-align: center;
+				font-size: 2.5rem;
+			}
+
+			.box .left {
+				background-color: #e91e63;
+				padding: 10px 20px; /* Adjust padding for better responsiveness */
+				font-weight: bold;
+			}
+
+			.middle {
+				flex: 1;
+				text-align: left;
+			}
+
+			.middle span {
+				font-size: 2.0rem; /* Default size */
+			}
+
+			/* Responsive styles */
+			@media (max-width: 1200px) {
+				.box {
+					width: 100%;
+					padding: 8px; /* Reduce padding for medium screens */
+				}
+
+				.box .left {
+					padding: 8px 16px;
+				}
+
+				.middle span {
+					font-size: 1.2rem; /* Size for medium screens */
+				}
+			}
+
+			@media (max-width: 800px) {
+				.box {
+					width: 90%;
+					padding: 6px; /* Further reduce padding for smaller screens */
+				}
+
+				.box .left {
+					padding: 6px 12px;
+				}
+
+				.middle span {
+					font-size: 1rem; /* Size for smaller screens */
+				}
+			}
+
+			@media (max-width: 500px) {
+				.box {
+					width: 95%;
+					padding: 4px; /* Minimal padding for very small screens */
+				}
+
+				.box .left {
+					padding: 4px 8px;
+				}
+
+				.middle span {
+					font-size: 0.8rem; /* Size for very small screens */
+				}
+			}
+
+			/* .moving-icon {
+				display: inline-block;
+				padding: 5px 5px;
+				background-color: #ffeb3b; 
+				color: #333; 
+				font-weight: bold;
+				font-family: Arial, sans-serif;
+				border-radius: 10px;
+				animation: move 2s linear infinite;
+			}
+
+			@keyframes move {
+				0% { transform: translateX(0); }
+				50% { transform: translateX(10px); }
+				100% { transform: translateX(0); }
+			} */
+
+		</style>
+		<style>
 			.text-justify {
 				text-align: justify; /* Justifies text within its container */
 			}
@@ -222,289 +478,296 @@
 				transform: scale(1.05); /* Optional: Add a scale effect */
 				background-color: #FBC412;
 			}
-
-			.card {
-				position: relative;
-				width: 100%;
-				height: 200px;
-				border-radius: 15px;
-				overflow: hidden;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				transition: transform 0.3s;
-			}
-
-			.card-text {
-				position: absolute;
-				bottom: 35px;
-				left: 20px;
-				right: 20px;
-				color: white;
-				font-size: 1rem;
-				font-weight: bold;
-				text-align: center;
-			}
-
-			.card:hover {
-				transform: translateY(-10px);
-			}
 		</style>
 	</head>
 	<!--end::Head-->
 	
 	<!--begin::Body-->
-	<body >
+	<body id="laman_utama" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
+		<!--begin::Theme mode setup on page load-->
+		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+		<!--end::Theme mode setup on page load-->
+		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
-			<!--Header-->
-			<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-				<div class="col-md-4">
-					<div class="content-jata">
-						<!--begin::Kementerian-->
-							<a href="#laman_utama">
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
-						<!--end::Kementerian-->
-					</div>
-				</div>
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-6">
-					<div class="content-menu">
-						<!--begin::Mobile menu toggle-->
-							<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
-								<i class="ki-duotone ki-abstract-14 fs-2hx">
-									<span class="path1"></span>
-									<span class="path2"></span>
-								</i>
-							</button>
-						<!--end::Mobile menu toggle-->
-						
-						<!--begin::Wrapper-->
-						<div class="d-flex align-items-center justify-content-between">
-							
-							<!--begin::Menu wrapper-->
-							<div class="d-lg-block" id="kt_header_nav_wrapper">
-								<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
-									
-									<!--begin::Menu-->
-									<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
-										
-										<!--begin::Menu item-->
-										<div class="menu-item">
-											<!--begin::Menu link-->
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
-											<!--end::Menu link-->
-										</div>
-										<!--end::Menu item-->
-										
-										<!-- Dropdown Menu for Maklumat BKOKU -->
-										<div class="menu-item">
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">
-												MAKLUMAT PENAJAAN
-											</a>
-											<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
-												<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
-												<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a></li>
-												<!-- Add more items as needed -->
-											</ul>
-										</div>
-										<!--begin::Menu item-->
-										<div class="menu-item">
-											<!--begin::Menu link-->
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
-											<!--end::Menu link-->
-										</div>
-										<!--end::Menu item-->
-										
-									</div>
-									<!--end::Menu-->
-								</div>
-							</div>
-							<!--end::Menu wrapper-->
-						</div>
-						<!--end::Wrapper-->
-					</div>
-					
-				</div>
-			</div>
-			
-			<!--Background-->
+			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
 				<!--begin::Wrapper-->
 				<div class="header-background">
 					<video autoplay loop muted class="background-video">
 						<source src="assets/media/background_9.mp4" type="video/mp4">
 					</video>
-					<div class="overlay">
-						<div class="row">
-							<div class="col-md-8">
-								<div>
-									<h1 class="text-transition"><span>Selamat Datang ke</span></h1>
-									<h1 class="text-transition" style="font-size: 5.0rem;"><span style="text-transform:uppercase">Sistem Penajaan <br>Orang Kurang Upaya </span><br><span>(SisPO)</span></h1>
-								</div>
-							</div>
+					<!--begin::Header-->
+					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
+						<!--begin::Logo-->
+						
+						<div class="content-jata">
+							<!--begin::Kementerian-->
+								<a href="#laman_utama">
+									<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
+									<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
+								</a>
+							<!--end::Kementerian-->
+							<!--begin::Logo-->
+								<!-- a href="#laman_utama"-->
+									<!--img alt="sispo" src="assets/media/sispo.png" class="content-logo"/-->
+									<!--img alt="sispo" src="assets/media/sispo.png" class="logo-default h-35px h-lg-60px"/-->
+									<!--img alt="sispo" src="assets/media/sispo.png" class="logo-sticky h-30px h-lg-60px"/-->
+								<!--/a-->
+							<!--end::Logo-->
+						</div>
+						
+						
+						<!--begin::Container-->
+						<div class="content-menu">
+							<!--begin::Mobile menu toggle-->
+								<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+									<i class="ki-duotone ki-abstract-14 fs-2hx">
+										<span class="path1"></span>
+										<span class="path2"></span>
+									</i>
+								</button>
+							<!--end::Mobile menu toggle-->
 							
-							<div class="col-md-4" >
-								<div class="bg-card-st">
-									<div class="col-md-12" style="font-size: 1.0rem; color:rgb(255, 255, 255);">
-										Klik di sini untuk permohonan<br>
-										<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan">
-											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;">
-										</a>
+							<!--begin::Wrapper-->
+							<div class="d-flex align-items-center justify-content-between">
+								
+								<!--begin::Menu wrapper-->
+								<div class="d-lg-block" id="kt_header_nav_wrapper">
+									<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
+										
+										<!--begin::Menu-->
+										<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
+											
+											<!--begin::Menu item-->
+											<div class="menu-item">
+												<!--begin::Menu link-->
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
+												<!--end::Menu link-->
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item">
+												<!--begin::Menu link-->
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a>
+												<!--end::Menu link-->
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item">
+												<!--begin::Menu link-->
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a>
+												<!--end::Menu link-->
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item">
+												<!--begin::Menu link-->
+												<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
+												<!--end::Menu link-->
+											</div>
+											<!--end::Menu item-->
+											
+										</div>
+										<!--end::Menu-->
 									</div>
 								</div>
-								<div class="bg-card-container">
-									<div class="bg-card-wrapper">
-										<div class="bg-card">
-											<div class="col-md-12">
-												<div class="left" style="color:rgb(255, 255, 255);">HEBAHAN</div>
-												<!-- div class="moving-icon">PENTING</div-->
-												<div class="middle">
-													<span style="font-size: 1.5rem; color:rgb(255, 255, 255);">{!! $catatan ?? 'No notes available' !!}</span>
-												</div>
-											</div>
-										</div>
-										<div class="bg-card">
-											<div class="col-md-12">
-												<span class="badge badge-default">Label 1</span>
-											</div>
-										</div>
-										<div class="bg-card">
-											<div class="col-md-12">
-												<span class="badge badge-default">Label 2</span>
-											</div>
-										</div>
-									</div>
-								</div>
+								<!--end::Menu wrapper-->
 							</div>
+							<!--end::Wrapper-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Header-->
+					<!--begin::Right content-->
+					<div class="content-right">
+						<div>
+							<!--img src="assets/media/sispo.png" alt="SisPO"-->
+							<h4 class="text-transition"><span class="id-color">Selamat Datang ke</span></h4>
+							<h1 class="text-transition" style="font-size: 4.5rem;"><span style="text-transform:uppercase">Sistem Penajaan OKU </span><span>(SisPO)</span></h1>
 						</div>
 					</div>
+					<!--end::Right content-->
+					<!--begin::Left content-->
+					<div class="content-left">
+						<div>
+							<span>
+								Klik di sini untuk permohonan<br>
+								<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan" >
+									PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;">
+								</a>
+							</span>
+						</div>
+					</div>
+					<!--end::Left content-->
+					
+
+					<!--begin::Hebahan content-->
+					<div class="box">
+						<div class="left" style="color:white;">HEBAHAN&nbsp;<img src="assets/media/megaphone.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;"></div>
+						<!-- div class="moving-icon">PENTING</div-->
+						<div class="middle">
+        					<span>{!! $catatan  ?? 'No notes available' !!}</span>
+						</div>
+					</div>
+					
+					<!--end::Hebahan content-->
+				</div>
+				<!--end::Wrapper-->
+				<!--begin::Curve bottom-->
+				<div class="landing-curve landing-dark-color mb-5 mb-lg-5">
+					<!-- Add any additional design elements here -->
+				</div>
+				<!--end::Curve bottom-->
+			</div>
+			<!--end::Header Section-->
+
+			<!--begin::Utama Section-->
+			<div class="py-10 py-lg-20" id="utama">
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(255, 255, 255);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::Utama-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100">
+											<!--begin::Card 1-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: #ffffff;box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">LATAR BELAKANG</span>
+															</div>
+															<br>
+															<br>
+															<br>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<i class="ki-duotone ki-verify fs-1 text-danger me-3">
+																	<span class="path1"></span>
+																	<span class="path2"></span>
+																</i>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
+																</span>
+															</div>
+															<br>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<i class="ki-duotone ki-verify fs-1 text-danger me-3">
+																	<span class="path1"></span>
+																	<span class="path2"></span>
+																</i>
+																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																	Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
+																</span>
+															</div>
+															<!--end::Item-->
+														</div>
+														<!--end::Features-->
+													</div>
+												</div>
+											</div>
+											<!--end::Card 1-->
+
+											<!--begin::Card 2-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3" style="flex-grow: 1; background-color: #ffffff;box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
+												<div class="card-utama border-0">
+													<div class="card-body">
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
+																<span class="fw-bold text-light fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span><br>
+																<span class="fw-bold text-light fs-4">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
+															</div>
+															<!--end::Item-->
+															<br><br><br>
+															<!--begin::Item-->
+															<div class="d-flex flex-stack mb-5">
+																<form class="w-100" style="text-align: left;"  method="POST" action="{{ route('sendEmail') }}">
+																	@csrf
+																	<div class="row mb-3">
+																		<div class="col-md-6">
+																			<label for="nama" class="form-label">Nama</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-user"></i>
+																				</span>
+																				<input type="text" class="form-control" id="nama" name="nama">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<label for="telefon" class="form-label">Telefon</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-phone"></i>
+																				</span>
+																				<input type="tel" class="form-control" id="telefon" name="telefon">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row mb-3">
+																		<div class="col-md-6">
+																			<label for="emel" class="form-label">Emel</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-envelope"></i>
+																				</span>
+																				<input type="email" class="form-control" id="emel" name="emel">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<label for="tajuk" class="form-label">Tajuk</label>
+																			<div class="input-group">
+																				<span class="input-group-text">
+																					<i class="fa-solid fa-tag"></i>
+																				</span>
+																				<input type="text" class="form-control" id="tajuk" name="tajuk">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="mb-3">
+																		<label for="mesej" class="form-label">Mesej</label>
+																		<textarea class="form-control" id="mesej" name="mesej" rows="3" placeholder="Masukkan mesej anda"></textarea>
+																	</div>
+																	<button type="submit" class="btn btn-primary">Hantar</button>
+																</form>
+															</div>
+															<!--end::Item-->
+														</div>
+														<!--end::Features-->
+													</div>
+												</div>
+											</div>
+											<!--end::Card 2-->
+										</div>
+
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Utama-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
 				</div>
 				<!--end::Wrapper-->
 			</div>
+			<!--end::Utama Section-->
 
-			<!--Utama-->
-			<div class="row" id="utama">
-				<!-- Card Container -->
-				<div class="col-md-6 d-flex">
-					<!--begin::Card 1-->
-					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3 card-container" style="background-color: #ffffff; box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
-						<div class="card-utama border-0">
-							<div class="card-body">
-								<!--begin::Features-->
-								<div class="w-100 mb-10">
-									<!--begin::Item-->
-									<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
-										<span class="fw-bold text-light fs-2 mb-2">LATAR BELAKANG</span>
-									</div>
-									<br><br><br>
-									<!--end::Item-->
-									<!--begin::Item-->
-									<div class="d-flex flex-stack mb-5">
-										<i class="ki-duotone ki-verify fs-1 text-danger me-3">
-											<span class="path1"></span>
-											<span class="path2"></span>
-										</i>
-										<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-											Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
-										</span>
-									</div>
-									<br>
-									<!--end::Item-->
-									<!--begin::Item-->
-									<div class="d-flex flex-stack mb-5">
-										<i class="ki-duotone ki-verify fs-1 text-danger me-3">
-											<span class="path1"></span>
-											<span class="path2"></span>
-										</i>
-										<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-											Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
-										</span>
-									</div>
-									<!--end::Item-->
-								</div>
-								<!--end::Features-->
-							</div>
-						</div>
-					</div>
-					<!--end::Card 1-->
-				</div>
-				
-				<div class="col-md-6 d-flex">
-					<!--begin::Card 2-->
-					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3 card-container" style="background-color: #ffffff; box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
-						<div class="card-utama border-0">
-							<div class="card-body">
-								<!--begin::Features-->
-								<div class="w-100 mb-10">
-									<!--begin::Item-->
-									<div class="d-flex flex-column mb-5" style="background-color: #A31C44; padding: 15px; border-radius: 5px;">
-										<span class="fw-bold text-light fs-2 mb-2">CADANGAN ATAU PERTANYAAN</span><br>
-										<span class="fw-bold text-light fs-4">Kementerian Pendidikan Tinggi mengalu-alukan cadangan dan pertanyaan berhubung bantuan ini.</span>
-									</div>
-									<!--end::Item-->
-									<br><br><br>
-									<!--begin::Item-->
-									<div class="d-flex flex-stack mb-5">
-										<form class="w-100" style="text-align: left;" method="POST" action="{{ route('sendEmail') }}">
-											@csrf
-											<div class="row mb-3">
-												<div class="col-md-6">
-													<label for="nama" class="form-label">Nama</label>
-													<div class="input-group">
-														<span class="input-group-text">
-															<i class="fa-solid fa-user"></i>
-														</span>
-														<input type="text" class="form-control" id="nama" name="nama">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<label for="telefon" class="form-label">Telefon</label>
-													<div class="input-group">
-														<span class="input-group-text">
-															<i class="fa-solid fa-phone"></i>
-														</span>
-														<input type="tel" class="form-control" id="telefon" name="telefon">
-													</div>
-												</div>
-											</div>
-											<div class="row mb-3">
-												<div class="col-md-6">
-													<label for="emel" class="form-label">Emel</label>
-													<div class="input-group">
-														<span class="input-group-text">
-															<i class="fa-solid fa-envelope"></i>
-														</span>
-														<input type="email" class="form-control" id="emel" name="emel">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<label for="tajuk" class="form-label">Tajuk</label>
-													<div class="input-group">
-														<span class="input-group-text">
-															<i class="fa-solid fa-tag"></i>
-														</span>
-														<input type="text" class="form-control" id="tajuk" name="tajuk">
-													</div>
-												</div>
-											</div>
-											<div class="mb-3">
-												<label for="mesej" class="form-label">Mesej</label>
-												<textarea class="form-control" id="mesej" name="mesej" rows="3" placeholder="Masukkan mesej anda"></textarea>
-											</div>
-											<button type="submit" class="btn btn-primary">Hantar</button>
-										</form>
-									</div>
-									<!--end::Item-->
-								</div>
-								<!--end::Features-->
-							</div>
-						</div>
-					</div>
-					<!--end::Card 2-->
-				</div>
-			</div>
-			
 			<!--begin::Maklumat BKOKU Section-->
 			<div class="py-10 py-lg-20" id="bkoku">
 				<!--begin::Wrapper-->
@@ -1366,78 +1629,128 @@
 			</div>
 			<!--end::Maklumat PPK Section-->
 
-			<!--Hubungi Kami-->
-			<div class="row" id="hubungi" style="margin-top: 30px;">
-				<div class="col-md-3">
-					<div class="media">
-						<div class="media-body">
-							<div class="media mt-3">
-								<div class="ms-12">
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.721301282511!2d101.66520007654144!3d2.8964460546508257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb7a1f5e8db05%3A0xd07cf0be45f8944c!2sMinistry%20of%20Higher%20Education!5e0!3m2!1sen!2smy!4v1725518423614!5m2!1sen!2smy" 
-									width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+			<!--begin::Hubungi Section-->
+			<div class="mb-n20 mb-lg-n20 z-index-2" id="hubungi">
+				<!--begin::Container-->
+				<div class="container">
+					
+					<!--begin::Row-->
+					<div class="row g-lg-12 mb-20 mb-lg-20 justify-content-between">
+						<!--begin::Col-->
+						<div class="col-lg-3">
+							<!--begin::Alamat-->
+							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+								<!--begin::Wrapper-->
+								<div class="mb-7">
+									<!--begin::Map-->
+									<div>
+										<!--begin::Text-->
+										<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.721301282511!2d101.66520007654144!3d2.8964460546508257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb7a1f5e8db05%3A0xd07cf0be45f8944c!2sMinistry%20of%20Higher%20Education!5e0!3m2!1sen!2smy!4v1725518423614!5m2!1sen!2smy" width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>										<!--end::Text-->
+									</div>
+									<!--end::Map-->
 								</div>
+								<!--end::Wrapper-->
 							</div>
+							<!--end::Alamat-->
 						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-lg-3">
+							<!--begin::Alamat-->
+							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+								<!--begin::Wrapper-->
+								<div class="mb-7">
+									<!--begin::Title-->
+									<div class="fs-4 fw-bold text-dark mb-3">Lokasi :</div>
+									<!--end::Title-->
+									<!--begin::Alamat-->
+									<div class="fw-semibold fs-6">Kementerian Pendidikan Tinggi,
+										<br /> Bahagian Biasiswa,
+										<br /> Unit Pra Perkhidmatan,
+										<br /> Aras 2, No. 2, Menara 2,
+										<br /> Jalan P5/6, Presint 5,
+										<br /> 62200 Wilayah Persekutuan Putrajaya.
+									</div>
+									<!--end::Alamat-->
+								</div>
+								<!--end::Wrapper-->
+							</div>
+							<!--end::Alamat-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-lg-3">
+							<!--begin::Hubungi-->
+							<div class="d-flex flex-column justify-content-between h-lg-200 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+								<!--begin::Wrapper-->
+								<div class="mb-7">
+									<!--begin::Title-->
+									<div class="fs-4 fw-bold text-dark mb-3">Hubungi Kami :</div>
+									<!--end::Title-->
+									<!--begin::Telefon-->
+									<div class="fw-semibold fs-7"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+603 8870 6347</div>									
+									<!--end::Telefon-->
+									<br />
+									<!--begin::Title-->
+									<div class="fs-4 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
+									<!--end::Title-->
+									<!--begin::Emel-->
+									<div class="fw-semibold fs-6">(i) Institusi Pengajian Tinggi Swasta, Politeknik & Kolej Komuniti
+										<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;bkoku@mohe.gov.my</div>
+									<br />
+									<div class="fw-semibold fs-6">(ii)Universiti Awam
+										<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;iptabkoku@mohe.gov.my</div>
+									<!--end::Emel-->
+								</div>
+								<!--end::Wrapper-->
+								
+							</div>
+							<!--end::Hubungi-->
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-lg-3">
+							<!--begin::Waktu-->
+							<div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-10 mb-lg-0">
+								<!--begin::Wrapper-->
+								<div class="mb-7">
+									<!--begin::Title-->
+									<div class="fs-4 fw-bold text-dark mb-3">Waktu Operasi :</div>
+									<!--end::Title-->
+									<!--begin::Waktu-->
+									<div class="fw-semibold fs-6">Isnin hingga Jumaat 
+									<br /> 9.00 pagi - 4.30 petang</div>
+									<!--end::Waktu-->
+									<br />
+									<!--begin::Waktu-->
+									<div class="fw-semibold fs-6">Kecuali Cuti Umum & Hari Kelepasan Am
+									</div>
+									<!--end::Waktu-->
+									<br />
+									<!--begin::Title-->
+									<div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat :</div>
+									<!--end::Title-->
+									<!--begin::Waktu-->
+									<div class="fw-semibold fs-6">Isnin hingga Khamis 
+									<br /> (1.00 tengah hari - 2.00 petang)</div>
+									<!--end::Waktu-->
+									<!--begin::Waktu-->
+									<div class="fw-semibold fs-6">Jumaat 
+									<br /> (12.15 tengah hari - 2.45 petang)</div>
+									<!--end::Waktu-->
+								</div>
+								<!--end::Wrapper-->
+								
+							</div>
+							<!--end::Waktu-->
+						</div>
+						<!--end::Col-->
 					</div>
+					<!--end::Row-->
 				</div>
-				<div class="col-md-3">
-					<div class="fs-4 fw-bold text-dark mb-3">Lokasi :</div>
-					<!--begin::Alamat-->
-					<div class="fw-semibold fs-6">Kementerian Pendidikan Tinggi,
-						<br /> Bahagian Biasiswa,
-						<br /> Unit Pra Perkhidmatan,
-						<br /> Aras 2, No. 2, Menara 2,
-						<br /> Jalan P5/6, Presint 5,
-						<br /> 62200 Wilayah Persekutuan Putrajaya.
-					</div>
-					<!--end::Alamat-->
-				</div>
-				<div class="col-md-3">
-					<!--begin::Title-->
-					<div class="fs-4 fw-bold text-dark mb-3">Hubungi Kami :</div>
-					<!--end::Title-->
-					<!--begin::Telefon-->
-					<div class="fw-semibold fs-7"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+603 8870 6347</div>									
-					<!--end::Telefon-->
-					<br />
-					<!--begin::Title-->
-					<div class="fs-4 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
-					<!--end::Title-->
-					<!--begin::Emel-->
-					<div class="fw-semibold fs-6">(i) Institusi Pengajian Tinggi Swasta, Politeknik & Kolej Komuniti
-						<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;bkoku@mohe.gov.my</div>
-					<br />
-					<div class="fw-semibold fs-6">(ii)Universiti Awam
-						<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;iptabkoku@mohe.gov.my</div>
-					<!--end::Emel-->
-				</div>
-				<div class="col-md-3">
-					 <!--begin::Title-->
-					 <div class="fs-4 fw-bold text-dark mb-3">Waktu Operasi :</div>
-					 <!--end::Title-->
-					 <!--begin::Waktu-->
-					 <div class="fw-semibold fs-6">Isnin hingga Jumaat 
-					 <br /> 9.00 pagi - 4.30 petang</div>
-					 <!--end::Waktu-->
-					 <br />
-					 <!--begin::Waktu-->
-					 <div class="fw-semibold fs-6">Kecuali Cuti Umum & Hari Kelepasan Am
-					 </div>
-					 <!--end::Waktu-->
-					 <br />
-					 <!--begin::Title-->
-					 <div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat :</div>
-					 <!--end::Title-->
-					 <!--begin::Waktu-->
-					 <div class="fw-semibold fs-6">Isnin hingga Khamis 
-					 <br /> (1.00 tengah hari - 2.00 petang)</div>
-					 <!--end::Waktu-->
-					 <!--begin::Waktu-->
-					 <div class="fw-semibold fs-6">Jumaat 
-					 <br /> (12.15 tengah hari - 2.45 petang)</div>
-					 <!--end::Waktu-->
-				</div>
+				<!--end::Container-->
 			</div>
+			<!--end::Hubungi Section-->
 
 			<!--begin::Footer Section-->
 			<div class="mb-0">
@@ -1474,95 +1787,114 @@
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Footer Section-->
+			<!--begin::Scrolltop-->
+			<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+				<i class="ki-duotone ki-arrow-up">
+					<span class="path1"></span>
+					<span class="path2"></span>
+				</i>
+			</div>
+			<!--end::Scrolltop-->
 		</div>
+		<!--end::Root-->
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<i class="ki-duotone ki-arrow-up">
+				<span class="path1"></span>
+				<span class="path2"></span>
+			</i>
+		</div>
+		<!--end::Scrolltop-->
+		<!--begin::Javascript-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used for this page only)-->
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used for this page only)-->
+		<!-- Include jQuery -->
+			
+		<!--end::Custom Javascript-->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			// Hide all sections initially
+			$(`#utama, #hubungi, #bkoku, #ppk`).hide();
 
-	<!--begin::Javascript-->
-	<script>var hostUrl = "assets/";</script>
-	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-	<script src="assets/plugins/global/plugins.bundle.js"></script>
-	<script src="assets/js/scripts.bundle.js"></script>
-	<!--end::Global Javascript Bundle-->	
+			$('#show-utama').click(function(event) {
+				$('#utama').show();
+				$('#hubungi').show();
+				$('#bkoku').hide();
+				$('#ppk').hide();
+			});
 
-	<!--end::Custom Javascript-->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		// Hide all sections initially
-		$(`#utama, #hubungi, #bkoku, #ppk`).hide();
+			$('#show-bkoku').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').show();
+				$('#ppk').hide();
+			});
 
-		$('#show-utama').click(function(event) {
-			$('#utama').show();
-			$('#hubungi').hide();
-			$('#bkoku').hide();
-			$('#ppk').hide();
-		});
+			$('#show-ppk').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').hide();
+				$('#ppk').show();
+			});
 
-		$('#show-bkoku').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').hide();
-			$('#bkoku').show();
-			$('#ppk').hide();
-		});
+			$('#show-hubungi').click(function(event) {
+				$('#utama').show();
+				$('#hubungi').show();
+				$('#bkoku').hide();
+				$('#ppk').hide();
+			});
+		</script>
 
-		$('#show-ppk').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').hide();
-			$('#bkoku').hide();
-			$('#ppk').show();
-		});
+		<script>
+			$(document).ready(function() {
+				function initializeCardToggle(section) {
+					$(`.card-${section}`).click(function() {
+						// Remove 'active' class from all cards
+						$(`.card-${section}`).removeClass('active');
 
-		$('#show-hubungi').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').show();
-			$('#bkoku').hide();
-			$('#ppk').hide();
-		});
-	</script>
+						// Add 'active' class to the clicked card
+						$(this).addClass('active');
+					});
 
-	<script>
-		$(document).ready(function() {
-			function initializeCardToggle(section) {
-				$(`.card-${section}`).click(function() {
-					// Remove 'active' class from all cards
-					$(`.card-${section}`).removeClass('active');
+					// Hide all sections initially
+					$(`#skop_${section}, #syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
 
-					// Add 'active' class to the clicked card
-					$(this).addClass('active');
-				});
+					// Click event handlers for showing and hiding sections
+					$(`#show_skop_${section}`).click(function() {
+						$(`#skop_${section}`).show();
+						$(`#syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+					});
 
-				// Hide all sections initially
-				$(`#skop_${section}, #syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+					$(`#show_syarat_${section}`).click(function() {
+						$(`#skop_${section}`).hide();
+						$(`#syarat_${section}`).show();
+						$(`#elemen_${section}, #tempoh_${section}`).hide();
+					});
 
-				// Click event handlers for showing and hiding sections
-				$(`#show_skop_${section}`).click(function() {
-					$(`#skop_${section}`).show();
-					$(`#syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
-				});
+					$(`#show_elemen_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}`).hide();
+						$(`#elemen_${section}`).show();
+						$(`#tempoh_${section}`).hide();
+					});
 
-				$(`#show_syarat_${section}`).click(function() {
-					$(`#skop_${section}`).hide();
-					$(`#syarat_${section}`).show();
-					$(`#elemen_${section}, #tempoh_${section}`).hide();
-				});
+					$(`#show_tempoh_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}, #elemen_${section}`).hide();
+						$(`#tempoh_${section}`).show();
+					});
+				}
 
-				$(`#show_elemen_${section}`).click(function() {
-					$(`#skop_${section}, #syarat_${section}`).hide();
-					$(`#elemen_${section}`).show();
-					$(`#tempoh_${section}`).hide();
-				});
-
-				$(`#show_tempoh_${section}`).click(function() {
-					$(`#skop_${section}, #syarat_${section}, #elemen_${section}`).hide();
-					$(`#tempoh_${section}`).show();
-				});
-			}
-
-			// Initialize for both BKOKU and PPK sections
-			initializeCardToggle('bkoku');
-			initializeCardToggle('ppk');
-		});
-	</script>
-	
-	<!--end::Javascript-->
-
+				// Initialize for both BKOKU and PPK sections
+				initializeCardToggle('bkoku');
+				initializeCardToggle('ppk');
+			});
+		</script>
+		
+		<!--end::Javascript-->
 	</body>
 </html>
