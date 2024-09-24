@@ -74,7 +74,7 @@
 				display: flex;
 				flex-direction: column;
 				height: 100%;
-				animation: verticalScroll 15s linear infinite;
+				/* animation: verticalScroll 15s linear infinite; */
 			}
 
 			.bg-card {
@@ -364,7 +364,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="bg-card">
+										{{-- <div class="bg-card">
 											<div class="col-md-12">
 												<span class="badge badge-default">Label 1</span>
 											</div>
@@ -373,7 +373,7 @@
 											<div class="col-md-12">
 												<span class="badge badge-default">Label 2</span>
 											</div>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 							</div>
