@@ -20,34 +20,28 @@ class ProfilController extends Controller
 
     public function simpanProfil(Request $request)
     {  
-        // if($request->hasFile('profile_photo_path')){
-            
-        //     $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
-
-        //     $request->profile_photo_path->move('assets/profile_photo_path',$filename);
-
-        //     User::where('no_kp',Auth::user()->no_kp)
-        //     ->update([
-        //         'profile_photo_path' => $filename,
-        //     ]);
-
-        // }
-
-
-        // Validate the file tak test lagi
+        
+        // Validate the file
         $request->validate([
             'profile_photo_path' => 'required|image|mimes:jpg,jpeg,png|max:2048', // 2MB max
         ]);
 
+
         if ($request->hasFile('profile_photo_path')) {
-            // Get the original file name
+            // Get the original file name and extension
             $originalFilename = $request->file('profile_photo_path')->getClientOriginalName();
+            $extension = $request->file('profile_photo_path')->getClientOriginalExtension();
+
+            if (substr_count($originalFilename, '.') > 1) {
+                return back()->withErrors('Nama fail tidak sah.');
+            }
             
-            // Sanitize the filename by removing special characters
-            $sanitizedFilename = preg_replace('/[^A-Za-z0-9\-\_\.]/', '', $originalFilename);
-            
+            // Sanitize the filename by removing special characters, excluding the extension
+            $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
+            $sanitizedFilename = preg_replace('/[^A-Za-z0-9\-\_]/', '', $filenameWithoutExtension);
+
             // Generate a unique filename
-            $filename = Auth::user()->no_kp . "_" . time() . "_" . $sanitizedFilename;
+            $filename = Auth::user()->no_kp . "_" . time() . "_" . $sanitizedFilename . '.' . $extension;
 
             // Move the file to the designated directory
             $request->file('profile_photo_path')->move(public_path('assets/profile_photo_path'), $filename);
@@ -81,7 +75,7 @@ class ProfilController extends Controller
 
             ]);
         }   
-         
+
         return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 
