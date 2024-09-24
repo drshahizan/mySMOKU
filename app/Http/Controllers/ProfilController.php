@@ -36,7 +36,7 @@ class ProfilController extends Controller
 
         // Validate the file tak test lagi
         $request->validate([
-            'profile_photo_path' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // 2MB max
+            'profile_photo_path' => 'required|image|mimes:jpg,jpeg,png|max:2048', // 2MB max
         ]);
 
         if ($request->hasFile('profile_photo_path')) {
@@ -44,7 +44,7 @@ class ProfilController extends Controller
             $originalFilename = $request->file('profile_photo_path')->getClientOriginalName();
             
             // Sanitize the filename by removing special characters
-            $sanitizedFilename = preg_replace('/[^a-zA-Z0-9._-]/', '', $originalFilename);
+            $sanitizedFilename = preg_replace('/[^A-Za-z0-9\-\_\.]/', '', $originalFilename);
             
             // Generate a unique filename
             $filename = Auth::user()->no_kp . "_" . time() . "_" . $sanitizedFilename;
@@ -62,10 +62,10 @@ class ProfilController extends Controller
 
         
         User::where('no_kp',Auth::user()->no_kp)
-        ->update([
-            'nama' => $request->nama,
-            'email' => $request->email
-        ]);
+            ->update([
+                'nama' => $request->nama,
+                'email' => $request->email
+            ]);
     
         Smoku::where('no_kp' ,Auth::user()->no_kp)
             ->update([
@@ -80,7 +80,8 @@ class ProfilController extends Controller
                 'emel' => $request->email
 
             ]);
-        }    
+        }   
+         
         return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 
