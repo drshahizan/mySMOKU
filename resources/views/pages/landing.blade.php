@@ -181,7 +181,8 @@
 
 			.table-style-2 {
 				width: 100%;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+				border: 1px solid #ccc;
 			}
 
 			.table-style-2 th, .table-style-2 td {
@@ -519,9 +520,11 @@
 			<!--Utama-->
 			<div class="row" id="utama">
 				<!-- Card Container -->
-				<div class="col-md-6 d-flex">
+				<div class="col-md-1 d-flex">
+				</div>
+				<div class="col-md-5 d-flex">
 					<!--begin::Card 1-->
-					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3 card-container" style="background-color: #ffffff; box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
+					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3 card-container" style="background-color: #ffffff; box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2); border: 1px solid #ccc;">
 						<div class="card-utama border-0">
 							<div class="card-body">
 								<!--begin::Features-->
@@ -563,9 +566,9 @@
 					<!--end::Card 1-->
 				</div>
 				
-				<div class="col-md-6 d-flex">
+				<div class="col-md-5 d-flex">
 					<!--begin::Card 2-->
-					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 ms-3 card-container" style="background-color: #ffffff; box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);">
+					<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3 card-container" style="background-color: #ffffff; box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2); border: 1px solid #ccc;">
 						<div class="card-utama border-0">
 							<div class="card-body">
 								<!--begin::Features-->
@@ -636,6 +639,8 @@
 					</div>
 					<!--end::Card 2-->
 				</div>
+				<div class="col-md-1 d-flex">
+				</div>
 			</div>
 			
 			<!--begin::Maklumat BKOKU Section-->
@@ -654,7 +659,7 @@
 									<div class="col-xl-12">
 										<div class="d-flex h-100">
 											<!--begin::Card 1-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(255, 255, 255); box-shadow: 0 30px 20px rgba(0, 0, 0, 0.1);">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(255, 255, 255); box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2); border: 1px solid #ccc;">
 												<div class="card-utama border-0">
 													<div class="card-body">
 														<!--begin::Features-->
@@ -1284,7 +1289,7 @@
 									<div class="col-xl-12">
 										<div class="d-flex h-100">
 											<!--begin::Card 1-->
-											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(255, 255, 255); box-shadow: 0 30px 20px rgba(0, 0, 0, 0.1);">
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(255, 255, 255); box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2); border: 1px solid #ccc;">
 												<div class="card-utama border-0">
 													<div class="card-body">
 														<!--begin::Features-->
