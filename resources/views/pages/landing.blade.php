@@ -22,12 +22,6 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<style>
-			.background-container {
-				position: relative;
-				width: 100%;
-				height: 100%; /* Full viewport height */
-				overflow: hidden;
-			}
 
 			.header-background {
 				position: relative;
@@ -143,6 +137,11 @@
 				font-weight: bold;
 			}
 
+			.btn-permohonan img{
+				width: 45px;
+				
+			}
+
 			.btn-permohonan:hover {
 				background-color: #ffb004;
 				border-color: #10355a;
@@ -152,8 +151,19 @@
 				flex-direction: column;
 				justify-content: space-between;
 			}
-		</style>
-		<style>
+
+			/* Active state */
+			.landing-header .menu .menu-item .menu-link.active {
+				color: #3E97FF; /* Color when active */
+			}
+			.content-jata {
+				position: relative;
+				display: flex;
+				justify-content: space-between; /* Align the left and right content to the edges */
+				align-items: center; /* Vertically centers the content */
+				padding: 20px; /* Optional: Add padding for spacing */
+			}
+		
 			/* CSS for table */
 			table {
 				width: 100%;
@@ -247,84 +257,208 @@
 			.card:hover {
 				transform: translateY(-10px);
 			}
+
+
+			@media (max-width: 1200px) {
+				.background-video {
+					object-fit: cover; /* Ensure the video scales nicely */
+				}
+
+				.header-background {
+					text-align: center; /* Ensure text stays centered */
+				}
+				
+				.overlay {
+					font-size: 1rem !important; /* Make overlay text smaller */
+				}
+
+				.overlay h1 {
+					font-size: 2rem !important; /* Adjust font size for headings */
+					margin: 1 auto;
+				}
+
+				.bg-card-st, .bg-card {
+					text-align: center; /* Ensure text stays centered */
+					font-size: 0.9rem !important; /* Further reduce font size */
+					margin: 5 auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem; /* Adjust button font size */
+					width: auto; /* Adjust button width */
+					padding: 5px 10px; /* Optional: adjust padding for better appearance */
+				}
+
+				.btn-permohonan img {
+					width: 30px; /* Adjust button width */
+				}
+
+				.bg-card-container {
+					width: auto; /* Adjust width */
+					font-size: 1rem; /* Adjust font size */
+				}
+
+				.bg-card-container span {
+					width: auto; /* Adjust width */
+					font-size: 1rem !important; /* Adjust font size */
+				}
+			}
+
+			@media (max-width: 800px) {
+				.background-video {
+					object-fit: cover; /* Ensure the video scales nicely */
+				}
+
+				.header-background {
+					text-align: center; /* Ensure text stays centered */
+				}
+				
+				.overlay {
+					font-size: 1rem !important; /* Make overlay text smaller */
+				}
+
+				.overlay h1 {
+					font-size: 2rem !important; /* Adjust font size for headings */
+					margin: 1 auto;
+				}
+
+				.bg-card-st, .bg-card {
+					text-align: center; /* Ensure text stays centered */
+					font-size: 0.9rem !important; /* Further reduce font size */
+					margin: 5 auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem; /* Adjust button font size */
+					width: auto; /* Adjust button width */
+					padding: 5px 10px; /* Optional: adjust padding for better appearance */
+				}
+
+				.btn-permohonan img {
+					width: 30px; /* Adjust button width */
+				}
+
+				.bg-card-container {
+					width: auto; /* Adjust width */
+					font-size: 1rem; /* Adjust font size */
+				}
+
+				.bg-card-container span {
+					width: auto; /* Adjust width */
+					font-size: 1rem !important; /* Adjust font size */
+				}
+			}
+
+			@media (max-width: 500px) {
+				.background-video {
+					object-fit: cover; /* Ensure the video scales nicely */
+				}
+
+				.header-background {
+					text-align: center; /* Ensure text stays centered */
+				}
+				
+				.overlay {
+					font-size: 1rem !important; /* Make overlay text smaller */
+				}
+
+				.overlay h1 {
+					font-size: 2rem !important; /* Adjust font size for headings */
+					margin: 1 auto;
+				}
+
+				.bg-card-st, .bg-card {
+					text-align: center; /* Ensure text stays centered */
+					font-size: 0.9rem !important; /* Further reduce font size */
+					margin: 5 auto;
+				}
+
+				.btn-permohonan {
+					font-size: 1rem; /* Adjust button font size */
+					width: auto; /* Adjust button width */
+					padding: 5px 10px; /* Optional: adjust padding for better appearance */
+				}
+
+				.btn-permohonan img {
+					width: 30px; /* Adjust button width */
+				}
+
+				.bg-card-container {
+					width: auto; /* Adjust width */
+					font-size: 1rem; /* Adjust font size */
+				}
+
+				.bg-card-container span {
+					width: auto; /* Adjust width */
+					font-size: 1rem !important; /* Adjust font size */
+				}
+			}
+
+			
 		</style>
+		
 	</head>
 	<!--end::Head-->
 	
 	<!--begin::Body-->
-	<body >
+	<body  id="laman_utama" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
 			<!--Header-->
 			<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 				<div class="col-md-4">
 					<div class="content-jata">
-						<!--begin::Kementerian-->
-							<a href="#laman_utama">
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
-								<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
-							</a>
-						<!--end::Kementerian-->
+						<a href="#laman_utama">
+							<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
+							<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
+						</a>
 					</div>
 				</div>
 				<div class="col-md-2">
 				</div>
-				<div class="col-md-6">
-					<div class="content-menu">
-						<!--begin::Mobile menu toggle-->
-							<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
-								<i class="ki-duotone ki-abstract-14 fs-2hx">
-									<span class="path1"></span>
-									<span class="path2"></span>
-								</i>
-							</button>
-						<!--end::Mobile menu toggle-->
-						
-						<!--begin::Wrapper-->
-						<div class="d-flex align-items-center justify-content-between">
-							
-							<!--begin::Menu wrapper-->
-							<div class="d-lg-block" id="kt_header_nav_wrapper">
-								<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
-									
-									<!--begin::Menu-->
-									<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
-										
-										<!--begin::Menu item-->
-										<div class="menu-item">
-											<!--begin::Menu link-->
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
-											<!--end::Menu link-->
-										</div>
-										<!--end::Menu item-->
-										
-										<!-- Dropdown Menu for Maklumat BKOKU -->
-										<div class="menu-item">
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">
-												MAKLUMAT PENAJAAN
-											</a>
-											<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
-												<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
-												<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a></li>
-												<!-- Add more items as needed -->
-											</ul>
-										</div>
-										<!--begin::Menu item-->
-										<div class="menu-item">
-											<!--begin::Menu link-->
-											<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
-											<!--end::Menu link-->
-										</div>
-										<!--end::Menu item-->
-										
-									</div>
-									<!--end::Menu-->
-								</div>
-							</div>
-							<!--end::Menu wrapper-->
-						</div>
-						<!--end::Wrapper-->
-					</div>
+				<div class="col-md-8">
+					<!--begin::Mobile menu toggle-->
+					<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+						<i class="ki-duotone ki-abstract-14 fs-2hx">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</i>
+					</button>
+					<!--end::Mobile menu toggle-->
 					
+					<!--begin::Wrapper-->
+					<div class="d-flex align-items-center justify-content-between">
+						<!--begin::Menu wrapper-->
+						<div class="d-lg-block" id="kt_header_nav_wrapper">
+							<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="300px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
+								<!--begin::Menu-->
+								<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary fs-5 fw-bold" id="kt_landing_menu">
+									<!--begin::Menu item-->
+									<div class="menu-item">
+										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
+									</div>
+									<!--end::Menu item-->
+									
+									<!-- Dropdown Menu for Maklumat BKOKU -->
+									<div class="menu-item">
+										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">MAKLUMAT PENAJAAN</a>
+										<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
+											<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
+											<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a></li>
+										</ul>
+									</div>
+									
+									<!--begin::Menu item-->
+									<div class="menu-item">
+										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
+									</div>
+									<!--end::Menu item-->
+								</div>
+								<!--end::Menu-->
+							</div>
+						</div>
+						<!--end::Menu wrapper-->
+					</div>
+					<!--end::Wrapper-->
 				</div>
 			</div>
 			
@@ -346,10 +480,10 @@
 							
 							<div class="col-md-4" >
 								<div class="bg-card-st">
-									<div class="col-md-12" style="font-size: 1.0rem; color:rgb(255, 255, 255);">
-										Klik di sini untuk permohonan<br>
+									<div class="col-md-12">
+										<div class="left" style="color:rgb(2, 2, 55);">KLIK DI SINI UNTUK PERMOHONAN</div>
 										<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan">
-											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik" width="45px" style="margin-left: 8px; display: inline-block;">
+											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
 									</div>
 								</div>
@@ -357,8 +491,7 @@
 									<div class="bg-card-wrapper">
 										<div class="bg-card">
 											<div class="col-md-12">
-												<div class="left" style="color:rgb(255, 255, 255);">HEBAHAN</div>
-												<!-- div class="moving-icon">PENTING</div-->
+												<div class="left" style="color:rgb(2, 2, 55);">HEBAHAN</div>
 												<div class="middle">
 													<span style="font-size: 1.5rem; color:rgb(255, 255, 255);">{!! $catatan ?? 'No notes available' !!}</span>
 												</div>
@@ -1476,93 +1609,116 @@
 			<!--end::Footer Section-->
 		</div>
 
-	<!--begin::Javascript-->
-	<script>var hostUrl = "assets/";</script>
-	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-	<script src="assets/plugins/global/plugins.bundle.js"></script>
-	<script src="assets/js/scripts.bundle.js"></script>
-	<!--end::Global Javascript Bundle-->	
+		<!--begin::Javascript-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->	
 
-	<!--end::Custom Javascript-->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		// Hide all sections initially
-		$(`#utama, #hubungi, #bkoku, #ppk`).hide();
+		<!--end::Custom Javascript-->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			// Get all nav links
+			const navLinks = document.querySelectorAll('.landing-header .menu .nav-link');
 
-		$('#show-utama').click(function(event) {
-			$('#utama').show();
-			$('#hubungi').hide();
-			$('#bkoku').hide();
-			$('#ppk').hide();
-		});
+			// Add click event to each main nav link
+			navLinks.forEach(link => {
+				link.addEventListener('click', function() {
+					// Remove active class from all links
+					navLinks.forEach(l => l.classList.remove('active'));
 
-		$('#show-bkoku').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').hide();
-			$('#bkoku').show();
-			$('#ppk').hide();
-		});
-
-		$('#show-ppk').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').hide();
-			$('#bkoku').hide();
-			$('#ppk').show();
-		});
-
-		$('#show-hubungi').click(function(event) {
-			$('#utama').hide();
-			$('#hubungi').show();
-			$('#bkoku').hide();
-			$('#ppk').hide();
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			function initializeCardToggle(section) {
-				$(`.card-${section}`).click(function() {
-					// Remove 'active' class from all cards
-					$(`.card-${section}`).removeClass('active');
-
-					// Add 'active' class to the clicked card
-					$(this).addClass('active');
+					// Add active class to the clicked link
+					this.classList.add('active');
+					
+					// Check if the clicked link is "MAKLUMAT BKOKU or PPK"
+					if (this.id === 'show-ppk' || this.id === 'show-bkoku') {
+						// Activate the parent "MAKLUMAT PENAJAAN" link
+						const parentLink = document.getElementById('dropdown-bkoku');
+						parentLink.classList.add('active');
+					}
 				});
+			});
 
-				// Hide all sections initially
-				$(`#skop_${section}, #syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+		</script>
+		<script>
+			// Hide all sections initially
+			$(`#utama, #hubungi, #bkoku, #ppk`).hide();
 
-				// Click event handlers for showing and hiding sections
-				$(`#show_skop_${section}`).click(function() {
-					$(`#skop_${section}`).show();
-					$(`#syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
-				});
+			$('#show-utama').click(function(event) {
+				$('#utama').show();
+				$('#hubungi').hide();
+				$('#bkoku').hide();
+				$('#ppk').hide();
+			});
 
-				$(`#show_syarat_${section}`).click(function() {
-					$(`#skop_${section}`).hide();
-					$(`#syarat_${section}`).show();
-					$(`#elemen_${section}, #tempoh_${section}`).hide();
-				});
+			$('#show-bkoku').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').show();
+				$('#ppk').hide();
+			});
 
-				$(`#show_elemen_${section}`).click(function() {
-					$(`#skop_${section}, #syarat_${section}`).hide();
-					$(`#elemen_${section}`).show();
-					$(`#tempoh_${section}`).hide();
-				});
+			$('#show-ppk').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').hide();
+				$('#bkoku').hide();
+				$('#ppk').show();
+			});
 
-				$(`#show_tempoh_${section}`).click(function() {
-					$(`#skop_${section}, #syarat_${section}, #elemen_${section}`).hide();
-					$(`#tempoh_${section}`).show();
-				});
-			}
+			$('#show-hubungi').click(function(event) {
+				$('#utama').hide();
+				$('#hubungi').show();
+				$('#bkoku').hide();
+				$('#ppk').hide();
+			});
+		</script>
 
-			// Initialize for both BKOKU and PPK sections
-			initializeCardToggle('bkoku');
-			initializeCardToggle('ppk');
-		});
-	</script>
-	
-	<!--end::Javascript-->
+		<script>
+			$(document).ready(function() {
+				function initializeCardToggle(section) {
+					$(`.card-${section}`).click(function() {
+						// Remove 'active' class from all cards
+						$(`.card-${section}`).removeClass('active');
+
+						// Add 'active' class to the clicked card
+						$(this).addClass('active');
+					});
+
+					// Hide all sections initially
+					$(`#skop_${section}, #syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+
+					// Click event handlers for showing and hiding sections
+					$(`#show_skop_${section}`).click(function() {
+						$(`#skop_${section}`).show();
+						$(`#syarat_${section}, #elemen_${section}, #tempoh_${section}`).hide();
+					});
+
+					$(`#show_syarat_${section}`).click(function() {
+						$(`#skop_${section}`).hide();
+						$(`#syarat_${section}`).show();
+						$(`#elemen_${section}, #tempoh_${section}`).hide();
+					});
+
+					$(`#show_elemen_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}`).hide();
+						$(`#elemen_${section}`).show();
+						$(`#tempoh_${section}`).hide();
+					});
+
+					$(`#show_tempoh_${section}`).click(function() {
+						$(`#skop_${section}, #syarat_${section}, #elemen_${section}`).hide();
+						$(`#tempoh_${section}`).show();
+					});
+				}
+
+				// Initialize for both BKOKU and PPK sections
+				initializeCardToggle('bkoku');
+				initializeCardToggle('ppk');
+			});
+		</script>
+		
+		<!--end::Javascript-->
 
 	</body>
 </html>
