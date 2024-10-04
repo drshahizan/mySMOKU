@@ -579,6 +579,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('pentadbir/kod-esp/institusi', [PentadbirController::class, 'viewESPInstitusi'])->name('esp.institusi');
         Route::get('/fetch-institusi-esp', [PentadbirController::class, 'fetchInstitusiEsp']);
         Route::post('pentadbir/kemaskini/kod-esp/institusi', [PentadbirController::class, 'kemaskiniESPInstitusi'])->name('kemaskini.esp.institusi');
+
+        Route::get('pentadbir/iklan', [PentadbirController::class, 'iklan'])->name('iklan');
+        Route::post('pentadbir/iklan', [PentadbirController::class, 'simpanIklan'])->name('simpan.iklan');
     });
 
     //Pegawai

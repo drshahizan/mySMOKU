@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailDaftarPengguna;
 use App\Mail\MailDaftarPentadbir;
+use App\Models\Iklan;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -483,6 +484,28 @@ class PentadbirController extends Controller
         else {
             return redirect()->back()->with('error', 'Institusi tidak dijumpai.');
         }
+    }
+
+
+    public function iklan()
+    {
+        $iklan = Iklan::orderBy('created_at', 'desc')->get(); 
+
+        return view('kemaskini.pentadbir.tambah_iklan', compact('iklan'));
+    }
+
+    public function simpanIklan(Request $request)
+    {
+        $iklan = Iklan::create([
+            'kategori_iklan' => $request->kategori_iklan,
+            'tajuk_iklan' => $request->tajuk_iklan,
+            'tarikh_iklan' => $request->tarikh_iklan,
+            'status' => $request->status,
+            'iklan' => $request->iklan,
+        ]);
+        
+  
+        return redirect()->route('iklan');
     }
     
 }
