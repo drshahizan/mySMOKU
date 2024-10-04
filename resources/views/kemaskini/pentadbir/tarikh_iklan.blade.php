@@ -92,7 +92,7 @@
 							<!--end::Input group-->
 						</div>
 						<!--begin::Input group-->
-						<div class="col-md-6 fv-row">
+						<div class="col-md-12 fv-row">
 							<!--begin::Label-->
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
