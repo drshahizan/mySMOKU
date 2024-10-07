@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SistemBKOKU: Lupa Kata Laluan</title>
+    <title>SisPO: Lupa Kata Laluan</title>
 </head>
 <body>
-    <h3>TUKAR KATA LALUAN PENDAFTARAN SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU)/ PROGRAM PENDIDIKAN KHAS (PPK)</h3>
+    <h3>TUKAR KATA LALUAN PENDAFTARAN SISTEM PENAJAAN OKU (SisPO)</h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>

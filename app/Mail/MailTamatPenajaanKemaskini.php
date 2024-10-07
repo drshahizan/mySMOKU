@@ -26,7 +26,7 @@ class MailTamatPenajaanKemaskini extends Mailable
     public function build()
     {
         
-        $subject = "PERINGATAN MESRA PENGEMASKINIAN MAKLUMAT PEKERJAAN DALAM SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK)";
+        $subject = "PERINGATAN MESRA PENGEMASKINIAN MAKLUMAT PEKERJAAN DALAM SISTEM PENAJAAN OKU (SisPO)";
         return $this->subject($subject)
                     ->view('kemaskini.pelajar.tamat_penajaan_kemaskini')
                     ->with([

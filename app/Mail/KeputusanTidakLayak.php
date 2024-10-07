@@ -29,7 +29,7 @@ class KeputusanTidakLayak extends Mailable
      */
     public function build()
     {
-        $subject = "KEPUTUSAN PERMOHONAN BANTUAN KHAS OKU";
+        $subject = "KEPUTUSAN PERMOHONAN PENAJAAN OKU";
         return $this->subject($subject)
                     ->view('permohonan.sekretariat.kelulusan.emel_tidak_lulus');
     }

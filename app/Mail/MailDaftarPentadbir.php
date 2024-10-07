@@ -37,7 +37,7 @@ class MailDaftarPentadbir extends Mailable
             ['id' => $this->no_kp, 'hash' => sha1($this->email)]
         );
 
-        $subject = "DAFTAR PENGGUNA SISTEM BKOKU";
+        $subject = "DAFTAR PENGGUNA SISTEM PENAJAAN OKU (SisPO)";
         return $this->subject($subject)
                     ->view('kemaskini.pentadbir.emel_daftar_pentadbir')
                     ->with([
