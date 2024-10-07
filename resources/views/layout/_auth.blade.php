@@ -58,8 +58,8 @@
 
         #slideshow {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: auto;
+            height: auto;
             transition: background-image 1s ease-in-out;
         }
     </style>
