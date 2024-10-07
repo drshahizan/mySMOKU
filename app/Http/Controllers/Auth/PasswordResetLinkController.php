@@ -53,11 +53,13 @@ class PasswordResetLinkController extends Controller
         $user = User::where('no_kp', $request->no_kp)->first();
         if ($user) {
             $emel = $user->email;
+            $no_kp = $user->no_kp;
         
             if ($emel) {
                 $token = Str::random(64); // Generate a unique token
                 DB::table('password_resets')->insert([
                     'email' => $emel,
+                    'no_kp' => $no_kp,
                     'token' => $token,
                     'created_at' => now(),
                 ]);

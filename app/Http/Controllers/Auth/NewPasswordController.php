@@ -28,6 +28,7 @@ class NewPasswordController extends Controller
             ->where('token', $token)
             ->first();
         $email = $reset ->email;
+        $no_kp = $reset ->no_kp;
         //dd($email);    
 
         // Step 3: Check if a matching record was found and validate the token
@@ -47,7 +48,7 @@ class NewPasswordController extends Controller
         $catatan = $iklan->catatan ?? "";
 
         // Step 4: Token is valid, show the password reset form
-        return view('pages.auth.reset-password', compact('token', 'email', 'catatan'));
+        return view('pages.auth.reset-password', compact('token', 'email', 'no_kp', 'catatan'));
     }
 
 
@@ -58,7 +59,8 @@ class NewPasswordController extends Controller
         $validator = Validator::make($request->all(), [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'no_kp' => 'required',
+            'password' => 'required|confirmed|min:12',
         ]);
 
         // Check if the validation fails
@@ -70,8 +72,11 @@ class NewPasswordController extends Controller
         $reset = DB::table('password_resets')
             ->where('token', $request->input('token'))
             ->where('email', $request->input('email'))
+            ->where('no_kp', $request->input('no_kp'))
             ->first();
-        $user = User::where('email', '=', $request->input('email'))->first();    
+        $user = User::where('email', '=', $request->input('email'))
+            ->where('no_kp', $request->input('no_kp'))
+            ->first();    
 
         if (!$reset || empty($reset->email)) {
             // Handle invalid token or token not found (display an error message)

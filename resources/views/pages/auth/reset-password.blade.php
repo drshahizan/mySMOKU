@@ -11,6 +11,7 @@
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $token }}">
         <input type="hidden" name="email" value="{{ $email }}">
+        <input type="hidden" name="no_kp" value="{{ $no_kp }}">
 
         <!--begin::Heading-->
         <div class="text-center mb-10">
