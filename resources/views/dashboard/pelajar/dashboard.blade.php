@@ -51,7 +51,7 @@
 									@if(Auth::user()->profile_photo_path !== null)
 									<img class="image rounded-circle" src="/assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
 									@else
-									<img class="image rounded-circle" src="/assets/profile_photo_path/default.png" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+									<img class="image rounded-circle" src="{{ asset('assets/media/auth/default.png') }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
 									@endif
 								</div>
 								<!--end::Avatar-->
