@@ -48,7 +48,7 @@
                                             @if(Auth::user()->profile_photo_path !== null)
                                                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/profile_photo_path/{{$user->profile_photo_path}}')"></div>
                                             @else
-                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/profile_photo_path/default.png')"></div>
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('assets/media/auth/default.png') }}')"></div>
                                             @endif
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Edit-->
