@@ -123,8 +123,6 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-2 fv-row none-container"> </div>
-
                                             <div class="col-md-2 fv-row">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
@@ -1411,8 +1409,7 @@
                     }
                 }
 
-                $('.export-container').hide(); // Hide export elements
-                $('.none-container').show(); // Hide export elements
+                $('.export-container').show(); // Hide export elements
 
                 // Add an event listener for tab clicks
                 $('.nav-link').on('click', function() {
@@ -1425,10 +1422,8 @@
                     // Check if the active tab is bkokuUA-tab
                     if (activeTabId === 'bkokuUA-tab') {
                         $('.export-container').show(); // Show export elements
-                        $('.none-container').hide(); // Hide export elements
                     } else {
                         $('.export-container').hide(); // Hide export elements
-                        $('.none-container').show(); // Hide export elements
                     }
 
                     // Update the institution dropdown based on the active tab
