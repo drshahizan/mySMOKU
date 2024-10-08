@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SistemBKOKU: Daftar Pengguna Sistem</title>
+    <title>SisPO: Daftar Pengguna Sistem</title>
 </head>
 <body>
-    <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM BANTUAN KEWANGAN ORANG KURANG UPAYA (BKOKU) / PROGRAM PENDIDIKAN KHAS (PPK) </h3>
+    <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM PENAJAAN OKU (SisPO) </h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
     <br>
     <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. 
-        Maklumat untuk mendaftar masuk ke dalam sistem BKOKU adalah seperti berikut:</p>
+        Maklumat untuk mendaftar masuk ke dalam Sistem Penajaan OKU (SisPO) adalah seperti berikut:</p>
     
     <br>
     <p>Nombor Kad Pengenalan : {{$no_kp}}
