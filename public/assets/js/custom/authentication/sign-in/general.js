@@ -168,13 +168,24 @@ var KTSigninGeneral = function () {
                             const validationErrors = error.response.data.errors;
                             // console.log("Validation Errors No_kp: ", validationErrors.no_kp);
                             // console.log("Validation Errors Password: ", validationErrors.password);
+                            // console.log("Validation Errors tahap: ", validationErrors.tahap_not_allowed);
                     
-                            if (validationErrors.password) {
+                            // Handle specific validation errors
+                            if (validationErrors.tahap_not_allowed) {
+                                // Show error for tahap_not_allowed
+                                showError(validationErrors.tahap_not_allowed[0]);
+                            } else if (validationErrors.password) {
+                                // Show error for password if tahap_not_allowed is not present
                                 showError(validationErrors.password[0]);
-                            } 
-                            else {
-                                showError(validationErrors.both[0]);
+                            } else if (validationErrors.no_kp) {
+                                // Show error for no_kp if tahap_not_allowed and password are not present
+                                showError(validationErrors.no_kp[0]);
+                            } else {
+                                // Default error message if no specific validation error found
+                                showError("Ralat tidak dijangka berlaku. Sila cuba lagi.");
                             }
+
+                            
                             
                             function showError(errorMessage) {
                                 Swal.fire({

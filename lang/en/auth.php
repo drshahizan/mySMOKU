@@ -19,5 +19,6 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'failed_fields' => 'Authentication failed for the following fields: :fields.',
     'both_incorrect' => 'Tiada maklumat pendaftaran.',
+    'tahap_not_allowed' => 'Sistem belum dibuka untuk permohonan.',
 
 ];

@@ -70,6 +70,14 @@ class LoginRequest extends FormRequest
                 ]);
             }
 
+            // Check if the user's 'tahap'
+            if ($user->tahap == 1 || $user->tahap == 2 || $user->tahap == 6) {
+                Auth::logout(); // Log the user out if 'tahap' is not 3
+                throw ValidationException::withMessages([
+                    'tahap_not_allowed' => trans('auth.tahap_not_allowed'),
+                ]);
+            }
+
             //create log
             LoginLog::create([
                 'user_id' => $user->id,
