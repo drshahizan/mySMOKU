@@ -161,7 +161,7 @@
 				display: flex;
 				justify-content: space-between; /* Align the left and right content to the edges */
 				align-items: center; /* Vertically centers the content */
-				padding: 20px; /* Optional: Add padding for spacing */
+				padding: 60px; /* Optional: Add padding for spacing */
 			}
 		
 			/* CSS for table */
@@ -406,7 +406,7 @@
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
 			<!--Header-->
 			<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="content-jata">
 						<a href="#laman_utama">
 							<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
@@ -414,9 +414,9 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4 mx-auto text-center">
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-6 text-end" >
 					<!--begin::Mobile menu toggle-->
 					<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
 						<i class="ki-duotone ki-abstract-14 fs-2hx">
@@ -483,7 +483,7 @@
 								<div class="bg-card-st">
 									<div class="col-md-12">
 										<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">KLIK DI SINI UNTUK PERMOHONAN</div>
-										<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan">
+										<a href="http://bkokudev.mohe.gov.my/login" class="btn btn-permohonan">
 											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
 									</div>
