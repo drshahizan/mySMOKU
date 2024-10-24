@@ -73,7 +73,7 @@
 
 			.bg-card {
 				width: 100%;
-				background-color: #bac0d457; /* Background color for each card */
+				background-color: rgba(255, 255, 255, 0.705); /* Background color for each card */
 				padding: 10px;
 				margin-bottom: 10px;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
@@ -86,7 +86,7 @@
 
 			.bg-card-st {
 				width: 100%;
-				background-color: #bac0d457; /* Background color for each card */
+				background-color: rgba(255, 255, 255, 0.705); /* Background color for each card */
 				padding: 10px;
 				margin-bottom: 10px;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
@@ -125,7 +125,7 @@
 			.btn-permohonan {
 				background-color: #c60000;
 				border-color: #0c4277;
-				font-size: 1.5rem;
+				font-size: 2.0rem;
 				width: 100%;
 				padding: 8px 16px;
 				margin-top: 10px;
@@ -474,7 +474,7 @@
 						<div class="row">
 							<div class="col-md-8">
 								<div>
-									<h1 class="text-transition"><span>Selamat Datang ke</span></h1>
+									<h1 class="text-transition" style="font-size: 3.0rem;"><span>Selamat Datang ke</span></h1>
 									<h1 class="text-transition" style="font-size: 5.0rem;"><span style="text-transform:uppercase">Sistem Penajaan <br>Orang Kurang Upaya </span><br><span>(SisPO)</span></h1>
 								</div>
 							</div>
@@ -482,7 +482,7 @@
 							<div class="col-md-4" >
 								<div class="bg-card-st">
 									<div class="col-md-12">
-										<div class="left" style="color:rgb(2, 2, 55);">KLIK DI SINI UNTUK PERMOHONAN</div>
+										<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">KLIK DI SINI UNTUK PERMOHONAN</div>
 										<a href="http://bkoku.mohe.gov.my/login" class="btn btn-permohonan">
 											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
@@ -492,9 +492,9 @@
 									<div class="bg-card-wrapper">
 										<div class="bg-card">
 											<div class="col-md-12">
-												<div class="left" style="color:rgb(2, 2, 55);">HEBAHAN</div>
+												<div class="left" style="color:rgb(2, 2, 55); text-align: center; font-weight: bold;">HEBAHAN</div>
 												<div class="middle">
-													<span style="font-size: 1.5rem; color:rgb(255, 255, 255);">{!! $catatan ?? 'No notes available' !!}</span>
+													<span style="font-size: 1.5rem; color:rgb(0, 0, 0);">{!! $catatan ?? 'No notes available' !!}</span>
 												</div>
 											</div>
 										</div>
