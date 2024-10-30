@@ -483,7 +483,7 @@
 								<div class="bg-card-st">
 									<div class="col-md-12">
 										<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">KLIK DI SINI UNTUK PERMOHONAN</div>
-										<a href="http://bkokudev.mohe.gov.my/login" class="btn btn-permohonan">
+										<a href="{{ env('APP_URL') }}/login" class="btn btn-permohonan">
 											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
 									</div>
