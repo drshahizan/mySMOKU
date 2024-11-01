@@ -480,14 +480,15 @@
 							</div>
 							
 							<div class="col-md-4" >
-								<div class="bg-card-st">
+								{{-- TUTUP BUTTON PERMOHONAN --}}
+								{{-- <div class="bg-card-st">
 									<div class="col-md-12">
 										<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">KLIK DI SINI UNTUK PERMOHONAN</div>
 										<a href="{{ env('APP_URL') }}/login" class="btn btn-permohonan">
 											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
 									</div>
-								</div>
+								</div> --}}
 								<div class="bg-card-container">
 									<div class="bg-card-wrapper">
 										<div class="bg-card">
