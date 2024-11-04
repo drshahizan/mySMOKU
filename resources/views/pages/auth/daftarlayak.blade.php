@@ -13,7 +13,7 @@
             <img alt="Logo" src="{{ image('logos/1.1.png') }}" class="h-100px h-lg-100px"/>
             <br>
             <br>
-            <img alt="Logo" src="{{ image('logos/3.1.svg') }}" class="h-100px h-lg-100px"/>
+            <img alt="Logo" src="{{ image('logos/sispo-new.png') }}" class="h-100px h-lg-200px"/>
                 
             <!-- </h1> -->
             <!--end::Title-->
