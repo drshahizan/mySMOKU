@@ -144,8 +144,8 @@
                                         $sesiMula = $awal . '/' . $akhir;
 
                                         // $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-                                        $months = trim($akademik->bil_bulan_per_sem);
-                                        $tarikhNextSem->add(new DateInterval("P{$months}M"));
+                                        $akademik->bil_bulan_per_sem = 6; // Test with a known working value
+                                        $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
                                     }
 
                                     $currentSesi = null; // Initialize a variable to store the current session
