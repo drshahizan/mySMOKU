@@ -144,7 +144,7 @@
                                         $sesiMula = $awal . '/' . $akhir;
 
                                         // $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-                                        $months = intval($akademik->bil_bulan_per_sem); // Convert to an integer
+                                        $months = trim($akademik->bil_bulan_per_sem);
                                         $tarikhNextSem->add(new DateInterval("P{$months}M"));
                                     }
 
