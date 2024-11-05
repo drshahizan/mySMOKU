@@ -144,8 +144,12 @@
                                         $sesiMula = $awal . '/' . $akhir;
 
                                         // $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-                                        $akademik->bil_bulan_per_sem = 6; // Test with a known working value
-                                        $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+                                        if (!empty($akademik->bil_bulan_per_sem) && is_numeric($akademik->bil_bulan_per_sem)) {
+                                            $bilBulanPerSem = intval($akademik->bil_bulan_per_sem);
+                                            $tarikhNextSem->add(new DateInterval("P{$bilBulanPerSem}M"));
+                                        } else {
+                                            throw new Exception("Invalid interval value: {$akademik->bil_bulan_per_sem}");
+                                        }
                                     }
 
                                     $currentSesi = null; // Initialize a variable to store the current session
