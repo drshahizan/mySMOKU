@@ -587,12 +587,12 @@
 						<div class="row mb-10">
 							<div class="col-md-5 fv-row">
 								<!--begin::Label-->
-								<label class=" fs-6 fw-semibold form-label mb-2">Alamat emel</label>
+								<label class=" fs-6 fw-semibold form-label mb-2">Alamat E-mel</label>
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" readonly/>
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" />
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
