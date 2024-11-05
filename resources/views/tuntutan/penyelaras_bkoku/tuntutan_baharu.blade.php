@@ -119,6 +119,8 @@
                                             <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                         @elseif ($layak->tuntutan_status=='9')
                                             <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                        @elseif ($layak->tuntutan_status=='10')
+                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>    
                                         @endif
                                     @else
                                         <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
