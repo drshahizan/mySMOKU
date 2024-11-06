@@ -363,7 +363,7 @@
                                                                 <div class="d-flex">
                                                                     <!--begin::Input-->
                                                                     <span class="input-group-text">RM</span>
-                                                                    <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ $amaun->jumlah }}" step="0.01" inputmode="decimal" readonly/>
+                                                                    <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ number_format($amaun->jumlah, 2, '.', '') }}" step="0.01" inputmode="decimal" readonly/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                             </div>
