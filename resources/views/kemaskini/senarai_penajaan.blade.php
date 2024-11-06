@@ -42,7 +42,7 @@
 				<div class="row clearfix">
 					<div class="card">
 						<div class="header">
-							<h2>Senarai Status Penajaan<br><small>Sila klik tab BKOKU IPTS, BKOKU POLI, BKOKU KK, BKOKU UA atau PPK untuk lihat jumlah terperinci.</small></h2>
+							<h2>Senarai Status Penajaan<br><small>Sila klik tab BKOKU UA, BKOKU POLI, BKOKU KK, BKOKU IPTS atau PPK untuk lihat jumlah terperinci.</small></h2>
 						</div>
 
 						{{-- top nav bar --}}
