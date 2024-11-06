@@ -216,6 +216,10 @@
 
                                     // Check if current date and time fall within the allowed range
                                     $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+
+                                    // Retrieve amount sem 2
+                                    $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'PPK')->where('semester', '2')->first();
+
                                 @endphp
 
                                 <tr>
@@ -260,19 +264,6 @@
                                                     <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                                 </span>
                                             </a>
-                                            @if($isWithinRange)
-                                                <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                                    </span>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1" onclick="showAlertTuntutan()">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                                    </span>
-                                                </a>
-                                            @endif
 
                                             @if($isWithinRange)
                                                 <a href="{{ $isInNextSemester === true && $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
@@ -372,7 +363,7 @@
                                                                 <div class="d-flex">
                                                                     <!--begin::Input-->
                                                                     <span class="input-group-text">RM</span>
-                                                                    <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ '3360.00' }}" step="0.01" inputmode="decimal" readonly/>
+                                                                    <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ $amaun->jumlah }}" step="0.01" inputmode="decimal" readonly/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                             </div>
