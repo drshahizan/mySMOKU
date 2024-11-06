@@ -67,6 +67,20 @@
 									</div>
 								</div>
 								<!--end::Row-->
+								{{-- NOTES --}}
+								<div>
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-exclamation-triangle' style='color:orange; font-size:15px;'></i>&nbsp;
+										Gunakan kemudahan <a href="https://compressjpeg.com/" target="_blank">di sini</a> untuk mengurangkan saiz fail sebelum memuat naik fail.</a>
+									</div>
+				
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
+										Format fail yang boleh dimuat naik adalah format '.pdf', '.jpg', '.png', dan '.jpeg'.
+									</div>
+				
+									<div class="text-dark fw-semibold fs-6"><i class='fas fa-info-circle' style="color: rgb(18, 178, 231);"></i>&nbsp; 
+										Saiz maksimum fail adalah 2 MB.
+									</div>
+								</div>
 								<!--begin::Action-->
 								@if(!$result)
 								<div class="d-flex flex-center mt-15">
