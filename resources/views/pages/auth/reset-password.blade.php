@@ -3,7 +3,13 @@
         <h2>Hebahan</h2>
         <p>{!! $catatan !!}</p> 
     @endsection
-
+    <style>
+        .bg-danger { background-color: #dc3545 !important; }
+        .bg-warning { background-color: #ffc107 !important; }
+        .bg-info { background-color: #17a2b8 !important; }
+        .bg-success { background-color: #28a745 !important; }
+      </style>
+      
     <!--begin::Form-->
     <form class="form w-100" novalidate="novalidate" id="kt_new_password_form" data-kt-redirect-url="{{ route('login') }}" action="{{ route('password.update') }}" method="POST">
         @csrf
@@ -35,7 +41,7 @@
             <div class="mb-1">
                 <!--begin::Input wrapper-->
                 <div class="position-relative mb-3">
-                    <input class="form-control bg-transparent" type="password" placeholder="Kata Laluan" name="password" autocomplete="off"/>
+                    <input min="12" class="form-control bg-transparent" type="password" placeholder="Katalaluan" name="password" autocomplete="off"/>
 
                     <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                         <i class="bi bi-eye-slash fs-2"></i>

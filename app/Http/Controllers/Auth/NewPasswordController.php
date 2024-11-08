@@ -48,6 +48,8 @@ class NewPasswordController extends Controller
         $catatan = $iklan->catatan ?? "";
 
         // Step 4: Token is valid, show the password reset form
+        addJavascriptFile('assets/js/custom/authentication/reset-password/new-password.js');
+
         return view('pages.auth.reset-password', compact('token', 'email', 'no_kp', 'catatan'));
     }
 

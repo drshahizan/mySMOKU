@@ -20,16 +20,46 @@ var KTAuthNewPassword = function() {
                                 message: 'Kata laluan diperlukan.'
                             },
                             callback: {
-                                message: 'Sila masukkan kata laluan yang sah.',
-                                callback: function(input) {
-                                    if (input.value.length > 0) {
-                                        return validatePassword();
+                                message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
+                                callback: function (input) {
+                                    const password = input.value;
+                                    const meterBars = document.querySelectorAll('[data-kt-password-meter-control="highlight"] .flex-grow-1');
+
+                                    // Reset all meter bar classes
+                                    meterBars.forEach(bar => bar.classList.remove('bg-secondary', 'bg-warning', 'bg-success', 'bg-danger'));
+
+                                    // Check password conditions
+                                    let strength = 0;
+
+                                    if (password.length >= 12) strength++; // Length check
+                                    if (/[a-zA-Z]/.test(password)) strength++; // Letter check
+                                    if (/\d/.test(password)) strength++; // Number check
+                                    if (/[@$!%*?&]/.test(password)) strength++; // Symbol check
+
+                                    // Update meter bar colors based on strength
+                                    if (strength === 1) {
+                                        meterBars.forEach(bar => bar.classList.add('bg-danger')); // Weak (red)
+                                    } else if (strength === 2) {
+                                        meterBars.forEach(bar => bar.classList.add('bg-warning')); // Moderate (yellow)
+                                    } else if (strength === 3) {
+                                        meterBars.forEach(bar => bar.classList.add('bg-info')); // Stronger (blue)
+                                    } else if (strength === 4) {
+                                        meterBars.forEach(bar => bar.classList.add('bg-success')); // Strongest (green)
                                     }
+
+                                    // Return validation result based on full criteria
+                                    if (strength < 4) {
+                                        return {
+                                            valid: false,
+                                            message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara'
+                                        };
+                                    }
+                                    return { valid: true };
                                 }
                             }
                         }
                     },
-                    'confirm-password': {
+                    'password_confirmation': {
                         validators: {
                             notEmpty: {
                                 message: 'Pengesahan kata laluan diperlukan.'
@@ -39,13 +69,6 @@ var KTAuthNewPassword = function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
                                 message: 'Kata laluan dan pengesahannya tidak sama.'
-                            }
-                        }
-                    },
-                    'toc': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Anda perlu menerima syarat-syarat dan terma-terma.'
                             }
                         }
                     }
@@ -107,7 +130,7 @@ var KTAuthNewPassword = function() {
                         }).then(function (result) {
                             if (result.isConfirmed) {
                                 form.querySelector('[name="password"]').value= "";
-                                form.querySelector('[name="confirm-password"]').value= "";
+                                form.querySelector('[name="password_confirmation"]').value= "";
                                 passwordMeter.reset();  // reset password meter
                                 //form.submit();
 
@@ -176,7 +199,7 @@ var KTAuthNewPassword = function() {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "Maaf haha, terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
+                            text: "Maaf, terdapat beberapa ralat yang dikesan. Sila cuba lagi.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
