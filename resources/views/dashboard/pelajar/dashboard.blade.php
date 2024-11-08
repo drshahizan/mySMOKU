@@ -165,7 +165,7 @@
 											@endphp
 											<tr> 
 												<td>{{$permohonan_id->no_rujukan_permohonan}}</td>
-												<td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+												<td>{{ $permohonan->created_at ? $permohonan->created_at->format('d/m/Y') : '-' }}</td>
 												<td>
 													@if ($permohonan_id->status == 1)
 														<a href="{{ route('permohonan') }}">{{ ucwords(strtolower($permohonan->status)) }}</a>
