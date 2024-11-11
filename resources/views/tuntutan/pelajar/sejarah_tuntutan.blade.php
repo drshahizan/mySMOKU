@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="/assets/css/saringan.css">
+        {{-- <link rel="stylesheet" href="/assets/css/saringan.css"> --}}
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -53,14 +53,12 @@
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>Sejarah Tuntutan<br>
-                                <small>
-                                    Sejarah pembayaran hanya disediakan bagi peringkat pengajian terkini sahaja. 
-                                    <br> Jika ingin mendapatkan sejarah pembayaran bagi peringkat pengajian terdahulu, sila buat semakan di pautan: 
-                                    <a href="https://biasiswa.mohe.gov.my/ledger/home.php" target="_blank">Sistem Semakan Penyata</a> 
-                                </small>
-                            </h2>
+                        <div>
+                            <small>
+                                Sejarah pembayaran hanya disediakan bagi peringkat pengajian terkini sahaja. 
+                                <br> Jika ingin mendapatkan sejarah pembayaran bagi peringkat pengajian terdahulu, sila buat semakan di pautan: 
+                                <a href="https://biasiswa.mohe.gov.my/ledger/home.php" target="_blank">Sistem Semakan Penyata</a> 
+                            </small>
                         </div>
 
                         <div class="tab-content" id="myTabContent">
