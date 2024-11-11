@@ -9,10 +9,10 @@
 <!--begin::Logo-->
 <div class="app-sidebar-logo px-4 justify-content-center align-items-center" id="kt_app_sidebar_logo">
 	<!--begin::Logo image-->
-	<a href="/">
+	{{-- <a href="/"> --}}
 		<img alt="Logo" src="{{ image('logos/sispo-light-new.png') }}" class="h-150px app-sidebar-logo-default" />
 		<img alt="Logo" src="{{ image('logos/sispo-light-new.png') }}" class="h-50px app-sidebar-logo-minimize" />
-	</a>
+	{{-- </a> --}}
 	
 	<!--end::Logo image-->
 	<!--begin::Sidebar toggle-->
