@@ -157,6 +157,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
         Route::get('profil/pelajar', [PelajarController::class, 'profilPelajar'])->name('profil.pelajar');
         Route::post('profil/pelajar/simpan', [PelajarController::class, 'simpanProfilPelajar'])->name('simpan.profil.pelajar');
+        Route::get('/getPeringkatProfil/{id}', [PelajarController::class, 'peringkatProfil']);
+        Route::get('/getKursusProfil/{kodperingkat}/{id}', [PelajarController::class, 'kursusProfil']);
 
         //Permohonan Pelajar
         Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');

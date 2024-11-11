@@ -12,13 +12,17 @@ use App\Models\Hubungan;
 use App\Models\InfoIpt;
 use App\Models\KelasPenganugerahan;
 use App\Models\Keturunan;
+use App\Models\Kursus;
 use App\Models\LanjutPengajian;
+use App\Models\Mod;
 use App\Models\Negeri;
 use App\Models\Parlimen;
+use App\Models\Penaja;
 use App\Models\PeringkatPengajian;
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
+use App\Models\SumberBiaya;
 use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
@@ -446,14 +450,47 @@ class PelajarController extends Controller
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
 
         $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
-        $institusi = InfoIpt::orderby("id","asc")->select('id_institusi','nama_institusi')->get();
+        $institusi = InfoIpt::orderby("nama_institusi","asc")->select('id_institusi','nama_institusi')->get();
 
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
+        $kursus = Kursus::all()->sortBy('nama_kursus');
+        $mod = Mod::all()->sortBy('kod_mod');
+        $biaya = SumberBiaya::all()->sortBy('id');
+        $penaja = Penaja::orderby("penaja","asc")->get();
+        $penajaArray = $penaja->toArray();
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
 
-        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','peringkat','dokumen'));
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen'));
+    }
+
+    public function peringkatProfil($ipt=0)
+    {
+
+        $peringkatData['data'] = Kursus::select('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->join('bk_peringkat_pengajian', function ($join) {
+                $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat');
+            })
+            ->where('id_institusi',$ipt)
+            ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->get();
+
+        return response()->json($peringkatData);
+
+    }
+
+    public function kursusProfil($kodperingkat=0,$ipt=0)
+    {
+
+        $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
+            // ->select('id_institusi','kod_peringkat','nama_kursus')
+            ->where('kod_peringkat',$kodperingkat)
+            ->where('id_institusi',$ipt)
+            ->get();
+
+        return response()->json($kursusData);
+
     }
 
     public function simpanProfilPelajar(Request $request)
@@ -510,6 +547,14 @@ class PelajarController extends Controller
             'nama_kursus' => $akademik->nama_kursus,
             'tempoh_pengajian' => $akademik->tempoh_pengajian,
             'bil_bulan_per_sem' => $akademik->bil_bulan_per_sem,
+            'sesi' => $akademik->sesi,
+            'mod' => $akademik->mod,
+            'tarikh_mula' => $akademik->tarikh_mula,
+            'tarikh_tamat' => $akademik->tarikh_tamat,
+            'sumber_biaya' => $akademik->sumber_biaya,
+            'sumber_lain' => $akademik->sumber_lain,
+            'nama_penaja' => $akademik->nama_penaja,
+            'penaja_lain' => $akademik->penaja_lain,
             'dokumen' => $dokumen1->dokumen ?? '',
             'catatan' => $dokumen1->catatan ?? '',
             'dokumen' => $dokumen2->dokumen ?? '',
@@ -581,11 +626,20 @@ class PelajarController extends Controller
                     'peringkat_pengajian' => $request->peringkat_pengajian,
                     'nama_kursus' => $request->nama_kursus,
                     'tempoh_pengajian' => $request->tempoh_pengajian,
-                    'bil_bulan_per_sem' => $request->bil_bulan_per_sem
+                    'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
+                    'sesi' => $request->sesi,
+                    'mod' => $request->mod,
+                    'tarikh_mula' => $request->tarikh_mula,
+                    'tarikh_tamat' => $request->tarikh_tamat,
+                    'sumber_biaya' => $request->sumber_biaya,
+                    'sumber_lain' => $request->sumber_lain,
+                    'nama_penaja' => $request->nama_penaja,
+                    'penaja_lain' => $request->penaja_lain,
                 ]);
         }
 
         $runningNumber = rand(1000, 9999);
+        $uploadPath = 'assets/dokumen/permohonan';
 
         $documentTypes = [
             'akaunBank' => 1,
@@ -594,46 +648,57 @@ class PelajarController extends Controller
         ];
 
         foreach ($documentTypes as $inputName => $idDokumen) {
-            $file = $request->file($inputName);
+            $file = $request->file("upload_$inputName");
+            // dd($file);
+
+            // Define note field name dynamically
+            $noteField = "nota_$inputName";
+            $noteContent = $request->input($noteField);
+
+            // Check if the document already exists
+            $existingDocument = Dokumen::where('permohonan_id', $permohonan->id)
+                ->where('id_dokumen', $idDokumen)
+                ->first();
 
             if ($file) {
+                // Generate new filename
                 $originalFilename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
                 $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
-                $file->move('assets/dokumen/permohonan', $newFilename);
+                // dd($newFilename);
+                // Move the file to the designated path
+                $file->move($uploadPath, $newFilename);
 
-                // Check if the document already exists
-                $existingDocument = Dokumen::where('permohonan_id', $permohonan->id)
-                    ->where('id_dokumen', $idDokumen)
-                    ->first();
-                    
                 if ($existingDocument) {
-                    // Update the existing document
+                    // Optionally delete the old file
+                    if (file_exists("$uploadPath/{$existingDocument->dokumen}")) {
+                        unlink("$uploadPath/{$existingDocument->dokumen}");
+                    }
+
+                    // Update the existing document record
                     $existingDocument->dokumen = $newFilename;
-                    $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->catatan = $noteContent;
                     $existingDocument->save();
                 } else {
-                    // Create a new instance of dokumen and set its properties
+                    // Create a new document record
                     $data = new Dokumen();
                     $data->permohonan_id = $permohonan->id;
                     $data->id_dokumen = $idDokumen;
                     $data->dokumen = $newFilename;
-                    $data->catatan = $request->input("nota_$inputName");
-
-                    // Save the new instance to the database
+                    $data->catatan = $noteContent;
                     $data->save();
                 }
-            }
-            else {
-                // Update all documents that match the conditions
-                Dokumen::where('permohonan_id', $permohonan->id)
-                ->where('id_dokumen', $idDokumen)
-                ->update(['catatan' => $request->input("nota_$inputName")]);
-            }
-
-            
+            } 
+            // else if ($existingDocument) {
+                
+            //     // Update the existing document record
+            //     $existingDocument->catatan = $noteContent;
+            //     $existingDocument->save();
+                
+            // }
         }
+
 
         // Check if any updates were made
         $updatedValues = [
@@ -677,6 +742,14 @@ class PelajarController extends Controller
             'nama_kursus' => $request->nama_kursus,
             'tempoh_pengajian' => $request->tempoh_pengajian,
             'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
+            'sesi' => $request->sesi,
+            'mod' => $request->mod,
+            'tarikh_mula' => $request->tarikh_mula,
+            'tarikh_tamat' => $request->tarikh_tamat,
+            'sumber_biaya' => $request->sumber_biaya,
+            'sumber_lain' => $request->sumber_lain,
+            'nama_penaja' => $request->nama_penaja,
+            'penaja_lain' => $request->penaja_lain,
             'dokumen' => $dokumen1->dokumen ?? '',
             'catatan' => $request->input("nota_akaunBank"),
             'dokumen' => $dokumen2->dokumen ?? '',

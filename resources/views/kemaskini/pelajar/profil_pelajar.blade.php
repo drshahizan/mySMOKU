@@ -814,11 +814,11 @@
 								<span class="">Nama Pusat Pengajian</span>
 							</label>
 							<!--end::Label-->
-							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
+							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid basic-search" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 								@foreach ($institusi as $institusi)
 									<option value="{{$institusi->id_institusi}}" {{$akademik->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
 								@endforeach
-								</select>							 
+							</select>							 
 						</div>
 						<!--begin::Input group-->
 						<div class="row mb-10">
@@ -840,9 +840,7 @@
 									<!--begin::Input wrapper-->
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										@foreach ($peringkat as $peringkat)
-											<option value="{{$peringkat->kod_peringkat}}" {{$butiranPelajar->peringkat_pengajian == $peringkat->kod_peringkat ? 'selected' : ''}}>{{ $peringkat->peringkat}}</option>
-										@endforeach
+										<option value="">Pilih</option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -857,8 +855,9 @@
 								<span class="">Nama Kursus</span>
 							</label>
 							<!--end::Label-->
+							<input type="hidden" class="form-control form-control-solid" placeholder="" id="nama_kursus_asal" name="nama_kursus_asal" value="{{$akademik->nama_kursus}}" />
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								<option value="{{ $akademik->nama_kursus}}">{{ strtoupper($akademik->nama_kursus)}}</option>
+								<option value="">Pilih</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -868,7 +867,7 @@
 								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Tempoh Pengajian (Tahun)</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="tempoh_pengajian" name="tempoh_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+									<select id="tempoh_pengajian" name="tempoh_pengajian" onchange=dateCheck() class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
 										<option></option>
 										@for($i = 1; $i <= 4; $i += 0.5)
 											@if($akademik->tempoh_pengajian == ($i == (int)$i ? (int)$i : number_format($i, 1)))
@@ -897,6 +896,178 @@
 								<!--end::Row-->
 							</div>
 						</div>
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sesi Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="2023/2024">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									{{-- <option></option> --}}
+									@if(empty($akademik->sesi))
+										@php
+											$currentYear = date('Y');
+										@endphp
+										@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
+											@php
+												$sesi = $year . '/' . ($year + 1);
+											@endphp
+											<option value="{{ $sesi }}">{{ $sesi }}</option>
+										@endfor
+									@else
+										@php
+											$currentSesi = $akademik->sesi;
+											$found = false;
+										@endphp
+										
+										<!-- Display the current sesi as the first option -->
+										@if($currentSesi)
+											<option value="{{ $currentSesi }}" selected>{{ $currentSesi }}</option>
+										@endif
+										
+										@for($year = date('Y') - 1; $year <= (date('Y') + 1); $year++)
+											@php
+												$sesi = $year . '/' . ($year + 1);
+											@endphp
+											@if($sesi === $currentSesi)
+												@php $found = true; @endphp
+												<!-- Skip to avoid duplicate if currentSesi matches -->
+											@else
+												<option value="{{ $sesi }}">{{ $sesi }}</option>
+											@endif
+										@endfor
+								
+									@endif
+								</select>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									<option></option>
+									@foreach ($mod as $mod)
+										<option value="{{$mod->kod_mod}}" {{$akademik->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
+									@endforeach
+								</select>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Tarikh Mula Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_mula" name="tarikh_mula" onchange=dateCheck() value="{{$akademik->tarikh_mula}}" />
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Tarikh Tamat Pengajian&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sama seperti dalam surat tawaran">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="date" class="form-control form-control-solid" placeholder="" id="tarikh_tamat" name="tarikh_tamat" value="{{$akademik->tarikh_tamat}}" />
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold form-label mb-2">
+									Sumber Pembiayaan&nbsp;
+									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="SENDIRI/TIADA PENAJA
+									BIASISWA (CONTOH:SIME DARBY)
+									PINJAMAN (CONTOH:PTPTN)
+									LAIN-LAIN (CONTOH:DERMASISWA)">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+									</span>
+								</label>
+								<!--end::Label-->
+								<!--begin::Row-->
+								<div class="row fv-row">
+									<!--begin::Input wrapper-->
+										<select id="sumber_biaya" name="sumber_biaya" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option></option>
+											@foreach ($biaya as $biaya)
+											<option value="{{$biaya->kod_biaya}}" {{$akademik->sumber_biaya == $biaya->kod_biaya ? 'selected' : ''}}>{{ $biaya->biaya}}</option>
+											@endforeach
+										</select>
+									<!--end::Input wrapper-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Col-->
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row" id="div_biaya_lain">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="sumber_lain" name="sumber_lain" value="{{$akademik->sumber_lain}}"/>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-10">
+							<div class="col-md-6 fv-row" id="div_nama_penaja">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">Nama Penaja</span>
+								</label>															
+								<!--end::Label-->
+								<select id="nama_penaja" name="nama_penaja" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<option value="">Pilih</option>
+									@foreach ($penaja as $penaja)
+									<option value="{{$penaja->id}}" {{$akademik->nama_penaja == $penaja->id ? 'selected' : ''}}>{{ $penaja->penaja}}</option>
+									@endforeach
+								</select>
+							</div>
+							<!--begin::Col-->
+							<div class="col-md-6 fv-row" id="div_penaja_lain">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">(Jika Lain-lain) Sila Nyatakan:</label>
+								<!--end::Label-->
+								<!--begin::Input wrapper-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="penaja_lain" name="penaja_lain" value="{{$akademik->penaja_lain}}"/>
+								<!--end::Input wrapper-->
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
 					</div>
 					<!--end::Wrapper-->
 					
@@ -936,7 +1107,6 @@
 							<tbody class="fw-semibold text-gray-600">
 								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
 									@foreach($dokumen as $dok)
-										
 										<tr>
 											<td class="text-gray-800">
 												@if($dok->id_dokumen == '1')
@@ -947,36 +1117,63 @@
 											</td>
 											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2')
 											@php
-											if($dok->id_dokumen == '1')
-												$namaDok='akaunBank';
-											elseif($dok->id_dokumen == '2')
-												$namaDok='suratTawaran';
+												$namaDok = ($dok->id_dokumen == '1') ? 'akaunBank' : 'suratTawaran';
 											@endphp
-												<td><a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a></td>
-												<td><textarea type="text" class="form-control form-control-sm" id="nota_{{ $namaDok }}" rows="1" name="nota_{{ $namaDok }}">{{ $dok->catatan }}</textarea></td>
+											<td>
+												<a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a>
+												<button type="button" class="btn btn-link p-0" onclick="toggleUpload('{{ $namaDok }}')">
+													<i class="fa-solid fa-pen"></i>
+												</button>
+												<input type="file" class="form-control form-control-sm mt-2" id="upload_{{ $namaDok }}" name="upload_{{ $namaDok }}" style="display: none;">
+											</td>
+											<td>
+												<textarea type="text" class="form-control form-control-sm" id="nota_{{ $namaDok }}" rows="1" name="nota_{{ $namaDok }}">{{ $dok->catatan }}</textarea>
+											</td>
 											@endif
 										</tr>
-									@endforeach	
+									@endforeach
 								@else
 									<tr>
-										<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
-										<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
+										<td class="text-gray-800">Salinan Penyata Bank&nbsp;
+											<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
+												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+											</a>
+										</td>
+										<td class="fv-row">
+											<input type="file" class="form-control form-control-sm" id="upload_akaunBank" name="upload_akaunBank"/>
+										</td>
+										<td>
+											<textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea>
+										</td>
 									</tr>
 									<tr>
-										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-										<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;
+											<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
+												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+											</a>
+										</td>
+										<td class="fv-row">
+											<input type="file" class="form-control form-control-sm" id="upload_suratTawaran" name="upload_suratTawaran"/>
+										</td>
+										<td>
+											<textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea>
+										</td>
 									</tr>
-
-								@endif	
-								
+								@endif
 							</tbody>
-							
 						</table>
 						<!--end::Table-->
 						
-
+						<script>
+							function toggleUpload(docId) {
+								var uploadField = document.getElementById('upload_' + docId);
+								if (uploadField.style.display === 'none') {
+									uploadField.style.display = 'block';
+								} else {
+									uploadField.style.display = 'none';
+								}
+							}
+						</script>
 						<br>
 						<br>
 
@@ -1287,7 +1484,7 @@
 			});
 
 			$(document).ready(function() {
-			$('.js-example-basic-single').select2();
+			$('.basic-search').select2();
 			});
 
 			//BEKERJA
@@ -1328,109 +1525,189 @@
 				});
 			});
 
+			//SUMBER BIAYA DAN PENAJA
+			$(document).ready(function () {
+				var sumber = document.getElementById("sumber_biaya").value;
+				if (sumber == '4') {
+					$("#div_nama_penaja").hide();
+				}
 
-		</script>
-		<script type='text/javascript'>
-			$(document).ready(function(){
+				// Initialize hidden divs
+				$("#div_biaya_lain").hide();
+				$("#div_penaja_lain").hide();
 
-				// institusi Change
-				//$('#id_institusi').change(function(){
+				var penajaOptions = {!! json_encode($penajaArray) !!};
 
-					// institusi id
-					var id_institusi = document.getElementById("id_institusi").value; 
-					// alert (id_institusi);
+				// Ensure penajaOptions is an array before attempting to iterate
+				if (Array.isArray(penajaOptions)) {
+					// Event handler for sumber_biaya change
+					$('#sumber_biaya').on('change', function () {
+						$("#div_penaja_lain").hide();
+						var selectedValue = this.value;
 
-					// Empty the dropdown
-					$('#peringkat_pengajian').find('option').not(':first').remove();
-					$('#nama_kursus').find('option').not(':first').remove();
+						// Update options based on the selected value
+						$('#nama_penaja').empty().append('<option value="">Pilih</option>');
 
-					// AJAX request 
-					$.ajax({
-						url: '/getPeringkat/'+id_institusi,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							alert('AJAX loaded something');
+						// Display "LAIN-LAIN" option for each sumber
+						$('#nama_penaja').append('<option value="99">LAIN-LAIN</option>');
 
-							var len = 0;
-							if(response['data'] != null){
-								len = response['data'].length;
+						// Show or hide div elements based on the selected value
+						if (selectedValue == '2' || selectedValue == '4') {
+							$("#div_nama_penaja").hide();
+							$("#div_biaya_lain").hide();
+						} else {
+							if (selectedValue == '5') {
+								$("#div_biaya_lain").show();
+								$("#div_nama_penaja").show();
+							} else {
+								$("#div_biaya_lain").hide();
+								$("#div_nama_penaja").show();
 							}
 
-							if(len > 0){
-								var selectedValue = document.getElementById("peringkat").value; 
-								alert(selectedValue);
-								// Read data and create <option >
-								for(var i=0; i<len; i++){
+							// Fetch penaja options based on sumber_biaya
+							$.ajax({
+								url: '/getPenaja/' + selectedValue,
+								type: 'get',
+								dataType: 'json',
+								success: function (response) {
+									// Empty the dropdown
+									$('#nama_penaja').find('option').not(':first').remove();
 
-									var id_institusi = response['data'][i].id_institusi;
-									var kod_peringkat = response['data'][i].kod_peringkat;
-									var peringkat = response['data'][i].peringkat;
+									var len = response['data'] ? response['data'].length : 0;
 
-									var isSelected = (kod_peringkat === selectedValue);
-
-    								var option = "<option value='" + kod_peringkat + "'" + (isSelected ? " selected" : "") + ">" + peringkat + "</option>";
-
-									$("#peringkat_pengajian").append(option); 
+									if (len > 0) {
+										// Read data and create <option>
+										for (var i = 0; i < len; i++) {
+											var id = response['data'][i].id;
+											var penaja = response['data'][i].penaja;
+											var option = "<option value='" + id + "'>" + penaja + "</option>";
+											$("#nama_penaja").append(option);
+										}
+									}
+								},
+								error: function () {
+									// alert('AJAX load did not work');
 								}
-							}
-
-						},
-						error: function(){
-						// alert('AJAX load did not work peringkat');
+							});
 						}
 					});
 
-				//});
-
-				// peringkat Change
-				$('#peringkat_pengajian').change(function(){
-
-				// institusi id
-				var idipt = document.getElementById("id_institusi").value;
-				var kodperingkat = document.getElementById("peringkat_pengajian").value;
-
-				// Empty the dropdown
-				$('#nama_kursus').find('option').not(':first').remove();
-				//alert(idipt);
-
-
-				// AJAX request 
-				$.ajax({
-					url: '/kursus/'+kodperingkat+'/'+idipt,
-					type: 'get',
-					dataType: 'json',
-				
-					success: function(response){
-
-						var len = 0;
-						if(response['data'] != null){
-							len = response['data'].length;
+					// Event handler for nama_penaja change
+					$('#nama_penaja').on('change', function () {
+						if (this.value == '99') {
+							$("#div_penaja_lain").show();
+						} else {
+							$("#div_penaja_lain").hide();
 						}
+					});
+				} else {
+					console.error("Error: penajaOptions is not an array");
+				}
+			});
 
-						if(len > 0){
-							// Read data and create <option >
-							for(var i=0; i<len; i++){
+			//CALCULATE TARIKH TAMAT
+			function dateCheck(){
+				let startDate = new Date($("#tarikh_mula").val());
+				let endDate = new Date($("#tarikh_tamat").val());
+				var studyPeriod = parseFloat(document.getElementById("tempoh_pengajian").value);
 
-								var id_institusi = response['data'][i].id_institusi;
-								var kod_peringkat = response['data'][i].kod_peringkat;
-								var nama_kursus = response['data'][i].nama_kursus;
-								var kod_nec = response['data'][i].kod_nec;
-								var bidang = response['data'][i].bidang.toUpperCase();
-								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
+				// Get the current date
+				var currentDate = new Date();
 
-								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
-
-								$("#nama_kursus").append(option); 
-								
-							}
-						}
-
+				if (!isNaN(studyPeriod)) {
+					// alert(currentDate);
+					// Check if the start date is not more than the current date
+					if (startDate >= currentDate) {
+						alert("Tarikh mula pengajian tidak boleh lebih daripada tarikh hari ini.");
+						document.getElementById("tarikh_mula").value = "";
+						return;
 					}
+				 	endDate.setFullYear(startDate.getFullYear() + Math.floor(studyPeriod));
+
+				 	var remainingMonths = (studyPeriod - Math.floor(studyPeriod)) * 12;
+				 	endDate.setMonth(startDate.getMonth() + Math.floor(remainingMonths));
+
+				 	document.getElementById("tarikh_tamat").valueAsDate = endDate;
+				}
+
+			}
+
+
+		</script>
+		<script>
+			$(document).ready(function() {
+				var id_institusi = $('#id_institusi').val();
+				var kod_peringkat = $('#peringkat').val();
+
+				// Function to fetch peringkat options
+				function fetchPeringkat(id) {
+					$.ajax({
+						url: '/getPeringkatProfil/' + id,
+						type: 'get',
+						dataType: 'json',
+						success: function(response) {
+							$("#peringkat_pengajian").empty();
+							
+							if (response['data']) {
+								var selectedValue = $('#peringkat').val();
+
+								response['data'].forEach(function(item) {
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat}</option>`;
+									$("#peringkat_pengajian").append(option);
+								});
+
+								// Update kod_peringkat to the newly selected value
+								kod_peringkat = $('#peringkat_pengajian').val();
+
+								// Fetch courses based on the new id_institusi and kod_peringkat
+								fetchKursus(id_institusi, kod_peringkat);
+							}
+						},
+						error: function() {
+							alert('Failed to load peringkat options');
+						}
+					});
+				}
+
+				// Function to fetch kursus options based on id_institusi and kod_peringkat
+				function fetchKursus(id_institusi, kod_peringkat) {
+					$.ajax({
+						url: '/getKursusProfil/' + kod_peringkat + '/' + id_institusi,
+						type: 'get',
+						dataType: 'json',
+						success: function(response) {
+							$("#nama_kursus").empty();
+
+							if (response['data']) {
+								var selectedValue = $('#nama_kursus_asal').val();
+
+								response['data'].forEach(function(item) {
+									var uppercaseValue = item.nama_kursus.toUpperCase();
+									var option = `<option value="${item.nama_kursus}" ${item.nama_kursus === selectedValue ? "selected" : ""}>${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
+									$("#nama_kursus").append(option);
+								});
+							}
+						},
+						error: function() {
+							alert('Failed to load kursus options');
+						}
+					});
+				}
+
+				// Initial load
+				fetchPeringkat(id_institusi);
+
+				// When id_institusi changes
+				$('#id_institusi').change(function() {
+					id_institusi = $(this).val();
+					fetchPeringkat(id_institusi);  // Reload peringkat options
 				});
 
+				// When peringkat changes
+				$('#peringkat_pengajian').change(function() {
+					kod_peringkat = $(this).val();
+					fetchKursus(id_institusi, kod_peringkat);  // Reload kursus options based on new kod_peringkat
 				});
-		
 			});
 
 		</script>
