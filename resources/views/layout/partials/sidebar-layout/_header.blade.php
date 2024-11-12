@@ -8,10 +8,10 @@
 		</div>
 		<!--end::Sidebar mobile toggle-->
 		<!--begin::Mobile logo-->
-		<div class="d-flex d-lg-none align-items-center flex-grow-1 flex-lg-grow-0">
-			{{-- <a href="/" class="d-lg-none"> --}}
+		<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+			<a href="" class="d-lg-none">
 				<img alt="Logo" src="{{ image('logos/sispo-new.png') }}" class="h-100px" />
-			{{-- </a> --}}
+			</a>
 		</div>
 		<!--end::Mobile logo-->
 		<!--begin::Header wrapper-->
