@@ -542,6 +542,7 @@ class PelajarController extends Controller
             'alamat_poskod_waris' => $waris->alamat_poskod_waris,
             'pekerjaan_waris' => $waris->pekerjaan_waris,
             'pendapatan_waris' => $waris->pendapatan_waris,
+            'id_institusi' => $akademik->id_institusi,
             'no_pendaftaran_pelajar' => $akademik->no_pendaftaran_pelajar,
             'peringkat_pengajian' => $akademik->peringkat_pengajian,
             'nama_kursus' => $akademik->nama_kursus,
@@ -622,9 +623,10 @@ class PelajarController extends Controller
         if($akademik != null) {
             Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
                 ->update([
+                    'id_institusi' => $request->id_institusi,
                     'no_pendaftaran_pelajar' => $request->no_pendaftaran_pelajar,
-                    'peringkat_pengajian' => $request->peringkat_pengajian,
-                    'nama_kursus' => $request->nama_kursus,
+                    // 'peringkat_pengajian' => $request->peringkat_pengajian,
+                    // 'nama_kursus' => $request->nama_kursus,
                     'tempoh_pengajian' => $request->tempoh_pengajian,
                     'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
                     'sesi' => $request->sesi,
@@ -637,6 +639,8 @@ class PelajarController extends Controller
                     'penaja_lain' => $request->penaja_lain,
                 ]);
         }
+
+        
 
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
@@ -737,6 +741,7 @@ class PelajarController extends Controller
             'alamat_poskod_waris' => $request->alamat_poskod_waris,
             'pekerjaan_waris' => $request->pekerjaan_waris,
             'pendapatan_waris' => $request->pendapatan_waris,
+            'id_institusi' => $request->id_institusi,
             'no_pendaftaran_pelajar' => $request->no_pendaftaran_pelajar,
             'peringkat_pengajian' => $request->peringkat_pengajian,
             'nama_kursus' => $request->nama_kursus,
@@ -758,7 +763,37 @@ class PelajarController extends Controller
 
         
         if ($currentValues != $updatedValues) {    
+            //update peringkat if permohonan belum lulus lagi
+            if($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
+                if($permohonan != null && $permohonan->status < 6){
+                    
+                    $program = substr($permohonan->program, 0, 1);
+                    // dd($program);
+                    Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
+                    ->update([
+                        'peringkat_pengajian' => $request->peringkat_pengajian
+                    ]);
+
+                    Permohonan::where('smoku_id' ,$smoku->id)
+                    ->update([
+                        'no_rujukan_permohonan' => $program.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
+                        
+                    ]);
+
+                } else {
+                    return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini.');
+                }
+            }
+            else{
+                Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
+                    ->update([
+                        'nama_kursus' => $request->nama_kursus,
+                    ]);
+            }
+
             return back()->with('success', 'Maklumat profil berjaya dikemaskini.');
+
+            
         }
 
         // No updates were made
