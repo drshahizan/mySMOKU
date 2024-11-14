@@ -50531,3 +50531,133 @@ small{
   font-size: large;
   color: gray;
 }
+
+.row{
+  display:-ms-flexbox;
+  display:flex;
+  -ms-flex-wrap:wrap;
+  flex-wrap:wrap;
+  margin-right:-15px;
+  margin-left:-15px;
+}
+
+.clearfix::after{
+  display:block;
+  clear:both;
+  content:"";
+}
+
+.row{
+    margin-right:-7.5px;
+    margin-left:-7.5px;
+    margin-bottom: 20px;
+}
+
+.icon-in-bg{
+    text-align:center;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-align-items:center;
+    align-items:center;
+    -webkit-justify-content:center;
+    justify-content:center;
+    width:45px;
+    height:45px;
+}
+.bg-pink{
+    background:#fa96b7;
+    color:rgba(255,255,255,0.7);
+}
+
+.bg-indigo{
+    background:#9367B4;
+    color:rgba(255,255,255,0.7);
+}
+
+.bg-azura{
+    background:#007FFF;
+    color:rgba(255,255,255,0.7);
+}
+
+.bg-orange{
+    background:#ff9659!important;
+    color:rgba(255,255,255,0.7);
+}
+
+.bg-pink:hover, .bg-pink:active{
+  background:#cc547c;
+  color:white!important;
+}
+
+.bg-orange:hover, .bg-orange:active{
+  background:#ff9659!important;
+  color:white!important;
+}
+
+.bg-baharu, .bg-baharu:hover, .bg-baharu:active{
+  background:#186ee6!important;
+  color:white!important;
+}
+
+.bg-sedang-disaring, .bg-sedang-disaring:hover, .bg-sedang-disaring:active{
+  background:#ea40acdc!important;
+  color:white!important;
+}
+
+.bg-disokong, .bg-disokong:hover, .bg-disokong:active{
+  background:#efd06c!important;
+  color:white!important;
+}
+
+.bg-dikembalikan, .bg-dikembalikan:hover, .bg-dikembalikan:active{
+  background:#d75b50!important;
+  color:white!important;
+}
+
+.bg-batal, .bg-batal:hover, .bg-batal:active{
+  background: gray !important;
+  color:white!important;
+}
+
+.bg-dibayar, .bg-dibayar:hover, .bg-dibayar:active{
+  background:#0ca1ab!important;
+  color:white!important;
+}
+
+.text-white{
+  color:white!important;
+}
+
+.rounded-circle{
+  border-radius:50%!important
+}
+
+.fa-file-text,.fa-search,.fa-check,.fa-reply-all{
+  color: white!important;
+}
+
+.col-lg-3{
+  -ms-flex:0 0 25%;
+  flex:0 0 25%;
+  max-width:25%;
+  position:relative;
+  width:100%;
+  padding-right:15px;
+  padding-left:15px;
+}
+
+.col-md-6{
+  -ms-flex:0 0 50%;
+  flex:0 0 50%;
+  /* max-width:50%; */
+  position:relative;
+  width:100%;
+  padding-right:15px;
+  padding-left:15px;
+}
+
+td button{
+  padding: 2px!important;
+  width:130px!important;
+  height: 28px!important;
+}
