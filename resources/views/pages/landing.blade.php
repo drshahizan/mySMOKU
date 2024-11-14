@@ -22,6 +22,25 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<style>
+			.landing-header {
+				padding: 15px 20px;
+			}
+
+			.content-jata {
+				display: flex;
+				align-items: center;
+			}
+
+			.menu-link {
+				color: #000; /* Change to your preferred color */
+				font-weight: bold;
+			}
+
+			@media (min-width: 992px) {
+				.landing-header .menu-link {
+					font-size: 1.25rem; /* Adjust for larger screens */
+				}
+			}
 
 			.header-background {
 				position: relative;
@@ -405,61 +424,47 @@
 	<body  id="laman_utama" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
 			<!--Header-->
-			<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
-				<div class="col-md-2">
-					<div class="content-jata">
-						<a href="#laman_utama">
-							<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px"/>
-							<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px"/>
-						</a>
-					</div>
+			<div class="landing-header d-flex justify-content-between align-items-center px-4" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}" style="padding: 10px 20px;">
+				<!-- Left: Logo Image -->
+				<div class="content-jata" style="width: 200px;">
+					<a href="#laman_utama">
+						<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-default h-35px h-lg-60px" />
+						<img alt="Portal" src="assets/media/portal_sispo.png" class="logo-sticky h-30px h-lg-60px" />
+					</a>
 				</div>
-				<div class="col-md-4 mx-auto text-center">
-				</div>
-				<div class="col-md-6 text-end" >
-					<!--begin::Mobile menu toggle-->
+			
+				<!-- Right: Menu -->
+				<div class="text-end d-flex align-items-center">
+					<!-- Mobile Menu Toggle -->
 					<button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
 						<i class="ki-duotone ki-abstract-14 fs-2hx">
 							<span class="path1"></span>
 							<span class="path2"></span>
 						</i>
 					</button>
-					<!--end::Mobile menu toggle-->
 					
-					<!--begin::Wrapper-->
-					<div class="d-flex align-items-center justify-content-between">
-						<!--begin::Menu wrapper-->
-						<div class="d-lg-block" id="kt_header_nav_wrapper">
-							<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="300px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
-								<!--begin::Menu-->
-								<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary fs-5 fw-bold" id="kt_landing_menu">
-									<!--begin::Menu item-->
-									<div class="menu-item">
-										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
-									</div>
-									<!--end::Menu item-->
-									
-									<!-- Dropdown Menu for Maklumat BKOKU -->
-									<div class="menu-item">
-										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">MAKLUMAT PENAJAAN</a>
-										<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
-											<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
-											<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a></li>
-										</ul>
-									</div>
-									
-									<!--begin::Menu item-->
-									<div class="menu-item">
-										<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
-									</div>
-									<!--end::Menu item-->
+					<!-- Menu Wrapper -->
+					<div class="d-lg-block" id="kt_header_nav_wrapper">
+						<div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="300px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#laman_utama', lg: '#kt_header_nav_wrapper'}">
+							<!-- Menu -->
+							<div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary fs-5 fw-bold" id="kt_landing_menu">
+								<div class="menu-item">
+									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
 								</div>
-								<!--end::Menu-->
+								<div class="menu-item">
+									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">MAKLUMAT PENAJAAN</a>
+									<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
+										<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
+										<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#ppk" id="show-ppk" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT PPK</a></li>
+									</ul>
+								</div>
+								<div class="menu-item">
+									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" id="show-hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">HUBUNGI KAMI</a>
+								</div>
 							</div>
 						</div>
-						<!--end::Menu wrapper-->
 					</div>
-					<!--end::Wrapper-->
+					<!-- End Menu Wrapper -->
 				</div>
 			</div>
 			
