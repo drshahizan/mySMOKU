@@ -185,16 +185,16 @@ var KTSignupGeneral = function () {
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'Katalaluan diperlukan'
+                                message: 'Kata laluan diperlukan'
                             },
                             callback: {
-                                message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
+                                message: 'Kata laluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
                                 callback: function (input) {
                                     // Check length
                                     if (input.value.length < 12) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu sekurang-kurangnya 12 aksara'
+                                            message: 'Kata laluan perlu sekurang-kurangnya 12 aksara'
                                         };
                                     }
 
@@ -202,7 +202,7 @@ var KTSignupGeneral = function () {
                                     if (!/[a-zA-Z]/.test(input.value)) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu huruf'
+                                            message: 'Kata laluan perlu mengandungi sekurang-kurangnya satu huruf'
                                         };
                                     }
                                     
@@ -210,15 +210,15 @@ var KTSignupGeneral = function () {
                                     if (!/\d/.test(input.value)) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu nombor'
+                                            message: 'Kata laluan perlu mengandungi sekurang-kurangnya satu nombor'
                                         };
                                     }
                                     
                                     // Check for at least one symbol (you can adjust the symbols based on your requirement)
-                                    if (!/[@$!%*?&]/.test(input.value)) {
+                                    if (!/[!@#$%^&*()_+-]/.test(input.value)) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu mengandungi sekurang-kurangnya satu simbol seperti @$!%*?&'
+                                            message: 'Kata laluan perlu mengandungi sekurang-kurangnya satu simbol seperti !@#$%^&*()_+-'
                                         };
                                     }
                     
@@ -232,13 +232,13 @@ var KTSignupGeneral = function () {
                     'password_confirmation': {
                         validators: {
                             notEmpty: {
-                                message: 'Pengesahan katalaluan diperlukan'
+                                message: 'Pengesahan kata laluan diperlukan'
                             },
                             identical: {
                                 compare: function () {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'Katalaluan dan pengesahannya tidak sama'
+                                message: 'Kata laluan dan pengesahannya tidak sama'
                             }
                         }
                     },

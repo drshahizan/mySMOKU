@@ -149,7 +149,7 @@ var KTSigninGeneral = function () {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "ada error ni kenapeeee.",
+                            text: "Error.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
