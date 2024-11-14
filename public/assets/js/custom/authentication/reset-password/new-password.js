@@ -20,43 +20,46 @@ var KTAuthNewPassword = function() {
                                 message: 'Kata laluan diperlukan.'
                             },
                             callback: {
-                                message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
+                                message: 'Katalaluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
                                 callback: function (input) {
                                     const password = input.value;
                                     const meterBars = document.querySelectorAll('[data-kt-password-meter-control="highlight"] .flex-grow-1');
-
+                            
                                     // Reset all meter bar classes
                                     meterBars.forEach(bar => bar.classList.remove('bg-secondary', 'bg-warning', 'bg-success', 'bg-danger'));
-
+                            
                                     // Check password conditions
                                     let strength = 0;
-
+                            
                                     if (password.length >= 12) strength++; // Length check
-                                    if (/[a-zA-Z]/.test(password)) strength++; // Letter check
-                                    if (/\d/.test(password)) strength++; // Number check
+                                    if (/[a-z]/.test(password)) strength++; // Lowercase letter check
+                                    if (/[A-Z]/.test(password)) strength++; // Uppercase letter check
+                                    if (/\d/.test(password)) strength++;    // Number check
                                     if (/[@$!%*?&]/.test(password)) strength++; // Symbol check
-
+                            
                                     // Update meter bar colors based on strength
-                                    if (strength === 1) {
+                                    if (strength === 1 && password.length < 12) {
                                         meterBars.forEach(bar => bar.classList.add('bg-danger')); // Weak (red)
-                                    } else if (strength === 2) {
+                                    } else if (strength === 2 && password.length < 12) {
                                         meterBars.forEach(bar => bar.classList.add('bg-warning')); // Moderate (yellow)
-                                    } else if (strength === 3) {
+                                    } else if (strength === 3 && password.length < 12) {
                                         meterBars.forEach(bar => bar.classList.add('bg-info')); // Stronger (blue)
-                                    } else if (strength === 4) {
+                                    } else if (strength === 5 && password.length >= 12) {
                                         meterBars.forEach(bar => bar.classList.add('bg-success')); // Strongest (green)
                                     }
-
+                            
                                     // Return validation result based on full criteria
-                                    if (strength < 4) {
+                                    if (strength < 5 || password.length < 12) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu mengandungi huruf, nombor, dan simbol, serta sekurang-kurangnya 12 aksara'
+                                            message: 'Katalaluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara'
                                         };
                                     }
                                     return { valid: true };
                                 }
                             }
+                            
+                            
                         }
                     },
                     'password_confirmation': {
@@ -231,7 +234,7 @@ var KTAuthNewPassword = function() {
     }
 
     var validatePassword = function() {
-        return  (passwordMeter.getScore() > 50);
+        return  (passwordMeter.getScore() > 100);
     }
 
     var isValidUrl = function(url) {
