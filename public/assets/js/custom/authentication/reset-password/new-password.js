@@ -35,7 +35,8 @@ var KTAuthNewPassword = function() {
                                     if (/[a-z]/.test(password)) strength++; // Lowercase letter check
                                     if (/[A-Z]/.test(password)) strength++; // Uppercase letter check
                                     if (/\d/.test(password)) strength++;    // Number check
-                                    if (/[@$!%*?&]/.test(password)) strength++; // Symbol check
+                                    // if (/[@$!%*?&]/.test(password)) strength++; // Symbol check
+                                    if (/[!@#$%^&*()_+-]/.test(password)) strength++; // Symbol check
                             
                                     // Update meter bar colors based on strength
                                     if (strength === 1 && password.length < 12) {
