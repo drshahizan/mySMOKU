@@ -597,7 +597,9 @@
 														<span class="input-group-text">
 															<i class="fa-solid fa-user"></i>
 														</span>
-														<input type="text" class="form-control" id="nama" name="nama">
+														<input type="text" class="form-control" id="nama" name="nama" required
+															oninvalid="this.setCustomValidity('Sila masukkan nama anda.')" 
+															oninput="setCustomValidity('')">
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -606,7 +608,9 @@
 														<span class="input-group-text">
 															<i class="fa-solid fa-phone"></i>
 														</span>
-														<input type="tel" class="form-control" id="telefon" name="telefon">
+														<input type="tel" class="form-control" id="telefon" minlength="11" maxlength="11" name="telefon" required
+															oninvalid="this.setCustomValidity('Sila masukkan nombor telefon anda.')" 
+															oninput="setCustomValidity('')">
 													</div>
 												</div>
 											</div>
@@ -617,7 +621,10 @@
 														<span class="input-group-text">
 															<i class="fa-solid fa-envelope"></i>
 														</span>
-														<input type="email" class="form-control" id="emel" name="emel">
+														<input type="email" class="form-control" id="emel" name="emel" required
+															pattern=".+@.+\..+" 
+															oninvalid="this.setCustomValidity('Sila masukkan emel yang sah dengan simbol @.')" 
+															oninput="setCustomValidity('')">
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -626,16 +633,21 @@
 														<span class="input-group-text">
 															<i class="fa-solid fa-tag"></i>
 														</span>
-														<input type="text" class="form-control" id="tajuk" name="tajuk">
+														<input type="text" class="form-control" id="tajuk" name="tajuk" required
+															oninvalid="this.setCustomValidity('Sila masukkan tajuk anda.')" 
+															oninput="setCustomValidity('')">
 													</div>
 												</div>
 											</div>
 											<div class="mb-3">
 												<label for="mesej" class="form-label">Mesej</label>
-												<textarea class="form-control" id="mesej" name="mesej" rows="3" placeholder="Masukkan mesej anda"></textarea>
+												<textarea class="form-control" id="mesej" name="mesej" rows="3" placeholder="Masukkan mesej anda" required
+													oninvalid="this.setCustomValidity('Sila masukkan mesej anda.')" 
+													oninput="setCustomValidity('')"></textarea>
 											</div>
 											<button type="submit" class="btn btn-primary">Hantar</button>
 										</form>
+										
 									</div>
 									<!--end::Item-->
 								</div>
