@@ -20,7 +20,7 @@ var KTAuthNewPassword = function() {
                                 message: 'Kata laluan diperlukan.'
                             },
                             callback: {
-                                message: 'Katalaluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
+                                message: 'Kata laluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara',
                                 callback: function (input) {
                                     const password = input.value;
                                     const meterBars = document.querySelectorAll('[data-kt-password-meter-control="highlight"] .flex-grow-1');
@@ -53,7 +53,7 @@ var KTAuthNewPassword = function() {
                                     if (strength < 5 || password.length < 12) {
                                         return {
                                             valid: false,
-                                            message: 'Katalaluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara'
+                                            message: 'Kata laluan perlu mengandungi huruf besar, huruf kecil, nombor, dan simbol, serta sekurang-kurangnya 12 aksara'
                                         };
                                     }
                                     return { valid: true };
