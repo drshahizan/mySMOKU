@@ -395,7 +395,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
 						<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
-						<span class="menu-title">Emel</span>
+						<span class="menu-title">E-mel</span>
 					</a>
 				</div>
 
