@@ -154,12 +154,18 @@ class TuntutanController extends Controller
                         ->orderBy('id', 'desc')
                         ->first();
                     
-                    $jumlah_tuntut = DB::table('tuntutan')
+                    if($ada -> sesi ==  null){
+                        $baki_total = $maxLimit->jumlah;	
+                    }else{
+                        $jumlah_tuntut = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
                         ->where('status','!=', 9)
                         ->get();
-                    $sum = $jumlah_tuntut->sum('jumlah');	
-                    $baki_total = $permohonan->baki_dibayar - $sum;	
+                        $sum = $jumlah_tuntut->sum('jumlah');	
+                        
+                        // $baki_total = $permohonan->baki_dibayar - $sum;	
+                        $baki_total = $maxLimit->jumlah - $sum;	
+                    }	
                 }	
             }
             else {

@@ -731,9 +731,10 @@ class PenyelarasController extends Controller
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
+        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
-        ->where('penyelaras_id','=', Auth::user()->id)
+        // ->where('penyelaras_id','=', Auth::user()->id)
+        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
         ->where('permohonan.status', 8) 
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->select('smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
@@ -993,7 +994,7 @@ class PenyelarasController extends Controller
             }
        
             if (($currentSesi === $previousSesi) || $previousSesi === null) {
-                
+            
                 if (!$tuntutan) {
                     $wang_saku = 0.00;
                     //nak tahu baki sesi semasa permohonan lepas
@@ -1004,13 +1005,21 @@ class PenyelarasController extends Controller
                         ->where('permohonan_id', $tuntutan->permohonan_id)
                         ->orderBy('id', 'desc')
                         ->first();
-                    
-                    $jumlah_tuntut = DB::table('tuntutan')
+
+                    if($ada -> sesi ==  null){
+                        $baki_total = $maxLimit->jumlah;	
+                    }else{
+                        $jumlah_tuntut = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
                         ->where('status','!=', 9)
                         ->get();
-                    $sum = $jumlah_tuntut->sum('jumlah');	
-                    $baki_total = $permohonan->baki_dibayar - $sum;	
+                        $sum = $jumlah_tuntut->sum('jumlah');	
+                        
+                        // $baki_total = $permohonan->baki_dibayar - $sum;	
+                        $baki_total = $maxLimit->jumlah - $sum;	
+                    }
+                    
+                    // dd($baki_total);
                 }	
             }
             else {

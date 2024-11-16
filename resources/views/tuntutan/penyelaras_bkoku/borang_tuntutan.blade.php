@@ -42,14 +42,14 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}"/>
 										</div>
 									</div>
 									<!--end::Col-->
