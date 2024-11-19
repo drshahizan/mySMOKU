@@ -54,6 +54,10 @@ use Illuminate\Support\Facades\Session;
     Route::get('/maklumat/MQAPA', [MaklumatKursusController::class, 'MQAPA']);
     Route::get('/testmqa/api', [MaklumatKursusController::class, 'test']);
 //});
+Route::get('/test', function () {
+    $name = 'John';
+    return view('pages.test', ['greeting' => "Hello, $name!"]);
+});
 
 Route::get('/', function () {
     // Check if a flash message indicating the session has been flushed exists

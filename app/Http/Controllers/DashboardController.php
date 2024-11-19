@@ -65,11 +65,11 @@ class DashboardController extends Controller
     {  
         if($request->hasFile('profile_photo_path'))
         {
-            $filename = strval(Auth::user()->nokp) . "_" . $request->profile_photo_path->getClientOriginalName();
+            $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
             //$request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
             $request->profile_photo_path->move('assets/profile_photo_path',$filename);
             //Auth()->user()->update(['profile_photo_path'=>$filename]);
-            DB::table('users')->where('nokp',Auth::user()->nokp)
+            DB::table('users')->where('nokp',Auth::user()->no_kp)
             ->update([
                 'profile_photo_path' => $filename,
             ]); 
