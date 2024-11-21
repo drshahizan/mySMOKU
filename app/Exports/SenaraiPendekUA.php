@@ -52,7 +52,7 @@ class SenaraiPendekUA implements FromCollection, WithHeadings, WithColumnWidths,
                 'b.tarikh_tamat'
             )
             ->get();
-
+        // dd($this->filters);
         return collect($senarai_pendek);
     }
 

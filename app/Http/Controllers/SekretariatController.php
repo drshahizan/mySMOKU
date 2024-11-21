@@ -1204,7 +1204,6 @@ class SekretariatController extends Controller
         }
 
         $kelulusan = $query->get();
-
         //check programCode
         if ($programCode == 'IPTS')
             return Excel::download(new SenaraiPendekBKOKU($programCode, $filters), 'Permohonan_BKOKU_IPTS_Disokong.xlsx');

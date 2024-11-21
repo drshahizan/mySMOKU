@@ -146,12 +146,12 @@
                                                 </button>
                                                 <!--end::Actions-->
                                             </div>
-                                        
-                                            <div class="col-md-3 fv-row export-container" data-program-code="IPTS" style="margin-left:65px;">
-                                                <a id="exportIPTS" href="{{ route('senarai.disokong.pdf', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
+
+                                            <div class="col-md-3 fv-row export-container" data-program-code="UA" style="margin-left:65px;">
+                                                <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportIPTSExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportUAExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
@@ -174,11 +174,11 @@
                                                 </a>
                                             </div>
                                             
-                                            <div class="col-md-3 fv-row export-container" data-program-code="UA" style="margin-left:65px;">
-                                                <a id="exportUA" href="{{ route('senarai.disokong.pdf', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                            <div class="col-md-3 fv-row export-container" data-program-code="IPTS" style="margin-left:65px;">
+                                                <a id="exportIPTS" href="{{ route('senarai.disokong.pdf', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PDF
                                                 </a>
-                                                <a id="exportUAExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round">
+                                                <a id="exportIPTSExcel" href="{{ route('senarai.disokong.excel', ['programCode' => 'IPTS']) }}" target="_blank" class="btn btn-secondary btn-round">
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Excel
                                                 </a>
                                             </div>
@@ -216,6 +216,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -296,6 +297,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -366,6 +368,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -446,6 +449,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -517,6 +521,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -597,6 +602,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -668,6 +674,7 @@
                                                         <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -748,6 +755,7 @@
                                                                     <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                     <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                                 </tr>
@@ -820,6 +828,7 @@
                                                         <th class="text-center" style="width: 10% !important;"><b>Jenis Kecacatan</b></th>
                                                         <th class="text-center" style="width: 17% !important;"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Tamat Pengajian</b></th>
                                                     </tr>
@@ -898,6 +907,7 @@
                                                                 <td style="width: 10%;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
                                                                 <td style="width: 17%;">{{$namakursus}}</td>
                                                                 <td style="width: 20%;">{{$institusipengajian}}</td>
+                                                                <td style="width: 20%">{{$id_institusi}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
                                                             </tr>
@@ -977,11 +987,11 @@
         </script>
         <script>
             $(document).ready(function() {
-                $('#sortTable1, #sortTable2, #sortTable3, #sortTable4, #sortTable5').DataTable({
-                    "language": {
-                        "url": "/assets/lang/Malay.json"
-                    }
-                });
+                // $('#sortTable1, #sortTable2, #sortTable3, #sortTable4, #sortTable5').DataTable({
+                //     "language": {
+                //         "url": "/assets/lang/Malay.json"
+                //     }
+                // });
             });
         </script>
         
@@ -994,10 +1004,10 @@
             var ppkList = @json($institusiPengajianPPK);
 
             $(document).ready(function() {
-                $('.export-container[data-program-code="IPTS"]').show();
+                $('.export-container[data-program-code="UA"]').show();
                 $('.export-container[data-program-code="POLI"]').hide();
                 $('.export-container[data-program-code="KK"]').hide();
-                $('.export-container[data-program-code="UA"]').hide();
+                $('.export-container[data-program-code="IPTS"]').hide();
                 $('.export-container[data-program-code="PPK"]').hide();
                 $('.none-container').show(); // Hide export elements
 
@@ -1089,7 +1099,7 @@
 
                     // Add options based on the selected tab
                     for (var i = 0; i < institusiList.length; i++) {
-                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                        $('#institusiDropdown').append('<option value="' + institusiList[i].id_institusi + '">' + institusiList[i].nama_institusi + '</option>');
                     }
                 }
             });
@@ -1130,9 +1140,11 @@
                             url: "/assets/lang/Malay.json"
                         },
                     columnDefs: [
-                        { orderable: false, targets: [0] }
+                        { orderable: false, targets: [0] },
+                        { targets: [6], visible: false }
                     ]
                 });
+
             }
 
             function applyFilter() {
@@ -1158,8 +1170,8 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columnDefs: [
-                                { orderable: false, targets: [0] }
-                                
+                                { orderable: false, targets: [0] },
+                                { targets: [6], visible: false }
 
                             ]
                     });
@@ -1203,7 +1215,7 @@
 
             function applyAndLogFilter(tableName, table, filterValue) {
                 // Apply search filter to the table
-                table.column(5).search(filterValue).draw();
+                table.column(6).search(filterValue).draw();
 
                 // Log filtered data
                 console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());

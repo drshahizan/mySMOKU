@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\InfoIpt;
 use App\Models\Tuntutan;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,17 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
     public function __construct()
     {
         // Get the institusi ID of the logged-in user
-        $this->instiusi_user = Auth::user()->id_institusi;
+        // $this->instiusi_user = Auth::user()->id_institusi;
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $this->instiusi_user = $infoiptCollection->pluck('id_institusi');
     }
 
     public function collection()
@@ -58,7 +69,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->where('tuntutan.status', 10)
             ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-            ->where('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -86,7 +97,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
             ->where('permohonan.status', 10)
             ->where('permohonan.sesi_bayaran', $sesiBayaran)
-            ->where('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -119,7 +130,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $query->whereColumn('tuntutan.yuran_dibayar', '!=', 'tuntutan.yuran_disokong')
                     ->orWhereColumn('tuntutan.wang_saku_dibayar', '!=', 'tuntutan.wang_saku_disokong');
             })
-            ->where('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -151,7 +162,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
                 $query->whereColumn('permohonan.yuran_dibayar', '!=', 'permohonan.yuran_disokong')
                     ->orWhereColumn('permohonan.wang_saku_dibayar', '!=', 'permohonan.wang_saku_disokong');
             })
-            ->where('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -267,7 +278,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
     private function getInstitusiData()
     {
         // Assuming you retrieve the institution data from somewhere
-        $institusiData = DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
+        $institusiData = DB::table('bk_info_institusi')->whereIn('id_institusi', $this->instiusi_user)->value('nama_institusi');
         
         // Convert the data to uppercase
         $institusiData = strtoupper($institusiData);

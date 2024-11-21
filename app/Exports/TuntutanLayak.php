@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\InfoIpt;
 use App\Models\Tuntutan;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -30,7 +31,16 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
     public function collection()
     {
         // Get the institusi ID of the logged-in user
-        $instiusi_user = Auth::user()->id_institusi;
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $instiusi_user = $infoiptCollection->pluck('id_institusi');
 
         // Fetch data from the database based on the institusi ID
         $query = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
@@ -38,7 +48,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('tuntutan.status', 6)
             ->whereNull('tuntutan.data_migrate')
-            ->where('bk_info_institusi.id_institusi', $instiusi_user);
+            ->whereIn('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date') {
             $query->whereBetween('tuntutan.tarikh_hantar', [$this->startDate, $this->endDate]);

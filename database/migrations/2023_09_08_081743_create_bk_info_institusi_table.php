@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_institusi');
             $table->string('institusi_esp')->nullable();
+            $table->string('id_induk')->nullable();
             $table->string('nama_institusi');
             $table->string('nama_institusi_bi')->nullable();
             $table->string('poskod')->nullable();

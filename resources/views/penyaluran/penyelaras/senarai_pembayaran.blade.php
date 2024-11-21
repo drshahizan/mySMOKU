@@ -257,8 +257,22 @@
                                                     @php
                                                         $i++;
                                                         $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                                        $institusi_id = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
-                                                        $instiusi_user = auth()->user()->id_institusi;
+                                                        
+                                                        $infoipt = DB::table('bk_info_institusi')->where('id_institusi', Auth::user()->id_institusi)->first();
+
+                                                        if ($infoipt && $infoipt->id_induk != null) {
+                                                            $infoiptCollection = DB::table('bk_info_institusi')->where('id_induk', Auth::user()->id_institusi)->get();
+                                                        } else {
+                                                            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+                                                        }
+
+                                                        // Extract all `id_institusi` values (handles both single and multiple records)
+                                                        $instiusi_user = $infoiptCollection->pluck('id_institusi');
+                                                        // $instiusi_user = auth()->user()->id_institusi;
+                                                        
+                                                        $institusi_id = DB::table('smoku_akademik')
+                                                        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )
+                                                        ->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.id_institusi');
 
                                                         // nama pemohon
                                                         $text = ucwords(strtolower($nama_pemohon)); 
@@ -275,7 +289,7 @@
                                                         $pemohon = implode(' ', $result);
                                                     @endphp
                                                     
-                                                    @if ($institusi_id == $instiusi_user)
+                                                    @if ($instiusi_user->contains($institusi_id))
                                                         <!-- Table rows -->
                                                         <tr>
                                                             {{-- <td class="text-center" style="width: 5%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>  --}}
@@ -295,55 +309,6 @@
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                         </tr>
 
-                                                        {{-- Modal Baucer --}}
-                                                        {{-- <div class="modal fade" id="baucerPermohonan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerPermohonan" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="baucerPermohonan">Kemaskini Maklumat Pembayaran</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-                                                                        <!-- Form for single submission -->
-                                                                        <form action="{{ route('permohonan.modal.submit', ['permohonan_id' => $item['id']]) }}" method="POST" class="modal-form">
-                                                                            {{ csrf_field() }}
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer">
-                                                                            </div>
-                                                                            
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal"></textarea>
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
-                                                                            </div>
-
-                                                                            <input type="hidden" id="clickedNoRujukan1">
-
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                        </div> --}}
                                                     @endif
                                                 @endforeach 
                                             </tbody>
@@ -416,55 +381,6 @@
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
                                                         </tr>
 
-                                                        {{-- Modal Baucer --}}
-                                                        {{-- <div class="modal fade" id="baucerTuntutan{{$item['id']}}" tabindex="-1" aria-labelledby="baucerTuntutan" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="baucerTuntutan">Kemaskini Maklumat Pembayaran</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-                                                                        <!-- Form for single submission -->
-                                                                        <form action="{{ route('tuntutan.modal.submit', ['tuntutan_id' => $item['id']]) }}" method="POST" class="modal-form">
-                                                                            {{ csrf_field() }}
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Yuran Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="yuranDibayar" name="yuranDibayar">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Wang Saku Dibayar (RM) :</label>
-                                                                                <input type="number" step="0.01" class="form-control" id="wangSakuDibayar" name="wangSakuDibayar">
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="recipient-name" class="col-form-label">No Baucer :</label>
-                                                                                <input type="text" class="form-control" id="noBaucer" name="noBaucer">
-                                                                            </div>
-                                                                            
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Perihal :</label>
-                                                                                <textarea class="form-control" id="perihal" name="perihal"></textarea>
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="message-text" class="col-form-label">Tarikh Baucer :</label>
-                                                                                <input type="date" class="form-control" id="tarikhBaucer" name="tarikhBaucer">
-                                                                            </div>
-
-                                                                            <input type="hidden" id="clickedNoRujukan2">
-
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                        </div> --}}
                                                     @endif
                                                 @endforeach 
                                             </tbody>

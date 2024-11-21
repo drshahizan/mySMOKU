@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\InfoIpt;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,14 +29,24 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
     public function collection()
     {
         // Get the institusi ID of the logged-in user
-        $instiusi_user = Auth::user()->id_institusi;
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $instiusi_user = $infoiptCollection->pluck('id_institusi');
+        // $instiusi_user = Auth::user()->id_institusi;
 
         $query = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->where('permohonan.status', 6)
             ->whereNull('permohonan.data_migrate')
-            ->where('bk_info_institusi.id_institusi', $instiusi_user);
+            ->whereIn('bk_info_institusi.id_institusi', $instiusi_user);
 
         if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date'){
             $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);

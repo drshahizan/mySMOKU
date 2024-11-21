@@ -271,7 +271,12 @@ class PenyelarasController extends Controller
         $negeri = Negeri::orderby("kod_negeri","asc")->select('id','negeri','kod_negeri')->get();
         $bandar = Bandar::orderby("id","asc")->select('id','bandar')->get();
         $agama = Agama::orderby("id","asc")->select('id','agama')->get();
-        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if($infoipt ->id_induk != null){
+            $infoipt = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        }
+        // dd($infoipt);
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
         $mod = Mod::all()->sortBy('kod_mod');
@@ -718,15 +723,16 @@ class PenyelarasController extends Controller
 
     public function senaraiTuntutanBaharu()
     {
-        // $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
-        // ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-        // ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-        // ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
-        // ->where('penyelaras_id','=', Auth::user()->id)
-        // ->where('permohonan.status', 8) 
-        // ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        // ->get(['smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
         
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
@@ -734,7 +740,7 @@ class PenyelarasController extends Controller
         // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
         // ->where('penyelaras_id','=', Auth::user()->id)
-        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
+        ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
         ->where('permohonan.status', 8) 
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->select('smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
@@ -1239,10 +1245,21 @@ class PenyelarasController extends Controller
 
     public function sejarahTuntutan()
     {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
         $tuntutan = Tuntutan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
         // join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'tuntutan.smoku_id')
         // ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
-        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
+        ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
         ->select('tuntutan.*')
         ->orderBy('tuntutan.id', 'DESC')
         ->get();
@@ -1297,13 +1314,22 @@ class PenyelarasController extends Controller
 
     public function sejarahPermohonan()
     {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+        // dd($idInstitusiList);
         $permohonan = Permohonan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
-        // ->join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'permohonan.smoku_id')
-        // ->where('smoku_penyelaras.penyelaras_id', '=', Auth::user()->id)
-        ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
-        ->select('permohonan.*')
-        ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get();
+            ->whereIn('smoku_akademik.id_institusi', $idInstitusiList) // Use `whereIn` for multiple IDs
+            ->select('permohonan.*')
+            ->orderBy('permohonan.tarikh_hantar', 'DESC')
+            ->get();
 
         return view('permohonan.penyelaras_bkoku.sejarah_permohonan',compact('permohonan'));
     }
@@ -1684,9 +1710,10 @@ class PenyelarasController extends Controller
         } else{
             $sesiBayaran = '4/' . $currentYear;
         }
-
+        
         $user = auth()->user();
         $institusiId = $user->id_institusi;
+
 
         // $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->where('permohonan.data_migrate', 'NULL')->get();
         $permohonanLayak = Permohonan::orderBy('id', 'desc')
@@ -2055,15 +2082,28 @@ class PenyelarasController extends Controller
 
     public function senaraiPelajar()
     {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
         $pelajar = Smoku::join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
         // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->join('users','users.no_kp','=','smoku.no_kp')
         ->leftJoin('tukar_institusi', 'tukar_institusi.smoku_id', '=', 'smoku.id')
-        ->where(function($query) {
-            $query->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
-                ->orWhere('tukar_institusi.id_institusi_baru', '=', Auth::user()->id_institusi)
-                ->where('tukar_institusi.status', '=', 1);
+        ->where(function ($query) use ($idInstitusiList) {
+            $query->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
+                  ->orWhere(function ($subQuery) use ($idInstitusiList) {
+                      $subQuery->whereIn('tukar_institusi.id_institusi_baru', $idInstitusiList)
+                               ->where('tukar_institusi.status', '=', 1);
+                  });
         })
         ->orderBy('smoku.id', 'DESC')
         ->get(['smoku.*','tukar_institusi.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);

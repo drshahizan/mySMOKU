@@ -455,7 +455,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         
     });     
-
+    //Penyelaras BKOKU
     Route::middleware(['auth', 'check.tahap:2'])->group(function () {
         //Penyaluran - Penyelaras - Dokumen SPBB
         Route::get('penyelaras/penyaluran/muat-turun/borang/spbb', [PenyelarasController::class, 'muatTurunBorangSPBB'])->name('penyelaras.muat-turun.SPBB');

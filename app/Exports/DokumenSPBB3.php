@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\InfoIpt;
 use App\Models\Tuntutan;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,17 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
 
     public function __construct()
     {
-        $this->instiusi_user = Auth::user()->id_institusi;
+        // $this->instiusi_user = Auth::user()->id_institusi;
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $this->instiusi_user = $infoiptCollection->pluck('id_institusi');
     }
 
     public function collection()
@@ -52,7 +63,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
         ->where('tuntutan.status', 8)
         ->where('tuntutan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
+        ->whereIn('f.id_institusi', $this->instiusi_user)
         ->select(
             'tuntutan.tarikh_transaksi',
             'tuntutan.no_cek',
@@ -68,7 +79,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
         ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
         ->where('permohonan.status', 8) 
         ->where('permohonan.sesi_bayaran', $sesiBayaran)
-        ->where('f.id_institusi', $this->instiusi_user)
+        ->whereIn('f.id_institusi', $this->instiusi_user)
         ->select(
             'permohonan.tarikh_transaksi',
             'permohonan.no_cek',
@@ -153,7 +164,7 @@ class DokumenSPBB3 implements FromCollection, WithHeadings, WithEvents, WithMapp
     private function getInstitusiData()
     {
         // Assuming you retrieve the institution data from somewhere
-        $institusiData = DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
+        $institusiData = DB::table('bk_info_institusi')->whereIn('id_institusi', $this->instiusi_user)->value('nama_institusi');
         
         // Convert the data to uppercase
         $institusiData = strtoupper($institusiData);

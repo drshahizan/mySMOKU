@@ -932,11 +932,9 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$butiranPelajar->peringkat_pengajian}}" />
 									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
 										<option value="">Pilih</option>
-										@foreach ($peringkat as $peringkat)
-										<option value="{{$peringkat->kod_peringkat}}" {{$butiranPelajar->peringkat_pengajian == $peringkat->kod_peringkat ? 'selected' : ''}}>{{ $peringkat->peringkat}}</option>
-										@endforeach
 									</select>
 									<!--end::Input wrapper-->
 								</div>
@@ -951,8 +949,9 @@
 								<span class="">Nama Kursus</span>
 							</label>
 							<!--end::Label-->
+							<input type="hidden" class="form-control form-control-solid" placeholder="" id="nama_kursus_asal" name="nama_kursus_asal" value="{{$butiranPelajar->nama_kursus}}" />
 							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
+								<option value="">Pilih</option>
 							</select>
 						</div>
 						<!--end::Input group-->
@@ -2053,102 +2052,79 @@
 			
 		</script>
 		<script type='text/javascript'>
-			$(document).ready(function(){
-	
-				// institusi Change
-				$('#id_institusi').change(function(){
-	
-					// institusi id
-					var id_institusi = $(this).val();
-					//alert (id_institusi);
-	
-					// Empty the dropdown
-					$('#peringkat_pengajian').find('option').not(':first').remove();
-					$('#nama_kursus').find('option').not(':first').remove();
-	
-					// AJAX request 
+			$(document).ready(function() {
+				var id_institusi = $('#id_institusi').val();
+				var kod_peringkat = $('#peringkat_pengajian').val();
+
+				// Function to fetch peringkat options
+				function fetchPeringkat(id) {
 					$.ajax({
 						url: '/peringkat/'+id_institusi,
 						type: 'get',
 						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-	
-							var len = 0;
-							if(response['data'] != null){
-								len = response['data'].length;
+						success: function(response) {
+							$("#peringkat_pengajian").empty();
+							
+							if (response['data']) {
+								var selectedValue = $('#peringkat').val();
+
+								response['data'].forEach(function(item) {
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat}</option>`;
+									$("#peringkat_pengajian").append(option);
+								});
+
+								// Update kod_peringkat to the newly selected value
+								kod_peringkat = $('#peringkat_pengajian').val();
+
+								// Fetch courses based on the new id_institusi and kod_peringkat
+								fetchKursus(id_institusi, kod_peringkat);
 							}
-	
-							if(len > 0){
-								// Read data and create <option >
-								for(var i=0; i<len; i++){
-	
-									var id_institusi = response['data'][i].id_institusi;
-									var kod_peringkat = response['data'][i].kod_peringkat;
-									var peringkat = response['data'][i].peringkat;
-	
-									var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
-	
-									$("#peringkat_pengajian").append(option); 
-								}
-							}
-	
 						},
-						error: function(){
-						// alert('AJAX load did not work peringkat');
+						error: function() {
+							alert('Failed to load peringkat options');
 						}
 					});
-	
-				});
-	
-				// peringkat Change
-				$('#peringkat_pengajian').change(function(){
-	
-				// institusi id
-				var idipt = $(id_institusi).val();
-				var kodperingkat = $(this).val();
-	
-				// Empty the dropdown
-				$('#nama_kursus').find('option').not(':first').remove();
-				//alert(idipt);
-	
-	
-				// AJAX request 
-				$.ajax({
-					url: '/kursus/'+kodperingkat+'/'+idipt,
-					type: 'get',
-					dataType: 'json',
-				
-					success: function(response){
-	
-						var len = 0;
-						if(response['data'] != null){
-							len = response['data'].length;
-						}
-	
-						if(len > 0){
-							// Read data and create <option >
-							for(var i=0; i<len; i++){
-	
-								var id_institusi = response['data'][i].id_institusi;
-								var kod_peringkat = response['data'][i].kod_peringkat;
-								var nama_kursus = response['data'][i].nama_kursus;
-								var kod_nec = response['data'][i].kod_nec;
-								var bidang = response['data'][i].bidang.toUpperCase();
-								var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
-	
-								var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
-	
-								$("#nama_kursus").append(option); 
-								
+				}
+
+				// Function to fetch kursus options based on id_institusi and kod_peringkat
+				function fetchKursus(id_institusi, kod_peringkat) {
+					$.ajax({
+						url: '/kursus/'+kod_peringkat+'/'+id_institusi,
+						type: 'get',
+						dataType: 'json',
+						success: function(response) {
+							$("#nama_kursus").empty();
+
+							if (response['data']) {
+								var selectedValue = $('#nama_kursus_asal').val();
+
+								response['data'].forEach(function(item) {
+									var uppercaseValue = item.nama_kursus.toUpperCase();
+									var option = `<option value="${item.nama_kursus}" ${item.nama_kursus === selectedValue ? "selected" : ""}>${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
+									$("#nama_kursus").append(option);
+								});
 							}
+						},
+						error: function() {
+							alert('Failed to load kursus options');
 						}
-	
-					}
+					});
+				}
+
+				// Initial load
+				fetchPeringkat(id_institusi);
+
+				// When id_institusi changes
+				$('#id_institusi').change(function() {
+					id_institusi = $(this).val();
+					fetchPeringkat(id_institusi);  // Reload peringkat options
 				});
-	
+
+				// When peringkat changes
+				$('#peringkat_pengajian').change(function() {
+					kod_peringkat = $(this).val();
+					fetchKursus(id_institusi, kod_peringkat);  // Reload kursus options based on new kod_peringkat
 				});
-		
 			});
 
 		</script>

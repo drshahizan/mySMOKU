@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Tuntutan;
 use App\Models\Akademik;
+use App\Models\InfoIpt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -29,7 +30,16 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     public function __construct()
     {
         // Get the institusi ID of the logged-in user
-        $this->instiusi_user = Auth::user()->id_institusi;
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $this->instiusi_user = $infoiptCollection->pluck('id_institusi');
     }
 
     public function collection()
@@ -47,7 +57,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->whereNull('tuntutan.data_migrate')
             // ->where('tuntutan.data_migrate', '!=', '1')
             ->where('d.jenis', 'Yuran')
-            ->where('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->instiusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -208,7 +218,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     private function getInstitusiData()
     {
-        return DB::table('bk_info_institusi')->where('id_institusi', $this->instiusi_user)->value('nama_institusi');
+        return DB::table('bk_info_institusi')->whereIn('id_institusi', $this->instiusi_user)->value('nama_institusi');
     }
 
     private function getNamaPenerimaData()

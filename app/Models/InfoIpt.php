@@ -13,6 +13,7 @@ class InfoIpt extends Model
     protected $fillable = [
         'id_institusi',
         'institusi_esp',
+        'id_induk',
         'nama_institusi',
         'nama_institusi_bi',
         'poskod',
