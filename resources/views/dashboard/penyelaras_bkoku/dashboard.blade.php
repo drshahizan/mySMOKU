@@ -204,17 +204,18 @@
             </div>
             <!--end::Table Widget 9-->
         </div>
-        </div> <script>
-            $(document).ready(function() {
-                $('#sortTable1').DataTable({
-                    "language": {
-                        "url": "/assets/lang/Malay.json"
-                    }
-                });
+    </div>
+    
+    
+    <script>
+        $(document).ready(function() {
+            $('#sortTable1').DataTable({
+                "language": {
+                    "url": "/assets/lang/Malay.json"
+                }
             });
-        </script>
-        </div>
-  
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

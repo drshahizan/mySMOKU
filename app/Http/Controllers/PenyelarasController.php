@@ -124,7 +124,15 @@ class PenyelarasController extends Controller
             $formattedDate = $tarikhLahirDate->format('Y-m-d');
 
             $kategori = $dataField['KATEGORI'];
-            $kod_oku = JenisOku::where('kecacatan',$kategori)->first();
+            $jenis_oku = JenisOku::where('kecacatan',$kategori)->first();
+            // dd($dataField['NO_DAFTAR_OKU']);
+            if ($jenis_oku !== null) {
+                $kod_oku = $jenis_oku->kecacatan;
+            } else {
+                $kod_oku = isset($dataField['NO_DAFTAR_OKU']) && !empty($dataField['NO_DAFTAR_OKU'])
+                   ? substr($dataField['NO_DAFTAR_OKU'], 0, 2)
+                   : null;
+            }
 
             $keturunan = $dataField['KETURUNAN'];
             $kod = Keturunan::where('keturunan',$keturunan)->first();
@@ -148,7 +156,7 @@ class PenyelarasController extends Controller
                     'no_id_tentera' => $dataField['NO_ID_TENTERA'],
                     'nama' => $dataField['NAMA_PENUH'],
                     'no_daftar_oku' => $dataField['NO_DAFTAR_OKU'],
-                    'kategori' => $kod_oku->kod_oku,
+                    'kategori' => $kod_oku,
                     'jantina' => $jantina,
                     'tarikh_lahir' => $formattedDate,
                     'umur' => $dataField['UMUR'],
