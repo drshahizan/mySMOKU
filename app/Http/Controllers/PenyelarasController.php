@@ -287,6 +287,9 @@ class PenyelarasController extends Controller
         else if($infoipt ->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi){
             $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
         }
+        else{
+            $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        }
         // dd($infoipt);
         $peringkat = PeringkatPengajian::all()->sortBy('kod_peringkat');
         $kursus = Kursus::all()->sortBy('nama_kursus');
@@ -736,11 +739,16 @@ class PenyelarasController extends Controller
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
-        if ($infoipt && $infoipt->id_induk != null) {
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
-        } else {
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
             $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
         }
+
         
         // Extract all `id_institusi` values (handles both single and multiple records)
         $idInstitusiList = $infoiptCollection->pluck('id_institusi');
@@ -1258,9 +1266,13 @@ class PenyelarasController extends Controller
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
-        if ($infoipt && $infoipt->id_induk != null) {
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
-        } else {
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
             $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
         }
         
@@ -1327,9 +1339,13 @@ class PenyelarasController extends Controller
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
-        if ($infoipt && $infoipt->id_induk != null) {
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
-        } else {
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
             $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
         }
         
@@ -2095,9 +2111,13 @@ class PenyelarasController extends Controller
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
-        if ($infoipt && $infoipt->id_induk != null) {
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
-        } else {
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
             $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
         }
         
