@@ -588,7 +588,7 @@
 									<br><br><br>
 									<!--begin::Item-->
 									<div class="d-flex flex-stack mb-5">
-										<form class="w-100" style="text-align: left;" method="POST" action="{{ route('sendEmail') }}">
+										<form class="w-100" style="text-align: left;" method="POST" action="{{ route('v') }}">
 											@csrf
 											<div class="row mb-3">
 												<div class="col-md-6">
@@ -608,7 +608,7 @@
 														<span class="input-group-text">
 															<i class="fa-solid fa-phone"></i>
 														</span>
-														<input type="tel" class="form-control" id="telefon" minlength="11" maxlength="11" name="telefon" required
+														<input type="tel" class="form-control" id="telefon" maxlength="11" name="telefon" required
 															oninvalid="this.setCustomValidity('Sila masukkan nombor telefon anda.')" 
 															oninput="setCustomValidity('')">
 													</div>
@@ -1631,7 +1631,28 @@
 			</div>
 			<!--end::Footer Section-->
 		</div>
-
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script>
+			// Check if there is a flash message
+			@if(session('success'))
+				Swal.fire({
+					icon: 'success',
+					title: 'Berjaya!',
+					text: ' {!! session('success') !!}',
+					confirmButtonText: 'OK'
+				});
+			@endif
+	
+			// Check if there is a flash message
+			@if(session('failed'))
+				Swal.fire({
+					icon: 'error',
+					title: 'Tidak Aktif!',
+					text: ' {!! session('failed') !!}',
+					confirmButtonText: 'OK'
+				});
+			@endif	
+		</script>
 		<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->

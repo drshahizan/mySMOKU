@@ -42,7 +42,7 @@ class LandingPageController extends Controller
         Mail::send('pages.auth.suggestion', $emailData, function ($message) use ($emailData) {
             $message->from($emailData['emel'], "SisPO") // Set the "From" address using the form data
                     ->replyTo($emailData['emel'], $emailData['nama']) // Set the reply-to as the user's email
-                    ->to('bkoku@mohe.gov.my') // Replace with the recipient email
+                    ->to('sispo@mohe.gov.my') // Replace with the recipient email
                     ->subject($emailData['tajuk']);
         });
 
