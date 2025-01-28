@@ -554,7 +554,7 @@
 									<br>
 									<!--end::Item-->
 									<!--begin::Item-->
-									<div class="d-flex flex-stack mb-5">
+									{{-- <div class="d-flex flex-stack mb-5">
 										<i class="ki-duotone ki-verify fs-1 text-danger me-3">
 											<span class="path1"></span>
 											<span class="path2"></span>
@@ -562,7 +562,7 @@
 										<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
 											Bantuan kewangan ini tidak mengambil kira taraf pendapatan sebagai syarat kelayakan selaras dengan objektif bantuan ini yang bertujuan untuk meningkatkan dan memperluaskan peluang pembelajaran sepanjang hayat kepada golongan OKU yang mengikuti pengajian di IPT.
 										</span>
-									</div>
+									</div> --}}
 									<!--end::Item-->
 								</div>
 								<!--end::Features-->
