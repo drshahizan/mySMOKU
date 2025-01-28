@@ -588,7 +588,7 @@
 									<br><br><br>
 									<!--begin::Item-->
 									<div class="d-flex flex-stack mb-5">
-										<form class="w-100" style="text-align: left;" method="POST" action="{{ route('v') }}">
+										<form class="w-100" style="text-align: left;" method="POST" action="{{ route('sendEmail') }}">
 											@csrf
 											<div class="row mb-3">
 												<div class="col-md-6">
