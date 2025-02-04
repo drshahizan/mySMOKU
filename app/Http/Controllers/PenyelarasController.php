@@ -127,7 +127,7 @@ class PenyelarasController extends Controller
             $jenis_oku = JenisOku::where('kecacatan',$kategori)->first();
             // dd($dataField['NO_DAFTAR_OKU']);
             if ($jenis_oku !== null) {
-                $kod_oku = $jenis_oku->kecacatan;
+                $kod_oku = $jenis_oku->kod_oku;
             } else {
                 $kod_oku = isset($dataField['NO_DAFTAR_OKU']) && !empty($dataField['NO_DAFTAR_OKU'])
                    ? substr($dataField['NO_DAFTAR_OKU'], 0, 2)

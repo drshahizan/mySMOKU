@@ -50,7 +50,7 @@ class PermohonanController extends Controller
         $smoku = Smoku::join('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
-        ->join('bk_jenis_oku','bk_jenis_oku.kecacatan','=','smoku.kategori')
+        ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*'])
         ->where('no_kp', Auth::user()->no_kp);
         
