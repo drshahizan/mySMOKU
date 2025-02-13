@@ -226,7 +226,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('kemaskini/sekretariat/kemaskini/jumlah-peruntukan', [KemaskiniController::class, 'kemaskiniJumlahPeruntukan'])->name('kemaskini.peruntukan');
 
         //Permohonan - Sekretariat - Saringan
-        Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan']);
+        Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan'])->name('senarai.permohonan');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/{id}', [SaringanController::class, 'maklumatPermohonanDiperbaharui'])->name('maklumat.permohonan.diperbaharui.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.id');
