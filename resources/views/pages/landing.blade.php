@@ -452,6 +452,9 @@
 									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#utama" id="show-utama" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">UTAMA</a>
 								</div>
 								<div class="menu-item">
+									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#manual" id="show-manual" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MANUAL PENGGUNA</a>
+								</div>
+								<div class="menu-item">
 									<a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6 dropdown-toggle" href="#" id="dropdown-bkoku" data-bs-toggle="dropdown" aria-expanded="false">MAKLUMAT PENAJAAN</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdown-bkoku">
 										<li><a style="font-size: 1.5rem;" class="menu-link nav-link py-3 px-4 px-xxl-6" href="#bkoku" id="show-bkoku" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">MAKLUMAT BKOKU</a></li>
@@ -523,7 +526,7 @@
 				<!--end::Wrapper-->
 			</div>
 
-			<!--Utama-->
+			<!--begin::Utama-->
 			<div class="row" id="utama">
 				<!-- Card Container -->
 				<div class="col-md-1 d-flex">
@@ -660,6 +663,124 @@
 				<div class="col-md-1 d-flex">
 				</div>
 			</div>
+			<!--end::Utama-->
+
+			<!--begin::Manual Pengguna-->
+			<div class="py-10 py-lg-20" id="manual">
+				<!--begin::Wrapper-->
+				<div class="py-1 landing-dark-bg" style="background-color: rgb(255, 255, 255);">
+					<!--begin::Container-->
+					<div class="container">
+						<!--begin::Plans-->
+						<div class="d-flex flex-column container pt-lg-15">
+							<!--begin::Manual-->
+							<div class="text-center">
+								<!--begin::Row-->
+								<div class="row g-10">
+									<!--begin::Col-->
+									<div class="col-xl-12">
+										<div class="d-flex h-100">
+											<!--begin::Card 1-->
+											<div class="w-100 d-flex flex-column flex-center rounded-3 py-10 px-10 me-3" style="flex-grow: 1; background-color: rgb(255, 255, 255); box-shadow: 0 30px 30px rgba(0, 0, 0, 0.2); border: 1px solid #ccc;">
+												<!--begin::Features-->
+												<div class="w-100 mb-10">
+													<!--begin::Item-->
+													<div class="d-flex flex-column mb-5" style="background-color: #ae00ff; padding: 15px; border-radius: 5px;">
+														<span class="fw-bold text-light fs-2 mb-2">MANUAL PENGGUNA SISTEM</span>
+													</div>
+													<!--end::Item-->
+
+													<!--begin::Item-->
+													<div class="container" style="text-align: left;">
+														<!--begin::Manual-->
+														<div class="flex-column mb-5">
+															<br><br>
+															<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
+																<!-- Table Start -->
+																<table style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+																	<thead>
+																		<tr>
+																			<th style="background-color: #96b6cd; text-align: center;">Bil.</th>
+																			<th style="background-color: #96b6cd; text-align: center;">Perkara</th>
+																			<th style="background-color: #96b6cd; text-align: center;">Manual</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td style="text-align: center;">1.</td>
+																			<td>Manual Pengguna Sistem Pentadbir</td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/A%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PENTADBIR.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">2.</td>
+																			<td>Manual Pengguna Sistem Pegawai</td>
+																			<td style="text-align: center;"></td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">3.</td>
+																			<td>Manual Pengguna Sistem Sekretariat</td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/B%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_SEKRETARIAT.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">4.</td>
+																			<td>Manual Pengguna Sistem Penyelaras BKOKU</td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/C%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PENYELARAS_BKOKU.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">5.</td>
+																			<td>Manual Pengguna Sistem Penyelaras PPK</td>
+																			<td style="text-align: center;"></td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">6.</td>
+																			<td>Manual Pengguna Sistem Pelajar UA</td>
+																			<td style="text-align: center;"></td>
+																		</tr>
+																		<tr>
+																			<td style="text-align: center;">7.</td>
+																			<td>Manual Pengguna Sistem Pelajar IPTS</td>
+																			<td style="text-align: center;"></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!-- Table End -->
+															</span><br><br>
+														</div>
+														<!--end::Manual-->
+													</div>
+													<!--end::Item-->
+												</div>
+												<!--end::Features-->
+											</div>
+											<!--end::Card 1-->
+										</div>
+
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Manual-->
+						</div>
+						<!--end::Plans-->
+					</div>
+					<!--end::Container-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Manual Pengguna-->
 			
 			<!--begin::Maklumat BKOKU Section-->
 			<div class="py-10 py-lg-20" id="bkoku">
@@ -1560,11 +1681,26 @@
 					<div class="fs-4 fw-bold text-dark mb-3">E-mel Unit BKOKU :</div>
 					<!--end::Title-->
 					<!--begin::Emel-->
-					<div class="fw-semibold fs-6">(i) Institusi Pengajian Tinggi Swasta, Politeknik & Kolej Komuniti
-						<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;bkoku@mohe.gov.my</div>
-					<br />
-					<div class="fw-semibold fs-6">(ii)Universiti Awam
-						<br /><i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;iptabkoku@mohe.gov.my</div>
+					<div class="fw-semibold fs-6">
+						(i) E-mel berkaitan sistem ini
+						<br />
+						<i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
+						<a href="mailto:iptabkoku@mohe.gov.my">sispo@mohe.gov.my</a>
+					</div>
+					<br>
+					<div class="fw-semibold fs-6">
+						(ii) Institusi Pengajian Tinggi Swasta, Politeknik & Kolej Komuniti
+						<br />
+						<i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
+						<a href="mailto:iptabkoku@mohe.gov.my">bkoku@mohe.gov.my</a>
+					</div>
+					<br>
+					<div class="fw-semibold fs-6">
+						(iii) Universiti Awam
+						<br />
+						<i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;
+						<a href="mailto:iptabkoku@mohe.gov.my">iptabkoku@mohe.gov.my</a>
+					</div>
 					<!--end::Emel-->
 				</div>
 				<div class="col-md-3">
@@ -1687,10 +1823,19 @@
 		</script>
 		<script>
 			// Hide all sections initially
-			$(`#utama, #hubungi, #bkoku, #ppk`).hide();
+			$(`#utama, #manual, #hubungi, #bkoku, #ppk`).hide();
 
 			$('#show-utama').click(function(event) {
 				$('#utama').show();
+				$('#manual').hide();
+				$('#hubungi').hide();
+				$('#bkoku').hide();
+				$('#ppk').hide();
+			});
+
+			$('#show-manual').click(function(event) {
+				$('#utama').hide();
+				$('#manual').show();
 				$('#hubungi').hide();
 				$('#bkoku').hide();
 				$('#ppk').hide();
@@ -1698,6 +1843,7 @@
 
 			$('#show-bkoku').click(function(event) {
 				$('#utama').hide();
+				$('#manual').hide();
 				$('#hubungi').hide();
 				$('#bkoku').show();
 				$('#ppk').hide();
@@ -1705,6 +1851,7 @@
 
 			$('#show-ppk').click(function(event) {
 				$('#utama').hide();
+				$('#manual').hide();
 				$('#hubungi').hide();
 				$('#bkoku').hide();
 				$('#ppk').show();
@@ -1712,6 +1859,7 @@
 
 			$('#show-hubungi').click(function(event) {
 				$('#utama').hide();
+				$('#manual').hide();
 				$('#hubungi').show();
 				$('#bkoku').hide();
 				$('#ppk').hide();
