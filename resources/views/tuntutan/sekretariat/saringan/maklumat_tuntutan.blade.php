@@ -232,7 +232,11 @@
                                                         <tr>
                                                             <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
-                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                                @if(file_exists($invoisResit))
+                                                                    <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                                @else
+                                                                    <span style="color: red;">Dokumen lama</span>
+                                                                @endif
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">

@@ -2132,7 +2132,8 @@ class SekretariatController extends Controller
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
 
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK','institusi','tuntutan','status_kod','status'));
+        return redirect()->route('senarai.tuntutan.kedua');
+        // return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK','institusi','tuntutan','status_kod','status'));
     }
 
     public function saringTuntutanKedua(Request $request, $id)

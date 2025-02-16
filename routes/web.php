@@ -402,7 +402,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('permohonan/sekretariat/sejarah/hantar-saringan/{id}', [SaringanController::class, 'hantarSaringan'])->name('hantar.saringan.id');
 
         //Tuntutan - Sekretariat - Saringan
-        Route::get('tuntutan/sekretariat/saringan/senarai-tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua']);
+        Route::get('tuntutan/sekretariat/saringan/senarai-tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua'])->name('senarai.tuntutan.kedua');
         Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan/{id}', [SekretariatController::class, 'keputusanPeperiksaan'])->name('maklumat.tuntutan.peperiksaan.id');
         Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
         Route::post('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/{id}', [SekretariatController::class, 'saringTuntutanKedua'])->name('saring.tuntutan.kedua.id');
