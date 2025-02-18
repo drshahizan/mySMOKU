@@ -19,6 +19,7 @@
         $alamat_waris = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $waris->alamat_negeri_waris)->where('bk_bandar.id', $waris->alamat_bandar_waris)->get(['bk_negeri.*','bk_bandar.*'])->first();
         $negeri_lahir = DB::table('bk_negeri')->where('bk_negeri.id', $pelajar->negeri_lahir)->get(['bk_negeri.*'])->first();
         $agama = DB::table('bk_agama')->where('id', $pelajar->agama)->value('agama');
+        $kategori_oku = DB::table('bk_jenis_oku')->where('kod_oku', $smoku->kategori)->value('kecacatan');
     @endphp
     <table class="profile-form">
         <tr>
@@ -71,7 +72,7 @@
             <tr class="gap-left">
                 <td style="width: 16%">Kecacatan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$smoku->kategori}}</td>
+                <td>{{$kategori_oku}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bangsa</td>
@@ -128,13 +129,12 @@
                 <td style="width: 2%">:</td>
                 <td>{{$pelajar->tel_bimbit}}</td>
             </tr>
-            @if ($pelajar->tel_rumah != null) {
+            @if ($pelajar->tel_rumah != null)
                 <tr class="gap-left">
                     <td style="width: 16%">No. Tel Rumah</td>
                     <td style="width: 2%">:</td>
                     <td>{{$pelajar->tel_rumah}}</td>
                 </tr>
-            }
             @endif
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Emel</td>
@@ -151,75 +151,75 @@
             <td class="header-part" colspan="3">B. MAKLUMAT WARIS</td>
         </tr>
         <div>
-        <tr class="gap-left">
-            <td style="width: 16%" class="gap-top">Nama </td>
-            <td style="width: 2%" class="gap-top">:</td>
-            <td class="gap-top">{{ $waris->nama_waris ?? '' }}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No. Kad Pengenalan</td>
-            <td style="width: 2%">:</td>
-            <td>{{ $waris->no_kp_waris ?? '' }}</td>
-        </tr>
-        @if ($waris->no_pasport_waris != null) {
             <tr class="gap-left">
-                <td style="width: 16%">No Pasport</td>
-                <td style="width: 2%">:</td>
-                <td>{{$waris->no_pasport_waris}}</td>
+                <td style="width: 16%" class="gap-top">Nama </td>
+                <td style="width: 2%" class="gap-top">:</td>
+                <td class="gap-top">{{ $waris->nama_waris ?? '' }}</td>
             </tr>
-        }
-        @endif
-        <tr class="gap-left">
-            <td style="width: 16%">Hubungan Waris</td>
-            <td style="width: 2%">:</td>
-            <td>{{ $hubungan_w ?? '' }}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Alamat Tetap</td>
-            <td style="width: 2%">:</td>
-            <td>{{ $waris->alamat_waris ?? '' }}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Poskod</td>
-            <td style="width: 2%">:</td>
-            <td>{{$waris->alamat_poskod_waris ?? ''}}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Bandar</td>
-            <td style="width: 2%">:</td>
-            <td>{{$alamat_waris->bandar ?? ''}}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Negeri</td>
-            <td style="width: 2%">:</td>
-            <td>{{$alamat_waris->negeri ?? ''}}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">No. Tel (HP)</td>
-            <td style="width: 2%">:</td>
-            <td>{{$waris->tel_bimbit_waris ?? ''}}</td>
-        </tr>
-        <tr class="gap-left">
-            <td style="width: 16%">Pekerjaan</td>
-            <td style="width: 2%">:</td>
-            <td>{{$waris->pekerjaan_waris ?? ''}}</td>
-        </tr>
-        <tr class="gap-left">
-            <td class="gap-bottom" style="width: 16%">Pendapatan Bulanan (RM)</td>
-            <td class="gap-bottom" style="width: 2%">:</td>
-            <td class="gap-bottom">{{$waris->pendapatan_waris ?? ''}}</td>
-        </tr>
-        </tr>
-            <td class="header-part" colspan="3">C. PERAKUAN</td>
-        </tr>
-        <tr class="gap-left">
-            <td colspan="3" class="gap-top gap-bottom">
-                Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
-                sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
-                permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
-            </td>
-        </tr>
-    </div>
+            <tr class="gap-left">
+                <td style="width: 16%">No. Kad Pengenalan</td>
+                <td style="width: 2%">:</td>
+                <td>{{ $waris->no_kp_waris ?? '' }}</td>
+            </tr>
+            @if ($waris->no_pasport_waris != null) {
+                <tr class="gap-left">
+                    <td style="width: 16%">No Pasport</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$waris->no_pasport_waris}}</td>
+                </tr>
+            }
+            @endif
+            <tr class="gap-left">
+                <td style="width: 16%">Hubungan Waris</td>
+                <td style="width: 2%">:</td>
+                <td>{{ $hubungan_w ?? '' }}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Alamat Tetap</td>
+                <td style="width: 2%">:</td>
+                <td>{{ $waris->alamat_waris ?? '' }}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Poskod</td>
+                <td style="width: 2%">:</td>
+                <td>{{$waris->alamat_poskod_waris ?? ''}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Bandar</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_waris->bandar ?? ''}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Negeri</td>
+                <td style="width: 2%">:</td>
+                <td>{{$alamat_waris->negeri ?? ''}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">No. Tel (HP)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$waris->tel_bimbit_waris ?? ''}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 16%">Pekerjaan</td>
+                <td style="width: 2%">:</td>
+                <td>{{$waris->pekerjaan_waris ?? ''}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td class="gap-bottom" style="width: 16%">Pendapatan Bulanan (RM)</td>
+                <td class="gap-bottom" style="width: 2%">:</td>
+                <td class="gap-bottom">{{$waris->pendapatan_waris ?? ''}}</td>
+            </tr>
+            </tr>
+                <td class="header-part" colspan="3">C. PERAKUAN</td>
+            </tr>
+            <tr class="gap-left">
+                <td colspan="3" class="gap-top gap-bottom">
+                    Saya mengaku bahawa segala maklumat yang diberikan adalah betul dan benar belaka. Saya juga faham
+                    sekiranya maklumat yang diberikan didapati palsu atau tidak benar, pihak kementerian berhak menolak
+                    permohonan saya dan menghentikan bantuan kewangan ini kepada saya.
+                </td>
+            </tr>
+        </div>   
     </table>
 </body>
 </html>
