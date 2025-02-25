@@ -30,11 +30,11 @@ class SenaraiPendekBKOKU implements FromCollection, WithHeadings, WithColumnWidt
     {
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
-            ->where('a.program', $this->programCode)
+            ->where('a.program', '=', 'BKOKU')
             ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
             ->join('bk_info_institusi as c', function ($join) {
                 $join->on('c.id_institusi', '=', 'b.id_institusi')
-                    ->where('c.jenis_institusi', '=', 'IPTS');
+                    ->where('c.jenis_institusi', $this->programCode);
             })
             ->join('smoku as d', 'd.id', '=', 'a.smoku_id')
             ->join('bk_jenis_oku as e', 'e.kod_oku', '=', 'd.kategori')

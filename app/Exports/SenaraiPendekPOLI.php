@@ -30,7 +30,7 @@ class SenaraiPendekPOLI implements FromCollection, WithHeadings, WithColumnWidth
     {
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
-            ->where('a.program', $this->programCode)
+            ->where('a.program', '=', 'BKOKU')
             ->join('smoku_akademik as b', 'b.smoku_id', '=', 'a.smoku_id')
             ->join('bk_info_institusi as c', function ($join) {
                 $join->on('c.id_institusi', '=', 'b.id_institusi')

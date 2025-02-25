@@ -30,7 +30,7 @@ class SenaraiPendek implements FromCollection, WithHeadings, WithColumnWidths, W
     {
         $senarai_pendek = DB::table('permohonan as a')
             ->where('a.status', 4)
-            ->where('a.program', $this->programCode);
+            ->where('a.program', '=', 'PPK');
             
         if (isset($this->filters['institusi'])) {
             $senarai_pendek->where('c.id_institusi', $this->filters['institusi']);
