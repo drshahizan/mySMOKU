@@ -97,85 +97,62 @@
             </thead>
             <tbody>
                 @php
-                    $i=0;
-                @endphp
-                @php
-                    require_once app_path('helpers.php'); // Replace with the actual path to your helper file
+                    $filteredKelulusan = $kelulusan->filter(function ($item) {
+                        $jenis_institusi = DB::table('smoku_akademik')
+                            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+                            ->where('smoku_id', $item['smoku_id'])
+                            ->value('bk_info_institusi.jenis_institusi');
+                        return $item['program'] === 'BKOKU' && $jenis_institusi === 'UA';
+                    });
                 @endphp
             
-                @foreach ($kelulusan as $item)
-                    @if ($item['program']=="BKOKU")
-                        @php
-                            $i++;
-                            $pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                            $kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                            $nokp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                            $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.jenis_institusi');
-                            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                            
-                            // nama pemohon
-                            $text = ucwords(strtolower($pemohon)); // Assuming you're sending the text as a POST parameter
-                            $conjunctions = ['bin', 'binti'];
-                            $words = explode(' ', $text);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $nama_pemohon = implode(' ', $result);
-
-                            //nama kursus
-                            $text2 = ucwords(strtolower($kursus)); // Assuming you're sending the text as a POST parameter
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text2);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $namaKursus = implode(' ', $result);
-                            $nama_kursus = transformBracketsToCapital($namaKursus);
-
-                            //institusi pengajian
-                            $text3 = ucwords(strtolower($institusi)); // Assuming you're sending the text as a POST parameter
-                            $conjunctions = ['of', 'in', 'and'];
-                            $words = explode(' ', $text3);
-                            $result = [];
-                            foreach ($words as $word) {
-                                if (in_array(Str::lower($word), $conjunctions)) {
-                                    $result[] = Str::lower($word);
-                                } else {
-                                    $result[] = $word;
-                                }
-                            }
-                            $institusiPengajian = implode(' ', $result);
-                            $institusi_pengajian = transformBracketsToUppercase($institusiPengajian);
-                        @endphp
-                        
-                        @if ($jenis_institusi == "UA")
-                            <tr>
-                                <td class="text-center">{{$i}}</td>                                           
-                                <td>{{$item['no_rujukan_permohonan']}}</td>
-                                <td>{{$nama_pemohon}}</td>
-                                <td>{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                <td>{{$nama_kursus}}</td>
-                                <td>{{$institusi_pengajian}}</td>
-                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
-                                <td class="text-center">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
-                            </tr>
-                        @endif
-                    @endif
-                @endforeach 
+                @foreach ($filteredKelulusan as $item)
+                    @php
+                        // Fetch data
+                        $smoku = DB::table('smoku')->where('id', $item['smoku_id'])->first();
+                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->first();
+                        $institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi ?? null)->value('nama_institusi');
+            
+                        // Nama pemohon
+                        $nama_pemohon = collect(explode(' ', ucwords(strtolower($smoku->nama))))
+                            ->map(fn($word) => in_array(Str::lower($word), ['bin', 'binti']) ? Str::lower($word) : $word)
+                            ->implode(' ');
+            
+                        // Nama kursus
+                        $nama_kursus = transformBracketsToCapital(
+                            collect(explode(' ', ucwords(strtolower($akademik->nama_kursus ?? ''))))
+                                ->map(fn($word) => in_array(Str::lower($word), ['of', 'in', 'and']) ? Str::lower($word) : $word)
+                                ->implode(' ')
+                        );
+            
+                        // Institusi pengajian
+                        $institusi_pengajian = transformBracketsToUppercase(
+                            collect(explode(' ', ucwords(strtolower($institusi ?? ''))))
+                                ->map(fn($word) => in_array(Str::lower($word), ['of', 'in', 'and']) ? Str::lower($word) : $word)
+                                ->implode(' ')
+                        );
+            
+                        // Jenis kecacatan
+                        $jenis_kecacatan = DB::table('smoku')
+                            ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
+                            ->where('smoku.id', $item['smoku_id'])
+                            ->value('bk_jenis_oku.kecacatan');
+                    @endphp
+            
+                    <tr>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td>{{ $item['no_rujukan_permohonan'] }}</td>
+                        <td>{{ $nama_pemohon }}</td>
+                        <td>{{ ucwords(strtolower($jenis_kecacatan)) }}</td>
+                        <td>{{ $nama_kursus }}</td>
+                        <td>{{ $institusi_pengajian }}</td>
+                        <td class="text-center">{{ $akademik->tarikh_mula ? date('d/m/Y', strtotime($akademik->tarikh_mula)) : '-' }}</td>
+                        <td class="text-center">{{ $akademik->tarikh_tamat ? date('d/m/Y', strtotime($akademik->tarikh_tamat)) : '-' }}</td>
+                    </tr>
+                @endforeach
             </tbody>
+            
+            
         </table>
 
         <?php
