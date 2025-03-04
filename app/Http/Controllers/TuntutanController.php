@@ -231,6 +231,8 @@ class TuntutanController extends Controller
             $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
         }
 
+       // dd($no_rujukan_tuntutan);
+
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)

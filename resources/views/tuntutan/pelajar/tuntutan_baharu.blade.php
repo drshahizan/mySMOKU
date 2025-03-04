@@ -13,7 +13,7 @@
 	<div id="kt_app_content_container" class="app-container container-xxl">
 		<!--begin::Layout-->
 		<div class="d-flex flex-column flex-lg-row">
-			@if ($permohonan->yuran == '1')
+			@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4'])) || ($akademik->mod == '2' && in_array($akademik->sumber_biaya, ['3', '4'])))
 			<!--begin::Content-->
 			<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
 				<!--begin::Card-->
@@ -41,14 +41,31 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+												<option></option>
+													@php
+														$currentYear = date('Y');
+													@endphp
+													@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
+														@php
+															$sesi = $year . '/' . ($year + 1);
+														@endphp
+														<option value="{{ $sesi }}">{{ $sesi }}</option>
+													@endfor
+											</select>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+												<option></option>
+												@for ($i = 1; $i <= 12; $i++)
+													<option value="<?= $i ?>"><?= $i ?></option>
+												@endfor
+												
+											</select>
 										</div>
 									</div>
 									<!--end::Col-->
@@ -139,7 +156,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-10">
 						<!--begin::Input group-->
-						@if ($permohonan->yuran == '1')
+						@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4'])) || ($akademik->mod == '2' && in_array($akademik->sumber_biaya, ['3', '4'])))
 						<div class="mb-10">
 							<!--begin::Label-->
 							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
@@ -185,8 +202,8 @@
 						@csrf
 							<!--begin::Item-->
 							
-							@if ($permohonan->wang_saku == '1')
-								@if ($permohonan->yuran != '1')
+							@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['1', '3', '4'])))
+								@if ($akademik->mod == '1' && $akademik->sumber_biaya =='1')
 									<!--begin::Wrapper-->
 									<div class="d-flex flex-column align-items-start flex-xxl-row">
 										<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
@@ -204,14 +221,31 @@
 										<div class="col-lg-6">
 											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 											<div class="mb-5">
-												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+												<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+													<option></option>
+														@php
+															$currentYear = date('Y');
+														@endphp
+														@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
+															@php
+																$sesi = $year . '/' . ($year + 1);
+															@endphp
+															<option value="{{ $sesi }}">{{ $sesi }}</option>
+														@endfor
+												</select>
 											</div>
 										</div>
 										<div class="col-lg-6">
 											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 											<!--begin::Input group-->
 											<div class="mb-5">
-												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+												<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+													<option></option>
+													@for ($i = 1; $i <= 12; $i++)
+														<option value="<?= $i ?>"><?= $i ?></option>
+													@endfor
+													
+												</select>
 											</div>
 										</div>
 										<!--end::Col-->
