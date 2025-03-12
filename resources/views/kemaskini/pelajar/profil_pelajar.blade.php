@@ -338,10 +338,10 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
-										<option value="">Pilih</option>
-										@foreach ($parlimen as $parlimen)	
-										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
-										@endforeach
+										{{-- <option></option> --}}
+										{{-- @foreach ($parlimen as $parlimen)	
+										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected="selected"' : '' }}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
+										@endforeach --}}
 									</select>
 									<!--end::Input-->
 								</div>
@@ -355,7 +355,7 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
-										<option value="">Pilih</option>
+										<option></option>
 										@foreach ($dun as $dun)	
 										<option value="{{$dun->id}}" {{$butiranPelajar->dun == $dun->id ? 'selected' : ''}}>{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
 										@endforeach
@@ -1400,15 +1400,18 @@
 
 			//PARLIMEN
 			$(document).ready(function() {
+				function clearParlimenAndDun() {
+					console.log("Clearing #parlimen and #dun options"); // Debugging
+
+					$('#parlimen').empty().append('<option value="">Pilih</option>').select2();
+					$('#dun').empty().append('<option value="">Pilih</option>').select2();
+				}
+
 				function loadParlimen() {
 					var idnegeri = $('#alamat_tetap_negeri').val();
 					if (!idnegeri) return; // Exit if no value is selected
 
-					// alert(idnegeri);
-
-					// Empty the dropdowns
-					$('#parlimen').find('option').not(':first').remove();
-					$('#dun').find('option').not(':first').remove();
+					console.log("Fetching Parlimen for Negeri ID:", idnegeri); // Debugging
 
 					// AJAX request 
 					$.ajax({
@@ -1416,18 +1419,17 @@
 						type: 'get',
 						dataType: 'json',
 						success: function(response) {
-							var len = response['data'] ? response['data'].length : 0;
+							console.log("Response:", response); // Debugging
 
-							if (len > 0) {
-								for (var i = 0; i < len; i++) {
-									var id = response['data'][i].id;
-									var kod = response['data'][i].kod_parlimen;
-									var parlimen = response['data'][i].parlimen.toUpperCase();
-
-									var option = "<option value='" + id + "'>" + kod + " - " + parlimen + "</option>";
-									$("#parlimen").append(option);
-								}
+							if (response.data && response.data.length > 0) {
+								$.each(response.data, function(index, item) {
+									var option = `<option value="${item.id}">${item.kod_parlimen} - ${item.parlimen.toUpperCase()}</option>`;
+									$('#parlimen').append(option);
+								});
 							}
+
+							// Refresh Select2
+							$('#parlimen').select2();
 						},
 						error: function() {
 							console.error('AJAX request failed for parlimen');
@@ -1435,8 +1437,11 @@
 					});
 				}
 
-				// Attach event listener for change event
-				$('#alamat_tetap_negeri').on('change', loadParlimen);
+				// Clear only when negeri changes
+				$('#alamat_tetap_negeri').on('change', function() {
+					clearParlimenAndDun();
+					loadParlimen();
+				});
 
 				// Run function on page load if value exists
 				if ($('#alamat_tetap_negeri').val()) {
