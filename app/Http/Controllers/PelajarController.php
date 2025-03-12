@@ -609,6 +609,7 @@ class PelajarController extends Controller
                     'no_kp_waris' => $request->no_kp_waris,
                     'no_pasport_waris' => $request->no_pasport_waris,
                     'tel_bimbit_waris' => str_replace('-', '', $request->tel_bimbit_waris),
+                    'hubungan_waris' => $request->hubungan_waris,
                     'hubungan_lain_waris' => $request->hubungan_lain_waris,
                     'alamat_waris' => strtoupper($request->alamat_waris),
                     'alamat_negeri_waris' => $request->alamat_negeri_waris,

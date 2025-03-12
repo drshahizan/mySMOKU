@@ -190,7 +190,7 @@
 									<!--begin::Col-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<select id="negeri_lahir" name="negeri_lahir" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 											@foreach ($negeri as $negerilahir)
 											<option value="{{$negerilahir->id}}" {{$butiranPelajar->negeri_lahir == $negerilahir->id ? 'selected' : ''}}>{{ $negerilahir->negeri}}</option>
 											@endforeach
@@ -239,7 +239,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='keturunan' name='keturunan' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true">
+									<select id='keturunan' name='keturunan' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true">
 										<option></option>
 										@foreach ($keturunan as $keturunan)	
 										<option value="{{$keturunan->id}}" {{$smoku->kod_keturunan == $keturunan->id ? 'selected' : ''}}>{{ strtoupper($keturunan->keturunan)}}</option>
@@ -256,7 +256,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true">
+									<select id="agama" name="agama" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true">
 										<option></option>
                                         @foreach ($agama as $agama)
 											<option value="{{$agama->id}}" {{$butiranPelajar->agama == $agama->id ? 'selected' : ''}}>{{ $agama->agama}}</option>
@@ -286,7 +286,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
                                         @foreach ($negeri as $negeritetap)	
 										<option value="{{$negeritetap->id}}" {{$butiranPelajar->alamat_tetap_negeri == $negeritetap->id ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
 										@endforeach
@@ -304,7 +304,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 										<option value="">Pilih</option>
                                         @foreach ($bandar as $bandartetap)	
 										<option value="{{$bandartetap->id}}" {{$butiranPelajar->alamat_tetap_bandar == $bandartetap->id ? 'selected' : ''}}>{{ $bandartetap->bandar}}</option>
@@ -337,7 +337,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 										<option value="">Pilih</option>
 										@foreach ($parlimen as $parlimen)	
 										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected' : ''}}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
@@ -354,7 +354,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+									<select id="dun" name="dun" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 										<option value="">Pilih</option>
 										@foreach ($dun as $dun)	
 										<option value="{{$dun->id}}" {{$butiranPelajar->dun == $dun->id ? 'selected' : ''}}>{{ $dun->kod_dun}} - {{ strtoupper($dun->dun)}}</option>
@@ -400,7 +400,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 											<option value="">Pilih</option>
 											@foreach ($negeri as $negerisurat)	
 											<option value="{{$negerisurat->id}}" {{$butiranPelajar->alamat_surat_negeri == $negerisurat->id ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
@@ -417,7 +417,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
+										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
 											<option value="">Pilih</option>
                                             @foreach ($bandar as $bandarsurat)	
 											<option value="{{$bandarsurat->id}}" {{$butiranPelajar->alamat_surat_bandar == $bandarsurat->id ? 'selected' : ''}}>{{ $bandarsurat->bandar}}</option>
@@ -449,7 +449,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" readonly/>
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}"/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -670,6 +670,7 @@
 							<div class="col-md-6 fv-row">
 								<label class="form-label mb-6">Hubungan Waris</label>
 								<select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-lg form-select-solid hubungan_waris" data-control="select2" data-placeholder="Pilih" >
+									<option></option>
 									@foreach ($hubungan as $hubungan)
 										<option value="{{$hubungan->kod_hubungan}}" {{$waris->hubungan_waris == $hubungan->kod_hubungan ? 'selected' : ''}}>{{ $hubungan->hubungan}}</option>
 									@endforeach
@@ -700,6 +701,24 @@
 							<!--end::Label-->
 							<label class="form-label">Alamat Tetap</label>
 							<!--end::Label-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-7">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack">
+									<!--begin::Label-->
+									<div class="me-5">
+										<!--begin::Input-->
+										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" />
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-label">Sama seperti Alamat Tetap Pelajar</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Label-->
+								</div>
+								<!--begin::Wrapper-->
+							</div>
+							<!--end::Input group-->
 							<!--begin::Input-->
 							<textarea id="alamat_waris" name="alamat_waris" class="form-control form-control-lg form-control-solid" rows="2" style="text-transform: uppercase;" >{{strtoupper($waris->alamat_waris)}}</textarea>
 							<!--end::Input-->
@@ -713,7 +732,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" >
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid basic-search"  data-control="select2" data-hide-search="true" >
 										<option value="">Pilih</option>
                                         @foreach ($negeri as $negeri)
 										<option value="{{$negeri->id}}" {{$waris->alamat_negeri_waris == $negeri->id ? 'selected' : ''}}>{{ $negeri->negeri}}</option>
@@ -730,7 +749,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" >
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid basic-search"  data-control="select2" data-hide-search="true" >
 										<option value="">Pilih</option>
 										@foreach ($bandar as $bandar)
 										<option value="{{$bandar->id}}" {{$waris->alamat_bandar_waris == $bandar->id ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
@@ -1297,6 +1316,45 @@
                 }
             }	
 
+			function alamatWaris() {
+				var checkBox = document.getElementById("sama_waris");  
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				console.log('negeri_p:', alamat_tetap_negeri);
+				console.log('bandar_p:', alamat_tetap_bandar);
+
+				var alamat_waris = document.getElementById("alamat_waris");
+				var alamat_negeri_waris = document.getElementById("alamat_negeri_waris");
+				var alamat_bandar_waris = document.getElementById("alamat_bandar_waris");
+				var alamat_poskod_waris = document.getElementById("alamat_poskod_waris");
+				console.log('negeri_w:', alamat_negeri_waris);
+				console.log('bandar_w:', alamat_bandar_waris);
+
+				if (checkBox.checked == true){
+					alamat_waris.value=alamat_tetap.value; 
+					alamat_negeri_waris.value=alamat_tetap_negeri.value;
+					alamat_bandar_waris.value=alamat_tetap_bandar.value;
+					console.log('negeri:', alamat_negeri_waris.value);
+					console.log('bandar:', alamat_bandar_waris.value);
+					alamat_poskod_waris.value=alamat_tetap_poskod.value;
+					
+					// Trigger select2 update
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				} else {
+					alamat_waris.value = '';
+					alamat_negeri_waris.value = '';
+					alamat_bandar_waris.value = '';
+					alamat_poskod_waris.value = '';
+
+					// Trigger select2 update.
+					$(alamat_negeri_waris).trigger('change.select2');
+					$(alamat_bandar_waris).trigger('change.select2');
+				}
+			}	
+
             //NEGERI ALAMAT TETAP
 			$(document).ready(function(){
 				$('#alamat_tetap_negeri').on('change', function() {
@@ -1341,48 +1399,49 @@
 			});
 
 			//PARLIMEN
-			$(document).ready(function(){
-				$('#alamat_tetap_negeri').on('change', function() {
-					var idnegeri = $(this).val();
-					//alert(id);
-					// Empty the dropdown
+			$(document).ready(function() {
+				function loadParlimen() {
+					var idnegeri = $('#alamat_tetap_negeri').val();
+					if (!idnegeri) return; // Exit if no value is selected
+
+					// alert(idnegeri);
+
+					// Empty the dropdowns
 					$('#parlimen').find('option').not(':first').remove();
-                    $('#dun').find('option').not(':first').remove();
+					$('#dun').find('option').not(':first').remove();
 
 					// AJAX request 
 					$.ajax({
-						
-						url: '/getParlimen/'+idnegeri,
+						url: '/getParlimen/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
+						success: function(response) {
+							var len = response['data'] ? response['data'].length : 0;
 
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
+							if (len > 0) {
+								for (var i = 0; i < len; i++) {
+									var id = response['data'][i].id;
+									var kod = response['data'][i].kod_parlimen;
+									var parlimen = response['data'][i].parlimen.toUpperCase();
 
-											var id = response['data'][i].id;
-											var kod = response['data'][i].kod_parlimen;
-											var parlimen = response['data'][i].parlimen.toUpperCase();
-
-											var option = "<option value='"+id+"'>"+kod+" - "+parlimen+"</option>";
-
-											$("#parlimen").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							// alert('AJAX load did not work parlimen');
+									var option = "<option value='" + id + "'>" + kod + " - " + parlimen + "</option>";
+									$("#parlimen").append(option);
+								}
 							}
-
+						},
+						error: function() {
+							console.error('AJAX request failed for parlimen');
+						}
 					});
-				});
+				}
 
+				// Attach event listener for change event
+				$('#alamat_tetap_negeri').on('change', loadParlimen);
+
+				// Run function on page load if value exists
+				if ($('#alamat_tetap_negeri').val()) {
+					loadParlimen();
+				}
 			});
 
 			//negeri takde dun
