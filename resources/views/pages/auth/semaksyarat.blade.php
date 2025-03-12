@@ -153,41 +153,48 @@
                 // Empty the dropdown
                 // $('#peringkat_pengajian').find('option').not(':first').remove();
                 $('#nama_kursus').find('option').not(':first').remove();
-                //alert(idipt);
+                // alert(kod_peringkat);
 
                 // AJAX request 
                 $.ajax({
-                    url: 'getKursus/'+kod_peringkat+'/'+id_ins,
-                    type: 'get',
-                    dataType: 'json',
-                
-                    success: function(response){
+    url: 'getKursus/' + kod_peringkat + '/' + id_ins,
+    type: 'get',
+    dataType: 'json',
 
-                        var len = 0;
-                        if(response['data'] != null){
-                            len = response['data'].length;
-                        }
+    success: function(response) {
+        // console.log("API Response:", response);
 
-                        if(len > 0){
-                            // Read data and create <option >
-                            for(var i=0; i<len; i++){
+        let $select = $("#nama_kursus");
+        $select.empty(); // Clear existing options
+        $select.append('<option value="">Pilih Kursus</option>'); // Default option
 
-                                var id_ins = response['data'][i].id_institusi;
-                                var kod_peringkat = response['data'][i].kod_peringkat;
-                                var nama_kursus = response['data'][i].nama_kursus;
-                                var kod_nec = response['data'][i].kod_nec;
-                                var bidang = response['data'][i].bidang.toUpperCase();
-                                var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
+        if (response.data && response.data.length > 0) {
+            response.data.forEach(kursus => {
+                let bidang = kursus.bidang ? kursus.bidang.toUpperCase() : "-";
+                let option = `<option value="${kursus.no_rujukan}">
+                                ${kursus.no_rujukan} - ${kursus.nama_kursus.toUpperCase()} - ${kursus.kod_nec} (${bidang})
+                              </option>`;
+                $select.append(option);
+            });
 
-                                var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
+            // console.log("Options added successfully!");
+        } else {
+            // console.warn("No data found.");
+        }
 
-                                $("#nama_kursus").append(option); 
-                                
-                            }
-                        }
+        // Reinitialize Select2
+        $select.select2({
+            placeholder: "Pilih Kursus",
+            allowClear: true
+        });
 
-                    }
-                });
+    },
+    error: function(xhr, status, error) {
+        console.error("AJAX Error:", status, error);
+        // console.log("Response:", xhr.responseText);
+    }
+});
+
 
             });
 

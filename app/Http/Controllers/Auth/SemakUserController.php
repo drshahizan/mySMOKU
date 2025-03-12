@@ -37,7 +37,7 @@ class SemakUserController extends Controller
             ->join('bk_peringkat_pengajian', function ($join) {
                 $join->on('bk_kursus.kod_peringkat', '=', 'bk_peringkat_pengajian.kod_peringkat'); })
             ->where('id_institusi',$ipt)
-            ->groupBy('bk_kursus.kod_peringkat','bk_peringkat_pengajian.peringkat')
+            ->groupBy('bk_kursus.kod_peringkat')
             ->orderBy('bk_kursus.kod_peringkat','asc')
             ->get();
             return response()->json($peringkatData);
@@ -48,8 +48,8 @@ class SemakUserController extends Controller
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
-            ->groupBy(['nama_kursus', 'kod_nec', 'bidang'])
-            ->select('nama_kursus', 'kod_nec', 'bidang')
+            // ->groupBy(['nama_kursus', 'kod_nec', 'bidang'])
+            ->select('no_rujukan', 'nama_kursus', 'kod_nec', 'bidang')
             ->get();
     
             return response()->json($kursusData); 
