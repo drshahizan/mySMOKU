@@ -2387,6 +2387,17 @@
 					document.getElementById("divyuran").style.display = "none";
 					document.getElementById("divelaun").style.display = "none";
 				}
+				else if(mod === '3' && sumber !== '1'){
+					console.log("Condition mod ==='2' && sumber !=='1' is met.");
+					document.getElementById("yuran").value = '1';
+					document.getElementById("divyuran").style.display = "";
+					document.getElementById("yuran").disabled = false;
+					document.getElementById("divelaun").style.display = "none";
+					document.getElementById("wang_saku").value = '';
+					document.getElementById("amaun_wang_saku").value = '';
+
+
+				}
 				else{
 					var wang_saku_perbulan = max_wang_saku;
 
