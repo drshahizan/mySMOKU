@@ -157,43 +157,43 @@
 
                 // AJAX request 
                 $.ajax({
-    url: 'getKursus/' + kod_peringkat + '/' + id_ins,
-    type: 'get',
-    dataType: 'json',
+                    url: 'getKursus/' + kod_peringkat + '/' + id_ins,
+                    type: 'get',
+                    dataType: 'json',
 
-    success: function(response) {
-        // console.log("API Response:", response);
+                    success: function(response) {
+                        // console.log("API Response:", response);
 
-        let $select = $("#nama_kursus");
-        $select.empty(); // Clear existing options
-        $select.append('<option value="">Pilih Kursus</option>'); // Default option
+                        let $select = $("#nama_kursus");
+                        $select.empty(); // Clear existing options
+                        $select.append('<option value="">Pilih Kursus</option>'); // Default option
 
-        if (response.data && response.data.length > 0) {
-            response.data.forEach(kursus => {
-                let bidang = kursus.bidang ? kursus.bidang.toUpperCase() : "-";
-                let option = `<option value="${kursus.no_rujukan}">
-                                ${kursus.no_rujukan} - ${kursus.nama_kursus.toUpperCase()} - ${kursus.kod_nec} (${bidang})
-                              </option>`;
-                $select.append(option);
-            });
+                        if (response.data && response.data.length > 0) {
+                            response.data.forEach(kursus => {
+                                let bidang = kursus.bidang ? kursus.bidang.toUpperCase() : "-";
+                                let option = `<option value="${kursus.nama_kursus}">
+                                                ${kursus.no_rujukan} - ${kursus.nama_kursus.toUpperCase()} - ${kursus.kod_nec} (${bidang})
+                                            </option>`;
+                                $select.append(option);
+                            });
 
-            // console.log("Options added successfully!");
-        } else {
-            // console.warn("No data found.");
-        }
+                            // console.log("Options added successfully!");
+                        } else {
+                            // console.warn("No data found.");
+                        }
 
-        // Reinitialize Select2
-        $select.select2({
-            placeholder: "Pilih Kursus",
-            allowClear: true
-        });
+                        // Reinitialize Select2
+                        $select.select2({
+                            placeholder: "Pilih Kursus",
+                            allowClear: true
+                        });
 
-    },
-    error: function(xhr, status, error) {
-        console.error("AJAX Error:", status, error);
-        // console.log("Response:", xhr.responseText);
-    }
-});
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                        // console.log("Response:", xhr.responseText);
+                    }
+                });
 
 
             });
