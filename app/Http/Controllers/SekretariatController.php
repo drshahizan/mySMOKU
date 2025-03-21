@@ -29,6 +29,7 @@ use App\Models\Status;
 use App\Models\TuntutanItem;
 use App\Models\Waris;
 use App\Models\Akademik;
+use App\Models\Dokumen;
 use App\Models\InfoIpt;
 use App\Models\Kelulusan;
 use App\Models\LanjutPengajian;
@@ -2045,8 +2046,12 @@ class SekretariatController extends Controller
         $tuntutan = Tuntutan::where('id', $id)->first();
         $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $penyata_bank = Dokumen::where('permohonan_id', $tuntutan->permohonan_id)
+                        ->where('id_dokumen', 1)->first();
+        // dd($penyata_bank);
         $smoku_id = Permohonan::where('id', $tuntutan->permohonan_id)->value('smoku_id');
         $smoku = Smoku::where('id', $smoku_id)->first();
+        $no_akaun = ButiranPelajar::where('smoku_id', $smoku->id)->value('no_akaun_bank');
 
         $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
         $peringkat = $rujukan[1];
@@ -2095,7 +2100,7 @@ class SekretariatController extends Controller
         ]);
         $status_rekod->save();
 
-        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('sama_semester','baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item'));
+        return view('tuntutan.sekretariat.saringan.maklumat_tuntutan',compact('sama_semester','baki_terdahulu','permohonan','smoku','akademik','tuntutan','tuntutan_item','penyata_bank','no_akaun'));
     }
 
     public function setSemulaStatus($id)

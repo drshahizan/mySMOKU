@@ -169,11 +169,25 @@
                                         <tr>
                                             <td><strong>Status Penajaan</strong></td>
                                             <td>:</td>
-                                            @if($akademik->nama_penaja!=null)
-                                                <td>Ditaja ({{$nama_penaja}})</td>
-                                            @else
-                                                <td>Tidak Ditaja</td>
-                                            @endif
+                                                @if($akademik->nama_penaja!=null)
+                                                    <td>Ditaja ({{$nama_penaja}})</td>
+                                                @else
+                                                    <td>Tidak Ditaja</td>
+                                                @endif
+                                            <td class="space">&nbsp;</td>
+                                            <td><strong>No. Akaun Bank</strong></td>
+                                            <td>:</td>
+                                            <td>{{$no_akaun}} - 
+                                                @if($penyata_bank!=null)
+                                                    @php
+                                                        $penyata = "/assets/dokumen/permohonan/".$penyata_bank->dokumen;
+                                                    @endphp
+                                                    <span><a href="{{ url($penyata) }}" target="_blank">Papar Penyata Bank</a></span>
+                                                    
+                                                @else
+                                                    <strong style="color: red;">Tiada Penyata Bank</strong>
+                                                @endif
+                                            </td>    
                                         </tr>
                                     </table>
                                 <hr>
