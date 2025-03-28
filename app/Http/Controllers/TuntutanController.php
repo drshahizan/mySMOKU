@@ -143,6 +143,7 @@ class TuntutanController extends Controller
        
             if (($currentSesi === $previousSesi) || $previousSesi === null) 
             {
+                // dd('sini');
                 if (!$tuntutan) {
                     $wang_saku = 0.00;
                     //nak tahu baki sesi semasa permohonan lepas
@@ -169,6 +170,7 @@ class TuntutanController extends Controller
                 }	
             }
             else {
+                // dd('situ');
                 if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
                     if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
                         // dd($akademik->bil_bulan_per_sem);

@@ -226,7 +226,8 @@
 								<div class="col-12">
 									<!--begin::Input-->
 									<select id="jantina" name="jantina" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true" >
-										<option value="{{ $smoku->kod_jantina }}">{{ $smoku->jantina }}</option>
+										<option value="L" {{$smoku->kod_jantina == "L" ? 'selected' : ''}}>LELAKI</option>
+										<option value="P" {{$smoku->kod_jantina == "P" ? 'selected' : ''}}>PEREMPUAN</option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -707,7 +708,7 @@
 									<!--begin::Label-->
 									<div class="me-5">
 										<!--begin::Input-->
-										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" />
+										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" @if($butiranPelajar->alamat_tetap == $waris->alamat_waris) checked @endif/>
 										<!--end::Input-->
 										<!--begin::Label-->
 										<label class="form-label">Sama seperti Alamat Tetap Pelajar</label>
