@@ -337,11 +337,10 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='parlimen' name='parlimen' class="form-select form-select-lg form-select-solid basic-search" data-placeholder="Pilih" data-control="select2" data-hide-search="true" >
-										{{-- <option></option> --}}
-										{{-- @foreach ($parlimen as $parlimen)	
-										<option value="{{$parlimen->id}}" {{$butiranPelajar->parlimen == $parlimen->id ? 'selected="selected"' : '' }}>{{ $parlimen->kod_parlimen}} - {{ strtoupper($parlimen->parlimen)}}</option>
-										@endforeach --}}
+									<select id="parlimen" name="parlimen" class="form-select form-select-lg form-select-solid basic-search" 
+											data-placeholder="Pilih" data-control="select2" data-hide-search="true" 
+											data-selected="{{ $butiranPelajar->parlimen }}">
+										<option value="">Pilih</option>
 									</select>
 									<!--end::Input-->
 								</div>
@@ -1409,6 +1408,7 @@
 
 				function loadParlimen() {
 					var idnegeri = $('#alamat_tetap_negeri').val();
+					var selectedParlimen = $('#parlimen').data('selected');
 					if (!idnegeri) return; // Exit if no value is selected
 
 					console.log("Fetching Parlimen for Negeri ID:", idnegeri); // Debugging
@@ -1423,7 +1423,8 @@
 
 							if (response.data && response.data.length > 0) {
 								$.each(response.data, function(index, item) {
-									var option = `<option value="${item.id}">${item.kod_parlimen} - ${item.parlimen.toUpperCase()}</option>`;
+									var isSelected = selectedParlimen == item.id ? 'selected' : ''; // Compare with stored value
+                    				var option = `<option value="${item.id}" ${isSelected}>${item.kod_parlimen} - ${item.parlimen.toUpperCase()}</option>`;
 									$('#parlimen').append(option);
 								});
 							}
