@@ -239,7 +239,7 @@ class TuntutanController extends Controller
         $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
             ->where('sesi', '=', $request->sesi)
-            ->where('semester', '=', $request->semester)
+            ->where('semester', '=', $request->sem_semasa)
             ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
             ->first();
 
@@ -249,7 +249,7 @@ class TuntutanController extends Controller
                 'permohonan_id' => $permohonan->id,
                 'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
                 'sesi' => $request->sesi,
-                'semester' => $request->semester,
+                'semester' => $request->sem_semasa,
                 'yuran' => '1',
                 'status' => '1',
             ]);
