@@ -214,15 +214,20 @@ class KemaskiniController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        $smoku = Smoku::where('no_kp', $request->no_kp)->firstOrFail();
-        $smoku->nama = $request->nama;
-        $smoku->email = $request->email;
-        $smoku->save();
+        // Update Smoku if exists
+        $smoku = Smoku::where('no_kp', $request->no_kp)->first();
+        if ($smoku) {
+            $smoku->nama = $request->nama;
+            $smoku->email = $request->email;
+            $smoku->save();
 
-        $id_smoku = $smoku->id;
-        $butiran = ButiranPelajar::where('smoku_id', $id_smoku)->firstOrFail();
-        $butiran->emel = $request->email;
-        $butiran->save();
+            // Update ButiranPelajar if exists
+            $butiran = ButiranPelajar::where('smoku_id', $smoku->id)->first();
+            if ($butiran) {
+                $butiran->emel = $request->email;
+                $butiran->save();
+            }
+        }
 
         return redirect()->route('kemaskini.sekretariat.pelajar.maklumat')->with('success', 'Maklumat pelajar berjaya dikemaskini.');
     }
