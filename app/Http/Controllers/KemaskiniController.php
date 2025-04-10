@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ButiranPelajar;
 use App\Models\EmelKemaskini;
 use App\Models\JumlahPeruntukan;
 use App\Models\Permohonan;
+use App\Models\Smoku;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KemaskiniController extends Controller
@@ -181,4 +184,48 @@ class KemaskiniController extends Controller
         $emel = EmelKemaskini::where('id',$id)->first();
         return view('kemaskini.sekretariat.emel.papar_emel',compact('emel'));
     }
+
+    public function maklumatPelajar()
+    {
+        return view('kemaskini.sekretariat.pelajar.semak_pelajar');
+    }
+
+    public function semakPelajar(Request $request)
+    {
+        $request->validate([
+            'no_kp' => 'required|max:12'
+        ]);
+
+        $akaun_pelajar = User::where('no_kp', $request->no_kp)->first();
+
+        return view('kemaskini.sekretariat.pelajar.semak_pelajar', compact('akaun_pelajar'));
+    }
+
+    public function updatePelajar(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string',
+            'email' => 'required|email',
+            'no_kp' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->save();
+
+        $smoku = Smoku::where('no_kp', $request->no_kp)->firstOrFail();
+        $smoku->nama = $request->nama;
+        $smoku->email = $request->email;
+        $smoku->save();
+
+        $id_smoku = $smoku->id;
+        $butiran = ButiranPelajar::where('smoku_id', $id_smoku)->firstOrFail();
+        $butiran->emel = $request->email;
+        $butiran->save();
+
+        return redirect()->route('kemaskini.sekretariat.pelajar.maklumat')->with('success', 'Maklumat pelajar berjaya dikemaskini.');
+    }
+
+
 }
