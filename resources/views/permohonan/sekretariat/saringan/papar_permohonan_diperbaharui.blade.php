@@ -134,46 +134,114 @@
                                         @if($permohonan->status==4)
                                             <table class="table table-hover table-bordered mb-5">
                                                 <thead class="table-primary">
-                                                <tr>
-                                                    <th style="width: 5%; text-align:right;">No.</th>
-                                                    <th style="width: 20%;">Item</th>
-                                                    <th style="width: 25%;">Keputusan Saringan</th>
-                                                    <th style="width: 50%;">Catatan</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th style="width: 5%; text-align:right;">No.</th>
+                                                        <th style="width: 20%;">Item</th>
+                                                        <th style="width: 25%;">Keputusan Saringan</th>
+                                                        <th style="width: 50%;">Catatan</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td style="text-align:right;">1</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
-                                                    </td>
+                                                    <tr>
+                                                        <td style="text-align:right;">1</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            Lengkap
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right;">2</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            Lengkap
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right;">3</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
+                                                        </td>
                                                     <td class="hidden-sm-down">
                                                         Lengkap
                                                     </td>
                                                     <td>
-                                                        &nbsp;
+                                                       &nbsp;
                                                     </td>
-                                                </tr>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         @elseif($permohonan->status==5)
                                             <table class="table table-hover table-bordered mb-5">
                                                 <thead class="table-primary">
-                                                <tr>
-                                                    <th style="width: 5%; text-align:right;">No.</th>
-                                                    <th style="width: 20%;">Item</th>
-                                                    <th style="width: 25%;">Keputusan Saringan</th>
-                                                    <th style="width: 50%;">Catatan</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th style="width: 5%; text-align:right;">No.</th>
+                                                        <th style="width: 20%;">Item</th>
+                                                        <th style="width: 25%;">Keputusan Saringan</th>
+                                                        <th style="width: 50%;">Catatan</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td style="text-align:right;">2</td>
-                                                    <td>
-                                                        <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
-                                                    </td>
+                                                    <tr>
+                                                        <td style="text-align:right;">1</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            @if ($catatan->catatan_profil_diri == null)
+                                                                Lengkap
+                                                            @else
+                                                                Tidak Lengkap
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @php
+                                                                $str = $catatan->catatan_profil_diri;
+                                                                $strArr = explode(",", $str);
+                                                            @endphp
+                                                            @for ($i = 0; $i < count($strArr)-1; $i++)
+                                                            {{$i+1}}. {{$strArr[$i]}} <br>
+                                                            @endfor
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right;">2</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            @if ($catatan->catatan_akademik == null)
+                                                                Lengkap
+                                                            @else
+                                                                Tidak Lengkap
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @php
+                                                                $str = $catatan->catatan_akademik;
+                                                                $strArr = explode(",", $str);
+                                                            @endphp
+                                                            @for ($i = 0; $i < count($strArr)-1; $i++)
+                                                            {{$i+1}}. {{$strArr[$i]}} <br>
+                                                            @endfor
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right;">3</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
+                                                        </td>
                                                     <td class="hidden-sm-down">
-                                                        @if ($catatan->catatan_akademik == null)
+                                                        @if ($catatan->catatan_salinan_dokumen == null)
                                                             Lengkap
                                                         @else
                                                             Tidak Lengkap
@@ -181,17 +249,18 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $str = $catatan->catatan_akademik;
+                                                            $str = $catatan->catatan_salinan_dokumen;
                                                             $strArr = explode(",", $str);
                                                         @endphp
                                                         @for ($i = 0; $i < count($strArr)-1; $i++)
-                                                            {{$i+1}}. {{$strArr[$i]}} <br>
+                                                        {{$i+1}}. {{$strArr[$i]}} <br>
                                                         @endfor
                                                     </td>
-                                                </tr>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         @endif
+
                                     </div>
                                 </div>
                             </div>

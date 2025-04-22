@@ -37,13 +37,19 @@
         if($user->tahap == 1 ){
             $smoku = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
             $permohonan = DB::table('permohonan')->where('smoku_id',$smoku->id)->first();
+            $akademik = DB::table('smoku_akademik')
+			->where('smoku_id', $smoku->id)
+			->where('status', 1)
+			->first();
         }
     @endphp
     <!--begin::Menu item-->
     @if($user->tahap == 1 && ($permohonan != null && $permohonan->status >= 2))
-        <div class="menu-item px-5">
-            <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Diri</a>
-        </div>
+        @if($akademik->tarikh_tamat >= today() || $akademik->tarikh_tamat == NULL)
+            <div class="menu-item px-5">
+                <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Diri</a>
+            </div>
+        @endif    
     @endif
     <div class="menu-item px-5">
         <a href="{{ route('tukar.katalaluan') }}" class="menu-link px-5">Tukar Kata Laluan</a>

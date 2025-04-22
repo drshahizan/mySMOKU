@@ -3,8 +3,19 @@
 	@php
 		$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
 		$permohonan = DB::table('permohonan')->where('smoku_id', $smoku_id->id)->first();
-		$akademik = DB::table('smoku_akademik')->where('smoku_id', $smoku_id->id)->where('status', 1)->first();
-		$institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->first();
+		$akademik = DB::table('smoku_akademik')
+			->where('smoku_id', $smoku_id->id)
+			->where('status', 1)
+			->first();
+		// dd($akademik->tarikh_tamat);	
+
+		$institusi = null;
+
+		if ($akademik && $akademik->id_institusi !== null) {
+			$institusi = DB::table('bk_info_institusi')
+				->where('id_institusi', $akademik->id_institusi)
+				->first();
+		}
 
 		// Retrieve data from bk_tarikh_iklan table
 		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
@@ -33,27 +44,27 @@
 						<span class="menu-title">Laman Utama</span>
 					</a>
 				</div>
-				@if($permohonan != null && $permohonan->status ==8 && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
-				<div class="menu-item pt-5">
-					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+				@if($permohonan != null && $permohonan->status == 8 && $institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+					<div class="menu-item pt-5">
+						<div class="menu-content">
+							<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+						</div>
 					</div>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.keputusan') }}">
-						<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
-						<span class="menu-title">Keputusan Peperiksaan</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('tamat.pengajian') }}">
-						<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
-						<span class="menu-title">Lapor Tamat Pengajian</span>
-					</a>
-				</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('kemaskini.keputusan') }}">
+							<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
+							<span class="menu-title">Keputusan Peperiksaan</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('tamat.pengajian') }}">
+							<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
+							<span class="menu-title">Lapor Tamat Pengajian</span>
+						</a>
+					</div>
 				@endif
 
-				@if(in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+				@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 					<div class="menu-item pt-5">
 						<div class="menu-content">
 							<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
@@ -62,12 +73,14 @@
 
 					@if($institusi->jenis_institusi === 'IPTS')
 						@if($isWithinRange)
-							<div class="menu-item">
-								<a class="menu-link" href="{{ route('permohonan') }}">
-									<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-									<span class="menu-title">Baharu</span>
-								</a>
-							</div>							
+							@if($akademik->tarikh_tamat >= today())
+								<div class="menu-item">
+									<a class="menu-link" href="{{ route('permohonan') }}">
+										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+										<span class="menu-title">Baharu</span>
+									</a>
+								</div>
+							@endif	
 						@else
 							<div class="menu-item">
 								<a class="menu-link" href="#" onclick="showAlert()">
@@ -87,21 +100,23 @@
 				@endif
 
 				@if($permohonan != null && $permohonan->status == 8)
-					@if(in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
 								<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
 							</div>
 						</div>
-
+				
 						@if($institusi->jenis_institusi === 'IPTS')
 							@if($isWithinRange)
-								<div class="menu-item">
-									<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
-										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-										<span class="menu-title">Baharu</span>
-									</a>
-								</div>
+								@if($akademik->tarikh_tamat >= today())
+									<div class="menu-item">
+										<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
+											<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+											<span class="menu-title">Baharu</span>
+										</a>
+									</div>
+								@endif	
 							@else
 								<div class="menu-item">
 									<a class="menu-link" href="#" onclick="showAlertTuntutan()">
@@ -111,7 +126,6 @@
 								</div>
 							@endif
 						@endif
-
 						<div class="menu-item">
 							<a class="menu-link" href="{{ route('pelajar.sejarah.tuntutan') }}">
 								<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>

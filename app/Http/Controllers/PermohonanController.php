@@ -353,7 +353,7 @@ class PermohonanController extends Controller
          ->where('smoku_id', $smoku_id->id)
          ->first(); 
 
-         if (!$permohonan || $permohonan->status == 9) {
+         if (!$permohonan || $permohonan->status == 9 || $permohonan->status == 8) {
             $permohonan = Permohonan::create(
                 [   'smoku_id' => $smoku_id->id,
                     'no_rujukan_permohonan' => 'B'.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,

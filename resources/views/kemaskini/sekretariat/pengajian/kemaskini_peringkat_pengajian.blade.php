@@ -123,7 +123,7 @@
                                                                 @endif
                                                             @endforeach
                                                         @else
-                                                            Belum dikemaskini
+                                                            <span style="color: red;">Belum dikemaskini</span>
                                                         @endif
                                                     </td>
             
@@ -140,8 +140,8 @@
                                                     </td>
 
                                                     <td class="text-center">
-                                                        @if($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
-                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" disabled>
+                                                        {{-- @if($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
+                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" >
                                                                 <option value="">Pilih Peringkat Pengajian</option>
                                                                 @foreach ($peringkatPengajian as $peringkat)
                                                                     @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
@@ -149,7 +149,7 @@
                                                                     @endif
                                                                 @endforeach
                                                             </select>
-                                                        @else
+                                                        @else --}}
                                                             <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
                                                                 @csrf
                                                                 <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }}) {{ session()->has('kemaskini_success_' . $items->smoku_id) ? 'disabled' : '' }}">
@@ -161,7 +161,7 @@
                                                                     @endforeach
                                                                 </select>
                                                             </form>
-                                                        @endif
+                                                        {{-- @endif --}}
                                                     </td>                                                                                                      
                                                 </tr>
                                             @endforeach

@@ -139,7 +139,29 @@
                                                     <tr>
                                                         <td style="text-align:right;">1</td>
                                                         <td>
-                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/permohonan-diperbaharui/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-profil-diri/'.$permohonan->id) }}" target="_blank">Maklumat Profil Diri</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            <div class="form-group c_form_group">
+                                                                <select id="maklumat_profil_diri" name="maklumat_profil_diri" class="form-control" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <option value="">Pilih</option>
+                                                                    <option value="lengkap">Lengkap</option>
+                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group c_form_group">
+                                                                <input class="checkbox1a" id="checkbox1a" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak benar pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak benar pada Maklumat Profil Diri</span><br>
+                                                                <input class="checkbox1b" id="checkbox1b" type="checkbox" name="catatan_maklumat_profil_diri[]" value="Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri" disabled="disabled"><span> Terdapat maklumat yang tidak lengkap pada Maklumat Profil Diri</span><br>
+                                                                <input class="checkbox1c" id="checkbox1c" type="checkbox" name="catatan_maklumat_profil_diri[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain1" id="lain1" disabled="disabled"></span><br>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right;">2</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/maklumat-akademik/'.$permohonan->id) }}" target="_blank">Maklumat Akademik</a></span>
                                                         </td>
                                                         <td class="hidden-sm-down">
                                                             <div class="form-group c_form_group">
@@ -158,7 +180,31 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                </tbody>
+                                                    <tr>
+                                                        <td style="text-align:right;">3</td>
+                                                        <td>
+                                                            <span><a href="{{ url('permohonan/sekretariat/saringan/salinan-dokumen/'.$permohonan->id) }}" target="_blank">Salinan Dokumen</a></span>
+                                                        </td>
+                                                        <td class="hidden-sm-down">
+                                                            <div class="form-group c_form_group">
+                                                                <select id="salinan_dokumen" name="salinan_dokumen" class="form-control" onchange="select3()" oninvalid="this.setCustomValidity('Sila pilih item dalam senarai')" oninput="setCustomValidity('')" required>
+                                                                    <option value="">Pilih</option>
+                                                                    <option value="lengkap">Lengkap</option>
+                                                                    <option value="tak_lengkap">Tidak Lengkap</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="checkbox-group">
+                                                                <input class="checkbox3a" id="checkbox3a" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada surat tawaran" disabled="disabled"><span> Ralat pada surat tawaran</span><br>
+                                                                <input class="checkbox3b" id="checkbox3b" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada penyata bank" disabled="disabled"><span> Ralat pada penyata bank</span><br>
+                                                                <input class="checkbox3c" id="checkbox3c" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada resit" disabled="disabled"><span> Ralat pada resit/invois</span><br>
+                                                                <input class="checkbox3d" id="checkbox3d" type="checkbox" name="catatan_salinan_dokumen[]" value="Ralat pada keputusan peperiksaan" disabled="disabled"><span> Ralat pada keputusan peperiksaan</span><br>
+                                                                <input class="checkbox3e" id="checkbox3e" type="checkbox" name="catatan_salinan_dokumen[]" value="" disabled="disabled"><span> Lain-lain: <input type="text" name="lain3" id="lain3" disabled="disabled"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
                                             </table>
                                         </div>
                                     </div>
