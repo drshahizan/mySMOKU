@@ -12,12 +12,14 @@ use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
 use App\Models\Kelulusan;
 use App\Models\Negeri;
+use App\Models\Penyelaras;
 use App\Models\Peperiksaan;
 use App\Models\Permohonan;
 use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\Status;
+use App\Models\User;
 use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -402,16 +404,24 @@ class SaringanController extends Controller
                 }
             }
 
-            // COMMENT PROD
-            $smoku_emel =Smoku::where('id', $permohonan->smoku_id)->value('email');
+            $id_penyelaras = Penyelaras::where('smoku_id', $permohonan->smoku_id)->value('penyelaras_id');
+            $emel_penyelaras = User::where('id', $id_penyelaras)->value('email');
+
+            $smoku_emel = Smoku::where('id', $permohonan->smoku_id)->value('email');
+
             $program = Permohonan::where('id', $id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',1)->first();
-                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+
+            if ($program == "BKOKU") {
+                $emel = EmelKemaskini::where('emel_id', 1)->first();
+            } elseif ($program == "PPK") {
+                $emel = EmelKemaskini::where('emel_id', 7)->first();
             }
-            elseif($program=="PPK"){
-                $emel = EmelKemaskini::where('emel_id',7)->first();
-                Mail::to($smoku_emel)->send(new SaringanMail($catatan,$emel));
+
+            // Send email
+            if ($emel_penyelaras) {
+                Mail::to($emel_penyelaras)->cc($smoku_emel)->send(new SaringanMail($catatan, $emel));
+            } else {
+                Mail::to($smoku_emel)->send(new SaringanMail($catatan, $emel));
             }
 
             $no_rujukan_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
