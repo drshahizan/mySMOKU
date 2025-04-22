@@ -380,11 +380,13 @@ class PentadbirController extends Controller
     public function simpanTarikh(Request $request)
     {
         $tarikh = TarikhIklan::create([
-            'tarikh_mula' => $request->tarikh_mula,
-            'masa_mula' => $request->masa_mula,
+            'tarikh_mula'  => $request->tarikh_mula,
+            'masa_mula'    => $request->masa_mula,
             'tarikh_tamat' => $request->tarikh_tamat,
-            'masa_tamat' => $request->masa_tamat,
-            'catatan' => $request->catatan,
+            'masa_tamat'   => $request->masa_tamat,
+            'permohonan'   => $request->has('permohonan') ? 1 : 0,
+            'tuntutan'     => $request->has('tuntutan') ? 1 : 0,
+            'catatan'      => $request->catatan,
         ]);
         
         $catatan = $request->catatan;

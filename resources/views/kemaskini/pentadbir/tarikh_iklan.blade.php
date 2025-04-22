@@ -93,6 +93,26 @@
 						</div>
 						<!--begin::Input group-->
 						<div class="col-md-12 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Papar</label>
+						
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="permohonan" id="permohonan">
+								<label for="permohonan">
+									Permohonan
+								</label>
+							</div>
+						
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="tuntutan" id="tuntutan">
+								<label for="tuntutan">
+									Tuntutan
+								</label>
+							</div>
+						</div>
+						<!--end::Input group-->
+						<br>
+						<!--begin::Input group-->
+						<div class="col-md-12 fv-row">
 							<!--begin::Label-->
 							<label class="fs-6 fw-semibold mb-2">Catatan</label>
 							<!--end::Label-->
@@ -132,6 +152,7 @@
 								<tr class="text-start align-center text-gray-400 fw-bold fs-7 gs-0">
 									<th class="min-w-125px align-center">Tarikh Mula</th>
 									<th class="min-w-125px align-center">Tarikh Tamat</th>
+									<th class="min-w-125px align-center">Papar</th>
 									<th class="min-w-125px align-center">Catatan</th>
 									<th class="min-w-125px align-center">Tarikh Kemaskini</th>
 								</tr>
@@ -140,6 +161,18 @@
 								<tr>
 									<td>{{ $tarikh->tarikh_mula}}</td>
 									<td>{{ $tarikh->tarikh_tamat}}</td>
+									<td class="align-center">
+										<div style="display: flex; gap: 10px; justify-content: center;">
+											<div>
+												<input type="checkbox" disabled {{ $tarikh->permohonan ? 'checked' : '' }}>
+												<label style="margin-left: 2px;">Permohonan</label>
+											</div>
+											<div>
+												<input type="checkbox" disabled {{ $tarikh->tuntutan ? 'checked' : '' }}>
+												<label style="margin-left: 2px;">Tuntutan</label>
+											</div>
+										</div>
+									</td>
 									<td class="align-left">{!! $tarikh->catatan !!}</td>
 									<td>{{ $tarikh->created_at->format('d/m/Y h:i:sa')}}</td>
 								</tr>
