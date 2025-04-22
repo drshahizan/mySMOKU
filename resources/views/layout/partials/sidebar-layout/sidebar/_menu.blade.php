@@ -73,7 +73,7 @@
 
 					@if($institusi->jenis_institusi === 'IPTS')
 						@if($isWithinRange)
-							@if($akademik->tarikh_tamat >= today())
+							@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today())
 								<div class="menu-item">
 									<a class="menu-link" href="{{ route('permohonan') }}">
 										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
