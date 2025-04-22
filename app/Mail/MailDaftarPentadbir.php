@@ -33,7 +33,7 @@ class MailDaftarPentadbir extends Mailable
     {
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
-            now()->addMinutes(60), // Adjust the expiration time as needed
+            now()->addMinutes(4320), // Adjust the expiration time as needed
             ['id' => $this->no_kp, 'hash' => sha1($this->email)]
         );
 
