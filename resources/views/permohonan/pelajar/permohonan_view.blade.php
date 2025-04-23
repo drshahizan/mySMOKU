@@ -1474,8 +1474,8 @@
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th class="min-w-50px"></th>
-									<th class="min-w-500px"></th>
+									<th class="min-w-20px"></th>
+									<th class="min-w-200px"></th>
 								</tr>
 							</thead>
 
@@ -1486,7 +1486,7 @@
 										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
 										<!-- End -->
 									</td>
-									<td class="input-group control-group img_div form-group col-md-10 mt-2">
+									<td class="input-group control-group img_div form-group col-md-5 mt-2">
 										Salinan Resit/Invois Tambahan (Jika ada)
 									</td>
 								</tr>

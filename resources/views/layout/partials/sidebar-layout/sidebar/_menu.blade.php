@@ -72,7 +72,7 @@
 					</div>
 
 					@if($institusi->jenis_institusi === 'IPTS')
-						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
+						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1) || $permohonan->status == 5)
 							@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today())
 								<div class="menu-item">
 									<a class="menu-link" href="{{ route('permohonan') }}">
