@@ -350,6 +350,7 @@ class PentadbirController extends Controller
                 'tel' => $request->tel,
                 'hotline' => $request->hotline,
                 'faks' => $request->faks,
+                'email' => $request->email,
             ]);
         } else {
             $maklumat->update([
@@ -365,6 +366,7 @@ class PentadbirController extends Controller
                 'tel' => $request->tel,
                 'hotline' => $request->hotline,
                 'faks' => $request->faks,
+                'email' => $request->email,
             ]);
         }
         return redirect()->route('alamat');

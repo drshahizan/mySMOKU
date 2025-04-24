@@ -5,7 +5,7 @@
                 size: A4;
                 font-family: Arial, sans-serif;
                 font-size: 12pt;
-                line-height: 1.15;
+                line-height: 1.5;
             }
     
             body::before {
@@ -35,6 +35,7 @@
             .parentSpace {
                 width: 100%;
                 display: inherit;
+                line-height: 1.0;
             }
     
             .left {
@@ -44,8 +45,8 @@
     
             .right {
                 float: right;
-                width: 22%;
-                font-size: 9pt; 
+                width: 30%;
+                font-size: 11pt; 
                 margin-top: 100px;
                 line-height: 1;
             }
@@ -56,19 +57,18 @@
         <div class="parentSpace">
             <div class="left">
                 <div class="logo" style="margin-top:20px; float: left;">
-                    <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 100px; width: 150px;">
+                    <img src="logoKPT.png" alt="Kementerian Pengajian Tinggi" style="height: 110px; width: 160px;">
                 </div>
 
-                <div class="address" style="padding-left: 150px; font-size: 10pt; margin-top:0%;">
-                    <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
-                    <br>{{$maklumat_kementerian->nama_kementerian_bi}}
-                    <br>
-                    <br>{{$maklumat_kementerian->nama_bahagian_bm}}
-                    <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                <div class="address" style="padding-left: 170px; font-size: 11pt; margin-top:15px;">
+                    <b>{{ strtoupper($maklumat_kementerian->nama_kementerian_bm) }}</b>
+                    <br><b style="font-style: italic;">{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}</b>
+                    <br><b>{{$maklumat_kementerian->nama_bahagian_bm}}</b>
+                    <br><b style="font-style: italic;">{{$maklumat_kementerian->nama_bahagian_bi}}</b>
                     <br>{{$maklumat_kementerian->alamat1}}
                     <br>{{$maklumat_kementerian->alamat2}}
-                    <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
-                    <br>{{$maklumat_kementerian->negara}}
+                    <br>{{$maklumat_kementerian->poskod}} {{strtoupper($maklumat_kementerian->negeri)}}
+                    <br>{{strtoupper($maklumat_kementerian->negara)}}
                 </div>
             </div>
 
@@ -80,102 +80,115 @@
                         <td>{{$maklumat_kementerian->tel}}</td>
                     </tr>
                     <tr>
-                        <td>Hotline</td>
+                        <td>E-mel</td>
                         <td>:</td>
-                        <td>{{$maklumat_kementerian->hotline}}</td>
-                    </tr>
-                    <tr>
-                        <td>Faks</td>
-                        <td>:</td>
-                        <td>{{$maklumat_kementerian->faks}}</td>
+                        <td>{{$maklumat_kementerian->email}}</td>
                     </tr>
                 </table>
             </div>
         </div>
            
-        <br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br>
         
         <hr>
 
-        <p>
-            <span style="float: right">
-                Ruj. Kami : KPT.BKOKU-XXXXXXXXXX <br>
-                Tarikh : XXXXXXXXXX <br>
-            </span>
-        </p>
+        <table style="float: right">
+            <tr>
+                <td>Ruj. Kami</td>
+                <td>:</td>
+                <td>KPT.BKOKU-XXXXXXXXXX </td>
+            </tr>
+            <tr>
+                <td>Tarikh</td>
+                <td>:</td>
+                <td>XXXXXXXXXX</td>
+            </tr>
+        </table>
+           
+        
 
-        <br>
+        <br><br><br>
 
         <div class="penerima" style="width: 40%">
-            <b>XXXXXXXXXX</b>
-            <br><b>NO.KP : XXXXXXXXXX</b>
+            <b>XXXXXXXXXXXXXXXXXXXX</b>
+            <br><b>XXXXXXXXXXXX</b>
             <br>XXXXXXXXXX
-            <br>XXXXX, XXXXXXXXXX
+            <br>XXXXXXXXXX
             <br>XXXXXXXXXX
         </div>
             
         <br>
         <p>Tuan/Puan,</p>
-        <br>
-        <h3>{{ strtoupper( $suratTawaran->tajuk) }}</h3>
-        <br>
+        <p><b>{{ strtoupper( $suratTawaran->tajuk) }}</b></p>
+        <p>{{$suratTawaran->hormat}}</p>
         <p>{{ $suratTawaran->tujuan }}</p>
         <br>
-
         <table>
             <tr>
-                <td><strong>Program Pengajian </strong></td>
+                <td><strong>PERINGKAT </strong></td>
                 <td><b>:</b></td>
-                <td>XXXXXXXXXXXXXXX</td>
+                <td>xxxxxxxxxxxxxxxx</td>
             </tr>
 
             <tr>
-                <td><strong>Mod Pengajian </strong></td>
+                <td><strong>KURSUS </strong></td>
                 <td><b>:</b></td>
-                <td>XXXXXXXXXXXXXXX</td>
+                <td>xxxxxxxxxxxxxxxx</td>
             </tr>
 
             <tr>
-                <td><strong>Tempoh Penajaan </strong></td>
+                <td><strong>INSTITUSI </strong></td>
                 <td><b>:</b></td>
-                <td>XXXXXXXXXXXXXXX</td>
+                <td>xxxxxxxxxxxxxxxx</td>
             </tr>
 
             <tr>
-                <td><strong>Institusi Pengajian </strong></td>
+                <td><strong>TEMPOH PENGAJIAN </strong></td>
                 <td><b>:</b></td>
-                <td>XXXXXXXXXXXXXXX</td>
+                <td>xxxxxxxxxxxxxxxx</td>
+            </tr>
+
+            <tr>
+                <td><strong>MOD PENGAJIAN </strong></td>
+                <td><b>:</b></td>
+                <td>xxxxxxxxxxxxxxxx</td>
             </tr>
         </table>
-        
         <br>
-        <div class="main-content" style="text-align:justify;">
-            <p>2. Bantuan ini berkuatkuasa mulai <b>XXXXXXXXXXX hingga XXXXXXXXXXX.</b>
-                  {{ $suratTawaran->kandungan1}}</p><br>
-            <p>3. {{ $suratTawaran->kandungan2}}</p><br>
-            <p>4. {{ $suratTawaran->kandungan3}}</p><br>
+        <div class="main-content" style="text-align: justify;">
+            <p><b>2. TEMPOH KUAT KUASA</b>
+                <br>
+                {{$suratTawaran->kandungan1}}</p>
+            <p><b>3. KADAR PEMBIAYAAN</b>
+                <br>{{$suratTawaran->kandungan2}}</p>
+            <p><b>4. HAK KERAJAAN</b>
+                <br>{{$suratTawaran->kandungan3}}</p>
         </div>
-        
+        <br>
         <p>Sekian, terima kasih.</p>
         <br>
         <p><b>{{ $suratTawaran->penutup1}}</b></p>
         <p><b>{{$suratTawaran->penutup4_4}}</b></p>
         <p><b>{{ $suratTawaran->penutup2}}</b></p>
-        <br>
         <p>Saya yang menjalankan amanah,</p>
-        <p> {{ $suratTawaran->penutup3_1}} <br>
-            {{ $suratTawaran->penutup3_2}} <br>
-            {{ $suratTawaran->penutup3_3}} <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ $suratTawaran->penutup3_4}} <br>
+        <br>
+        <p>
+            <b>{{$suratTawaran->penutup3_1}}</b> <br>
+            {{$suratTawaran->penutup3_2}} <br>
+            {{$suratTawaran->penutup3_3}} <br>
+            {{$suratTawaran->penutup3_4}} <br>
+            
         </p>
         <br>
-        <p><div style="text-align: center;  font-style: italic;">Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
+        <p>s.k : {{$suratTawaran->penutup4_1}} <br>
+            {{$suratTawaran->penutup4_2}} <br>
+            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX <br>
+        </p>
         <br>
-        <p>s.k :<br>
-            {{ $suratTawaran->penutup4_1}} <br>
-            {{ $suratTawaran->penutup4_2}} <br>
-            XXXXXXXXXXXXXXXXXXX <br>
+        <p style="text-align: center;">
+            <span style="font-style: italic;"><b>
+              * Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan.
+            </b></span>
         </p>
     </body>
 </html>

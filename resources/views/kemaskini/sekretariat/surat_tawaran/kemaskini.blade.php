@@ -78,13 +78,13 @@
                     
                                     <div class="address" style="padding-left: 150px; margin-top:0%;">
                                         <b>{{ strtoupper($maklumat_kementerian->nama_kementerian_bm) }}</b>
-                                        <br>{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}<br>
-                                        <br>{{$maklumat_kementerian->nama_bahagian_bm}}
-                                        <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                                        <br><b style="font-style: italic;">{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}</b>
+                                        <br><b>{{$maklumat_kementerian->nama_bahagian_bm}}</b>
+                                        <br><b style="font-style: italic;">{{$maklumat_kementerian->nama_bahagian_bi}}</b>
                                         <br>{{$maklumat_kementerian->alamat1}}
                                         <br>{{$maklumat_kementerian->alamat2}}
-                                        <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
-                                        <br>{{$maklumat_kementerian->negara}}
+                                        <br>{{$maklumat_kementerian->poskod}} {{strtoupper($maklumat_kementerian->negeri)}}
+                                        <br>{{strtoupper($maklumat_kementerian->negara)}}
                                     </div>
                                 </div>
                     
@@ -96,14 +96,9 @@
                                             <td>{{$maklumat_kementerian->tel}}</td>
                                         </tr>
                                         <tr style="line-height: 0;">
-                                            <td>Hotline</td>
+                                            <td>E-mel</td>
                                             <td>:</td>
-                                            <td>{{$maklumat_kementerian->hotline}}</td>
-                                        </tr>
-                                        <tr style="line-height: 0;">
-                                            <td>Faks</td>
-                                            <td>:</td>
-                                            <td>{{$maklumat_kementerian->faks}}</td>
+                                            <td>{{$maklumat_kementerian->email}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -113,18 +108,26 @@
 
                             <form action="{{ route('send', ['suratTawaranId' => $suratTawaran->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <p>
-                                    <span style="float: right">
-                                        Ruj. Kami : KPT.BKOKU-xxxxxxxxx<br>
-                                        Tarikh : xxxxxxxxx <br>
-                                    </span>
-                                </p>
+                                <table style="float: right">
+                                    <tr>
+                                        <td>Ruj. Kami</td>
+                                        <td>:</td>
+                                        <td>KPT.BKOKU-XXXXXXXXXX </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarikh</td>
+                                        <td>:</td>
+                                        <td>XXXXXXXXXX</td>
+                                    </tr>
+                                </table>
 
-                                <br>
+                                <br><br><br>
 
                                 <div class="penerima">
-                                    <b>xxxxxxxxxxxxxxxx</b>
-                                    <br><b>NO.KP : xxxxxxxxx</b>
+                                    <b>xxxxxxxxxxxxxxxxxxxxxxxx</b>
+                                    <br><b>xxxxxxxxx</b>
+                                    <br><b>xxxxxxxxxxxxxxxx</b>
+                                    <br><b>xxxxxxxxxxxxxxxx</b>
                                     <br><b>xxxxxxxxxxxxxxxx</b>
                                 </div>
                                     
@@ -135,31 +138,41 @@
                                 </div>
                                 <br>
                                 <div class="col-md-12 fv-row">
+                                    <input class="form-control form-control-solid" type="text" id="hormat" name="hormat" value="{{$suratTawaran->hormat}}">
+                                </div>
+                                <br>
+                                <div class="col-md-12 fv-row">
                                     <textarea class="form-control form-control-solid" name="tujuan" id="tujuan">{{$suratTawaran->tujuan}}</textarea>
                                 </div>
                                 <br>
 
                                 <table>
                                     <tr>
-                                        <td><strong>Program Pengajian </strong></td>
+                                        <td><strong>PERINGKAT </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Mod Pengajian </strong></td>
+                                        <td><strong>KURSUS </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Tempoh Penajaan </strong></td>
+                                        <td><strong>INSTITUSI </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Institusi Pengajian </strong></td>
+                                        <td><strong>TEMPOH PENGAJIAN</strong></td>
+                                        <td><b>:</b></td>
+                                        <td>xxxxxxxxxxxxxxxx</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>MOD PENGAJIAN </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
@@ -168,17 +181,17 @@
                                 <br>
                                 <div class="main-content">
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2">2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</label>
+                                        <label class="fs-6 fw-semibold mb-2"><b>2. TEMPOH KUAT KUASA</b></label>
                                         <textarea class="form-control form-control-solid" name="kandungan1" id="kandungan1">{{$suratTawaran->kandungan1}}</textarea>
                                     </div>
                                     <br>
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2">3.</label>
+                                        <label class="fs-6 fw-semibold mb-2"><b>3. KADAR PEMBIAYAAN</b></label>
                                         <textarea class="form-control form-control-solid" name="kandungan2" id="kandungan2">{{$suratTawaran->kandungan2}}</textarea>
                                     </div>
                                     <br>
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2">4.</label>
+                                        <label class="fs-6 fw-semibold mb-2"><b>4. HAK KERAJAAN</b></label>
                                         <textarea class="form-control form-control-solid" name="kandungan3" id="kandungan3">{{$suratTawaran->kandungan3}}</textarea>
                                     </div>
                                 </div>
@@ -205,25 +218,33 @@
                                     <input class="form-control" type="text" id="penutup3_1" name="penutup3_1" style="font-weight:bold" value="{{$suratTawaran->penutup3_1}}">
                                 </div>
                                 <div class="col-md-5 fv-row">
-                                    <input class="form-control" type="text" id="penutup3_2" name="penutup3_2" style="font-weight:bold" value="{{$suratTawaran->penutup3_2}}">
+                                    <input class="form-control" type="text" id="penutup3_2" name="penutup3_2" value="{{$suratTawaran->penutup3_2}}">
                                 </div>
                                 <div class="col-md-5 fv-row">
-                                    <input class="form-control" type="text" id="penutup3_3" name="penutup3_3" style="font-weight:bold" value="{{$suratTawaran->penutup3_3}}">
+                                    <input class="form-control" type="text" id="penutup3_3" name="penutup3_3" value="{{$suratTawaran->penutup3_3}}">
                                 </div>
                                 <div class="col-md-5 fv-row">
-                                    <input class="form-control" type="text" id="penutup3_4" name="penutup3_4" style="font-weight:bold" value="{{$suratTawaran->penutup3_4}}">
+                                    <input class="form-control" type="text" id="penutup3_4" name="penutup3_4" value="{{$suratTawaran->penutup3_4}}">
                                 </div>
                                 <br><br>
 
-                                <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
-
-                                <p>s.k : </p>
-                                <div class="col-md-5 fv-row">
-                                    <input class="form-control" type="text" id="penutup4_1" name="penutup4_1" style="font-weight:bold" value="{{$suratTawaran->penutup4_1}}">
-                                </div> 
+                                <div class="d-flex align-items-center">
+                                    <label for="penutup4_1" class="me-2">s.k. :</label>
+                                    <input class="form-control" type="text" id="penutup4_1" name="penutup4_1"
+                                           style="font-weight: bold; width: auto;" 
+                                           value="{{$suratTawaran->penutup4_1}}">
+                                </div>
                                 <div class="col-md-5 fv-row">
                                     <input class="form-control" type="text" id="penutup4_2" name="penutup4_2" style="font-weight:bold" value="{{$suratTawaran->penutup4_2}}">
                                 </div>
+                                <br><br>
+
+                                <p style="text-align: center;">
+                                    <span style="font-style: italic;"><b>
+                                      * Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan.
+                                    </b></span>
+                                </p>
+                                  
                                 
                                 <div class="d-flex flex-center mt-5 mb-5">
                                     <button type="submit" class="btn btn-primary btn-sm">Kemaskini</button>

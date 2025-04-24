@@ -12,6 +12,7 @@ class SuratTawaran extends Model
     protected $fillable = [
         'no_rujukan',
         'tajuk',
+        'hormat',
         'tujuan',
         'kandungan1',
         'kandungan2',

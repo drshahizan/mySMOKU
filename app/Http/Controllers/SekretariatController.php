@@ -1055,6 +1055,7 @@ class SekretariatController extends Controller
 
         if ($existingRecord) {
             $existingRecord->tajuk = $request->tajuk;
+            $existingRecord->hormat = $request->hormat;
             $existingRecord->tujuan = $request->tujuan;
             $existingRecord->kandungan1 = $request->kandungan1;
             $existingRecord->kandungan2 = $request->kandungan2;

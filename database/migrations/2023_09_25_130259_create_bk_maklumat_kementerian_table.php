@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('tel');
             $table->string('hotline');
             $table->string('faks');
+            $table->string('email');
             $table->timestamps();
         });
     }

@@ -23,5 +23,6 @@ class MaklumatKementerian extends Model
         'tel',
         'hotline',
         'faks',
+        'email',
     ];
 }

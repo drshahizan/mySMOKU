@@ -183,6 +183,19 @@
 							</div>
 							<!--end::Input group-->
 						</div>
+
+						<div class="row mb-10">
+							<!--begin::Input group-->
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="fs-6 fw-semibold mb-2">E-mel</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$maklumat->email}}"/>
+								<!--end::Input-->
+							</div>
+							<!--end::Input group-->
+						</div>
 						@endforeach
 						<!--begin::action-->
 						<div class="modal-footer flex-center">

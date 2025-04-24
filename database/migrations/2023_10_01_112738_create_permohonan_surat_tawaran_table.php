@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_rujukan')->nullable();
             $table->string('tajuk')->nullable();
+            $table->string('hormat')->nullable();
             $table->string('tujuan')->nullable();
             $table->longText('kandungan1')->nullable();
             $table->longText('kandungan2')->nullable();

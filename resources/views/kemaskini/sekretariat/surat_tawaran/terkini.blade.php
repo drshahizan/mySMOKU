@@ -21,7 +21,7 @@
                 font-family: Arial, sans-serif;
                 font-size: 12px;
                 color: black;
-                line-height: 1.1 !important;
+                line-height: 1.0;
             }
     
             .left {
@@ -87,14 +87,14 @@
                                     </div>
                     
                                     <div class="address" style="padding-left: 150px; margin-top:0%;">
-                                        <b>{{$maklumat_kementerian->nama_kementerian_bm}}</b>
-                                        <br>{{$maklumat_kementerian->nama_kementerian_bi}}<br>
-                                        <br>{{$maklumat_kementerian->nama_bahagian_bm}}
-                                        <br>{{$maklumat_kementerian->nama_bahagian_bi}}
+                                        <b>{{ strtoupper($maklumat_kementerian->nama_kementerian_bm) }}</b>
+                                        <br><b style="font-style: italic;">{{ strtoupper($maklumat_kementerian->nama_kementerian_bi) }}</b>
+                                        <br><b>{{$maklumat_kementerian->nama_bahagian_bm}}</b>
+                                        <br><b style="font-style: italic;">{{$maklumat_kementerian->nama_bahagian_bi}}</b>
                                         <br>{{$maklumat_kementerian->alamat1}}
                                         <br>{{$maklumat_kementerian->alamat2}}
-                                        <br>{{$maklumat_kementerian->poskod}} {{$maklumat_kementerian->negeri}}
-                                        <br>{{$maklumat_kementerian->negara}}
+                                        <br>{{$maklumat_kementerian->poskod}} {{strtoupper($maklumat_kementerian->negeri)}}
+                                        <br>{{strtoupper($maklumat_kementerian->negara)}}
                                     </div>
                                 </div>
                     
@@ -106,14 +106,9 @@
                                             <td>{{$maklumat_kementerian->tel}}</td>
                                         </tr>
                                         <tr style="line-height: 0;">
-                                            <td>Hotline</td>
+                                            <td>E-mel</td>
                                             <td>:</td>
-                                            <td>{{$maklumat_kementerian->hotline}}</td>
-                                        </tr>
-                                        <tr style="line-height: 0;">
-                                            <td>Faks</td>
-                                            <td>:</td>
-                                            <td>{{$maklumat_kementerian->faks}}</td>
+                                            <td>{{$maklumat_kementerian->email}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -123,18 +118,26 @@
 
                             <form action="#" method="GET">
                                 @csrf
-                                <p>
-                                    <span style="float: right">
-                                        No Rujukan Kami : KPT.BKOKU-xxxxxxxxx<br>
-                                        Tarikh : xxxxxxxxx <br>
-                                    </span>
-                                </p>
+                                <table style="float: right">
+                                    <tr>
+                                        <td>Ruj. Kami</td>
+                                        <td>:</td>
+                                        <td>KPT.BKOKU-XXXXXXXXXX </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tarikh</td>
+                                        <td>:</td>
+                                        <td>XXXXXXXXXX</td>
+                                    </tr>
+                                </table>
 
                                 <br>
 
                                 <div class="penerima">
-                                    <b>xxxxxxxxxxxxxxxx</b>
-                                    <br><b>NO.KP : xxxxxxxxx</b>
+                                    <b>xxxxxxxxxxxxxxxxxxxxxxxx</b>
+                                    <br><b>xxxxxxxxx</b>
+                                    <br><b>xxxxxxxxxxxxxxxx</b>
+                                    <br><b>xxxxxxxxxxxxxxxx</b>
                                     <br><b>xxxxxxxxxxxxxxxx</b>
                                 </div>
                                     
@@ -143,42 +146,54 @@
                                 <br>
                                 <h4>{{ strtoupper($suratTawaran->tajuk) }}</h4>
                                 <br>
+                                <p>{{$suratTawaran->hormat}}</p>
+                                <br>
                                 <p>{{$suratTawaran->tujuan}}</p>
                                 <br>
 
                                 <table>
                                     <tr>
-                                        <td><strong>Program Pengajian </strong></td>
+                                        <td><strong>PERINGKAT </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Mod Pengajian </strong></td>
+                                        <td><strong>KURSUS </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Tempoh Penajaan </strong></td>
+                                        <td><strong>INSTITUSI </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>Institusi Pengajian </strong></td>
+                                        <td><strong>TEMPOH PENGAJIAN </strong></td>
+                                        <td><b>:</b></td>
+                                        <td>xxxxxxxxxxxxxxxx</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>MOD PENGAJIAN </strong></td>
                                         <td><b>:</b></td>
                                         <td>xxxxxxxxxxxxxxxx</td>
                                     </tr>
                                 </table>
                                 
                                 <br>
-                                <div class="main-content">
-                                    <p>2. Bantuan ini berkuatkuasa mulai <b>xxxxxxxxx hingga xxxxxxxxx.</b> {{$suratTawaran->kandungan1}}</p>
+                                <div class="main-content" style="text-align: justify;">
+                                    <p><b>2. TEMPOH KUAT KUASA</b>
+                                        <br>
+                                        {{$suratTawaran->kandungan1}}</p>
                                     <br>
-                                    <p>3. {{$suratTawaran->kandungan2}}</p>
+                                    <p><b>3. KADAR PEMBIAYAAN</b>
+                                        <br>{{$suratTawaran->kandungan2}}</p>
                                     <br>
-                                    <p>4. {{$suratTawaran->kandungan3}}</p>
+                                    <p><b>4. HAK KERAJAAN</b>
+                                        <br>{{$suratTawaran->kandungan3}}</p>
                                 </div>
                                 <br>
                                 
@@ -191,21 +206,23 @@
                                 <p>Saya yang menjalankan amanah,</p>
                                 <p>
                                     <b>{{$suratTawaran->penutup3_1}}</b> <br>
-                                    <b>{{$suratTawaran->penutup3_2}}</b> <br>
-                                    <b>{{$suratTawaran->penutup3_3}}</b> <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <b>{{$suratTawaran->penutup3_4}}</b> <br>
+                                    {{$suratTawaran->penutup3_2}} <br>
+                                    {{$suratTawaran->penutup3_3}} <br>
+                                    {{$suratTawaran->penutup3_4}} <br>
                                     
                                 </p>
                                 <br>
-                                <p><div style="text-align: center;">"Nota: Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan."</div></p>
-                                <br>
-                                <p>s.k :<br>
-                                    {{$suratTawaran->penutup4_1}} <br>
+                                
+                                <p>s.k : {{$suratTawaran->penutup4_1}} <br>
                                     {{$suratTawaran->penutup4_2}} <br>
-                                    XXXXXXXXXXXXXXXXXXX <br>
+                                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX <br>
                                 </p>
-
+                                <br>
+                                <p style="text-align: center;">
+                                    <span style="font-style: italic;"><b>
+                                      * Surat ini adalah cetakan komputer dan tandatangan tidak diperlukan.
+                                    </b></span>
+                                </p>
                                 <div class="d-flex flex-center mt-5 mb-5">
                                     <a href="{{ url('sekretariat/muat-turun/surat-tawaran/dikemaskini') }}" class="btn btn-info btn-sm" style="width: 15%; margin: 0 auto;">
                                         Muat Turun<i class='fas fa-download' style='color:white!important; padding-left:20px;'></i>
