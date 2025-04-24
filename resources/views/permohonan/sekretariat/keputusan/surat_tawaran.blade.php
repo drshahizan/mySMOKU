@@ -121,7 +121,7 @@
             <tr>
                 <td>Tarikh</td>
                 <td>:</td>
-                <td> {{date('d/m/Y', strtotime($tarikh_kelulusan))}}</td>
+                <td>{{ \Carbon\Carbon::parse($tarikh_kelulusan)->isoFormat('D MMMM Y') }}</td>
             </tr>
         </table>
 
@@ -165,7 +165,11 @@
             <tr>
                 <td><strong>TEMPOH PENGAJIAN </strong></td>
                 <td><b>:</b></td>
-                <td>{{ \Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y') }} HINGGA {{ \Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y') }}</td>
+                <td>
+                    {{ Str::upper(\Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y')) }}
+                    HINGGA
+                    {{ Str::upper(\Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y')) }}
+                </td>
             </tr>
 
             <tr>
