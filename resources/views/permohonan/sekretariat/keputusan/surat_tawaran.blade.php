@@ -147,35 +147,52 @@
             <tr>
                 <td><strong>PERINGKAT</strong></td>
                 <td><b>:</b></td>
-                <td>{{ strtoupper($peringkat) }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{ strtoupper($peringkat) }}</b></td>
             </tr>
 
             <tr>
                 <td><strong>KURSUS </strong></td>
                 <td><b>:</b></td>
-                <td>{{strtoupper($program)}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{strtoupper($program)}}</b></td>
             </tr>
 
             <tr>
                 <td><strong>INSTITUSI</strong></td>
                 <td><b>:</b></td>
-                <td>{{strtoupper($institusi)}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{strtoupper($institusi)}}</b></td>
             </tr>
 
             <tr>
                 <td><strong>TEMPOH PENGAJIAN </strong></td>
                 <td><b>:</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
+                    <b>
                     {{ Str::upper(\Carbon\Carbon::parse($tarikh_mula)->isoFormat('D MMMM Y')) }}
                     HINGGA
                     {{ Str::upper(\Carbon\Carbon::parse($tarikh_tamat)->isoFormat('D MMMM Y')) }}
+                    </b>
                 </td>
             </tr>
 
             <tr>
                 <td><strong>MOD PENGAJIAN </strong></td>
                 <td><b>:</b></td>
-                <td>{{strtoupper($mod)}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>{{strtoupper($mod)}}</b></td>
             </tr>
         </table>
         
