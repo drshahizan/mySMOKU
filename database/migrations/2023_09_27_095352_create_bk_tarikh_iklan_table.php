@@ -17,6 +17,8 @@ return new class extends Migration
             $table->time('masa_mula');
             $table->date('tarikh_tamat');
             $table->time('masa_tamat');
+            $table->integer('permohonan');
+            $table->integer('tuntutan');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });
