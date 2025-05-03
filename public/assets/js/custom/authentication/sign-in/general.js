@@ -145,7 +145,7 @@ var KTSigninGeneral = function () {
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, the email or password is incorrect, please try again oii.",
+                                text: "Sorry, the email or password is incorrect, please try again.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
@@ -182,7 +182,7 @@ var KTSigninGeneral = function () {
                                 showError(validationErrors.no_kp[0]);
                             } else {
                                 // Default error message if no specific validation error found
-                                showError("Ralat tidak dijangka berlaku. Sila cuba lagi.");
+                                showError("Sila semak emel anda dan klik pautan yang diberikan untuk log masuk.");
                             }
 
                             
