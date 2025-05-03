@@ -702,7 +702,7 @@
 	{
 		Swal.fire({
 		icon: 'error',
-		title: 'Permohonan ditutup pada masa sekarang.',
+		title: 'Permohonan telah ditutup.',
 		text: ' {!! session('failed') !!}',
 		confirmButtonText: 'OK'
 		});
