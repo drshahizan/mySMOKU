@@ -96,7 +96,7 @@
             <tr>
                 <td>Ruj. Kami</td>
                 <td>:</td>
-                <td>KPT.BKOKU-XXXXXXXXXX </td>
+                <td>KPT.PPK-XXXXXXXXXX </td>
             </tr>
             <tr>
                 <td>Tarikh</td>

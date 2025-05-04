@@ -109,6 +109,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/getPenaja/{id}', [PermohonanController::class, 'getPenaja']);
     Route::get('/fetch-amaun/bkoku', [PermohonanController::class, 'fetchAmaun']);
     Route::get('/surat-tawaran/{permohonanId}', [SekretariatController::class, 'muatTurunSuratTawaran'])->name('generate-pdf');
+    Route::get('/surat-tawaran-PPK/{permohonanId}', [SekretariatController::class, 'muatTurunSuratTawaranPPK'])->name('generate-pdfPPK');
 
     //status penajaan
     Route::get('senarai', [LaporanController::class,'senaraiPenajaan'])->name('status.penajaan');
@@ -360,6 +361,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('kemaskini/sekretariat/surat/tawaran/send/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaran'])->name('send');
         Route::get('kemaskini/sekretariat/surat/tawaran/update/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaran'])->name('update');
         Route::get('sekretariat/muat-turun/surat-tawaran/dikemaskini', [SekretariatController::class, 'muatTurunKemaskiniSuratTawaran']);
+
+        //Kemaskini - Sekretariat - Surat Tawaran PPK
+        Route::get('kemaskini/sekretariat/surat/tawaran/previewPPK', [SekretariatController::class, 'previewSuratTawaranPPK'])->name('previewPPK');
+        Route::post('kemaskini/sekretariat/surat/tawaran/sendPPK/{suratTawaranId}', [SekretariatController::class, 'sendSuratTawaranPPK'])->name('sendPPK');
+        Route::get('kemaskini/sekretariat/surat/tawaran/updatePPK/{suratTawaranId}', [SekretariatController::class, 'updatedSuratTawaranPPK'])->name('updatePPK');
+        Route::get('sekretariat/muat-turun/surat-tawaran/dikemaskiniPPK', [SekretariatController::class, 'muatTurunKemaskiniSuratTawaranPPK']);
 
         //Penyaluran - Sekretariat - Dokumen SPBB
         Route::get('penyaluran/sekretariat/muat-naik/dokumen/SPBB', [SekretariatController::class, 'muatNaikDokumenSPPB'])->name('sekretariat.muat-naik.SPBB');

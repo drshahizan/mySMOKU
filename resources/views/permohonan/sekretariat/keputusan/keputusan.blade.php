@@ -1072,7 +1072,7 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case 'Lulus':
-                                            var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
                                             status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +

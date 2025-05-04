@@ -1096,6 +1096,63 @@ class SekretariatController extends Controller
         return $pdf->stream('surat-tawaran-dikemaskini.pdf');
     }
 
+    //Step 1: PPK
+    public function previewSuratTawaranPPK()
+    {
+        $suratTawaran = SuratTawaran::find(2);
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        return view('kemaskini.sekretariat.surat_tawaran.ppk.kemaskini', compact('suratTawaran','maklumat_kementerian'));
+    }
+
+    //Step 2: PPK
+    public function sendSuratTawaranPPK(Request $request, $suratTawaranId)
+    {
+        $existingRecord = SuratTawaran::where('id', $suratTawaranId)->first();
+
+        if ($existingRecord) {
+            $existingRecord->tajuk = $request->tajuk;
+            $existingRecord->hormat = $request->hormat;
+            $existingRecord->tujuan = $request->tujuan;
+            $existingRecord->kandungan1 = $request->kandungan1;
+            $existingRecord->kandungan2 = $request->kandungan2;
+            $existingRecord->kandungan3 = $request->kandungan3;
+            $existingRecord->penutup1 = $request->penutup1;
+            $existingRecord->penutup2 = $request->penutup2;
+            $existingRecord->penutup3_1 = $request->penutup3_1;
+            $existingRecord->penutup3_2 = $request->penutup3_2;
+            $existingRecord->penutup3_3 = $request->penutup3_3;
+            $existingRecord->penutup3_4 = $request->penutup3_4;
+            $existingRecord->penutup4_1 = $request->penutup4_1;
+            $existingRecord->penutup4_2 = $request->penutup4_2;
+            $existingRecord->penutup4_3 = $request->penutup4_3;
+            $existingRecord->penutup4_4 = $request->penutup4_4;
+            $existingRecord->save();
+        }
+
+        return redirect()->route('updatePPK', ['suratTawaranId' => $suratTawaranId])->with('success', 'Surat Tawaran telah dikemaskini.');
+    }
+
+    //Step 3: PPK
+    public function updatedSuratTawaranPPK($suratTawaranId)
+    {
+        $suratTawaran = SuratTawaran::find($suratTawaranId);
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        return view('kemaskini.sekretariat.surat_tawaran.ppk.terkini', compact('suratTawaranId','suratTawaran','maklumat_kementerian'));
+    }
+
+    //Step 4: PPK
+    public function muatTurunKemaskiniSuratTawaranPPK()
+    {
+        $suratTawaran = SuratTawaran::find(2);
+        $maklumat_kementerian = MaklumatKementerian::first();
+
+        $pdf = PDF::loadView('kemaskini.sekretariat.surat_tawaran.ppk.muat-turun', compact('suratTawaran', 'maklumat_kementerian'));
+
+        return $pdf->stream('surat-tawaran-dikemaskini.pdf');
+    }
+
     //PERMOHONAN - KELULUSAN
     public function senaraiKelulusanPermohonan(Request $request)
     {
@@ -1916,6 +1973,46 @@ class SekretariatController extends Controller
 
         // Load the view into an HTML string
         $html = view('permohonan.sekretariat.keputusan.surat_tawaran', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
+        // Set the chroot to the public directory
+        $options->set('chroot', public_path());
+
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+
+        // Stream the PDF
+        return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
+    }
+
+    public function muatTurunSuratTawaranPPK($permohonanId)
+    {
+        // Get the "permohonan" data based on $permohonanId
+        $permohonan = Permohonan::where('id', $permohonanId)->first();
+        $maklumat_kementerian = MaklumatKementerian::first();
+        $kandungan_surat = SuratTawaran::find(2);
+
+        // Load the view into an HTML string
+        $html = view('permohonan.sekretariat.keputusan.surat_tawaran_PPK', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
 
         // Create Dompdf options
         $options = new Options();

@@ -401,10 +401,30 @@
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('preview') }}">
+					<span class="menu-link">
 						<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 						<span class="menu-title">Surat Tawaran</span>
-					</a>
+					</span>
+					<!-- Start of submenu -->
+					<ul> 
+						<a class="menu-link" href="{{ route('preview') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">BKOKU</span>
+						</a>
+					</ul> 
+					<!-- End of submenu -->
+					<!-- Start of submenu -->
+					<ul> 
+						<a class="menu-link" href="{{ route('previewPPK') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">PPK</span>
+						</a>
+					</ul> 
+					<!-- End of submenu -->
 				</div>
 				<div class="menu-item">
 					<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">

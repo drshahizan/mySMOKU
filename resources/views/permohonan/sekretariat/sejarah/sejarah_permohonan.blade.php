@@ -1251,7 +1251,7 @@
                                     status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
                                     break;
                                     case '6':
-                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
                                     status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
                                                 '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
@@ -1262,7 +1262,7 @@
                                     status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
                                     break;
                                 case '8':
-                                    var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                    var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
                                     status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
                                                 '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
