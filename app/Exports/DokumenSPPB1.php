@@ -22,7 +22,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     /**
     * @return \Illuminate\Support\Collection
     */
-    protected $instiusi_user;
+    protected $institusi_user;
     private $counter = 0;
     private $totalYuran = 0;
     private $totalWangSaku = 0;
@@ -39,7 +39,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         }
         
         // Extract all `id_institusi` values (handles both single and multiple records)
-        $this->instiusi_user = $infoiptCollection->pluck('id_institusi');
+        $this->institusi_user = $infoiptCollection->pluck('id_institusi');
     }
 
     public function collection()
@@ -48,7 +48,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         $senarai = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
             ->leftJoin('bk_jumlah_tuntutan as d', 'd.jenis', '=', DB::raw("'Yuran'"))
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->leftjoin('bk_sumber_biaya as e', 'e.kod_biaya' , '=' , 'c.sumber_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
@@ -57,7 +57,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->whereNull('tuntutan.data_migrate')
             // ->where('tuntutan.data_migrate', '!=', '1')
             ->where('d.jenis', 'Yuran')
-            ->whereIn('f.id_institusi', $this->instiusi_user)
+            ->whereIn('f.id_institusi', $this->institusi_user)
             ->select(
                 'b.id',
                 'b.nama',
@@ -218,7 +218,7 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     private function getInstitusiData()
     {
-        return DB::table('bk_info_institusi')->whereIn('id_institusi', $this->instiusi_user)->value('nama_institusi');
+        return DB::table('bk_info_institusi')->whereIn('id_institusi', $this->institusi_user)->value('nama_institusi');
     }
 
     private function getNamaPenerimaData()
