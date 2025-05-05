@@ -989,6 +989,7 @@ class PenyelarasController extends Controller
                     $sesiSemasa = $data['sesi'];
                     $previousSesi = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
                 }
+                
 
             }
 
@@ -997,22 +998,30 @@ class PenyelarasController extends Controller
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
-            // dd($sesiSemasa);
+            // dd($semesterEndDate);
 
-            if ($semLepas != 0 ) {
-                if($semSemasa != $semLepas){
-                    // semak dah upload result ke belum
-                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                    ->where('semester', $semLepas)
-                    ->first();
-                    if($result == null){
-                        if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-                            return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+            if ($currentDate <= $semesterEndDate ) {
+                if ($semLepas != 0 ){
+                    if($semSemasa != $semLepas){
+                        // semak dah upload result ke belum
+                        $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                        ->where('semester', $semLepas)
+                        ->first();
+                        if($result == null){
+                            if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                                return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+                            }
+                            return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                         }
-                        return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }
                 }
+                   
             }
+            else
+                {
+                    return back()->with('sem', 'Tamat pengajian.');
+                }
+            
 
             if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
                 return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');

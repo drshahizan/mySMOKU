@@ -96,8 +96,9 @@
                                     <td>{{ $pemohon}}</td>
                                     <td>{{ $layak->nama_kursus}}</td>
                                     <td>
-                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_mula)->format('d/m/Y') }} - 
-                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d', $layak->tarikh_tamat)->format('d/m/Y') }}
+                                        {{ !empty($layak->tarikh_mula) ? \Carbon\Carbon::parse($layak->tarikh_mula)->format('d/m/Y') : 'N/A' }}
+                                        -
+                                        {{ !empty($layak->tarikh_tamat) ? \Carbon\Carbon::parse($layak->tarikh_tamat)->format('d/m/Y') : 'N/A' }}
                                     </td>
                                     @if($status != null)
 
