@@ -127,6 +127,19 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
                         'startColor' => ['rgb' => '808080'], // Header background color 
                     ],
                 ]);
+
+                // Highlight header cells H1 to K1
+                $event->sheet->getStyle('H1:K1')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['rgb' => 'FFFFFF'], // White text
+                        'size' => 12,
+                    ],
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => '4CAF50'], // Green background
+                    ],
+                ]);
             },
         ];
     }
