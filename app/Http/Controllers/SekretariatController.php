@@ -2169,7 +2169,14 @@ class SekretariatController extends Controller
 
         if($no_tuntutan == 1){
             // dd('sini');
-            $baki_terdahulu = $permohonan->baki_dibayar;
+            
+            if($tuntutan->sesi != $sesi_sebelum){
+                $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
+                $baki_terdahulu = $j_tuntutan->jumlah;
+            }
+            else{
+                $baki_terdahulu = $permohonan->baki_dibayar;
+            }
         }
         elseif ($tuntutan_sebelum==null){
             // dd('sini ke');
