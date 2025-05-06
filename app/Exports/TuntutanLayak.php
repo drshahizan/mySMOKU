@@ -129,7 +129,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
                 ]);
 
                 // Highlight header cells H1 to K1
-                $event->sheet->getStyle('H1:K1')->applyFromArray([
+                $event->sheet->getStyle('F1:K1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => 'FFFFFF'], // White text
