@@ -202,7 +202,7 @@
 				@if($institusi->jenis_institusi === 'UA')
 					<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+							<span class="menu-heading fw-bold text-uppercase fs-7">Salur</span>
 						</div>
 					</div>
 					<div class="menu-item">

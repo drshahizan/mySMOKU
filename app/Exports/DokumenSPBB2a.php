@@ -63,7 +63,7 @@ class DokumenSPBB2a implements FromCollection, WithHeadings, WithColumnWidths, W
         // Fetch data from Tuntutan table with status 10
         $senaraiTuntutan = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
-            ->join('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
+            ->leftjoin('bk_sumber_biaya as e','c.sumber_biaya','=','e.kod_biaya')
             ->join('bk_info_institusi as f', 'f.id_institusi', '=', 'c.id_institusi')
             ->join('bk_peringkat_pengajian as g','g.kod_peringkat','=','c.peringkat_pengajian')
             ->join('bk_mod as h','h.kod_mod','=','c.mod')
