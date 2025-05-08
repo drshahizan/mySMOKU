@@ -718,7 +718,11 @@
 																		<tr>
 																			<td style="text-align: center;">2.</td>
 																			<td>Manual Pengguna Sistem Pegawai</td>
-																			<td style="text-align: center;"></td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/G%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PEGAWAI.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td style="text-align: center;">3.</td>
@@ -741,17 +745,29 @@
 																		<tr>
 																			<td style="text-align: center;">5.</td>
 																			<td>Manual Pengguna Sistem Penyelaras PPK</td>
-																			<td style="text-align: center;"></td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/D%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PENYELARAS_PPK.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td style="text-align: center;">6.</td>
 																			<td>Manual Pengguna Sistem Pelajar UA</td>
-																			<td style="text-align: center;"></td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/F%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PELAJAR_UA.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
 																		</tr>
 																		<tr>
 																			<td style="text-align: center;">7.</td>
 																			<td>Manual Pengguna Sistem Pelajar IPTS</td>
-																			<td style="text-align: center;"></td>
+																			<td style="text-align: center;">
+																				<a href="assets/manual_pengguna/E%20[SisPO]%20MANUAL_PENGGUNA_SISTEM_PELAJAR_IPTS.pdf" target="_blank">
+																					<img src="assets/media/icons/file.png" alt="Muat Turun" style="width: 30px; height: auto;">
+																				</a>
+																			</td>
 																		</tr>
 																	</tbody>
 																</table>
