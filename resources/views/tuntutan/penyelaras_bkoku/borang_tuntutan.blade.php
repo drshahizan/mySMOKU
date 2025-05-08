@@ -222,7 +222,7 @@
 								<div class="me-5">
 									<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
 
-									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" value="1" />
+									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1"/>
 									<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 								</div>
 							</div>

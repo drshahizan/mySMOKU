@@ -756,7 +756,14 @@ class PenyelarasController extends Controller
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
+        ->leftJoin('tuntutan', function ($join) {
+            $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
+                 ->whereRaw('tuntutan.id = (
+                     SELECT MAX(t.id) 
+                     FROM tuntutan t
+                     WHERE t.permohonan_id = permohonan.id
+                 )');
+        })
         ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
         ->where('permohonan.status', 8) 
         ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
@@ -1077,7 +1084,14 @@ class PenyelarasController extends Controller
             else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9)
             {
                 return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
+                // $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();                           
+
+                // dd($tuntutan);
             }
+            // else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4 || $tuntutan->status == 6))
+            // {
+            //     return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
+            // }
             else 
             {
                 $tuntutan_item = collect(); // An empty collection
