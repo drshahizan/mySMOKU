@@ -758,11 +758,12 @@ class PenyelarasController extends Controller
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
         ->leftJoin('tuntutan', function ($join) {
             $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
-                 ->whereRaw('tuntutan.id = (
-                     SELECT MAX(t.id) 
-                     FROM tuntutan t
-                     WHERE t.permohonan_id = permohonan.id
-                 )');
+                ->whereRaw('tuntutan.id = (
+                    SELECT MAX(t.id) 
+                    FROM tuntutan t
+                    WHERE t.permohonan_id = permohonan.id
+                )')
+                ->whereNull('tuntutan.data_migrate');
         })
         ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
         ->where('permohonan.status', 8) 
@@ -1081,21 +1082,21 @@ class PenyelarasController extends Controller
             }
             
             
-            if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) 
+            if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5)) 
             {
                 $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
             } 
-            else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9)
+            // else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9)
+            // {
+            //     // return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
+            //     $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();                           
+
+            //     // dd($tuntutan);
+            // }
+            else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4 || $tuntutan->status == 6))
             {
                 return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
-                // $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();                           
-
-                // dd($tuntutan);
             }
-            // else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4 || $tuntutan->status == 6))
-            // {
-            //     return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
-            // }
             else 
             {
                 $tuntutan_item = collect(); // An empty collection

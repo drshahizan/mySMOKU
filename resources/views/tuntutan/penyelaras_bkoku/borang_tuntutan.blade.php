@@ -232,7 +232,7 @@
 									<div class="me-5">
 										<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
 
-										<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1"/>
+										<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if($tuntutan->wang_saku == 1) checked @endif/>
 										<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 									</div>
 								</div>
@@ -250,6 +250,7 @@
 								<div class="d-flex">
 									<span class="input-group-text">RM</span>
 									<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
+									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{$tuntutan->amaun_wang_saku}}"/>
 									<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
 								</div>
 							@endif
@@ -425,11 +426,13 @@
 				console.log("Total amount is within the limit: " + parseFloat(total));
 			} else {
 				var baki_wang_saku = maxLimit - totalAmaun;
+				var amaun_ws = parseInt(document.getElementById('amaun_ws').value);
+			
 				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
-					console.log("Total amount exceeds the limit: " + parseFloat(total));
+					document.getElementById("amaun_wang_saku").value = (amaun_ws).toFixed(2);
+					console.log("Total amount exceeds the limit sini: " + parseFloat(total));
 					var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-					document.getElementById("jumlah").value = (baki_wang_saku + totalAmaun).toFixed(2);
+					document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
 				} else {
 					document.getElementById("amaun_wang_saku").value = "";
 					console.log("Invalid input. Cannot calculate total amount.");
@@ -477,44 +480,40 @@
             var amaunyuranValue = $(rowData[4]).text(); 
 
 			var linkElement = $(rowData[2]).find('a');
-        var hrefValue = linkElement.attr('href');
+			var hrefValue = linkElement.length > 0 ? linkElement.attr('href') : null;
 
-        // Assuming the <span> has an id of "fileNameDisplay"
-        var fileNameDisplay = $('#fileNameDisplay');
+			// File link display elements
+			var fileNameDisplay = $('#fileNameDisplay');
+			var fileLinkContainer = $('#fileLinkContainer');
+			fileLinkContainer.empty();
 
-        // Assuming the <div> has an id of "fileLinkContainer"
-        var fileLinkContainer = $('#fileLinkContainer');
+			if (hrefValue) {
+				// File is present
+				var fileName = hrefValue.split('/').pop();
+				var fileLink = $('<a>').attr('href', hrefValue).text(fileName);
+				fileLinkContainer.append(fileLink);
+				fileNameDisplay.text('File attached: ' + fileName);
+				$('#file_upload').prop('required', false);  // Make file optional
+			} else {
+				// No file present
+				fileNameDisplay.text('No file attached');
+				$('#file_upload').prop('required', true);  // Make file mandatory
+			}
 
-        // Create an anchor element dynamically
-        var fileLink = $('<a>');
-
-        // Set the href attribute to the file URL
-        fileLink.attr('href', hrefValue);
-
-        // Set the text content to the filename
-        var fileName = hrefValue.split('/').pop(); // Assumes the file name is at the end of the URL
-        fileLink.text(fileName);
-
-        // Clear previous content in the container
-        fileLinkContainer.empty();
-
-        // Append the anchor element to the container
-        fileLinkContainer.append(fileLink);
-
-			
-            // Set the selected options in the <select> elements
-            $('#jenis_yuran').val(jenisValue);
-            $('#no_resit').val(noresitValue);
-            $('#nota_resit').val(notaresitValue);
-            $('#amaun_yuran').val(amaunyuranValue);
+				
+			// Set the selected options in the <select> elements
+			$('#jenis_yuran').val(jenisValue);
+			$('#no_resit').val(noresitValue);
+			$('#nota_resit').val(notaresitValue);
+			$('#amaun_yuran').val(amaunyuranValue);
 
 			$('#jenis_yuran').trigger('change');
 			$('#no_resit').trigger('change');
 			$('#nota_resit').trigger('change');
 			$('#amaun_yuran').trigger('change');
-            // Show the form
-            $('#dataForm').show();
-        });
+			// Show the form
+			$('#dataForm').show();
+		});
 
     });
 
