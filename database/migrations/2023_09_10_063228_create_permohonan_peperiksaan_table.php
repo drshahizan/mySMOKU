@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('semester');
             $table->string('cgpa');
             $table->string('pengesahan_rendah');
-            $table->string('kepPeperiksaan');
+            $table->string('kepPeperiksaan')->nullable();
             $table->string('nota_kepPeperiksaan')->nullable();
             $table->foreign('permohonan_id')
               ->references('id')->on('permohonan')->onDelete('cascade'); 

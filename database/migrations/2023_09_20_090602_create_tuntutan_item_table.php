@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tuntutan_id');
             $table->string('jenis_yuran');
-            $table->string('no_resit');
-            $table->string('resit');
+            $table->string('no_resit')->nullable();
+            $table->string('resit')->nullable();
             $table->string('nota_resit');
             $table->string('amaun');
             $table->string('kep_saringan')->nullable();

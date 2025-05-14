@@ -51,7 +51,7 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" required oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -132,7 +132,13 @@
 											<td>{{ $peperiksaan->sesi}}</td>
 											<td>{{ $peperiksaan->semester}}</td>
 											<td>{{ $peperiksaan->cgpa}}</td>
-											<td><a href="/assets/dokumen/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
+											<td>
+												@if ($peperiksaan->kepPeperiksaan)
+													<a href="{{ asset('assets/dokumen/peperiksaan/' . $peperiksaan->kepPeperiksaan) }}" target="_blank">Papar</a>
+												@else
+													-
+												@endif
+											</td>
 										</tr>
 										@endforeach	
 									</tbody>

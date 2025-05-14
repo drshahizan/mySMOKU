@@ -14,123 +14,123 @@
 		<!--begin::Layout-->
 		<div class="d-flex flex-column flex-lg-row">
 			@if ($permohonan->yuran == '1')
-			<!--begin::Content-->
-			<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
-				<!--begin::Card-->
-				<div class="card">
-					<!--begin::Card body-->
-					<div class="card-body p-8">
-						<!--begin::Form-->
-						<form id="dataForm" action="{{ route('bkoku.simpan.tuntutan',$smoku_id) }}" method="post" enctype="multipart/form-data">
-							@csrf
-							<!--begin::Wrapper-->
-							<div class="d-flex flex-column align-items-start flex-xxl-row">
-								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-									<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
+				<!--begin::Content-->
+				<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
+					<!--begin::Card-->
+					<div class="card">
+						<!--begin::Card body-->
+						<div class="card-body p-8">
+							<!--begin::Form-->
+							<form id="dataForm" action="{{ route('bkoku.simpan.tuntutan',$smoku_id) }}" method="post" enctype="multipart/form-data">
+								@csrf
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-column align-items-start flex-xxl-row">
+									<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
+										<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
+									</div>
 								</div>
-							</div>
-							<br>
-							<!--begin::Wrapper-->
-							<!--begin::Wrapper-->
-							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
-							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
+								<br>
+								<!--begin::Wrapper-->
+								<!--begin::Wrapper-->
+								<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
+								<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
 
-							<div class="mb-0">
-								<!--begin::Row-->
-								<div class="row gx-10 mb-5">
-									<!--begin::Col-->
-									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
-										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}"/>
+								<div class="mb-0">
+									<!--begin::Row-->
+									<div class="row gx-10 mb-5">
+										<!--begin::Col-->
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+											<div class="mb-5">
+												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}"/>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}"/>
+											</div>
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+									<div class="row gx-10 mb-5">
+										<!--begin::Col-->
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
+											<!--begin::Input group-->
+											<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih jenis yuran.')" oninput="setCustomValidity('')">
+												<option></option>
+												<option value="Yuran Pengajian">Yuran Pengajian</option>
+												<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
+												<option value="Kad Kampus/Kad Matrik">Kad Kampus/ Kad Matrik</option>
+												<option value="Yuran Peperiksaan">Yuran Peperiksaan</option>
+												<option value="Yuran Perpustakaan">Yuran Perpustakaan</option>
+												<option value="Yuran Peralatan/ Bahan Makmal">Yuran Peralatan/ Bahan Makmal</option>
+												<option value="Yuran Perkhidmatan">Yuran Perkhidmatan</option>
+												<option value="Yuran Pemeriksaan/ Yuran Tesis">Yuran Pemeriksaan/ Yuran Tesis</option>
+												<option value="Yuran Komputer">Yuran Komputer</option>						
+											</select>
+											<!--end::Input group-->
+										</div>
+										<!--end::Col-->
+									</div>
+									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder="" oninput="setCustomValidity('')"/>
+											</div>
 										</div>
 									</div>
-									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}"/>
+									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
+											<div class="mb-5">
+												<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required oninvalid="this.setCustomValidity('Sila isi perihal.')" oninput="setCustomValidity('')"/>
+											</div>
 										</div>
 									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-								<div class="row gx-10 mb-5">
-									<!--begin::Col-->
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
-										<!--begin::Input group-->
-										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih jenis yuran.')" oninput="setCustomValidity('')">
-											<option></option>
-											<option value="Yuran Pengajian">Yuran Pengajian</option>
-											<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
-											<option value="Kad Kampus/Kad Matrik">Kad Kampus/ Kad Matrik</option>
-											<option value="Yuran Peperiksaan">Yuran Peperiksaan</option>
-											<option value="Yuran Perpustakaan">Yuran Perpustakaan</option>
-											<option value="Yuran Peralatan/ Bahan Makmal">Yuran Peralatan/ Bahan Makmal</option>
-											<option value="Yuran Perkhidmatan">Yuran Perkhidmatan</option>
-											<option value="Yuran Pemeriksaan/ Yuran Tesis">Yuran Pemeriksaan/ Yuran Tesis</option>
-											<option value="Yuran Komputer">Yuran Komputer</option>						
-										</select>
-										<!--end::Input group-->
-									</div>
-									<!--end::Col-->
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder=""  required oninvalid="this.setCustomValidity('Sila isi no. resit.')" oninput="setCustomValidity('')"/>
+									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Amaun Yuran</label>
+											<!--begin::Input group-->
+											<div class="d-flex">
+												<span class="input-group-text">RM</span>
+												<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
+												<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required oninvalid="this.setCustomValidity('Sila isi amaun yuran.')" oninput="setCustomValidity('')" />
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
-										<div class="mb-5">
-											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required oninvalid="this.setCustomValidity('Sila isi perihal.')" oninput="setCustomValidity('')"/>
+									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+											<div class="input-group control-group img_div form-group col-md-11" >
+												<input type="file" id="resit" name="resit[]" />
+											</div>
+											<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
+												<input type="hidden" id="resit" name="resit[]" />
+												<span id="fileNameDisplay"></span>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Amaun Yuran</label>
-										<!--begin::Input group-->
-										<div class="d-flex">
-											<span class="input-group-text">RM</span>
-											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
-											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required oninvalid="this.setCustomValidity('Sila isi amaun yuran.')" oninput="setCustomValidity('')" />
-										</div>
+									<div class="d-flex flex-center mt-15">
+										<button type="submit" class="btn btn-primary">
+											Simpan
+										</button>&nbsp;&nbsp;&nbsp;
 									</div>
 								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-										<div class="input-group control-group img_div form-group col-md-11" >
-											<input type="file" id="resit" name="resit[]" />
-										</div>
-										<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
-											<input type="hidden" id="resit" name="resit[]" />
-											<span id="fileNameDisplay"></span>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex flex-center mt-15">
-									<button type="submit" class="btn btn-primary">
-										Simpan
-									</button>&nbsp;&nbsp;&nbsp;
-								</div>
-							</div>
-							<!--end::Wrapper-->
-						</form>
-						<!--end::Form-->
+								<!--end::Wrapper-->
+							</form>
+							<!--end::Form-->
+						</div>
+						<!--end::Card body-->
 					</div>
-					<!--end::Card body-->
+					<!--end::Card-->
 				</div>
-				<!--end::Card-->
-			</div>
-			<!--end::Content-->
+				<!--end::Content-->
 			@endif
 			<!--begin::Sidebar-->
 			<div class="flex-lg-auto min-w-lg-450px">
@@ -140,45 +140,55 @@
 					<div class="card-body p-10">
 						<!--begin::Input group-->
 						@if ($permohonan->yuran == '1')
-						<div class="mb-10">
-							<!--begin::Label-->
-							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
-							<br>
-							<br>
-							<div class="table-responsive">
-								<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
-									<thead>
-										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-											<th class="text-center">Bil</th>
-											<th class="text-center">Jenis Yuran</th>
-											<th class="text-center">No. Resit</th>
-											<th class="text-center">Perihal</th>
-											<th class="text-center">RM</th>
-											<th class="text-center"></th>
-										</tr>
-									</thead>
-									<tbody class="fw-semibold text-gray-600">
-										@foreach ($tuntutan_item as $tuntutan_item)
-										<tr>
-											<td>{{ $loop->iteration }}.</td>
-											<td>{{ $tuntutan_item->jenis_yuran}}</td>
-											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
-											<td>{{ $tuntutan_item->nota_resit}}</td>
-											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
-											<td class="text-center">
-												<a href="{{ route('bkoku.tuntutan.item.delete', ['id' => $tuntutan_item->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
-													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
-														<i class="fa fa-trash fa-sm custom-white-icon"></i>
-													</span>
-												</a>
-											</td>
-										</tr>
-										@endforeach	
-									</tbody>
-								</table>
-								<div style="font-size: 11px;"> Klik dua kali untuk kemaskini item tuntutan. </div>
+							<div class="mb-10">
+								<!--begin::Label-->
+								<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
+								<br>
+								<br>
+								<div class="table-responsive">
+									<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
+										<thead>
+											<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+												<th class="text-center">Bil</th>
+												<th class="text-center">Jenis Yuran</th>
+												<th class="text-center">No. Resit</th>
+												<th class="text-center">Perihal</th>
+												<th class="text-center">RM</th>
+												<th class="text-center"></th>
+											</tr>
+										</thead>
+										<tbody class="fw-semibold text-gray-600">
+											@foreach ($tuntutan_item as $tuntutan_item)
+											<tr>
+												<td>{{ $loop->iteration }}.</td>
+												<td>{{ $tuntutan_item->jenis_yuran}}</td>
+												<td>
+													@if(!empty($tuntutan_item->no_resit))
+														@if(!empty($tuntutan_item->resit))
+															<a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit }}</a>
+														@else
+															{{ $tuntutan_item->no_resit }}
+														@endif
+													@else
+														<span style="color: #ff0202;">-</span>
+													@endif
+												</td>
+												<td>{{ $tuntutan_item->nota_resit}}</td>
+												<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
+												<td class="text-center">
+													<a href="{{ route('bkoku.tuntutan.item.delete', ['id' => $tuntutan_item->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
+														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
+															<i class="fa fa-trash fa-sm custom-white-icon"></i>
+														</span>
+													</a>
+												</td>
+											</tr>
+											@endforeach	
+										</tbody>
+									</table>
+									<div style="font-size: 11px;"> Klik dua kali untuk kemaskini item tuntutan. </div>
+								</div>
 							</div>
-						</div>
 						@endif
 						<!--begin::Form-->
 						<form action="{{ route('bkoku.hantar.tuntutan',$smoku_id) }}" method="post" enctype="multipart/form-data">
@@ -218,30 +228,30 @@
 									<!--end::Row-->
 								@endif
 
-							<div class="d-flex flex-stack">
-								<div class="me-5">
-									<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
+								<div class="d-flex flex-stack">
+									<div class="me-5">
+										<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
 
-									<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1"/>
-									<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
+										<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1"/>
+										<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
+									</div>
 								</div>
-							</div>
-							<!--end::Item-->
-							<br>
-							<!--begin::Wrapper-->
-							<div class="d-flex flex-stack flex-grow-1">
-								<!--begin::Content-->
-								<div class="fw-semibold">
-									<div class="fs-6 text-dark">Amaun Wang Saku </div>
+								<!--end::Item-->
+								<br>
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack flex-grow-1">
+									<!--begin::Content-->
+									<div class="fw-semibold">
+										<div class="fs-6 text-dark">Amaun Wang Saku </div>
+									</div>
+									<!--end::Content-->
 								</div>
-								<!--end::Content-->
-							</div>
-							<!--end::Wrapper-->
-							<div class="d-flex">
-								<span class="input-group-text">RM</span>
-								<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-								<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
-							</div>
+								<!--end::Wrapper-->
+								<div class="d-flex">
+									<span class="input-group-text">RM</span>
+									<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
+									<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
+								</div>
 							@endif
 							<br>
 							<br>
@@ -260,7 +270,7 @@
 							<br>
 							<!--end::Actions-->
 							<div class="d-flex justify-content-end">
-								<button type="submit"  class="btn btn-primary">
+								<button type="submit" id="submitButton" class="btn btn-primary">
 									Hantar
 								</button>
 							</div>
@@ -279,7 +289,37 @@
 <!--end::Content-->
 
 <!--begin::Javascript-->
-<!--end::Javascript-->
+<script>
+    function checkButtonState() {
+        const submitButton = document.getElementById("submitButton");
+        const wangSakuCheckbox = document.getElementById("wang_saku");
+        const tableBody = document.querySelector("#itemtuntutan tbody");
+        
+        // Check if the table has rows (if present)
+        const hasItems = tableBody ? tableBody.children.length > 0 : false;
+        const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
+
+        // Enable button if items exist or wang saku is checked
+        submitButton.disabled = !(hasItems || wangSakuChecked);
+    }
+
+    // Initial check
+    checkButtonState();
+
+    // Update button state on checkbox change
+    const wangSakuCheckbox = document.getElementById("wang_saku");
+    if (wangSakuCheckbox) {
+        wangSakuCheckbox.addEventListener("change", checkButtonState);
+    }
+
+    // Update button state when table items change
+    const tableBody = document.querySelector("#itemtuntutan tbody");
+    if (tableBody) {
+        const observer = new MutationObserver(checkButtonState);
+        observer.observe(tableBody, { childList: true });
+    }
+</script>
+
 
 
 <script>
