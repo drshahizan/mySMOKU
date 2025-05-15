@@ -52,6 +52,7 @@ use App\Exports\TuntutanLayak;
 use App\Imports\ModifiedPermohonanImport;
 use App\Imports\ModifiedTuntutanImport;
 use App\Mail\MailDaftarPentadbir;
+use App\Mail\PengesahanCGPA;
 use App\Models\JumlahTuntutan;
 use App\Models\SenaraiBank;
 use App\Models\TukarInstitusi;
@@ -872,7 +873,7 @@ class PenyelarasController extends Controller
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
-
+        $smoku_id = Smoku::where('id',$id)->first();
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;
         $counter = 1; 
@@ -899,18 +900,53 @@ class PenyelarasController extends Controller
             $uniqueFilename = null;
         }
 
+        $cgpa = $request->cgpa;
+            if($cgpa >= 0.0 && $cgpa < 2.0){
+                $pengesahan = 1;
+                $catatan = "Pelajar telah menghantar keputusan peperiksaan semester lepas. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
+                if (empty($invalidEmails)) 
+                {            
+                    // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+                    Mail::to($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+
+                } 
+                else 
+                {
+                    foreach ($invalidEmails as $invalidEmail) {
+                        Log::error('Invalid email address: ' . $invalidEmail);
+                    }
+                }
+            }else{
+                $pengesahan = null;
+            }
+
         // Save the peperiksaan record
         $data = new peperiksaan();
         $data->permohonan_id = $permohonan->id;
         $data->sesi = $request->sesi;
         $data->semester = $request->semester;
         $data->cgpa = $request->cgpa;
+        $data->pengesahan_rendah=$pengesahan;
         $data->kepPeperiksaan = $uniqueFilename;
         $data->save();
 
         return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah disimpan.');
 
     }
+
+    public function deleteKeputusanPeperiksaan($id)
+    {
+        $keputusan_peperiksaan = Peperiksaan::where('id', $id)->first();
+
+        if ($keputusan_peperiksaan) 
+        {
+            DB::table('permohonan_peperiksaan')->where('id',$keputusan_peperiksaan->id)->delete();
+        } 
+        
+        return back();
+    }
+
+
 
     public function tuntutanBaharu($id)
     {   
@@ -1023,7 +1059,11 @@ class PenyelarasController extends Controller
                                 return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
                             }
                             return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                        }elseif($result && $result->pengesahan_rendah== 1){
+                            return back()->with('sem', 'Keputusan peperiksaan dalam semakan.');
+
                         }
+                        
                     }
                 }
                    

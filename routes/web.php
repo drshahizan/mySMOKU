@@ -525,6 +525,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/bkoku/senarai/tuntutan-baharu', [PenyelarasController::class, 'senaraiTuntutanBaharu'])->name('senarai.bkoku.tuntutanBaharu');
         Route::get('bkoku/kemaskini/keputusan/{id}', [PenyelarasController::class, 'kemaskiniKeputusan'])->name('bkoku.kemaskini.keputusan');
         Route::post('bkoku/hantar/keputusan/{id}', [PenyelarasController::class, 'hantarKeputusanPeperiksaan'])->name('bkoku.keputusan.hantar');
+        Route::get('bkoku/keputusan/delete/{id}', [PenyelarasController::class, 'deleteKeputusanPeperiksaan'])->name('bkoku.keputusan.delete');
         Route::get('bkoku/tuntutan/baharu/{id}',[PenyelarasController::class,'tuntutanBaharu'])->name('bkoku.tuntutan.baharu');
         Route::post('bkoku/simpan/{id}', [PenyelarasController::class, 'simpanTuntutan'])->name('bkoku.simpan.tuntutan');
         Route::post('bkoku/hantar/{id}', [PenyelarasController::class, 'hantarTuntutan'])->name('bkoku.hantar.tuntutan');

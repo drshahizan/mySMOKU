@@ -55,15 +55,31 @@
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<label class="fs-6 fw-semibold form-label mb-2">
-											CGPA&nbsp;
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
-												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-											</span>
-										</label>
-										<div class="mb-5">
-											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
-										</div>
+										<div>
+									<label>
+										<input type="radio" name="choice" value="cgpa"> CGPA
+									</label>
+									<label>
+										<input type="radio" name="choice" value="penyelidikan"> Penyelidikan
+									</label>
+									</div>
+
+									<div id="cgpa-input" class="mb-5" style="display:none;">
+									<label class="fs-6 fw-semibold form-label mb-2">
+										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
+										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+										</span>
+									</label>
+									<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" />
+									</div>
+
+									<div id="penyelidikan-input" class="mb-5" style="display:none;">
+									<select name="cgpa" class="form-select form-control-solid" >
+										<option value="" disabled selected>Sila pilih</option>
+										<option value="LULUS">Lulus</option>
+										<option value="TIDAK LULUS">Tidak Lulus</option>
+									</select>
+									</div>
 									</div>
 								</div>
 								<!--end::Row-->
@@ -82,17 +98,17 @@
 									</div>
 								</div>
 								<!--begin::Action-->
-								@if(!$result)
+								{{-- @if(!$result) --}}
 								<div class="d-flex flex-center mt-15">
-									<button type="submit"  class="btn btn-primary">
+									<button id="submitButton" type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
-								@else
+								{{-- @else
 									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
 										Keputusan peperiksaan lepas sudah dikemaskini.
 									</div>
-								@endif
+								@endif --}}
 								<!--end::Action-->
 							</div>
 							<!--end::Wrapper-->
@@ -124,6 +140,7 @@
 											<th>Semester</th>
 											<th>Keputusan (CGPA)</th>
 											<th>Salinan</th>
+											<th class="text-center"></th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
@@ -138,6 +155,13 @@
 												@else
 													-
 												@endif
+											</td>
+											<td class="text-center">
+												<a href="{{ route('bkoku.keputusan.delete', ['id' => $peperiksaan->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam keputusan ini?')">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
+														<i class="fa fa-trash fa-sm custom-white-icon"></i>
+													</span>
+												</a>
 											</td>
 										</tr>
 										@endforeach	
@@ -160,6 +184,43 @@
 						
 		
 <!--begin::Javascript-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    const cgpaInput = $('#cgpa-input');
+    const penyelidikanInput = $('#penyelidikan-input');
+    const submitButton = $('#submitButton');
+
+    $('input[name="choice"]').on('change', function() {
+      if (this.value === 'cgpa') {
+        cgpaInput.show();
+        penyelidikanInput.hide().find('select').val('');
+      } else if (this.value === 'penyelidikan') {
+        cgpaInput.hide().find('input').val('');
+        penyelidikanInput.show();
+      }
+    });
+
+    cgpaInput.find('input').on('change', function() {
+      const cgpa = parseFloat($(this).val());
+      if (cgpa >= 0.0 && cgpa < 2.0) {
+        Swal.fire({
+			icon: 'warning',
+			title: 'Pengesahan Keputusan Peperiksaan!',
+			text: 'PNG anda bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+			confirmButtonText: 'OK'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Change button text to "Hantar Pengesahan"
+				$('#submitButton').text('Hantar Pengesahan');
+			}
+		});
+      } else {
+        submitButton.text('Hantar');
+      }
+    });
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 	@if(session('success'))
@@ -172,8 +233,8 @@
 	@endif
 	@if(session('error'))
 		Swal.fire({
-			icon: 'error',
-			title: 'Tidak Berjaya!',
+			icon: 'warning',
+			title: 'Peringatan!',
 			text: ' {!! session('error') !!}',
 			confirmButtonText: 'OK'
 		});
