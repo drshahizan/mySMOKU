@@ -49,39 +49,46 @@
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">
+											Salinan Keputusan Peperiksaan&nbsp;
+											<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
+												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+											</a>
+										</label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan"/>
 										</div>
 									</div>
+
 									<div class="col-lg-6">
 										<div>
-									<label>
-										<input type="radio" name="choice" value="cgpa"> CGPA
-									</label>
-									<label>
-										<input type="radio" name="choice" value="penyelidikan"> Penyelidikan
-									</label>
-									</div>
+											<label>
+												<input type="radio" name="choice" value="cgpa" required oninvalid="this.setCustomValidity('Sila pilih salah satu.')" oninput="setCustomValidity('')"> CGPA
+											</label>
+											<label>
+												<input type="radio" name="choice" value="penyelidikan" required oninvalid="this.setCustomValidity('Sila pilih salah satu.')" oninput="setCustomValidity('')"> Penyelidikan
+											</label>
+										</div>
 
-									<div id="cgpa-input" class="mb-5" style="display:none;">
-									<label class="fs-6 fw-semibold form-label mb-2">
-										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
-										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-										</span>
-									</label>
-									<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" />
-									</div>
+										<div id="cgpa-input" class="mb-5" style="display:none;">
+											<label class="fs-6 fw-semibold form-label mb-2">
+												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
+													<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+												</span>
+											</label>
+											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" />
+										</div>
 
-									<div id="penyelidikan-input" class="mb-5" style="display:none;">
-									<select name="cgpa" class="form-select form-control-solid" >
-										<option value="" disabled selected>Sila pilih</option>
-										<option value="LULUS">Lulus</option>
-										<option value="TIDAK LULUS">Tidak Lulus</option>
-									</select>
-									</div>
+										<div id="penyelidikan-input" class="mb-5" style="display:none;">
+											<select name="cgpa" class="form-select form-control-solid" required oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
+												<option value="" disabled selected>Sila pilih</option>
+												<option value="LULUS">Lulus</option>
+												<option value="TIDAK LULUS">Tidak Lulus</option>
+											</select>
+										</div>
 									</div>
 								</div>
+
 								<!--end::Row-->
 								{{-- NOTES --}}
 								<div>
@@ -190,36 +197,51 @@
     const cgpaInput = $('#cgpa-input');
     const penyelidikanInput = $('#penyelidikan-input');
     const submitButton = $('#submitButton');
+    const cgpaField = cgpaInput.find('input');
+    const penyelidikanField = penyelidikanInput.find('select');
 
     $('input[name="choice"]').on('change', function() {
-      if (this.value === 'cgpa') {
-        cgpaInput.show();
-        penyelidikanInput.hide().find('select').val('');
-      } else if (this.value === 'penyelidikan') {
-        cgpaInput.hide().find('input').val('');
-        penyelidikanInput.show();
-      }
+        if (this.value === 'cgpa') {
+            cgpaInput.show();
+            penyelidikanInput.hide().find('select').val('');
+
+            // Make CGPA required and remove required from Penyelidikan
+            cgpaField.prop('required', true);
+            penyelidikanField.prop('required', false);
+        } else if (this.value === 'penyelidikan') {
+            cgpaInput.hide().find('input').val('');
+            penyelidikanInput.show();
+
+            // Make Penyelidikan required and remove required from CGPA
+            penyelidikanField.prop('required', true);
+            cgpaField.prop('required', false);
+        }
+
+		// Clear radio button validity
+		$('input[name="choice"]').each(function() {
+			this.setCustomValidity('');
+		});
     });
 
-    cgpaInput.find('input').on('change', function() {
-      const cgpa = parseFloat($(this).val());
-      if (cgpa >= 0.0 && cgpa < 2.0) {
-        Swal.fire({
-			icon: 'warning',
-			title: 'Pengesahan Keputusan Peperiksaan!',
-			text: 'PNG pelajar bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
-			confirmButtonText: 'OK'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				// Change button text to "Hantar Pengesahan"
-				$('#submitButton').text('Hantar Pengesahan');
-			}
-		});
-      } else {
-        submitButton.text('Hantar');
-      }
+    cgpaField.on('change', function() {
+        const cgpa = parseFloat($(this).val());
+        if (cgpa >= 0.0 && cgpa < 2.0) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Pengesahan Keputusan Peperiksaan!',
+                text: 'PNG pelajar bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#submitButton').text('Hantar Pengesahan');
+                }
+            });
+        } else {
+            submitButton.text('Hantar');
+        }
     });
-  });
+});
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
