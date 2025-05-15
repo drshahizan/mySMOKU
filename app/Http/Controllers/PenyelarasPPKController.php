@@ -1002,25 +1002,26 @@ class PenyelarasPPKController extends Controller
 
         $bil = $biltuntutan->count();
         $running_num =  $bil + 1; //sebab nak guna satu id je
-        $no_rujukan_tuntutan =  $permohonan->no_rujukan_permohonan.'/'.$running_num; // try duluuu
+        $no_rujukan_tuntutan =  $permohonan->no_rujukan_permohonan.'/'.$running_num;
 
         //simpan dalam table tuntutan
-        $tuntutan = Tuntutan::where('smoku_id', '=', $id)
-            ->where('permohonan_id', '=', $permohonan->id)
-            ->first();
-        if ($tuntutan === null) {
-            $tuntutan = Tuntutan::create([
-                'smoku_id' => $id,
-                'permohonan_id' => $permohonan->id,
-                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
-                'semester' => $request->semester,    
-                'wang_saku' => $request->wang_saku,
-                'amaun_wang_saku' => $request->amaun_wang_saku,
-                'tarikh_hantar' => now()->format('Y-m-d'),
-                'status' => '2',
-            ]);
-        }
+        // $tuntutan = Tuntutan::where('smoku_id', '=', $id)
+        //     ->where('permohonan_id', '=', $permohonan->id)
+        //     ->first();
+           
+        // if ($tuntutan === null) {
+        $tuntutan = Tuntutan::create([
+            'smoku_id' => $id,
+            'permohonan_id' => $permohonan->id,
+            'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+            'sesi' => $request->sesi,
+            'semester' => $request->semester,    
+            'wang_saku' => $request->wang_saku,
+            'amaun_wang_saku' => $request->amaun_wang_saku,
+            'tarikh_hantar' => now()->format('Y-m-d'),
+            'status' => '2',
+        ]);
+        // }
         $tuntutan->save();
 
         $sejarah = SejarahTuntutan::create([
