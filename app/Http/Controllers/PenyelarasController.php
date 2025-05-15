@@ -770,7 +770,7 @@ class PenyelarasController extends Controller
         ->where('permohonan.status', 8) 
         ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->select('smoku.*', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
+        ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
         ->distinct()
         ->get();
 
@@ -1484,13 +1484,13 @@ class PenyelarasController extends Controller
         
         // Extract all `id_institusi` values (handles both single and multiple records)
         $idInstitusiList = $infoiptCollection->pluck('id_institusi');
-        // dd($idInstitusiList);
+        
         $permohonan = Permohonan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
             ->whereIn('smoku_akademik.id_institusi', $idInstitusiList) // Use `whereIn` for multiple IDs
             ->select('permohonan.*')
             ->orderBy('permohonan.tarikh_hantar', 'DESC')
             ->get();
-
+        // dd($permohonan);
         return view('permohonan.penyelaras_bkoku.sejarah_permohonan',compact('permohonan'));
     }
 

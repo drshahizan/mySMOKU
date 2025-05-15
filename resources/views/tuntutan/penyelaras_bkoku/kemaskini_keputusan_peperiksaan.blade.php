@@ -207,7 +207,7 @@
         Swal.fire({
 			icon: 'warning',
 			title: 'Pengesahan Keputusan Peperiksaan!',
-			text: 'PNG anda bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+			text: 'PNG pelajar bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
 			confirmButtonText: 'OK'
 		}).then((result) => {
 			if (result.isConfirmed) {

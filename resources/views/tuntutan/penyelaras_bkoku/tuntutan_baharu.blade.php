@@ -60,99 +60,101 @@
                         </thead>
                         <tbody>
                             @foreach ($layak as $layak)
-                                @php
-                                    $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
-                                                
-                                    $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['bin', 'binti'];
-                                    $words = explode(' ', $text);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
+                                @if ($layak->program=="BKOKU")
+                                    @php
+                                        $status = DB::table('bk_status')->where('kod_status', $layak->tuntutan_status)->value('status');
+                                                    
+                                        $text = ucwords(strtolower($layak->nama)); // Assuming you're sending the text as a POST parameter
+                                        $conjunctions = ['bin', 'binti'];
+                                        $words = explode(' ', $text);
+                                        $result = [];
+                                        foreach ($words as $word) {
+                                            if (in_array(Str::lower($word), $conjunctions)) {
+                                                $result[] = Str::lower($word);
+                                            } else {
+                                                $result[] = $word;
+                                            }
                                         }
-                                    }
-                                    $pemohon = implode(' ', $result);
-                                @endphp
+                                        $pemohon = implode(' ', $result);
+                                    @endphp
 
-                                @php
-                                    // Retrieve data from bk_tarikh_iklan table
-                                    $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+                                    @php
+                                        // Retrieve data from bk_tarikh_iklan table
+                                        $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
 
-                                    // Get current date and time
-                                    $currentDateTime = now();
+                                        // Get current date and time
+                                        $currentDateTime = now();
 
-                                    // Check if current date and time fall within the allowed range
-                                    $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
-                                    $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+                                        // Check if current date and time fall within the allowed range
+                                        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+                                        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
 
-                                    // Check if current date and time fall within the allowed range
-                                    $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
-                                @endphp
-                                <tr>
-                                    <td>{{ $layak->no_rujukan_permohonan}}</td>
-                                    <td>{{ $pemohon}}</td>
-                                    <td>{{ $layak->nama_kursus}}</td>
-                                    <td>
-                                        {{ !empty($layak->tarikh_mula) ? \Carbon\Carbon::parse($layak->tarikh_mula)->format('d/m/Y') : 'N/A' }}
-                                        -
-                                        {{ !empty($layak->tarikh_tamat) ? \Carbon\Carbon::parse($layak->tarikh_tamat)->format('d/m/Y') : 'N/A' }}
-                                    </td>
-                                    @if($status != null)
+                                        // Check if current date and time fall within the allowed range
+                                        $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $layak->no_rujukan_permohonan}}</td>
+                                        <td>{{ $pemohon}}</td>
+                                        <td>{{ $layak->nama_kursus}}</td>
+                                        <td>
+                                            {{ !empty($layak->tarikh_mula) ? \Carbon\Carbon::parse($layak->tarikh_mula)->format('d/m/Y') : 'N/A' }}
+                                            -
+                                            {{ !empty($layak->tarikh_tamat) ? \Carbon\Carbon::parse($layak->tarikh_tamat)->format('d/m/Y') : 'N/A' }}
+                                        </td>
+                                        @if($status != null)
 
-                                        @if ($layak->tuntutan_status=='1')
-                                            <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='2')
-                                            <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='3')
-                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='4')
-                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='5')
-                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='6')
-                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='7')
-                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='8')
-                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='9')
-                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                        @elseif ($layak->tuntutan_status=='10')
-                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>    
-                                        @endif
-                                    @else
-                                        <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
-                                    @endif
-                                    
-                                    <td class="text-center">
-                                        <div>
-                                            <!--begin::Edit-->
-                                            <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                                <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
-                                                    <i class="ki-solid ki-pencil text-dark fs-2"></i>
-                                                </span>
-                                            </a>
-
-                                            @if($isWithinRange)
-                                                <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                                    </span>
-                                                </a>
-                                            @else
-                                                <a href="#" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                        <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;" onclick="showAlertTuntutan()"></i>
-                                                    </span>
-                                                </a>
+                                            @if ($layak->tuntutan_status=='1')
+                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='2')
+                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='3')
+                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='4')
+                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='5')
+                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='6')
+                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='7')
+                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='8')
+                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='9')
+                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($layak->tuntutan_status=='10')
+                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>    
                                             @endif
-                                            <!--end::Edit-->
-                                        </div>
-                                    </td>
-                                </tr>
+                                        @else
+                                            <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
+                                        @endif
+                                        
+                                        <td class="text-center">
+                                            <div>
+                                                <!--begin::Edit-->
+                                                <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
+                                                        <i class="ki-solid ki-pencil text-dark fs-2"></i>
+                                                    </span>
+                                                </a>
+
+                                                @if($isWithinRange)
+                                                    <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                            <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                        </span>
+                                                    </a>
+                                                @else
+                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
+                                                            <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;" onclick="showAlertTuntutan()"></i>
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                                <!--end::Edit-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif    
                             @endforeach
                         </tbody>
                     </table>
