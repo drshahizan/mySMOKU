@@ -92,7 +92,8 @@ class MaklumatESPController extends Controller
     {
         $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')
         ->join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
-        ->where('tuntutan.status', '=','6')->whereNull('tuntutan.data_migrate')
+        ->where('tuntutan.status', '=','6')
+        ->whereNull('tuntutan.data_migrate')
         ->get(['permohonan.no_rujukan_permohonan','tuntutan.*']);
         // dd($kelulusan);
 
@@ -151,6 +152,7 @@ class MaklumatESPController extends Controller
         $countPPK = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
                             ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('tuntutan.status', ['6'])
                             ->whereNull('tuntutan.data_migrate')

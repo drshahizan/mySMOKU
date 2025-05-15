@@ -358,6 +358,7 @@
                             @foreach ($kelulusan as $bkoku)
 
                               @php
+                              // dd($bkoku);
                                 $i++;
                                 $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
@@ -367,9 +368,9 @@
                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-                                //dd($bkoku['smoku_id']);
-                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
+                                $program = DB::table('permohonan')->where('id',$bkoku['permohonan_id'])->value('program');
+                                // dd($bkoku['permohonan_id']);
+                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['permohonan_id'])->get();
 
                                 // nama pemohon
                                 $text = ucwords(strtolower($nama_pemohon)); 
@@ -537,9 +538,9 @@
                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
+                                $program = DB::table('permohonan')->where('id',$bkoku['permohonan_id'])->value('program');
                                 //dd($bkoku['smoku_id']);
-                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
+                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['permohonan_id'])->get();
 
                                 // nama pemohon
                                 $text = ucwords(strtolower($nama_pemohon)); 
@@ -879,8 +880,8 @@
                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                                $program = DB::table('permohonan')->where('id',$item['id'])->value('program');
-                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $item['id'])->get();
+                                $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
+                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $item['permohonan_id'])->get();
 
                                 // nama pemohon
                                 $text = ucwords(strtolower($nama_pemohon)); 
