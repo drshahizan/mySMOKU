@@ -989,7 +989,7 @@ class PenyelarasPPKController extends Controller
         
         return back();
     }
-    
+
     public function hantarTuntutan(Request $request, $id)
     {
         $permohonan = Permohonan::orderBy('id', 'DESC')
@@ -1214,10 +1214,9 @@ class PenyelarasPPKController extends Controller
         $smoku = Smoku::leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
         ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->leftJoin('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
         ->where('permohonan.status','=', '8')
         ->where('smoku_akademik.id_institusi','=', Auth::user()->id_institusi)
-        // ->where('penyelaras_id','=', Auth::user()->id)
+        ->where('permohonan.program','=', 'PPK')
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->get(['smoku.*', 'permohonan.*', 'permohonan.id as permohonan_id', 'smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
 
