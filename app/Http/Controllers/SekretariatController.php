@@ -2307,7 +2307,7 @@ class SekretariatController extends Controller
                     // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
                     $saringan = new SaringanTuntutan([
                         'tuntutan_id'               =>  $id,
-                        'saringan_kep_peperiksaan'  =>  null,
+                        'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
                         'catatan'                   =>  $request->get('catatan'),
                         'status'                    =>  6,
                     ]);
@@ -2326,7 +2326,7 @@ class SekretariatController extends Controller
                 // Create a new SaringanTuntutan instance with null saringan_kep_peperiksaan
                 $saringan = new SaringanTuntutan([
                     'tuntutan_id'               =>  $id,
-                    'saringan_kep_peperiksaan'  =>  null,
+                    'saringan_kep_peperiksaan'  =>  $request->get('peperiksaan'),
                     'catatan'                   =>  $request->get('catatan'),
                     'status'                    =>  6,
                 ]);

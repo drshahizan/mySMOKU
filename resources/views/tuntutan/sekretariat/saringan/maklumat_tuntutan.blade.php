@@ -213,14 +213,22 @@
                                                     </thead>
                                                     <tbody>
                                                         @php
-                                                            $keputusan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->get();
+                                                            $keputusan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->get();
                                                             // dd($keputusan);
                                                         @endphp
                                                     @if ($keputusan->isNotEmpty())
+                                                        @php
+                                                            $salinan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
+                                                            // dd($keputusan);
+                                                        @endphp
                                                         <tr>
-                                                            <td style="text-align:right;">{{$i++}}</td>
+                                                            <td style="text-align:left;">{{$i++}}</td>
                                                             <td>
-                                                                <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                                @if($salinan->kepPeperiksaan)
+                                                                    <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                                @else
+                                                                    <span>Keputusan Peperiksaan</span>
+                                                                @endif    
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">
@@ -232,7 +240,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                -
+                                                                CGPA - {{$salinan->cgpa}}
                                                             </td>
                                                             <td>
                                                                 Keseluruhan keputusan peperiksaan
@@ -244,13 +252,13 @@
                                                                 $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
                                                             @endphp
                                                         <tr>
-                                                            <td style="text-align:right;">{{$i++}}</td>
+                                                            <td style="text-align:left;">{{$i++}}</td>
                                                             <td>
-                                                                {{-- @if(file_exists($invoisResit)) --}}
+                                                                @if($item->resit)
                                                                     <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
-                                                                {{-- @else
-                                                                    <span style="color: red;">Dokumen lama</span>
-                                                                @endif --}}
+                                                                @else
+                                                                    <span>{{$item['jenis_yuran']}}</span>
+                                                                @endif
                                                             </td>
                                                             <td class="hidden-sm-down">
                                                                 <div class="form-group c_form_group">

@@ -114,10 +114,10 @@
                                     $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 4)->value('created_at');
                                 }
                                 elseif($tuntutan->status==6){
-                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 6)->value('created_at');
                                 }
                                 elseif($tuntutan->status==7){
-                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 5)->value('created_at');
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 7)->value('created_at');
                                 }
 
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
@@ -206,7 +206,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Institusi</strong></td>
                                     <td>:</td>
-                                    <td>{{$institusi}}</td>
+                                    <td>{{$nama_institusi}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>No. Kad Pengenalan</strong></td>
@@ -224,7 +224,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Sesi/Semester</strong></td>
                                     <td>:</td>
-                                    <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                    <td>{{$tuntutan->sesi}}-0{{$tuntutan->semester}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Status Penajaan</strong></td>
@@ -237,7 +237,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Status</strong></td>
                                     <td>:</td>
-                                    <td>{{ucwords(strtolower($tuntutan->status))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
+                                    <td>{{ucwords(strtolower($status_tuntutan))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
                                 </tr>
                             </table>
                             <hr>
@@ -266,16 +266,24 @@
                                             </thead>
                                             <tbody>
                                             @if($sama_semester==false)
+                                                    @php
+                                                        $salinan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
+                                                        // dd($keputusan);
+                                                    @endphp
                                                 <tr>
-                                                    <td style="text-align:right;">1</td>
+                                                    <td style="text-align:left;">1</td>
                                                     <td>
-                                                        <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                        @if($salinan->kepPeperiksaan)
+                                                            <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                        @else
+                                                            <span>Keputusan Peperiksaan</span>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         {{$saringan->saringan_kep_peperiksaan}}
                                                     </td>
                                                     <td>
-                                                        -
+                                                        CGPA - {{$salinan->cgpa}}
                                                     </td>
                                                     <td>
                                                         Keseluruhan keputusan peperiksaan
@@ -287,9 +295,13 @@
                                                     $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
                                                 @endphp
                                                 <tr>
-                                                    <td style="text-align:right;">{{$i++}}</td>
+                                                    <td style="text-align:left;">{{$i++}}</td>
                                                     <td>
-                                                        <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                        @if($item->resit)
+                                                            <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                        @else
+                                                            <span>{{$item['jenis_yuran']}}</span>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         {{$item['kep_saringan']}}

@@ -29,35 +29,34 @@
 </style>
     <body>
         <h3>Keputusan Peperiksaan Mengikut Sesi/Semester</h3>
-         @php
-            $i=1;
-        @endphp
+         
         <div class="border">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 @foreach($peperiksaan as $item)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="sem{{$i}}-tab" data-toggle="tab" data-target="#sem{{$i}}" type="button" role="tab" aria-controls="sem{{$i}}" aria-selected="true">
-                            {{$item['sesi']}}-{{$item['semester']}}
-                        </button>
-                    </li>
-                    @php
-                        $i++;
-                    @endphp
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="exam-tab-{{$item->id}}" data-toggle="tab" data-target="#exam-{{$item->id}}" type="button" role="tab" aria-controls="exam-{{$item->id}}" aria-selected="true">
+                        {{$item->sesi}}-0{{$item->semester}}
+                    </button>
+                </li>
                 @endforeach
             </ul>
-        @php
-            $n=1;
-        @endphp
+        
             <div class="tab-content" id="myTabContent">
                 @foreach($peperiksaan as $item)
-                    <div class="tab-pane fadeshow" id="sem{{$n}}" role="tabpanel" aria-labelledby="sem{{$n}}-tab">
-                        <div style="text-align: center">
-                            <embed src="/assets/dokumen/peperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
+                    @if($item->kepPeperiksaan)
+                         <div class="tab-pane fade show active" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
+                            <div style="text-align: center">
+                                <embed src="/assets/dokumen/peperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
+                            </div>
                         </div>
-                    </div>
-                    @php
-                        $n++;
-                    @endphp
+                    @else
+                        <div class="tab-pane fade show active" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
+                            <div style="text-align: center; color: red;">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    @endif    
+                    
                 @endforeach
             </div>
         </div>
