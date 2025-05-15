@@ -1063,10 +1063,11 @@ class PenyelarasPPKController extends Controller
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $keputusan = Peperiksaan::where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.penyelaras_ppk.papar_tuntutan',compact('permohonan','tuntutan','smoku','akademik','sejarah_t'));
+        return view('tuntutan.penyelaras_ppk.papar_tuntutan',compact('permohonan','keputusan','tuntutan','smoku','akademik','sejarah_t'));
     }
 
     public function keputusanPeperiksaan($id)
@@ -1083,10 +1084,11 @@ class PenyelarasPPKController extends Controller
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $keputusan = Peperiksaan::where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.penyelaras_ppk.papar_saringan',compact('permohonan','tuntutan','smoku','akademik','sejarah_t'));
+        return view('tuntutan.penyelaras_ppk.papar_saringan',compact('permohonan','keputusan','tuntutan','smoku','akademik','sejarah_t'));
     }
 
     public function sejarahPermohonan()

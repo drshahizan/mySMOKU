@@ -177,6 +177,7 @@
                                             <tr>
                                                 <th style="width: 5%;">No.</th>
                                                 <th style="width: 20%;">Item</th>
+                                                <th style="width: 20%;">CGPA</th>
                                                 <th style="width: 40%;">Perihal</th>
                                             </tr>
                                             </thead>
@@ -184,7 +185,14 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                    <span><a href="{{ route('ppk.papar.peperiksaan',$smoku->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                    @if($keputusan->kepPeperiksaan)
+                                                        <span><a href="{{ route('ppk.papar.peperiksaan', $smoku->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                    @else
+                                                        <span>Tiada Keputusan Peperiksaan</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                   {{$keputusan->cgpa}} 
                                                 </td>
                                                 <td>
                                                     Keseluruhan keputusan peperiksaan

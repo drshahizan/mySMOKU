@@ -41,12 +41,21 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 @foreach($peperiksaan as $exam)
-                <div class="tab-pane fade show active" id="exam-{{$exam->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$exam->id}}">
-                    <div style="text-align: center">
-                        <embed src="/assets/dokumen/peperiksaan/{{$exam->kepPeperiksaan}}#zoom=90" width="70%" height="605px"/>
-                    </div>
-                </div>
+                    @if($exam->kepPeperiksaan)
+                        <div class="tab-pane fade show active" id="exam-{{$exam->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$exam->id}}">
+                            <div style="text-align: center">
+                                <embed src="{{ asset('assets/dokumen/peperiksaan/' . $exam->kepPeperiksaan) }}#zoom=90" width="70%" height="605px"/>
+                            </div>
+                        </div>
+                    @else
+                        <div class="tab-pane fade show active" id="exam-{{$exam->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$exam->id}}">
+                            <div style="text-align: center; color: red;">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
+
             </div>
             
         </div>
