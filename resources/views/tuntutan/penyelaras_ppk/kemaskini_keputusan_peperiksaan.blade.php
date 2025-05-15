@@ -51,7 +51,7 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Keputusan Peperiksaan&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
 										<div class="mb-5">
-											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" required oninvalid="this.setCustomValidity('Sila muat naik salinan keputusan.')" oninput="setCustomValidity('')"/>
+											<input type="file" id="kepPeperiksaan" name="kepPeperiksaan" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -62,7 +62,7 @@
 											</span>
 										</label>
 										<div class="mb-5">
-											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
+											<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
 										</div>
 									</div>
 								</div>
@@ -82,17 +82,17 @@
 									</div>
 								</div>
 								<!--begin::Action-->
-								@if(!$result)
+								{{-- @if(!$result) --}}
 								<div class="d-flex flex-center mt-15">
-									<button type="submit"  class="btn btn-primary">
+									<button id="submitButton" type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
-								@else
+								{{-- @else
 									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
 										Keputusan peperiksaan lepas sudah dikemaskini.
 									</div>
-								@endif
+								@endif --}}
 								<!--end::Action-->
 							</div>
 							<!--end::Wrapper-->
@@ -120,19 +120,33 @@
 								<table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-											<th class="text-center">Sesi</th>
-											<th class="text-center">Semester</th>
-											<th class="text-center">Keputusan (CGPA)</th>
-											<th class="text-center">Salinan</th>
+											<th>Sesi</th>
+											<th>Semester</th>
+											<th>Keputusan (CGPA)</th>
+											<th>Salinan</th>
+											<th class="text-center"></th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
 										@foreach ($peperiksaan as $peperiksaan)
 										<tr>
-											<td class="text-center">{{ $peperiksaan->sesi}}</td>
-											<td class="text-center">{{ $peperiksaan->semester}}</td>
-											<td class="text-center">{{ $peperiksaan->cgpa}}</td>
-											<td class="text-center"><a href="/assets/dokumen/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
+											<td>{{ $peperiksaan->sesi}}</td>
+											<td>{{ $peperiksaan->semester}}</td>
+											<td>{{ $peperiksaan->cgpa}}</td>
+											<td>
+												@if ($peperiksaan->kepPeperiksaan)
+													<a href="{{ asset('assets/dokumen/peperiksaan/' . $peperiksaan->kepPeperiksaan) }}" target="_blank">Papar</a>
+												@else
+													-
+												@endif
+											</td>
+											<td class="text-center">
+												<a href="{{ route('ppk.keputusan.delete', ['id' => $peperiksaan->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam keputusan ini?')">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
+														<i class="fa fa-trash fa-sm custom-white-icon"></i>
+													</span>
+												</a>
+											</td>
 										</tr>
 										@endforeach	
 									</tbody>
@@ -155,6 +169,27 @@
 		
 <!--begin::Javascript-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	//cgpa
+	$(document).ready(function(){
+		$('#cgpa').on('change', function() {
+			var cgpa = parseFloat($(this).val());
+			if (cgpa >= 0.0 && cgpa < 2.0) {
+				Swal.fire({
+					icon: 'warning',
+					title: 'Pengesahan Keputusan Peperiksaan!',
+					text: 'PNG pelajar bawah 2.00. Sila klik butang "Hantar Pengesahan" untuk pengesahan daripada sekretariat KPT.',
+					confirmButtonText: 'OK'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						// Change button text to "Hantar Pengesahan"
+						$('#submitButton').text('Hantar Pengesahan');
+					}
+				});
+			} 
+		});
+	});
+</script>
 <script>
 	@if(session('success'))
 		Swal.fire({

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\MailDaftarPentadbir;
+use App\Mail\PengesahanCGPA;
 use App\Mail\PermohonanHantar;
 use App\Models\Agama;
 use Illuminate\Http\Request;
@@ -765,29 +766,41 @@ class PenyelarasPPKController extends Controller
 
     public function senaraiTuntutanBaharu()
     {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+        
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-        ->leftjoin('tuntutan','tuntutan.permohonan_id','=','permohonan.id')
-        ->where('penyelaras_id','=', Auth::user()->id)
+        ->leftJoin('tuntutan', function ($join) {
+            $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
+                ->whereRaw('tuntutan.id = (
+                    SELECT MAX(t.id) 
+                    FROM tuntutan t
+                    WHERE t.permohonan_id = permohonan.id
+                )')
+                ->whereNull('tuntutan.data_migrate');
+        })
+        ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
         ->where('permohonan.status', 8) 
+        ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->get(['smoku.*', 'permohonan.no_rujukan_permohonan', 'permohonan.id as permohonan_id', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi']);
-        
-
-        // $currentDate = Carbon::now();
-        // $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-        // $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
-
-        // if($akademik->bil_bulan_per_sem == 6){
-        //     $bilSem = 2;
-        // } else {
-        //     $bilSem = 3;
-        // }
-            
-        // $semSemasa = $akademik->sem_semasa;
-        // $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+        ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
+        ->distinct()
+        ->get();
 
         return view('tuntutan.penyelaras_ppk.tuntutan_baharu', compact('layak'));
     }
@@ -895,6 +908,7 @@ class PenyelarasPPKController extends Controller
         $permohonan = Permohonan::orderBy('id', 'DESC')
             ->where('smoku_id', '=', $id)
             ->first();
+        $smoku_id = Smoku::where('id',$id)->first();
         $result = DB::table('permohonan_peperiksaan')
             ->where('permohonan_id', $permohonan->id)
             ->where('sesi', '=', $request->sesi)
@@ -906,41 +920,76 @@ class PenyelarasPPKController extends Controller
         }
 
         //simpan dalam table peperiksaan
-        $kepPeperiksaan = $request->file('kepPeperiksaan');
+        $kepPeperiksaan=$request->kepPeperiksaan;
         $counter = 1; 
 
         // Check if files were uploaded
-        if (!empty($kepPeperiksaan)) {
-           
-                $filenamekepP = $kepPeperiksaan->getClientOriginalName();  
-                $uniqueFilename = $counter . '_' . $filenamekepP;
+        // tak wajib
+        $counter = 1; // Initialize the counter
 
-                while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                    $counter++;
-                    $uniqueFilename = $counter . '_' . $filenamekepP;
-                }
-    
-                $kepPeperiksaan->move('assets/dokumen/peperiksaan', $uniqueFilename);
-    
-                $data = new peperiksaan();
-                $data->permohonan_id = $permohonan->id;
-                $data->sesi = $request->sesi;
-                $data->semester = $request->semester;
-                $data->cgpa = $request->cgpa;
-                $data->kepPeperiksaan = $uniqueFilename;
-                $data->save();
-    
-                // Increment counter after successful database save
+        if ($request->hasFile('kepPeperiksaan')) {
+            $kepPeperiksaan = $request->file('kepPeperiksaan');
+            $filenamekepP = $kepPeperiksaan->getClientOriginalName();
+            $uniqueFilename = $counter . '_' . $filenamekepP;
+
+            // Append increment to the filename until it's unique
+            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
                 $counter++;
-                return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
-                
+                $uniqueFilename = $counter . '_' . $filenamekepP;
+            }
+
+            // Move the uploaded file
+            $kepPeperiksaan->move('assets/dokumen/peperiksaan', $uniqueFilename);
         } else {
-            // Handle the case where no files were uploaded
-            // You might want to redirect back with an error message
-            return redirect()->back()->with('error', 'No files uploaded.');
+            // Set a default value if no file is uploaded
+            $uniqueFilename = null;
         }
+
+        $cgpa = $request->cgpa;
+            if($cgpa >= 0.0 && $cgpa < 2.0){
+                $pengesahan = 1;
+                $catatan = "Pelajar telah menghantar keputusan peperiksaan semester lepas. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
+                if (empty($invalidEmails)) 
+                {            
+                    // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+                    Mail::to($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
+
+                } 
+                else 
+                {
+                    foreach ($invalidEmails as $invalidEmail) {
+                        Log::error('Invalid email address: ' . $invalidEmail);
+                    }
+                }
+            }else{
+                $pengesahan = null;
+            }
+
+        // Save the peperiksaan record
+        $data = new peperiksaan();
+        $data->permohonan_id = $permohonan->id;
+        $data->sesi = $request->sesi;
+        $data->semester = $request->semester;
+        $data->cgpa = $request->cgpa;
+        $data->pengesahan_rendah=$pengesahan;
+        $data->kepPeperiksaan = $uniqueFilename;
+        $data->save();
+
+        return redirect()->route('senarai.ppk.tuntutanBaharu')->with('message', 'Keputusan peperiksaan pelajar telah di simpan.');
     }
 
+    public function deleteKeputusanPeperiksaan($id)
+    {
+        $keputusan_peperiksaan = Peperiksaan::where('id', $id)->first();
+
+        if ($keputusan_peperiksaan) 
+        {
+            DB::table('permohonan_peperiksaan')->where('id',$keputusan_peperiksaan->id)->delete();
+        } 
+        
+        return back();
+    }
+    
     public function hantarTuntutan(Request $request, $id)
     {
         $permohonan = Permohonan::orderBy('id', 'DESC')

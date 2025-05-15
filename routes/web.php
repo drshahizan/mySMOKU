@@ -572,6 +572,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/ppk/senarai/tuntutan-baharu', [PenyelarasPPKController::class, 'senaraiTuntutanBaharu'])->name('senarai.ppk.tuntutanBaharu');
         Route::get('ppk/kemaskini/keputusan/{id}', [PenyelarasPPKController::class, 'kemaskiniKeputusan'])->name('ppk.kemaskini.keputusan');
         Route::post('ppk/hantar/keputusan/{id}', [PenyelarasPPKController::class, 'hantarKeputusanPeperiksaan'])->name('ppk.keputusan.hantar');
+        Route::get('ppk/keputusan/delete/{id}', [PenyelarasPPKController::class, 'deleteKeputusanPeperiksaan'])->name('ppk.keputusan.delete');
         Route::post('ppk/hantar/{id}', [PenyelarasPPKController::class, 'hantarTuntutan'])->name('ppk.tuntutan.hantar');
         Route::get('penyelaras/ppk/sejarah/sejarah-tuntutan', [PenyelarasPPKController::class, 'sejarahTuntutan'])->name('ppk.sejarah.tuntutan');
         Route::get('penyelaras/ppk/sejarah/rekod-tuntutan/{id}', [PenyelarasPPKController::class, 'rekodTuntutan'])->name('ppk.rekod.tuntutan');
