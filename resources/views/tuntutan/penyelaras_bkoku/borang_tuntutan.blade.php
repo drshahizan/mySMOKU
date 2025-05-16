@@ -232,7 +232,7 @@
 									<div class="me-5">
 										<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
 
-										<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if($tuntutan->wang_saku == 1) checked @endif/>
+										<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if(($tuntutan->wang_saku ?? 0) == 1) checked @endif />
 										<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
 									</div>
 								</div>
@@ -250,7 +250,7 @@
 								<div class="d-flex">
 									<span class="input-group-text">RM</span>
 									<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{$tuntutan->amaun_wang_saku}}"/>
+									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{ $tuntutan->amaun_wang_saku ?? '' }}" />
 									<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
 								</div>
 							@endif
