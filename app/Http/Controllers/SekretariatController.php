@@ -41,6 +41,7 @@ use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\MaklumatBank;
 use App\Models\TukarInstitusi;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -2343,15 +2344,17 @@ class SekretariatController extends Controller
             $status_rekod->save();
 
             // COMMENT PROD
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',5)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+                Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
             }
             elseif($program=="PPK"){
                 $emel = EmelKemaskini::where('emel_id',11)->first();
-                Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+                Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
             }
 
             $status_kod=1;

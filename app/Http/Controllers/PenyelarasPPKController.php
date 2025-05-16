@@ -1028,6 +1028,7 @@ class PenyelarasPPKController extends Controller
             'tuntutan_id' => $tuntutan->id,
             'smoku_id' => $id,
             'status' => '2',
+            'dilaksanakan_oleh' =>  Auth::user()->id,
     
         ]);
         $sejarah->save();
