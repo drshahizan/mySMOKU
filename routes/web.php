@@ -177,6 +177,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/batal/{id}', [PermohonanController::class, 'batalPermohonan'])->name('permohonan.batal');
         Route::get('kemaskini/keputusan', [PermohonanController::class, 'kemaskiniKeputusan'])->name('kemaskini.keputusan');
         Route::post('kemaskini/keputusan', [PermohonanController::class, 'save'])->name('save');
+        Route::get('keputusan/delete/{id}', [PermohonanController::class, 'deleteKeputusanPeperiksaan'])->name('keputusan.delete');
         Route::get('permohonan/sejarah/sejarah-permohonan', [PermohonanController::class, 'sejarahPermohonan'])->name('pelajar.sejarah.permohonan');
 
         //Tuntutan Pelajar

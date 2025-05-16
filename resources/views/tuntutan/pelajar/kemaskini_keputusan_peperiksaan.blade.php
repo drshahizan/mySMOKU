@@ -34,13 +34,13 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" />
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" />
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 										</div>
 									</div>
 									<!--end::Col-->
@@ -87,13 +87,13 @@
 									</div>
 								</div>
 								<!--begin::Action-->
-								@if(!$result)
+								{{-- @if(!$result) --}}
 								<div class="d-flex flex-center mt-15">
 									<button id="submitButton" type="submit"  class="btn btn-primary">
 										Simpan
 									</button>
 								</div>
-								@elseif($result && $result->pengesahan_rendah==1)
+								{{-- @elseif($result && $result->pengesahan_rendah==1)
 									<div class="alert alert-danger mt-15" role="alert" style="color: black;">
 										Keputusan peperiksaan telah dihantar untuk semakan Sekretariat KPT.
 									</div>
@@ -101,7 +101,7 @@
 									<div class="alert alert-warning mt-15" role="alert" style="color: black;">
 										Keputusan peperiksaan lepas sudah dikemaskini.
 									</div>
-								@endif
+								@endif --}}
 								<!--end::Action-->
 							</div>
 							<!--end::Wrapper-->
@@ -133,6 +133,7 @@
 											<th>Semester</th>
 											<th>Keputusan (PNG)</th>
 											<th>Salinan</th>
+											<th class="text-center"></th>
 										</tr>
 									</thead>
 									<tbody class="fw-semibold text-gray-600">
@@ -142,6 +143,13 @@
 											<td>{{ $peperiksaan->semester}}</td>
 											<td>{{ $peperiksaan->cgpa}}</td>
 											<td><a href="/assets/dokumen/peperiksaan/{{$peperiksaan->kepPeperiksaan}}" target="_blank">Papar</a></td>
+											<td class="text-center">
+												<a href="{{ route('keputusan.delete', ['id' => $peperiksaan->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam keputusan ini?')">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
+														<i class="fa fa-trash fa-sm custom-white-icon"></i>
+													</span>
+												</a>
+											</td>
 										</tr>
 										@endforeach	
 									</tbody>

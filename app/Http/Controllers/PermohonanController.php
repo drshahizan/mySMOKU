@@ -840,6 +840,18 @@ class PermohonanController extends Controller
         return redirect()->route('kemaskini.keputusan')->with('success', 'Keputusan peperiksaan telah di simpan.');
     }
 
+    public function deleteKeputusanPeperiksaan($id)
+    {
+        $keputusan_peperiksaan = Peperiksaan::where('id', $id)->first();
+
+        if ($keputusan_peperiksaan) 
+        {
+            DB::table('permohonan_peperiksaan')->where('id',$keputusan_peperiksaan->id)->delete();
+        } 
+        
+        return back();
+    }
+
 }
 
 
