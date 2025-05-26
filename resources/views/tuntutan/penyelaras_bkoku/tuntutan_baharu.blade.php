@@ -53,6 +53,7 @@
                                 <th class="text-center"><b>ID Permohonan</b></th>                                        
 								<th class="text-center"><b>Nama</b></th>
 								<th class="text-center"><b>Nama Kursus</b></th>
+								<th class="text-center"><b>Institusi</b></th>
                                 <th class="text-center"><b>Tempoh Penajaan</b></th>
                                 <th class="text-center"><b>Status</b></th>
                                 <th class="text-center"><b>Tindakan</b></th>
@@ -96,6 +97,7 @@
                                         <td>{{ $layak->no_rujukan_permohonan}}</td>
                                         <td>{{ $pemohon}}</td>
                                         <td>{{ $layak->nama_kursus}}</td>
+                                        <td>{{ $layak->nama_institusi}}</td>
                                         <td>
                                             {{ !empty($layak->tarikh_mula) ? \Carbon\Carbon::parse($layak->tarikh_mula)->format('d/m/Y') : 'N/A' }}
                                             -
