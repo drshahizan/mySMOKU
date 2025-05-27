@@ -126,7 +126,7 @@
                             data: 'no_rujukan_tuntutan',
                             render: function(data, type, row) {
                                 // Construct the URL using the no_rujukan_permohonan value
-                                var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.smoku_id;
+                                var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
                                 // Create and return the link element
                                 return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                             }
@@ -165,8 +165,10 @@
                             data: 'tarikh_hantar',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -185,8 +187,10 @@
                             data: 'tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();

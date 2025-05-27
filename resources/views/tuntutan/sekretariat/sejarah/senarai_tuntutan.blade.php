@@ -388,8 +388,10 @@
                             data: 'tuntutan.tarikh_hantar',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -408,18 +410,17 @@
                             data: 'tuntutan.tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                    // Get the year, month, and day components
                                     var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                                    var day = ('0' + date.getDate()).slice(-2);
 
-                                    // Return the formatted date as YYYY/MM/DD
                                     return day + '/' + month + '/' + year;
                                 } else {
-                                    // For sorting and other purposes, return the original data
                                     return data;
                                 }
                             }
@@ -579,8 +580,10 @@
                             data: 'tuntutan.tarikh_hantar',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -599,8 +602,10 @@
                             data: 'tuntutan.tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -790,8 +795,10 @@
                             data: 'tuntutan.tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -960,8 +967,10 @@
                             data: 'tuntutan.tarikh_hantar',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -980,8 +989,10 @@
                             data: 'tuntutan.tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -1149,8 +1160,10 @@
                             data: 'tuntutan.tarikh_hantar',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
@@ -1169,8 +1182,10 @@
                             data: 'tuntutan.tarikh_transaksi',
                             render: function(data, type, row) {
                                 if (type === 'display' || type === 'filter') {
-                                    // Convert the date to a JavaScript Date object
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
                                     var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
                                     // Get the year, month, and day components
                                     var year = date.getFullYear();
