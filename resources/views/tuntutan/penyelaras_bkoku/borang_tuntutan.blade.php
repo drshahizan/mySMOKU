@@ -13,7 +13,7 @@
 	<div id="kt_app_content_container" class="app-container container-xxl">
 		<!--begin::Layout-->
 		<div class="d-flex flex-column flex-lg-row">
-			@if ($permohonan->yuran == '1')
+			@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4'])))
 				<!--begin::Content-->
 				<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
 					<!--begin::Card-->
@@ -139,7 +139,7 @@
 					<!--begin::Card body-->
 					<div class="card-body p-10">
 						<!--begin::Input group-->
-						@if ($permohonan->yuran == '1')
+						@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4'])))
 							<div class="mb-10">
 								<!--begin::Label-->
 								<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
@@ -194,8 +194,8 @@
 						<form action="{{ route('bkoku.hantar.tuntutan',$smoku_id) }}" method="post" enctype="multipart/form-data">
 						@csrf
 							<!--begin::Item-->
-							@if ($permohonan->wang_saku == '1')
-								@if ($permohonan->yuran != '1')
+							@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['1', '3', '4'])))
+								@if ($akademik->mod == '1' && $akademik->sumber_biaya =='1')
 									<!--begin::Wrapper-->
 									<div class="d-flex flex-column align-items-start flex-xxl-row">
 										<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">

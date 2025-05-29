@@ -970,6 +970,7 @@ class PenyelarasController extends Controller
 
             $tuntutan = Tuntutan::where('smoku_id', $id)
                 ->where('permohonan_id', $permohonan->id)
+                ->whereNull('data_migrate')
                 ->orderBy('tuntutan.id', 'desc')
                 ->first(['tuntutan.*']);
 
