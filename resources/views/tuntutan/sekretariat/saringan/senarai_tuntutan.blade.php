@@ -205,7 +205,7 @@
                                                         $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                         $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                        if($user_id==null){
+                                                        if($user_id==null || $item['status']==1 || $item['status']==2){
                                                             $user_name = "Tiada Maklumat";
                                                         }
                                                         else{
@@ -327,7 +327,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                    if($user_id==null){
+                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
                                                         $user_name = "Tiada Maklumat";
                                                     }
                                                     else{
@@ -449,7 +449,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                    if($user_id==null){
+                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
                                                         $user_name = "Tiada Maklumat";
                                                     }
                                                     else{
@@ -571,7 +571,7 @@
                                                     $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
                                                     $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
 
-                                                    if($user_id==null){
+                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
                                                         $user_name = "Tiada Maklumat";
                                                     }
                                                     else{
@@ -691,7 +691,7 @@
                                                     $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
                                                     $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
 
-                                                    if($user_id==null){
+                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
                                                         $user_name = "Tiada Maklumat";
                                                     }
                                                     else{
