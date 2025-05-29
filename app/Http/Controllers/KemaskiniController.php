@@ -206,12 +206,14 @@ class KemaskiniController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'email' => 'required|email',
-            'no_kp' => 'required'
+            'no_kp' => 'required',
+            'email_verified_at' => 'required'
         ]);
 
         $user = User::findOrFail($id);
         $user->nama = $request->nama;
         $user->email = $request->email;
+        $user->email_verified_at = $request->email_verified_at;
         $user->save();
 
         // Update Smoku if exists

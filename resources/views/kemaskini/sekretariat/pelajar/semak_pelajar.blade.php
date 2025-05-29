@@ -69,8 +69,22 @@
                                             <input type="text" name="no_kp" class="form-control mb-3 mx-auto" value="{{ $akaun_pelajar->no_kp }}" readonly style="max-width: 400px;">
                                             <input type="email" name="email" class="form-control mb-3 mx-auto" value="{{ $akaun_pelajar->email }}" placeholder="E-mel" style="max-width: 400px;">
 
+                                            <div class="d-flex mb-3" style="max-width: 400px; margin: 0 auto;">
+                                                <input type="datetime-local" name="email_verified_at"
+                                                    class="form-control"
+                                                    value="{{ $akaun_pelajar->email_verified_at ? $akaun_pelajar->email_verified_at->format('Y-m-d\TH:i') : '' }}"
+                                                    style="flex: 1;">
+
+                                                @if (is_null($akaun_pelajar->email_verified_at))
+                                                    <span class="text-danger ms-12" style="font-size: 1.0rem; white-space: nowrap; align-self: center;">
+                                                        * Tiada Pengesahan E-mel
+                                                    </span>
+                                                @endif
+                                            </div>
+
                                             <button type="submit" class="btn btn-warning">Kemaskini</button>
                                         </div>
+
                                     </form>
                                     @endisset
 
