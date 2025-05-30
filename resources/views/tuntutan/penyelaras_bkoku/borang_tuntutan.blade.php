@@ -15,6 +15,8 @@
 		<div class="d-flex flex-column flex-lg-row">
 			@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4', '5'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4', '5'])))
 				<!--begin::Content-->
+				<input type="hidden" id="requireYuran" value="{{ $permohonan->yuran == '1' ? '1' : '0' }}">
+				<input type="hidden" id="requireWangSaku" value="{{ $permohonan->wang_saku == '1' ? '1' : '0' }}">
 				<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
 					<!--begin::Card-->
 					<div class="card">
@@ -292,33 +294,41 @@
 <!--begin::Javascript-->
 <script>
     function checkButtonState() {
-        const submitButton = document.getElementById("submitButton");
-        const wangSakuCheckbox = document.getElementById("wang_saku");
-        const tableBody = document.querySelector("#itemtuntutan tbody");
-        
-        // Check if the table has rows (if present)
-        const hasItems = tableBody ? tableBody.children.length > 0 : false;
-        const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
+		const submitButton = document.getElementById("submitButton");
+		const wangSakuCheckbox = document.getElementById("wang_saku");
+		const tableBody = document.querySelector("#itemtuntutan tbody");
 
-        // Enable button if items exist or wang saku is checked
-        submitButton.disabled = !(hasItems || wangSakuChecked);
-    }
+		const hasItems = tableBody ? tableBody.children.length > 0 : false;
+		const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
 
-    // Initial check
-    checkButtonState();
+		const requireYuran = document.getElementById("requireYuran").value === '1';
+		const requireWangSaku = document.getElementById("requireWangSaku").value === '1';
 
-    // Update button state on checkbox change
-    const wangSakuCheckbox = document.getElementById("wang_saku");
-    if (wangSakuCheckbox) {
-        wangSakuCheckbox.addEventListener("change", checkButtonState);
-    }
+		let enable = false;
 
-    // Update button state when table items change
-    const tableBody = document.querySelector("#itemtuntutan tbody");
-    if (tableBody) {
-        const observer = new MutationObserver(checkButtonState);
-        observer.observe(tableBody, { childList: true });
-    }
+		if (requireYuran && requireWangSaku) {
+			enable = hasItems && wangSakuChecked;
+		} else if (requireYuran && !requireWangSaku) {
+			enable = hasItems;
+		} else if (!requireYuran && requireWangSaku) {
+			enable = wangSakuChecked;
+		}
+
+		submitButton.disabled = !enable;
+	}
+
+	checkButtonState();
+
+	const wangSakuCheckbox = document.getElementById("wang_saku");
+	if (wangSakuCheckbox) {
+		wangSakuCheckbox.addEventListener("change", checkButtonState);
+	}
+
+	const tableBody = document.querySelector("#itemtuntutan tbody");
+	if (tableBody) {
+		const observer = new MutationObserver(checkButtonState);
+		observer.observe(tableBody, { childList: true });
+	}
 </script>
 
 
