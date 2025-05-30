@@ -8,9 +8,13 @@
     <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
         @csrf
          <!--begin::Subtitle-->
-         <div class="text-gray-500 fw-semibold fs-2">
-            <a href="/" class="text-gray-500 fw-semibold fs-2"><i class="fa-solid fa-house"></i> 
-                Laman Utama
+         <div class="d-flex justify-content-between align-items-center text-gray-500 fw-semibold fs-2">
+            <a href="/" class="text-gray-500 fw-semibold fs-2">
+                <i class="fa-solid fa-house"></i> Laman Utama
+            </a>
+
+            <a href="assets/borang/BORANG_TUNTUTAN.pdf" target="_blank" class="text-gray-500 fw-semibold fs-2" title="BORANG TUNTUTAN YURAN PENGAJIAN">
+                <i class="fa-solid fa-download"></i> Muat Turun Borang
             </a>
         </div>
         <!--end::Subtitle--->
