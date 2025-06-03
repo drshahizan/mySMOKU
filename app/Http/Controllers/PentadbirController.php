@@ -408,14 +408,16 @@ class PentadbirController extends Controller
             }
         }
 
-        if (empty($invalidEmails)) {
-            Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-        } 
-        else {
-            foreach ($invalidEmails as $invalidEmail) {
-                 Log::error('Invalid email address: ' . $invalidEmail);
-            }
-        }
+        //tutup sementara
+
+        // if (empty($invalidEmails)) {
+        //     Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+        // } 
+        // else {
+        //     foreach ($invalidEmails as $invalidEmail) {
+        //          Log::error('Invalid email address: ' . $invalidEmail);
+        //     }
+        // }
   
         return redirect()->route('tarikh');
     }
