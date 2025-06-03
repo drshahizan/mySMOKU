@@ -388,37 +388,40 @@ class PentadbirController extends Controller
             'masa_tamat'   => $request->masa_tamat,
             'permohonan'   => $request->has('permohonan') ? 1 : 0,
             'tuntutan'     => $request->has('tuntutan') ? 1 : 0,
+            'emel'         => $request->has('emel') ? 1 : 0,
             'catatan'      => $request->catatan,
         ]);
-        
-        $catatan = $request->catatan;
-        $users = User::whereIn('tahap', [1, 2, 6])
-        ->where('status', 1)
-        ->whereNotNull('email_verified_at')
-        ->get(); 
-        
-        $emailmain = "bkoku@mohe.gov.my";
-        $bcc = $users->pluck('email')->toArray();
-        
-        // Validate each email address
-        $invalidEmails = [];
-        foreach ($bcc as $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $invalidEmails[] = $email;
+
+        if ($request->emel == 'on'){
+            $catatan = $request->catatan;
+            $users = User::whereIn('tahap', [1, 2, 6])
+            ->where('status', 1)
+            ->whereNotNull('email_verified_at')
+            ->get(); 
+            
+            $emailmain = "bkoku@mohe.gov.my";
+            $bcc = $users->pluck('email')->toArray();
+            
+            // Validate each email address
+            $invalidEmails = [];
+            foreach ($bcc as $email) {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $invalidEmails[] = $email;
+                }
             }
+
+
+            if (empty($invalidEmails)) {
+                Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
+            } 
+            else {
+                foreach ($invalidEmails as $invalidEmail) {
+                     Log::error('Invalid email address: ' . $invalidEmail);
+                }
+            }
+
         }
-
-        //tutup sementara
-
-        // if (empty($invalidEmails)) {
-        //     Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-        // } 
-        // else {
-        //     foreach ($invalidEmails as $invalidEmail) {
-        //          Log::error('Invalid email address: ' . $invalidEmail);
-        //     }
-        // }
-  
+        
         return redirect()->route('tarikh');
     }
 

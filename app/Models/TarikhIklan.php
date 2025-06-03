@@ -17,6 +17,7 @@ class TarikhIklan extends Model
         'masa_tamat',
         'permohonan',
         'tuntutan',
+        'emel',
         'catatan',
     ];
 }

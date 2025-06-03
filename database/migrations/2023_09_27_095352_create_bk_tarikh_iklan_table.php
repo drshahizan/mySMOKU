@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('masa_tamat');
             $table->integer('permohonan');
             $table->integer('tuntutan');
+            $table->integer('emel');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

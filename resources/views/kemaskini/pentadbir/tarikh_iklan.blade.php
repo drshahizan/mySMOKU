@@ -92,22 +92,40 @@
 							<!--end::Input group-->
 						</div>
 						<!--begin::Input group-->
-						<div class="col-md-12 fv-row">
-							<label class="fs-6 fw-semibold mb-2">Papar</label>
+						<div class="row mb-10">
+							<!--begin::Input group-->
+							<div class="col-md-6 fv-row">
+								<label class="fs-6 fw-semibold mb-2">Papar</label>
+							
+								<div class="form-check mb-2">
+									<input class="form-check-input" type="checkbox" name="permohonan" id="permohonan">
+									<label for="permohonan">
+										Permohonan
+									</label>
+								</div>
+							
 						
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="permohonan" id="permohonan">
-								<label for="permohonan">
-									Permohonan
-								</label>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" name="tuntutan" id="tuntutan">
+									<label for="tuntutan">
+										Tuntutan
+									</label>
+								</div>
 							</div>
-						
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" name="tuntutan" id="tuntutan">
-								<label for="tuntutan">
-									Tuntutan
-								</label>
+							<!--end::Input group-->
+
+							<!--begin::Input group-->
+							<div class="col-md-6 fv-row">
+								<label class="fs-6 fw-semibold mb-2">Hebahan E-mel</label>
+							
+								<div class="form-check mb-2">
+									<input class="form-check-input" type="checkbox" name="emel" id="emel">
+									<label for="emel">
+										Ya
+									</label>
+								</div>
 							</div>
+							<!--end::Input group-->
 						</div>
 						<!--end::Input group-->
 						<br>
