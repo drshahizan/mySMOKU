@@ -196,13 +196,16 @@
 	// Initialize TinyMCE
 	tinymce.init({
 		selector: '#catatan',
-		plugins: 'autolink lists link image charmap print preview',
+		plugins: 'autolink lists link image charmap print preview paste',
 		toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 		height: 300,
-		setup: function (editor) {
-			// You can perform additional setup here if needed
+
+		// This removes background color styles on paste
+		paste_preprocess: function(plugin, args) {
+			args.content = args.content.replace(/background-color:[^;"]+;?/gi, '');
 		}
 	});
+
 
 	function validateForm() {
 		// Get the content of TinyMCE editor

@@ -44,7 +44,7 @@
     <!--end::App-->
     <style>
         .announcement-box {
-            position: relative;
+            position: absolute;
             top: 65%;
             left: 20px;
             width: 95%;
