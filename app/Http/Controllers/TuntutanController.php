@@ -64,9 +64,9 @@ class TuntutanController extends Controller
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
             $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
 
-            $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+            $tarikhNextSem = clone $tarikhMula;
             $nextSemesterDates = [];
-            $firstIteration = true;
+            $semCounter = 0;
 
             while ($tarikhNextSem < $tarikhTamat) 
             {
@@ -77,13 +77,19 @@ class TuntutanController extends Controller
                 ];
 
                 $semSemasa++;
+                $semCounter++;
+
+                // Move to next semester
                 $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 
-                $awal = $tarikhNextSem->format('Y');
-                $akhir = $tarikhNextSem->format('Y') + 1;
-                
-                $sesiMula = $awal . '/' . $akhir;
+                // Only update sesiMula every $bilSem semesters
+                if ($semCounter % $bilSem == 0) {
+                    $awal = $tarikhNextSem->format('Y');
+                    $akhir = $tarikhNextSem->format('Y') + 1;
+                    $sesiMula = $awal . '/' . $akhir;
+                }
             }
+
            
 
             $currentSesi = null; // Initialize a variable to store the current session
@@ -93,6 +99,7 @@ class TuntutanController extends Controller
 
             foreach ($nextSemesterDates as $key => $data) 
             {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
                 // Set the end date to be just before the start of the next semester
@@ -144,7 +151,7 @@ class TuntutanController extends Controller
             if (($currentSesi === $previousSesi) || $previousSesi === null) 
             {
                 // dd('sini');
-                if (!$tuntutan) {
+                if (!$tuntutan || $tuntutan->status == 1) {
                     $wang_saku = 0.00;
                     //nak tahu baki sesi semasa permohonan lepas
                     $baki_total = $permohonan->baki_dibayar;

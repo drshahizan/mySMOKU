@@ -991,9 +991,9 @@ class PenyelarasController extends Controller
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
             $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
 
-            $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+            $tarikhNextSem = clone $tarikhMula;
             $nextSemesterDates = [];
-            $firstIteration = true;
+            $semCounter = 0;
 
             while ($tarikhNextSem < $tarikhTamat) 
             {
@@ -1004,14 +1004,19 @@ class PenyelarasController extends Controller
                 ];
 
                 $semSemasa++;
-                
+                $semCounter++;
+
+                // Move to next semester
                 $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
-                $awal = $tarikhNextSem->format('Y');
-                
-                $akhir = $tarikhNextSem->format('Y') + 1;
-                
-                $sesiMula = $awal . '/' . $akhir;
+
+                // Only update sesiMula every $bilSem semesters
+                if ($semCounter % $bilSem == 0) {
+                    $awal = $tarikhNextSem->format('Y');
+                    $akhir = $tarikhNextSem->format('Y') + 1;
+                    $sesiMula = $awal . '/' . $akhir;
+                }
             }
+
            
 
             $currentSesi = null; // Initialize a variable to store the current session
@@ -1021,6 +1026,7 @@ class PenyelarasController extends Controller
 
             foreach ($nextSemesterDates as $key => $data) {
                 // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
+                
 
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
@@ -1040,16 +1046,19 @@ class PenyelarasController extends Controller
                 
 
             }
+           
 
             // Output the results
             // echo 'Current Session: ' . $currentSesi . PHP_EOL;
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
+            //  dd('sini');
             // dd($semesterEndDate);
 
             if ($currentDate <= $semesterEndDate ) {
                 if ($semLepas != 0 ){
+                    
                     if($semSemasa != $semLepas){
                         // semak dah upload result ke belum
                         $result = Peperiksaan::where('permohonan_id', $permohonan->id)
@@ -1078,13 +1087,16 @@ class PenyelarasController extends Controller
             if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
                 return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
             }
+            // dd($previousSesi);
        
             if (($currentSesi === $previousSesi) || $previousSesi === null) {
             
-                if (!$tuntutan) {
+
+                if (!$tuntutan || $tuntutan->status == 1) {
                     $wang_saku = 0.00;
                     //nak tahu baki sesi semasa permohonan lepas
                     $baki_total = $permohonan->baki_dibayar;
+                    //  dd($baki_total);
                 }
                 else{
                     $ada = DB::table('tuntutan')
@@ -1109,6 +1121,8 @@ class PenyelarasController extends Controller
                 }	
             }
             else {
+
+                
                 if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
                     if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
                         $baki_total = $limitWangSaku->jumlah * $akademik->bil_bulan_per_sem; 
@@ -1119,6 +1133,7 @@ class PenyelarasController extends Controller
                 }
                 else {
                     $baki_total = $maxLimit->jumlah;
+                    
                 }
             }
             

@@ -252,7 +252,7 @@
 								<div class="d-flex">
 									<span class="input-group-text">RM</span>
 									<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{ $tuntutan->amaun_wang_saku ?? '' }}" />
+									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{ $tuntutan->amaun_wang_saku ?? '0.00' }}" />
 									<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
 								</div>
 							@endif
