@@ -1087,9 +1087,9 @@ class PenyelarasController extends Controller
             if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
                 return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
             }
-            // dd($previousSesi);
+            // dd($akademik->sesi);
        
-            if (($currentSesi === $previousSesi) || $previousSesi === null) {
+            if (($currentSesi === $akademik->sesi) || $previousSesi === null) {
             
 
                 if (!$tuntutan || $tuntutan->status == 1) {
@@ -1099,6 +1099,7 @@ class PenyelarasController extends Controller
                     //  dd($baki_total);
                 }
                 else{
+                    dd('sini');
                     $ada = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
                         ->orderBy('id', 'desc')
