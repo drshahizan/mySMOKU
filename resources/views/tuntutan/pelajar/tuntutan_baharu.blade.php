@@ -457,7 +457,7 @@ function myFunction() {
 				var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
 				document.getElementById("jumlah").value = (baki_wang_saku + totalAmaun).toFixed(2);
 			} else {
-				document.getElementById("amaun_wang_saku").value = "";
+				document.getElementById("amaun_wang_saku").value = "0.00";
 				console.log("Invalid input. Cannot calculate total amount.");
 			}
 		}
