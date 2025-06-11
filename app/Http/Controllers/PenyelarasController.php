@@ -1093,13 +1093,14 @@ class PenyelarasController extends Controller
             
 
                 if (!$tuntutan || $tuntutan->status == 1) {
+                    // dd('sini');
                     $wang_saku = 0.00;
                     //nak tahu baki sesi semasa permohonan lepas
                     $baki_total = $permohonan->baki_dibayar;
                     //  dd($baki_total);
                 }
                 else{
-                    dd('sini');
+                    // dd('sini');
                     $ada = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
                         ->orderBy('id', 'desc')
