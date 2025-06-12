@@ -148,13 +148,17 @@ class TuntutanController extends Controller
             //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
             // }
        
-            if (($currentSesi === $previousSesi) || $previousSesi === null) 
+            if (($currentSesi === $akademik->sesi) || $previousSesi === null) 
             {
                 // dd('sini');
                 if (!$tuntutan || $tuntutan->status == 1) {
-                    $wang_saku = 0.00;
+                   if ($semSemasa == $semLepas){
+                        $wang_saku = 0.00;
+                    }
+
                     //nak tahu baki sesi semasa permohonan lepas
-                    $baki_total = $permohonan->baki_dibayar;
+                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit->jumlah;
+                    //  dd($baki_total);
                 }
                 else{
                     $ada = DB::table('tuntutan')
