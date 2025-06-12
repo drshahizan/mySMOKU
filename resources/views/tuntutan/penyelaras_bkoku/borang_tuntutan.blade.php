@@ -413,7 +413,7 @@
 		// Define the maximum limit for 'amaun_yuran'
 		var baki_total = document.getElementById('baki_total');
 		var maxLimit = parseFloat(baki_total.value);
-		console.log(maxLimit);
+		console.log('Calculated maxLimit:', maxLimit);
 	
 		if (total_yuran > maxLimit) {
 			yuranInput.value = '';
@@ -436,6 +436,7 @@
 				console.log("Total amount is within the limit: " + parseFloat(total));
 			} else {
 				var baki_wang_saku = maxLimit - totalAmaun;
+				console.log("baki_wang_saku: " + parseFloat(baki_wang_saku));
 				var amaun_ws = parseInt(document.getElementById('amaun_ws').value);
 			
 				if (!isNaN(baki_wang_saku)) {
