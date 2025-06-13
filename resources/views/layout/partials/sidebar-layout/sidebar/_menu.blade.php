@@ -236,6 +236,12 @@
 						</div>
 					</div>
 					<div class="menu-item">
+						<a class="menu-link" href="{{ route('senarai.pelajar')}}">
+							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+							<span class="menu-title">Senarai Pelajar</span>
+						</a>
+					</div>
+					<div class="menu-item">
 						<a class="menu-link" href="{{ route('maklumat.bank')}}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 							<span class="menu-title">Maklumat Bank Universiti</span>
@@ -243,7 +249,7 @@
 					</div>
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.pelajar.ua')}}">
-							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+							<span class="menu-icon">{!! getIcon('home', 'fs-2') !!}</span>
 							<span class="menu-title">Tukar Institusi</span>
 						</a>
 					</div>
