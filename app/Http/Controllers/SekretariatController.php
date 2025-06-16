@@ -2664,7 +2664,7 @@ class SekretariatController extends Controller
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('tuntutan.status', ['2'])
                             ->count();
-
+        // return redirect()->route('senarai.tuntutan.kedua');
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK','tuntutan','status_kod','status'));
     }
 

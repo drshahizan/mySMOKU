@@ -13,7 +13,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
         <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
@@ -24,7 +23,10 @@
         </style>
     </head>
 
-    <!--begin::Page title-->
+    
+
+    <body>
+        <!--begin::Page title-->
 	<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 		<!--begin::Title-->
 		<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
@@ -59,8 +61,6 @@
         </div>
     @endif
     {{-- end alert --}}
-
-    <body>
     <!-- Main body part  -->
         <div id="main-content">
             <div class="container-fluid">
@@ -786,6 +786,8 @@
                 </div>
             </div>
         </div>
+        <!-- Javascript -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <style>
             .custom-width-select {
