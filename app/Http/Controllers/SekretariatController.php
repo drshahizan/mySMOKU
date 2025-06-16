@@ -2348,13 +2348,26 @@ class SekretariatController extends Controller
             $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
-            if($program=="BKOKU"){
-                $emel = EmelKemaskini::where('emel_id',5)->first();
-                Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+            if ($program == "BKOKU") {
+                $emel = EmelKemaskini::where('emel_id', 5)->first();
+
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                }
             }
             elseif($program=="PPK"){
                 $emel = EmelKemaskini::where('emel_id',11)->first();
-                Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                }
             }
 
             $status_kod=1;
@@ -2450,15 +2463,30 @@ class SekretariatController extends Controller
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
             // COMMENT PROD
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',6)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                }
+                
             }
             elseif($program=="PPK"){
                 $emel = EmelKemaskini::where('emel_id',12)->first();
-                Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                }
             }
 
             $status_kod=1;
@@ -2547,15 +2575,30 @@ class SekretariatController extends Controller
             $tuntutan_item = TuntutanItem::where('tuntutan_id', $id)->get();
 
             // COMMENT PROD
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',4)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                }
+               
             }
             elseif($program=="PPK"){
                 $emel = EmelKemaskini::where('emel_id',10)->first();
-                Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                }
             }
 
             $status_kod=2;
