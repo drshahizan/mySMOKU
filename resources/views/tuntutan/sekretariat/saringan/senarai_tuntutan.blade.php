@@ -7,14 +7,16 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
+
         <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+
+
 
         <style>
             .nav{
@@ -183,115 +185,14 @@
                                             <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                    <th style="width: 25%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
-                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                                    <th><b>ID Tuntutan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Tuntutan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                @foreach ($tuntutan as $item)
-                                                    @php
-                                                        $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                        $rujukan = explode("/", $item['no_rujukan_tuntutan']);
-                                                        $peringkat = $rujukan[1];
-                                                        $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                        $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                        $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
-                                                        $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
-                                                        $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                        $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-
-                                                        if($user_id==null || $item['status']==1 || $item['status']==2){
-                                                            $user_name = "Tiada Maklumat";
-                                                        }
-                                                        else{
-                                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                            $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                            $conjunctions = ['bin', 'binti'];
-                                                            $words = explode(' ', $text);
-                                                            $result = [];
-                                                            foreach ($words as $word) {
-                                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                                    $result[] = Str::lower($word);
-                                                                } else {
-                                                                    $result[] = $word;
-                                                                }
-                                                            }
-                                                            $user_name = implode(' ', $result);
-                                                        }
-
-                                                        if ($item['status']==2){
-                                                            $status='Baharu';
-                                                        }
-                                                        if ($item['status']==3){
-                                                            $status='Sedang Disaring';
-                                                        }
-                                                        $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $pemohon = implode(' ', $result);
-
-                                                        //institusi pengajian
-                                                        $text3 = ucwords(strtolower($institusi_pengajian));
-                                                        $conjunctions = ['of', 'in', 'and'];
-                                                        $words = explode(' ', $text3);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $institusi = implode(' ', $result);
-                                                        $institusipengajian = transformBracketsToUppercase($institusi);
-                                                    @endphp
-                                                    @if($permohonan->program == "BKOKU")
-                                                        @if ($jenis_institusi == "UA")
-                                                            <tr>
-                                                                <td style="width: 15%">
-                                                                    @if($item['status']==2)
-                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                                    @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                                    @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                        {{$item['no_rujukan_tuntutan']}}
-                                                                    @else
-                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                                    @endif
-                                                                </td>
-                                                                <td style="width: 25%">{{$pemohon}}</td>
-                                                                <td style="width: 20%">{{$institusipengajian}}</td>
-                                                                <td class="text-center" style="width: 13%">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                                @if ($item['status']=='2')
-                                                                    <td class="text-center" style="width: 10%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='3')
-                                                                    <td class="text-center" style="width: 10%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='5')
-                                                                    <td class="text-center" style="width: 10%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='6')
-                                                                    <td class="text-center" style="width: 10%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @elseif ($item['status']=='7')
-                                                                    <td class="text-center" style="width: 10%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                                @endif
-                                                                <td style="width: 20%">{{$user_name}}</td>
-                                                            </tr>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -305,115 +206,14 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                    <th style="width: 25%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
-                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                                    <th><b>ID Tuntutan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Tuntutan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($tuntutan as $item)
-                                                @php
-                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                    $rujukan = explode("/", $item['no_rujukan_tuntutan']);
-                                                    $peringkat = $rujukan[1];
-                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
-                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-
-                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
-                                                        $user_name = "Tiada Maklumat";
-                                                    }
-                                                    else{
-                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $user_name = implode(' ', $result);
-                                                    }
-
-                                                    if ($item['status']==2){
-                                                        $status='Baharu';
-                                                    }
-                                                    if ($item['status']==3){
-                                                        $status='Sedang Disaring';
-                                                    }
-                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $pemohon = implode(' ', $result);
-
-                                                    //institusi pengajian
-                                                    $text3 = ucwords(strtolower($institusi_pengajian));
-                                                    $conjunctions = ['of', 'in', 'and'];
-                                                    $words = explode(' ', $text3);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $institusi = implode(' ', $result);
-                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                @endphp
-                                                @if($permohonan->program == "BKOKU")
-                                                    @if ($jenis_institusi == "P")
-                                                    <tr>
-                                                        <td>
-                                                            @if($item['status']==2)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                {{$item['no_rujukan_tuntutan']}}
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
-                                                        </td>
-                                                        <td style="width: 25%">{{$pemohon}}</td>
-                                                        <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                        @if ($item['status']=='2')
-                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
-                                                        <td style="width: 20%">{{$user_name}}</td>
-                                                    </tr>
-                                                    @endif
-                                                @endif
-                                                @endforeach
-                                            </tbody>
                                         </table>
                                     </div>
                                     </div>
@@ -427,115 +227,14 @@
                                         <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                    <th style="width: 25%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
-                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                                    <th><b>ID Tuntutan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Tuntutan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($tuntutan as $item)
-                                                @php
-                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                    $rujukan = explode("/", $item['no_rujukan_tuntutan']);
-                                                    $peringkat = $rujukan[1];
-                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
-                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-
-                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
-                                                        $user_name = "Tiada Maklumat";
-                                                    }
-                                                    else{
-                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $user_name = implode(' ', $result);
-                                                    }
-
-                                                    if ($item['status']==2){
-                                                        $status='Baharu';
-                                                    }
-                                                    if ($item['status']==3){
-                                                        $status='Sedang Disaring';
-                                                    }
-                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $pemohon = implode(' ', $result);
-
-                                                    //institusi pengajian
-                                                    $text3 = ucwords(strtolower($institusi_pengajian));
-                                                    $conjunctions = ['of', 'in', 'and'];
-                                                    $words = explode(' ', $text3);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $institusi = implode(' ', $result);
-                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                @endphp
-                                                @if($permohonan->program == "BKOKU")
-                                                    @if ($jenis_institusi == "KK")
-                                                    <tr>
-                                                        <td>
-                                                            @if($item['status']==2)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                {{$item['no_rujukan_tuntutan']}}
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
-                                                        </td>
-                                                        <td style="width: 25%">{{$pemohon}}</td>
-                                                        <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                        @if ($item['status']=='2')
-                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
-                                                        <td style="width: 20%">{{$user_name}}</td>
-                                                    </tr>
-                                                    @endif
-                                                @endif
-                                                @endforeach
-                                            </tbody>
                                         </table>
                                     </div>
                                     </div>
@@ -549,115 +248,14 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                    <th style="width: 25%"><b>Nama</b></th>
-                                                    <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                    <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                    <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
-                                                    <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                                    <th><b>ID Tuntutan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Tuntutan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($tuntutan as $item)
-                                                @php
-                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                    $rujukan = explode("/", $item['no_rujukan_tuntutan']);
-                                                    $peringkat = $rujukan[1];
-                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
-                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-
-                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
-                                                        $user_name = "Tiada Maklumat";
-                                                    }
-                                                    else{
-                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $user_name = implode(' ', $result);
-                                                    }
-
-                                                    if ($item['status']==2){
-                                                        $status='Baharu';
-                                                    }
-                                                    if ($item['status']==3){
-                                                        $status='Sedang Disaring';
-                                                    }
-                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $pemohon = implode(' ', $result);
-
-                                                    //institusi pengajian
-                                                    $text3 = ucwords(strtolower($institusi_pengajian));
-                                                    $conjunctions = ['of', 'in', 'and'];
-                                                    $words = explode(' ', $text3);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $institusi = implode(' ', $result);
-                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                @endphp
-                                                @if($permohonan->program == "BKOKU")
-                                                    @if ($jenis_institusi == "IPTS")
-                                                    <tr>
-                                                        <td>
-                                                            @if($item['status']==2)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                {{$item['no_rujukan_tuntutan']}}
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
-                                                        </td>
-                                                        <td style="width: 25%">{{$pemohon}}</td>
-                                                        <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                        @if ($item['status']=='2')
-                                                        <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
-                                                        <td style="width: 20%">{{$user_name}}</td>
-                                                    </tr>
-                                                    @endif
-                                                @endif
-                                                @endforeach
-                                            </tbody>
                                         </table>
                                     </div>
                                     </div>
@@ -669,113 +267,16 @@
                                     <div class="table-responsive">
                                         <br>
                                         <table id="sortTable5" class="table table-striped table-hover dataTable js-exportable">
-                                            <thead>
-                                                <th style="width: 15%"><b>ID Tuntutan</b></th>
-                                                <th style="width: 25%"><b>Nama</b></th>
-                                                <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                                                <th style="width: 13%" class="text-center"><b>Tarikh Tuntutan</b></th>
-                                                <th style="width: 10%" class="text-center"><b>Status Saringan</b></th>
-                                                <th style="width: 20%"><b>Disaring Oleh</b></th>
+                                           <thead>
+                                                <tr>
+                                                    <th><b>ID Tuntutan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Tuntutan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
+                                                </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($tuntutan as $item)
-                                                @php
-                                                    $permohonan = DB::table('permohonan')->where('id', $item['permohonan_id'])->first();
-                                                    $nama_pemohon = DB::table('smoku')->where('id', $permohonan->smoku_id)->value('nama');
-                                                    $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                    $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-
-                                                    $rujukan = explode("/", $item['no_rujukan_tuntutan']);
-                                                    $peringkat = $rujukan[1];
-                                                    $akademik = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->where('status', 1)->first();
-                                                    $jenis_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('jenis_institusi');
-                                                    $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('peringkat_pengajian',$peringkat)->value('bk_info_institusi.nama_institusi');
-
-                                                    if($user_id==null || $item['status']==1 || $item['status']==2){
-                                                        $user_name = "Tiada Maklumat";
-                                                    }
-                                                    else{
-                                                        $user_name = DB::table('users')->where('id', $user_id)->value('nama');
-                                                        $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                        $conjunctions = ['bin', 'binti'];
-                                                        $words = explode(' ', $text);
-                                                        $result = [];
-                                                        foreach ($words as $word) {
-                                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                                $result[] = Str::lower($word);
-                                                            } else {
-                                                                $result[] = $word;
-                                                            }
-                                                        }
-                                                        $user_name = implode(' ', $result);
-                                                    }
-
-                                                    if ($item['status']==2){
-                                                        $status='Baharu';
-                                                    }
-                                                    if ($item['status']==3){
-                                                        $status='Sedang Disaring';
-                                                    }
-                                                    $text = ucwords(strtolower($nama_pemohon)); // Assuming you're sending the text as a POST parameter
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $pemohon = implode(' ', $result);
-
-                                                    //institusi pengajian
-                                                    $text3 = ucwords(strtolower($institusi_pengajian));
-                                                    $conjunctions = ['of', 'in', 'and'];
-                                                    $words = explode(' ', $text3);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $institusi = implode(' ', $result);
-                                                    $institusipengajian = transformBracketsToUppercase($institusi);
-                                                @endphp
-                                                @if($permohonan->program == "PPK")
-                                                    <tr>
-                                                        <td style="width: 15%">
-                                                            @if($item['status']==2)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id==Auth::user()->id)
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @elseif($item['status']==3 && $user_id!=Auth::user()->id)
-                                                                {{$item['no_rujukan_tuntutan']}}
-                                                            @else
-                                                                <a href="{{ url('tuntutan/sekretariat/saringan/papar-tuntutan/'. $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                            @endif
-                                                        </td>
-                                                        <td style="width: 25%">{{$pemohon}}</td>
-                                                        <td style="width: 20%">{{$institusipengajian}}</td>
-                                                        <td class="text-center" style="width: 13%">{{date('d/m/Y', strtotime($item['tarikh_hantar']))}}</td>
-                                                        @if ($item['status']=='2')
-                                                        <td class="text-center" style="width: 10%"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center" style="width: 10%"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                            <td class="text-center" style="width: 10%"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center" style="width: 10%"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center" style="width: 10%"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
-                                                        <td style="width: 20%">{{$user_name}}</td>
-                                                    </tr>
-                                                @endif
-                                                @endforeach
-                                            </tbody>
                                         </table>
                                     </div>
                                     </div>
@@ -787,7 +288,6 @@
             </div>
         </div>
         <!-- Javascript -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <style>
             .custom-width-select {
@@ -804,134 +304,970 @@
             });
         </script>
         <script>
-            $(document).ready(function() {
-                $('#sortTable1, #sortTable2, #sortTable3, #sortTable4, #sortTable5').DataTable({
-                    "language": {
-                        "url": "/assets/lang/Malay.json"
-                    }
-                });
-            });
+            const currentUserId = {{ Auth::id() }};
         </script>
         
         <script>
-            // Initialize JavaScript variables with data from Blade
-            var bkokuIPTSList = @json($institusiPengajianIPTS);
-            var bkokuPOLIList = @json($institusiPengajianPOLI);
-            var bkokuKKList = @json($institusiPengajianKK);
-            var bkokuUAList = @json($institusiPengajianUA);
-            var ppkList = @json($institusiPengajianPPK);
-        
-            $(document).ready(function() {
-                $('.none-container').show(); // Hide export elements
-        
-                // Add an event listener for tab clicks
-                $('.nav-link').on('click', function() {
-                    // Get the ID of the active tab
-                    var activeTabId = $(this).attr('id');
-        
-                    // Clear filters when changing tabs
-                    clearFilters();
-        
-                    // Update the institution dropdown based on the active tab
-                    switch (activeTabId) {
-                        case 'bkokuIPTS-tab':
-                            updateInstitusiDropdown(bkokuIPTSList);
-                            break;
-                        case 'bkokuPOLI-tab':
-                            updateInstitusiDropdown(bkokuPOLIList);
-                            break;
-                        case 'bkokuKK-tab':
-                            updateInstitusiDropdown(bkokuKKList);
-                            break;
-                        case 'bkokuUA-tab':
-                            updateInstitusiDropdown(bkokuUAList);
-                            break;
-                        case 'ppk-tab':
-                            updateInstitusiDropdown(ppkList);
-                            break;
-                    }
-                });
-        
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuUAList);
-        
+           $(document).ready(function() {
+                // Initialize JavaScript variables with data from Blade
+                var bkokuIPTSList = @json($institusiPengajianIPTS);
+                var bkokuPOLIList = @json($institusiPengajianPOLI);
+                var bkokuKKList = @json($institusiPengajianKK);
+                var bkokuUAList = @json($institusiPengajianUA);
+                var ppkList = @json($institusiPengajianPPK);
+
+
+                // DataTable initialization functions
+                function initializeDataTable1() {
+                    $('#sortTable1').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.tuntutan.BKOKUIPTS") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/tuntutan/sekretariat/saringan/papar-tuntutan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
+                function initializeDataTable2() {
+                    $('#sortTable2').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.tuntutan.BKOKUPOLI") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/tuntutan/sekretariat/saringan/papar-tuntutan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
+                function initializeDataTable3() {
+                    $('#sortTable3').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.tuntutan.BKOKUKK") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/tuntutan/sekretariat/saringan/papar-tuntutan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
+                function initializeDataTable4() {
+                    $('#sortTable4').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.tuntutan.BKOKUUA") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/tuntutan/sekretariat/saringan/papar-tuntutan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
+                function initializeDataTable5() {
+                    $('#sortTable5').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.tuntutan.PPK") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_tuntutan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/tuntutan/sekretariat/saringan/papar-tuntutan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
                 // Function to clear filters for all tables
                 function clearFilters() {
-                    if (datatable1) {
-                        datatable1.search('').columns().search('').draw();
+                    if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                        $('#sortTable1').DataTable().destroy();
                     }
-                    if (datatable2) {
-                        datatable2.search('').columns().search('').draw();
+                    if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                        $('#sortTable2').DataTable().destroy();
                     }
-                    if (datatable3) {
-                        datatable3.search('').columns().search('').draw();
+                    if ($.fn.DataTable.isDataTable('#sortTable3')) {
+                        $('#sortTable3').DataTable().destroy();
                     }
-                    if (datatable4) {
-                        datatable4.search('').columns().search('').draw();
+                    if ($.fn.DataTable.isDataTable('#sortTable4')) {
+                        $('#sortTable4').DataTable().destroy();
                     }
-                    if (datatable5) {
-                        datatable5.search('').columns().search('').draw();
+                    if ($.fn.DataTable.isDataTable('#sortTable5')) {
+                        $('#sortTable5').DataTable().destroy();
                     }
                 }
-        
-        
+
                 // Function to update the institution dropdown
                 function updateInstitusiDropdown(institusiList) {
                     // Clear existing options
                     $('#institusiDropdown').empty();
-        
+
                     // Add default option
                     $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
-        
+
                     // Add options based on the selected tab
                     for (var i = 0; i < institusiList.length; i++) {
                         $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
                     }
                 }
+
+                // Add an event listener for tab clicks
+                $('.nav-link').on('click', function() {
+                    // Get the ID of the active tab
+                    var activeTabId = $(this).attr('id');
+
+                    // Clear filters when changing tabs
+                    clearFilters();
+
+                    // Update the institution dropdown based on the active tab
+                    switch (activeTabId) {
+                        case 'bkokuIPTS-tab':
+                            updateInstitusiDropdown(bkokuIPTSList);
+                            initializeDataTable1();
+                            break;
+                        case 'bkokuPOLI-tab':
+                            updateInstitusiDropdown(bkokuPOLIList);
+                            initializeDataTable2();
+                            break;
+                        case 'bkokuKK-tab':
+                            updateInstitusiDropdown(bkokuKKList);
+                            initializeDataTable3();
+                            break;
+                        case 'bkokuUA-tab':
+                            updateInstitusiDropdown(bkokuUAList);
+                            initializeDataTable4();
+                            break;
+                        case 'ppk-tab':
+                            updateInstitusiDropdown(ppkList);
+                            initializeDataTable5();
+                            break;
+                    }
+                });
+
+                // Trigger the function for the default active tab (bkoku-tab)
+                updateInstitusiDropdown(bkokuUAList);
+                initializeDataTable4(); // Initialize DataTable1 on page load
             });
         </script>
         
         <script>
-            // Declare datatables in a higher scope to make them accessible
-            var datatable1, datatable2, datatable3, datatable4, datatable5;
-        
-            $(document).ready(function() {
-                // Initialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable2', 'datatable2');
-                initDataTable('#sortTable3', 'datatable3');
-                initDataTable('#sortTable4', 'datatable4');
-                initDataTable('#sortTable5', 'datatable5');
-        
-                // Log data for all tables
-                logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable2);
-                logTableData('Table 3 Data:', datatable3);
-                logTableData('Table 4 Data:', datatable4);
-                logTableData('Table 5 Data:', datatable5);
-            });
-        
-            function initDataTable(tableId, variableName) {
-                // Check if the datatable is already initialized
-                if ($.fn.DataTable.isDataTable(tableId)) {
-                    // Destroy the existing DataTable instance
-                    $(tableId).DataTable().destroy();
-                }
-        
-                // Initialize the datatable and assign it to the global variable
-                window[variableName] = $(tableId).DataTable({
-                    ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    language: {
-                            url: "/assets/lang/Malay.json"
-                        },
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ]
-                });
-            }
-        
-            function applyFilter() {
+            function applyFilter() 
+            {
                 // Reinitialize DataTables
                 initDataTable('#sortTable1', 'datatable1');
                 initDataTable('#sortTable2', 'datatable2');
@@ -954,41 +1290,27 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columnDefs: [
-                                { orderable: false, targets: [0] }
-                            ]
+                            { orderable: false, targets: [0] }
+                        ]
                     });
                 }
 
                 var selectedInstitusi = $('[name="institusi"]').val();
-        
+
                 // Apply search filter and log data for all tables
                 applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
                 applyAndLogFilter('Table 2', datatable2, selectedInstitusi);
                 applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
                 applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
                 applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
-        
-                // Update the export link with the selected institusi for Table 2
-                var exportLink = document.getElementById('exportLink');
-                exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
             }
-        
+
             function applyAndLogFilter(tableName, table, filterValue) {
                 // Apply search filter to the table
                 table.column(2).search(filterValue).draw();
-        
-                // Log filtered data
-                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-        
+
                 // Go to the first page for the table
                 table.page(0).draw(false);
-        
-                // Log the data of visible rows on the first page for the table
-                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
-            }
-        
-            function logTableData(message, table) {
-                console.log(message, table.rows().data().toArray());
             }
         </script>
     </body>

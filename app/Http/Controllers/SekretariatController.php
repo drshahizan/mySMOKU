@@ -2129,6 +2129,227 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
     }
 
+    //Json saringan
+    public function getSenaraiTuntutanBKOKUUA()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'UA');
+                    })
+                    ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiTuntutanBKOKUPOLI()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'P');
+                    })
+                    ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiTuntutanBKOKUKK()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'KK');
+                    })
+                    ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiTuntutanBKOKUIPTS()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'IPTS');
+                    })
+                    ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiTuntutanPPK()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    // ->whereHas('infoipt', function ($subQuery) {
+                    //     $subQuery->where('jenis_institusi', '=', 'UA');
+                    // })
+                    ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'PPK');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
+
+    }
+
     public function keputusanPeperiksaan($id)
     {
         $peperiksaan = Peperiksaan::where('permohonan_id',$id)->get();

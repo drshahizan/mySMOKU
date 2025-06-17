@@ -416,6 +416,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //Tuntutan - Sekretariat - Saringan
         Route::get('tuntutan/sekretariat/saringan/senarai-tuntutan', [SekretariatController::class, 'senaraiTuntutanKedua'])->name('senarai.tuntutan.kedua');
+        Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUUA', [SekretariatController::class, 'getSenaraiTuntutanBKOKUUA'])->name('senarai.tuntutan.BKOKUUA');
+        Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUPOLI', [SekretariatController::class, 'getSenaraiTuntutanBKOKUPOLI'])->name('senarai.tuntutan.BKOKUPOLI');
+        Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUKK', [SekretariatController::class, 'getSenaraiTuntutanBKOKUKK'])->name('senarai.tuntutan.BKOKUKK');
+        Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUIPTS', [SekretariatController::class, 'getSenaraiTuntutanBKOKUIPTS'])->name('senarai.tuntutan.BKOKUIPTS');
+        Route::get('tuntutan/sekretariat/saringan/senarai/PPK', [SekretariatController::class, 'getSenaraiTuntutanPPK'])->name('senarai.tuntutan.PPK');
         Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan/{id}', [SekretariatController::class, 'keputusanPeperiksaan'])->name('maklumat.tuntutan.peperiksaan.id');
         Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
         Route::post('tuntutan/sekretariat/saringan/saring-tuntutan-kedua/{id}', [SekretariatController::class, 'saringTuntutanKedua'])->name('saring.tuntutan.kedua.id');
