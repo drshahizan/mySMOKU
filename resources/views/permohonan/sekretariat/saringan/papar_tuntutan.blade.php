@@ -177,19 +177,6 @@
                                         }
                                         $kursus = implode(' ', $result);
 
-                                        //institusi pengajian
-                                        $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                        $conjunctions = ['of', 'in', 'and'];
-                                        $words = explode(' ', $text3);
-                                        $result = [];
-                                        foreach ($words as $word) {
-                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                $result[] = Str::lower($word);
-                                            } else {
-                                                $result[] = $word;
-                                            }
-                                        }
-                                        $institusi = implode(' ', $result);
                                     @endphp
                                     <table class="maklumat">
                                         <tr>
@@ -208,7 +195,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Institusi</strong></td>
                                             <td>:</td>
-                                            <td>{{$institusi}}</td>
+                                            <td>{{$nama_institusi}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>No. Kad Pengenalan</strong></td>
