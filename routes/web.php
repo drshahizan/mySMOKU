@@ -234,6 +234,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //Permohonan - Sekretariat - Saringan
         Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan'])->name('senarai.permohonan');
+        Route::get('permohonan/sekretariat/saringan/senarai/BKOKUUA', [SaringanController::class, 'getSenaraiPermohonanBKOKUUA'])->name('senarai.permohonan.BKOKUUA');
+        Route::get('permohonan/sekretariat/saringan/senarai/BKOKUPOLI', [SaringanController::class, 'getSenaraiPermohonanBKOKUPOLI'])->name('senarai.permohonan.BKOKUPOLI');
+        Route::get('permohonan/sekretariat/saringan/senarai/BKOKUKK', [SaringanController::class, 'getSenaraiPermohonanBKOKUKK'])->name('senarai.permohonan.BKOKUKK');
+        Route::get('permohonan/sekretariat/saringan/senarai/BKOKUIPTS', [SaringanController::class, 'getSenaraiPermohonanBKOKUIPTS'])->name('senarai.permohonan.BKOKUIPTS');
+        Route::get('permohonan/sekretariat/saringan/senarai/PPK', [SaringanController::class, 'getSenaraiPermohonanPPK'])->name('senarai.permohonan.PPK');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/{id}', [SaringanController::class, 'maklumatPermohonanDiperbaharui'])->name('maklumat.permohonan.diperbaharui.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.id');

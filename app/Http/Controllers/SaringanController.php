@@ -24,6 +24,7 @@ use App\Models\Waris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -88,6 +89,195 @@ class SaringanController extends Controller
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
         return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
+    }
+
+    //Json saringan
+    public function getSenaraiPermohonanBKOKUUA()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiPermohonanBKOKUPOLI()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'P');
+                        });
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiPermohonanBKOKUKK()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'KK');
+                        });
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiPermohonanBKOKUIPTS()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'IPTS');
+                        });
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiPermohonanPPK()
+    {
+        $permohonan = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
     }
 
     public function maklumatPermohonan($id)
@@ -1017,8 +1207,9 @@ class SaringanController extends Controller
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+        $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
 
-        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','smoku','akademik'));
+        return view('permohonan.sekretariat.saringan.papar_tuntutan',compact('permohonan','smoku','akademik','j_tuntutan'));
     }
 
     //pembayaran

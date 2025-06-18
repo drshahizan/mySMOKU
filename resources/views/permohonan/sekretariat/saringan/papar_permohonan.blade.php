@@ -292,6 +292,8 @@
                                 <div class="col-md-6 text-right">
                                     @if($permohonan->status == 4)
                                         <a href="{{ url('permohonan/sekretariat/saringan/papar-tuntutan/'.$permohonan->id) }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
+                                    @elseif($permohonan->status == 5)
+                                        <a href="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali </a></button>
                                     @else
                                         <a href="{{ url('permohonan/sekretariat/saringan/senarai-permohonan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </a></button>
                                     @endif
