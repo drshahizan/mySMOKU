@@ -194,8 +194,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['auth', 'check.tahap:3'])->group(function () {
         //ESP
         Route::get('/permohonanESP', [MaklumatESPController::class, 'permohonan'])->name('permohonan.esp');
+        Route::get('/getDokumen/{type}/{id}', [MaklumatESPController::class, 'getDokumen']);
+        Route::get('/permohonanESP/BKOKUUA', [MaklumatESPController::class, 'getSenaraiEspBKOKUUA'])->name('senarai.esp.BKOKUUA');
+        Route::get('/permohonanESP/BKOKUPOLI', [MaklumatESPController::class, 'getSenaraiEspBKOKUPOLI'])->name('senarai.esp.BKOKUPOLI');
+        Route::get('/permohonanESP/BKOKUKK', [MaklumatESPController::class, 'getSenaraiEspBKOKUKK'])->name('senarai.esp.BKOKUKK');
+        Route::get('/permohonanESP/BKOKUIPTS', [MaklumatESPController::class, 'getSenaraiEspBKOKUIPTS'])->name('senarai.esp.BKOKUIPTS');
+        Route::get('/permohonanESP/PPK', [MaklumatESPController::class, 'getSenaraiEspPPK'])->name('senarai.esp.PPK');
         Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
+
         Route::get('/tuntutanESP', [MaklumatESPController::class, 'tuntutan'])->name('tuntutan.esp');
+        Route::get('/tuntutanESP/BKOKUUA', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUUA'])->name('senarai.esp.tuntutan.BKOKUUA');
+        Route::get('/tuntutanESP/BKOKUPOLI', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUPOLI'])->name('senarai.esp.tuntutan.BKOKUPOLI');
+        Route::get('/tuntutanESP/BKOKUKK', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUKK'])->name('senarai.esp.tuntutan.BKOKUKK');
+        Route::get('/tuntutanESP/BKOKUIPTS', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUIPTS'])->name('senarai.esp.tuntutan.BKOKUIPTS');
+        Route::get('/tuntutanESP/PPK', [MaklumatESPController::class, 'getSenaraiEspTuntutanPPK'])->name('senarai.esp.tuntutan.PPK');
         Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
 
         //Kemaskini - Sekretariat - Emel

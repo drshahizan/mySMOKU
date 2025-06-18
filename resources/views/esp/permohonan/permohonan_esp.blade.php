@@ -1,15 +1,18 @@
 <x-default-layout> 
   <head>
+      <title>Sekretariat BKOKU KPT | Permohonan ESP</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
       <!-- MAIN CSS -->
       <link rel="stylesheet" href="/assets/css/saringan.css">
-      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-      <script src="/assets/lang/Malay.json"></script>
+
       <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
       <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -19,6 +22,8 @@
         }
       </style>
   </head>
+
+<body>
   <!--begin::Page title-->
   <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
@@ -39,11 +44,9 @@
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
-</div>
-<!--end::Page title-->
-<br>
-
-<body>
+  </div>
+  <!--end::Page title-->
+  <br>
   <div id="main-content">
     <div class="container-fluid">
       <!--begin::Content-->
@@ -172,157 +175,14 @@
                               <th class="text-center" style="width:3%;">
                                 <input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggleSelectAll('bkokuUA');" />
                               </th>
-                              <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                              <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                              <th class="text-center" style="width: 20%"><b>Nama Kursus</b></th>
-                              <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
-                              <th class="text-center" style="width: 13%"><b>Yuran Disokong (RM)</b></th>
-                              <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>ID Permohonan</b></th>                                                   
+                              <th><b>Nama</b></th>
+                              <th><b>Nama Kursus</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-
-                          <tbody>
-                            @php
-                              $i=0;
-                            @endphp
-
-                            @foreach ($kelulusan as $bkoku)
-                                @php
-                                
-                                  $i++;
-                                  $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
-                                  $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
-                                  $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
-                                  $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                  $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
-                                  $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
-                                  $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
-                                  $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                  $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-                                  
-                                  $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
-
-                                  // nama pemohon
-                                  $text = ucwords(strtolower($nama_pemohon)); 
-                                  $conjunctions = ['bin', 'binti'];
-                                  $words = explode(' ', $text);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $pemohon = implode(' ', $result);
-
-                                  //nama kursus
-                                  $text2 = ucwords(strtolower($nama_kursus)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text2);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $kursus = implode(' ', $result);
-                                  $namakursus = transformBracketsToCapital($kursus);
-
-                                  //institusi pengajian
-                                  $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text3);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $institusi = implode(' ', $result);
-                                  $institusipengajian = transformBracketsToUppercase($institusi);
-                                @endphp
-                                @if($program == "BKOKU") 
-                                  @if ($jenis_institusi=="UA") 
-                                    <tr>
-                                      <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                      <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenUA{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
-                                      </td>
-                                      <td style="width: 20%">{{$pemohon}}</td>
-                                      <td style="width: 20%">{{$namakursus}}</td>
-                                      <td style="width: 15%">{{$institusipengajian}}</td>
-                                      <td class="text-right" style="width: 13%">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right" style="width: 13%">{{$bkoku->wang_saku_disokong}}</td>
-                                    </tr>
-                                  @endif   
-                                @endif
-                                {{-- Modal --}}
-                                <div class="modal fade" id="dokumenUA{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenUA{{$bkoku['id']}}" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <!--begin::Accordion-->
-                                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                                @php 
-                                                  $i=1; $n=1;
-                                                @endphp
-                                                @foreach($dokumen as $item)
-                                                  @php
-                                                    $dokumen_path = "/assets/dokumen/permohonan/".$item->dokumen;
-                                                    
-                                                    if ($item->id_dokumen == 1) {
-                                                        $dokumen_name = "No. Akaun Bank Islam";
-                                                    } elseif ($item->id_dokumen == 2) {
-                                                        $dokumen_name = "Surat Tawaran";
-                                                    } elseif ($item->id_dokumen == 3) {
-                                                        $dokumen_name = "Invois/Resit";
-                                                    } elseif ($item->id_dokumen == 4) {
-                                                        $dokumen_name = "Dokumen Tambahan " . $n;
-                                                        $n++;
-                                                    }
-                                                
-                                                    $i++;
-                                                  @endphp
-                                                  <div class="accordion-item">
-                                                      <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                                                              <b style="color: black!important">{{$dokumen_name}}</b>
-                                                          </button>
-                                                      </h2>
-                                                      <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                                                          <div class="accordion-body" style="text-align: center">
-                                                              <p>Catatan: {{$item->catatan}}</p>
-                                                              <!-- Display Download link for PNG only if it's not a PDF -->
-                                                              @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
-                                                                <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
-                                                                    <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
-                                                                </a>
-                                                              @endif
-                                                              <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                @endforeach
-                                            </div>
-                                            <!--end::Accordion-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                            </div>
-                                          </div>
-                                      </div> 
-                                  </div>
-                                </div> 
-                            @endforeach
-                          </tbody>
                         </table>
                       </div>
                       <!--end::Table-->
@@ -343,155 +203,14 @@
                               <th class="text-center" style="width:4%;">
                                 <input type="checkbox" name="select-all" id="select-all-bkokuPOLI" onclick="toggleSelectAll('bkokuPOLI');" />
                               </th>
-                              <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                              <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                              <th class="text-center" style="width: 20%"><b>Nama Kursus</b></th>
-                              <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
-                              <th class="text-center" style="width: 13%"><b>Yuran Disokong (RM)</b></th>
-                              <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>ID Permohonan</b></th>                                                   
+                              <th><b>Nama</b></th>
+                              <th><b>Nama Kursus</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-                          <tbody>
-                              @php
-                                $i=0;
-                              @endphp
-
-                              @foreach ($kelulusan as $bkoku)
-                                @php
-                                  $i++;
-                                  $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
-                                  $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
-                                  $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
-                                  $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                  $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
-                                  $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
-                                  $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
-                                  $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                  $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-
-                                  $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
-
-                                  // nama pemohon
-                                  $text = ucwords(strtolower($nama_pemohon)); 
-                                  $conjunctions = ['bin', 'binti'];
-                                  $words = explode(' ', $text);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $pemohon = implode(' ', $result);
-
-                                  //nama kursus
-                                  $text2 = ucwords(strtolower($nama_kursus)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text2);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $kursus = implode(' ', $result);
-                                  $namakursus = transformBracketsToCapital($kursus);
-
-                                  //institusi pengajian
-                                  $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text3);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $institusi = implode(' ', $result);
-                                  $institusipengajian = transformBracketsToUppercase($institusi);
-                                @endphp
-                                @if($program == "BKOKU") 
-                                  @if ($jenis_institusi == "P") 
-                                    <tr>
-                                      <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                      <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenPOLI{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
-                                      </td>
-                                      <td>{{$pemohon}}</td>
-                                      <td>{{$namakursus}}</td>
-                                      <td>{{$institusipengajian}}</td>
-                                      <td class="text-right">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right">{{$bkoku->wang_saku_disokong}}</td>
-                                    </tr>
-                                  @endif  
-                                @endif
-                                {{-- Modal --}}
-                                <div class="modal fade" id="dokumenPOLI{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenPOLI{{$bkoku['id']}}" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <!--begin::Accordion-->
-                                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                                @php 
-                                                  $i=1; $n=1;
-                                                @endphp
-                                                @foreach($dokumen as $item)
-                                                  @php
-                                                    $dokumen_path = "/assets/dokumen/permohonan/".$item->dokumen;
-                                                    
-                                                    if ($item->id_dokumen == 1) {
-                                                        $dokumen_name = "No. Akaun Bank Islam";
-                                                    } elseif ($item->id_dokumen == 2) {
-                                                        $dokumen_name = "Surat Tawaran";
-                                                    } elseif ($item->id_dokumen == 3) {
-                                                        $dokumen_name = "Invois/Resit";
-                                                    } elseif ($item->id_dokumen == 4) {
-                                                        $dokumen_name = "Dokumen Tambahan " . $n;
-                                                        $n++;
-                                                    }
-                                                
-                                                    $i++;
-                                                  @endphp
-                                                  <div class="accordion-item">
-                                                      <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                                                              <b style="color: black!important">{{$dokumen_name}}</b>
-                                                          </button>
-                                                      </h2>
-                                                      <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                                                          <div class="accordion-body" style="text-align: center">
-                                                              <p>Catatan: {{$item->catatan}}</p>
-                                                              <!-- Display Download link for PNG only if it's not a PDF -->
-                                                              @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
-                                                                <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
-                                                                    <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
-                                                                </a>
-                                                              @endif
-                                                              <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                @endforeach
-                                            </div>
-                                            <!--end::Accordion-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                            </div>
-                                          </div>
-                                      </div> 
-                                  </div>
-                                </div> 
-                            @endforeach
-                          </tbody>
                         </table>
                       </div>
                       <!--end::Table-->
@@ -512,155 +231,14 @@
                               <th class="text-center" style="width:4%;">
                                 <input type="checkbox" name="select-all" id="select-all-bkokuKK" onclick="toggleSelectAll('bkokuKK');" />
                               </th>
-                              <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                              <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                              <th class="text-center" style="width: 20%"><b>Nama Kursus</b></th>
-                              <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
-                              <th class="text-center" style="width: 13%"><b>Yuran Disokong (RM)</b></th>
-                              <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>ID Permohonan</b></th>                                                   
+                              <th><b>Nama</b></th>
+                              <th><b>Nama Kursus</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-                          <tbody>
-                              @php
-                                $i=0;
-                              @endphp
-
-                              @foreach ($kelulusan as $bkoku)
-                                @php
-                                  $i++;
-                                  $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
-                                  $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
-                                  $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
-                                  $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                  $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
-                                  $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
-                                  $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
-                                  $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                  $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-
-                                  $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
-
-                                  // nama pemohon
-                                  $text = ucwords(strtolower($nama_pemohon)); 
-                                  $conjunctions = ['bin', 'binti'];
-                                  $words = explode(' ', $text);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $pemohon = implode(' ', $result);
-
-                                  //nama kursus
-                                  $text2 = ucwords(strtolower($nama_kursus)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text2);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $kursus = implode(' ', $result);
-                                  $namakursus = transformBracketsToCapital($kursus);
-
-                                  //institusi pengajian
-                                  $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text3);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $institusi = implode(' ', $result);
-                                  $institusipengajian = transformBracketsToUppercase($institusi);
-                                @endphp
-                                @if($program == "BKOKU") 
-                                  @if ($jenis_institusi == "KK") 
-                                    <tr>
-                                      <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                      <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenKK{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
-                                      </td>
-                                      <td>{{$pemohon}}</td>
-                                      <td>{{$namakursus}}</td>
-                                      <td>{{$institusipengajian}}</td>
-                                      <td class="text-right">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right">{{$bkoku->wang_saku_disokong}}</td>
-                                    </tr>
-                                  @endif  
-                                @endif
-                                {{-- Modal --}}
-                                <div class="modal fade" id="dokumenKK{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenKK{{$bkoku['id']}}" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <!--begin::Accordion-->
-                                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                                @php 
-                                                  $i=1; $n=1;
-                                                @endphp
-                                                @foreach($dokumen as $item)
-                                                  @php
-                                                    $dokumen_path = "/assets/dokumen/permohonan/".$item->dokumen;
-                                                    
-                                                    if ($item->id_dokumen == 1) {
-                                                        $dokumen_name = "No. Akaun Bank Islam";
-                                                    } elseif ($item->id_dokumen == 2) {
-                                                        $dokumen_name = "Surat Tawaran";
-                                                    } elseif ($item->id_dokumen == 3) {
-                                                        $dokumen_name = "Invois/Resit";
-                                                    } elseif ($item->id_dokumen == 4) {
-                                                        $dokumen_name = "Dokumen Tambahan " . $n;
-                                                        $n++;
-                                                    }
-                                                
-                                                    $i++;
-                                                  @endphp
-                                                  <div class="accordion-item">
-                                                      <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                                                              <b style="color: black!important">{{$dokumen_name}}</b>
-                                                          </button>
-                                                      </h2>
-                                                      <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                                                          <div class="accordion-body" style="text-align: center">
-                                                              <p>Catatan: {{$item->catatan}}</p>
-                                                              <!-- Display Download link for PNG only if it's not a PDF -->
-                                                              @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
-                                                                <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
-                                                                    <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
-                                                                </a>
-                                                              @endif
-                                                              <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                @endforeach
-                                            </div>
-                                            <!--end::Accordion-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                            </div>
-                                          </div>
-                                      </div> 
-                                  </div>
-                                </div> 
-                            @endforeach
-                          </tbody>
                         </table>
                       </div>
                       <!--end::Table-->
@@ -678,158 +256,17 @@
                         <table id="sortTable1" class="table table-bordered table-striped">
                           <thead>
                             <tr>
-                              <th class="text-center" style="width:4%;">
+                              <th>
                                 <input type="checkbox" name="select-all" id="select-all-bkokuIPTS" onclick="toggleSelectAll('bkokuIPTS');" />
                               </th>
-                              <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                              <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                              <th class="text-center" style="width: 20%"><b>Nama Kursus</b></th>
-                              <th class="text-center" style="width: 15%"><b>Institusi Pengajian</b></th>
-                              <th class="text-center" style="width: 13%"><b>Yuran Disokong (RM)</b></th>
-                              <th class="text-center" style="width: 13%"><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>ID Permohonan</b></th>                                                   
+                              <th><b>Nama</b></th>
+                              <th><b>Nama Kursus</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-                          <tbody>
-                              @php
-                                $i=0;
-                              @endphp
-
-                              @foreach ($kelulusan as $bkoku)
-                                @php
-                                  $i++;
-                                  $nama_pemohon = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('nama');
-                                  $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('nama_kursus');
-                                  $no_kp = DB::table('smoku')->where('id', $bkoku['smoku_id'])->value('no_kp');
-                                  $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $bkoku['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                  $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
-                                  $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $bkoku['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.jenis_institusi');
-                                  $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_mula');
-                                  $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $bkoku['smoku_id'])->value('tarikh_tamat');
-                                  $program = DB::table('permohonan')->where('id',$bkoku['id'])->value('program');
-
-                                  $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $bkoku['id'])->get();
-
-                                  // nama pemohon
-                                  $text = ucwords(strtolower($nama_pemohon)); 
-                                  $conjunctions = ['bin', 'binti'];
-                                  $words = explode(' ', $text);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $pemohon = implode(' ', $result);
-
-                                  //nama kursus
-                                  $text2 = ucwords(strtolower($nama_kursus)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text2);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $kursus = implode(' ', $result);
-                                  $namakursus = transformBracketsToCapital($kursus);
-
-                                  //institusi pengajian
-                                  $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                  $conjunctions = ['of', 'in', 'and'];
-                                  $words = explode(' ', $text3);
-                                  $result = [];
-                                  foreach ($words as $word) {
-                                      if (in_array(Str::lower($word), $conjunctions)) {
-                                          $result[] = Str::lower($word);
-                                      } else {
-                                          $result[] = $word;
-                                      }
-                                  }
-                                  $institusi = implode(' ', $result);
-                                  $institusipengajian = transformBracketsToUppercase($institusi);
-                                @endphp
-                                @if($program == "BKOKU") 
-                                  @if ($jenis_institusi == "IPTS") 
-                                    <tr>
-                                      <td class="text-center"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                      <td class="text-center">
-                                        <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenIPTS{{$bkoku['id']}}" data-no-rujukan="{{$bkoku['no_rujukan_permohonan']}}">{{ $bkoku->no_rujukan_permohonan}}</a>
-                                      </td>
-                                      <td>{{$pemohon}}</td>
-                                      <td>{{$namakursus}}</td>
-                                      <td>{{$institusipengajian}}</td>
-                                      <td class="text-right">{{$bkoku->yuran_disokong}}</td>
-                                      <td class="text-right">{{$bkoku->wang_saku_disokong}}</td>
-                                    </tr>
-                                  @endif  
-                                @endif
-                                {{-- Modal --}}
-                                <div class="modal fade" id="dokumenIPTS{{$bkoku['id']}}" tabindex="-1" aria-labelledby="dokumenIPTS{{$bkoku['id']}}" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="modaldokumen{{$bkoku['id']}}">Salinan Dokumen Pemohon</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <!--begin::Accordion-->
-                                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                                @php 
-                                                  $i=1; $n=1;
-                                                @endphp
-                                                @foreach($dokumen as $item)
-                                                  @php
-                                                    $dokumen_path = "/assets/dokumen/permohonan/".$item->dokumen;
-                                                    
-                                                    if ($item->id_dokumen == 1) {
-                                                        $dokumen_name = "No. Akaun Bank Islam";
-                                                    } elseif ($item->id_dokumen == 2) {
-                                                        $dokumen_name = "Surat Tawaran";
-                                                    } elseif ($item->id_dokumen == 3) {
-                                                        $dokumen_name = "Invois/Resit";
-                                                    } elseif ($item->id_dokumen == 4) {
-                                                        $dokumen_name = "Dokumen Tambahan " . $n;
-                                                        $n++;
-                                                    }
-                                                
-                                                    $i++;
-                                                  @endphp
-                                                  <div class="accordion-item">
-                                                      <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                                                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                                                              <b style="color: black!important">{{$dokumen_name}}</b>
-                                                          </button>
-                                                      </h2>
-                                                      <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                                                          <div class="accordion-body" style="text-align: center">
-                                                              <p>Catatan: {{$item->catatan}}</p>
-                                                              <!-- Display Download link for PNG only if it's not a PDF -->
-                                                              @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
-                                                                <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
-                                                                    <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
-                                                                </a>
-                                                              @endif
-                                                              <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                @endforeach
-                                            </div>
-                                            <!--end::Accordion-->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                            </div>
-                                          </div>
-                                      </div> 
-                                  </div>
-                                </div> 
-                            @endforeach
-                          </tbody>
                         </table>
                       </div>
                       <!--end::Table-->
@@ -850,161 +287,44 @@
                               <th class="text-center" style="width:3%;">
                                 <input type="checkbox" name="select-all" id="select-all-ppk" onclick="toggleSelectAll('ppk');" />
                               </th>
-                              <th class="text-center" style="width: 15%"><b>ID Permohonan</b></th>                                                   
-                              <th class="text-center" style="width: 25%"><b>Nama</b></th>
-                              <th class="text-center" style="width: 25%"><b>Nama Kursus</b></th>
-                              <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
-                              <th class="text-center" style="width: 12%"><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>ID Permohonan</b></th>                                                   
+                              <th><b>Nama</b></th>
+                              <th><b>Nama Kursus</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
                             </tr>
                           </thead>
-                          <tbody>
-                            @php
-                              $i=0;
-                            @endphp
-                            @foreach ($kelulusan as $item)
-
-                              @php
-                                $i++;
-                                $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
-                                $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
-                                $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
-                                $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->value('bk_info_institusi.nama_institusi');
-                                $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_mula');
-                                $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('tarikh_tamat');
-                                $program = DB::table('permohonan')->where('id',$item['id'])->value('program');
-                                $dokumen = DB::table('permohonan_dokumen')->where('permohonan_id', $item['id'])->get();
-
-                                // nama pemohon
-                                $text = ucwords(strtolower($nama_pemohon)); 
-                                $conjunctions = ['bin', 'binti'];
-                                $words = explode(' ', $text);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
-                                    }
-                                }
-                                $pemohon = implode(' ', $result);
-
-                                //nama kursus
-                                $text2 = ucwords(strtolower($nama_kursus)); 
-                                $conjunctions = ['of', 'in', 'and'];
-                                $words = explode(' ', $text2);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
-                                    }
-                                }
-                                $kursus = implode(' ', $result);
-                                $namakursus = transformBracketsToCapital($kursus);
-
-                                //institusi pengajian
-                                $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                $conjunctions = ['of', 'in', 'and'];
-                                $words = explode(' ', $text3);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
-                                    }
-                                }
-                                $institusi = implode(' ', $result);
-                                $institusipengajian = transformBracketsToUppercase($institusi);
-                              @endphp
-                              @if($program == "PPK")
-                                <tr>
-                                  <td class="text-center" style="width: 4%"><input type="checkbox" class="select-checkbox" name="selected_items[]" value="{{ $no_kp }}" /></td>
-                                  <td class="text-center">
-                                    <a href="#" class="open-modal-link-permohonan" data-bs-toggle="modal" data-bs-target="#dokumenPPK{{$item['id']}}" data-no-rujukan="{{$item['no_rujukan_permohonan']}}">{{ $item->no_rujukan_permohonan}}</a>
-                                  </td>                                
-                                  <td style="width: 25%">{{$pemohon}}</td>
-                                  <td style="width: 25%">{{$namakursus}}</td>
-                                  <td style="width: 20%">{{$institusipengajian}}</td>
-                                  <td class="text-right" style="width: 12%">{{$item->wang_saku_disokong}}</td>
-                                </tr>
-                              @endif
-                              {{-- Modal --}}
-                              <div class="modal fade" id="dokumenPPK{{$item['id']}}" tabindex="-1" aria-labelledby="dokumenPPK{{$item['id']}}" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="modaldokumen{{$item['id']}}">Salinan Dokumen Pemohon</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <!--begin::Accordion-->
-                                          <div class="accordion" id="accordionPanelsStayOpenExample">
-                                              @php 
-                                                $i=1; $n=1;
-                                              @endphp
-                                              @foreach($dokumen as $itemdokumen)
-                                                @php
-                                                  $dokumen_path = "/assets/dokumen/permohonan/".$itemdokumen->dokumen;
-                                                  
-                                                  if ($itemdokumen->id_dokumen == 1) {
-                                                      $dokumen_name = "No. Akaun Bank Islam";
-                                                  } elseif ($itemdokumen->id_dokumen == 2) {
-                                                      $dokumen_name = "Surat Tawaran";
-                                                  } elseif ($itemdokumen->id_dokumen == 3) {
-                                                      $dokumen_name = "Invois/Resit";
-                                                  } elseif ($itemdokumen->id_dokumen == 4) {
-                                                      $dokumen_name = "Dokumen Tambahan " . $n;
-                                                      $n++;
-                                                  }
-                                              
-                                                  $i++;
-                                                @endphp
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="panelsStayOpen-heading{{$i}}">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{$i}}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{$i}}">
-                                                            <b style="color: black!important">{{$dokumen_name}}</b>
-                                                        </button>
-                                                    </h2>
-                                                    <div id="panelsStayOpen-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{$i}}">
-                                                        <div class="accordion-body" style="text-align: center">
-                                                            <p>Catatan: {{$itemdokumen->catatan}}</p>
-                                                            <!-- Display Download link for PNG only if it's not a PDF -->
-                                                            @if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf')
-                                                                <a href="{{$dokumen_path}}" download="{{$dokumen_name}}.png">
-                                                                    <img src="{{$dokumen_path}}" alt="Muat Turun" width="90%" height="650px"/>
-                                                                </a>
-                                                            @endif
-                                                            <embed src="{{$dokumen_path}}" width="90%" height="650px"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                              @endforeach
-                                          </div>
-                                          <!--end::Accordion-->
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                          </div>
-                                        </div>
-                                    </div> 
-                                </div>
-                              </div>  
-                            @endforeach
-                          </tbody>
                         </table>
                       </div>
                       <!--end::Table-->
                     </div>
                     <!--end::Card body-->
-                </div>  
+                </div>
+
+                <!--begin::MODAL-->
+                <div class="modal fade" id="dokumenModal" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Salinan Dokumen Pemohon</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                      </div>
+                      <div class="modal-body" id="modalDokumenContent">
+                        <p>Sedang dimuatkan...</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </div> 
             
             <!--begin::Card body-->
             <div class="card-body pt-0">
                 <!--begin::Form-->
-                <form class="form" id="hantar_maklumat">
+                <form class="form" id="hantar_maklumat" style="text-align: right;">
                   <textarea name="token" id="token" rows="10" cols="50"></textarea>
                   <textarea name="data" id="data" rows="10" cols="50"></textarea>
 
@@ -1034,16 +354,14 @@
             margin-left: 10px !important; 
     }
   </style>
-
-  <script>
-    $(document).ready(function() {
-        $('#sortTable1, #sortTable2, #sortTable3, #sortTable4, #sortTable5').DataTable({
-            "language": {
-                "url": "/assets/lang/Malay.json"
-            }
-        });
-    });
-  </script>
+  <style>
+    #token {
+      display: none;
+    }
+    #data {
+      display: none;
+    } 
+  </style>
 
   <script>
     $(document).ready(function() {
@@ -1165,78 +483,425 @@
     });
   </script>
 
-  <style>
-    #token {
-      display: none;
-    }
-    #data {
-      display: none;
-    } 
-  </style>
-
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
     
   <script>
-      // Initialize JavaScript variables with data from Blade
-      var bkokuIPTSList = @json($institusiPengajianIPTS);
-      var bkokuPOLIList = @json($institusiPengajianPOLI);
-      var bkokuKKList = @json($institusiPengajianKK);
-      var bkokuUAList = @json($institusiPengajianUA);
-      var ppkList = @json($institusiPengajianPPK);
-
       $(document).ready(function() {
-          $('.none-container').show(); // Hide export elements
+          // Initialize JavaScript variables with data from Blade
+          var bkokuIPTSList = @json($institusiPengajianIPTS);
+          var bkokuPOLIList = @json($institusiPengajianPOLI);
+          var bkokuKKList = @json($institusiPengajianKK);
+          var bkokuUAList = @json($institusiPengajianUA);
+          var ppkList = @json($institusiPengajianPPK);
 
-          // Add an event listener for tab clicks
-          $('.nav-link').on('click', function() {
-              // Get the ID of the active tab
-              var activeTabId = $(this).attr('id');
+          // DataTable initialization functions
+          function initializeDataTable1() {
+              $('#sortTable1').DataTable({
+                  ordering: true, // Enable manual sorting
+                      order: [], // Disable initial sorting
+                      columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.BKOKUIPTS") }}', // URL to fetch data from
+                      dataSrc: '' // Property in the response object containing the data array
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [ 
+                  {
+                      data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
+                      className: 'text-center',
+                      width: '4%',
+                      render: function (data, type, row, meta) {
+                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
+                      }
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#" 
+                            class="open-modal-link" 
+                            data-id="${row.id}" 
+                            data-type="IPTS"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  }, 
+                  { 
+                      data: 'smoku.nama', 
+                      render: function(data, type, row) {
+                          // Define conjunctions to be handled differently
+                          var conjunctions_lower = ['bin', 'binti'];
+                          var conjunctions_upper = ['A/L', 'A/P'];
 
-              // Clear filters when changing tabs
-              clearFilters();
+                          // Split the nama field into words
+                          var words = data.split(' ');
 
-              // Update the institution dropdown based on the active tab
-              switch (activeTabId) {
-                  case 'bkokuIPTS-tab':
-                      updateInstitusiDropdown(bkokuIPTSList);
-                      break;
-                  case 'bkokuPOLI-tab':
-                      updateInstitusiDropdown(bkokuPOLIList);
-                      break;
-                      case 'bkokuKK-tab':
-                      updateInstitusiDropdown(bkokuKKList);
-                      break;
-                  case 'bkokuUA-tab':
-                      updateInstitusiDropdown(bkokuUAList);
-                      break;
-                  case 'ppk-tab':
-                      updateInstitusiDropdown(ppkList);
-                      break;
-              }
-          });
+                          // Process each word
+                          for (var i = 0; i < words.length; i++) {
+                              var word = words[i];
 
-          // Trigger the function for the default active tab (bkoku-tab)
-          updateInstitusiDropdown(bkokuUAList);
+                              // Check if the word is a conjunction to be displayed in lowercase
+                              if (conjunctions_lower.includes(word.toLowerCase())) {
+                                  // Convert the word to lowercase
+                                  words[i] = word.toLowerCase();
+                              } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                  // Convert the word to uppercase
+                                  words[i] = word.toUpperCase();
+                              } else {
+                                  // Capitalize the first letter of other words
+                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                              }
+                          }
+
+                          // Join the words back into a single string
+                          var formatted_nama = words.join(' ');
+
+                          return formatted_nama;
+                      }
+                  },
+                  { data: 'akademik.nama_kursus' }, 
+                  { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'yuran_disokong' },
+                  { data: 'wang_saku_disokong' }
+                  ]
+              });
+          }
+
+          function initializeDataTable2() {
+              $('#sortTable2').DataTable({
+                  ordering: true, // Enable manual sorting
+                      order: [], // Disable initial sorting
+                      columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.BKOKUPOLI") }}', // URL to fetch data from
+                      dataSrc: '' // Property in the response object containing the data array
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [ 
+                  {
+                      data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
+                      className: 'text-center',
+                      width: '4%',
+                      render: function (data, type, row, meta) {
+                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
+                      }
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#" 
+                            class="open-modal-link" 
+                            data-id="${row.id}" 
+                            data-type="POLI"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  }, 
+                  { 
+                      data: 'smoku.nama', 
+                      render: function(data, type, row) {
+                          // Define conjunctions to be handled differently
+                          var conjunctions_lower = ['bin', 'binti'];
+                          var conjunctions_upper = ['A/L', 'A/P'];
+
+                          // Split the nama field into words
+                          var words = data.split(' ');
+
+                          // Process each word
+                          for (var i = 0; i < words.length; i++) {
+                              var word = words[i];
+
+                              // Check if the word is a conjunction to be displayed in lowercase
+                              if (conjunctions_lower.includes(word.toLowerCase())) {
+                                  // Convert the word to lowercase
+                                  words[i] = word.toLowerCase();
+                              } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                  // Convert the word to uppercase
+                                  words[i] = word.toUpperCase();
+                              } else {
+                                  // Capitalize the first letter of other words
+                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                              }
+                          }
+
+                          // Join the words back into a single string
+                          var formatted_nama = words.join(' ');
+
+                          return formatted_nama;
+                      }
+                  },
+                  { data: 'akademik.nama_kursus' }, 
+                  { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'yuran_disokong' },
+                  { data: 'wang_saku_disokong' }
+                  ]
+              });
+          }
+
+          function initializeDataTable3() {
+              $('#sortTable3').DataTable({
+                  ordering: true, // Enable manual sorting
+                      order: [], // Disable initial sorting
+                      columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.BKOKUKK") }}', // URL to fetch data from
+                      dataSrc: '' // Property in the response object containing the data array
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [ 
+                  {
+                      data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
+                      className: 'text-center',
+                      width: '4%',
+                      render: function (data, type, row, meta) {
+                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
+                      }
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#" 
+                            class="open-modal-link" 
+                            data-id="${row.id}" 
+                            data-type="KK"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  }, 
+                  { 
+                      data: 'smoku.nama', 
+                      render: function(data, type, row) {
+                          // Define conjunctions to be handled differently
+                          var conjunctions_lower = ['bin', 'binti'];
+                          var conjunctions_upper = ['A/L', 'A/P'];
+
+                          // Split the nama field into words
+                          var words = data.split(' ');
+
+                          // Process each word
+                          for (var i = 0; i < words.length; i++) {
+                              var word = words[i];
+
+                              // Check if the word is a conjunction to be displayed in lowercase
+                              if (conjunctions_lower.includes(word.toLowerCase())) {
+                                  // Convert the word to lowercase
+                                  words[i] = word.toLowerCase();
+                              } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                  // Convert the word to uppercase
+                                  words[i] = word.toUpperCase();
+                              } else {
+                                  // Capitalize the first letter of other words
+                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                              }
+                          }
+
+                          // Join the words back into a single string
+                          var formatted_nama = words.join(' ');
+
+                          return formatted_nama;
+                      }
+                  },
+                  { data: 'akademik.nama_kursus' }, 
+                  { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'yuran_disokong' },
+                  { data: 'wang_saku_disokong' }
+                  ]
+              });
+          }
+
+          function initializeDataTable4() {
+              $('#sortTable4').DataTable({
+                  ordering: true, // Enable manual sorting
+                      order: [], // Disable initial sorting
+                      columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.BKOKUUA") }}', // URL to fetch data from
+                      dataSrc: '' // Property in the response object containing the data array
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [ 
+                  {
+                      data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
+                      className: 'text-center',
+                      width: '4%',
+                      render: function (data, type, row, meta) {
+                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
+                      }
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#" 
+                            class="open-modal-link" 
+                            data-id="${row.id}" 
+                            data-type="UA"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  }, 
+                  { 
+                      data: 'smoku.nama', 
+                      render: function(data, type, row) {
+                          // Define conjunctions to be handled differently
+                          var conjunctions_lower = ['bin', 'binti'];
+                          var conjunctions_upper = ['A/L', 'A/P'];
+
+                          // Split the nama field into words
+                          var words = data.split(' ');
+
+                          // Process each word
+                          for (var i = 0; i < words.length; i++) {
+                              var word = words[i];
+
+                              // Check if the word is a conjunction to be displayed in lowercase
+                              if (conjunctions_lower.includes(word.toLowerCase())) {
+                                  // Convert the word to lowercase
+                                  words[i] = word.toLowerCase();
+                              } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                  // Convert the word to uppercase
+                                  words[i] = word.toUpperCase();
+                              } else {
+                                  // Capitalize the first letter of other words
+                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                              }
+                          }
+
+                          // Join the words back into a single string
+                          var formatted_nama = words.join(' ');
+
+                          return formatted_nama;
+                      }
+                  },
+                  { data: 'akademik.nama_kursus' }, 
+                  { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'yuran_disokong' },
+                  { data: 'wang_saku_disokong' }
+                  ]
+              });
+          }
+
+          function initializeDataTable5() {
+              $('#sortTable5').DataTable({
+                  ordering: true, // Enable manual sorting
+                      order: [], // Disable initial sorting
+                      columnDefs: [
+                          { orderable: false, targets: [0] }
+                      ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.PPK") }}', // URL to fetch data from
+                      dataSrc: '' // Property in the response object containing the data array
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [ 
+                  {
+                      data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
+                      className: 'text-center',
+                      width: '4%',
+                      render: function (data, type, row, meta) {
+                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
+                      }
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#" 
+                            class="open-modal-link" 
+                            data-id="${row.id}" 
+                            data-type="PPK"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  }, 
+                  { 
+                      data: 'smoku.nama', 
+                      render: function(data, type, row) {
+                          // Define conjunctions to be handled differently
+                          var conjunctions_lower = ['bin', 'binti'];
+                          var conjunctions_upper = ['A/L', 'A/P'];
+
+                          // Split the nama field into words
+                          var words = data.split(' ');
+
+                          // Process each word
+                          for (var i = 0; i < words.length; i++) {
+                              var word = words[i];
+
+                              // Check if the word is a conjunction to be displayed in lowercase
+                              if (conjunctions_lower.includes(word.toLowerCase())) {
+                                  // Convert the word to lowercase
+                                  words[i] = word.toLowerCase();
+                              } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                  // Convert the word to uppercase
+                                  words[i] = word.toUpperCase();
+                              } else {
+                                  // Capitalize the first letter of other words
+                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                              }
+                          }
+
+                          // Join the words back into a single string
+                          var formatted_nama = words.join(' ');
+
+                          return formatted_nama;
+                      }
+                  },
+                  { data: 'akademik.nama_kursus' }, 
+                  { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'wang_saku_disokong' }
+                  ]
+              });
+          }
 
           // Function to clear filters for all tables
           function clearFilters() {
-              if (datatable1) {
-                  datatable1.search('').columns().search('').draw();
+              if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                  $('#sortTable1').DataTable().destroy();
               }
-              if (datatable2) {
-                  datatable2.search('').columns().search('').draw();
+              if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                  $('#sortTable2').DataTable().destroy();
               }
-              if (datatable3) {
-                  datatable3.search('').columns().search('').draw();
+              if ($.fn.DataTable.isDataTable('#sortTable3')) {
+                  $('#sortTable3').DataTable().destroy();
               }
-              if (datatable4) {
-                  datatable4.search('').columns().search('').draw();
+              if ($.fn.DataTable.isDataTable('#sortTable4')) {
+                  $('#sortTable4').DataTable().destroy();
               }
-              if (datatable5) {
-                  datatable5.search('').columns().search('').draw();
+              if ($.fn.DataTable.isDataTable('#sortTable5')) {
+                  $('#sortTable5').DataTable().destroy();
               }
           }
-
 
           // Function to update the institution dropdown
           function updateInstitusiDropdown(institusiList) {
@@ -1251,6 +916,43 @@
                   $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
               }
           }
+
+          // Add an event listener for tab clicks
+          $('.nav-link').on('click', function() {
+              // Get the ID of the active tab
+              var activeTabId = $(this).attr('id');
+
+              // Clear filters when changing tabs
+              clearFilters();
+
+              // Update the institution dropdown based on the active tab
+              switch (activeTabId) {
+                  case 'bkokuIPTS-tab':
+                      updateInstitusiDropdown(bkokuIPTSList);
+                      initializeDataTable1();
+                      break;
+                  case 'bkokuPOLI-tab':
+                      updateInstitusiDropdown(bkokuPOLIList);
+                      initializeDataTable2();
+                      break;
+                  case 'bkokuKK-tab':
+                      updateInstitusiDropdown(bkokuKKList);
+                      initializeDataTable3();
+                      break;
+                  case 'bkokuUA-tab':
+                      updateInstitusiDropdown(bkokuUAList);
+                      initializeDataTable4();
+                      break;
+                  case 'ppk-tab':
+                      updateInstitusiDropdown(ppkList);
+                      initializeDataTable5();
+                      break;
+              }
+          });
+
+          // Trigger the function for the default active tab (bkoku-tab)
+          updateInstitusiDropdown(bkokuUAList);
+          initializeDataTable4(); // Initialize DataTable1 on page load
       });
   </script>
 
@@ -1291,7 +993,8 @@
           });
       }
 
-      function applyFilter() {
+      function applyFilter() 
+      {
           // Reinitialize DataTables
           initDataTable('#sortTable1', 'datatable1');
           initDataTable('#sortTable2', 'datatable2');
@@ -1314,10 +1017,11 @@
                       url: "/assets/lang/Malay.json"
                   },
                   columnDefs: [
-                          { orderable: false, targets: [0] }
-                      ]
+                      { orderable: false, targets: [0] }
+                  ]
               });
           }
+
           var selectedInstitusi = $('[name="institusi"]').val();
 
           // Apply search filter and log data for all tables
@@ -1332,20 +1036,41 @@
           // Apply search filter to the table
           table.column(4).search(filterValue).draw();
 
-          // Log filtered data
-          console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-
           // Go to the first page for the table
           table.page(0).draw(false);
-
-          // Log the data of visible rows on the first page for the table
-          console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
       }
 
       function logTableData(message, table) {
           console.log(message, table.rows().data().toArray());
       }
   </script>
+
+
+  <script>
+    $(document).on('click', '.open-modal-link', function(e) {
+      e.preventDefault();
+
+      const id = $(this).data('id');
+      
+      const type = $(this).data('type');
+      // alert (type);
+
+      $('#modalDokumenContent').html('<p>Memuatkan dokumen...</p>');
+
+      $.ajax({
+        url: `/getDokumen/${type}/${id}`,
+        type: 'GET',
+        success: function(response) {
+          // response should be raw HTML accordion from controller
+          $('#modalDokumenContent').html(response);
+        },
+        error: function() {
+          $('#modalDokumenContent').html('<p class="text-danger">Gagal memuatkan dokumen.</p>');
+        }
+      });
+    });
+  </script>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
@@ -1374,12 +1099,12 @@
       })
       .then(response => response.json())
       .then(data => {
-          // console.log(data); // Log the API response to the console
+          console.log(data); // Log the API response to the console
 
           // Convert the API response to a string for display in the alert
           const responseDataString = JSON.stringify(data, null, 2);
-          // console.log(responseDataString);
-          // console.log(data.status);
+          console.log(responseDataString);
+          console.log(data.status);
           if (data.status === 'error'){
             Swal.fire({
               icon: 'error',

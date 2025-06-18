@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokumen;
 use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
 use App\Models\Permohonan;
@@ -88,6 +89,172 @@ class MaklumatESPController extends Controller
         
     }
 
+    public function getDokumen($type, $id)
+    {
+        $type = strtoupper($type);
+        $dokumen = match ($type) {
+            'IPTS', 'PPK' => Dokumen::where('permohonan_id', $id)->get(),
+            default => collect(),
+        };
+
+        if ($dokumen->isEmpty()) {
+            return '<p class="text-muted">Tiada dokumen dijumpai.</p>';
+        }
+        // return response('<p>Hello from server. Type = ' . $type . ', ID = ' . $id . '</p>');
+
+        // Return raw HTML string — this is where the accordion code is generated
+        $i = 1; $n = 1;
+        $html = '<div class="accordion" id="dokumenAccordion">';
+        foreach ($dokumen as $item) {
+            $dokumen_path = asset('assets/dokumen/permohonan/' . $item->dokumen);
+            $filePath = public_path('assets/dokumen/permohonan/' . $item->dokumen);
+
+            if (!file_exists($filePath)) {
+                $html .= '<p class="text-danger">Dokumen "' . $item->dokumen . '" tidak dijumpai dalam sistem.</p>';
+                continue;
+            }
+
+            $id_dokumen = match((int)$item->id_dokumen) {
+                1 => "No. Akaun Bank Islam",
+                2 => "Surat Tawaran",
+                3 => "Invois/Resit",
+                4 => "Dokumen Tambahan " . $n++,
+            };
+
+            $html .= '
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="heading'.$i.'">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'.$i.'" aria-expanded="false">
+                <b style="color:black!important">'.$id_dokumen.'</b>
+                </button>
+            </h2>
+            <div id="collapse'.$i.'" class="accordion-collapse collapse" aria-labelledby="heading'.$i.'">
+                <div class="accordion-body" style="text-align: center">
+                <p>Catatan: '.$item->catatan.'</p>';
+            
+            if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf') {
+                $html .= '<a href="'.$dokumen_path.'" download="'.$id_dokumen.'.png">
+                            <img src="'.$dokumen_path.'" width="90%" height="650px"/>
+                        </a>';
+            }
+            $html .= '<embed src="'.$dokumen_path.'" width="90%" height="650px"/>
+                </div>
+            </div>
+            </div>';
+            $i++;
+        }
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    public function getSenaraiEspBKOKUUA()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'UA');
+                        });
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiEspBKOKUPOLI()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'P');
+                        });
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiEspBKOKUKK()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'KK');
+                        });
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiEspBKOKUIPTS()
+    {
+        $permohonan = Permohonan::where('program', 'BKOKU')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '=', 'IPTS');
+                        });
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiEspPPK()
+    {
+        $permohonan = Permohonan::where('program', 'PPK')
+                    ->whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
+
+    }
+
     public function tuntutan()
     {
         $kelulusan = Tuntutan::orderBy('tuntutan.tarikh_hantar', 'desc')
@@ -162,6 +329,126 @@ class MaklumatESPController extends Controller
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
         return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));     
+    }
+
+    public function getSenaraiEspTuntutanBKOKUUA()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'UA');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt');
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiEspTuntutanBKOKUPOLI()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'P');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt');
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiEspTuntutanBKOKUKK()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'KK');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt');
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiEspTuntutanBKOKUIPTS()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '=', 'IPTS');
+                    });
+                $query->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt');
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiEspTuntutanPPK()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    // ->whereHas('infoipt', function ($subQuery) {
+                    //     $subQuery->where('jenis_institusi', '=', 'UA');
+                    // });
+                ->whereHas('peringkat');
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'PPK');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with('infoipt');
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
     }
 
     public function hantar(Request $request)
