@@ -1762,6 +1762,12 @@
 								var selectedValue = $('#nama_kursus_asal').val();
 								var found = false;
 
+								// If selectedValue is not in the list, add it manually
+								if (!found && selectedValue) {
+									var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
+									$("#nama_kursus").append(fallbackOption);
+								}
+
 								response['data'].forEach(function(item) {
 									var uppercaseValue = item.nama_kursus.toUpperCase();
 									var isSelected = item.nama_kursus === selectedValue;
@@ -1774,11 +1780,7 @@
 									$("#nama_kursus").append(option);
 								});
 
-								// If selectedValue is not in the list, add it manually
-								if (!found && selectedValue) {
-									var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
-									$("#nama_kursus").append(fallbackOption);
-								}
+								
 							}
 						},
 						error: function() {

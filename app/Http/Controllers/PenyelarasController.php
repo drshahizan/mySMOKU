@@ -2647,32 +2647,105 @@ class PenyelarasController extends Controller
 
         
         if ($currentValues != $updatedValues) {    
-            //update peringkat if permohonan belum lulus lagi
-            if($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
-                if($permohonan != null && $permohonan->status < 6){
-                    
-                    $program = substr($permohonan->program, 0, 1);
-                    // dd($program);
-                    Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
-                    ->update([
-                        'peringkat_pengajian' => $request->peringkat_pengajian
-                    ]);
+            $permohonans = Permohonan::where('smoku_id', $smoku->id)->get();
 
-                    Permohonan::where('smoku_id' ,$smoku->id)
-                    ->update([
-                        'no_rujukan_permohonan' => $program.'/'.$request->peringkat_pengajian.'/'.Auth::user()->no_kp,
-                        
-                    ]);
+            // Update no_kp in smoku first
+            if ($request->no_kp != $smoku->no_kp) {
+                Smoku::where('id', $smoku->id)
+                    ->update(['no_kp' => $request->no_kp]);
+            }
 
+            // Update akademik
+            if ($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
+                if ($permohonans->firstWhere('status', '<', 6)) {
+                    Akademik::where('smoku_id', $smoku->id)
+                        ->where('status', 1)
+                        ->update([
+                            'peringkat_pengajian' => $request->peringkat_pengajian,
+                            'nama_kursus' => $request->nama_kursus,
+                        ]);
                 } else {
                     return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini.');
                 }
-            }
-            else{
-                Akademik::where('smoku_id' ,$smoku->id)->where('status', 1)
+            } else {
+                // peringkat unchanged, only update course name
+                Akademik::where('smoku_id', $smoku->id)
+                    ->where('status', 1)
                     ->update([
                         'nama_kursus' => $request->nama_kursus,
                     ]);
+            }
+
+            // Loop through permohonan to update only the matching one
+            foreach ($permohonans as $permohonan) {
+                $parts = explode('/', $permohonan->no_rujukan_permohonan);
+
+                if (count($parts) === 3) {
+                    $updateRujukan = false;
+
+                    // If old peringkat matches akademik before update
+                    if ($parts[1] == $akademik->peringkat_pengajian) {
+
+                        // Update peringkat part in rujukan if it changed
+                        if ($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
+                            $parts[1] = $request->peringkat_pengajian;
+                            $updateRujukan = true;
+                        }
+
+                    }
+
+                    // Update no_kp part in rujukan if it changed
+                    if ($request->no_kp != $smoku->no_kp) {
+                        $parts[2] = $request->no_kp;
+                        $updateRujukan = true;
+                    }
+
+                    if ($updateRujukan) {
+                        $new_no_rujukan = implode('/', $parts);
+                        $permohonan->update([
+                            'no_rujukan_permohonan' => $new_no_rujukan,
+                        ]);
+                    }
+                }
+            }
+
+            $tuntutans = Tuntutan::where('smoku_id', $smoku->id)->get();
+
+            foreach ($tuntutans as $tuntutan) {
+                $parts = explode('/', $tuntutan->no_rujukan_tuntutan);
+
+                if (count($parts) === 4) { // Ensure it's in format B/peringkat/no_kp/n
+                    $updateRujukan = false;
+
+                    // Match only tuntutan with peringkat same as request
+                    if ($parts[1] == $request->peringkat_pengajian) {
+
+                        // Update peringkat_pengajian
+                        if ($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
+                            if ($permohonan && $permohonan->status < 6) {
+                                $parts[1] = $request->peringkat_pengajian;
+                                $updateRujukan = true;
+                            } else {
+                                return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini.');
+                            }
+                        }
+                    
+                    }
+
+                    // Update no_kp
+                    if ($request->no_kp != $smoku->no_kp) {
+                        $parts[2] = $request->no_kp;
+                        $updateRujukan = true;
+                    }
+
+                    // Apply update if needed
+                    if ($updateRujukan) {
+                        $new_no_rujukan_tuntutan = implode('/', $parts);
+                        $tuntutan->update([
+                            'no_rujukan_tuntutan' => $new_no_rujukan_tuntutan,
+                        ]);
+                    }
+                }
             }
 
             //update mod or sumber biaya = layak yuran or wang saku sahaja
