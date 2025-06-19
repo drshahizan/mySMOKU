@@ -440,7 +440,8 @@
 				var amaun_ws = parseInt(document.getElementById('amaun_ws').value);
 			
 				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = (amaun_ws).toFixed(2);
+					// document.getElementById("amaun_wang_saku").value = (amaun_ws).toFixed(2);
+					document.getElementById("amaun_wang_saku").value = (baki_wang_saku).toFixed(2);
 					console.log("Total amount exceeds the limit sini: " + parseFloat(total));
 					var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
 					document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
