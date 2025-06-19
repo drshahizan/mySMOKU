@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Akademik;
+
 class Smoku extends Model
 {
     use HasFactory;
@@ -36,5 +38,11 @@ class Smoku extends Model
         'pekerjaan_waris',
         'pendapatan_waris',
     ];
+
+    // Define the relationship with Akademik
+    public function akademik()
+    {
+        return $this->hasMany(Akademik::class, 'smoku_id', 'id');
+    }
 
 }

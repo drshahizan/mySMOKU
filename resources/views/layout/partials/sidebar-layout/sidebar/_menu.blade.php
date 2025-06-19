@@ -440,8 +440,14 @@
 				</div>
 				<div class="menu-item">
 					<a class="menu-link" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Maklumat E-mel Pengguna</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat Pelajar</span>
+						<span class="menu-title">Senarai Pelajar</span>
 					</a>
 				</div>
 
