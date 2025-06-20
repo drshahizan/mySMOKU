@@ -904,18 +904,14 @@ class PenyelarasController extends Controller
             if($cgpa >= 0.0 && $cgpa < 2.0){
                 $pengesahan = 1;
                 $catatan = "Pelajar telah menghantar keputusan peperiksaan semester lepas. Keputusan tersebut perlu pengesahan daripada Sekretariat KPT sebelum tuntutan dapat dikemukakan.";
-                if (empty($invalidEmails)) 
-                {            
+                
+                if (!empty(trim($smoku_id->email))) 
+                {       
                     // Mail::to($emailmain)->cc($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
                     Mail::to($smoku_id->email)->send(new PengesahanCGPA($catatan)); 
 
                 } 
-                else 
-                {
-                    foreach ($invalidEmails as $invalidEmail) {
-                        Log::error('Invalid email address: ' . $invalidEmail);
-                    }
-                }
+               
             }else{
                 $pengesahan = null;
             }
