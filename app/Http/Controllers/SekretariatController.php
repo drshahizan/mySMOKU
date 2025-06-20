@@ -2553,15 +2553,26 @@ class SekretariatController extends Controller
             $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
             if ($program == "BKOKU") {
                 $emel = EmelKemaskini::where('emel_id', 5)->first();
 
                 if (empty(trim($smoku_emel))) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
-                    Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    }
+                    
                 } else {
                     // Otherwise, send to smoku with cc to penyelaras
-                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    }
+                    else{
+                        Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+                    }
                 }
             }
             elseif($program=="PPK"){
@@ -2672,14 +2683,23 @@ class SekretariatController extends Controller
             $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',6)->first();
                 if (empty(trim($smoku_emel))) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
-                    Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    }
                 } else {
                     // Otherwise, send to smoku with cc to penyelaras
-                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    } else{
+                        Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    }
                 }
                 
             }
@@ -2784,14 +2804,23 @@ class SekretariatController extends Controller
             $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
             $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
             $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',4)->first();
                 if (empty(trim($smoku_emel))) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
-                    Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }
                 } else {
                     // Otherwise, send to smoku with cc to penyelaras
-                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }else{
+                        Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }
                 }
                
             }
