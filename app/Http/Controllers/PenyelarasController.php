@@ -2262,29 +2262,63 @@ class PenyelarasController extends Controller
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
 
-        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
+        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
         }
-        else {
-            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
-        }
-        
-        // Extract all `id_institusi` values (handles both single and multiple records)
+
         $idInstitusiList = $infoiptCollection->pluck('id_institusi');
 
-        $pelajar = Smoku::join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
-        ->orderBy('smoku.id', 'DESC')
-        ->get(['smoku.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi', 'bk_info_institusi.id_induk']);
+        $institusiPengajian = InfoIpt::whereIn('id_institusi', $idInstitusiList)->orderBy('nama_institusi')->get();
 
-        $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
-        $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
-        $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get();
-        $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
-
-        return view('kemaskini.penyelaras.senarai_pelajar_institusi', compact('pelajar','infoipt','infoiptIPTS','infoiptP','infoiptKK'));
+        return view('kemaskini.penyelaras.senarai_pelajar_institusi', compact('institusiPengajian'));
     }
+
+    public function getSenaraiPelajarPenyelaras()
+    {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+        }
+
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
+        $pelajar = Smoku::whereHas('akademik', function ($query) use ($idInstitusiList) {
+                $query->where('status', 1)
+                    ->whereIn('id_institusi', $idInstitusiList);
+            })
+            ->with(['akademik' => function ($query) use ($idInstitusiList) {
+                $query->where('status', 1)
+                    ->whereIn('id_institusi', $idInstitusiList)
+                    ->with('infoipt');
+            }])
+            ->orderBy('nama')
+            ->get()
+            ->map(function ($item) {
+                $akademik = $item->akademik->first();
+                return [
+                    'id' => $item->id,
+                    'smoku_id' => $item->id,
+                    'nama' => $item->nama,
+                    'no_kp' => $item->no_kp,
+                    'no_daftar_oku' => $item->no_daftar_oku,
+                    'nama_kursus' => $akademik->nama_kursus ?? '-',
+                    'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
+                    'tarikh_mula' => $akademik->tarikh_mula ?? '',
+                    'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
+                    'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
+                ];
+            });
+    
+
+
+        return response()->json($pelajar);
+    }
+
 
     public function profilPelajarInstitusi($smoku_id)
     {   

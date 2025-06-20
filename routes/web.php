@@ -525,8 +525,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
         Route::post('penyelaras/kemaskini/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
         Route::get('penyelaras/kemaskini/senarai/pelajar/institusi', [PenyelarasController::class, 'senaraiPelajarInstitusi'])->name('senarai.pelajar');
+
+        Route::get('penyelaras/kemaskini/senarai/pelajar/getSenarai', [PenyelarasController::class, 'getSenaraiPelajarPenyelaras'])->name('penyelaras.getSenaraiPelajar');
         Route::get('penyelaras/kemaskini/profil/pelajar/{id}', [PenyelarasController::class, 'profilPelajarInstitusi'])->name('profil.pelajar.institusi');
         Route::post('penyelaras/kemaskini/profil/pelajar/simpan/{id}', [PenyelarasController::class, 'simpanProfilPelajarInstitusi'])->name('simpan.profil.pelajar.institusi');
+
+
         Route::get('/getPeringkatProfilPelajar/{id}', [PenyelarasController::class, 'peringkatProfilPelajar']);
         Route::get('/getKursusProfilPelajar/{kodperingkat}/{id}', [PenyelarasController::class, 'kursusProfilPelajar']);
         Route::get('penyelaras/kemaskini/senarai/pelajar', [PenyelarasController::class, 'senaraiPelajar'])->name('senarai.pelajar.ua');
