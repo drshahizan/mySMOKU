@@ -2438,34 +2438,18 @@ class SekretariatController extends Controller
             ]);
 
         $tuntutan = Tuntutan::where('id',$id)->first();
+        $sejarah_tuntutan = SejarahTuntutan::where('tuntutan_id',$id)->where('status',2)->first();
+
         $status_rekod = new SejarahTuntutan([
-            'smoku_id'          =>  $tuntutan->smoku_id,
-            'tuntutan_id'       =>  $id,
-            'status'            =>  2,
+            'smoku_id'              =>  $tuntutan->smoku_id,
+            'tuntutan_id'           =>  $id,
+            'status'                =>  2,
+            'dilaksanakan_oleh'     =>  $sejarah_tuntutan->dilaksanakan_oleh,
         ]);
         $status_rekod->save();
 
-        $status_kod=0;
-        $status = null;
-
-        $query = Tuntutan::select('tuntutan.*')
-            ->where('tuntutan.status', '=', '2')
-            ->orWhere('tuntutan.status', '=','3')
-            ->orWhere('tuntutan.status', '=','5')
-            ->orWhere('tuntutan.status', '=','6')
-            ->orWhere('tuntutan.status', '=','7');
-
-        $tuntutan = $query->orderBy('tarikh_hantar', 'desc')->get();
-        $institusi = InfoIpt::orderBy('nama_institusi', 'asc')->get();
-
-        $institusiPengajianIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
-        $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
-        $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
-        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
-
         return redirect()->route('senarai.tuntutan.kedua');
-        // return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK','institusi','tuntutan','status_kod','status'));
+       
     }
 
     public function saringTuntutanKedua(Request $request, $id)
