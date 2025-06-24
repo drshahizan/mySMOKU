@@ -45,4 +45,9 @@ class Smoku extends Model
         return $this->hasMany(Akademik::class, 'smoku_id', 'id');
     }
 
+    public function permohonan()
+    {
+        return $this->hasMany(Permohonan::class, 'smoku_id', 'id');
+    }
+
 }

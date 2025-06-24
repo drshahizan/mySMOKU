@@ -269,9 +269,11 @@ class KemaskiniController extends Controller
         $pelajar = Smoku::whereHas('akademik', function ($query) {
                 $query->where('status', 1);
             })
+            ->whereHas('permohonan')
             ->with(['akademik' => function ($query) {
                 $query->where('status', 1)->with('infoipt');
-            }])
+                 },
+            'permohonan'])
             ->orderBy('nama')
             ->get()
             ->map(function ($item) {
@@ -384,7 +386,7 @@ class KemaskiniController extends Controller
             'tarikh_lahir' => $smoku->tarikh_lahir,
             'umur' => $smoku->umur,
             'keturunan' => $smoku->keturunan,
-            'email' => $smoku->email,
+            'email' => $smoku->email ?? '',
             'no_akaun_bank' => $butiran_pelajar->no_akaun_bank,
             'negeri_lahir' => $butiran_pelajar->negeri_lahir,
             'agama' => $butiran_pelajar->agama,
@@ -440,7 +442,7 @@ class KemaskiniController extends Controller
         // Update the values
         $smoku->update([
             'nama' => strtoupper($request->nama_pelajar),
-            'email' => $request->emel,
+            'email' => $request->emel ?? '',
             'no_daftar_oku' => $request->no_daftar_oku,
             'kategori' => $request->oku,
         ]);
@@ -449,13 +451,13 @@ class KemaskiniController extends Controller
         ->update([
             'nama' => strtoupper($request->nama_pelajar),
             'no_kp' => $request->no_kp,
-            'email' => $request->emel
+            'email' => $request->emel ?? ''
         ]);
 
         if($butiran_pelajar != null) {
             ButiranPelajar::where('smoku_id' ,$smoku->id)
                 ->update([
-                    'emel' => $request->emel,
+                    'emel' => $request->emel ?? '',
                     'no_akaun_bank' => $request->no_akaun_bank,
                     'negeri_lahir' => $request->negeri_lahir,
                     'agama' => $request->agama,

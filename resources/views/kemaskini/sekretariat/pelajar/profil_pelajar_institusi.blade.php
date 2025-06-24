@@ -1248,7 +1248,7 @@
 							
 					<!--begin::Wrapper-->
 					<div>
-						@if (in_array($permohonan->status, [1, 2, 5, 6, 7, 8]))
+						{{-- @if (in_array($permohonan->status, [1, 2, 5, 6, 7, 8])) --}}
 							<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" >
 								<span class="indicator-label">Simpan
 								<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -1259,7 +1259,7 @@
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 							</button>
 						
-						@endif
+						{{-- @endif --}}
 
 						{{-- <button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next"> --}}
 						<button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">
@@ -1290,9 +1290,9 @@
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="/assets/js/custom/utilities/modals/view-account.js"></script>
-		<script src="/assets/js/custom/apps/file-manager/list.js"></script>
-		<script src="/assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="/assets/js/custom/utilities/modals/view-profile.js"></script>
+		{{-- <script src="/assets/js/custom/apps/file-manager/list.js"></script>
+		<script src="/assets/js/custom/utilities/modals/create-app.js"></script> --}}
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
