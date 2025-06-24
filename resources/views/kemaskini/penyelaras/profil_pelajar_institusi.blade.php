@@ -1290,9 +1290,9 @@
 		<!--end::Global Javascript Bundle-->
 
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="/assets/js/custom/utilities/modals/view-account.js"></script>
-		<script src="/assets/js/custom/apps/file-manager/list.js"></script>
-		<script src="/assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="/assets/js/custom/utilities/modals/view-profile.js"></script>
+		{{-- <script src="/assets/js/custom/apps/file-manager/list.js"></script>
+		<script src="/assets/js/custom/utilities/modals/create-app.js"></script> --}}
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 
