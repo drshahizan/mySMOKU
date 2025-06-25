@@ -2291,11 +2291,18 @@ class PenyelarasController extends Controller
                 $query->where('status', 1)
                     ->whereIn('id_institusi', $idInstitusiList);
             })
+            ->whereHas('permohonan', function ($query) {
+                $query->where('program', 'BKOKU');
+            })
             ->with(['akademik' => function ($query) use ($idInstitusiList) {
                 $query->where('status', 1)
                     ->whereIn('id_institusi', $idInstitusiList)
                     ->with('infoipt');
-            }])
+                },
+                'permohonan' => function ($query) {
+                    $query->where('program', 'BKOKU');
+                }
+            ])
             ->orderBy('nama')
             ->get()
             ->map(function ($item) {
