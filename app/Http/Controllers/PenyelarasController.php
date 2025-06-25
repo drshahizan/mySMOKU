@@ -1879,9 +1879,9 @@ class PenyelarasController extends Controller
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
-        if ($currentMonth == 2) {
+        if ($currentMonth == 6) {
             $sesiBayaran = '1/' . $currentYear;
-        } elseif ($currentMonth == 4) {
+        } elseif ($currentMonth == 8) {
             $sesiBayaran = '2/' . $currentYear;
         } elseif ($currentMonth == 10) {
             $sesiBayaran = '3/' . $currentYear;
