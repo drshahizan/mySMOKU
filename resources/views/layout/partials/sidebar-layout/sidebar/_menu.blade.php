@@ -229,7 +229,7 @@
 							<span class="menu-title">Keputusan Pembayaran</span>
 						</a>
 					</div>
-
+				@endif
 					<div class="menu-item pt-5">
 						<div class="menu-content">
 							<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
@@ -241,6 +241,7 @@
 							<span class="menu-title">Senarai Pelajar</span>
 						</a>
 					</div>
+				@if($institusi->jenis_institusi === 'UA')	
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('maklumat.bank')}}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
@@ -253,7 +254,7 @@
 							<span class="menu-title">Tukar Institusi</span>
 						</a>
 					</div>
-				@endif
+				@endif	
 			</div>
 			<!--end::Menu-->
 
@@ -717,6 +718,17 @@
 					<a class="menu-link" href="{{route('ppk.sejarah.tuntutan')}}">
 						<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
 						<span class="menu-title">Sejarah</span>
+					</a>
+				</div>
+				<div class="menu-item pt-5">
+					<div class="menu-content">
+						<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+					</div>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('ppk.senarai.pelajar')}}">
+						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+						<span class="menu-title">Senarai Pelajar</span>
 					</a>
 				</div>
 			</div>
