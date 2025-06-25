@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Tuntutan;
 use App\Models\Akademik;
 use App\Models\InfoIpt;
+use App\Models\TuntutanItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -137,18 +138,20 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
     {
         // Fetch sesi from Akademik table
         $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', $item['id'])->first();
+        $tuntutan_item = TuntutanItem::orderBy('id', 'desc')->where('tuntutan_id', $tuntutan->id)->first();
  
         if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
-            $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU';
+            $result = strtoupper($tuntutan_item->nota_resit);
         } elseif ($item['yuran'] == 1) {
-            $result = 'YURAN PENGAJIAN';
+            $result = strtoupper($tuntutan_item->nota_resit);
         } elseif ($item['wang_saku'] == 1) {
-            $result = 'ELAUN WANG SAKU';
+            $result = 'ELAUN WANG SAKU '. 'SEMESTER '. $tuntutan->semester .' SESI '. $tuntutan->sesi;
         } else {
-            $result = 'Other';
+            $result = 'LAIN-LAIN';
         }
-        
-        return $result . ' SEM 1 DAN 2 TAHUN ' . $sesi;
+        // dd($result);
+        return $result;
     }
 
     public function columnWidths(): array
