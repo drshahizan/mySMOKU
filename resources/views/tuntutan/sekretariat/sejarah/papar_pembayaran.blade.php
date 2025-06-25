@@ -156,7 +156,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
-                                            <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                            <td>{{$tuntutan->sesi}}-0{{$tuntutan->semester}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Status Penajaan</strong></td>

@@ -3342,6 +3342,7 @@ class SekretariatController extends Controller
     public function paparRekodSaringanTuntutan($id)
     {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
+        // dd($sejarah_t);
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
         $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
@@ -3353,7 +3354,11 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $no_tuntutan = $rujukan[3];
 
-        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)
+        ->where('status', '8')
+        ->where('id', '<', $sejarah_t->tuntutan_id)
+        ->orderBy('id','desc')->first();
+
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }
@@ -3379,6 +3384,9 @@ class SekretariatController extends Controller
             $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
             $baki_terdahulu = $j_tuntutan->jumlah;
         }
+
+        // dd($baki_terdahulu);
+
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
 
         return view('tuntutan.sekretariat.sejarah.papar_saringan',compact('sama_semester','baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
@@ -3413,7 +3421,7 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $no_tuntutan = $rujukan[3];
 
-        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '8')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }
@@ -3462,7 +3470,7 @@ class SekretariatController extends Controller
         $peringkat = $rujukan[1];
         $no_tuntutan = $rujukan[3];
 
-        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '6')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)->where('status', '8')->where('id', '<', $sejarah_t->tuntutan_id)->orderBy('id','desc')->first();
         if($tuntutan_sebelum!=null){
             $sesi_sebelum = $tuntutan_sebelum->sesi;
         }

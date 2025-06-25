@@ -67,7 +67,7 @@
                                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
-                                                    <th>ID Permohonan</th>
+                                                    <th>ID Tuntutan</th>
                                                     <th>No Baucer</th>
                                                     <th>Tarikh Baucer</th>
                                                     <th>Amaun Yuran (RM)</th>
