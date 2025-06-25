@@ -1078,13 +1078,13 @@ class SaringanController extends Controller
 
     public function rekodPermohonan($id)
     {
-        $permohonan = Permohonan::orderBy('id', 'DESC')->where('id', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->where('smoku_id', $id)->first();
         $smoku_id = $permohonan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-        $sejarah_p = SejarahPermohonan::where('permohonan_id', $id)->orderBy('created_at', 'desc')->get();
+        $sejarah_p = SejarahPermohonan::where('permohonan_id', $permohonan->id)->orderBy('created_at', 'desc')->get();
 
         return view('permohonan.sekretariat.sejarah.rekod_permohonan',compact('permohonan','akademik','smoku','sejarah_p'));
     }

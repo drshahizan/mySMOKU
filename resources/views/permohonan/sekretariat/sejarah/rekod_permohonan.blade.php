@@ -119,7 +119,7 @@
                                                 @elseif ($item['status']=='9')
                                                     <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
                                                 @endif
-                                                <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                <td class="text-center">{{ $item['created_at'] ? $item['created_at']->format('d/m/Y') : '-' }}</td>
                                                 @if ($item['status']=='1')
                                                     <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
                                                 @elseif ($item['status']=='2')

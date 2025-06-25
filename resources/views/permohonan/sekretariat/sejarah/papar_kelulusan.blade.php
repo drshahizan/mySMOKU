@@ -93,7 +93,7 @@
                                     <tr>
                                         <td><strong>Tarikh Permohonan </strong></td>
                                         <td><b>:</b></td>
-                                        <td>{{$permohonan['created_at']->format('d/m/Y')}}</td>
+                                        <td>{{ $permohonan['created_at'] ? $permohonan['created_at']->format('d/m/Y') : '-' }}</td>
                                     </tr>
                                     <tr>
                                         <td><strong>ID Permohonan </strong></td>
@@ -121,7 +121,7 @@
                                 <tr>
                                     <td><b>Tarikh Mesyuarat</b></td>
                                     <td><b>:</b></td>
-                                    <td>{{date('d/m/Y', strtotime($kelulusan->tarikh_mesyuarat))}}</td>
+                                    <td>{{ $kelulusan->tarikh_mesyuarat ? date('d/m/Y', strtotime($kelulusan->tarikh_mesyuarat)) : '-' }}</td>
                                 </tr>
                                 <tr>
                                     <td><b>Keputusan</b></td>
