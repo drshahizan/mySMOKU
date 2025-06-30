@@ -105,6 +105,7 @@
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
+                                        $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
 
                                         // nama pemohon
                                         $text = ucwords(strtolower($smoku->nama));
@@ -156,7 +157,7 @@
                                             <td class="space">&nbsp;</td>
                                             <td><strong>Sesi/Semester</strong></td>
                                             <td>:</td>
-                                            <td>{{$akademik->sesi}}-0{{$akademik->sem_semasa}}</td>
+                                            <td>{{$tuntutan->sesi}}-0{{$tuntutan->semester}}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>Status Penajaan</strong></td>
@@ -242,15 +243,23 @@
                                         <br>
                                         <!--begin: Invoice body-->
                                         @if($permohonan->program == "BKOKU" && $tuntutan->yuran == "1" && $tuntutan->wang_saku == "1")
-                                            @php
-                                                if($tuntutan->amaun_yuran == null){
-                                                    $tuntutan->amaun_yuran = 0;
+                                           @php
+                                                $yuran = 0;
+                                                foreach ($tuntutan_item as $item){
+                                                    if($item['amaun'] == null){
+                                                        $item['amaun'] = 0;
+                                                        $yuran = $yuran + $item['amaun'];
+                                                    }
+                                                    else{
+                                                        $yuran = $yuran + $item['amaun'];
+                                                    }
                                                 }
+
                                                 if($tuntutan->amaun_wang_saku == null){
                                                     $tuntutan->amaun_wang_saku = 0;
                                                 }
-                                                $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
-                                                $baki_y = 5000 - $jumlah;
+                                                $jumlah = $yuran + $tuntutan->amaun_wang_saku;
+                                                $baki_y = $baki_terdahulu - $jumlah;
                                             @endphp
                                             <div class="table-responsive">
                                                 <table class="table">
@@ -268,12 +277,12 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong - $tuntutan->wang_saku_disokong, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_dibayar - $tuntutan->wang_saku_dibayar, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
                                                     </tr>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
@@ -296,6 +305,16 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Catatan</td>
+                                                        <td>:</td>
+                                                        <td>{{$saringan->catatan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keputusan Akhir</td>
+                                                        <td>:</td>
+                                                        <td>{{ucwords(strtolower($status_tuntutan))}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -336,15 +355,32 @@
                                                         <td>:</td>
                                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Catatan</td>
+                                                        <td>:</td>
+                                                        <td>{{$saringan->catatan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keputusan Akhir</td>
+                                                        <td>:</td>
+                                                        <td>{{ucwords(strtolower($status_tuntutan))}}</td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         @elseif($permohonan->program == "BKOKU" && $tuntutan->wang_saku == NULL)
                                             @php
-                                                if($tuntutan->amaun_yuran == null){
-                                                    $tuntutan->amaun_yuran = 0;
+                                                $yuran = 0;
+                                                foreach ($tuntutan_item as $item){
+                                                    if($item['amaun'] == null){
+                                                        $item['amaun'] = 0;
+                                                        $yuran = $yuran + $item['amaun'];
+                                                    }
+                                                    else{
+                                                        $yuran = $yuran + $item['amaun'];
+                                                    }
                                                 }
-                                                $jumlah = $tuntutan->amaun_yuran + $tuntutan->amaun_wang_saku;
-                                                $baki_y = 5000 - $jumlah;
+                                                $jumlah = $yuran;
+                                                $baki_y = $baki_terdahulu - $jumlah;
                                             @endphp
                                             <div class="table-responsive">
                                                 <table class="table">
@@ -362,12 +398,12 @@
                                                     <tbody>
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Yuran Pengajian</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_yuran, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($yuran, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($baki_y, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_disokong, 2)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_disokong, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->baki_disokong, 2)}}</td>
                                                         <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
-                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format(5000 - $tuntutan->yuran_dibayar, 2)}}</td>
+                                                        <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->baki_dibayar, 2)}}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -381,6 +417,16 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td>{{number_format($tuntutan->yuran_dibayar, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Catatan</td>
+                                                        <td>:</td>
+                                                        <td>{{$saringan->catatan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keputusan Akhir</td>
+                                                        <td>:</td>
+                                                        <td>{{ucwords(strtolower($status_tuntutan))}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -420,6 +466,16 @@
                                                         <td>Jumlah tuntutan yang dibayar (RM)</td>
                                                         <td>:</td>
                                                         <td>{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Catatan</td>
+                                                        <td>:</td>
+                                                        <td>{{$saringan->catatan}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keputusan Akhir</td>
+                                                        <td>:</td>
+                                                        <td>{{ucwords(strtolower($status_tuntutan))}}</td>
                                                     </tr>
                                                 </table>
                                             </div>

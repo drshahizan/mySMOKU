@@ -83,11 +83,11 @@
                                         @endphp
                                         <tr>
                                             @if ($item['status']=='1')
-                                                <td><a href="{{route('bkoku.papar.rekod',$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
+                                                <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                             @elseif ($item['status']=='2')
                                                 <td><a href="{{route('bkoku.papar.rekod',$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='3')
-                                                <td><a href="{{route('bkoku.papar.saringan.tuntutan',$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
+                                                <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                             @elseif ($item['status']=='5')
                                                 <td><a href="{{route('bkoku.papar.saringan.tuntutan',$item['id'])}}" target="_blank">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='6')

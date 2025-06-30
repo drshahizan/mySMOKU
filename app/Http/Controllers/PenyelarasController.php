@@ -54,6 +54,7 @@ use App\Imports\ModifiedTuntutanImport;
 use App\Mail\MailDaftarPentadbir;
 use App\Mail\PengesahanCGPA;
 use App\Models\JumlahTuntutan;
+use App\Models\SaringanTuntutan;
 use App\Models\SenaraiBank;
 use App\Models\TukarInstitusi;
 use Carbon\Carbon;
@@ -1478,12 +1479,56 @@ class PenyelarasController extends Controller
     {
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();
-        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
         $permohonan = Permohonan::where('id', $tuntutan->permohonan_id)->first();
+        $saringan = SaringanTuntutan::where('tuntutan_id', $sejarah_t->tuntutan_id)->first();
+        $tuntutan_item = TuntutanItem::where('tuntutan_id', $sejarah_t->tuntutan_id)->get();
         $smoku_id = $tuntutan->smoku_id;
         $smoku = Smoku::where('id', $smoku_id)->first();
+
+        $rujukan = explode("/", $tuntutan->no_rujukan_tuntutan);
+        $peringkat = $rujukan[1];
+        $no_tuntutan = $rujukan[3];
+
+        $tuntutan_sebelum = Tuntutan::where('permohonan_id',$tuntutan->permohonan_id)
+        ->where('status', '8')
+        ->where('id', '<', $sejarah_t->tuntutan_id)
+        ->orderBy('id','desc')->first();
+
+        if($tuntutan_sebelum!=null){
+            $sesi_sebelum = $tuntutan_sebelum->sesi;
+        }
+        else{
+            $sesi_sebelum = null;
+        }
+
+        $baki_terdahulu = 0;
+        $sama_semester = false;
+        if($no_tuntutan == 1){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+            if ($baki_terdahulu == null){
+                $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
+                $baki_terdahulu = $j_tuntutan->jumlah;
+            }
+        }
+        elseif ($tuntutan_sebelum==null){
+            $baki_terdahulu = $permohonan->baki_dibayar;
+        }
+        elseif($tuntutan->sesi == $sesi_sebelum){
+            $baki_terdahulu = $tuntutan_sebelum->baki_dibayar;
+            if ($tuntutan_sebelum->semester != $tuntutan->semester){
+                $sama_semester = true;
+            }
+        }
+        elseif($tuntutan->sesi != $sesi_sebelum){
+            $j_tuntutan = JumlahTuntutan::where('jenis',"Yuran")->first();
+            $baki_terdahulu = $j_tuntutan->jumlah;
+        }
+
+        // dd($baki_terdahulu);
+
+
         $akademik = Akademik::where('smoku_id', $smoku_id)->first();
-        return view('tuntutan.penyelaras_bkoku.papar_saringan',compact('permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t'));
+        return view('tuntutan.penyelaras_bkoku.papar_saringan',compact('sama_semester','baki_terdahulu','permohonan','tuntutan','tuntutan_item','smoku','akademik','sejarah_t','saringan'));
     }
 
     public function sejarahPermohonan()
