@@ -2,8 +2,10 @@
 
 namespace App\Exports;
 
+use App\Models\Akademik;
 use App\Models\InfoIpt;
 use App\Models\Tuntutan;
+use App\Models\TuntutanItem;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -53,15 +55,29 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
         if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date') {
             $query->whereBetween('tuntutan.tarikh_hantar', [$this->startDate, $this->endDate]);
         }
-    
-        return $query->select(
+
+        // Execute the query and get results
+        $results = $query->select(
+                'tuntutan.smoku_id',
                 'tuntutan.no_rujukan_tuntutan',
                 'b.nama',
+                'tuntutan.yuran',
+                'tuntutan.wang_saku',
                 'tuntutan.yuran_disokong',
                 'tuntutan.wang_saku_disokong',
                 'tuntutan.tarikh_hantar'
             )
             ->get();
+
+        // Add calculated fields to each item in the result
+        $results = $results->map(function ($item, $key) {
+            $item->perihal = $this->calculatePerihal($item); // assume this method exists in the class
+            $item->bil = $key + 1;
+            return $item;
+        });
+
+        return $results;
+  
     }
 
     public function headings(): array
@@ -75,8 +91,8 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'Tarikh Tuntutan',
             'Yuran Dibayar (RM)',
             'Wang Saku Dibayar (RM)',
-            'No Baucar',
             'Perihal',
+            'No Baucar',
             'Tarikh Baucar',
             'Status (Aktif/Tidak Aktif)'
         ];
@@ -99,8 +115,33 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
         ];
     }
 
+    private function calculatePerihal($item)
+    {
+        // Fetch sesi from Akademik table
+        // dd($item);
+        $sesi = Akademik::where('smoku_id', $item['smoku_id'])->value('sesi');
+        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', $item['smoku_id'])->first();
+        $tuntutan_item = TuntutanItem::orderBy('id', 'desc')->where('tuntutan_id', $tuntutan->id)->first();
+ 
+        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+            $result = strtoupper($tuntutan_item->nota_resit);
+        } elseif ($item['yuran'] == 1) {
+            $result = strtoupper($tuntutan_item->nota_resit);
+        } elseif ($item['wang_saku'] == 1) {
+            $result = 'ELAUN WANG SAKU '. 'SEMESTER '. $tuntutan->semester .' SESI '. $tuntutan->sesi;
+        } else {
+            $result = 'LAIN-LAIN';
+        }
+        // dd($result);
+        return $result;
+    }
+
     public function map($row): array
     {
+
+        // Calculate "perihal" based on the fetched sesi
+        $perihal = $this->calculatePerihal($row);
+
         return [
             // Update this to match with column name in database
             $row->no_rujukan_tuntutan, 
@@ -108,6 +149,9 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
             number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
             Carbon::parse($row->tarikh_hantar)->format('d/m/Y'),
+            number_format($row->yuran_disokong, 2, '.', ''), // Same amount as yuran disokong
+            number_format($row->wang_saku_disokong, 2, '.', ''), // Same amount as wang saku disokong
+            $perihal,
         ];
     }
 
