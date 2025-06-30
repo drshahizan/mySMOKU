@@ -108,7 +108,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'E' => 20,
             'F' => 25,
             'G' => 30,
-            'H' => 20,
+            'H' => 50,
             'I' => 50,
             'J' => 20,
             'K' => 30,
