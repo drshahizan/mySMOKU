@@ -447,6 +447,16 @@ class KemaskiniController extends Controller
             'kategori' => $request->oku,
         ]);
 
+
+
+        $user_ada = User::where('no_kp', $request->no_kp)->get();
+
+        //Semak table user dah ada ic betul ke tak. kalau ada delete dulu
+        if ($user_ada->isNotEmpty()) {
+            // Delete all matching entries
+            User::where('no_kp', $request->no_kp)->delete();
+
+        }
         User::where('no_kp',$smoku->no_kp)
         ->update([
             'nama' => strtoupper($request->nama_pelajar),
@@ -649,6 +659,14 @@ class KemaskiniController extends Controller
 
             // Update no_kp in smoku first
             if ($request->no_kp != $smoku->no_kp) {
+                //semak dalam smoku no_kp
+                $smoku_ada = Smoku::where('no_kp', $request->no_kp)->get();
+                
+                if ($smoku_ada->isNotEmpty()) {
+                    // Delete all matching entries
+                    Smoku::where('no_kp', $request->no_kp)->delete();
+
+                }
                 Smoku::where('id', $smoku->id)
                     ->update(['no_kp' => $request->no_kp]);
             }
