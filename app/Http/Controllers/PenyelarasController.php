@@ -971,26 +971,32 @@ class PenyelarasController extends Controller
                 ->orderBy('tuntutan.id', 'desc')
                 ->first(['tuntutan.*']);
 
-            // $semSemasa = $akademik->sem_semasa;
-            $semSemasa = 1;
-            // $sesiSemasa = $akademik->sesi;
-
-            if($akademik->bil_bulan_per_sem == 6){
-                $bilSem = 2;
-            } else {
-                $bilSem = 3;
-            }
+            $bilSem = ($akademik->bil_bulan_per_sem == 6) ? 2 : 3;
             $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
             $currentYear = date('Y');
 
             $currentDate = Carbon::now();
             $tarikhMula = Carbon::parse($akademik->tarikh_mula);
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-            $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
+            // Check if month is January (1) or March (3)
+            $bulanMula  = $tarikhMula->format('n'); // 'n' returns numeric month without leading zero
+            // Check if special pattern applies (Jan or Mar start)
+            $isSpecialStart = in_array($bulanMula, [1, 3]);
+
+            // Initialize session year
+            $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
+            $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+            // Setup session semester pattern: 2, 3, 3, 3, ...
+            $pattern = [2, 3]; // Start with 2, then 3, then repeat 3s
+            $patternIndex = 0;
+            $currentPattern = $pattern[$patternIndex];
+            $semInCurrentSesi = 0;
 
             $tarikhNextSem = clone $tarikhMula;
             $nextSemesterDates = [];
             $semCounter = 0;
+            $semSemasa = 1;
 
             while ($tarikhNextSem < $tarikhTamat) 
             {
@@ -1002,15 +1008,30 @@ class PenyelarasController extends Controller
 
                 $semSemasa++;
                 $semCounter++;
+                $semInCurrentSesi++;
 
                 // Move to next semester
                 $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 
-                // Only update sesiMula every $bilSem semesters
-                if ($semCounter % $bilSem == 0) {
-                    $awal = $tarikhNextSem->format('Y');
-                    $akhir = $tarikhNextSem->format('Y') + 1;
-                    $sesiMula = $awal . '/' . $akhir;
+                if ($isSpecialStart) {
+                    if ($semInCurrentSesi >= $currentPattern) {
+                        // Reset counter and update sesi
+                        $semInCurrentSesi = 0;
+                        $tahunSesi++;
+                        $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+                        // Move to next pattern
+                        if ($patternIndex < count($pattern) - 1) {
+                            $patternIndex++;
+                        }
+                        $currentPattern = $pattern[$patternIndex] ?? 3; // default to 3
+                    }
+                } else {
+                    // For normal start, update sesi every 3 semesters
+                    if ($semCounter % $bilSem == 0) {
+                        $tahunSesi++;
+                        $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+                    }
                 }
             }
 
@@ -1022,7 +1043,7 @@ class PenyelarasController extends Controller
             $sesiSemasa = null; // Initialize a variable to store the current session
 
             foreach ($nextSemesterDates as $key => $data) {
-                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
+                echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
                 
 
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
@@ -1050,7 +1071,7 @@ class PenyelarasController extends Controller
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
-            //  dd('sini');
+             dd('sini');
             // dd($semesterEndDate);
 
             if ($currentDate <= $semesterEndDate ) {
