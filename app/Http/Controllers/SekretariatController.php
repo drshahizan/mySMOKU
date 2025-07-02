@@ -2559,7 +2559,13 @@ class SekretariatController extends Controller
             if ($program == "BKOKU") {
                 $emel = EmelKemaskini::where('emel_id', 5)->first();
 
-                if (empty(trim($smoku_emel))) {
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
                     if($jenis_institusi != 'IPTS'){
                         Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
@@ -2688,7 +2694,13 @@ class SekretariatController extends Controller
 
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',6)->first();
-                if (empty(trim($smoku_emel))) {
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
                     if($jenis_institusi != 'IPTS'){
                         Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
@@ -2809,7 +2821,13 @@ class SekretariatController extends Controller
 
             if($program=="BKOKU"){
                 $emel = EmelKemaskini::where('emel_id',4)->first();
-                if (empty(trim($smoku_emel))) {
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
                     // If $smoku_emel is blank or contains only spaces, just send to penyelaras
                     if($jenis_institusi != 'IPTS'){
                         Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
