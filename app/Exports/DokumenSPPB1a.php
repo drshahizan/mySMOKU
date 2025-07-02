@@ -79,6 +79,7 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
                 'permohonan.yuran',    
                 'permohonan.wang_saku',    
             )
+            ->distinct()
             ->get();  
 
         // Add the calculated "jenis_permohonan" column to the collection
