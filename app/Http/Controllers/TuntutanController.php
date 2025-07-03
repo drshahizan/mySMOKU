@@ -63,8 +63,15 @@ class TuntutanController extends Controller
             $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
             $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
-            // Setup session semester pattern: 2, 3, 3, 3, ...
-            $pattern = [2, 3]; // Start with 2, then 3, then repeat 3s
+            // Define semester pattern based on start month
+            if ($bulanMula == 1) {
+                $pattern = [2, 3]; // First sesi 2 sem, then 3 sem sesi
+            } elseif ($bulanMula == 3) {
+                $pattern = [1, 2]; // Every sesi 2 semesters
+            } else {
+                $pattern = [$bilSem]; // fallback to normal
+            }
+            
             $patternIndex = 0;
             $currentPattern = $pattern[$patternIndex];
             $semInCurrentSesi = 0;
@@ -100,10 +107,10 @@ class TuntutanController extends Controller
                         if ($patternIndex < count($pattern) - 1) {
                             $patternIndex++;
                         }
-                        $currentPattern = $pattern[$patternIndex] ?? 3; // default to 3
+                        $currentPattern = $pattern[$patternIndex] ?? $pattern[count($pattern) - 1]; // stay on last pattern
                     }
                 } else {
-                    // For normal start, update sesi every 3 semesters
+                    // For normal start, update sesi every bilSem
                     if ($semCounter % $bilSem == 0) {
                         $tahunSesi++;
                         $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
