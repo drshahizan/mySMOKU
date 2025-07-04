@@ -988,12 +988,16 @@ class PenyelarasController extends Controller
             $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
             // Define semester pattern based on start month
-            if ($bulanMula == 1) {
-                $pattern = [2, 3]; // First sesi 2 sem, then 3 sem sesi
-            } elseif ($bulanMula == 3) {
-                $pattern = [1, 2]; // Every sesi 2 semesters
+            if (in_array($bulanMula, [1, 3])) {
+                if ($akademik->bil_bulan_per_sem == 6) {
+                    $pattern = [1, 2]; // First sesi has 1 semester, then 2 semesters per sesi
+                } elseif ($akademik->bil_bulan_per_sem == 4) {
+                    $pattern = [2, 3]; // First sesi has 2 semesters, then 3 semesters per sesi
+                } else {
+                    $pattern = [$bilSem]; // fallback
+                }
             } else {
-                $pattern = [$bilSem]; // fallback to normal
+                $pattern = [$bilSem]; // fallback for other months
             }
 
             $patternIndex = 0;
@@ -1078,7 +1082,7 @@ class PenyelarasController extends Controller
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
-            //  dd('sini');
+            //  dd($tuntutan->id);
             // dd($semesterEndDate);
 
             if ($currentDate <= $semesterEndDate ) {
