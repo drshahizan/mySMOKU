@@ -162,8 +162,10 @@
                                         <tr>
                                             <td><strong>Status Penajaan</strong></td>
                                             <td>:</td>
-                                            @if($akademik->nama_penaja!=null)
-                                                <td>Ditaja ({{$nama_penaja}})</td>
+                                            @if($akademik->nama_penaja == '99')
+                                                <td>Ditaja ({{ $akademik->penaja_lain }})</td>
+                                            @elseif($akademik->nama_penaja != null)
+                                                <td>Ditaja ({{ $nama_penaja }})</td>
                                             @else
                                                 <td>Tidak Ditaja</td>
                                             @endif
