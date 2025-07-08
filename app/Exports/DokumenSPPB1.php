@@ -141,19 +141,27 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
         $sesi = Akademik::where('smoku_id', $item['id'])->value('sesi');
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', $item['id'])->first();
         $tuntutan_item = TuntutanItem::orderBy('id', 'desc')->where('tuntutan_id', $tuntutan->id)->first();
- 
+
+        // Default fallback for nota_resit
+        $nota_resit = strtoupper(trim($tuntutan_item->nota_resit ?? ''));
+
+        if (empty($nota_resit)) {
+            $nota_resit = '-';
+        }
+
         if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
-            $result = strtoupper($tuntutan_item->nota_resit);
+            $result = $nota_resit;
         } elseif ($item['yuran'] == 1) {
-            $result = strtoupper($tuntutan_item->nota_resit);
+            $result = $nota_resit;
         } elseif ($item['wang_saku'] == 1) {
-            $result = 'ELAUN WANG SAKU '. 'SEMESTER '. $tuntutan->semester .' SESI '. $tuntutan->sesi;
+            $result = 'ELAUN WANG SAKU SEMESTER ' . $tuntutan->semester . ' SESI ' . $tuntutan->sesi;
         } else {
             $result = 'LAIN-LAIN';
         }
-        // dd($result);
+
         return $result;
     }
+
 
     public function columnWidths(): array
     {
