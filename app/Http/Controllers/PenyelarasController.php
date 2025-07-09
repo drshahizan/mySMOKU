@@ -1757,12 +1757,12 @@ class PenyelarasController extends Controller
 
         // Validation rules for each document column
         $rules = [
-            'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
-            'dokumen4.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:2048',
+            'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen4.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
         ];
 
         // Custom error messages
