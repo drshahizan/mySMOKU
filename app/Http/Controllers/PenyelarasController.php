@@ -1083,6 +1083,7 @@ class PenyelarasController extends Controller
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
             //  dd($tuntutan->id);
+            //  dd('sini');
             // dd($semesterEndDate);
 
             if ($currentDate <= $semesterEndDate ) {
