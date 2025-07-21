@@ -406,8 +406,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			// }
 			// If the clicked step is valid or it is a step before the first invalid step, proceed
 			var clickedStepIndex = stepper.getClickedStepIndex();
-			// console.log("Clicked Step: " + clickedStepIndex);
-			// console.log("firstInvalid Step: " + firstInvalidStep);
+			console.log("Clicked Step: " + clickedStepIndex);
+			console.log("firstInvalid Step: " + firstInvalidStep);
 
 			// NOT CHECKING VALIDATION
 			// if (validationStatus[clickedStepIndex] === "Valid" || (firstInvalidStep !== null && clickedStepIndex < firstInvalidStep)) {
@@ -461,7 +461,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			// 		stepper.goTo(firstInvalidStep);
 			// 	}
 			// }
-			
+			stepper.goTo(clickedStepIndex);
 			
 		});
 		
