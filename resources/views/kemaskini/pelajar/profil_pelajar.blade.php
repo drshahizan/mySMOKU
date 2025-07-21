@@ -790,11 +790,13 @@
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
 								<label class="fs-6 fw-semibold form-label mb-2">
-									Pendapatan Bulanan&nbsp;
+									Pendapatan Bulanan Isi Rumah&nbsp;
 									<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Nilai tanpa .00">
 										<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
 									</span>
-								</label>								
+								</label>
+								<div class="fw-semibold fs-8" style="color: red">* Maklumat yang diisi mestilah benar, sekiranya didapati maklumat yang dinyatakan tidak benar, bantuan ini akan ditarikh balik dan boleh dikenakan tindakan.</div>							
+								<br>								
 								<!--end::Label-->
 								<!--begin::Input wrapper-->
 								<div class="col-12">
