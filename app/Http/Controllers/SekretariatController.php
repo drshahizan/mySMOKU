@@ -910,80 +910,93 @@ class SekretariatController extends Controller
     {
         $peringkatPengajian = PeringkatPengajian::all();
         
-        $recordsTerkini = TamatPengajian::select(
-            'tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat',
-            DB::raw('(SELECT peringkat_pengajian FROM smoku_akademik WHERE smoku_id = smoku_akademik.smoku_id AND status = 1 ORDER BY created_at DESC LIMIT 1) as peringkat_terkini')
-        )
-        ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-        ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
-        ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-        ->whereIn('smoku_akademik.smoku_id', function ($query) {
-            $query->select('smoku_id')
-                ->from('permohonan')
-                ->where('program', 'BKOKU');
-        })
-        ->where('smoku_akademik.status', 1)
-        ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
-        ->get();
+        // Step 1: Get the latest tamat_pengajian.id per student (smoku_id)
+        $latestIds = DB::table('tamat_pengajian')
+            ->select(DB::raw('MAX(id) as id'))
+            ->groupBy('smoku_id');
 
-        $recordsTerdahulu = TamatPengajian::select(
-            'tamat_pengajian.*', 'smoku_akademik.*', 'smoku.nama', 'bk_peringkat_pengajian.peringkat',
-            DB::raw('(SELECT peringkat_pengajian FROM smoku_akademik WHERE smoku_id = smoku_akademik.smoku_id AND status = 1 ORDER BY created_at DESC LIMIT 1) as peringkat_terkini')
-        )
-        ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
-        ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
-        ->join('bk_peringkat_pengajian', 'smoku_akademik.peringkat_pengajian', '=', 'bk_peringkat_pengajian.kod_peringkat')
-        ->whereIn('smoku_akademik.smoku_id', function ($query) {
-            $query->select('smoku_id')
-                ->from('permohonan')
-                ->where('program', 'BKOKU');
-        })
-        ->where('smoku_akademik.status', 0)
-        ->whereRaw('(tamat_pengajian.created_at, smoku_akademik.smoku_id) IN (SELECT MAX(created_at), smoku_id FROM tamat_pengajian GROUP BY smoku_id)')
-        ->get();
+        // Step 2: Get the full records for those latest IDs, joined with smoku to get the student name
+        $recordsTerkini = TamatPengajian::select('tamat_pengajian.*', 'smoku.nama')
+            ->join('smoku', 'tamat_pengajian.smoku_id', '=', 'smoku.id')
+            ->whereIn('tamat_pengajian.id', $latestIds)
+            ->orderBy('tamat_pengajian.id', 'desc')
+            ->get();
 
-        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsTerkini', 'recordsTerdahulu', 'peringkatPengajian'));
+        $recordsTerdahulu = TamatPengajian::select('tamat_pengajian.*', 'smoku_akademik.*')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+            ->where('smoku_akademik.status', 0)
+            ->get();
+
+        //untuk pelajar yang tak guna flow baru
+        $recordsBaru = TamatPengajian::select('tamat_pengajian.*', 'smoku_akademik.*')
+            ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'tamat_pengajian.smoku_id')
+            ->where('smoku_akademik.status', 1)
+            ->get();    
+
+        return view('kemaskini.sekretariat.pengajian.kemaskini_peringkat_pengajian', compact('recordsTerkini', 'recordsTerdahulu', 'recordsBaru',));
     }
 
     public function kemaskiniPeringkatPengajian(Request $request, $id)
     {
-        // Find the latest 'peringkat_pengajian' for this 'smoku_id'
-        $latestPeringkatPengajian = Akademik::where('smoku_id', $id)
-            ->orderBy('created_at', 'desc') // Assuming you have a 'created_at' column
-            ->first();
+        $kelulusan = $request->peringkat_baharu;
 
-        if ($latestPeringkatPengajian) {
-            // Update the latest record's 'status' to 1
-            $latestPeringkatPengajian->update(['status' => 0]);
+        if ($kelulusan == "LULUS") {
+            $latestPeringkatPengajian = Akademik::where('smoku_id', $id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($latestPeringkatPengajian) {
+                $latestPeringkatPengajian->update(['status' => 0]);
+            }
+
+            $tamat_pengajian = TamatPengajian::where('smoku_id', $id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($tamat_pengajian) {
+                // Update peringkat_baharu column
+                $tamat_pengajian->peringkat_baharu = $kelulusan;
+                $tamat_pengajian->save();
+            }
+
+            $newRecord = new Akademik([
+                'smoku_id' => $id,
+                'no_pendaftaran_pelajar' => null,
+                'peringkat_pengajian' => $tamat_pengajian->peringkat ?? null,
+                'nama_kursus' => $tamat_pengajian->kursus ?? null,
+                'id_institusi' => $tamat_pengajian->institusi ?? null,
+                'sesi' => NULL,
+                'tarikh_mula' => NULL,
+                'tarikh_tamat' => NULL,
+                'sem_semasa' => NULL,
+                'tempoh_pengajian' => NULL,
+                'bil_bulan_per_sem' => NULL,
+                'mod' => NULL,
+                'cgpa' => NULL,
+                'sumber_biaya' => NULL,
+                'sumber_lain' => NULL,
+                'nama_penaja' => NULL,
+                'penaja_lain' => NULL,
+                'status' => 1,
+            ]);
+            $newRecord->save();
+
+            return redirect()->back()->with('success', 'Permohonan peringkat pengajian baharu telah diluluskan.');
+        } else {
+            // If not approved, still update the peringkat_baharu column to reflect rejection
+            $tamat_pengajian = TamatPengajian::where('smoku_id', $id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($tamat_pengajian) {
+                $tamat_pengajian->peringkat_baharu = $kelulusan;
+                $tamat_pengajian->save();
+            }
+
+            return redirect()->back()->with('failed', 'Permohonan peringkat pengajian baharu tidak diluluskan.');
         }
-
-        // Create a new record with the specified "status" as 1
-        $newRecord = new Akademik([
-            'smoku_id' => $id,
-            'no_pendaftaran_pelajar' => null,
-            'peringkat_pengajian' => $request->peringkat_pengajian,
-            'nama_kursus' => NULL,
-            'id_institusi' => NULL,
-            'sesi' => NULL,
-            'tarikh_mula' => NULL,
-            'tarikh_tamat' => NULL,
-            'sem_semasa' => NULL,
-            'tempoh_pengajian' => NULL,
-            'bil_bulan_per_sem' => NULL,
-            'mod' => NULL,
-            'cgpa' => NULL,
-            'sumber_biaya' => NULL,
-            'sumber_lain' => NULL,
-            'nama_penaja' => NULL,
-            'penaja_lain' => NULL,
-            'status' => 1,
-        ]);
-        $newRecord->save();
-
-        session()->put('kemaskini_success_' . $id, true);
-
-        return redirect()->back()->with('success', 'Peringkat pengajian telah berjaya dikemaskini.');
     }
+
 
     public function tangguhLanjutPengajian()
     {

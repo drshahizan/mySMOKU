@@ -18,8 +18,16 @@ return new class extends Migration
             $table->string('sijil_tamat'); 
             $table->string('transkrip'); 
             $table->string('cgpa'); 
-            $table->integer('kelas'); 
+            $table->integer('kelas');
+            $table->string('tawaran')->nullable(); 
+            $table->string('institusi')->nullable(); 
+            $table->integer('peringkat')->nullable();
+            $table->integer('kursus')->nullable();
+            $table->integer('institusi_lama')->nullable();
+            $table->integer('peringkat_lama')->nullable();
+            $table->integer('kursus_lama')->nullable();
             $table->string('perakuan')->nullable();
+            $table->string('peringkat_baharu')->nullable();
             $table->timestamps();
         });
     }

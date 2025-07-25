@@ -17,6 +17,14 @@ class TamatPengajian extends Model
         'transkrip',
         'cgpa',
         'kelas',
+        'tawaran',
+        'institusi',
+        'peringkat',
+        'kursus',
+        'institusi_lama',
+        'peringkat_lama',
+        'kursus_lama',
         'perakuan',
+        'peringkat_baharu',
     ];
 }

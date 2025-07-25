@@ -61,11 +61,12 @@
                                             <tr style="color: white; background-color:rgb(35, 58, 108);">
                                                 <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>                                        
                                                 <th style="width: 27%"><b>Nama</b></th>
-                                                <th style="width: 18%" class="text-center"><b>Peringkat Pengajian Terdahulu</b></th>
-                                                <th style="width: 17%" class="text-center"><b>Peringkat Pengajian Terkini</b></th>
+                                                <th style="width: 17%" class="text-center"><b>Peringkat Pengajian Lama</b></th>
+                                                <th style="width: 18%" class="text-center"><b>Peringkat Pengajian Dimohon</b></th>
                                                 <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
                                                 <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
-                                                <th style="width: 10%" class="text-center">Kemaskini</th>
+                                                <th style="width: 12%" class="text-center"><b>Surat Tawaran Baharu</b></th> 
+                                                <th style="width: 10%" class="text-center">Permohonan Peringkat Pengajian Baharu</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,76 +93,138 @@
                                                 <tr>
                                                     <td class="text-center" data-no="{{ $i++ }}">{{$i++}}</td>
                                                     <td>{{$pemohon}}</td>
-                                                    <td>
-                                                        @if ($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
-                                                            @foreach ($recordsTerdahulu as $item)
-                                                                @php
-                                                                    $pp_terkini = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $item->peringkat_pengajian)->value('peringkat');
-                                                                @endphp
 
+                                                    <td>
+                                                        @if ($items->peringkat_lama == NULL)
+                                                            @php
+                                                                $hasRecord = false;
+                                                            @endphp
+
+                                                            @foreach ($recordsTerdahulu as $item)
                                                                 @if ($item->smoku_id === $items->smoku_id)
-                                                                    {{ ucwords(strtolower($pp_terkini)) }}
+                                                                    @php
+                                                                        $peringkat_lama = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $item->peringkat_pengajian)->value('peringkat');
+                                                                        $institusi_lama = DB::table('bk_info_institusi')->where('id_institusi', $item->id_institusi)->value('nama_institusi');
+                                                                        $hasRecord = true;
+                                                                    @endphp
+                                                                    <strong>{{ ucwords(strtolower($peringkat_lama)) }}</strong>
+                                                                    <br>
+                                                                    {{ ucwords($item->nama_kursus) }}
+                                                                    <br>
+                                                                    <strong>{{ ucwords($institusi_lama) }}</strong>
                                                                 @endif
                                                             @endforeach
+
+                                                            @if (!$hasRecord)
+                                                                @foreach ($recordsBaru as $item)
+                                                                    @if ($item->smoku_id === $items->smoku_id)
+                                                                        @php
+                                                                            $peringkat_lama = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $item->peringkat_pengajian)->value('peringkat');
+                                                                            $institusi_lama = DB::table('bk_info_institusi')->where('id_institusi', $item->id_institusi)->value('nama_institusi');
+                                                                        @endphp
+                                                                        <strong>{{ ucwords(strtolower($peringkat_lama)) }}</strong>
+                                                                        <br>
+                                                                        {{ ucwords($item->nama_kursus) }}
+                                                                        <br>
+                                                                        <strong>{{ ucwords($institusi_lama) }}</strong>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                                         @else
                                                             @php
-                                                                $pp_terdahulu = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat_pengajian)->value('peringkat');
-                                                            @endphp
-                                                            {{ ucwords(strtolower($pp_terdahulu)) }}
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        @if ($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
-                                                            @php
-                                                                $pp_terkini = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat_pengajian)->value('peringkat');
+                                                                $peringkat_lama = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat_lama)->value('peringkat');
+                                                                $institusi_lama = DB::table('bk_info_institusi')->where('id_institusi', $items->institusi_lama)->value('nama_institusi');
                                                             @endphp
 
                                                             @foreach ($recordsTerkini as $item)
                                                                 @if ($item->smoku_id === $items->smoku_id)
-                                                                    {{ ucwords(strtolower($pp_terkini)) }}
+                                                                    <strong>{{ ucwords(strtolower($peringkat_lama)) }}</strong>
+                                                                    <br>
+                                                                    {{ ucwords($items->kursus_lama) }}
+                                                                    <br>
+                                                                    <strong>{{ ucwords($institusi_lama) }}</strong>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif    
+                                                    </td>
+
+                                                    <td>
+                                                        @php
+                                                            $smokuIdsTerdahulu = $recordsTerdahulu->pluck('smoku_id')->unique();
+                                                            $smokuIdsBaru = $recordsBaru->pluck('smoku_id')->unique();
+                                                        @endphp
+                                                        @if ($items->peringkat == NULL && $smokuIdsTerdahulu->contains($items->smoku_id) && $smokuIdsBaru->contains($items->smoku_id))
+                                                            @foreach ($recordsBaru as $item)
+                                                                @if ($item->smoku_id === $items->smoku_id)
+                                                                    @php
+                                                                        $peringkat_baru = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $item->peringkat_pengajian)->value('peringkat');
+                                                                        $institusi_baru = DB::table('bk_info_institusi')->where('id_institusi', $item->id_institusi)->value('nama_institusi');
+
+                                                                    @endphp
+                                                                    <strong>{{ ucwords(strtolower($peringkat_baru)) }}</strong>
+                                                                    <br>
+                                                                    {{ ucwords($item->nama_kursus) }}
+                                                                    <br>
+                                                                    <strong>{{ ucwords($institusi_baru) }}</strong>
                                                                 @endif
                                                             @endforeach
                                                         @else
-                                                            <span style="color: red;">Belum dikemaskini</span>
-                                                        @endif
+                                                            @php
+                                                                $peringkat_mohon = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $items->peringkat)->value('peringkat');
+                                                                $institusi_mohon = DB::table('bk_info_institusi')->where('id_institusi', $items->institusi)->value('nama_institusi');
+                                                            @endphp
+                                                            @foreach ($recordsTerkini as $item)
+                                                                @if ($item->smoku_id === $items->smoku_id)
+                                                                    <strong>{{ ucwords(strtolower($peringkat_mohon)) }}</strong>
+                                                                    <br>
+                                                                    {{ ucwords($item->kursus) }}
+                                                                    <br>
+                                                                    <strong>{{ ucwords($institusi_mohon) }}</strong>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif 
                                                     </td>
+
+                                                    
             
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
+                                                        Papar
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
 
                                                     <td class="text-center">
                                                         <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Lihat
+                                                        Papar
                                                         <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
                                                     </td>
 
                                                     <td class="text-center">
-                                                        {{-- @if($recordsTerdahulu->isNotEmpty() && $recordsTerkini->isNotEmpty())
-                                                            <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" >
-                                                                <option value="">Pilih Peringkat Pengajian</option>
-                                                                @foreach ($peringkatPengajian as $peringkat)
-                                                                    @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
-                                                                        <option value="{{ $peringkat->kod_peringkat }}">{{ $peringkat->peringkat }}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-                                                        @else --}}
-                                                            <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
-                                                                @csrf
-                                                                <select name="peringkat_pengajian" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }}) {{ session()->has('kemaskini_success_' . $items->smoku_id) ? 'disabled' : '' }}">
-                                                                    <option value="">Pilih Peringkat Pengajian</option>
-                                                                    @foreach ($peringkatPengajian as $peringkat)
-                                                                        @if ($peringkat->kod_peringkat > $items->peringkat_pengajian)
-                                                                            <option value="{{ $peringkat->kod_peringkat }}">{{ $peringkat->peringkat }}</option>
-                                                                        @endif
-                                                                    @endforeach
+                                                        @if ($items->tawaran)
+                                                            <a href="{{ asset('assets/dokumen/permohonan/' . $items->tawaran) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                Papar
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
+                                                            </a>
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+
+
+                                                    <td class="text-center">
+                                                        <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
+                                                            @csrf
+                                                            @if ($items->tawaran)
+                                                                <select name="peringkat_baharu" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})">
+                                                                    <option {{ $items->peringkat_baharu == null ? 'selected' : '' }}>Pilih</option>
+                                                                    <option value="LULUS" {{ $items->peringkat_baharu == 'LULUS' ? 'selected' : '' }}>Lulus</option>
+                                                                    <option value="TIDAK LULUS" {{ $items->peringkat_baharu == 'TIDAK LULUS' ? 'selected' : '' }}>Tidak Lulus</option>
                                                                 </select>
-                                                            </form>
-                                                        {{-- @endif --}}
+
+                                                            @else
+                                                                -
+                                                            @endif    
+                                                        </form>
                                                     </td>                                                                                                      
                                                 </tr>
                                             @endforeach
@@ -191,7 +254,7 @@
                 // Set the selected value as a hidden input
                 const input = document.createElement('input');
                 input.type = 'hidden';
-                input.name = 'peringkat_pengajian'; // Change to your desired input name
+                input.name = 'peringkat_baharu'; // Change to your desired input name
                 input.value = selectedValue;
                 form.appendChild(input);
 
