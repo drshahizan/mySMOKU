@@ -432,10 +432,10 @@ class KemaskiniController extends Controller
             'sumber_lain' => $akademik->sumber_lain,
             'nama_penaja' => $akademik->nama_penaja,
             'penaja_lain' => $akademik->penaja_lain,
-            'dokumen' => $dokumen1->dokumen ?? '',
-            'catatan' => $dokumen1->catatan ?? '',
-            'dokumen' => $dokumen2->dokumen ?? '',
-            'catatan' => $dokumen2->catatan ?? ''
+            'upload_akaunBank' => $dokumen1->dokumen ?? '',
+            'nota_akaunBank' => $dokumen1->catatan ?? '',
+            'upload_suratTawaran' => $dokumen2->dokumen ?? '',
+            'nota_suratTawaran' => $dokumen2->catatan ?? ''
         ];
         
 
@@ -447,22 +447,31 @@ class KemaskiniController extends Controller
             'kategori' => $request->oku,
         ]);
 
-
-
-        $user_ada = User::where('no_kp', $request->no_kp)->get();
-
         //Semak table user dah ada ic betul ke tak. kalau ada delete dulu
-        if ($user_ada->isNotEmpty()) {
-            // Delete all matching entries
-            User::where('no_kp', $request->no_kp)->delete();
+        if ($request->no_kp != $smoku->no_kp) {
+            // Check if the new no_kp already exists in the users table
+            $user_ada = User::where('no_kp', $request->no_kp)->get();
 
+            if ($user_ada->isNotEmpty()) {
+                // Delete all users with the new no_kp to prevent conflict
+                User::where('no_kp', $request->no_kp)->delete();
+            }
+
+            // Now update the user with the old no_kp to the new one
+            User::where('no_kp', $smoku->no_kp)
+                ->update([
+                    'nama' => strtoupper($request->nama_pelajar),
+                    'no_kp' => $request->no_kp,
+                    'email' => $request->emel ?? ''
+                ]);
+        } else {
+            // no_kp not changed, just update name/email
+            User::where('no_kp', $smoku->no_kp)
+                ->update([
+                    'nama' => strtoupper($request->nama_pelajar),
+                    'email' => $request->emel ?? ''
+                ]);
         }
-        User::where('no_kp',$smoku->no_kp)
-        ->update([
-            'nama' => strtoupper($request->nama_pelajar),
-            'no_kp' => $request->no_kp,
-            'email' => $request->emel ?? ''
-        ]);
 
         if($butiran_pelajar != null) {
             ButiranPelajar::where('smoku_id' ,$smoku->id)

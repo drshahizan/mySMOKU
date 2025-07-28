@@ -238,7 +238,7 @@
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.pelajar')}}">
 							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-							<span class="menu-title">Senarai Pelajar</span>
+							<span class="menu-title">Maklumat Pelajar</span>
 						</a>
 					</div>
 				@if($institusi->jenis_institusi === 'UA')	
@@ -448,7 +448,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Senarai Pelajar</span>
+						<span class="menu-title">Maklumat Pelajar</span>
 					</a>
 				</div>
 
@@ -728,7 +728,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('ppk.senarai.pelajar')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Senarai Pelajar</span>
+						<span class="menu-title">Maklumat Pelajar</span>
 					</a>
 				</div>
 			</div>
