@@ -1851,4 +1851,82 @@ class PenyelarasPPKController extends Controller
         return back();
     }
 
+    public function senaraiSuratTawaranPPK()
+    {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        }
+        // else if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk != $infoipt ->id_institusi) {
+        //     $infoiptCollection = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->get();
+        // } 
+        else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi')->whereIn('id_institusi', $idInstitusiList)->get();
+        
+        return view('kemaskini.penyelarasppk.senarai_surat_tawaran', compact('institusiPengajian'));
+
+
+    }
+
+    public function getSenaraiLayakPPK()
+    {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        }
+        else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection for consistency
+        }
+        
+        // Extract all `id_institusi` values (handles both single and multiple records)
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+        
+        $pelajar = Smoku::whereHas('akademik', function ($query)  use ($idInstitusiList) {
+                $query->where('status', 1)
+                      ->whereIn('id_institusi', $idInstitusiList);
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->whereIn('status', [6, 8]);
+            })
+            ->with(['akademik' => function ($query) use ($idInstitusiList) {
+                $query->where('status', 1)->whereIn('id_institusi', $idInstitusiList)->with(['infoipt', 'peringkat']);
+                 },
+            'permohonan'])
+            ->orderBy('nama')
+            ->get()
+            ->map(function ($item) {
+                // Ambil hanya satu rekod akademik yang status=1
+                $akademik = $item->akademik->first();
+                // Ambil hanya satu rekod permohonan latest
+                $permohonan = $item->permohonan->whereIn('status', [6, 8])->first();
+                return [
+                    'id' => $item->id,
+                    'smoku_id' => $item->id,
+                    'nama' => $item->nama,
+                    'no_kp' => $item->no_kp,
+                    'peringkat_pengajian' => ucfirst(strtolower($akademik->peringkat->peringkat)) ?? '-',
+                    'nama_kursus' => $akademik->nama_kursus ?? '-',
+                    'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
+                    'tarikh_mula' => $akademik->tarikh_mula ?? '',
+                    'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
+                    'permohonan_id' => $permohonan->id ?? '',
+                    'program' => $permohonan->program ?? '',
+                    'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now())
+                ];
+            });
+
+        return response()->json($pelajar);
+
+
+
+    }
+
 }

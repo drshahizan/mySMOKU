@@ -161,7 +161,7 @@
 
 				<div class="menu-item pt-5">
 					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
+						<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar Baharu</span>
 					</div>
 				</div>
 
@@ -181,7 +181,7 @@
 
 				<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
+							<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar <br>Sedia Ada</span>
 						</div>
 				</div>
 
@@ -202,7 +202,7 @@
 				@if($institusi->jenis_institusi === 'UA')
 					<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Salur</span>
+							<span class="menu-heading fw-bold text-uppercase fs-4">Salur</span>
 						</div>
 					</div>
 					<div class="menu-item">
@@ -232,13 +232,19 @@
 				@endif
 					<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+							<span class="menu-heading fw-bold text-uppercase fs-4">Kemaskini</span>
 						</div>
 					</div>
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.pelajar')}}">
 							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 							<span class="menu-title">Maklumat Pelajar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('penyelaras.kemaskini.surat.tawaran')}}">
+							<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
+							<span class="menu-title">Surat Tawaran Pelajar</span>
 						</a>
 					</div>
 				@if($institusi->jenis_institusi === 'UA')	
@@ -683,7 +689,7 @@
 				</div>
 				<div class="menu-item pt-5">
 					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
+						<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar Baharu</span>
 					</div>
 				</div>
 				<div class="menu-item">
@@ -706,7 +712,7 @@
 				</div>
 				<div class="menu-item pt-5">
 					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
+						<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar <br>Sedia Ada</span>
 					</div>
 				</div>
 				<div class="menu-item">
@@ -729,13 +735,19 @@
 				</div>
 				<div class="menu-item pt-5">
 					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+						<span class="menu-heading fw-bold text-uppercase fs-4">Kemaskini</span>
 					</div>
 				</div>
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('ppk.senarai.pelajar')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 						<span class="menu-title">Maklumat Pelajar</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('penyelaras.ppk.kemaskini.surat.tawaran')}}">
+						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
+						<span class="menu-title">Surat Tawaran Pelajar</span>
 					</a>
 				</div>
 			</div>

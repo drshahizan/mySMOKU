@@ -1724,7 +1724,7 @@
 				// Function to fetch peringkat options
 				function fetchPeringkat(id) {
 					$.ajax({
-						url: '/getPeringkatProfilPelajar/' + id,
+						url: '/getPeringkatPProfilPelajar/' + id,
 						type: 'get',
 						dataType: 'json',
 						success: function(response) {
@@ -1754,7 +1754,7 @@
 				// Function to fetch kursus options based on id_institusi and kod_peringkat
 				function fetchKursus(id_institusi, kod_peringkat) {
 					$.ajax({
-						url: '/getKursusProfilPelajar/' + kod_peringkat + '/' + id_institusi,
+						url: '/getKursusProfilPelajarB/' + kod_peringkat + '/' + id_institusi,
 						type: 'get',
 						dataType: 'json',
 						success: function(response) {

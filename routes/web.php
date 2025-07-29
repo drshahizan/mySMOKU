@@ -525,6 +525,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/penyelaras/permohonan/maklumat-baucer/{permohonanId}', [PenyelarasController::class, 'updateMaklumatBaucerPermohonan'])->name('update.maklumat.baucer.permohonan');
         Route::post('/penyelaras/tuntutan/maklumat-baucer/{tuntutanId}', [PenyelarasController::class, 'updateMaklumatBaucerTuntutan'])->name('update.maklumat.baucer.tuntutan');
 
+        //Kemaskini - Penyelaras - Senarai Surat Tawaran
+        Route::get('penyelaras/kemaskini/senarai/surat/tawaran', [PenyelarasController::class, 'senaraiSuratTawaranBKOKU'])->name('penyelaras.kemaskini.surat.tawaran');
+        Route::get('penyelaras/kemaskini/getSenaraiLayak', [PenyelarasController::class, 'getSenaraiLayakBKOKU'])->name('penyelaras.kemaskini.getSenaraiLayak');
+
         //Kemaskini - Penyelaras - Maklumat Bank
         Route::get('penyelaras/kemaskini/maklumat/bank', [PenyelarasController::class, 'maklumatBank'])->name('maklumat.bank');
         Route::post('penyelaras/kemaskini/hantar/maklumat/bank/{id}', [PenyelarasController::class, 'kemaskiniMaklumatBank'])->name('kemaskini.bank');
@@ -532,8 +536,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/kemaskini/senarai/pelajar/getSenarai', [PenyelarasController::class, 'getSenaraiPelajarPenyelaras'])->name('penyelaras.getSenaraiPelajar');
         Route::get('penyelaras/kemaskini/profil/pelajar/{id}', [PenyelarasController::class, 'profilPelajarInstitusi'])->name('profil.pelajar.institusi');
         Route::post('penyelaras/kemaskini/profil/pelajar/simpan/{id}', [PenyelarasController::class, 'simpanProfilPelajarInstitusi'])->name('simpan.profil.pelajar.institusi');
-        Route::get('/getPeringkatProfilPelajar/{id}', [PenyelarasController::class, 'peringkatProfilPelajar']);
-        Route::get('/getKursusProfilPelajar/{kodperingkat}/{id}', [PenyelarasController::class, 'kursusProfilPelajar']);
+        Route::get('/getPeringkatPProfilPelajar/{id}', [PenyelarasController::class, 'peringkatProfilPelajar']);
+        Route::get('/getKursusProfilPelajarB/{kodperingkat}/{id}', [PenyelarasController::class, 'kursusProfilPelajar']);
         Route::get('penyelaras/kemaskini/senarai/pelajar', [PenyelarasController::class, 'senaraiPelajar'])->name('senarai.pelajar.ua');
         Route::post('penyelaras/kemaskini/hantar/maklumat/institusi/{id}', [PenyelarasController::class, 'tukarInstitusi'])->name('tukar.institusi');
         Route::post('penyelaras/kemaskini/hantar/terima/pelajar/{id}', [PenyelarasController::class, 'terimaPelajar'])->name('terima.pelajar');
@@ -579,6 +583,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/bkoku/sejarah/papar-saringan/{id}', [PenyelarasController::class, 'paparRekodSaringanTuntutan'])->name('bkoku.papar.saringan.tuntutan');
         Route::get('penyelaras/bkoku/tuntutan/item/delete/{id}', [PenyelarasController::class, 'deleteItemTuntutan'])->name('bkoku.tuntutan.item.delete');
         Route::get('penyelaras/bkoku/tuntutan/batal/{id}', [PenyelarasController::class, 'batalTuntutan'])->name('bkoku.tuntutan.batal');
+        
     });    
 
     //Penyelaras PPK
@@ -630,6 +635,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('penyelaras/ppk/kemaskini/profil/pelajar/simpan/{id}', [PenyelarasPPKController::class, 'simpanProfilPelajarInstitusi'])->name('ppk.simpan.profil.pelajar.institusi');
         Route::get('/getPeringkatProfilPelajar/{id}', [PenyelarasPPKController::class, 'peringkatProfilPelajar']);
         Route::get('/getKursusProfilPelajar/{kodperingkat}/{id}', [PenyelarasPPKController::class, 'kursusProfilPelajar']);
+
+        //Kemaskini - Penyelaras  PPK- Senarai Surat Tawaran
+        Route::get('penyelaras/ppk/kemaskini/senarai/surat/tawaran', [PenyelarasPPKController::class, 'senaraiSuratTawaranPPK'])->name('penyelaras.ppk.kemaskini.surat.tawaran');
+        Route::get('penyelaras/ppk/kemaskini/getSenaraiLayak', [PenyelarasPPKController::class, 'getSenaraiLayakPPK'])->name('penyelaras.ppk.kemaskini.getSenaraiLayak');
     });
 
     //Pentadbir
