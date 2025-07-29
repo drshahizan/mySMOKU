@@ -442,7 +442,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
 						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat E-mel Pengguna</span>
+						<span class="menu-title">Maklumat Akaun Pengguna</span>
 					</a>
 				</div>
 				<div class="menu-item">
