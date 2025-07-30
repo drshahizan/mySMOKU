@@ -239,6 +239,8 @@
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
@@ -261,7 +263,9 @@
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
@@ -285,6 +289,8 @@
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th>
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
@@ -307,7 +313,9 @@
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
@@ -332,6 +340,7 @@
                                                         <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th>
                                                         <th class="text-center" style="width: 15%"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
@@ -396,7 +405,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [10], visible: false } // Hide column (index 11)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.UA") }}', // URL to fetch data from
@@ -461,6 +470,28 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -538,7 +569,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [10], visible: false } // Hide column (index 11)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.IPTS") }}', // URL to fetch data from
@@ -604,6 +635,28 @@
                                     return formatted_data;
                                 },
                                 className: 'text-center'
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
                             },
                             {
                                 data: 'kelulusan.no_mesyuarat',
@@ -680,7 +733,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [10], visible: false } // Hide column (index 11)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.POLI") }}', // URL to fetch data from
@@ -746,6 +799,28 @@
                                     return formatted_data;
                                 },
                                 className: 'text-center'
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
                             },
                             {
                                 data: 'kelulusan.no_mesyuarat',
@@ -820,7 +895,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [10], visible: false } // Hide column (index 11)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.KK") }}', // URL to fetch data from
@@ -886,6 +961,28 @@
                                     return formatted_data;
                                 },
                                 className: 'text-center'
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
                             },
                             {
                                 data: 'kelulusan.no_mesyuarat',
@@ -960,7 +1057,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [9], visible: false } // Hide column (index 10)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
@@ -1026,6 +1123,17 @@
                                     return formatted_data;
                                 },
                                 className: 'text-center'
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
                             },
                             {
                                 data: 'kelulusan.no_mesyuarat',
