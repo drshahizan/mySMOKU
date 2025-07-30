@@ -50,4 +50,20 @@ class Smoku extends Model
         return $this->hasMany(Permohonan::class, 'smoku_id', 'id');
     }
 
+    public function butiranPelajar()
+    {
+        return $this->hasOne(ButiranPelajar::class, 'smoku_id', 'id');
+    }
+
+    public function keturunanRelation()
+    {
+        return $this->belongsTo(Keturunan::class, 'keturunan', 'id');
+    }
+
+    public function okuRelation()
+    {
+        return $this->belongsTo(JenisOku::class, 'kategori', 'kod_oku');
+    }
+
+
 }

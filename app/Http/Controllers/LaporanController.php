@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SenaraiPermohonanBKOKU;
+use App\Models\InfoIpt;
 use App\Models\Permohonan;
+use App\Models\Smoku;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
@@ -482,4 +487,108 @@ class LaporanController extends Controller
 
         return response()->json($permohonan);
     }
+
+    public function excelBKOKU()
+    {
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi')->get();
+        
+        return view('pelaporan.excel_bkoku', compact('institusiPengajian'));
+
+
+    }
+
+    public function getExcelBKOKU()
+    {
+        
+        $pelajar = Smoku::whereHas('akademik', function ($query) {
+                $query->where('status', 1);
+            })
+            ->whereHas('permohonan', function ($query) {
+                $query->whereIn('status', [6, 8])
+                      ->where('program', 'BKOKU');
+            })
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
+                 },
+                'permohonan' => function ($query) {
+                    $query->whereIn('status', [6, 8])
+                        ->where('program', 'BKOKU');
+                }
+            ])
+            ->orderBy('nama')
+            ->get()
+            ->map(function ($item) {
+                // Ambil hanya satu rekod akademik yang status=1
+                $akademik = $item->akademik->first();
+                // Ambil hanya satu rekod permohonan latest
+                $permohonan = $item->permohonan->whereIn('status', [6, 8])->where('program', 'BKOKU')->first();
+                return [
+                    'id' => $item->id,
+                    'smoku_id' => $item->id,
+                    'nama' => $item->nama,
+                    'no_kp' => $item->no_kp,
+                    'peringkat_pengajian' => ucfirst(strtolower($akademik->peringkat->peringkat)) ?? '-',
+                    'nama_kursus' => $akademik->nama_kursus ?? '-',
+                    'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
+                    'tarikh_mula' => $akademik->tarikh_mula ?? '',
+                    'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
+                    'permohonan_id' => $permohonan->id ?? '',
+                    'program' => $permohonan->program ?? '',
+                    'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now())
+                ];
+            });
+
+        return response()->json($pelajar);
+
+    }
+
+    public function cetakSenaraiBKOKUExcel(Request $request)
+    {
+        $institusi = $request->input('institusi');
+        // dd($request->fullUrl(), $request->input('institusi'));
+        $id_institusi = null;
+
+        if (!empty($institusi)) {
+            $id_institusi = InfoIpt::where('nama_institusi', $institusi)->value('id_institusi');
+        }
+
+        $kelulusan = Smoku::whereHas('akademik', function ($query) use ($id_institusi) {
+        $query->where('status', 1);
+
+        // Apply filter if $id_institusi is not null
+        if (!empty($id_institusi)) {
+                $query->where('id_institusi', $id_institusi);
+            }
+        })
+        ->whereHas('permohonan', function ($query) {
+            $query->whereIn('status', [6, 8])
+                ->where('program', 'BKOKU');
+        })
+        ->with([
+            'butiranPelajar.negeri',
+            'butiranPelajar.bandar',
+            'butiranPelajar.parlimenRelation',
+            'butiranPelajar.dunRelation',
+            'butiranPelajar.agamaRelation',
+            'keturunanRelation',
+            'okuRelation',
+            'akademik' => function ($query) use ($id_institusi) {
+                $query->where('status', 1)
+                    ->when($id_institusi, fn($q) => $q->where('id_institusi', $id_institusi))
+                    ->with(['infoipt', 'peringkat', 'modRelation', 'sumberRelation', 'penajaRelation']);
+            },
+            'permohonan' => function ($query) {
+                $query->whereIn('status', [6, 8])
+                    ->where('program', 'BKOKU')
+                    ->with('kelulusanRelation');
+            }
+        ])
+        ->orderBy('nama')
+        ->get();
+
+        // dd($kelulusan);
+
+        return Excel::download(new SenaraiPermohonanBKOKU($kelulusan), 'Data_Excel_BKOKU.xlsx');
+    }
+
 }

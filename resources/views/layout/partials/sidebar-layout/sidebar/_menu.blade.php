@@ -505,6 +505,32 @@
 					<!-- End of submenu -->
 				</div>
 				<div class="menu-item">
+					<a class="menu-link" href="{{ route('laporan.permohonan') }}" >
+						<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
+						<span class="menu-title">Data Excel</span>
+					</a>
+					<!-- Start of submenu -->
+					<ul> 
+						<a class="menu-link" href="{{ route('laporan.excel.bkoku') }}">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">BKOKU</span>
+						</a>
+					</ul> 
+					<!-- End of submenu -->
+					<!-- Start of submenu -->
+					<ul> 
+						<a class="menu-link" href="#">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">PPK</span>
+						</a>
+					</ul> 
+					<!-- End of submenu -->
+				</div>
+				<div class="menu-item">
 					<a class="menu-link" href="{{ route('laporan.tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('chart-line', 'fs-2') !!}</span>
 						<span class="menu-title">Tuntutan</span>

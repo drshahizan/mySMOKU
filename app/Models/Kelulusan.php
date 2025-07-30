@@ -20,4 +20,5 @@ class Kelulusan extends Model
         'keputusan',
         'catatan',
     ];
+
 }

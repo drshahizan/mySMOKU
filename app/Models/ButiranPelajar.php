@@ -32,4 +32,31 @@ class ButiranPelajar extends Model
         'no_akaun_bank',
         
     ];
+
+    public function negeri()
+    {
+        return $this->belongsTo(Negeri::class, 'alamat_tetap_negeri');
+    }
+
+    public function bandar()
+    {
+        return $this->belongsTo(Bandar::class, 'alamat_tetap_bandar');
+    }
+
+    public function parlimenRelation()
+    {
+        return $this->belongsTo(Parlimen::class, 'parlimen', 'id');
+    }
+
+    public function dunRelation()
+    {
+        return $this->belongsTo(Dun::class, 'dun', 'id');
+    }
+
+    public function agamaRelation()
+    {
+        return $this->belongsTo(Agama::class, 'agama', 'id');
+    }
+
+
 }

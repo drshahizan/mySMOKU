@@ -44,5 +44,20 @@ class Akademik extends Model
         return $this->belongsTo(PeringkatPengajian::class, 'peringkat_pengajian', 'kod_peringkat');
     }
 
+    public function modRelation()
+    {
+        return $this->belongsTo(Mod::class, 'mod', 'kod_mod');
+    }
+
+    public function sumberRelation()
+    {
+        return $this->belongsTo(SumberBiaya::class, 'sumber_biaya', 'kod_biaya');
+    }
+
+    public function penajaRelation()
+    {
+        return $this->belongsTo(Penaja::class, 'nama_penaja', 'id');
+    }
+
 
 }

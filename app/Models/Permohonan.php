@@ -70,5 +70,11 @@ class Permohonan extends Model
         return $this->belongsTo(Kelulusan::class, 'id', 'permohonan_id');
     }
 
+    public function kelulusanRelation()
+    {
+        return $this->hasOne(Kelulusan::class, 'permohonan_id', 'id');
+    }
+
+
    
 }

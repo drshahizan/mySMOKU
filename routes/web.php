@@ -100,7 +100,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('katalaluan/simpan', [ProfilController::class, 'simpanKatalaluan'])->name('simpan.katalaluan');
     Route::get('kemaskini/emel-katalaluan', [ProfilController::class, 'kemaskiniEmelKatalaluan'])->name('kemaskini.emel.katalaluan');
     Route::post('simpan/kemaskini/emel-katalaluan', [ProfilController::class, 'simpanEmelKatalaluan'])->name('hantar.emel.katalaluan');
-   
 
     //all use
     Route::get('/getBandar/{id}', [PermohonanController::class, 'getBandar']);
@@ -674,6 +673,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/laporan/permohonan', [LaporanController::class, 'permohonan'])->name('laporan.permohonan');
         Route::get('/laporan/statistik', [LaporanController::class, 'statistik'])->name('laporan.statistik');
         Route::get('/laporan/tuntutan', [LaporanController::class, 'tuntutan'])->name('laporan.tuntutan');
+
+        //Download Masterlist
+        Route::get('/laporan/excel/bkoku', [LaporanController::class, 'excelBKOKU'])->name('laporan.excel.bkoku');
+        Route::get('/laporan/excel/bkoku/getExcelBKOKU', [LaporanController::class, 'getExcelBKOKU'])->name('laporan.getExcelBKOKU');
+        //EXCEL
+        Route::get('senarai-permohonan-bkoku-excel', [LaporanController::class, 'cetakSenaraiBKOKUExcel'])->name('senarai.bkoku.excel');
+
+        Route::get('/laporan/excel/ppk', [LaporanController::class, 'excelPPK'])->name('laporan.excel.ppk');
     // });
         
     
