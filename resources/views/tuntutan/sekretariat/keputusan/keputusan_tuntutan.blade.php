@@ -161,17 +161,19 @@
                                 <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable4" class="table table-bordered table-striped">
+                                            <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th><b>ID Tuntutan</b></th>
-                                                        <th><b>Nama</b></th>
-                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center"><b>ID Institusi</b></th>
-                                                        <th><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center">Status Tuntutan</th>
-                                                        <th class="text-center">Status</th>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Tuntutan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -183,17 +185,19 @@
                                 <div class="tab-pane fade" id="bkokuPOLI" role="tabpanel" aria-labelledby="bkokuPOLI-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable2" class="table table-bordered table-striped">
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th><b>ID Tuntutan</b></th>
-                                                        <th><b>Nama</b></th>
-                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center"><b>ID Institusi</b></th>
-                                                        <th><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center">Status Tuntutan</th>
-                                                        <th class="text-center">Status</th>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Tuntutan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -205,17 +209,19 @@
                                 <div class="tab-pane fade" id="bkokuKK" role="tabpanel" aria-labelledby="bkokuKK-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable3" class="table table-bordered table-striped">
+                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th><b>ID Tuntutan</b></th>
-                                                        <th><b>Nama</b></th>
-                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center"><b>ID Institusi</b></th>
-                                                        <th><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center">Status Tuntutan</th>
-                                                        <th class="text-center">Status</th>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Tuntutan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -227,17 +233,19 @@
                                 <div class="tab-pane fade" id="bkokuIPTS" role="tabpanel" aria-labelledby="bkokuIPTS-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
-                                            <table id="sortTable1" class="table table-bordered table-striped">
+                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th><b>ID Tuntutan</b></th>
-                                                        <th><b>Nama</b></th>
-                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center"><b>ID Institusi</b></th>
-                                                        <th><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center">Status Tuntutan</th>
-                                                        <th class="text-center">Status</th>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Tuntutan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -249,17 +257,18 @@
                                 <div class="tab-pane fade" id="ppk" role="tabpanel" aria-labelledby="ppk-tab">
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable5" class="table table-bordered table-striped">
+                                            <table id="sortTable5" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
-                                                    <tr style="color: white; background-color:rgb(35, 58, 108);">
-                                                        <th><b>ID Tuntutan</b></th>
-                                                        <th><b>Nama</b></th>
-                                                        <th class="text-center"><b>Institusi Pengajian</b></th>
-                                                        <th class="text-center"><b>ID Institusi</b></th>
-                                                        <th><b>Peringkat Pengajian</b></th>
-                                                        <th class="text-center"><b>Tarikh Kemaskini Keputusan</b></th>
-                                                        <th class="text-center">Status Tuntutan</th>
-                                                        <th class="text-center">Status</th>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Tuntutan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Kemaskini Keputusan</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Tuntutan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -312,7 +321,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.tuntutan.IPTS") }}', // URL to fetch data from
@@ -361,6 +370,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'status' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -376,6 +386,28 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -429,8 +461,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'status' }
+                            }
                         ]
                         
 
@@ -444,7 +475,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.tuntutan.POLI") }}', // URL to fetch data from
@@ -493,6 +524,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'status' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -508,6 +540,28 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -561,8 +615,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'status' }
+                            }
                         ]
                     });
                 }
@@ -574,7 +627,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.tuntutan.KK") }}', // URL to fetch data from
@@ -623,6 +676,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'status' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -638,6 +692,28 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -691,8 +767,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'status' }
+                            }
                         ]
                     });
                 }
@@ -704,7 +779,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.tuntutan.BKOKUUA") }}', // URL to fetch data from
@@ -753,6 +828,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'status' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -768,6 +844,28 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -821,8 +919,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'status' }
+                            }
                         ]
                         
 
@@ -836,7 +933,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.tuntutan.PPK") }}', // URL to fetch data from
@@ -885,6 +982,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'status' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -900,6 +998,17 @@
                                     var formatted_data = words.join(' ');
 
                                     return formatted_data;
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    if (data === null) {
+                                        return ''; // Return empty string if data is null
+                                    } else {
+                                        return data; // Return the original data if not null
+                                    }
                                 }
                             },
                             {
@@ -953,8 +1062,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'status' }
+                            }
                         ]
                         
 
@@ -1062,7 +1170,7 @@
                         columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [7], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ]
                     });
                 }
@@ -1098,7 +1206,7 @@
                             let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
                             let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
 
-                            let dateAdded = moment(data[5], 'DD/MM/YYYY');
+                            let dateAdded = moment(data[8], 'DD/MM/YYYY');
 
                             // Check if the date falls within the specified range
                             let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
@@ -1129,7 +1237,7 @@
                 // Apply search filter for status
                 if (status) {
                     console.log('Applying Status Filter:', status);
-                    table.column(7).search(status).draw();
+                    table.column(4).search(status).draw();
                 } else {
                     console.log('No Status Filter Applied');
                 }
