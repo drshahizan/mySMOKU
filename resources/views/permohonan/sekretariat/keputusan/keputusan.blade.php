@@ -238,13 +238,13 @@
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -262,14 +262,14 @@
                                                         <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 15% !important;"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10% !important;"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -288,13 +288,13 @@
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -313,13 +313,13 @@
                                                         <th style="width: 25% !important;"><b>Nama</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
                                                         <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
                                                         <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
-                                                        <th class="text-center" style="width: 10%;"><b>Status</b></th>
                                                     </tr>
                                                 </thead>
                                                
@@ -335,16 +335,16 @@
                                             <table id="sortTable5" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10%"><b>ID Permohonan</b></th>                                        
-                                                        <th style="width: 27%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 18%"><b>Institusi Pengajian</b></th> 
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>                                        
+                                                        <th style="width: 25% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th> 
                                                         <th class="text-center" style="width: 15%"><b>ID Institusi</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Peringkat Pengajian</b></th> 
-                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th>
-                                                        <th class="text-center" style="width: 15%"><b>No. Mesyuarat</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Tarikh Mesyuarat</b></th> 
-                                                        <th class="text-center" style="width: 10%"><b>Status Permohonan</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th> 
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th> 
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -405,7 +405,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [10], visible: false } // Hide column (index 11)
+                                { targets: [4], visible: false }, // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.UA") }}', // URL to fetch data from
@@ -454,6 +454,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'kelulusan.keputusan' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 className: 'text-center',
@@ -554,8 +555,8 @@
                                     }
                                     return status;
                                 }
-                            },
-                            { data: 'kelulusan.keputusan' }
+                            }
+                            
                         ]
                         
 
@@ -569,7 +570,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [10], visible: false } // Hide column (index 11)
+                                { targets: [4], visible: false }, // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.IPTS") }}', // URL to fetch data from
@@ -618,6 +619,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'kelulusan.keputusan' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -718,8 +720,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'kelulusan.keputusan' }
+                            }
                         ]
                         
 
@@ -733,7 +734,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [10], visible: false } // Hide column (index 11)
+                                { targets: [4], visible: false }, // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.POLI") }}', // URL to fetch data from
@@ -782,6 +783,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'kelulusan.keputusan' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -882,8 +884,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'kelulusan.keputusan' }
+                            }
                         ]
                     });
                 }
@@ -895,7 +896,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [10], visible: false } // Hide column (index 11)
+                                { targets: [4], visible: false }, // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.KK") }}', // URL to fetch data from
@@ -944,6 +945,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'kelulusan.keputusan' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -1044,8 +1046,7 @@
 
                                     return status;
                                 }
-                            },
-                            { data: 'kelulusan.keputusan' }
+                            }
                         ]
                     });
                 }
@@ -1057,7 +1058,7 @@
                             columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [9], visible: false } // Hide column (index 10)
+                                { targets: [4], visible: false }, // Hide column (index 5)
                             ],
                         ajax: {
                             url: '{{ route("senarai.keputusan.PPK") }}', // URL to fetch data from
@@ -1106,6 +1107,7 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
+                            { data: 'kelulusan.keputusan' },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -1194,8 +1196,7 @@
                                     }
                                     return status;
                                 }
-                            },
-                            { data: 'kelulusan.keputusan' }
+                            }
                         ]
                         
 
@@ -1331,7 +1332,7 @@
                         columnDefs: [
                                 { orderable: false, targets: [0] },
                                 { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [8], visible: false } // Hide column (index 9)
+                                { targets: [4], visible: false } // Hide column (index 5)
                             ]
                     });
                 }
@@ -1385,7 +1386,7 @@
                             let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
                             let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
 
-                            let dateAdded = moment(data[6], 'DD/MM/YYYY');
+                            let dateAdded = moment(data[9], 'DD/MM/YYYY');
 
                             // Check if the date falls within the specified range
                             let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
@@ -1416,7 +1417,7 @@
                 // Apply search filter for status
                 if (status) {
                     console.log('Applying Status Filter:', status);
-                    table.column(8).search(status).draw();
+                    table.column(4).search(status).draw();
                 } else {
                     console.log('No Status Filter Applied');
                 }
