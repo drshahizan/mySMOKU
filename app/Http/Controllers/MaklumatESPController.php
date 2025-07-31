@@ -100,11 +100,10 @@ class MaklumatESPController extends Controller
         if ($dokumen->isEmpty()) {
             return '<p class="text-muted">Tiada dokumen dijumpai.</p>';
         }
-        // return response('<p>Hello from server. Type = ' . $type . ', ID = ' . $id . '</p>');
 
-        // Return raw HTML string — this is where the accordion code is generated
         $i = 1; $n = 1;
         $html = '<div class="accordion" id="dokumenAccordion">';
+        
         foreach ($dokumen as $item) {
             $dokumen_path = asset('assets/dokumen/permohonan/' . $item->dokumen);
             $filePath = public_path('assets/dokumen/permohonan/' . $item->dokumen);
@@ -121,32 +120,40 @@ class MaklumatESPController extends Controller
                 4 => "Dokumen Tambahan " . $n++,
             };
 
+            $ext = strtolower(pathinfo($dokumen_path, PATHINFO_EXTENSION));
+
             $html .= '
             <div class="accordion-item">
-            <h2 class="accordion-header" id="heading'.$i.'">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'.$i.'" aria-expanded="false">
-                <b style="color:black!important">'.$id_dokumen.'</b>
-                </button>
-            </h2>
-            <div id="collapse'.$i.'" class="accordion-collapse collapse" aria-labelledby="heading'.$i.'">
-                <div class="accordion-body" style="text-align: center">
-                <p>Catatan: '.$item->catatan.'</p>';
-            
-            if (pathinfo($dokumen_path, PATHINFO_EXTENSION) != 'pdf') {
-                $html .= '<a href="'.$dokumen_path.'" download="'.$id_dokumen.'.png">
-                            <img src="'.$dokumen_path.'" width="90%" height="650px"/>
+                <h2 class="accordion-header" id="heading' . $i . '">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $i . '" aria-expanded="false">
+                        <b style="color:black!important">' . $id_dokumen . '</b>
+                    </button>
+                </h2>
+                <div id="collapse' . $i . '" class="accordion-collapse collapse" aria-labelledby="heading' . $i . '">
+                    <div class="accordion-body" style="text-align: center">
+                        <p>Catatan: ' . $item->catatan . '</p>';
+
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
+                $html .= '
+                        <a href="' . $dokumen_path . '" download="' . $id_dokumen . '.' . $ext . '">
+                            <img src="' . $dokumen_path . '" style="max-width: 50%; height: auto; cursor: pointer;" alt="' . $id_dokumen . '">
                         </a>';
+            } else {
+                $html .= '<embed src="' . $dokumen_path . '" width="100%" height="650px" type="application/pdf"/>';
             }
-            $html .= '<embed src="'.$dokumen_path.'" width="90%" height="650px"/>
+
+            $html .= '
+                    </div>
                 </div>
-            </div>
             </div>';
+
             $i++;
         }
-        $html .= '</div>';
 
+        $html .= '</div>';
         return $html;
     }
+
 
     public function getSenaraiEspBKOKUUA()
     {
