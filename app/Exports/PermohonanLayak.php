@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Akademik;
 use App\Models\InfoIpt;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
@@ -52,13 +53,29 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             $query->whereBetween('permohonan.tarikh_hantar', [$this->startDate, $this->endDate]);
         }
 
-        return $query->select(
+        // Execute the query and get results
+        $results = $query->select(
+                'permohonan.smoku_id',
                 'permohonan.no_rujukan_permohonan',
                 'b.nama',
+                'permohonan.yuran',
+                'permohonan.wang_saku',
                 'permohonan.yuran_disokong',
                 'permohonan.wang_saku_disokong',
                 'permohonan.tarikh_hantar'
-            )->get();
+            )
+            ->get();
+
+        // Add calculated fields to each item in the result
+        $results = $results->map(function ($item, $key) {
+            $item->perihal = $this->calculatePerihal($item);
+            $item->bil = $key + 1;
+            return $item;
+        });
+
+        return $results;
+        
+        
     }
 
     public function headings(): array
@@ -72,11 +89,29 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             'Tarikh Permohonan',
             'Yuran Dibayar (RM)',
             'Wang Saku Dibayar (RM)',
-            'No Baucar',
             'Perihal',
+            'No Baucar',
             'Tarikh Baucar',
             'Status (Aktif/Tidak Aktif)'
         ];
+    }
+
+    private function calculatePerihal($item)
+    {
+        // Fetch sesi from Akademik table
+        $sesi = Akademik::where('smoku_id', $item['smoku_id'])->value('sesi');
+ 
+        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+            $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI ' . $sesi;
+        } elseif ($item['yuran'] == 1) {
+            $result = 'YURAN PENGAJIAN SESI ' . $sesi;
+        } elseif ($item['wang_saku'] == 1) {
+            $result = 'ELAUN WANG SAKU SESI ' . $sesi;
+        } else {
+            $result = 'LAIN-LAIN';
+        }
+        // dd($result);
+        return $result;
     }
 
     public function columnWidths(): array
@@ -89,7 +124,7 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
             'E' => 20,
             'F' => 25,
             'G' => 30,
-            'H' => 20,
+            'H' => 60,
             'I' => 50,
             'J' => 20,
             'K' => 30,
@@ -98,13 +133,20 @@ class PermohonanLayak implements FromCollection, WithHeadings, WithColumnWidths,
 
     public function map($row): array
     {
+        // Calculate "perihal" based on the fetched sesi
+        $perihal = $this->calculatePerihal($row);
+
         return [
+            
             // Update this to match with column name in database
             $row->no_rujukan_permohonan, 
             $row->nama,
-            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''),
-            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''),
+            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''), // Format 'Yuran Disokong'
+            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''), // Format 'Wang Saku Disokong'
             Carbon::parse($row->tarikh_hantar)->format('d/m/Y'),
+            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''), // Same amount as yuran disokong
+            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''), // Same amount as wang saku disokong
+            $perihal,
         ];
     }
 
