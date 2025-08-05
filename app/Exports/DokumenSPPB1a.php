@@ -191,29 +191,29 @@ class DokumenSPPB1a implements FromCollection, WithHeadings, WithColumnWidths, W
         $this->counter++;
 
         // Update total values
-        $this->totalYuran += $row->yuran_disokong;
-        $this->totalWangSaku += $row->wang_saku_disokong;
+        $this->totalYuran += (float) preg_replace('/[^\d.]/', '', $row->yuran_disokong);
+        $this->totalWangSaku += (float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong);
 
         return [
-             $this->counter,
-             $row->nama,
-             $row->no_kp,
-             strtoupper($row->no_pendaftaran_pelajar),
-             $row->no_daftar_oku,
-             Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
-             Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
-             strtoupper($row->nama_kursus),
-             $row->peringkat,
-             $status,
-             $row->biaya,
-             $row->mod,
-             $row->bil_bulan_per_sem . ' BULAN',
-             number_format($row->jumlah, 2, '.', ''), 
-             number_format($row->yuran_disokong, 2, '.', ''), 
-             number_format($row->wang_saku_disokong, 2, '.', ''), 
-             number_format((float)$row->baki, 2, '.', ''),
-             $jenis_permohonan,
-             strtoupper($row->catatan_disokong),
+            $this->counter,
+            $row->nama,
+            $row->no_kp,
+            strtoupper($row->no_pendaftaran_pelajar),
+            $row->no_daftar_oku,
+            Carbon::parse($row->tarikh_mula)->format('d/m/Y'),
+            Carbon::parse($row->tarikh_tamat)->format('d/m/Y'),
+            strtoupper($row->nama_kursus),
+            $row->peringkat,
+            $status,
+            $row->biaya,
+            $row->mod,
+            $row->bil_bulan_per_sem . ' BULAN',
+            number_format((float) preg_replace('/[^\d.]/', '', $row->jumlah), 2, '.', ''),
+            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''),
+            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''),
+            number_format((float) preg_replace('/[^\d.]/', '', $row->baki), 2, '.', ''),
+            $jenis_permohonan,
+            strtoupper($row->catatan_disokong),
         ];
     }
 
