@@ -146,11 +146,11 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             // Update this to match with column name in database
             $row->no_rujukan_tuntutan, 
             $row->nama,
-            number_format($row->yuran_disokong, 2, '.', ''), // Format 'Yuran Disokong' as numeric with two decimal places
-            number_format($row->wang_saku_disokong, 2, '.', ''), // Format 'Wang Saku Disokong' as numeric with two decimal places
+            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''), // Format 'Yuran Disokong'
+            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''), // Format 'Wang Saku Disokong'
             Carbon::parse($row->tarikh_hantar)->format('d/m/Y'),
-            number_format($row->yuran_disokong, 2, '.', ''), // Same amount as yuran disokong
-            number_format($row->wang_saku_disokong, 2, '.', ''), // Same amount as wang saku disokong
+            number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''), // Same amount as yuran disokong
+            number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''), // Same amount as wang saku disokong
             $perihal,
         ];
     }
