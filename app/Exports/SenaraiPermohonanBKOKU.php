@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SenaraiPermohonanBKOKU implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
@@ -107,7 +108,7 @@ class SenaraiPermohonanBKOKU implements FromCollection, WithHeadings, WithStyles
             'Poskod',
             'Negeri',
             'Parlimen',
-            'DUN',
+            'Dun',
             'No. Telefon',
             'Tarikh Mula Pengajian',
             'Tarikh Tamat Pengajian',
@@ -122,6 +123,22 @@ class SenaraiPermohonanBKOKU implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
+
+        // Get the highest column and row with data
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+        $cellRange = 'A1:' . $highestColumn . $highestRow;
+
+        // Apply border and other styles
+        $sheet->getStyle($cellRange)->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+
         return [
             1 => [ // Row 1 (header row)
                 'font' => [
