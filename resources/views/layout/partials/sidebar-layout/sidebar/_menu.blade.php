@@ -521,7 +521,7 @@
 					<!-- End of submenu -->
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="#">
+						<a class="menu-link" href="{{ route('laporan.excel.ppk') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>

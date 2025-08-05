@@ -677,10 +677,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Download Masterlist
         Route::get('/laporan/excel/bkoku', [LaporanController::class, 'excelBKOKU'])->name('laporan.excel.bkoku');
         Route::get('/laporan/excel/bkoku/getExcelBKOKU', [LaporanController::class, 'getExcelBKOKU'])->name('laporan.getExcelBKOKU');
+        
+        Route::get('/laporan/excel/ppk', [LaporanController::class, 'excelPPK'])->name('laporan.excel.ppk');
+        Route::get('/laporan/excel/ppk/getExcelPPK', [LaporanController::class, 'getExcelPPK'])->name('laporan.getExcelPPK');
+        
         //EXCEL
         Route::get('senarai-permohonan-bkoku-excel', [LaporanController::class, 'cetakSenaraiBKOKUExcel'])->name('senarai.bkoku.excel');
+        Route::get('senarai-permohonan-ppk-excel', [LaporanController::class, 'cetakSenaraiPPKExcel'])->name('senarai.ppk.excel');
 
-        Route::get('/laporan/excel/ppk', [LaporanController::class, 'excelPPK'])->name('laporan.excel.ppk');
+        
     // });
         
     
