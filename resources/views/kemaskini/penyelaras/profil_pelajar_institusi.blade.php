@@ -592,7 +592,8 @@
 									<!--end::Title-->
 									<!--begin::Notice-->
 									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
-									<div class="fw-semibold fs-4" style="color: red">* Pelajar perlu memastikan akaun bank berstatus aktif</div>
+									<div class="fw-semibold fs-4" style="color: red">* Pelajar perlu memastikan akaun bank berstatus aktif.</div>
+									<div class="fw-semibold fs-4" style="color: red">* Pemberian bantuan hanya akan dilaksanakan melalui akaun Bank Islam. Mohon pastikan akaun yang dikemukakan adalah akaun Bank Islam yang aktif.</div>
 									<!--end::Notice-->
 								</div>
 								<div class="col-md-6 fv-row">
