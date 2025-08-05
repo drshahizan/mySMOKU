@@ -33,6 +33,7 @@ class SenaraiPermohonanPPK implements FromCollection, WithHeadings, WithStyles, 
 
             return [
                 'Bil' => $index + 1,
+                'Program' => $permohonan->program,
                 'Sumber Pembiayaan' => $akademik->sumberRelation->biaya ?? '-',
                 'Nama Penaja' => $akademik->nama_penaja == '99'
                     ? (strtoupper($akademik->penaja_lain) ?? '-')
@@ -86,6 +87,7 @@ class SenaraiPermohonanPPK implements FromCollection, WithHeadings, WithStyles, 
     {
         return [
             'Bil',
+            'Program',
             'Sumber Pembiayaan',
             'Nama Penaja',
             'Status',
