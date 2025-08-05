@@ -71,7 +71,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
 
         // Add calculated fields to each item in the result
         $results = $results->map(function ($item, $key) {
-            $item->perihal = $this->calculatePerihal($item); // assume this method exists in the class
+            $item->perihal = $this->calculatePerihal($item); 
             $item->bil = $key + 1;
             return $item;
         });
@@ -108,7 +108,7 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             'E' => 20,
             'F' => 25,
             'G' => 30,
-            'H' => 50,
+            'H' => 60,
             'I' => 50,
             'J' => 20,
             'K' => 30,
