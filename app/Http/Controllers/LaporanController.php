@@ -595,7 +595,7 @@ class LaporanController extends Controller
 
     public function excelPPK()
     {
-        $institusiPengajian = InfoIpt::orderBy('nama_institusi')->get();
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi')->whereIN('id_institusi',['00031','00331','00933','00938','01127','01055'])->get();
         
         return view('pelaporan.excel_ppk', compact('institusiPengajian'));
 
