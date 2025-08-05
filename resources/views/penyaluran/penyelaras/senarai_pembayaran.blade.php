@@ -298,12 +298,12 @@
                                                             <td style="width: 40%">{{$pemohon}}</td>
                                                             <td class="text-center" style="width: 10%">
                                                                 @if ($item->yuran_disokong !== null)
-                                                                    RM {{ number_format($item->yuran_disokong, 2) }}
+                                                                    RM {{ number_format((float) preg_replace('/[^\d.]/', '', $item->yuran_disokong), 2) }}
                                                                 @endif
                                                             </td>
                                                             <td class="text-center" style="width: 15%">
                                                                 @if ($item->wang_saku_disokong !== null)
-                                                                    RM {{ number_format($item->wang_saku_disokong, 2) }}
+                                                                    RM {{ number_format((float) preg_replace('/[^\d.]/', '', $item->wang_saku_disokong), 2) }}
                                                                 @endif
                                                             </td>
                                                             <td class="text-center" style="width: 15%">{{date('d/m/Y', strtotime($item->tarikh_hantar))}}</td>
