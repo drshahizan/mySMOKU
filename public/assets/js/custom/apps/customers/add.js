@@ -49,6 +49,37 @@ var KTModalCustomersAdd = function () {
 							}
 						}
 					},
+                    'edit_institusi_ipt': {
+                        validators: {
+                            callback: {
+                                message: 'Nama Pusat Pengajian diperlukan',
+                                callback: function(input) {
+                                    const tahap = document.getElementById('pilihtahap').value;
+                                    // Required only if tahap == 2
+                                    if (tahap === '2') {
+                                        return input.value !== '';
+                                    }
+                                    return true; // Not required otherwise
+                                }
+                            }
+                        }
+                    },
+                    'edit_institusi_ppk': {
+                        validators: {
+                            callback: {
+                                message: 'Nama Pusat Pengajian diperlukan',
+                                callback: function(input) {
+                                    const tahap = document.getElementById('pilihtahap').value;
+                                    // Required only if tahap == 6
+                                    if (tahap === '6') {
+                                        return input.value !== '';
+                                    }
+                                    return true; // Not required otherwise
+                                }
+                            }
+                        }
+                    },
+
 					// 'password': {
 					// 	validators: {
 					// 		notEmpty: {
@@ -127,10 +158,10 @@ var KTModalCustomersAdd = function () {
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, looks like there are some errors detected sini, please try again.",
+                                text: "Sila lengkap maklumat pendaftaran.",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }

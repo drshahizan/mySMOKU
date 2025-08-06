@@ -29,7 +29,7 @@ class User extends Authenticatable
         'jawatan',
         'id_institusi',
         'status',
-        'data_migrate'.
+        'data_migrate',
         'remember_token',
         'profile_photo_path',
     ];
@@ -53,4 +53,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'tahap', 'id');
+    }
+
+    public function infoipt()
+    {
+        return $this->hasOne(InfoIpt::class, 'id_institusi', 'id_institusi');
+    }
 }
