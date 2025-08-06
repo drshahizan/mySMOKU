@@ -361,6 +361,7 @@ class PentadbirController extends Controller
 
     public function simpanTarikh(Request $request)
     {
+        
         $tarikh = TarikhIklan::create([
             'tarikh_mula'  => $request->tarikh_mula,
             'masa_mula'    => $request->masa_mula,
@@ -374,30 +375,48 @@ class PentadbirController extends Controller
 
         if ($request->emel == 'on'){
             $catatan = $request->catatan;
-            $users = User::whereIn('tahap', [1, 2, 6])
-            ->where('status', 1)
-            ->whereNotNull('email_verified_at')
-            ->get(); 
+            $isTuntutan = $request->has('tuntutan');
+            $isPermohonan = $request->has('permohonan');
+
+            $penyelaras = User::whereIn('tahap', [2, 6])
+                ->where('status', 1)
+                ->whereNotNull('email_verified_at')
+                ->pluck('email');
+
+            $pelajarQuery = User::join('smoku', 'smoku.no_kp', '=', 'users.no_kp')
+                ->join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'smoku.id')
+                ->where('users.tahap', 1)
+                ->where('users.status', 1)
+                ->where('smoku_akademik.status', 1)
+                ->whereNotNull('users.email_verified_at')
+                ->select('users.email');
+
+            $pelajar = $pelajarQuery->get()->pluck('email');
+
+            $pelajarAktif = (clone $pelajarQuery)
+                ->where('smoku_akademik.tarikh_tamat', '>', now())
+                ->get()
+                ->pluck('email');
+
+            // $emails = $users_pelajar->pluck('email')->toArray();
+
+            // dd($emails);
             
             $emailmain = "bkoku@mohe.gov.my";
-            $bcc = $users->pluck('email')->toArray();
-            
-            // Validate each email address
-            $invalidEmails = [];
-            foreach ($bcc as $email) {
-                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $invalidEmails[] = $email;
-                }
-            }
 
+            $bcc = collect()
+                ->merge($penyelaras)
+                ->merge($isTuntutan && !$isPermohonan ? $pelajarAktif : $pelajar)
+                ->filter(fn($email) => filter_var($email, FILTER_VALIDATE_EMAIL))
+                ->unique()
+                ->values()
+                ->toArray();
 
-            if (empty($invalidEmails)) {
-                Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan)); 
-            } 
-            else {
-                foreach ($invalidEmails as $invalidEmail) {
-                     Log::error('Invalid email address: ' . $invalidEmail);
-                }
+            // Send email only if there are valid recipients    
+            if (!empty($bcc)) {
+                Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan));
+            } else {
+                Log::warning('No valid email addresses found to send BCC.');
             }
 
         }
