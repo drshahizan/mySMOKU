@@ -158,7 +158,7 @@ var KTModalCustomersAdd = function () {
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sila lengkap maklumat pendaftaran.",
+                                text: "Ralat.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
