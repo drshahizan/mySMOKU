@@ -45,11 +45,11 @@
     @endphp
     <!--begin::Menu item-->
     @if($user->tahap == 1 && ($permohonan != null && $permohonan->status >= 2))
-        @if($akademik->tarikh_tamat >= today() || $akademik->tarikh_tamat == NULL)
+        {{-- @if($akademik->tarikh_tamat >= today() || $akademik->tarikh_tamat == NULL) --}}
             <div class="menu-item px-5">
-                <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Diri</a>
+                <a href="{{ route('profil.pelajar') }}" class="menu-link px-5">Profil Pelajar</a>
             </div>
-        @endif    
+        {{-- @endif     --}}
     @endif
     <div class="menu-item px-5">
         <a href="{{ route('tukar.katalaluan') }}" class="menu-link px-5">Tukar Kata Laluan</a>

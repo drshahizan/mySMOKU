@@ -44,10 +44,18 @@
 						<span class="menu-title">Laman Utama</span>
 					</a>
 				</div>
+				@if($permohonan != null && $permohonan->status >= 2)
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('profil.pelajar') }}">
+							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+							<span class="menu-title">Profil Pelajar</span>
+						</a>
+					</div>
+				@endif
 				@if($permohonan != null && $permohonan->status == 8 && $institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 					<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
+							<span class="menu-heading fw-bold text-uppercase fs-4">Kemaskini</span>
 						</div>
 					</div>
 					<div class="menu-item">
@@ -67,7 +75,7 @@
 				@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 					<div class="menu-item pt-5">
 						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-7">Permohonan</span>
+							<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Kali Pertama</span>
 						</div>
 					</div>
 
@@ -103,7 +111,7 @@
 					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
-								<span class="menu-heading fw-bold text-uppercase fs-7">Tuntutan</span>
+								<span class="menu-heading fw-bold text-uppercase fs-4">Tuntutan</span>
 							</div>
 						</div>
 				

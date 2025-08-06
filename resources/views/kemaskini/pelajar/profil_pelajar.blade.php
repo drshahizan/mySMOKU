@@ -582,7 +582,8 @@
 									<!--end::Title-->
 									<!--begin::Notice-->
 									<div class="text-muted fw-semibold fs-6">Bank Islam</div>
-									<div class="fw-semibold fs-4" style="color: red">* Pelajar perlu memastikan akaun bank berstatus aktif</div>
+									<div class="fw-semibold fs-4" style="color: red">* Pelajar perlu memastikan akaun bank berstatus aktif.</div>
+									<div class="fw-semibold fs-4" style="color: red">* Pemberian bantuan hanya akan dilaksanakan melalui akaun Bank Islam. Mohon pastikan akaun yang dikemukakan adalah akaun Bank Islam yang aktif.</div>
 									<!--end::Notice-->
 								</div>
 								<div class="col-md-6 fv-row">
@@ -877,7 +878,7 @@
 							</label>
 							<!--end::Label-->
 							<input type="hidden" class="form-control form-control-solid" placeholder="" id="nama_kursus_asal" name="nama_kursus_asal" value="{{$akademik->nama_kursus}}" />
-							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid basic-search" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 								<option value="">Pilih</option>
 							</select>
 						</div>
@@ -1748,12 +1749,28 @@
 
 							if (response['data']) {
 								var selectedValue = $('#nama_kursus_asal').val();
+								var found = false;
+
+								// If selectedValue is not in the list, add it manually
+								if (!found && selectedValue) {
+									var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
+									$("#nama_kursus").append(fallbackOption);
+								}
 
 								response['data'].forEach(function(item) {
 									var uppercaseValue = item.nama_kursus.toUpperCase();
-									var option = `<option value="${item.nama_kursus}" ${item.nama_kursus === selectedValue ? "selected" : ""}>${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
+									var isSelected = item.nama_kursus === selectedValue;
+
+									if (isSelected) found = true;
+
+									var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
+										${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()}) - ${item.no_rujukan}
+									</option>`;
 									$("#nama_kursus").append(option);
+
 								});
+
+								
 							}
 						},
 						error: function() {
