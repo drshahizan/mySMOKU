@@ -52,6 +52,14 @@
 						</a>
 					</div>
 				@endif
+				@if($permohonan && in_array($permohonan->status, [6, 8]))
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('pelajar.surat.tawaran') }}">
+							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
+							<span class="menu-title">Surat Tawaran Pelajar</span>
+						</a>
+					</div>
+				@endif	
 				@if($permohonan != null && $permohonan->status == 8 && $institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 					<div class="menu-item pt-5">
 						<div class="menu-content">

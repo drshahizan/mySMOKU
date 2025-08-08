@@ -164,6 +164,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/getPeringkatProfil/{id}', [PelajarController::class, 'peringkatProfil']);
         Route::get('/getKursusProfil/{kodperingkat}/{id}', [PelajarController::class, 'kursusProfil']);
 
+        Route::get('pelajar/surat/tawaran', [PelajarController::class, 'suratTawaran'])->name('pelajar.surat.tawaran');
+        Route::get('pelajar/surat-tawaran/{permohonanId}', [PelajarController::class, 'muatTurunSuratTawaran'])->name('surat.tawaran');
+        Route::get('pelajar/surat-tawaran-PPK/{permohonanId}', [PelajarController::class, 'muatTurunSuratTawaranPPK'])->name('surat.tawaranPPK');
+
         //Permohonan Pelajar
         Route::get('permohonan', [PermohonanController::class, 'permohonan'])->name('permohonan');
         Route::get('/getPeringkat/{id}', [PermohonanController::class, 'peringkat']);

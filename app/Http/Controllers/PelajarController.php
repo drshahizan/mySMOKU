@@ -14,21 +14,26 @@ use App\Models\KelasPenganugerahan;
 use App\Models\Keturunan;
 use App\Models\Kursus;
 use App\Models\LanjutPengajian;
+use App\Models\MaklumatKementerian;
 use App\Models\Mod;
 use App\Models\Negeri;
 use App\Models\Parlimen;
 use App\Models\Penaja;
 use App\Models\PeringkatPengajian;
 use App\Models\Permohonan;
+use App\Models\Saringan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\SumberBiaya;
+use App\Models\SuratTawaran;
 use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\User;
 use App\Models\Waris;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -838,6 +843,100 @@ class PelajarController extends Controller
 
         // No updates were made
         return back();
+    }
+
+    public function suratTawaran()
+    {
+        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
+
+        $permohonan = Permohonan::orderBy('id', 'desc')
+            ->where('smoku_id', $smoku_id->id)
+            ->get();
+        // dd($permohonan);    
+
+        return view('kemaskini.pelajar.surat_tawaran', compact('permohonan'));
+        
+    }
+
+    public function muatTurunSuratTawaran($permohonanId)
+    {
+        // Get the "permohonan" data based on $permohonanId
+        $permohonan = Permohonan::where('id', $permohonanId)->first();
+        // dd($permohonan);
+        $maklumat_kementerian = MaklumatKementerian::first();
+        $kandungan_surat = SuratTawaran::first();
+
+        // Load the view into an HTML string
+        $html = view('kemaskini.pelajar.surat_tawaran_pdf', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
+        // Set the chroot to the public directory
+        $options->set('chroot', public_path());
+
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+
+        // Stream the PDF
+        return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
+    }
+
+    public function muatTurunSuratTawaranPPK($permohonanId)
+    {
+        // Get the "permohonan" data based on $permohonanId
+        $permohonan = Permohonan::where('id', $permohonanId)->first();
+        $maklumat_kementerian = MaklumatKementerian::first();
+        $kandungan_surat = SuratTawaran::find(2);
+
+        // Load the view into an HTML string
+        $html = view('permohonan.sekretariat.keputusan.surat_tawaran_PPK', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+
+        // Create Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
+        // Set the chroot to the public directory
+        $options->set('chroot', public_path());
+
+        // Create Dompdf instance with options
+        $pdf = new Dompdf($options);
+
+        // Load HTML into Dompdf
+        $pdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $pdf->render();
+
+        // Get the total number of pages
+        $totalPages = $pdf->getCanvas()->get_page_count();
+
+        // Add page numbers using CSS
+        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
+
+        // Stream the PDF
+        return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
     }
 
 }
