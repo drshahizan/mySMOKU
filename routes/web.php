@@ -88,7 +88,7 @@ Route::get('/', function () {
 
 
 Route::get('/unauthorized', function () {
-    return view('unauthorized');
+    return view('errors.403');
 })->name('unauthorized');
 
 Route::middleware(['auth', 'verified'])->group(function () {

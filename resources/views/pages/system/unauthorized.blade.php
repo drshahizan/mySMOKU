@@ -6,31 +6,32 @@
         <!--begin::Page bg image-->
         <style>
             body {
-                background-image: url('{{ image('auth/bg1.jpg') }}');
+                background-image: url('{{ image('auth/bg7.jpg') }}');
             }
 
             [data-bs-theme="dark"] body {
-                background-image: url('{{ image('auth/bg1-dark.jpg') }}');
+                background-image: url('{{ image('auth/bg7-dark.jpg') }}');
             }
         </style>
         <!--end::Page bg image-->
 
+        <img src="assets/media/auth/warning.png" alt="Warning" style="display: block; margin: 0 auto; width: 10%;">
         <!--begin::Title-->
-        <h1 class="fw-bolder fs-2hx text-gray-900 mb-4">
-            Oops!
+        <h1 class="fw-bolder fs-2qx text-gray-900 mb-4">
+            Tidak dibenarkan
         </h1>
         <!--end::Title-->
 
         <!--begin::Text-->
         <div class="fw-semibold fs-6 text-gray-500 mb-7">
-            Maaf, halaman yang anda cari tidak dijumpai.
+            Maaf, anda tidak mempunyai kebenaran untuk mengakses halaman ini.
         </div>
         <!--end::Text-->
 
         <!--begin::Illustration-->
-        <div class="mb-3">
-            <img src="{{ image('auth/404-error.png') }}" class="mw-100 mh-300px theme-light-show" alt=""/>
-            <img src="{{ image('auth/404-error-dark.png') }}" class="mw-100 mh-300px theme-dark-show" alt=""/>
+        <div class="mb-11">
+            <img src="{{ image('auth/403-forbidden.jpg') }}" class="mw-100 mh-300px theme-light-show" alt=""/>
+            <img src="{{ image('auth/403-forbidden.jpg') }}" class="mw-100 mh-300px theme-dark-show" alt=""/>
         </div>
         <!--end::Illustration-->
 
@@ -44,3 +45,5 @@
     <!--end::Card body-->
 {{-- </div> --}}
 <!--end::Card-->
+
+
