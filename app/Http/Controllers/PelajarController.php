@@ -864,50 +864,19 @@ class PelajarController extends Controller
         $permohonan = Permohonan::where('id', $permohonanId)->first();
         // dd($permohonan);
         $maklumat_kementerian = MaklumatKementerian::first();
-        $kandungan_surat = SuratTawaran::first();
+        
 
-        // Load the view into an HTML string
-        $html = view('kemaskini.pelajar.surat_tawaran_pdf', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+        if($permohonan->program=="BKOKU"){
+            $kandungan_surat = SuratTawaran::first();
+            // Load the view into an HTML string
+            $html = view('kemaskini.pelajar.surat_tawaran_pdf', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+        } else if($permohonan->program=="PPK") {
+            $kandungan_surat = SuratTawaran::find(2);
+            // Load the view into an HTML string
+            $html = view('kemaskini.pelajar.surat_tawaran_pdfPPK', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+        }
 
-        // Create Dompdf options
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-
-        // Set the chroot to the public directory
-        $options->set('chroot', public_path());
-
-        // Create Dompdf instance with options
-        $pdf = new Dompdf($options);
-
-        // Load HTML into Dompdf
-        $pdf->loadHtml($html);
-
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'portrait');
-
-        // Render the PDF
-        $pdf->render();
-
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-
-        // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(290, 810, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-
-        // Stream the PDF
-        return $pdf->stream('SuratTawaran_'.$permohonanId.'.pdf');
-    }
-
-    public function muatTurunSuratTawaranPPK($permohonanId)
-    {
-        // Get the "permohonan" data based on $permohonanId
-        $permohonan = Permohonan::where('id', $permohonanId)->first();
-        $maklumat_kementerian = MaklumatKementerian::first();
-        $kandungan_surat = SuratTawaran::find(2);
-
-        // Load the view into an HTML string
-        $html = view('permohonan.sekretariat.keputusan.surat_tawaran_PPK', compact('permohonan', 'maklumat_kementerian','kandungan_surat'))->render();
+        
 
         // Create Dompdf options
         $options = new Options();
