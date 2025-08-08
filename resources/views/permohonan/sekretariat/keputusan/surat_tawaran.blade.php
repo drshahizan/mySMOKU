@@ -100,12 +100,22 @@
             $poskod = DB::table('smoku_butiran_pelajar')->where('smoku_id',$permohonan['smoku_id'])->value('alamat_tetap_poskod');
             $bandar = DB::table('smoku_butiran_pelajar')->join('bk_bandar','bk_bandar.id','=','smoku_butiran_pelajar.alamat_tetap_bandar' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_bandar.bandar');
             $negeri = DB::table('smoku_butiran_pelajar')->join('bk_negeri','bk_negeri.id','=','smoku_butiran_pelajar.alamat_tetap_negeri' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_negeri.negeri');
-            $program = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('nama_kursus');
-            $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_mula');
-            $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_tamat');
-            $mod = DB::table('smoku_akademik')->join('bk_mod','bk_mod.kod_mod','=','smoku_akademik.mod' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_mod.mod');
-            $peringkat = DB::table('smoku_akademik')->join('bk_peringkat_pengajian','bk_peringkat_pengajian.kod_peringkat','=','smoku_akademik.peringkat_pengajian' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_peringkat_pengajian.peringkat');
-            $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
+            
+            
+            //maklumat pengajian
+            $no_rujukan_permohonan = $permohonan['no_rujukan_permohonan'];
+            // Extract peringkat pengajian value using regular expression
+            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches);
+
+            // $matches[1] will contain the extracted peringkat pengajian value
+            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null;
+
+            $program = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->where('smoku_id', $permohonan['smoku_id'])->value('nama_kursus');
+            $tarikh_mula = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_mula');
+            $tarikh_tamat = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->where('smoku_id', $permohonan['smoku_id'])->value('tarikh_tamat');
+            $mod = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->join('bk_mod','bk_mod.kod_mod','=','smoku_akademik.mod' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_mod.mod');
+            $peringkat = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->join('bk_peringkat_pengajian','bk_peringkat_pengajian.kod_peringkat','=','smoku_akademik.peringkat_pengajian' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_peringkat_pengajian.peringkat');
+            $institusi = DB::table('smoku_akademik')->where('peringkat_pengajian', $peringkat_pengajian)->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $permohonan['smoku_id'])->value('bk_info_institusi.nama_institusi');
         @endphp
 
         @php
