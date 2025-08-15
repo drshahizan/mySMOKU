@@ -1690,12 +1690,12 @@ class PenyelarasController extends Controller
         $institusiId = $user->id_institusi;
         
         // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/1'
-        $dokumen = DokumenESP::where('institusi_id', $institusiId)
-            ->where('no_rujukan', 'like', '%/1')
-            ->orderBy('created_at', 'desc')
-            ->get(); 
+        // $dokumen = DokumenESP::where('institusi_id', $institusiId)
+        //     ->where('no_rujukan', 'like', '%/1')
+        //     ->orderBy('created_at', 'desc')
+        //     ->get(); 
         
-        return view('spbb.penyelaras.muat_turun_dokumen', compact('dokumen','institusiId'));
+        return view('spbb.penyelaras.muat_turun_dokumen', compact('institusiId'));
     }
 
     public function muatTurunDokumenSPBB1()
