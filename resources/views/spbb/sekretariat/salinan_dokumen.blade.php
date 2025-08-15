@@ -77,23 +77,6 @@
                 $pdfExtensions = ['pdf'];
             @endphp
 
-            <div class="tab-pane fadeshow" id="dokumen1a" role="tabpanel" aria-labelledby="dokumen1a-tab">
-                <div style="text-align: center">
-                    @php
-                        $fileExtension = pathinfo($dokumen->dokumen1a, PATHINFO_EXTENSION);
-                    @endphp
-
-                    @if (in_array($fileExtension, $xlsxExtensions))
-                        <p>Sila klik link di bawah untuk muat turun Dokumen Salur Pelajar Baharu</p>
-                        <a href="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}" download>Klik Sini</a><br>
-                    @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}#zoom=90" width="70%" height="605px" />
-                    @else
-                        <p>Dokumen Salur Pelajar Baharu tidak dimuat naik oleh penyelaras.</p>
-                    @endif
-                </div>
-            </div>
-
             <div class="tab-pane fadeshow" id="dokumen1" role="tabpanel" aria-labelledby="dokumen1-tab">
                 <div style="text-align: center">
                     @php
@@ -107,6 +90,23 @@
                         <embed src="/assets/dokumen/sppb_1/{{$dokumen->dokumen1}}#zoom=90" width="70%" height="605px" />
                     @else
                         <p>Dokumen Permohonan Salur Pelajar Sedia Ada tidak dimuat naik oleh penyelaras.</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="tab-pane fadeshow" id="dokumen1a" role="tabpanel" aria-labelledby="dokumen1a-tab">
+                <div style="text-align: center">
+                    @php
+                        $fileExtension = pathinfo($dokumen->dokumen1a, PATHINFO_EXTENSION);
+                    @endphp
+
+                    @if (in_array($fileExtension, $xlsxExtensions))
+                        <p>Sila klik link di bawah untuk muat turun Dokumen Salur Pelajar Baharu</p>
+                        <a href="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}" download>Klik Sini</a><br>
+                    @elseif (in_array($fileExtension, $pdfExtensions))
+                        <embed src="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}#zoom=90" width="70%" height="605px" />
+                    @else
+                        <p>Dokumen Salur Pelajar Baharu tidak dimuat naik oleh penyelaras.</p>
                     @endif
                 </div>
             </div>

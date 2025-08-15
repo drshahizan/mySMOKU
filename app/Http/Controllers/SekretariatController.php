@@ -2100,15 +2100,27 @@ class SekretariatController extends Controller
 
     public function muatTurunDokumenSPPB()
     {
-        // Order by created date in descending order
-        $dokumen = DokumenESP::orderBy('updated_at', 'desc')->get();
+        // Get the latest updated_at for each id_institusi
+        $dokumen = DokumenESP::select('dokumen_esp.*')
+            ->join(
+                DB::raw('(SELECT institusi_id, MAX(updated_at) as latest_update 
+                        FROM dokumen_esp 
+                        GROUP BY institusi_id) as latest'),
+                function ($join) {
+                    $join->on('dokumen_esp.institusi_id', '=', 'latest.institusi_id')
+                        ->on('dokumen_esp.updated_at', '=', 'latest.latest_update');
+                }
+            )
+            ->orderBy('latest.latest_update', 'desc')
+            ->get();
+
         return view('spbb.sekretariat.muat_turun_dokumen', compact('dokumen'));
     }
 
     public function salinanDokumenSPPB($id)
     {
         $penyata =  MaklumatBank::where('institusi_id', $id)->first();
-        $dokumen = DokumenESP::where('institusi_id', $id)->first();
+        $dokumen = DokumenESP::where('institusi_id', $id)->orderByDesc('id')->first();
         return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','penyata'));
     }
 

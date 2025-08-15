@@ -67,7 +67,7 @@
 												$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
 											@endphp
 							
-											@if (str_ends_with($doc->no_rujukan, '/2'))
+											{{-- @if (str_ends_with($doc->no_rujukan, '/2')) --}}
 												<tr>
 													<td class="text-center" data-no="{{ $i++ }}">{{ $i }}.</td>
 													<td>{{ $nama_institusi }}</td>
@@ -78,7 +78,7 @@
 														</a>
 													</td>
 												</tr>
-											@endif
+											{{-- @endif --}}
 										@endforeach
 									</tbody>
 								</table>
