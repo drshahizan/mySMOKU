@@ -487,6 +487,12 @@
 					</div>
 				</div>
 				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.draf.SPBB')}}">
+						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
+						<span class="menu-title">Draf SPBB</span>
+					</a>
+				</div>
+				<div class="menu-item">
 					<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPBB')}}">
 						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 						<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>

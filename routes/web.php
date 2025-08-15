@@ -406,6 +406,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyaluran/sekretariat/muat-turun/dokumen/SPBB', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPBB');
         Route::get('penyaluran/sekretariat/lihat/salinan-dokumen/SPBB/{id}', [SekretariatController::class, 'salinanDokumenSPPB'])->name('dokumen.SPBB.id');
 
+        //Draf SPBB
+        Route::get('penyaluran/sekretariat/draf/dokumen/SPBB', [SekretariatController::class, 'muatTurunDrafSPPB'])->name('sekretariat.draf.SPBB');
+        Route::get('penyaluran/sekretariat/draf/spbb1/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB1'])->name('sekretariat.draf.SPBB1');
+        Route::get('penyaluran/sekretariat/draf/spbb1a/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB1a'])->name('sekretariat.draf.SPBB1a');
+        Route::get('penyaluran/sekretariat/draf/spbb2/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB2'])->name('sekretariat.draf.SPBB2');
+        Route::get('penyaluran/sekretariat/draf/spbb2a/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB2a'])->name('sekretariat.draf.SPBB2a');
+        Route::get('penyaluran/sekretariat/draf/spbb3/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB3'])->name('sekretariat.draf.SPBB3');
+
         //Permohonan - Sekretariat - Kelulusan
         Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
         Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);

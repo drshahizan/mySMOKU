@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BorangSPPB;
+use App\Exports\DrafSPBB1;
+use App\Exports\DrafSPBB1a;
+use App\Exports\DrafSPBB2;
+use App\Exports\DrafSPBB2a;
+use App\Exports\DrafSPBB3;
 use App\Exports\PenyaluranTuntutan;
 use App\Exports\SenaraiPendek;
 use App\Exports\SenaraiPendekBKOKU;
@@ -2059,6 +2064,40 @@ class SekretariatController extends Controller
     }
 
     //PENYALURAN SPBB
+
+    //draf
+    public function muatTurunDrafSPPB()
+    {
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        
+        return view('spbb.sekretariat.draf_spbb', compact('institusiPengajianUA'));
+    }
+
+    public function muatTurunDrafSPBB1($id_institusi)
+    {
+        return Excel::download(new DrafSPBB1($id_institusi), 'Draf-SPBB1.xlsx');
+    }
+
+    public function muatTurunDrafSPBB1a($id_institusi)
+    {
+        return Excel::download(new DrafSPBB1a($id_institusi), 'Draf-SPBB1a.xlsx');
+    }
+
+    public function muatTurunDrafSPBB2($id_institusi)
+    {
+        return Excel::download(new DrafSPBB2($id_institusi), 'Draf-SPBB2.xlsx');
+    }
+
+    public function muatTurunDrafSPBB2a($id_institusi)
+    {
+        return Excel::download(new DrafSPBB2a($id_institusi), 'Draf-SPBB2a.xlsx');
+    }
+
+    public function muatTurunDrafSPBB3($id_institusi)
+    {
+        return Excel::download(new DrafSPBB3($id_institusi), 'Draf-SPBB3.xlsx');
+    }
+
     public function muatTurunDokumenSPPB()
     {
         // Order by created date in descending order
