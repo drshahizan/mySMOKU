@@ -838,9 +838,6 @@
 																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
 																	i.	Pemohon perlu membuat permohonan dengan mengemukakan salinan dokumen yang dinyatakan dengan lengkap melalui sistem Penajaan OKU (SisPO).
 																</span><br><br>
-																<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																	ii.	Hanya Invois Asal yang perlu dimuatnaik melalui Sistem Penajaan OKU (SisPO).
-																</span><br><br>
 															</div>
 															<!--end::Item-->
 
@@ -939,13 +936,13 @@
 																		ii. Pelajar berdaftar dengan Jabatan Kebajikan Masyarakat (JKM) dan telah mempunyai kad OKU;
 																	</span><br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		iii. Kursus yang diikuti hendaklah diiktiraf oleh Agensi Kelayakan Malaysia (MQA) atau Jabatan Perkhidmatan Awam (JPA);
+																		iii. Kursus yang diikuti hendaklah diiktiraf oleh Agensi Kelayakan Malaysia (MQA);
 																	</span><br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		iv.	Pelajar OKU yang menerima pinjaman pelajaran atau pembiayaan sendiri adalah layak menerima elemen wangsaku dan yuran pengajian. Penerima biasiswa pula layak mendapat wang saku sahaja;
+																		iv.	Pelajar OKU yang menerima pinjaman pelajaran atau membiayai pengajian sendiri adalah layak memohon. Namun, pelajar yang mempunyai <b>biasiswa lain tidak layak untuk mendapat BKOKU</b>;
 																	</span><br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		v.	Pelajar hendaklah sedang melanjutkan pengajian di mana-mana universiti awam atau IPTS (bawah seliaan KPT) atau Kolej Komuniti dan Politeknik;
+																		v.	Pelajar hendaklah sedang melanjutkan pengajian di mana-mana universiti awam, Kolej Komuniti dan Politeknik atau IPTS di bawah seliaan KPT;
 																	</span><br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
 																		vi.	Pelajar yang mengikuti kursus separuh masa atau pengajian jarak jauh layak menerima bantuan kewangan ini;
@@ -957,7 +954,7 @@
 																		viii. Pelajar OKU hendaklah bukan dalam tempoh cuti belajar bergaji (penuh/sebahagian);dan
 																	</span><br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		ix. Bagi pelajar yang ingin memohon perlanjutan tempoh pengajian adalah tidak layak mendapat bantuan dalam proses perlanjutan tersebut. Hal ini kerana tempoh tajaan Bantuan kewangan ini adalah mengikut tempoh surat tawaran asal. Pelajar yang ingin menukar tempat pengajian dalam tempoh pembiayaan BKOKU, hendaklah maklum kepada pihak kementerian secara bertulis dan juga kepada pihak institusi pengajian sebelum dari tempoh lapor diri di tempat pengajian baru.
+																		ix. Pelajar yang ingin menukar tempat pengajian dalam tempoh pembiayaan BKOKU hendaklah memaklumkan perkara tersebut secara bertulis kepada pihak kementerian dan institusi pengajian sebelum tarikh lapor diri di tempat pengajian baharu. Walau bagaimanapun, tempoh bantuan kewangan adalah tertakluk kepada surat tawaran asal institusi. Pelajar yang memohon pelanjutan tempoh pengajian adalah tidak layak menerima bantuan kewangan ini bagi tempoh pelanjutan tersebut, memandangkan tempoh tajaan adalah mengikut surat tawaran asal.
 																	</span><br><br>
 																</div>
 																<!--end::Syarat BKOKU-->
@@ -965,141 +962,67 @@
 																<div class="flex-column mb-5" id="elemen_bkoku" style="display:none;">
 																	<br><br>
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		i. Pembiayaan ini meliputi yuran pengajian dan elaun wang saku sebanyak RM400 sebulan dengan kadar maksimum RM6,200 setahun (mengikut kalendar akademik) atau RM24,800 sepanjang tempoh pengajian.
+																		i. Kadar bantuan kewangan di bawah BKOKU ialah <b>RM3,100 (satu semester = 6 bulan)</b> untuk <b>semua mod, peringkat dan institusi pengajian</b>.
 																	</span><br><br>
+																	
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		ii. Senarai Yuran Layak dan Yuran Tidak Layak:<br><br>
-																		<!-- Table Start -->
-																		<table style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-																			<thead>
-																				<tr>
-																					<th style="background-color: #96b6cd;">Bil.</th>
-																					<th style="background-color: #96b6cd;">Yuran Pengajian Yang LAYAK Dituntut</th>
-																					<th style="background-color: #96b6cd;">Yuran Pengajian Yang TIDAK LAYAK Dituntut</th>
-																				</tr>
-																			</thead>
-																			<tbody>
-																				<tr>
-																					<td>1.</td>
-																					<td>Yuran Pendaftaran Pengajian</td>
-																					<td>Yuran Penempatan / Yuran Asrama</td>
-																				</tr>
-																				<tr>
-																					<td>2.</td>
-																					<td>Kad Kampus / Kad Matrik</td>
-																					<td>Insuran Kesihatan / Perlindungan Insuran</td>
-																				</tr>
-																				<tr>
-																					<td>3.</td>
-																					<td>Yuran Perpustakaan</td>
-																					<td>Yuran Kebajikan / Persatuan / Alumni / Aktiviti / Khairiat</td>
-																				</tr>
-																				<tr>
-																					<td>4.</td>
-																					<td>Yuran Peperiksaan</td>
-																					<td>Yuran Kelengkapan / Tabung Pengurusan MPA</td>
-																				</tr>
-																				<tr>
-																					<td>5.</td>
-																					<td>Yuran Perkhidmatan</td>
-																					<td>Yuran Pencalonan</td>
-																				</tr>
-																				<tr>
-																					<td>6.</td>
-																					<td>Yuran Ko-Kurikulum / Sukan</td>
-																					<td>Tabung Kecemasan</td>
-																				</tr>
-																				<tr>
-																					<td>7.</td>
-																					<td>Yuran Graduasi (Jika bergraduat dalam tempoh tajaan sahaja)</td>
-																					<td>Elaun Buku</td>
-																				</tr>
-																				<tr>
-																					<td>8.</td>
-																					<td>Yuran Pemeriksaan / Yuran Tesis</td>
-																					<td>Elaun Sara Hidup</td>
-																				</tr>
-																				<tr>
-																					<td>9.</td>
-																					<td>Yuran Komputer</td>
-																					<td>Elaun Tesis</td>
-																				</tr>
-																				<tr>
-																					<td>10.</td>
-																					<td>Yuran Peralatan / Bahan Makmal</td>
-																					<td>Elaun Latihan Amali / Klinikal / Kerja Lapangan</td>
-																				</tr>
-																				<tr>
-																					<td>11.</td>
-																					<td></td>
-																					<td>Elaun Perjalanan / Tambang</td>
-																				</tr>
-																				<tr>
-																					<td>12.</td>
-																					<td></td>
-																					<td>Elaun Akhir Pengajian</td>
-																				</tr>
-																				<tr>
-																					<td>13.</td>
-																					<td></td>
-																					<td>Elaun Penyelidikan</td>
-																				</tr>
-																				<tr>
-																					<td>14.</td>
-																					<td></td>
-																					<td>Elaun Pengangkutan</td>
-																				</tr>
-																			</tbody>
-																		</table>
-																		<!-- Table End -->
-																	</span><br><br>
-																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		iii. Maklumat Pembiayaan:<br><br>
+																		ii. Maklumat Pembiayaan:<br><br>
 																		<!-- Table Start -->
 																		<table  class="table-style-2">
 																			<thead>
 																				<tr>
-																					<th></th>
-																					<th></th>
 																					<th>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
-																								<div class="text-light fw-bold" style="font-size:14px;">Yuran </div>
+																								<div class="text-light fw-bold" style="font-size:14px;">MOD PENGAJIAN </div>
 																								<!-- end::Title -->
 																							</div>
 																							<!-- end::Heading -->
 																						</div>
 																					</th>
 																					<th>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2" style="background-color: rgb(55, 63, 168);">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
-																								<div class="text-light fw-bold" style="font-size:14px;">Wang Saku</div>
+																								<div class="text-light fw-bold" style="font-size:14px;">JENIS PEMBIAYAAN </div>
 																								<!-- end::Title -->
 																							</div>
 																							<!-- end::Heading -->
 																						</div>
 																					</th>
+																					<th>
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
+																							<!-- begin::Heading -->
+																							<div class="mb-2">
+																								<!-- begin::Title -->
+																								<div class="text-light fw-bold" style="font-size:14px;">ELAUN WANG SAKU </div>
+																								<!-- end::Title -->
+																							</div>
+																							<!-- end::Heading -->
+																						</div>
+																					</th>
+																					
 																				</tr>
 																			</thead>
 																			<tbody>
+																				
 																				<tr>
 																					<td rowspan="2">
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #59BA47;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
 																							<!-- begin::Heading -->
 																							<div class="mb-4">
 																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:24px;">Sepenuh Masa</div>
+																								<div class="fw-bold" style="font-size:14px;">Sepenuh Masa / Separuh Masa / Dalam Talian / Jarak Jauh</div>
 																								<!-- end::Title -->
 																							</div>
 																							<!-- end::Heading -->
 																						</div>
 																					</td>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #59BA47;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1110,136 +1033,19 @@
 																						</div>
 																					</td>
 																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #59BA47;">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
+																								<div class="fw-bold" style="font-size:14px;">RM3,100 / Semester </div>
 																								<!-- end::Title -->
 																							</div>
 																							<!-- end::Heading -->
 																						</div>
 																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
+																					
 																				</tr>
-																				<tr>
-																					<td rowspan="2">
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-6 px-6 mb-4" style="background-color: #27BFE6;">
-																							<!-- begin::Heading -->
-																							<div class="mb-4">
-																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:24px;">Separuh Masa</div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
-																							<!-- begin::Heading -->
-																							<div class="mb-2">
-																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:14px;">Pinjaman Pelajaran / Pembiayaan Sendiri </div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-check-circle text-success" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
-																							<!-- begin::Heading -->
-																							<div class="mb-2">
-																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:14px;">Biasiswa</div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																					<td>
-																						<div class="mb-2">
-																							<!-- begin::Title -->
-																							<i class="ki-duotone ki-cross-circle text-danger" style="font-size: 3em;">
-																								<span class="path1"></span>
-																								<span class="path2"></span>
-																							</i>
-																							<!-- end::Title -->
-																						</div>
-																					</td>
-																				</tr>
+																				
 																			</tbody>
 																		</table>
 																		<!-- Table End -->
