@@ -1676,7 +1676,7 @@
 					$(alamat_surat_negeri).trigger('change.select2');
 					$(alamat_surat_bandar).trigger('change.select2');
 				} else {
-					alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
+					alamat_surat_menyurat.value = @json($butiranPelajar->alamat_surat_baru);
 					alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
 					alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
 					alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
@@ -1726,7 +1726,11 @@
 			}
 
 			$(document).ready(function () {
+				// alert('sinii');
 				var previousIdNegeri = $('#alamat_negeri').val();
+				console.log('previousIdNegeri: ', previousIdNegeri);
+				// alert(previousIdNegeri);
+
 
 				function getBandarData(idnegeri) {
 					$("#alamat_tetap_bandar").empty();
@@ -1739,6 +1743,7 @@
 						success: function (response) {
 							if (response['data']) {
 								var selectedValue = $("#alamat_bandar").val();
+								// alert(selectedValue);
 
 								for (var i = 0; i < response['data'].length; i++) {
 									var id = response['data'][i].id;
