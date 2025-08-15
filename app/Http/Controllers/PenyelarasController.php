@@ -1730,7 +1730,8 @@ class PenyelarasController extends Controller
         
         // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/2'
         $dokumen = DokumenESP::where('institusi_id', $institusiId)
-            ->where('no_rujukan', 'like', '%/2')
+            // ->where('no_rujukan', 'like', '%/2')
+            ->orderByDesc('id')
             ->get();
 
         return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
@@ -1740,23 +1741,17 @@ class PenyelarasController extends Controller
     {
         $user = auth()->user();
         $institusiId = $user->id_institusi;
-        $existRecord = DokumenESP::where('institusi_id', $institusiId)->first();
         $currentYear = Carbon::now()->year;
+        $currentMonth = Carbon::now()->month;
 
-        $dokumen1 = $request->file('dokumen1');
-        $dokumen1a = $request->file('dokumen1a');
-        $dokumen2 = $request->file('dokumen2');
-        $dokumen2a = $request->file('dokumen2a');
-        $dokumen3 = $request->file('dokumen3');
-        $dokumen4 = $request->file('dokumen4');
-        $uploadedDokumen1 = [];
-        $uploadedDokumen1a = [];
-        $uploadedDokumen2 = [];
-        $uploadedDokumen2a = [];
-        $uploadedDokumen3 = [];
-        $uploadedDokumen4 = [];
+        // Check last record in the same month/year
+        $lastRecord = DokumenESP::where('institusi_id', $institusiId)
+            ->whereYear('created_at', $currentYear)
+            ->whereMonth('created_at', $currentMonth)
+            ->orderByDesc('id')
+            ->first();
 
-        // Validation rules for each document column
+        // Validation rules
         $rules = [
             'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
             'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
@@ -1766,13 +1761,11 @@ class PenyelarasController extends Controller
             'dokumen4.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
         ];
 
-        // Custom error messages
         $customMessages = [
             'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
-            'max' => 'Saiz maksimum bagi :attribute adalah 2 MB.',
+            'max' => 'Saiz maksimum bagi :attribute adalah 8 MB.',
         ];
 
-        // Validate the request
         $validator = Validator::make($request->all(), $rules, $customMessages);
 
         if ($validator->fails()) {
@@ -1781,86 +1774,64 @@ class PenyelarasController extends Controller
                 ->withInput();
         }
 
-        if ($dokumen1 || $dokumen1a || $dokumen2 || $dokumen2a || $dokumen3 || $dokumen4) {
-            // Check and process dokumen1
-            $file1 = $dokumen1[0] ?? null;
-            if ($file1 && $file1->isValid()) {
-                $uniqueFilenameDokumen1 = uniqid() . '_' . $file1->getClientOriginalName();
-                $file1->move('assets/dokumen/sppb_1', $uniqueFilenameDokumen1);
-                $uploadedDokumen1[] = $uniqueFilenameDokumen1;
-            }
+        if (!$lastRecord) {
+            // Create new record → increment number for institusi
+            $lastRecordOverall = DokumenESP::where('institusi_id', $institusiId)
+                ->whereYear('created_at', $currentYear)
+                ->orderByDesc('id')
+                ->first();
 
-            // Check and process dokumen1a
-            $file1a = $dokumen1a[0] ?? null;
-            if ($file1a && $file1a->isValid()) {
-                $uniqueFilenameDokumen1a = uniqid() . '_' . $file1a->getClientOriginalName();
-                $file1a->move('assets/dokumen/sppb_1a', $uniqueFilenameDokumen1a);
-                $uploadedDokumen1a[] = $uniqueFilenameDokumen1a;
-            }
-            
-            // Check and process dokumen2
-            $file2 = $dokumen2[0] ?? null;
-            if ($file2 && $file2->isValid()) {
-                $uniqueFilenameDokumen2 = uniqid() . '_' . $file2->getClientOriginalName();
-                $file2->move('assets/dokumen/sppb_2', $uniqueFilenameDokumen2);
-                $uploadedDokumen2[] = $uniqueFilenameDokumen2;
-            }
-
-            // Check and process dokumen2a
-            $file2a = $dokumen2a[0] ?? null;
-            if ($file2a && $file2a->isValid()) {
-                $uniqueFilenameDokumen2a = uniqid() . '_' . $file2a->getClientOriginalName();
-                $file2a->move('assets/dokumen/sppb_2a', $uniqueFilenameDokumen2a);
-                $uploadedDokumen2a[] = $uniqueFilenameDokumen2a;
-            }
-
-            // Check and process dokumen3
-            $file3 = $dokumen3[0] ?? null;
-            if ($file3 && $file3->isValid()) {
-                $uniqueFilenameDokumen3 = uniqid() . '_' . $file3->getClientOriginalName();
-                $file3->move('assets/dokumen/sppb_3', $uniqueFilenameDokumen3);
-                $uploadedDokumen3[] = $uniqueFilenameDokumen3;
-            }
-
-            // Check and process dokumen4
-            $file4 = $dokumen4[0] ?? null;
-            if ($file4 && $file4->isValid()) {
-                $uniqueFilenameDokumen4 = uniqid() . '_' . $file4->getClientOriginalName();
-                $file4->move('assets/dokumen/sppb_4', $uniqueFilenameDokumen4);
-                $uploadedDokumen4[] = $uniqueFilenameDokumen4;
-            }
-
-            // Update or create the record in the database after processing all files
-            if ($existRecord) {
-                $existRecord->update([
-                    'user_id' => $user->id,
-                    'institusi_id' => $institusiId,
-                    'no_rujukan' => "{$institusiId}/{$currentYear}/2",
-                    'dokumen1' => $uploadedDokumen1[0] ?? null,
-                    'dokumen1a' => $uploadedDokumen1a[0] ?? null,
-                    'dokumen2' => $uploadedDokumen2[0] ?? null,
-                    'dokumen2a' => $uploadedDokumen2a[0] ?? null,
-                    'dokumen3' => $uploadedDokumen3[0] ?? null,
-                    'dokumen4' => $uploadedDokumen4[0] ?? null,
-                ]);
+            if ($lastRecordOverall && preg_match('/\/(\d+)$/', $lastRecordOverall->no_rujukan, $matches)) {
+                $nextNumber = intval($matches[1]) + 1;
             } else {
-                $dokumenESP = new DokumenESP();
-                $dokumenESP->user_id = auth()->user()->id;
-                $dokumenESP->institusi_id = $institusiId;
-                $dokumenESP->no_rujukan = "{$institusiId}/{$currentYear}/2";
-                $dokumenESP->dokumen1 = $uploadedDokumen1[0] ?? null;
-                $dokumenESP->dokumen1a = $uploadedDokumen1a[0] ?? null;
-                $dokumenESP->dokumen2 = $uploadedDokumen2[0]  ?? null;
-                $dokumenESP->dokumen2a = $uploadedDokumen2a[0] ?? null;
-                $dokumenESP->dokumen3 = $uploadedDokumen3[0]  ?? null;
-                $dokumenESP->dokumen4 = $uploadedDokumen4[0]  ?? null;
-                $dokumenESP->save();
+                $nextNumber = 1;
             }
+
+            $noRujukan = "{$institusiId}/{$currentYear}/{$nextNumber}";
+
+            $dokumenESP = new DokumenESP();
+            $dokumenESP->user_id = $user->id;
+            $dokumenESP->institusi_id = $institusiId;
+            $dokumenESP->no_rujukan = $noRujukan;
+        } else {
+            // Update same-month record
+            $dokumenESP = $lastRecord;
         }
 
-        // Store the uploaded file names in the session for display in your view
-        return redirect()->route('penyelaras.muat-naik.SPBB')->with('success', 'Semua fail SPBB telah berjaya dikemaskini.');
+        $uploadedAnyFile = false;
+
+        // Helper function to handle file upload
+        $processFile = function ($inputName, $folder, $oldFile = null) use ($request, &$uploadedAnyFile) {
+            $file = $request->file($inputName)[0] ?? null;
+            if ($file && $file->isValid()) {
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move("assets/dokumen/{$folder}", $filename);
+                $uploadedAnyFile = true; // mark as uploaded
+                return $filename;
+            }
+            return $oldFile; // keep old if no new file
+        };
+
+        // Only replace if uploaded, else keep old
+        $dokumenESP->dokumen1 = $processFile('dokumen1', 'sppb_1', $dokumenESP->dokumen1);
+        $dokumenESP->dokumen1a = $processFile('dokumen1a', 'sppb_1a', $dokumenESP->dokumen1a);
+        $dokumenESP->dokumen2 = $processFile('dokumen2', 'sppb_2', $dokumenESP->dokumen2);
+        $dokumenESP->dokumen2a = $processFile('dokumen2a', 'sppb_2a', $dokumenESP->dokumen2a);
+        $dokumenESP->dokumen3 = $processFile('dokumen3', 'sppb_3', $dokumenESP->dokumen3);
+        $dokumenESP->dokumen4 = $processFile('dokumen4', 'sppb_4', $dokumenESP->dokumen4);
+
+        $dokumenESP->save();
+
+        if ($uploadedAnyFile) {
+            return redirect()->route('penyelaras.muat-naik.SPBB')
+                ->with('success', 'Fail SPBB telah berjaya dikemaskini.');
+        } else {
+            return redirect()->route('penyelaras.muat-naik.SPBB');
+        }
+
     }
+
+
 
     //KEMASKINI BANK
     public function maklumatBank()

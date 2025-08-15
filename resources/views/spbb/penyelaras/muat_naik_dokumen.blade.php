@@ -91,14 +91,14 @@
 								<br>
 
 								@if(session('success'))
-									<div class="alert alert-success text-center" style="width: 80%; margin: 0 auto;">
+									<div class="alert alert-success text-center" style="width: 80%; margin: 0 auto; color: black;">
 										{{ session('success') }}
 									</div>
 									<br>
 								@endif
 
 								@if ($errors->any())
-									<div class="alert alert-danger text-center" style="width: 80%; margin: 0 auto;">
+									<div class="alert alert-danger text-center" style="width: 80%; margin: 0 auto; color: black;">
 										@foreach ($errors->all() as $error)
 											<li>{{ $error }}</li>
 										@endforeach
@@ -131,17 +131,35 @@
 										<tr>
 											<td>Borang SPBB 1a (Permohonan Berstatus Layak)</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB1a -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen1a[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1a))
-																<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">{{ $dokumen->first()->dokumen1a }}</a>
-															@endif
-														</div>
-													</div>
-												</div>                                                                                     
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen1a" 
+													name="dokumen1a[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen1a)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 1A.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen1a)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen1a))
+													<a href="{{ asset('assets/dokumen/sppb_1a/' . $dokumen->first()->dokumen1a) }}" target="_blank">
+														{{ $dokumen->first()->dokumen1a }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen1a').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
 										</tr>
 
@@ -149,17 +167,35 @@
 										<tr>
 											<td>Borang SPBB 1 (Tuntutan Berstatus Layak)</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB1 -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen1[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen1))
-																<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">{{ $dokumen->first()->dokumen1 }}</a>
-															@endif
-														</div>
-													</div>
-												</div>                                                                                     
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen1" 
+													name="dokumen1[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen1)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 1.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen1)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen1))
+													<a href="{{ asset('assets/dokumen/sppb_1/' . $dokumen->first()->dokumen1) }}" target="_blank">
+														{{ $dokumen->first()->dokumen1 }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen1').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
 										</tr>
 
@@ -167,17 +203,35 @@
 										<tr>
 											<td>Borang SPBB 2 (Laporan Bayaran)</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB2 -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen2[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen2))
-																<a href="{{ asset('assets/dokumen/sppb_2/' . $dokumen->first()->dokumen2) }}" target="_blank">{{ $dokumen->first()->dokumen2 }}</a>
-															@endif
-														</div>
-													</div>
-												</div>																						
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen2" 
+													name="dokumen2[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen2)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 2.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen2)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen2))
+													<a href="{{ asset('assets/dokumen/sppb_2/' . $dokumen->first()->dokumen2) }}" target="_blank">
+														{{ $dokumen->first()->dokumen2 }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen2').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
 										</tr>
 
@@ -185,17 +239,35 @@
 										<tr>
 											<td>Borang SPBB 2a (Laporan Tuntutan)</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB2a -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen2a[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen2a))
-																<a href="{{ asset('assets/dokumen/sppb_2a/' . $dokumen->first()->dokumen2a) }}" target="_blank">{{ $dokumen->first()->dokumen2a }}</a>
-															@endif
-														</div>
-													</div>
-												</div>																						
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen2a" 
+													name="dokumen2a[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen2)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 2.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen2a)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen2a))
+													<a href="{{ asset('assets/dokumen/sppb_2a/' . $dokumen->first()->dokumen2a) }}" target="_blank">
+														{{ $dokumen->first()->dokumen2a }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen2a').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
 										</tr>
 
@@ -203,35 +275,72 @@
 										<tr>
 											<td>Borang SPBB 3 (Penyata Terimaan)</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB3 -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen3[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen3))
-																<a href="{{ asset('assets/dokumen/sppb_3/' . $dokumen->first()->dokumen3) }}" target="_blank">{{ $dokumen->first()->dokumen3 }}</a>
-															@endif
-														</div>
-													</div>
-												</div>																						
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen3" 
+													name="dokumen3[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen3)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 3.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen3)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen3))
+													<a href="{{ asset('assets/dokumen/sppb_3/' . $dokumen->first()->dokumen3) }}" target="_blank">
+														{{ $dokumen->first()->dokumen3 }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen3').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
+
 										</tr>
 
 										{{-- DOKUMEN Surat Iringan Universiti --}}
 										<tr>
 											<td>Surat Iringan Universiti</td>
 											<td>
-												<div id="file-input-container">
-													<!-- File input fields for SPPB3 -->
-													<div class="d-flex">
-														<div class="file-input">
-															<input type="file" name="dokumen4[]"/>
-															@if ($dokumen->isNotEmpty() && !empty($dokumen->first()->dokumen4))
-																<a href="{{ asset('assets/dokumen/sppb_4/' . $dokumen->first()->dokumen4) }}" target="_blank">{{ $dokumen->first()->dokumen4 }}</a>
-															@endif
-														</div>
-													</div>
-												</div>																						
+												{{-- File Input (hidden if file already uploaded) --}}
+												<input 
+													type="file" 
+													id="dokumen4" 
+													name="dokumen4[]" 
+													accept=".pdf, .xls, .xlsx"
+													{{-- @if(empty($dokumen->first()->dokumen4)) required @endif
+													oninvalid="this.setCustomValidity('Sila muat naik fail SPPB 4.')"
+													oninput="setCustomValidity('')" --}}
+													@if(!empty($dokumen->first()->dokumen4)) style="display: none;" @endif
+												>
+
+												{{-- Show existing uploaded file --}}
+												@if(!empty($dokumen->first()->dokumen4))
+													<a href="{{ asset('assets/dokumen/sppb_4/' . $dokumen->first()->dokumen4) }}" target="_blank">
+														{{ $dokumen->first()->dokumen4 }}
+													</a>
+													<br>
+													<small class="text-muted">
+														Fail telah dimuat naik. Muat naik semula hanya jika ingin menggantikan.
+													</small>
+
+													{{-- Replace file button --}}
+													<br>
+													<button type="button" 
+														onclick="document.getElementById('dokumen4').style.display = 'inline'; this.style.display = 'none';">
+														Muat Naik Semula
+													</button>
+												@endif
 											</td>
 										</tr>
 										
