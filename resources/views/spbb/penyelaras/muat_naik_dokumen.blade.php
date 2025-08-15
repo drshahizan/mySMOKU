@@ -217,9 +217,9 @@
 											</td>
 										</tr>
 
-										{{-- DOKUMEN SPBB 4 --}}
+										{{-- DOKUMEN Surat Iringan Universiti --}}
 										<tr>
-											<td>Borang SPBB 4 (Surat Iringan Universiti)</td>
+											<td>Surat Iringan Universiti</td>
 											<td>
 												<div id="file-input-container">
 													<!-- File input fields for SPPB3 -->

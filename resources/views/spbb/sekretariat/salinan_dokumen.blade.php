@@ -61,7 +61,7 @@
             </li>  
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen4-tab" data-toggle="tab" data-target="#dokumen4" type="button" role="tab" aria-controls="dokumen4" aria-selected="true">
-                    SPBB 4
+                    Surat Iringan Universiti
                 </button>
             </li>  
             <li class="nav-item" role="presentation">
