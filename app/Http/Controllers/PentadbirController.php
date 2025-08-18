@@ -417,7 +417,7 @@ class PentadbirController extends Controller
 
             // Send email only if there are valid recipients    
             if (!empty($bcc)) {
-                $chunks = array_chunk($bcc, 300); // split into chunks of 500 emails
+                $chunks = array_chunk($bcc, 300); // split into chunks of 300 emails
 
                 foreach ($chunks as $chunk) {
                     Mail::to($emailmain)
