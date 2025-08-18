@@ -413,9 +413,17 @@ class PentadbirController extends Controller
                 ->values()
                 ->toArray();
 
+            // dd($bcc);    
+
             // Send email only if there are valid recipients    
             if (!empty($bcc)) {
-                Mail::to($emailmain)->bcc($bcc)->send(new HebahanIklan($catatan));
+                $chunks = array_chunk($bcc, 300); // split into chunks of 500 emails
+
+                foreach ($chunks as $chunk) {
+                    Mail::to($emailmain)
+                        ->bcc($chunk)
+                        ->send(new HebahanIklan($catatan));
+                }
             } else {
                 Log::warning('No valid email addresses found to send BCC.');
             }
