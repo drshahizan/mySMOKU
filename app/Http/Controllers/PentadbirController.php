@@ -407,6 +407,7 @@ class PentadbirController extends Controller
             $bcc = collect()
                 ->merge($penyelaras)
                 ->merge($isTuntutan && !$isPermohonan ? $pelajarAktif : $pelajar)
+                ->map(fn($email) => preg_replace('/\s+/', '', $email)) // remove ALL whitespace
                 ->filter(fn($email) => filter_var($email, FILTER_VALIDATE_EMAIL))
                 ->unique()
                 ->values()
