@@ -294,7 +294,9 @@
 		$withAkademik = function($table) {
 			return DB::table($table)
 				->join('smoku_akademik', $table.'.smoku_id', '=', 'smoku_akademik.smoku_id')
-				->where('smoku_akademik.status', 1);
+				->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+				->where('smoku_akademik.status', 1)
+				->whereIn('bk_info_institusi.jenis_institusi', ['IPTS', 'UA', 'KK', 'P']);
 		};
 
 		$baharu   = $withAkademik('permohonan')->where('permohonan.status', 2)->count();
