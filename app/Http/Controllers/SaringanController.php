@@ -81,6 +81,7 @@ class SaringanController extends Controller
 
         $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('permohonan.status', ['2'])
                             ->count();
@@ -537,6 +538,7 @@ class SaringanController extends Controller
 
         $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('permohonan.status', ['2'])
                             ->count();
@@ -706,6 +708,7 @@ class SaringanController extends Controller
 
             $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                                 ->where('smoku_akademik.status', 1)
+                                ->where('permohonan.program', 'PPK')
                                 ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                                 ->whereIn('permohonan.status', ['4'])
                                 ->count();
@@ -807,6 +810,7 @@ class SaringanController extends Controller
 
             $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                                 ->where('smoku_akademik.status', 1)
+                                ->where('permohonan.program', 'PPK')
                                 ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                                 ->whereIn('permohonan.status', ['4'])
                                 ->count();
@@ -931,6 +935,7 @@ class SaringanController extends Controller
 
             $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                                 ->where('smoku_akademik.status', 1)
+                                ->where('permohonan.program', 'PPK')
                                 ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                                 ->whereIn('permohonan.status', ['4'])
                                 ->count();

@@ -1223,6 +1223,7 @@ class SekretariatController extends Controller
 
         $countPPK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('permohonan.status', ['4'])
                             ->count();
@@ -2138,7 +2139,8 @@ class SekretariatController extends Controller
         $institusiPengajianPOLI = InfoIpt::where('jenis_institusi','P')->orderBy('nama_institusi')->get();
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
-        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        // dd($institusiPengajianPPK); 
         
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -2183,6 +2185,7 @@ class SekretariatController extends Controller
         $countPPK = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
                             ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('tuntutan.status', ['2'])
                             ->count();
@@ -2977,6 +2980,7 @@ class SekretariatController extends Controller
         $countPPK = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
                             ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                             ->where('smoku_akademik.status', 1)
+                            ->where('permohonan.program', 'PPK')
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('tuntutan.status', ['2'])
                             ->count();
