@@ -114,6 +114,14 @@
                                         @endif     
                                     </button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="gaji-tab" data-toggle="tab" data-target="#gaji" type="button" role="tab" aria-controls="gaji" aria-selected="false">
+                                        RANKING GAJI 
+                                        @if ($countALL > 0)
+                                            <span class="badge badge-danger">{{ $countALL }}</span>
+                                        @endif     
+                                    </button>
+                                </li>
                             </ul>
 
                             <!--begin::Card title-->
@@ -275,6 +283,27 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- GAJI --}}
+                                <div class="tab-pane fade" id="gaji" role="tabpanel" aria-labelledby="gaji-tab">
+                                    <br>
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table id="sortTable6" class="table table-striped table-hover dataTable js-exportable">
+                                                <thead>
+                                                <tr>
+                                                    <th><b>ID Permohonan</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Tarikh Permohonan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -310,6 +339,7 @@
                 var bkokuKKList = @json($institusiPengajianKK);
                 var bkokuUAList = @json($institusiPengajianUA);
                 var ppkList = @json($institusiPengajianPPK);
+                var gajiList = @json($institusiPengajianALL);
         
             
                 // DataTable initialization functions
@@ -1188,6 +1218,181 @@
                     });
                 }
 
+                function initializeDataTable6() {
+                    $('#sortTable6').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("senarai.permohonan.ALL") }}', // URL to fetch data from
+                            dataSrc: '' // Property in the response object containing the data array
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_permohonan',
+                            render: function(data, type, row) {
+                                let url = '';
+                                const status = row.status;
+                                const ownerId = row.user_id;
+                                const id = row.id;
+
+                                if (status == 2) {
+                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId == currentUserId) {
+                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                } else if (status == 3 && ownerId != currentUserId) {
+                                    return data;
+                                } else {
+                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            }
+                        }, 
+                        { 
+                            data: 'smoku.nama', 
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama;
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' }, 
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        },
+                        {
+                            data: 'dilaksanakan_oleh_nama',
+                            render: function(data, type, row) {
+                                // Define conjunctions to be handled differently
+                                var conjunctions_lower = ['bin', 'binti'];
+                                var conjunctions_upper = ['A/L', 'A/P'];
+
+                                // Split the nama field into words
+                                var words = data.split(' ');
+
+                                // Process each word
+                                for (var i = 0; i < words.length; i++) {
+                                    var word = words[i];
+
+                                    // Check if the word is a conjunction to be displayed in lowercase
+                                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                                        // Convert the word to lowercase
+                                        words[i] = word.toLowerCase();
+                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                        // Convert the word to uppercase
+                                        words[i] = word.toUpperCase();
+                                    } else {
+                                        // Capitalize the first letter of other words
+                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                    }
+                                }
+
+                                // Join the words back into a single string
+                                var formatted_nama = words.join(' ');
+
+                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                            }
+                        }
+                        ]
+                    });
+                }
+
                 // Function to clear filters for all tables
                 function clearFilters() {
                     if ($.fn.DataTable.isDataTable('#sortTable1')) {
@@ -1204,6 +1409,9 @@
                     }
                     if ($.fn.DataTable.isDataTable('#sortTable5')) {
                         $('#sortTable5').DataTable().destroy();
+                    }
+                    if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                        $('#sortTable6').DataTable().destroy();
                     }
                 }
 
@@ -1251,6 +1459,10 @@
                             updateInstitusiDropdown(ppkList);
                             initializeDataTable5();
                             break;
+                        case 'gaji-tab':
+                            updateInstitusiDropdown(gajiList);
+                            initializeDataTable6();
+                            break;    
                     }
                 });
 
@@ -1270,6 +1482,7 @@
                 initDataTable('#sortTable3', 'datatable3');
                 initDataTable('#sortTable4', 'datatable4');
                 initDataTable('#sortTable5', 'datatable5');
+                initDataTable('#sortTable6', 'datatable6');
 
                 function initDataTable(tableId, variableName) {
                     // Check if the datatable is already initialized
@@ -1299,6 +1512,7 @@
                 applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
                 applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
                 applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
+                applyAndLogFilter('Table 6', datatable6, selectedInstitusi);
             }
 
             function applyAndLogFilter(tableName, table, filterValue) {

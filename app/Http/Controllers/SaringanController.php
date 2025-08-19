@@ -42,6 +42,7 @@ class SaringanController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -49,6 +50,7 @@ class SaringanController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -85,11 +87,17 @@ class SaringanController extends Controller
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('permohonan.status', ['2'])
                             ->count();
+        $countALL = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            // ->where('permohonan.program', 'PPK')
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('permohonan.status', ['2'])
+                            ->count();                    
 
         // Debug output
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
-        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
+        return view('permohonan.sekretariat.saringan.senarai_permohonan',compact('permohonan','status_kod','status','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));
     }
 
     //Json saringan
@@ -258,6 +266,44 @@ class SaringanController extends Controller
                         $query->with('infoipt');
                     }, 'smoku'])
                     ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;            
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
+    public function getSenaraiPermohonanALL()
+    {
+        $permohonan = Permohonan::whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'KI');
+                        });
+                    })
+                    ->whereIn('status', ['2','3'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with('infoipt');
+                    }, 'smoku'])
+                    ->join('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
+                    ->orderBy('smoku_waris.pendapatan_waris', 'asc') // sort by income
                     ->get();
 
         // Append name of 'dilaksanakan_oleh'
