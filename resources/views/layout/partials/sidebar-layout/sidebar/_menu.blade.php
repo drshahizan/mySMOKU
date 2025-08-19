@@ -240,9 +240,9 @@
 						</a>
 					</div>
 					<div class="menu-item">
-						<a class="menu-link" href="#">
+						<a class="menu-link" href="{{ route('penyelaras.maklumat.lejar')}}">
 							<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-							<span class="menu-title">Lejar</span>
+							<span class="menu-title">Maklumat Lejar</span>
 						</a>
 					</div>
 					<div class="menu-item">

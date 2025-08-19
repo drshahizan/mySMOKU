@@ -1831,6 +1831,151 @@ class PenyelarasController extends Controller
 
     }
 
+    //PENYALURAN - MAKLUMAT LEJAR
+    public function maklumatLejar()
+    {   
+        $user = auth()->user();
+        $institusiId = $user->id_institusi;
+        
+        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/2'
+        $dokumen = DokumenESP::where('institusi_id', $institusiId)
+            // ->where('no_rujukan', 'like', '%/2')
+            ->orderByDesc('id')
+            ->get();
+
+        return view('spbb.penyelaras.maklumat_lejar', compact('institusiId','dokumen'));
+    }
+
+    //PENYALURAN - LEJAR - PERMOHONAN
+    public function exportPermohonanLayak()
+    {
+        return Excel::download(new PermohonanLayak, 'senarai_permohonan__layak.xlsx');
+    }
+
+    public function uploadedFilePembayaranPermohonan(Request $request)
+    {
+        $request->validate([
+            'modified_excel_file1' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('modified_excel_file1');
+
+        // Use the Laravel Excel package to import data from the Excel file
+        $import = new ModifiedPermohonanImport();
+        $data = Excel::import($import, $file);
+
+        // Process the imported data and update the permohonan records
+        $this->updatePermohonanRecords($import->getModifiedData());
+        
+        // You may add a success message or redirect to a success page
+        return redirect()->back()->with('success', 'Maklumat Lejar telah berjaya dikemaskini.');
+    }
+
+    private function updatePermohonanRecords($modifiedData)
+    {
+        foreach ($modifiedData as $modifiedRecord)
+        {
+            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $statusPemohon = $modifiedRecord['status_pemohon'];
+
+            // Retrieve the corresponding database record based on no_rujukan_permohonan
+            $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
+
+            //fetch max yuran dan wang saku
+            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+            
+            if ($permohonan) {
+                // Update the retrieved database record with the modified data
+                $permohonan->update([
+                    'yuran_dibayar' => $yuranDibayar,
+                    'wang_saku_dibayar' => $wangSakuDibayar,
+                    'no_baucer' => $noBaucer,
+                    'perihal' => $perihal,
+                    'tarikh_baucer' => $tarikhBaucer,
+                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
+                    'status_pemohon' => $statusPemohon
+                ]);
+                // Optionally, you can log a success message
+                Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
+            } 
+            else {
+                // Optionally, log a message or handle the case where no matching record is found
+                Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
+            }
+        }
+    }
+
+    //PENYALURAN - LEJAR - TUNTUTAN
+    public function exportTuntutanLayak()
+    {
+        
+        return Excel::download(new TuntutanLayak, 'senarai_tuntutan__layak.xlsx');
+    }
+
+    public function uploadedFilePembayaranTuntutan(Request $request)
+    {
+        $request->validate([
+            'modified_excel_file2' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('modified_excel_file2');
+
+        // Use the Laravel Excel package to import data from the Excel file
+        $import = new ModifiedTuntutanImport();
+        $data = Excel::import($import, $file);
+
+        // Process the imported data and update the tuntutan records
+        $this->updateTuntutanRecords($import->getModifiedData());
+        
+        // You may add a success message or redirect to a success page
+        return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
+    }
+
+    private function updateTuntutanRecords($modifiedData)
+    {
+        foreach ($modifiedData as $modifiedRecord)
+        {
+            $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
+            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
+            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
+            $noBaucer = $modifiedRecord['no_baucer'];
+            $perihal = $modifiedRecord['perihal'];
+            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
+            $statusPemohon = $modifiedRecord['status_pemohon'];
+
+            // Retrieve the corresponding database record based on no_rujukan_tuntutan
+            $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)->first();
+
+            //fetch max yuran dan wang saku
+            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
+            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+            
+            if ($tuntutan) {
+                // Update the retrieved database record with the modified data
+                $tuntutan->update([
+                    'yuran_dibayar' => $yuranDibayar,
+                    'wang_saku_dibayar' => $wangSakuDibayar,
+                    'no_baucer' => $noBaucer,
+                    'perihal' => $perihal,
+                    'tarikh_baucer' => $tarikhBaucer,
+                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
+                    'status_pemohon' => $statusPemohon
+                ]);
+                // Optionally, you can log a success message
+                Log::info("Record with no_rujukan_tuntutan $noRujukan updated successfully.");
+            } 
+            else {
+                // Optionally, log a message or handle the case where no matching record is found
+                Log::warning("No record found for no_rujukan_tuntutan $noRujukan.");
+            }
+        }
+    }
 
 
     //KEMASKINI BANK
@@ -1978,74 +2123,6 @@ class PenyelarasController extends Controller
         return view('penyaluran.penyelaras.senarai_pembayaran', compact('permohonanLayak','tuntutanLayak','institusiId','kutipanBalik'));
     }
 
-    //PENYALURAN - PEMBAYARAN - PERMOHONAN
-    public function exportPermohonanLayak(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        return Excel::download(new PermohonanLayak($startDate, $endDate), 'senarai_permohonan__layak.xlsx');
-    }
-
-    public function uploadedFilePembayaranPermohonan(Request $request)
-    {
-        $request->validate([
-            'modified_excel_file1' => 'required|mimes:xlsx,xls',
-        ]);
-
-        $file = $request->file('modified_excel_file1');
-
-        // Use the Laravel Excel package to import data from the Excel file
-        $import = new ModifiedPermohonanImport();
-        $data = Excel::import($import, $file);
-
-        // Process the imported data and update the permohonan records
-        $this->updatePermohonanRecords($import->getModifiedData());
-        
-        // You may add a success message or redirect to a success page
-        return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
-    }
-
-    private function updatePermohonanRecords($modifiedData)
-    {
-        foreach ($modifiedData as $modifiedRecord)
-        {
-            $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
-            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
-            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
-            $noBaucer = $modifiedRecord['no_baucer'];
-            $perihal = $modifiedRecord['perihal'];
-            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
-            $statusPemohon = $modifiedRecord['status_pemohon'];
-
-            // Retrieve the corresponding database record based on no_rujukan_permohonan
-            $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)->first();
-
-            //fetch max yuran dan wang saku
-            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
-            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
-            
-            if ($permohonan) {
-                // Update the retrieved database record with the modified data
-                $permohonan->update([
-                    'yuran_dibayar' => $yuranDibayar,
-                    'wang_saku_dibayar' => $wangSakuDibayar,
-                    'no_baucer' => $noBaucer,
-                    'perihal' => $perihal,
-                    'tarikh_baucer' => $tarikhBaucer,
-                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
-                    'status_pemohon' => $statusPemohon
-                ]);
-                // Optionally, you can log a success message
-                Log::info("Record with no_rujukan_permohonan $noRujukan updated successfully.");
-            } 
-            else {
-                // Optionally, log a message or handle the case where no matching record is found
-                Log::warning("No record found for no_rujukan_permohonan $noRujukan.");
-            }
-        }
-    }
-
     // MODAL PENYALURAN - PERMOHONAN
     public function hantarInfoBaucerPermohonan(Request $request, $id)
     {
@@ -2094,74 +2171,6 @@ class PenyelarasController extends Controller
         ->where('permohonan.status', '=', '8')->get();
 
         return redirect()->route('penyelaras.senarai.dibayar', compact('dibayar'));
-    }
-
-    //PENYALURAN - PEMBAYARAN - TUNTUTAN
-    public function exportTuntutanLayak(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        
-        return Excel::download(new TuntutanLayak($startDate, $endDate), 'senarai_tuntutan__layak.xlsx');
-    }
-
-    public function uploadedFilePembayaranTuntutan(Request $request)
-    {
-        $request->validate([
-            'modified_excel_file2' => 'required|mimes:xlsx,xls',
-        ]);
-
-        $file = $request->file('modified_excel_file2');
-
-        // Use the Laravel Excel package to import data from the Excel file
-        $import = new ModifiedTuntutanImport();
-        $data = Excel::import($import, $file);
-
-        // Process the imported data and update the tuntutan records
-        $this->updateTuntutanRecords($import->getModifiedData());
-        
-        // You may add a success message or redirect to a success page
-        return redirect()->back()->with('success', 'Fail telah berjaya dihantar.');
-    }
-
-    private function updateTuntutanRecords($modifiedData)
-    {
-        foreach ($modifiedData as $modifiedRecord)
-        {
-            $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
-            $yuranDibayar = $modifiedRecord['yuran_dibayar'];
-            $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
-            $noBaucer = $modifiedRecord['no_baucer'];
-            $perihal = $modifiedRecord['perihal'];
-            $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
-            $statusPemohon = $modifiedRecord['status_pemohon'];
-
-            // Retrieve the corresponding database record based on no_rujukan_tuntutan
-            $tuntutan = Tuntutan::where('no_rujukan_tuntutan', $noRujukan)->first();
-
-            //fetch max yuran dan wang saku
-            $amaun_yuran = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Yuran')->first();
-            $amaun_wang_saku = JumlahTuntutan::where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
-            
-            if ($tuntutan) {
-                // Update the retrieved database record with the modified data
-                $tuntutan->update([
-                    'yuran_dibayar' => $yuranDibayar,
-                    'wang_saku_dibayar' => $wangSakuDibayar,
-                    'no_baucer' => $noBaucer,
-                    'perihal' => $perihal,
-                    'tarikh_baucer' => $tarikhBaucer,
-                    'baki_dibayar' => $amaun_yuran->jumlah - $yuranDibayar - $wangSakuDibayar,
-                    'status_pemohon' => $statusPemohon
-                ]);
-                // Optionally, you can log a success message
-                Log::info("Record with no_rujukan_tuntutan $noRujukan updated successfully.");
-            } 
-            else {
-                // Optionally, log a message or handle the case where no matching record is found
-                Log::warning("No record found for no_rujukan_tuntutan $noRujukan.");
-            }
-        }
     }
 
     //MODAL PENYALURAN - TUNTUTAN

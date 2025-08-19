@@ -49,15 +49,7 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
-        if ($currentMonth == 2) {
-            $sesiBayaran = '1/' . $currentYear;
-        } elseif ($currentMonth == 4) {
-            $sesiBayaran = '2/' . $currentYear;
-        } elseif ($currentMonth == 10) {
-            $sesiBayaran = '3/' . $currentYear;
-        } else {
-            $sesiBayaran = '4/' . $currentYear;
-        }
+        $sesiBayaran = $currentMonth . '/' . $currentYear;
 
         foreach ($this->modifiedData as $modifiedRecord) {
             $noRujukan = $modifiedRecord['no_rujukan_permohonan'];

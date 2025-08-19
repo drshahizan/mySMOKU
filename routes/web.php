@@ -525,13 +525,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyelaras/penyaluran/muat-turun/spbb3', [PenyelarasController::class, 'muatTurunDokumenSPBB3'])->name('penyelaras.dokumen.SPBB3');
         Route::get('penyelaras/penyaluran/muat-turun/spbb4', [PenyelarasController::class, 'muatTurunDokumenSPBB4'])->name('penyelaras.dokumen.SPBB4');
 
-        //Penyaluran - Penyelaras - Pembayaran
-        Route::get('penyelaras/penyaluran/kemaskini/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('penyelaras.kemaskini.layak');;
-        Route::get('penyelaras/penyaluran/permohonan-tuntutan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
+        //Penyaluran - Penyelaras - Lejar
+        Route::get('penyelaras/penyaluran/maklumat/lejar', [PenyelarasController::class, 'maklumatLejar'])->name('penyelaras.maklumat.lejar');
         Route::get('/permohonan/senarai-layak-excel', [PenyelarasController::class, 'exportPermohonanLayak'])->name('penyelaras.permohonan.senarai.layak.excel');
         Route::post('/permohonan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranPermohonan'])->name('modified.file.pembayaran.permohonan');
         Route::get('/tuntutan/senarai-layak-excel', [PenyelarasController::class, 'exportTuntutanLayak'])->name('penyelaras.tuntutan.senarai.layak.excel');
         Route::post('/tuntutan/process-uploaded-file', [PenyelarasController::class, 'uploadedFilePembayaranTuntutan'])->name('modified.file.pembayaran.tuntutan');
+        
+        //Penyaluran - Penyelaras - Pembayaran
+        Route::get('penyelaras/penyaluran/kemaskini/permohonan-tuntutan/layak', [PenyelarasController::class, 'senaraiPemohonLayak'])->name('penyelaras.kemaskini.layak');;
+        Route::get('penyelaras/penyaluran/permohonan-tuntutan/dibayar', [PenyelarasController::class, 'senaraiPemohonDibayar'])->name('penyelaras.senarai.dibayar');
         Route::post('/penyelaras/permohonan/maklumat-baucer/{permohonanId}', [PenyelarasController::class, 'updateMaklumatBaucerPermohonan'])->name('update.maklumat.baucer.permohonan');
         Route::post('/penyelaras/tuntutan/maklumat-baucer/{tuntutanId}', [PenyelarasController::class, 'updateMaklumatBaucerTuntutan'])->name('update.maklumat.baucer.tuntutan');
 

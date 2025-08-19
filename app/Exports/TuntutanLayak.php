@@ -20,14 +20,10 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
     /**
     * @return \Illuminate\Support\Collection
     */
-    protected $dateFormat = 'd/m/Y';
-    protected $startDate;
-    protected $endDate;
 
-    public function __construct($startDate = null, $endDate = null)
+    public function __construct()
     {
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        
     }
 
     public function collection()
@@ -51,10 +47,6 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             ->where('tuntutan.status', 6)
             ->whereNull('tuntutan.data_migrate')
             ->whereIn('bk_info_institusi.id_institusi', $instiusi_user);
-
-        if ($this->startDate !== 'Invalid date' && $this->endDate !== 'Invalid date') {
-            $query->whereBetween('tuntutan.tarikh_hantar', [$this->startDate, $this->endDate]);
-        }
 
         // Execute the query and get results
         $results = $query->select(
@@ -152,6 +144,9 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
             number_format((float) preg_replace('/[^\d.]/', '', $row->yuran_disokong), 2, '.', ''), // Same amount as yuran disokong
             number_format((float) preg_replace('/[^\d.]/', '', $row->wang_saku_disokong), 2, '.', ''), // Same amount as wang saku disokong
             $perihal,
+            NULL,
+            NULL,
+            NULL
         ];
     }
 

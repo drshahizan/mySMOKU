@@ -131,7 +131,7 @@
 														</a>
                                                     </div>
 
-                                                    <div class="col-md-4" style="padding-left:30px;">
+                                                    {{-- <div class="col-md-4" style="padding-left:30px;">
                                                         <form action="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
                                                             <input type="hidden" name="start_date" id="permohonan_hidden_start_date">
@@ -152,20 +152,20 @@
                                                                 <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
                                                             </button>
                                                         </form>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
 
                                             {{-- TUNTUTAN --}}
                                             <div class="col-md-7 export-container" data-program-code="tuntutan"> 
-                                                <div class="row" style="margin-bottom:0px!important; margin-left:40px;"> 
+                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;"> 
                                                     <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB1') }}" class="btn btn-info btn-round">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB1') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
 															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1
 														</a>
                                                     </div>
 
-                                                    <div class="col-md-4" style="padding-left:30px;">
+                                                    {{-- <div class="col-md-4" style="padding-left:30px;">
                                                         <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
                                                             @csrf
                                                             <input type="hidden" name="start_date" id="tuntutan_hidden_start_date">
@@ -186,7 +186,7 @@
                                                                 <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
                                                             </button>
                                                         </form>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -198,7 +198,7 @@
                                 <div class="d-flex justify-content-between mt-5 mb-0">
                                     <div class="col-md-12">
                                         <div class="row form-filter">
-                                            <div class="col-md-2" style="display: flex; align-items: center;">
+                                            <div class="col-md-4" style="display: flex; align-items: center;">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
                                                     <option value="AKTIF">AKTIF</option>
@@ -215,10 +215,10 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-9 export-container" data-program-code="kutipan"> 
-                                                <div class="row justify-content-end" style="margin-bottom:0px!important; padding-right:20px;"> 
+                                            <div class="col-md-7 export-container" data-program-code="kutipan"> 
+                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;">
                                                     <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round">
+                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
                                                             <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
                                                         </a>
                                                     </div>
