@@ -290,17 +290,23 @@
 {{-- SEKRETARIAT --}}
 @elseif(Auth::user()->tahap=='3')
 	@php
-		$baharu = DB::table('permohonan')->where('status', '=', '2')->count();
-		$sokong = DB::table('permohonan')->where('status', '=', '4')->count();
-		// $keputusan = DB::table('permohonan')->whereIn('status', ['6', '7'])->count();
-		$layak = DB::table('permohonan')->where('status', '=', '6')->whereNull('data_migrate')->count();
-		$bayar = DB::table('permohonan')->where('status', '=', '8')->count();
-		$total = DB::table('permohonan')->count();
-		$baharuT = DB::table('tuntutan')->where('status', '=', '2')->count();
-		// $keputusanT = DB::table('tuntutan')->whereIn('status', ['6', '7'])->count();
-		$layakT = DB::table('tuntutan')->where('status', '=', '6')->whereNull('data_migrate')->count();
-		$bayarT = DB::table('tuntutan')->where('status', '=', '8')->count();
-		$totalT = DB::table('tuntutan')->count();
+
+		$withAkademik = function($table) {
+			return DB::table($table)
+				->join('smoku_akademik', $table.'.smoku_id', '=', 'smoku_akademik.smoku_id')
+				->where('smoku_akademik.status', 1);
+		};
+
+		$baharu   = $withAkademik('permohonan')->where('permohonan.status', 2)->count();
+		$sokong   = $withAkademik('permohonan')->where('permohonan.status', 4)->count();
+		$layak    = $withAkademik('permohonan')->where('permohonan.status', 6)->whereNull('data_migrate')->count();
+		$bayar    = $withAkademik('permohonan')->where('permohonan.status', 8)->count();
+		$total    = $withAkademik('permohonan')->count();
+
+		$baharuT  = $withAkademik('tuntutan')->where('tuntutan.status', 2)->count();
+		$layakT   = $withAkademik('tuntutan')->where('tuntutan.status', 6)->whereNull('data_migrate')->count();
+		$bayarT   = $withAkademik('tuntutan')->where('tuntutan.status', 8)->count();
+		$totalT   = $withAkademik('tuntutan')->count();
 
 		//tukar institusi
 		$tukarInstitusi = DB::table('tukar_institusi')->where('status', '=', '0')->count();
