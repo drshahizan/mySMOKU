@@ -14,6 +14,14 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
+                    'terimaBiasiswa': {
+                        validators: {
+                            notEmpty: {
+                                message: 'First Name is required'
+                            }
+                        }
+                    },
+
                     'id_institusi': {
                         validators: {
                             notEmpty: {
@@ -116,6 +124,37 @@ var KTSignupGeneral = function () {
             form,
             {
                 fields: {
+                    'cuti': {
+                        validators: {
+                            choice: {
+                                min: 1,
+                                message: 'Sila pilih sama ada Ya atau Tidak'
+                            }
+                        }
+                    },
+                    'terimBiasiswa': {
+                        validators: {
+                            choice: {
+                                min: 1,
+                                message: 'Sila pilih sama ada Ya atau Tidak'
+                            }
+                        }
+                    },
+                    'nama_penaja': {
+                        validators: {
+                            callback: {
+                                message: 'Sila pilih Biasiswa / Tajaan',
+                                callback: function(input) {
+                                    // only validate if user selected "ya"
+                                    const terima = form.querySelector('input[name="terimBiasiswa"]:checked');
+                                    if (terima && terima.value === "ya") {
+                                        return input.value !== ""; // must select
+                                    }
+                                    return true; // skip validation if "tidak"
+                                }
+                            }
+                        }
+                    },
                     'id_institusi': {
                         validators: {
                             notEmpty: {
@@ -166,14 +205,24 @@ var KTSignupGeneral = function () {
                     // Check axios library docs: https://axios-http.com/docs/intro
                     axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
                         if (response) {
-                            // Check if the user chose 'Ya'
-                            const cutiValue = form.querySelector('input[name="cuti"]:checked').value;
+                            // Check if the user chose 'Ya' for cuti
+                            const cutiValue = form.querySelector('input[name="cuti"]:checked')?.value;
 
-                            if (cutiValue === 'ya') {
-                                let errorMessage = "Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh";
-                            
+                            // Check if the user chose 'Ya' for terimBiasiswa
+                            const biasiswaValue = form.querySelector('input[name="terimBiasiswa"]:checked')?.value;
+
+                            if (cutiValue === 'ya' || biasiswaValue === 'ya') {
+                                let errorMessage = "";
+
+                                if (cutiValue === 'ya') {
+                                    errorMessage += "Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh. ";
+                                }
+                                if (biasiswaValue === 'ya') {
+                                    errorMessage += "Anda tidak layak daftar kerana anda penerima Biasiswa atau Tajaan Lain.";
+                                }
+
                                 Swal.fire({
-                                    text: errorMessage,
+                                    text: errorMessage.trim(),
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
@@ -181,20 +230,23 @@ var KTSignupGeneral = function () {
                                         confirmButton: "btn btn-primary",
                                     },
                                     didClose: () => {
-                                        // Redirect to the login page
                                         window.location.href = '/login';
                                     }
                                 });
+
                             } else {
+                                // Both cuti and biasiswa are NOT "ya"
                                 form.reset();
 
                                 const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
                                 if (redirectUrl) {
                                     location.href = redirectUrl;
                                 }
-                            }    
-                        } else {
+                            }
+                        }
+
+                        
+                        else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
                                 text: "Sorry, looks like there are some errors detected, please try again.",

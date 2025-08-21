@@ -24,22 +24,6 @@
                 Semakan Kelayakan Syarat Daftar Pengguna
             </h3>
         </div>
-       
-        {{-- <div class="fv-row mb-10">
-			<label class="form-label required">Adakah anda penerima Hadiah Latihan Persekutuan?</label>	
-			<div class="row mb-2" data-kt-buttons="true">
-                <div class="col">
-                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-                    <input type="radio" class="btn-check" name="terimHLP" value="ya" />
-                    <span class="fw-bold fs-3">Ya</span></label>
-                </div>
-                <div class="col">
-                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-                    <input type="radio" class="btn-check" name="terimHLP" checked="checked" value="tidak" />
-                    <span class="fw-bold fs-3">Tidak</span></label>
-                </div>
-			</div>
-		</div> --}}
 
         <div class="fv-row mb-10">
 			<label style="font-size: 20px" class="form-label required">Adakah anda penerima Cuti Belajar Bergaji Penuh?</label>	
@@ -50,12 +34,45 @@
                     <span class="fw-bold fs-3">Ya</span></label>
                 </div>
                 <div class="col">
-                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-                    <input type="radio" class="btn-check" name="cuti" checked="checked" value="tidak" />
+                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+                    <input type="radio" class="btn-check" name="cuti" value="tidak" />
                     <span class="fw-bold fs-3">Tidak</span></label>
                 </div>
 			</div>
 		</div>
+
+        <div class="fv-row mb-10">
+            <label style="font-size: 20px" class="form-label required">
+                Adakah anda penerima Biasiswa atau Tajaan Lain?
+            </label>	
+            <div class="row mb-2" data-kt-buttons="true">
+                <div class="col">
+                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+                        <input type="radio" class="btn-check" name="terimBiasiswa" value="ya" />
+                        <span class="fw-bold fs-3">Ya</span>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+                        <input type="radio" class="btn-check" name="terimBiasiswa" value="tidak" />
+                        <span class="fw-bold fs-3">Tidak</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Biasiswa Dropdown -->
+            <div class="fv-row mb-10" id="div_biasiswa" style="display:none;">													
+                <label style="font-size: 20px" class="form-label">Biasiswa / Tajaan Lain</label>
+                <select style="font-size: 20px" id="nama_penaja" name="nama_penaja" 
+                        class="form-select form-select-lg form-select-solid js-example-basic-single"  
+                        data-control="select2" data-hide-search="true">
+                    <option value="">Pilih</option>
+                    @foreach ($penaja as $penaja)	
+                        <option value="{{ $penaja->id}}">{{ strtoupper($penaja->penaja)}}</option> 
+                    @endforeach
+                </select>
+            </div>
+        </div>
   
         <div class="text-center mb-11">
             <h2 style="font-size: 20px" class="text-dark fw-bolder mb-3">
@@ -97,6 +114,27 @@
         <!-- Script -->
         {{-- <script src="assets/js/custom/authentication/semak/general.js"></script> --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radios = document.querySelectorAll("input[name='terimBiasiswa']");
+            const divBiasiswa = document.getElementById("div_biasiswa");
+
+            // hide by default
+            divBiasiswa.style.display = "none";
+
+            radios.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    if (this.value === "ya") {
+                        divBiasiswa.style.display = "block";
+                    } else {
+                        divBiasiswa.style.display = "none";
+                    }
+                });
+            });
+        });
+        </script>
+
         <script type='text/javascript'>
         $(document).ready(function(){
 
@@ -205,6 +243,8 @@
         });
 
         </script>
+
+
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">

@@ -9,6 +9,8 @@ use App\Models\InfoIpt;
 use App\Models\PeringkatPengajian;
 use App\Models\Kursus;
 use App\Models\Akademik;
+use App\Models\Penaja;
+use App\Models\SumberBiaya;
 use App\Models\TarikhIklan;
 
 class SemakUserController extends Controller
@@ -19,6 +21,9 @@ class SemakUserController extends Controller
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
 
+        $penaja = Penaja::orderby("penaja")
+             ->whereIn('sumber_id',['1','2'])
+             ->get();
         $ipt = InfoIpt::orderby("nama_institusi","asc")
              ->where('jenis_institusi','=','IPTS')
              ->get();
@@ -26,6 +31,7 @@ class SemakUserController extends Controller
             ->get();
 
         return view('pages.auth.semaksyarat', compact('catatan'))
+        ->with("penaja",$penaja)
         ->with("ipt",$ipt)
         ->with("kod_peringkat",$kodperingkat);
    }
@@ -59,35 +65,24 @@ class SemakUserController extends Controller
     {
         $request->validate([
             'cuti' => ['required'],
+            'terimaBiasiswa' => ['required'],
             'id_institusi' => ['required'],
             'peringkat_pengajian' => ['required'],
             'nama_kursus' => ['required'],
             
         ]);
 
+        Akademik::updateOrCreate(
+            ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
+            [
+                'id_institusi' => $request->id_institusi,
+                'peringkat_pengajian' => $request->peringkat_pengajian,
+                'nama_kursus' => $request->nama_kursus,
+                'status' => 1,
+            ]
+        );
 
-        $cuti = $request->cuti;
+        return redirect()->route('daftarlayak');
         
-        if ($cuti == 'ya') {
-            
-            $message = 'Anda tidak layak daftar kerana anda penerima Cuti Belajar Bergaji Penuh';
-            
-        
-            return redirect()->route('login')->with('message', $message);
-        } 
-        else {
-            
-            Akademik::updateOrCreate(
-                ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
-                [
-                    'id_institusi' => $request->id_institusi,
-                    'peringkat_pengajian' => $request->peringkat_pengajian,
-                    'nama_kursus' => $request->nama_kursus,
-                    'status' => 1,
-                ]
-            );
-        
-            return redirect()->route('daftarlayak');
-        }  
     }  
 }
