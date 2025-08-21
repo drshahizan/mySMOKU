@@ -108,15 +108,15 @@
 
         <!--begin::Input group--->
         <div class="fv-row mb-10">
-            <div class="form-check form-check-custom form-check-solid form-check-inline">
-                <input class="form-check-input" type="checkbox" name="toc" value="1"/>
-
-                <label class="form-check-label fw-semibold text-gray-700 fs-6">
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input me-2" type="checkbox" name="toc" value="1"/>
+                <label class="form-check-label fw-semibold text-gray-700 fs-4 mb-0">
                     Saya dengan ini mengesahkan bahawa maklumat yang diberikan adalah benar.
                 </label>
             </div>
         </div>
         <!--end::Input group--->
+
 
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
