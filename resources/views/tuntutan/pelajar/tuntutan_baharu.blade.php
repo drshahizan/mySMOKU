@@ -15,6 +15,8 @@
 		<div class="d-flex flex-column flex-lg-row">
 			@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4', '5'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4', '5'])))
 			<!--begin::Content-->
+			<input type="hidden" id="requireYuran" value="{{ $permohonan->yuran == '1' ? '1' : '0' }}">
+			<input type="hidden" id="requireWangSaku" value="{{ $permohonan->wang_saku == '1' ? '1' : '0' }}">
 			<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
 				<!--begin::Card-->
 				<div class="card">
@@ -41,31 +43,14 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 										<div class="mb-5">
-											<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option></option>
-													@php
-														$currentYear = date('Y');
-													@endphp
-													@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
-														@php
-															$sesi = $year . '/' . ($year + 1);
-														@endphp
-														<option value="{{ $sesi }}">{{ $sesi }}</option>
-													@endfor
-											</select>
+											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 										<!--begin::Input group-->
 										<div class="mb-5">
-											<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-												<option></option>
-												@for ($i = 1; $i <= 12; $i++)
-													<option value="<?= $i ?>"><?= $i ?></option>
-												@endfor
-												
-											</select>
+											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 										</div>
 									</div>
 									<!--end::Col-->
@@ -122,10 +107,16 @@
 								</div>
 								<div class="row gx-10 mb-5">
 									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/ Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
-										<div class="input-group control-group img_div form-group col-md-11" >
-											<input type="file" id="resit" name="resit[]" />
-											<br>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
+										<div class="input-group control-group img_div form-group col-md-11">
+											<input type="file" 
+												id="resit" 
+												name="resit" 
+												accept=".jpg,.jpeg,.png,.pdf"
+												{{-- required 
+												oninvalid="this.setCustomValidity('Sila upload resit dalam format JPG, PNG atau PDF.')" 
+												oninput="this.setCustomValidity('')"  --}}
+											/>
 										</div>
 										<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
 											<input type="hidden" id="resit" name="resit[]" />
@@ -221,31 +212,14 @@
 										<div class="col-lg-6">
 											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
 											<div class="mb-5">
-												<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-													<option></option>
-														@php
-															$currentYear = date('Y');
-														@endphp
-														@for($year = $currentYear - 1; $year <= ($currentYear + 1); $year++)
-															@php
-																$sesi = $year . '/' . ($year + 1);
-															@endphp
-															<option value="{{ $sesi }}">{{ $sesi }}</option>
-														@endfor
-												</select>
+												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
 											</div>
 										</div>
 										<div class="col-lg-6">
 											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
 											<!--begin::Input group-->
 											<div class="mb-5">
-												<select id="sem_semasa" name="sem_semasa" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-													<option></option>
-													@for ($i = 1; $i <= 12; $i++)
-														<option value="<?= $i ?>"><?= $i ?></option>
-													@endfor
-													
-												</select>
+												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
 											</div>
 										</div>
 										<!--end::Col-->
@@ -318,33 +292,41 @@
 <!--begin::Javascript-->
 <script>
     function checkButtonState() {
-        const submitButton = document.getElementById("submitButton");
-        const wangSakuCheckbox = document.getElementById("wang_saku");
-        const tableBody = document.querySelector("#itemtuntutan tbody");
-        
-        // Check if the table has rows (if present)
-        const hasItems = tableBody ? tableBody.children.length > 0 : false;
-        const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
+		const submitButton = document.getElementById("submitButton");
+		const wangSakuCheckbox = document.getElementById("wang_saku");
+		const tableBody = document.querySelector("#itemtuntutan tbody");
 
-        // Enable button if items exist or wang saku is checked
-        submitButton.disabled = !(hasItems || wangSakuChecked);
-    }
+		const hasItems = tableBody ? tableBody.children.length > 0 : false;
+		const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
 
-    // Initial check
-    checkButtonState();
+		const requireYuran = document.getElementById("requireYuran").value === '1';
+		const requireWangSaku = document.getElementById("requireWangSaku").value === '1';
 
-    // Update button state on checkbox change
-    const wangSakuCheckbox = document.getElementById("wang_saku");
-    if (wangSakuCheckbox) {
-        wangSakuCheckbox.addEventListener("change", checkButtonState);
-    }
+		let enable = false;
 
-    // Update button state when table items change
-    const tableBody = document.querySelector("#itemtuntutan tbody");
-    if (tableBody) {
-        const observer = new MutationObserver(checkButtonState);
-        observer.observe(tableBody, { childList: true });
-    }
+		if (requireYuran && requireWangSaku) {
+			enable = hasItems && wangSakuChecked;
+		} else if (requireYuran && !requireWangSaku) {
+			enable = hasItems;
+		} else if (!requireYuran && requireWangSaku) {
+			enable = wangSakuChecked;
+		}
+
+		submitButton.disabled = !enable;
+	}
+
+	checkButtonState();
+
+	const wangSakuCheckbox = document.getElementById("wang_saku");
+	if (wangSakuCheckbox) {
+		wangSakuCheckbox.addEventListener("change", checkButtonState);
+	}
+
+	const tableBody = document.querySelector("#itemtuntutan tbody");
+	if (tableBody) {
+		const observer = new MutationObserver(checkButtonState);
+		observer.observe(tableBody, { childList: true });
+	}
 </script>
 
 
