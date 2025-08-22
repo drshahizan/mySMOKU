@@ -154,7 +154,7 @@ class TuntutanController extends Controller
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
-            // dd($semLepas);
+            // dd('sini');
             // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
 
             if ($semLepas != 0 ) {
@@ -481,9 +481,9 @@ class TuntutanController extends Controller
         $sejarah->save();
 
         // COMMENT PROD
-        $catatan = "Tuntutan";
-        $emel = EmelKemaskini::where('emel_id',14)->first();
-        Mail::to($smoku_id->email)->send(new TuntutanHantar($catatan,$emel));
+        // $catatan = "Tuntutan";
+        // $emel = EmelKemaskini::where('emel_id',14)->first();
+        // Mail::to($smoku_id->email)->send(new TuntutanHantar($catatan,$emel));
         
         return redirect()->route('pelajar.dashboard')->with('message', 'Tuntutan anda telah dihantar.');
     }
