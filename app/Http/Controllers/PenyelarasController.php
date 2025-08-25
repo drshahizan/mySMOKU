@@ -1311,26 +1311,13 @@ class PenyelarasController extends Controller
 
             
         //simpan dalam table sejarah_tuntutan
-        $sejarahtuntutan = SejarahTuntutan::where('tuntutan_id', '=', $tuntutan->id)->first();
-        if ($sejarahtuntutan === null) {
-            $sejarahtuntutan = SejarahTuntutan::create([
-                'tuntutan_id' => $tuntutan->id,
+        $sejarahtuntutan = SejarahTuntutan::updateOrCreate(
+            ['tuntutan_id' => $tuntutan->id], // syarat
+            [
                 'smoku_id' => $id,
-                'status' => '1',
-        
-            ]);
-        }
-        else{
-
-            SejarahTuntutan::where('tuntutan_id', '=', $tuntutan->id)
-                ->update([
-                'tuntutan_id' => $tuntutan->id,
-                'smoku_id' => $id,
-                'status' => '1',
-                
-            ]);
-        }
-        $sejarahtuntutan->save();
+                'status'   => '1',
+            ]
+        );
             
         return redirect()->route('bkoku.tuntutan.baharu', [$id])->with('message', 'Simpan.');
     }
