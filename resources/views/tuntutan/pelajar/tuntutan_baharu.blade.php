@@ -170,15 +170,7 @@
 										<tr>
 											<td>{{ $loop->iteration }}.</td>
 											<td>{{ $tuntutan_item->jenis_yuran}}</td>
-											<td>
-												@if(!empty($tuntutan_item->resit))
-													<a href="/assets/dokumen/tuntutan/{{ $tuntutan_item->resit }}" target="_blank">
-														{{ $tuntutan_item->no_resit }}
-													</a>
-												@else
-													{{ $tuntutan_item->no_resit }}
-												@endif
-											</td>
+											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
 											<td>{{ $tuntutan_item->nota_resit}}</td>
 											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 											<td class="text-center">
