@@ -10,6 +10,7 @@
         @foreach($dokumen as $item)
             @php
                 $dokumen_path = "/assets/dokumen/permohonan/" . $item['dokumen'];
+                $file_path = public_path($dokumen_path); // real file path
                 $ext = pathinfo($dokumen_path, PATHINFO_EXTENSION);
 
                 if ($item['id_dokumen'] == 1) {
@@ -36,19 +37,23 @@
                     <div class="accordion-body" style="text-align: center">
                         <p>Catatan: {{ $item['catatan'] }}</p>
 
-                        @if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']))
-                            <a href="{{ $dokumen_path }}" download>
-                                <img src="{{ $dokumen_path }}" style="max-width: 50%; height: auto; cursor: pointer;" alt="Dokumen Gambar">
-                            </a>
+                        @if(file_exists($file_path))
+                            @if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif']))
+                                <a href="{{ $dokumen_path }}" download>
+                                    <img src="{{ $dokumen_path }}" style="max-width: 50%; height: auto; cursor: pointer;" alt="Dokumen Gambar">
+                                </a>
+                            @else
+                                <embed src="{{ $dokumen_path }}" width="100%" height="650px" type="application/pdf"/>
+                            @endif
                         @else
-                            <embed src="{{ $dokumen_path }}" width="100%" height="650px" type="application/pdf"/>
+                            <p><b style="color:red">TIADA DOKUMEN</b></p>
                         @endif
                     </div>
                 </div>
             </div>
         @endforeach
-
     </div>
+
     <!--end::Accordion-->
 </x-default-layout>
 
