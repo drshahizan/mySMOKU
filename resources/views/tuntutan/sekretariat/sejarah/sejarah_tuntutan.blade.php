@@ -113,6 +113,9 @@
                     $('#sortTable1').DataTable({
                         ordering: true, // Enable manual sorting
                             order: [], // Disable initial sorting
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
                             columnDefs: [
                                 { orderable: false, targets: [0] }
                             ],
@@ -132,7 +135,29 @@
                             }
                         },
                         { data: 'no_baucer' },  
-                        { data: 'tarikh_baucer' },  
+                        {   
+                            data: 'tarikh_baucer',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            } 
+
+                        },  
                         {
                             data: 'yuran_dibayar',
                             render: function(data, type, row) {
