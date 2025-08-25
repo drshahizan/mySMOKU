@@ -111,7 +111,7 @@
 										<div class="input-group control-group img_div form-group col-md-11">
 											<input type="file" 
 												id="resit" 
-												name="resit" 
+												name="resit[]" 
 												accept=".jpg,.jpeg,.png,.pdf"
 												{{-- required 
 												oninvalid="this.setCustomValidity('Sila upload resit dalam format JPG, PNG atau PDF.')" 
@@ -170,7 +170,16 @@
 										<tr>
 											<td>{{ $loop->iteration }}.</td>
 											<td>{{ $tuntutan_item->jenis_yuran}}</td>
-											<td><a href="/assets/dokumen/tuntutan/{{$tuntutan_item->resit}}" target="_blank">{{ $tuntutan_item->no_resit}}</a></td>
+											<td>
+												@if(!empty($tuntutan_item->resit))
+													<a href="/assets/dokumen/tuntutan/{{ $tuntutan_item->resit }}" target="_blank">
+														{{ $tuntutan_item->no_resit }}
+													</a>
+												@else
+													{{ $tuntutan_item->no_resit }}
+												@endif
+											</td>
+
 											<td>{{ $tuntutan_item->nota_resit}}</td>
 											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
 											<td class="text-center">
@@ -472,58 +481,45 @@ myFunction();
 </script>
 <script>
     $(document).ready(function () {
-        $('#itemtuntutan tbody tr').on('dblclick', function () {
-            // Handle double-click event here
-            var rowData = $(this).find('td'); // Get the data from the clicked row
-    		console.log('rowData:', rowData);
+		$('#itemtuntutan tbody tr').on('dblclick', function () {
+			var rowData = $(this).find('td'); 
 
-            // Extract data 
-            var jenisValue = $(rowData[1]).text(); 
+			// Extract data 
+			var jenisValue = $(rowData[1]).text(); 
 			var noresitValue = $(rowData[2]).text().trim();
-            var notaresitValue = $(rowData[3]).text().trim(); 
-            var amaunyuranValue = $(rowData[4]).text(); 
+			var notaresitValue = $(rowData[3]).text().trim(); 
+			var amaunyuranValue = $(rowData[4]).text(); 
 
 			var linkElement = $(rowData[2]).find('a');
-        var hrefValue = linkElement.attr('href');
+			var hrefValue = linkElement.length ? linkElement.attr('href') : null;
 
-        // Assuming the <span> has an id of "fileNameDisplay"
-        var fileNameDisplay = $('#fileNameDisplay');
+			var fileLinkContainer = $('#fileLinkContainer');
+			fileLinkContainer.empty();
 
-        // Assuming the <div> has an id of "fileLinkContainer"
-        var fileLinkContainer = $('#fileLinkContainer');
+			if (hrefValue) {
+				// Create an anchor element dynamically
+				var fileLink = $('<a>')
+					.attr('href', hrefValue)
+					.attr('target', '_blank')
+					.text(hrefValue.split('/').pop()); // filename at the end of URL
 
-        // Create an anchor element dynamically
-        var fileLink = $('<a>');
+				fileLinkContainer.append(fileLink);
+			} else {
+				// If no link, show "TIADA DOKUMEN"
+    			fileLinkContainer.text("TIADA DOKUMEN");
+			}
 
-        // Set the href attribute to the file URL
-        fileLink.attr('href', hrefValue);
+			// Set the selected options in the form
+			$('#jenis_yuran').val(jenisValue).trigger('change');
+			$('#no_resit').val(noresitValue).trigger('change');
+			$('#nota_resit').val(notaresitValue).trigger('change');
+			$('#amaun_yuran').val(amaunyuranValue).trigger('change');
 
-        // Set the text content to the filename
-        var fileName = hrefValue.split('/').pop(); // Assumes the file name is at the end of the URL
-        fileLink.text(fileName);
+			// Show the form
+			$('#dataForm').show();
+		});
+	});
 
-        // Clear previous content in the container
-        fileLinkContainer.empty();
-
-        // Append the anchor element to the container
-        fileLinkContainer.append(fileLink);
-
-			
-            // Set the selected options in the <select> elements
-            $('#jenis_yuran').val(jenisValue);
-            $('#no_resit').val(noresitValue);
-            $('#nota_resit').val(notaresitValue);
-            $('#amaun_yuran').val(amaunyuranValue);
-
-			$('#jenis_yuran').trigger('change');
-			$('#no_resit').trigger('change');
-			$('#nota_resit').trigger('change');
-			$('#amaun_yuran').trigger('change');
-            // Show the form
-            $('#dataForm').show();
-        });
-
-    });
 
 </script>
 

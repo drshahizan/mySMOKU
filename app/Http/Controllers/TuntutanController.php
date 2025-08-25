@@ -306,55 +306,56 @@ class TuntutanController extends Controller
             ->where('permohonan_id', '=', $permohonan->id)
             ->first();    
 
-        $resit = $request->resit;
+
+        $resit = $request->file('resit'); 
         $counter = 1; 
 
+    
         // Check if $request->resit is not null before iterating
-        if ($resit !== null && is_array($resit) && isset($resit[0]) && $resit[0] !== null) {
+        if ($resit && is_array($resit)) {
             foreach ($resit as $resitItem) {
-                $filenameresit = $resitItem->getClientOriginalName();
-                $uniqueFilename = $counter . '_' . $filenameresit;
-
-                // Append increment to the filename until it's unique
-                while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
-                    $counter++;
+                if ($resitItem) {
+                    $filenameresit = $resitItem->getClientOriginalName();
                     $uniqueFilename = $counter . '_' . $filenameresit;
-                }
 
-                $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
+                    while (file_exists(public_path('assets/dokumen/tuntutan/' . $uniqueFilename))) {
+                        $counter++;
+                        $uniqueFilename = $counter . '_' . $filenameresit;
+                    }
 
-                // Create an array with all data
-                $data = [
-                    'tuntutan_id' => $tuntutan->id,
-                    'jenis_yuran' => $request->jenis_yuran,
-                    'no_resit' => $request->no_resit,
-                    'nota_resit' => $request->nota_resit,
-                    'amaun' => $request->amaun_yuran,
-                    'resit' => $uniqueFilename,
-                ];
+                    $resitItem->move(public_path('assets/dokumen/tuntutan'), $uniqueFilename);
 
-                // Update or create the record
-                TuntutanItem::updateOrCreate(
-                    [
+                    $data = [
                         'tuntutan_id' => $tuntutan->id,
                         'jenis_yuran' => $request->jenis_yuran,
-                    ],
-                    $data
-                );
+                        'no_resit'   => $request->no_resit,
+                        'nota_resit' => $request->nota_resit,
+                        'amaun'      => $request->amaun_yuran,
+                        'resit'      => $uniqueFilename,
+                    ];
 
-                $counter++;
+                    TuntutanItem::updateOrCreate(
+                        [
+                            'tuntutan_id' => $tuntutan->id,
+                            'jenis_yuran' => $request->jenis_yuran,
+                        ],
+                        $data
+                    );
+
+                    $counter++;
+                }
             }
         } else {
-            // If $request->resit is null, update other data without updating resit
+            // no file uploaded, update other data only
             TuntutanItem::updateOrCreate(
                 [
                     'tuntutan_id' => $tuntutan->id,
                     'jenis_yuran' => $request->jenis_yuran,
                 ],
                 [
-                    'no_resit' => $request->no_resit,
+                    'no_resit'   => $request->no_resit,
                     'nota_resit' => $request->nota_resit,
-                    'amaun' => $request->amaun_yuran,
+                    'amaun'      => $request->amaun_yuran,
                 ]
             );
         }
