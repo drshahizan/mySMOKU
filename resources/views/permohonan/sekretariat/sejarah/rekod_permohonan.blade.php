@@ -60,89 +60,16 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
                                     <tr>
-                                        <th style="width: 50%"><b>ID Permohonan</b></th>
-                                        <th style="width: 15%" class="text-center"><b>Tarikh</b></th>
-                                        <th style="width: 15%" class="text-center"><b>Status</b></th>
-                                        <th style="width: 15%" class="text-center"><b>Dilaksanakan Oleh</b></th>
+                                        <th>ID Permohonan</th>
+                                        <th>No Baucer</th>
+                                        <th>Tarikh Baucer</th>
+                                        <th>Amaun Yuran (RM)</th>
+                                        <th>Amaun Wang Saku (RM)</th>
+                                        <th>Tarikh Permohonan</th>
+                                        <th>Tarikh Dibayar</th>
+                                        <th>Status</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @php
-                                        $i=0;
-                                    @endphp
-                                    @foreach ($sejarah_p as $item)
-                                            @php
-                                                $i++;
-                                                $status = DB::table('bk_status')->where('kod_status', $item['status'])->value('status');
-                                                if ($item['status']==2){
-                                                    $status='Baharu';
-                                                }
-                                                if ($item['status']==3){
-                                                    $status='Sedang Disaring';
-                                                }
-                                                if($item['dilaksanakan_oleh']==null){
-                                                    $oleh = "Tiada Maklumat";
-                                                }
-                                                else{
-                                                    $user_name = DB::table('users')->where('id', $item['dilaksanakan_oleh'])->value('nama');
-                                                    $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                    $conjunctions = ['bin', 'binti'];
-                                                    $words = explode(' ', $text);
-                                                    $result = [];
-                                                    foreach ($words as $word) {
-                                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                                            $result[] = Str::lower($word);
-                                                        } else {
-                                                            $result[] = $word;
-                                                        }
-                                                    }
-                                                    $oleh = implode(' ', $result);
-                                                }
-                                            @endphp
-                                            <tr>
-                                                @if ($item['status']=='1')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='2')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='3')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='4')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='5')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='6')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='7')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-kelulusan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='8')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-pembayaran/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @elseif ($item['status']=='9')
-                                                    <td><a href="{{url('permohonan/sekretariat/sejarah/papar-permohonan/'.$item['id'])}}" target="_blank">{{$permohonan->no_rujukan_permohonan}}</a></td>
-                                                @endif
-                                                <td class="text-center">{{ $item['created_at'] ? $item['created_at']->format('d/m/Y') : '-' }}</td>
-                                                @if ($item['status']=='1')
-                                                    <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='2')
-                                                    <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='3')
-                                                    <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='4')
-                                                    <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='5')
-                                                    <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='6')
-                                                    <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='7')
-                                                    <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='8')
-                                                    <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @elseif ($item['status']=='9')
-                                                    <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                @endif
-                                                <td>{{$oleh}}</td>
-                                            </tr>
-                                    @endforeach
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -152,9 +79,185 @@
         </div>
     </div>
     <script>
-        $('#sortTable1').DataTable();
-        $('#sortTable2').DataTable();
-    </script>
+            const smoku_id = "{{ $smoku_id }}";
+
+            $(document).ready(function() {
+
+                // DataTable initialization functions
+                function initializeDataTable1() {
+                    $('#sortTable1').DataTable({
+                        ordering: true, // Enable manual sorting
+                            order: [], // Disable initial sorting
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            columnDefs: [
+                                { orderable: false, targets: [0] }
+                            ],
+                        ajax: {
+                            url: '{{ route("sejarah.permohonan.data", ["id" => ":smoku_id"]) }}'.replace(':smoku_id', smoku_id),
+                            dataSrc: '' // Property in the response object containing the data array
+                            
+                        },
+                        columns: [
+                        { 
+                            data: 'no_rujukan_permohonan',
+                            render: function(data, type, row) {
+                                // Construct the URL using the no_rujukan_permohonan value
+                                var url = "{{ url('permohonan/sekretariat/sejarah/papar-permohonan/') }}" + '/' + row.smoku_id;
+                                // Create and return the link element
+                                return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                            }
+                        },
+                        { data: 'no_baucer' },  
+                        {   
+                            data: 'tarikh_baucer',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            } 
+
+                        },  
+                        {
+                            data: 'yuran_dibayar',
+                            render: function(data, type, row) {
+                                // If the data is being displayed, add .00 to the end
+                                if (data === null) {
+                                    return '-';
+                                }
+                                // If the data is being displayed, add .00 to the end
+                                else if (type === 'display' || type === 'filter') {
+                                    return data + '.00';
+                                }
+                                return data;
+                            }
+                        },  
+                        {
+                            data: 'wang_saku_dibayar',
+                            render: function(data, type, row) {
+                                // If the data is being displayed, add .00 to the end
+                                if (data === null) {
+                                    return '-';
+                                }
+                                // If the data is being displayed, add .00 to the end
+                                else if (type === 'display' || type === 'filter') {
+                                    return data + '.00';
+                                }
+                                return data;
+                            }
+                        },  
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        },
+                        {
+                            data: 'tarikh_transaksi',
+                            render: function(data, type, row) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' '; // handle null, undefined, or empty string
+
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                    // Get the year, month, and day components
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                    // Return the formatted date as YYYY/MM/DD
+                                    return day + '/' + month + '/' + year;
+                                } else {
+                                    // For sorting and other purposes, return the original data
+                                    return data;
+                                }
+                            }
+                        }, 
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                var status = ''; // Initialize an empty string for the button HTML
+
+                                // Define the button HTML based on the status value
+                                switch (data) {
+                                    case '1':
+                                        status = '<button class="btn bg-info text-white">Deraf</button>';
+                                        break;
+                                    case '2':
+                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                        break;
+                                    case '3':
+                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                        break;
+                                    case '4':
+                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                        break;
+                                    case '5':
+                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                        break;
+                                    case '6':
+                                        status = '<button class="btn bg-success text-white">Layak</button>';
+                                        break;
+                                    case '7':
+                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                        break;
+                                    case '8':
+                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                        break;
+                                    case '9':
+                                        status = '<button class="btn bg-batal text-white">Batal</button>';
+                                        break;
+                                    case '10':
+                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                        break;    
+                                    default:
+                                        status = ''; // Set empty string for unknown status values
+                                        break;
+                                }
+
+                                return status;
+                            }
+                        }]
+
+                    });
+                }
+
+                initializeDataTable1(); // Initialize DataTable1 on page load
+
+            });
+        </script>
 
     </body>
 </x-default-layout>

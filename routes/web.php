@@ -447,6 +447,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/sekretariat/sejarah/sejarah/dataPPK', [SaringanController::class, 'getDataSejarahPPK'])->name('sejarah.permohonan.dataPPK');
 
         Route::get('permohonan/sekretariat/sejarah/rekod-permohonan/{id}', [SaringanController::class, 'rekodPermohonan'])->name('rekod.permohonan.id');
+        Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan/data/{id}', [SaringanController::class, 'getDataSejarahPermohonan'])->name('sejarah.permohonan.data');
+
         Route::get('permohonan/sekretariat/sejarah/papar-permohonan/{id}', [SaringanController::class, 'paparRekodPermohonan'])->name('papar.rekod.permohonan.id');
         Route::get('permohonan/sekretariat/sejarah/papar-pembayaran/{id}', [SaringanController::class, 'paparRekodPembayaran'])->name('papar.rekod.pembayaran.id');
         Route::get('permohonan/sekretariat/sejarah/papar-saringan/{id}', [SaringanController::class, 'paparRekodSaringan'])->name('papar.rekod.saringan.id');

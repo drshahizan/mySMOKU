@@ -1137,18 +1137,25 @@ class SaringanController extends Controller
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
         $sejarah_p = SejarahPermohonan::where('permohonan_id', $permohonan->id)->orderBy('created_at', 'desc')->get();
 
-        return view('permohonan.sekretariat.sejarah.rekod_permohonan',compact('permohonan','akademik','smoku','sejarah_p'));
+        return view('permohonan.sekretariat.sejarah.rekod_permohonan',compact('permohonan','akademik','smoku','sejarah_p','smoku_id'));
+    }
+
+    public function getDataSejarahPermohonan($id)
+    {
+        $permohonan = Permohonan::where('smoku_id', $id)->get();
+
+
+        return response()->json($permohonan);
     }
 
     public function paparRekodPermohonan($id)
     {
-        $sejarah_p = SejarahPermohonan::where('id', $id)->first();
-        $permohonan = Permohonan::where('id', $sejarah_p->permohonan_id)->first();
-        $smoku_id = $permohonan->smoku_id;
-        $smoku = Smoku::where('id', $smoku_id)->first();
+        $permohonan = Permohonan::orderBy('id', 'DESC')->where('smoku_id', $id)->first();
+        $sejarah_p = SejarahPermohonan::where('permohonan_id', $permohonan->id)->orderBy('created_at', 'desc')->first();
+        $smoku = Smoku::where('id', $id)->first();
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
-        $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
+        $akademik = Akademik::where('smoku_id', $id)->where('peringkat_pengajian', $peringkat)->first();
 
         return view('permohonan.sekretariat.sejarah.papar_permohonan',compact('permohonan','smoku','akademik','sejarah_p'));
     }
