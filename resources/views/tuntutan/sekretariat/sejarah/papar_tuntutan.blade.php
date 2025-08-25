@@ -203,7 +203,13 @@
                                                         <tr>
                                                             <td style="text-align:right;">{{$i++}}</td>
                                                             <td>
-                                                                <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
+                                                                @if(!empty($item['resit']))
+                                                                    <a href="/assets/dokumen/tuntutan/{{ $item['resit'] }}" target="_blank">
+                                                                        {{$item['jenis_yuran']}}
+                                                                    </a>
+                                                                @else
+                                                                    {{$item['jenis_yuran']}}
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 {{$item['no_resit']}}
