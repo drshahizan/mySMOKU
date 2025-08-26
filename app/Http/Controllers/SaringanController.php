@@ -303,6 +303,7 @@ class SaringanController extends Controller
                         $query->with('infoipt');
                     }, 'smoku'])
                     ->join('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
+                    ->select('permohonan.*', 'smoku_waris.pendapatan_waris')
                     ->orderBy('smoku_waris.pendapatan_waris', 'asc') // sort by income
                     ->get();
 

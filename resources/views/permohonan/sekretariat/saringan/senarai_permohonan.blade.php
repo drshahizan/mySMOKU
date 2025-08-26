@@ -296,6 +296,7 @@
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
+                                                    <th><b>Pendapatan Isi Rumah</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
                                                 </tr>
@@ -1309,6 +1310,16 @@
                                     // For sorting and other purposes, return the original data
                                     return data;
                                 }
+                            }
+                        },
+                        {
+                            data: 'pendapatan_waris',
+                            render: function (data, type, row) {
+                                if (data == null || data === "") return "RM 0.00";
+
+                                // convert to float and format with 2 decimals
+                                let num = parseFloat(data);
+                                return "RM " + num.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                             }
                         },
                         {
