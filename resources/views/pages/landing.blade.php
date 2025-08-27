@@ -1011,7 +1011,7 @@
 																				
 																				<tr>
 																					<td rowspan="2">
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-4">
 																								<!-- begin::Title -->
@@ -1022,7 +1022,7 @@
 																						</div>
 																					</td>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
@@ -1033,7 +1033,7 @@
 																						</div>
 																					</td>
 																					<td>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2">
+																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
 																							<div class="mb-2">
 																								<!-- begin::Title -->
