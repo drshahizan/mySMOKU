@@ -421,6 +421,14 @@ td button{
     color: rgb(102, 102, 102);
 }
 
-#kt_app_sidebar_mobile_toggle{
+/* Hide by default */
+#kt_app_sidebar_mobile_toggle {
     display: none;
+}
+
+/* Show only on mobile (max-width 768px for tablets/phones) */
+@media (max-width: 768px) {
+    #kt_app_sidebar_mobile_toggle {
+        display: block !important;  /* or flex depending on design */
+    }
 }
