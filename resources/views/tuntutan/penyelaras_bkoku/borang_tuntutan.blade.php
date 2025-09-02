@@ -292,6 +292,17 @@
 <!--end::Content-->
 
 <!--begin::Javascript-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	@if(session('sem'))
+		Swal.fire({
+			icon: 'error',
+			title: 'Tidak Berjaya!',
+			text: ' {!! session('sem') !!}',
+			confirmButtonText: 'OK'
+		});
+	@endif
+</script>
 <script>
     function checkButtonState() {
 		const submitButton = document.getElementById("submitButton");

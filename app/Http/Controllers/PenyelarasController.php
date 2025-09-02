@@ -954,14 +954,24 @@ class PenyelarasController extends Controller
             ->where('smoku_akademik.status', 1)
             ->first();
 
-        $maxLimit = DB::table('bk_jumlah_tuntutan')
-        ->where('program','BKOKU')
-        ->where('jenis', 'Yuran')
-        ->first();	
-        $limitWangSaku = DB::table('bk_jumlah_tuntutan')
-        ->where('program','BKOKU')
-        ->where('jenis', 'Wang Saku')
-        ->first();	    
+        // against missing akademik
+        if (!$akademik) {
+            return back()->with('error', 'Maklumat akademik pelajar tidak ditemui.');
+        }
+
+        $maxLimitRow = DB::table('bk_jumlah_tuntutan')
+            ->where('program','BKOKU')
+            ->where('jenis', 'Yuran')
+            ->first();    
+
+        $limitWangSakuRow = DB::table('bk_jumlah_tuntutan')
+            ->where('program','BKOKU')
+            ->where('jenis', 'Wang Saku')
+            ->first();    
+
+        $maxLimit = $maxLimitRow->jumlah ?? 0;  
+        $limitWangSaku = $limitWangSakuRow->jumlah ?? 0;
+
 
         if ($permohonan && $permohonan->status ==8) {  
 
@@ -1081,7 +1091,7 @@ class PenyelarasController extends Controller
             // echo 'Current Session: ' . $currentSesi . PHP_EOL;
             // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
-            // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
+            // echo 'Previous Semester: ' . $semLepas . PHP_EOL;
             //  dd($tuntutan->id);
             //  dd('sini');
             // dd($semesterEndDate);
@@ -1128,7 +1138,7 @@ class PenyelarasController extends Controller
                     }
 
                     //nak tahu baki sesi semasa permohonan lepas
-                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit->jumlah;
+                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit;
                     //  dd($baki_total);
                 }
                 else{
@@ -1139,7 +1149,7 @@ class PenyelarasController extends Controller
                         ->first();
 
                     if($ada -> sesi ==  null){
-                        $baki_total = $maxLimit->jumlah;	
+                        $baki_total = $maxLimit;	
                     }else{
                         $jumlah_tuntut = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
@@ -1148,7 +1158,7 @@ class PenyelarasController extends Controller
                         $sum = $jumlah_tuntut->sum('jumlah');	
                         
                         // $baki_total = $permohonan->baki_dibayar - $sum;	
-                        $baki_total = $maxLimit->jumlah - $sum;	
+                        $baki_total = $maxLimit - $sum;	
                     }
                     
                     // dd($baki_total);
@@ -1159,14 +1169,14 @@ class PenyelarasController extends Controller
                 
                 if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
                     if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
-                        $baki_total = $limitWangSaku->jumlah * $akademik->bil_bulan_per_sem; 
+                        $baki_total = $limitWangSaku * $akademik->bil_bulan_per_sem; 
                     }
                     else {
                         $baki_total = '0'; 
                     }
                 }
                 else {
-                    $baki_total = $maxLimit->jumlah;
+                    $baki_total = $maxLimit;
                     
                 }
             }
@@ -1183,7 +1193,7 @@ class PenyelarasController extends Controller
 
             //     // dd($tuntutan);
             // }
-            else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4 || $tuntutan->status == 6))
+            else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4))
             {
                 return back()->with('sem', 'Tuntutan pelajar masih dalam semakan.');
             }
@@ -1195,7 +1205,7 @@ class PenyelarasController extends Controller
             return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
             
         } 
-        else if ($permohonan && $permohonan->status !=8) {
+        else if ($permohonan && $permohonan->status !=6) {
 
             return redirect()->route('dashboard')->with('permohonan', 'Permohonan pelajar masih dalam semakan.');
         } 
@@ -1230,25 +1240,29 @@ class PenyelarasController extends Controller
         }
 
         //simpan dalam table tuntutan
-        $tuntutan = Tuntutan::where('smoku_id', '=', $id)
-            ->where('permohonan_id', '=', $permohonan->id)
-            ->where('sesi', '=', $request->sesi)
-            ->where('semester', '=', $request->semester)
-            ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
+        $tuntutan = Tuntutan::where('smoku_id', $id)
+            ->where('permohonan_id', $permohonan->id)
+            ->where('sesi', $request->sesi)
+            ->where('no_rujukan_tuntutan', $no_rujukan_tuntutan)
             ->first();
 
-        if (!$tuntutan) {
-            $tuntutan = Tuntutan::create([
-                'smoku_id' => $id,
-                'permohonan_id' => $permohonan->id,
-                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
-                'semester' => $request->semester,    
-                'yuran' => '1',
-                'status' => '1',
-            ]);
-            $tuntutan->save();
+        if ($tuntutan) {
+            // kalau semester sama dengan yang sedia ada
+            if ($tuntutan->semester == $request->semester) {
+                return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+            }
         }
+
+        // kalau tak ada record, atau semester lain → buat rekod baru
+        $tuntutan = Tuntutan::create([
+            'smoku_id' => $id,
+            'permohonan_id' => $permohonan->id,
+            'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+            'sesi' => $request->sesi,
+            'semester' => $request->semester,    
+            'yuran' => '1',
+            'status' => '1',
+        ]);
 
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::orderBy('id', 'desc')
@@ -1350,27 +1364,31 @@ class PenyelarasController extends Controller
                     $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
                 }
 
-                // Cipta tuntutan jika belum wujud untuk kombinasi ini
-                $tuntutan = Tuntutan::where([
-                    ['smoku_id', '=', $id],
-                    ['permohonan_id', '=', $permohonan->id],
-                    ['sesi', '=', $request->sesi],
-                    ['semester', '=', $request->semester],
-                    ['no_rujukan_tuntutan', '=', $no_rujukan_tuntutan],
-                ])->first();
+                //simpan dalam table tuntutan
+                $tuntutan = Tuntutan::where('smoku_id', $id)
+                    ->where('permohonan_id', $permohonan->id)
+                    ->where('sesi', $request->sesi)
+                    ->where('no_rujukan_tuntutan', $no_rujukan_tuntutan)
+                    ->first();
 
-                if (!$tuntutan) {
-                    $tuntutan = Tuntutan::create([
-                        'smoku_id' => $id,
-                        'permohonan_id' => $permohonan->id,
-                        'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                        'sesi' => $request->sesi,
-                        'semester' => $request->semester,
-                        'wang_saku' => $request->wang_saku,
-                        'amaun_wang_saku' => $request->amaun_wang_saku,
-                        'status' => '1',
-                    ]);
+                if ($tuntutan) {
+                    // kalau semester sama dengan yang sedia ada
+                    if ($tuntutan->semester == $request->semester) {
+                        return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+                    }
                 }
+
+                // kalau tak ada record, atau semester lain → buat rekod baru
+                $tuntutan = Tuntutan::create([
+                    'smoku_id' => $id,
+                    'permohonan_id' => $permohonan->id,
+                    'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                    'sesi' => $request->sesi,
+                    'semester' => $request->semester,    
+                    'wang_saku' => $request->wang_saku,
+                    'amaun_wang_saku' => $request->amaun_wang_saku,
+                    'status' => '1',
+                ]);
 
                 $sejarah = SejarahTuntutan::create([
                     'tuntutan_id' => $tuntutan->id,
