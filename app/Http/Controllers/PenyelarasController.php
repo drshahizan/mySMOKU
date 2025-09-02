@@ -1385,6 +1385,15 @@ class PenyelarasController extends Controller
                     if ($tuntutan->semester == $request->semester) {
                         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
                     }
+                } else {
+
+                    $akademik = Akademik::where('smoku_id',$id)
+                        ->where('smoku_akademik.status', 1)
+                        ->first();
+                    // semak kalau semester permohonan sama dengan request
+                    if ($akademik->sem_semasa == $request->semester) {
+                        return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+                    }
                 }
 
                 // kalau tak ada record, atau semester lain → buat rekod baru
