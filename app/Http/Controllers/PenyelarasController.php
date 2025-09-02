@@ -768,7 +768,7 @@ class PenyelarasController extends Controller
                 ->whereNull('tuntutan.data_migrate');
         })
         ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
-        ->where('permohonan.status', 8) 
+        ->whereIn('permohonan.status', [6,8]) 
         ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
         ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
@@ -973,7 +973,7 @@ class PenyelarasController extends Controller
         $limitWangSaku = $limitWangSakuRow->jumlah ?? 0;
 
 
-        if ($permohonan && $permohonan->status ==8) {  
+        if ($permohonan && $permohonan->status == 6 || $permohonan->status == 8) {  
 
             $tuntutan = Tuntutan::where('smoku_id', $id)
                 ->where('permohonan_id', $permohonan->id)
@@ -1218,7 +1218,7 @@ class PenyelarasController extends Controller
 
     public function simpanTuntutan(Request $request, $id)
     {   
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $id)->first();
@@ -1249,6 +1249,15 @@ class PenyelarasController extends Controller
         if ($tuntutan) {
             // kalau semester sama dengan yang sedia ada
             if ($tuntutan->semester == $request->semester) {
+                return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+            }
+        } else {
+
+            $akademik = Akademik::where('smoku_id',$id)
+                ->where('smoku_akademik.status', 1)
+                ->first();
+            // semak kalau semester permohonan sama dengan request
+            if ($akademik->sem_semasa == $request->semester) {
                 return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
             }
         }
