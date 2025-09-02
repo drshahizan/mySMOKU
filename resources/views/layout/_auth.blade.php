@@ -30,7 +30,11 @@
                 <!--begin::Wrapper-->
                 <div>
                     <!-- Announcement Content -->
-                    <div class="announcement-box">
+                    <div id="announcement-box" class="announcement-box">
+                        <button class="announcement-close" 
+                                onclick="document.getElementById('announcement-box').style.display='none'">
+                            &times;
+                        </button>
                         @yield('announcement')
                     </div>
                 </div>
@@ -45,7 +49,7 @@
     <style>
         .announcement-box {
             position: absolute;
-            top: 65%;
+            /* top: 50%; */
             left: 20px;
             width: 95%;
             height: auto;
@@ -55,6 +59,20 @@
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
             font-size: 20px;
         }
+
+        /* Close button */
+        .announcement-close {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            line-height: 1;
+        }
+
 
         #slideshow {
             position: relative;
