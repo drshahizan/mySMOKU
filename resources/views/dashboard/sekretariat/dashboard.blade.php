@@ -11,10 +11,126 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 		<style>
-            .nav{
-                margin-left: 20px!important;
+        /* Base styles for all tabs */
+		.nav-tabs .nav-item {
+			margin-bottom: -1px; /* Prevent bottom margin */
+		}
+
+		.nav-link {
+			font-size: 16px !important;
+			color: #6c757d !important; 
+			background-color: none;
+			border: 1px solid transparent; 
+			padding: 10px 15px;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		/* Inactive tabs (flat) */
+		.nav-link {
+			background-color: transparent;
+			color: gray;
+			border: none;
+			border-bottom: 2px solid transparent;
+		}
+
+		/* Active tab with color and shadow */
+		.nav-link.active {
+			color: darkslateblue !important;
+    		box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
+			background-color: whitesmoke !important; /* Light blue background for active tab */
+			color: #8800ff; /* Bold blue font for active tab */
+			border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
+			font-weight: bold; /* Make font bold */
+			border-radius: 4px 4px 0 0; /* Slight rounding at top of active tab */
+		}
+
+		/* Add hover effect to inactive tabs */
+		.nav-link:hover {
+			border-bottom: 2px solid lightgray;
+			color: #007bff;
+		}
+
+		/* Remove default border */
+		.nav-tabs {
+			border-bottom: 2px solid lightgray; /* Bottom border for tab container */
+		}
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                display: flex;
+                flex-direction: column;
+                gap: 10px; /* Add space between the buttons */
+                width: 100%; /* Ensure it takes full width */
             }
-        </style>
+
+            .nav-tabs .nav-item {
+                flex: 1; /* Make each item take equal width */
+            }
+
+            .nav-tabs .nav-link {
+                display: block;
+                text-align: center;
+                width: 100%; /* Full width for each button */
+                padding: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                border: none; /* Remove default borders */
+                border-radius: 5px; /* Add rounded corners */
+            }
+
+            .nav-tabs .nav-link.active {
+                background-color: #003366; /* Change active tab background color */
+                color: white; /* Active tab text color */
+            }
+
+            .nav-tabs .nav-link {
+                background-color: #f8f9fa; /* Inactive tab background color */
+                color: black; /* Inactive tab text color */
+            }
+
+            /* Adjust the cards to stack vertically */
+            .row.g-3, .row.g-lg-6 {
+                flex-direction: column;
+            }
+
+            .row.g-3 .col-4, .row.g-lg-6 .col-4 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            .row.g-3 .col-3, .row.g-lg-6 .col-3 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            /* Reduce card padding and font sizes for better readability */
+            .card {
+                padding: 10px;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+
+            .card .fs-4x {
+                font-size: 2rem;
+            }
+
+            .card .fs-7 {
+                font-size: 0.8rem;
+            }
+
+            /* Adjust symbol/icon sizes */
+            .symbol {
+                margin-bottom: 10px;
+            }
+
+            .symbol i {
+                font-size: 15px !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    </style>
 	</head>
 
 
