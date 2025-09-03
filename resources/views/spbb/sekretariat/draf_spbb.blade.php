@@ -67,6 +67,8 @@
 													<div><a href="{{ route('sekretariat.draf.SPBB2', ['id_institusi' => $ua->id_institusi]) }}">SPBB 2</a></div>
 													<div><a href="{{ route('sekretariat.draf.SPBB2a', ['id_institusi' => $ua->id_institusi]) }}">SPBB 2a</a></div>
 													<div><a href="{{ route('sekretariat.draf.SPBB3', ['id_institusi' => $ua->id_institusi]) }}">SPBB 3</a></div>
+													<div><a href="{{ route('sekretariat.draf.lejar.permohonan', ['id_institusi' => $ua->id_institusi]) }}">Lejar Baharu (Permohonan)</a></div>
+													<div><a href="{{ route('sekretariat.draf.lejar.tuntutan', ['id_institusi' => $ua->id_institusi]) }}">Lejar Sedia Ada (Tuntutan)</a></div>
 												</td>
 											</tr>
 										@endforeach
@@ -83,12 +85,17 @@
 	<script>
 		$(document).ready(function() {
 			var table = $('#sortTable1').DataTable({
-				"columnDefs": [
+				ordering: true, // Enable manual sorting
+                order: [], // Disable initial sorting
+				columnDefs: [
 					{
 						"targets": 'no-sort',
 						"orderable": false
 					}
 				],
+				language: {
+					url: "/assets/lang/Malay.json"
+				}
 			});
 
 			

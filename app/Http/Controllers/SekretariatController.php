@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BorangSPPB;
+use App\Exports\DrafLejarPermohonan;
+use App\Exports\DrafLejarTuntutan;
 use App\Exports\DrafSPBB1;
 use App\Exports\DrafSPBB1a;
 use App\Exports\DrafSPBB2;
@@ -2097,6 +2099,17 @@ class SekretariatController extends Controller
     public function muatTurunDrafSPBB3($id_institusi)
     {
         return Excel::download(new DrafSPBB3($id_institusi), 'Draf-SPBB3.xlsx');
+    }
+
+    public function muatTurunDrafLejarPermohonan($id_institusi)
+    {
+        return Excel::download(new DrafLejarPermohonan($id_institusi), 'Draf-Lejar-Baharu_Permohonan.xlsx');
+    }
+
+    public function muatTurunDrafLejarTuntutan($id_institusi)
+    {
+        
+        return Excel::download(new DrafLejarTuntutan($id_institusi), 'Draf-Lejar-SediaAda_Tuntutan.xlsx');
     }
 
     public function muatTurunDokumenSPPB()
