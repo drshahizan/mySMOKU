@@ -55,6 +55,7 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -69,236 +70,285 @@ class SekretariatController extends Controller
         return view('dashboard.sekretariat.dashboard');
     }
 
-    public function getPermohonanIPTS()
-    {
-        $permohonanIPTS = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->selectRaw('
-                COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanIPTS,
-                COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafIPTS,
-                COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuIPTS,
-                COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanIPTS,
-                COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongIPTS,
-                COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanIPTS,
-                COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakIPTS,
-                COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakIPTS,
-                COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarIPTS
-            ')
-            ->where('program', 'BKOKU')
-            ->where('bk_info_institusi.jenis_institusi', 'IPTS')
-            ->first();
-
-        return response()->json($permohonanIPTS);
-    }
-
-    public function getTuntutanIPTS()
-    {
-        $tuntutanIPTS = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                ->where('permohonan.program','=','BKOKU')
-                ->where('bk_info_institusi.jenis_institusi', 'IPTS')
-                ->select(
-                    DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status != 9 THEN 1 END) AS keseluruhanTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanIPTS'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanIPTS')
-                )
-                ->first();
-
-        return response()->json($tuntutanIPTS);
-    }
-
-    public function getPermohonanPOLI()
-    {
-        $permohonanPOLI = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->selectRaw('
-                COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanPOLI,
-                COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafPOLI,
-                COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuPOLI,
-                COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanPOLI,
-                COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongPOLI,
-                COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanPOLI,
-                COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakPOLI,
-                COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakPOLI,
-                COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarPOLI
-            ')
-            ->where('program', 'BKOKU')
-            ->where('bk_info_institusi.jenis_institusi', 'P')
-            ->first();
-
-        return response()->json($permohonanPOLI);
-    }
-
-    public function getTuntutanPOLI()
-    {
-        $tuntutanPOLI = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                ->where('permohonan.program','=','BKOKU')
-                ->where('bk_info_institusi.jenis_institusi', 'P')
-                ->select(
-                    DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanPOLI'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanPOLI')
-                )
-                ->first();
-
-        return response()->json($tuntutanPOLI);
-    }
-
-    public function getPermohonanKK()
-    {
-        $permohonanKK = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->selectRaw('
-                COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanKK,
-                COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafKK,
-                COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuKK,
-                COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanKK,
-                COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongKK,
-                COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanKK,
-                COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakKK,
-                COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakKK,
-                COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarKK
-            ')
-            ->where('program', 'BKOKU')
-            ->where('bk_info_institusi.jenis_institusi', 'KK')
-            ->first();
-
-        return response()->json($permohonanKK);
-    }
-
-    public function getTuntutanKK()
-    {
-        $tuntutanKK = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
-                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                ->where('permohonan.program','=','BKOKU')
-                ->where('bk_info_institusi.jenis_institusi', 'KK')
-                ->select(
-                    DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status != 9 THEN 1 END) AS keseluruhanTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanKK'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanKK')
-                )
-                ->first();
-
-        return response()->json($tuntutanKK);
-    }
-
     public function getPermohonanUA()
     {
-        $permohonanUA = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->selectRaw('
-                COUNT(CASE WHEN permohonan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanUA,
-                COUNT(CASE WHEN permohonan.status = 1 THEN 1 END) AS derafUA,
-                COUNT(CASE WHEN permohonan.status = 2 THEN 1 END) AS baharuUA,
-                COUNT(CASE WHEN permohonan.status = 3 THEN 1 END) AS saringanUA,
-                COUNT(CASE WHEN permohonan.status = 4 THEN 1 END) AS disokongUA,
-                COUNT(CASE WHEN permohonan.status = 5 THEN 1 END) AS dikembalikanUA,
-                COUNT(CASE WHEN permohonan.status = 6 THEN 1 END) AS layakUA,
-                COUNT(CASE WHEN permohonan.status = 7 THEN 1 END) AS tidaklayakUA,
-                COUNT(CASE WHEN permohonan.status = 8 THEN 1 END) AS dibayarUA
-            ')
-            ->where('program', 'BKOKU')
-            ->where('bk_info_institusi.jenis_institusi', 'UA')
-            ->first();
+        // Cache for 1 minute (optional but recommended for dashboard)
+        $response = Cache::remember('permohonanUA_counts', 60, function () {
+            $counts = DB::table('permohonan')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'UA')
+                ->select('permohonan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('permohonan.status')
+                ->pluck('total','permohonan.status'); // returns [status => total]
 
-        return response()->json($permohonanUA);
+            return [
+                'keseluruhanUA' => $counts->except([9,10])->sum(), // exclude status 9 & 10
+                'derafUA'       => $counts[1] ?? 0,
+                'baharuUA'      => $counts[2] ?? 0,
+                'saringanUA'    => $counts[3] ?? 0,
+                'disokongUA'    => $counts[4] ?? 0,
+                'dikembalikanUA'=> $counts[5] ?? 0,
+                'layakUA'       => $counts[6] ?? 0,
+                'tidaklayakUA'  => $counts[7] ?? 0,
+                'dibayarUA'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
     }
 
     public function getTuntutanUA()
     {
-        $tuntutanUA = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+        // Cache for 1 minute (optional for dashboard)
+        $response = Cache::remember('tuntutanUA_counts', 60, function () {
+            $counts = DB::table('tuntutan')
+                ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
                 ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
                 ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
                 ->where('permohonan.program','=','BKOKU')
                 ->where('bk_info_institusi.jenis_institusi', 'UA')
-                ->select(
-                    DB::raw('COUNT(CASE WHEN tuntutan.status NOT IN (9, 10) THEN 1 END) AS keseluruhanTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 1 THEN 1 END) AS derafTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 2 THEN 1 END) AS baharuTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 3 THEN 1 END) AS saringanTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 4 THEN 1 END) AS disokongTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 5 THEN 1 END) AS dikembalikanTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 6 THEN 1 END) AS layakTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 7 THEN 1 END) AS tidakLayakTuntutanUA'),
-                    DB::raw('COUNT(CASE WHEN tuntutan.status = 8 THEN 1 END) AS dibayarTuntutanUA')
-                )
-                ->first();
+                ->select('tuntutan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('tuntutan.status')
+                ->pluck('total','tuntutan.status'); // returns [status => total]
 
-        return response()->json($tuntutanUA);
+            return [
+                'keseluruhanTuntutanUA' => $counts->except([9,10])->sum(), // exclude 9 & 10
+                'derafTuntutanUA'       => $counts[1] ?? 0,
+                'baharuTuntutanUA'      => $counts[2] ?? 0,
+                'saringanTuntutanUA'    => $counts[3] ?? 0,
+                'disokongTuntutanUA'    => $counts[4] ?? 0,
+                'dikembalikanTuntutanUA'=> $counts[5] ?? 0,
+                'layakTuntutanUA'       => $counts[6] ?? 0,
+                'tidaklayakTuntutanUA'  => $counts[7] ?? 0,
+                'dibayarTuntutanUA'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getPermohonanPOLI()
+    {
+        $response = Cache::remember('permohonanPOLI_counts', 60, function () {
+            $counts = DB::table('permohonan')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'P')
+                ->select('permohonan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('permohonan.status')
+                ->pluck('total', 'permohonan.status');
+
+            return [
+                'keseluruhanPOLI' => $counts->except([9,10])->sum(),
+                'derafPOLI'       => $counts[1] ?? 0,
+                'baharuPOLI'      => $counts[2] ?? 0,
+                'saringanPOLI'    => $counts[3] ?? 0,
+                'disokongPOLI'    => $counts[4] ?? 0,
+                'dikembalikanPOLI'=> $counts[5] ?? 0,
+                'layakPOLI'       => $counts[6] ?? 0,
+                'tidaklayakPOLI'  => $counts[7] ?? 0,
+                'dibayarPOLI'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getTuntutanPOLI()
+    {
+        $response = Cache::remember('tuntutanPOLI_counts', 60, function () {
+            $counts = DB::table('tuntutan')
+                ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('permohonan.program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'P')
+                ->select('tuntutan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('tuntutan.status')
+                ->pluck('total', 'tuntutan.status');
+
+            return [
+                'keseluruhanTuntutanPOLI' => $counts->except([9,10])->sum(),
+                'derafTuntutanPOLI'       => $counts[1] ?? 0,
+                'baharuTuntutanPOLI'      => $counts[2] ?? 0,
+                'saringanTuntutanPOLI'    => $counts[3] ?? 0,
+                'disokongTuntutanPOLI'    => $counts[4] ?? 0,
+                'dikembalikanTuntutanPOLI'=> $counts[5] ?? 0,
+                'layakTuntutanPOLI'       => $counts[6] ?? 0,
+                'tidaklayakTuntutanPOLI'  => $counts[7] ?? 0,
+                'dibayarTuntutanPOLI'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getPermohonanKK()
+    {
+        $response = Cache::remember('permohonanKK_counts', 60, function () {
+            $counts = DB::table('permohonan')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'KK')
+                ->select('permohonan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('permohonan.status')
+                ->pluck('total', 'permohonan.status');
+
+            return [
+                'keseluruhanKK' => $counts->except([9,10])->sum(),
+                'derafKK'       => $counts[1] ?? 0,
+                'baharuKK'      => $counts[2] ?? 0,
+                'saringanKK'    => $counts[3] ?? 0,
+                'disokongKK'    => $counts[4] ?? 0,
+                'dikembalikanKK'=> $counts[5] ?? 0,
+                'layakKK'       => $counts[6] ?? 0,
+                'tidaklayakKK'  => $counts[7] ?? 0,
+                'dibayarKK'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getTuntutanKK()
+    {
+        $response = Cache::remember('tuntutanKK_counts', 60, function () {
+            $counts = DB::table('tuntutan')
+                ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('permohonan.program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'KK')
+                ->select('tuntutan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('tuntutan.status')
+                ->pluck('total', 'tuntutan.status');
+
+            return [
+                'keseluruhanTuntutanKK' => $counts->except([9,10])->sum(),
+                'derafTuntutanKK'       => $counts[1] ?? 0,
+                'baharuTuntutanKK'      => $counts[2] ?? 0,
+                'saringanTuntutanKK'    => $counts[3] ?? 0,
+                'disokongTuntutanKK'    => $counts[4] ?? 0,
+                'dikembalikanTuntutanKK'=> $counts[5] ?? 0,
+                'layakTuntutanKK'       => $counts[6] ?? 0,
+                'tidaklayakTuntutanKK'  => $counts[7] ?? 0,
+                'dibayarTuntutanKK'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getPermohonanIPTS()
+    {
+        $response = Cache::remember('permohonanIPTS_counts', 60, function () {
+            $counts = DB::table('permohonan')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'IPTS')
+                ->select('permohonan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('permohonan.status')
+                ->pluck('total', 'permohonan.status');
+
+            return [
+                'keseluruhanIPTS' => $counts->except([9,10])->sum(),
+                'derafIPTS'       => $counts[1] ?? 0,
+                'baharuIPTS'      => $counts[2] ?? 0,
+                'saringanIPTS'    => $counts[3] ?? 0,
+                'disokongIPTS'    => $counts[4] ?? 0,
+                'dikembalikanIPTS'=> $counts[5] ?? 0,
+                'layakIPTS'       => $counts[6] ?? 0,
+                'tidaklayakIPTS'  => $counts[7] ?? 0,
+                'dibayarIPTS'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
+    }
+
+    public function getTuntutanIPTS()
+    {
+        $response = Cache::remember('tuntutanIPTS_counts', 60, function () {
+            $counts = DB::table('tuntutan')
+                ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+                ->where('permohonan.program', 'BKOKU')
+                ->where('bk_info_institusi.jenis_institusi', 'IPTS')
+                ->select('tuntutan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('tuntutan.status')
+                ->pluck('total', 'tuntutan.status');
+
+            return [
+                'keseluruhanTuntutanIPTS' => $counts->except([9,10])->sum(),
+                'derafTuntutanIPTS'       => $counts[1] ?? 0,
+                'baharuTuntutanIPTS'      => $counts[2] ?? 0,
+                'saringanTuntutanIPTS'    => $counts[3] ?? 0,
+                'disokongTuntutanIPTS'    => $counts[4] ?? 0,
+                'dikembalikanTuntutanIPTS'=> $counts[5] ?? 0,
+                'layakTuntutanIPTS'       => $counts[6] ?? 0,
+                'tidaklayakTuntutanIPTS'  => $counts[7] ?? 0,
+                'dibayarTuntutanIPTS'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
     }
 
     public function getPermohonanP()
     {
-        $keseluruhanP = Permohonan::where('program','=','PPK')->count();
-        $derafP = Permohonan::where('program','=','PPK')->where('status','=','1')->count();
-        $baharuP = Permohonan::where('program','=','PPK')->where('status','=','2')->count();
-        $saringanP = Permohonan::where('program','=','PPK')->where('status','=','3')->count();
-        $disokongP = Permohonan::where('program','=','PPK')->where('status','=','4')->count();
-        $dikembalikanP = Permohonan::where('program','=','PPK')->where('status','=','5')->count();
-        $layakP = Permohonan::where('program','=','PPK')->where('status','=','6')->count();
-        $tidaklayakP = Permohonan::where('program','=','PPK')->where('status','=','7')->count();
-        $dibayarP = Permohonan::where('program','=','PPK')->where('status','=','8')->count();
+        $response = Cache::remember('permohonanP_counts', 60, function () {
+            $counts = DB::table('permohonan')
+                ->where('program', 'PPK')
+                ->select('status', DB::raw('COUNT(*) as total'))
+                ->groupBy('status')
+                ->pluck('total', 'status'); // returns [status => total]
 
-        return response()->json([
-            'keseluruhanP' => $keseluruhanP,
-            'derafP' => $derafP,
-            'baharuP' => $baharuP,
-            'saringanP' => $saringanP,
-            'disokongP' => $disokongP,
-            'dikembalikanP' => $dikembalikanP,
-            'layakP' => $layakP,
-            'tidaklayakP' => $tidaklayakP,
-            'dibayarP' => $dibayarP,
-        ]);
+            return [
+                'keseluruhanP' => $counts->except([9,10])->sum(), // exclude status 9 & 10
+                'derafP'       => $counts[1] ?? 0,
+                'baharuP'      => $counts[2] ?? 0,
+                'saringanP'    => $counts[3] ?? 0,
+                'disokongP'    => $counts[4] ?? 0,
+                'dikembalikanP'=> $counts[5] ?? 0,
+                'layakP'       => $counts[6] ?? 0,
+                'tidaklayakP'  => $counts[7] ?? 0,
+                'dibayarP'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
     }
 
     public function getTuntutanP()
     {
-        $keseluruhanTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '!=', 9)->where('permohonan.program','=','PPK')->count();
-        $derafTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 1)->where('permohonan.program','=','PPK')->count();
-        $baharuTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 2)->where('permohonan.program','=','PPK')->count();
-        $saringanTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 3)->where('permohonan.program','=','PPK')->count();
-        $disokongTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 4)->where('permohonan.program','=','PPK')->count();
-        $dikembalikanTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 5)->where('permohonan.program','=','PPK')->count();
-        $layakTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 6)->where('permohonan.program','=','PPK')->count();
-        $tidaklayakTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 7)->where('permohonan.program','=','PPK')->count();
-        $dibayarTP = Tuntutan::join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')->where('tuntutan.status', '=', 8)->where('permohonan.program','=','PPK')->count();
+        $response = Cache::remember('tuntutanP_counts', 60, function () {
+            $counts = DB::table('tuntutan')
+                ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+                ->where('permohonan.program', 'PPK')
+                ->select('tuntutan.status', DB::raw('COUNT(*) as total'))
+                ->groupBy('tuntutan.status')
+                ->pluck('total', 'tuntutan.status');
 
-        return response()->json([
-            'keseluruhanTP' => $keseluruhanTP,
-            'derafTP' => $derafTP,
-            'baharuTP' => $baharuTP,
-            'saringanTP' => $saringanTP,
-            'disokongTP' => $disokongTP,
-            'dikembalikanTP' => $dikembalikanTP,
-            'layakTP' => $layakTP,
-            'tidaklayakTP' => $tidaklayakTP,
-            'dibayarTP' => $dibayarTP,
-        ]);
+            return [
+                'keseluruhanTP' => $counts->except([9,10])->sum(), // exclude 9 & 10
+                'derafTP'       => $counts[1] ?? 0,
+                'baharuTP'      => $counts[2] ?? 0,
+                'saringanTP'    => $counts[3] ?? 0,
+                'disokongTP'    => $counts[4] ?? 0,
+                'dikembalikanTP'=> $counts[5] ?? 0,
+                'layakTP'       => $counts[6] ?? 0,
+                'tidaklayakTP'  => $counts[7] ?? 0,
+                'dibayarTP'     => $counts[8] ?? 0,
+            ];
+        });
+
+        return response()->json($response);
     }
 
     //BKOKU IPTS
