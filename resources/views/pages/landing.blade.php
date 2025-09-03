@@ -110,7 +110,7 @@
 											<div class="col-md-12">
 												<div class="left" style="color:rgb(2, 2, 55); text-align: center; font-weight: bold;">HEBAHAN</div>
 												<div class="middle">
-													<span style="font-size: 1.5rem; color:rgb(0, 0, 0);">{!! $catatan ?? 'No notes available' !!}</span>
+													<span style="font-size: 1.2rem; color:rgb(0, 0, 0);">{!! $catatan ?? 'No notes available' !!}</span>
 												</div>
 											</div>
 										</div>
