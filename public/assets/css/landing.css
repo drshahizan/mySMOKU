@@ -42,7 +42,7 @@
 
 			.overlay {
 				position: absolute; /* Ensure it's positioned relative to its closest positioned ancestor */
-				/* top: 1%; */
+				margin-top: 30px;
 				left: 0;
 				width: 100%;
 				z-index: 1; /* Ensure content is above the video */
