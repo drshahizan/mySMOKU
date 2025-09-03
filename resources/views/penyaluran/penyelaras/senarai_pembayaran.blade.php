@@ -7,7 +7,7 @@
 
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="/assets/css/sekretariat.css">
-        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        {{-- <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" /> --}}
         
         {{-- JAVASCRIPT --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +16,6 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
         <style>
@@ -24,18 +23,13 @@
                 margin-left: 20px!important;
             }
 
-            .dash {
-                width: 15px;
-                height: 1px;
-                background: black;
-                margin: 0 5px;
-                margin-bottom: 20px;
-                display: inline-block;
-                background-color: #fff;
+            .form-filter {
+                margin-left: 10px !important; 
             }
 
-            .form-filter {
-                margin-left: 20px !important; 
+            #end_date {
+                position: relative;
+                z-index: 9999;
             }
         </style>
     </head>
@@ -97,117 +91,77 @@
                             <!--begin::Card title-->
 
                             <!--begin::Card toolbar-->
+                            <!-- PERMOHONAN / TUNTUTAN TOOLBAR -->
                             <div class="card-toolbar" id="permohonan-tuntutan-toolbar" data-kt-subscription-table-filter="form">
                                 <div class="d-flex justify-content-between mt-5 mb-0" data-kt-subscription-table-toolbar="base">
                                     <div class="col-md-12">
-                                        <div class="row form-filter" >
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="col-md-6">
-                                                    <input type="date" name="start_date" id="start_date" value="" class="form-control" />
+                                        <div class="row form-filter align-items-center">
+
+                                            <!-- DATE FILTER -->
+                                            <div class="col-md-4 d-flex align-items-center">
+                                                <div class="flex-fill pe-2">
+                                                    <input type="date" name="start_date" id="start_date" class="form-control" />
                                                 </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
-                                                <div class="col-md-6">
-                                                    <input type="date" name="end_date" id="end_date" value="" class="form-control" />
+                                                <div class="px-2">-</div>
+                                                <div class="flex-fill ps-2">
+                                                    <input type="date" name="end_date" id="end_date" class="form-control" />
                                                 </div>
                                             </div>
-                                            
-                                            <div class="col-md-1">
-                                                <button type="submit" class="btn btn-primary fw-semibold" style="margin-left: 20px;" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+
+                                            <!-- FILTER BUTTON -->
+                                            <div class="col-md-2 d-flex justify-content-center ms-6">
+                                                <button type="submit" class="btn btn-primary fw-semibold" 
+                                                        data-kt-menu-dismiss="true" 
+                                                        data-kt-subscription-table-filter="filter" 
+                                                        onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
                                                 </button>
                                             </div>
-                                            
-                                            {{-- PERMOHONAN --}}
-                                            <div class="col-md-7 export-container" data-program-code="permohonan">
-                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;"> 
-                                                    <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB1a') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
-															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1a
-														</a>
-                                                    </div>
 
-                                                    {{-- <div class="col-md-4" style="padding-left:30px;">
-                                                        <form action="{{ route('penyelaras.permohonan.senarai.layak.excel') }}" method="GET" target="_blank">
-                                                            @csrf
-                                                            <input type="hidden" name="start_date" id="permohonan_hidden_start_date">
-                                                            <input type="hidden" name="end_date" id="permohonan_hidden_end_date">
 
-                                                            <button type="submit" class="btn btn-secondary btn-round">
-                                                                <i class="fas fa-download" style="color: black; padding-right:5px;"></i>Kemaskini
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                        
-                                                    <div class="col-md-5">
-                                                        <form id="uploadForm1" action="{{ route('modified.file.pembayaran.permohonan') }}" method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <input type="file" name="modified_excel_file1" accept=".xlsx, .xls" style="display: none" onchange="fileSelected1(event)">
-                                                            <input type="hidden" name="form_submitted1" id="formSubmitted1" value="0">
-                                                            <button type="button" class="btn btn-secondary btn-round" onclick="uploadFilePermohonan()"> 
-                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
-                                                            </button>
-                                                        </form>
-                                                    </div> --}}
-                                                </div>
+                                            <!-- PERMOHONAN EXPORT -->
+                                            <div class="col-md-3 export-container" data-program-code="permohonan">
+                                                <a href="{{ route('penyelaras.dokumen.SPBB1a') }}" 
+                                                class="btn btn-info btn-round w-100">
+                                                    <i class="fas fa-download text-white"></i> SPBB 1a
+                                                </a>
                                             </div>
 
-                                            {{-- TUNTUTAN --}}
-                                            <div class="col-md-7 export-container" data-program-code="tuntutan"> 
-                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;"> 
-                                                    <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB1') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
-															<i class='fas fa-download' style='color:white !important;'></i>SPBB 1
-														</a>
-                                                    </div>
-
-                                                    {{-- <div class="col-md-4" style="padding-left:30px;">
-                                                        <form action="{{ route('penyelaras.tuntutan.senarai.layak.excel') }}" method="GET" target="_blank">
-                                                            @csrf
-                                                            <input type="hidden" name="start_date" id="tuntutan_hidden_start_date">
-                                                            <input type="hidden" name="end_date" id="tuntutan_hidden_end_date">
-
-                                                            <button type="submit" class="btn btn-secondary btn-round">
-                                                                <i class="fas fa-download" style="color: black; padding-right:5px;"></i>Kemaskini
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                            
-                                                    <div class="col-md-5">
-                                                        <form id="uploadForm2" action="{{ route('modified.file.pembayaran.tuntutan') }}" method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <input type="file" name="modified_excel_file2" accept=".xlsx, .xls" style="display: none" onchange="fileSelected2(event)">
-                                                            <input type="hidden" name="form_submitted2" id="formSubmitted2" value="0">
-                                                            <button type="button" class="btn btn-secondary btn-round" onclick="uploadFileTuntutan()"> 
-                                                                <i class="fa fa-upload" style="color: black; padding-right:5px;"></i>Maklumat Baucer
-                                                            </button>
-                                                        </form>
-                                                    </div> --}}
-                                                </div>
+                                            <!-- TUNTUTAN EXPORT -->
+                                            <div class="col-md-3 export-container" data-program-code="tuntutan">
+                                                <a href="{{ route('penyelaras.dokumen.SPBB1') }}" 
+                                                class="btn btn-info btn-round w-100">
+                                                    <i class="fas fa-download text-white"></i> SPBB 1
+                                                </a>
                                             </div>
-                                        </div>
+
+                                        </div><!-- /.row -->
                                     </div>
                                 </div>
                             </div>
 
+
+                            <!-- KUTIPAN TOOLBAR -->
                             <div class="card-toolbar" id="kutipan-toolbar" data-kt-subscription-table-filter="status">
                                 <div class="d-flex justify-content-between mt-5 mb-0">
                                     <div class="col-md-12">
-                                        <div class="row form-filter">
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
+                                        <div class="row form-filter align-items-center">
+
+                                            <!-- STATUS FILTER -->
+                                            <div class="col-md-4">
                                                 <select class="form-select" id="kutipan_status_filter">
                                                     <option value="">Pilih Status</option>
                                                     <option value="AKTIF">AKTIF</option>
                                                     <option value="TIDAK AKTIF">TIDAK AKTIF</option>
                                                 </select>
                                             </div>
-                                            
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-primary fw-semibold" style="margin-left: 20px;" onclick="applyStatusFilter()">
+
+                                            <!-- FILTER BUTTON -->
+                                            <div class="col-md-2 d-flex justify-content-center">
+                                                <button type="button" class="btn btn-primary fw-semibold" onclick="applyStatusFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
@@ -215,19 +169,20 @@
                                                 </button>
                                             </div>
 
-                                            <div class="col-md-7 export-container" data-program-code="kutipan"> 
-                                                <div class="row" style="margin-bottom:0px!important; margin-left:30px;">
-                                                    <div class="col-md-3">
-                                                        <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" class="btn btn-info btn-round" style="width: 100%; margin: 0 auto;">
-                                                            <i class='fas fa-download' style='color:white !important;'></i>SPBB 2a
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                            <!-- KUTIPAN EXPORT -->
+                                            <div class="col-md-3 export-container" data-program-code="kutipan">
+                                                <a href="{{ route('penyelaras.dokumen.SPBB2a') }}" 
+                                                class="btn btn-info btn-round w-100">
+                                                    <i class="fas fa-download text-white"></i> SPBB 2a
+                                                </a>
                                             </div>
-                                        </div>
+
+                                        </div><!-- /.row -->
                                     </div>
                                 </div>
                             </div>
+
+
                             <!--end::Card toolbar-->
 
                             <div class="tab-content" id="myTabContent">
