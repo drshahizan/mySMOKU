@@ -18,7 +18,7 @@
 
 		.nav-link {
 			font-size: 16px !important;
-			color: #6c757d !important; 
+			/* color: #6c757d !important;  */
 			background-color: none;
 			border: 1px solid transparent; 
 			padding: 10px 15px;
@@ -28,7 +28,7 @@
 		/* Inactive tabs (flat) */
 		.nav-link {
 			background-color: transparent;
-			color: gray;
+			/* color: gray; */
 			border: none;
 			border-bottom: 2px solid transparent;
 		}
@@ -37,11 +37,11 @@
 		.nav-link.active {
 			color: darkslateblue !important;
     		box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
-			background-color: whitesmoke !important; /* Light blue background for active tab */
-			color: #8800ff; /* Bold blue font for active tab */
-			border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
-			font-weight: bold; /* Make font bold */
-			border-radius: 4px 4px 0 0; /* Slight rounding at top of active tab */
+			background-color: whitesmoke !important; 
+			color: #8800ff; 
+			border-bottom: 2px solid darkslateblue !important; 
+			font-weight: bold; 
+			border-radius: 4px 4px 0 0; 
 		}
 
 		/* Add hover effect to inactive tabs */
