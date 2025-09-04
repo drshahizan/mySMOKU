@@ -132,6 +132,20 @@
     });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+		// Check if there is a flash message
+		@if(session('success'))
+			Swal.fire({
+				icon: 'success',
+				title: 'Berjaya!',
+				text: ' {!! session('success') !!}',
+				confirmButtonText: 'OK'
+			});
+		@endif
+
+	</script>
+
 <!--end::Javascript-->
 
 </x-default-layout>
