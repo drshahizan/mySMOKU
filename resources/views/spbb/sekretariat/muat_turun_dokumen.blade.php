@@ -93,12 +93,17 @@
 	<script>
 		$(document).ready(function() {
 			var table = $('#sortTable1').DataTable({
-				"columnDefs": [
+				ordering: true, // Enable manual sorting
+            	order: [], // Disable initial sorting
+				columnDefs: [
 					{
 						"targets": 'no-sort',
 						"orderable": false
 					}
 				],
+				language: {
+					url: "/assets/lang/Malay.json"
+				}
 			});
 
 			// Disable sorting for the "No" column
