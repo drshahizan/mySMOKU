@@ -699,28 +699,46 @@ class PermohonanController extends Controller
             ->where('smoku_akademik.status', 1)
             ->first();
         
-        $semSemasa = 1;
-
-        if($akademik->bil_bulan_per_sem == 6){
-            $bilSem = 2;
-        } else {
-            $bilSem = 3;
-        }
+        $bilSem = ($akademik->bil_bulan_per_sem == 6) ? 2 : 3;
         $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
         $currentYear = date('Y');
 
         $currentDate = Carbon::now();
         $tarikhMula = Carbon::parse($akademik->tarikh_mula);
         $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-        $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
+        // Check if month is January (1) or March (3)
+        $bulanMula  = $tarikhMula->format('n'); // 'n' returns numeric month without leading zero
+        // Check if special pattern applies (Jan or Mar start)
+        $isSpecialStart = in_array($bulanMula, [1, 3]);
 
-        $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
+        // Initialize session year
+        $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
+        $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+        // Define semester pattern based on start month
+        if (in_array($bulanMula, [1, 3])) {
+            if ($akademik->bil_bulan_per_sem == 6) {
+                $pattern = [1, 2]; // First sesi has 1 semester, then 2 semesters per sesi
+            } elseif ($akademik->bil_bulan_per_sem == 4) {
+                $pattern = [2, 3]; // First sesi has 2 semesters, then 3 semesters per sesi
+            } else {
+                $pattern = [$bilSem]; // fallback
+            }
+        } else {
+            $pattern = [$bilSem]; // fallback for other months
+        }
+        
+        $patternIndex = 0;
+        $currentPattern = $pattern[$patternIndex];
+        $semInCurrentSesi = 0;
+
+        $tarikhNextSem = clone $tarikhMula;
         $nextSemesterDates = [];
-        $firstIteration = true;
+        $semCounter = 0;
+        $semSemasa = 1;
 
-        while ($tarikhNextSem < $tarikhTamat) {
-            
-
+        while ($tarikhNextSem < $tarikhTamat) 
+        {
             $nextSemesterDates[] = [
                 'date' => $tarikhNextSem->format('Y-m-d'),
                 'semester' => $semSemasa,
@@ -728,13 +746,32 @@ class PermohonanController extends Controller
             ];
 
             $semSemasa++;
-            $awal = $tarikhNextSem->format('Y');
-            
-            $akhir = $tarikhNextSem->format('Y') + 1;
-            
-            $sesiMula = $awal . '/' . $akhir;
+            $semCounter++;
+            $semInCurrentSesi++;
 
+            // Move to next semester
             $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
+            if ($isSpecialStart) {
+                if ($semInCurrentSesi >= $currentPattern) {
+                    // Reset counter and update sesi
+                    $semInCurrentSesi = 0;
+                    $tahunSesi++;
+                    $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+                    // Move to next pattern
+                    if ($patternIndex < count($pattern) - 1) {
+                        $patternIndex++;
+                    }
+                    $currentPattern = $pattern[$patternIndex] ?? $pattern[count($pattern) - 1]; // stay on last pattern
+                }
+            } else {
+                // For normal start, update sesi every bilSem
+                if ($semCounter % $bilSem == 0) {
+                    $tahunSesi++;
+                    $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+                }
+            }
         }
 
         $currentSesi = null; // Initialize a variable to store the current session
@@ -743,7 +780,7 @@ class PermohonanController extends Controller
         $sesiSemasa = null; // Initialize a variable to store the current session
 
         foreach ($nextSemesterDates as $key => $data) {
-            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
 
             $dateOfSemester = \Carbon\Carbon::parse($data['date']);
             
@@ -761,6 +798,7 @@ class PermohonanController extends Controller
             }
            
         }
+        // dd('sini');
 
         if ($semSemasa === 0 ) {
             return back()->with('sem', 'Semester semasa belum tamat.');
