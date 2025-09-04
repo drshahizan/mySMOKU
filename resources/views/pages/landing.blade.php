@@ -508,7 +508,7 @@
 																</div>
 															</div>
 															<!--end::Item-->
-															<div class="container" style="text-align: left;">
+															<div class="container" style="text-align: justify;">
 																<!--begin::Skop BKOKU-->
 																<div class="flex-column mb-5" id="skop_bkoku" style="display:none;">
 																	<br><br>
@@ -563,56 +563,26 @@
 																	</span><br><br>
 																	
 																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
-																		ii. Maklumat Pembiayaan:<br><br>
+																		ii. Maklumat Pembiayaan:
+																	</span><br><br>
+																	<span class="fw-semibold fs-2 text-gray-800 text-justify flex-grow-1">
 																		<!-- Table Start -->
-																		<table  class="table-style-2">
+																		<table style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
 																			<thead>
 																				<tr>
-																					<th>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
-																							<!-- begin::Heading -->
-																							<div class="mb-2">
-																								<!-- begin::Title -->
-																								<div class="text-light fw-bold" style="font-size:14px;">MOD PENGAJIAN </div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</th>
-																					<th>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
-																							<!-- begin::Heading -->
-																							<div class="mb-2">
-																								<!-- begin::Title -->
-																								<div class="text-light fw-bold" style="font-size:14px;">JENIS PEMBIAYAAN </div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</th>
-																					<th>
-																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2">
-																							<!-- begin::Heading -->
-																							<div class="mb-2">
-																								<!-- begin::Title -->
-																								<div class="text-light fw-bold" style="font-size:14px;">ELAUN WANG SAKU </div>
-																								<!-- end::Title -->
-																							</div>
-																							<!-- end::Heading -->
-																						</div>
-																					</th>
-																					
+																					<th style="background-color: #96b6cd; text-align: center;">Mod Pengajian</th>
+																					<th style="background-color: #96b6cd; text-align: center;">Jenis Pembiayaan</th>
+																					<th style="background-color: #96b6cd; text-align: center;">Elaun Wang Saku</th>
 																				</tr>
 																			</thead>
 																			<tbody>
-																				
 																				<tr>
-																					<td rowspan="2">
+																					<td>
 																						<div class="w-100 d-flex flex-column flex-center rounded-3 py-2 px-6 mb-2" style="background-color: #27BFE6;">
 																							<!-- begin::Heading -->
-																							<div class="mb-4">
+																							<div class="mb-2">
 																								<!-- begin::Title -->
-																								<div class="fw-bold" style="font-size:14px;">Sepenuh Masa / Separuh Masa / Dalam Talian / Jarak Jauh</div>
+																								<div class="fw-bold" style="font-size:14px;">Sepenuh Masa / Separuh Masa / Dalam Talian / Jarak Jauh </div>
 																								<!-- end::Title -->
 																							</div>
 																							<!-- end::Heading -->
@@ -640,9 +610,7 @@
 																							<!-- end::Heading -->
 																						</div>
 																					</td>
-																					
 																				</tr>
-																				
 																			</tbody>
 																		</table>
 																		<!-- Table End -->
@@ -947,7 +915,7 @@
 																</div>
 															</div>
 															<!--end::Item-->
-															<div class="container" style="text-align: left;">
+															<div class="container" style="text-align: justify;">
 																<!--begin::Skop PPK-->
 																<div class="flex-column mb-5" id="skop_ppk" style="display:none;">
 																	<br><br>
