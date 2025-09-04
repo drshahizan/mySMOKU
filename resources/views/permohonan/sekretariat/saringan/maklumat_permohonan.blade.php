@@ -20,6 +20,74 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
+        @media (max-width: 768px) {
+            .page_menu {
+                flex-direction: column !important; /* stack items vertically */
+                align-items: flex-start !important; 
+                padding: 10px;
+            }
+
+            .page_menu .navbar-nav {
+                margin-bottom: 10px;
+            }
+
+            .page_menu .ml-auto {
+                width: 100%;
+                text-align: left; /* or center if you prefer */
+            }
+
+            .page_menu .btn {
+                width: 50%; /* make button full width */
+            }
+
+            .maklumat {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            /* Each row stacks, but keeps label : value together */
+            .maklumat tr {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            /* Hide the spacer column */
+            .maklumat td.space {
+                display: none;
+            }
+
+            /* Group label, colon and value on the same line */
+            .maklumat td {
+                display: inline-block;
+                vertical-align: top;
+                padding: 2px 4px;
+            }
+
+            /* Ensure label stays bold, but not too wide */
+            .maklumat td:first-child strong,
+            .maklumat td:nth-child(5) strong {
+                display: inline-block;
+                min-width: 140px; /* adjust to your layout */
+            }
+
+            .table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+            }
+
+            .table thead,
+            .table tbody,
+            .table tr,
+            .table th,
+            .table td {
+                white-space: nowrap; /* prevent text wrapping */
+            }
+        }
+
+
     </style>
 
     <!--begin::Page title-->
@@ -60,16 +128,11 @@
             <div class="row clearfix">
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light page_menu">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-bars text-muted"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan</b></li>
-                            </ul>
-                             <div class="ml-auto">
-                                <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" class="btn btn-primary btn-sm">Set Semula Saringan</a>
-                            </div>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item vivify swoopInTop delay-150 active"><b>Maklumat Permohonan</b></li>
+                        </ul>
+                            <div class="ml-auto">
+                            <a href="{{ url('permohonan/sekretariat/saringan/set-semula-status/'.$permohonan->id) }}" class="btn btn-primary btn-sm">Set Semula Saringan</a>
                         </div>
                     </nav>
                 </div>
