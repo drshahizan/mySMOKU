@@ -501,8 +501,14 @@
 					</div>
 				</div>
 				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.sesi.salur')}}">
+						<span class="menu-icon">{!! getIcon('calendar', 'fs-2') !!}</span>
+						<span class="menu-title">Sesi Salur</span>
+					</a>
+				</div>
+				<div class="menu-item">
 					<a class="menu-link" href="{{ route('sekretariat.draf.SPBB')}}">
-						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
+						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
 						<span class="menu-title">Draf SPBB</span>
 					</a>
 				</div>

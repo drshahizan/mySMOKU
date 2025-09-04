@@ -407,6 +407,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyaluran/sekretariat/muat-turun/dokumen/SPBB', [SekretariatController::class, 'muatTurunDokumenSPPB'])->name('sekretariat.muat-turun.SPBB');
         Route::get('penyaluran/sekretariat/lihat/salinan-dokumen/SPBB/{id}', [SekretariatController::class, 'salinanDokumenSPPB'])->name('dokumen.SPBB.id');
 
+        //Sesi Salur
+        Route::get('penyaluran/sekretariat/sesi/salur', [SekretariatController::class, 'sesiSalur'])->name('sekretariat.sesi.salur');
+        Route::post('penyaluran/sekretariat/sesi/salur', [SekretariatController::class, 'simpanSesiSalur'])->name('sekretariat.simpan.sesi');
+        
         //Draf SPBB
         Route::get('penyaluran/sekretariat/draf/dokumen/SPBB', [SekretariatController::class, 'muatTurunDrafSPPB'])->name('sekretariat.draf.SPBB');
         Route::get('penyaluran/sekretariat/draf/spbb1/{id_institusi}', [SekretariatController::class, 'muatTurunDrafSPBB1'])->name('sekretariat.draf.SPBB1');

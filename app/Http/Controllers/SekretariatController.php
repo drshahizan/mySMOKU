@@ -47,6 +47,7 @@ use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
 use App\Models\MaklumatBank;
+use App\Models\SesiSalur;
 use App\Models\TukarInstitusi;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -3976,4 +3977,27 @@ class SekretariatController extends Controller
             return redirect()->back();
         }
     }
+
+    public function sesiSalur()
+    {
+        $sesi = SesiSalur::orderBy('created_at', 'desc')->get(); 
+        return view('kemaskini.sekretariat.salur.sesi_salur', compact('sesi'));
+    }
+
+    public function simpanSesiSalur(Request $request)
+    {
+        $request->validate([
+            'sesi' => 'required|string|max:255',
+        ], [
+            'sesi.required' => 'Masukkan sesi salur.',
+        ]);
+
+        SesiSalur::create([
+            'sesi' => $request->sesi,
+            'dilaksanakan_oleh' => Auth::id(),
+        ]);
+
+        return back()->with('success', 'Sesi salur berjaya disimpan.');
+    }
+
 }
