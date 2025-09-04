@@ -825,7 +825,7 @@ class PermohonanController extends Controller
     {   
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         $emailmain = "bkoku@mohe.gov.my";
 
         $kepPeperiksaan=$request->kepPeperiksaan;
