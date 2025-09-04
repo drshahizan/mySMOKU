@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
+use App\Models\SesiSalur;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -46,10 +47,15 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
     private function updateStatus()
     {
         // Determine the sesi bayaran based on the current date
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
 
-        $sesiBayaran = $currentMonth . '/' . $currentYear;
+        // $sesiBayaran = $currentMonth . '/' . $currentYear;
+
+        // Fetch the latest Sesi Salur
+        $sesiSalur = SesiSalur::orderBy('created_at', 'desc')->first(); 
+        $sesiBayaran = $sesiSalur->sesi;
+
 
         foreach ($this->modifiedData as $modifiedRecord) {
             $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
@@ -96,46 +102,4 @@ class ModifiedPermohonanImport implements ToCollection, WithHeadingRow
         }
     }
 
-    // private function updateStatus()
-    // {
-    //     foreach ($this->modifiedData as $modifiedRecord) {
-    //         $noRujukan = $modifiedRecord['no_rujukan_permohonan'];
-    //         $yuranDibayar = $modifiedRecord['yuran_dibayar'];
-    //         $wangSakuDibayar = $modifiedRecord['wang_saku_dibayar'];
-    //         $noBaucer = $modifiedRecord['no_baucer'];
-    //         $perihal = $modifiedRecord['perihal'];
-    //         $tarikhBaucer = $modifiedRecord['tarikh_baucer'];
-    //         $statusPemohon = $modifiedRecord['status_pemohon'];
-
-    //         // Check if the required attributes are filled
-    //         if (!empty($yuranDibayar) && !empty($wangSakuDibayar) && !empty($noBaucer) && !empty($perihal) && !empty($tarikhBaucer)) 
-    //         {
-    //             // Update the fields for the permohonan record with matching 'no_rujukan_permohonan'
-    //             Permohonan::where('no_rujukan_permohonan', $noRujukan)
-    //                         ->update([
-    //                             'status' => 8, 
-    //                             'yuran_dibayar' => $yuranDibayar,
-    //                             'wang_saku_dibayar' => $wangSakuDibayar,
-    //                             'no_baucer' => $noBaucer,
-    //                             'perihal' => $perihal,
-    //                             'tarikh_baucer' => $tarikhBaucer,
-    //                             'status_pemohon' => $statusPemohon
-    //                         ]);
-
-    //             // Fetch the corresponding row from permohonan table
-    //             $permohonan = Permohonan::where('no_rujukan_permohonan', $noRujukan)
-    //                 ->select('id', 'smoku_id')
-    //                 ->first();
-
-    //             // Create a new record in sejarah_permohonan table based on the fetched row
-    //             if ($permohonan) {
-    //                 SejarahPermohonan::create([
-    //                     'permohonan_id' => $permohonan->id,
-    //                     'smoku_id' => $permohonan->smoku_id,
-    //                     'status' => 8
-    //                 ]);
-    //             }
-    //         }
-    //     }
-    // }
 }

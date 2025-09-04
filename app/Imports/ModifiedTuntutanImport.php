@@ -5,6 +5,7 @@ namespace App\Imports;
 use Carbon\Carbon;
 use App\Models\Tuntutan;
 use App\Models\SejarahTuntutan;
+use App\Models\SesiSalur;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -51,10 +52,14 @@ class ModifiedTuntutanImport implements ToCollection, WithHeadingRow
     private function updateStatus()
     {
         // Determine the sesi bayaran based on the current date
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
 
-        $sesiBayaran = $currentMonth . '/' . $currentYear;
+        // $sesiBayaran = $currentMonth . '/' . $currentYear;
+
+        // Fetch the latest Sesi Salur
+        $sesiSalur = SesiSalur::orderBy('created_at', 'desc')->first(); 
+        $sesiBayaran = $sesiSalur->sesi;
 
         foreach ($this->modifiedData as $modifiedRecord) {
             $noRujukan = $modifiedRecord['no_rujukan_tuntutan'];
