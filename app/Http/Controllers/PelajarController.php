@@ -44,33 +44,48 @@ class PelajarController extends Controller
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
 
-        $permohonan_id = Permohonan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
-        if($permohonan_id !== null){
-            $permohonan = SejarahPermohonan::orderby("sejarah_permohonan.created_at","desc")
-            ->join('bk_status','bk_status.kod_status','=','sejarah_permohonan.status')
-            ->get(['sejarah_permohonan.*','bk_status.status','sejarah_permohonan.status as kod_status'])
-            ->where('smoku_id',$smoku_id->id)
-            ->where('permohonan_id',$permohonan_id->id)
-            ->where('status', '!=', 'DISOKONG');
-        } 
-        else {
-            $permohonan = [];
+        $permohonan_id = Permohonan::orderBy("id", "desc")
+            ->where('smoku_id', $smoku_id->id)
+            ->first();
+
+        if ($permohonan_id !== null) {
+            $permohonan = SejarahPermohonan::orderBy("sejarah_permohonan.created_at", "desc")
+                ->join('bk_status', 'bk_status.kod_status', '=', 'sejarah_permohonan.status')
+                ->where('sejarah_permohonan.smoku_id', $smoku_id->id)
+                ->where('sejarah_permohonan.permohonan_id', $permohonan_id->id)
+                ->where('bk_status.status', '!=', 'DISOKONG')
+                ->get([
+                    'sejarah_permohonan.*',
+                    'bk_status.status',
+                    'sejarah_permohonan.status as kod_status',
+                ]);
+        } else {
+            $permohonan = collect(); // empty collection, consistent with query results
         }
 
 
-        $tuntutan_id = Tuntutan::orderby("id","desc")->where('smoku_id',$smoku_id->id)->first();
-        if($tuntutan_id !== null){
-            $tuntutan = Tuntutan::orderby("sejarah_tuntutan.created_at","desc")
-                ->join('sejarah_tuntutan','sejarah_tuntutan.tuntutan_id','=','tuntutan.id')
-                ->join('bk_status','bk_status.kod_status','=','sejarah_tuntutan.status')
-                ->get(['sejarah_tuntutan.*','tuntutan.*','bk_status.status','tuntutan.status as status_semasa'])
-                ->where('smoku_id',$smoku_id->id)
-                ->where('tuntutan_id',$tuntutan_id->id)
-                ->where('status', '!=', 'DISOKONG');
-        } 
-        else {
-            $tuntutan = [];
+        $tuntutan_id = Tuntutan::orderBy("id","desc")
+            ->where('smoku_id', $smoku_id->id)
+            ->first();
+
+        if ($tuntutan_id !== null) {
+            $tuntutan = Tuntutan::orderBy("sejarah_tuntutan.created_at", "desc")
+                ->join('sejarah_tuntutan', 'sejarah_tuntutan.tuntutan_id', '=', 'tuntutan.id')
+                ->join('bk_status', 'bk_status.kod_status', '=', 'sejarah_tuntutan.status')
+                ->where('tuntutan.smoku_id', $smoku_id->id)
+                ->where('sejarah_tuntutan.tuntutan_id', $tuntutan_id->id)
+                ->where('bk_status.status', '!=', 'DISOKONG')
+                ->get([
+                    'sejarah_tuntutan.*',
+                    'tuntutan.*',
+                    'bk_status.status',
+                    'tuntutan.status as status_semasa',
+                    'sejarah_tuntutan.created_at as tarikh_status'
+                ]);
+        } else {
+            $tuntutan = collect(); // empty collection instead of []
         }
+
         
 
         $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')

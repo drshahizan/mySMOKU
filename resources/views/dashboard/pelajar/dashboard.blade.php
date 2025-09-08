@@ -220,31 +220,31 @@
 											</tr>
 										</thead>
 										<tbody>
-											@foreach($tuntutan as $tuntutan)
-											<tr> 
-												<td>{{$tuntutan->no_rujukan_tuntutan}}</td>
-												<td>{{$tuntutan->created_at->format('d/m/Y')}}</td>
+											@foreach($tuntutan as $row)
+											<tr>
+												<td>{{ $row->no_rujukan_tuntutan }}</td>
+												<td>{{ \Carbon\Carbon::parse($row->tarikh_status)->format('d/m/Y') }}</td>
 												<td>
-													@if ($tuntutan->status_semasa == 1)
-														<a href="{{ route('tuntutan.baharu') }}">{{ ucwords(strtolower($tuntutan->status)) }}</a>
+													@if ($row->status_semasa == 1)
+														<a href="{{ route('tuntutan.baharu') }}">{{ ucwords(strtolower($row->status)) }}</a>
 													@else
-													<?php //dd($tuntutan->status); ?>
-														@if ($tuntutan->status == 'LAYAK')
-															<?php $status = 'Berjaya'; ?>
-														@elseif ($tuntutan->status == 'TIDAK LAYAK')
-															<?php $status = 'Tidak Berjaya'; ?>
-														@elseif ($tuntutan->status == 'DIHANTAR')
-															<?php $status = 'Berjaya Dihantar'; ?>
-														@else
-															<?php $status = ucwords(strtolower($tuntutan->status)); ?>
-														@endif
+														@php
+															if ($row->status === 'LAYAK') {
+																$status = 'Berjaya';
+															} elseif ($row->status === 'TIDAK LAYAK') {
+																$status = 'Tidak Berjaya';
+															} elseif ($row->status === 'DIHANTAR') {
+																$status = 'Berjaya Dihantar';
+															} else {
+																$status = ucwords(strtolower($row->status));
+															}
+														@endphp
 														{{ $status }}
 													@endif
-												</td>	
-												{{-- <td>{{ucwords(strtolower($tuntutan->status))}}</td> --}}
-												{{--<td><a href="{{ route('delete',  $permohonan->nokp_pelajar) }}" class="btn btn-primary">Batal</a> </td>--}}
+												</td>
 											</tr>
 											@endforeach
+
 										</tbody>
 									</table>
 								</div>		
@@ -256,6 +256,24 @@
 		</div>
 	<div>
 </div>
+<style>
+	.dataTables_filter {
+		width: 100%;
+	}
+
+	.dataTables_filter label {
+		width: 100%;
+		display: flex;
+		justify-content: flex-start; /* or center/right if you prefer */
+	}
+
+	.dataTables_filter input {
+		width: 100% !important;
+		max-width: 100% !important;
+		box-sizing: border-box;
+	}
+
+</style>
 <script>
 	$('#sortTable1').DataTable({
             ordering: true, // Enable manual sorting
@@ -275,6 +293,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+	
 	@if(session('message'))
 		Swal.fire({
 			icon: 'success',
