@@ -88,8 +88,8 @@
 					</div>
 
 					@if($institusi->jenis_institusi === 'IPTS')
-						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1) && (!$permohonan || $permohonan->status == 5))
-							@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today())
+						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
+							@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
 								<div class="menu-item">
 									<a class="menu-link" href="{{ route('permohonan') }}">
 										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
