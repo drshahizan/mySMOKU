@@ -232,7 +232,7 @@ class TuntutanController extends Controller
                 
                 $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
             } 
-            else if ($tuntutan && $tuntutan->status != 8 && $tuntutan->status != 9){
+            else if ($tuntutan && !in_array($tuntutan->status, [7, 8, 9])) {
                 
                 return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
             }
