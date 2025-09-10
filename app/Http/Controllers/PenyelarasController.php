@@ -804,6 +804,7 @@ class PenyelarasController extends Controller
             $currentDate = Carbon::now();
             $tarikhMula = Carbon::parse($akademik->tarikh_mula);
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+            // $sesiMula = Carbon::parse($akademik->sesi);
             $sesiMula = $tarikhMula->format('Y') . '/' . ($tarikhMula->format('Y') + 1);
 
             $tarikhNextSem = clone $tarikhMula; // Clone to avoid modifying the original date
@@ -813,7 +814,7 @@ class PenyelarasController extends Controller
             while ($tarikhNextSem < $tarikhTamat) 
             {
                 $nextSemesterDates[] = [
-                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'date' => $tarikhNextSem->format('F Y'),
                     'semester' => $semSemasa,
                     'sesi' => $sesiMula,
                 ];
@@ -835,6 +836,8 @@ class PenyelarasController extends Controller
 
             foreach ($nextSemesterDates as $key => $data) 
             {
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
+
                 $dateOfSemester = \Carbon\Carbon::parse($data['date']);
                 
                 // Set the end date to be just before the start of the next semester
@@ -850,6 +853,15 @@ class PenyelarasController extends Controller
                     $sesiSemasa = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
                 }
             }
+           
+
+            // Output the results
+            // echo 'Current Session: ' . $currentSesi . PHP_EOL;
+            // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
+            // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
+            // echo 'Previous Semester: ' . $semLepas . PHP_EOL;
+            // dd('sini');
+            // dd($semesterEndDate);
 
             if ($semSemasa === 0 ) {
                 return back()->with('sem', 'Semester semasa belum tamat.');
@@ -975,11 +987,7 @@ class PenyelarasController extends Controller
 
         if ($permohonan && $permohonan->status == 6 || $permohonan->status == 8) {  
 
-            $tuntutan = Tuntutan::where('smoku_id', $id)
-                ->where('permohonan_id', $permohonan->id)
-                ->whereNull('data_migrate')
-                ->orderBy('tuntutan.id', 'desc')
-                ->first(['tuntutan.*']);
+            
 
             $bilSem = ($akademik->bil_bulan_per_sem == 6) ? 2 : 3;
             $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
@@ -1022,7 +1030,7 @@ class PenyelarasController extends Controller
             while ($tarikhNextSem < $tarikhTamat) 
             {
                 $nextSemesterDates[] = [
-                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'date' => $tarikhNextSem->format('F Y'),
                     'semester' => $semSemasa,
                     'sesi' => $sesiMula,
                 ];
@@ -1085,6 +1093,15 @@ class PenyelarasController extends Controller
                 
 
             }
+
+            $tuntutan = Tuntutan::where('smoku_id', $id)
+                ->where('permohonan_id', $permohonan->id)
+                ->whereNotIn('status', [6,8])
+                // ->where('sesi', $sesiSemasa)
+                // ->where('semester', $semSemasa)
+                ->whereNull('data_migrate')
+                ->orderBy('tuntutan.id', 'desc')
+                ->first(['tuntutan.*']);
            
 
             // Output the results
@@ -1093,40 +1110,54 @@ class PenyelarasController extends Controller
             // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
             // echo 'Previous Semester: ' . $semLepas . PHP_EOL;
             //  dd($tuntutan->id);
-            //  dd('sini');
             // dd($semesterEndDate);
+            // dd('sini');
+
+            // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
+            // sesi 1 untuk kemasukan bulan julai sehingga disember
+            // sesi 2 untuk kemasukan bulan januari sehingga jun
+
+            $bulanMasuk = Carbon::parse($akademik->tarikh_mula)->month; // hasil: 1 - 12
+
+            if (in_array($bulanMasuk, [7,8,9,10,11,12])) {
+                $sesi = 1; // sesi 1 untuk kemasukan bulan Julai hingga Disember
+            } elseif (in_array($bulanMasuk, [1,2,3,4,5,6])) {
+                $sesi = 2; // sesi 2 untuk kemasukan bulan Januari hingga Jun
+            }
+
+            // echo 'Tahun Lepas: ' . $previousSesi . PHP_EOL . '<br>';
+            // echo 'Tahun Semasa: ' . $currentSesi . PHP_EOL . '<br>';
+            // echo 'Sesi: ' . $sesi . PHP_EOL . '<br>';
+            // dd('sini');
+            
 
             if ($currentDate <= $semesterEndDate ) {
-                if ($semLepas != 0 ){
-                    
-                    if($semSemasa != $semLepas){
-                        // semak dah upload result ke belum
-                        $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                        ->where('semester', $semLepas)
-                        ->first();
-                        if($result == null){
-                            if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-                                return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
-                            }
-                            return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
-                        }elseif($result && $result->pengesahan_rendah== 1){
-                            return back()->with('sem', 'Keputusan peperiksaan dalam semakan.');
+                // if ($semLepas != 0 ){
+                if($currentSesi != $previousSesi){
+                    // semak dah upload result ke belum
+                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                    ->where('sesi', $previousSesi)
+                    ->where('semester', $sesi)
+                    ->first();
+                    if($result == null){
+                        // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                        //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+                        // }
+                        return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                    }elseif($result && $result->pengesahan_rendah== 1){
+                        return back()->with('sem', 'Keputusan peperiksaan dalam semakan.');
 
-                        }
-                        
                     }
+                    
                 }
+                // }
                    
             }
             else
-                {
-                    return back()->with('sem', 'Tamat pengajian.');
-                }
-            
-
-            if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-                return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+            {
+                return back()->with('sem', 'Tamat pengajian.');
             }
+            
             // dd($akademik->sesi);
        
             if (($currentSesi === $akademik->sesi) || $previousSesi === null) {
@@ -1223,7 +1254,7 @@ class PenyelarasController extends Controller
 
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $id)->first();
 
-        if(!$tuntutan || $tuntutan->status == 8 || $tuntutan->status == 9){
+        if(!$tuntutan || $tuntutan->status == 6 || $tuntutan->status == 8 || $tuntutan->status == 9){
             
             $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
                 ->groupBy('no_rujukan_tuntutan')

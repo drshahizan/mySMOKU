@@ -42,16 +42,48 @@
 									<div class="row gx-10 mb-5">
 										<!--begin::Col-->
 										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
 											<div class="mb-5">
-												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+												@php
+													$year = date('Y'); 
+													$nextYear = $year + 1; 
+													$sesiSemasa = $year . '/' . $nextYear; 
+												@endphp
+
+												<select id="sesi" name="sesi"  
+													class="form-select form-select-solid" 
+													data-control="select2" 
+													data-hide-search="true" 
+													data-placeholder="Pilih" 
+													required 
+													oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
+													oninput="setCustomValidity('')">
+
+													<option></option>
+													@for ($i = -1; $i <= 1; $i++) 
+														@php 
+															$start = $year + $i; 
+															$end = $start + 1; 
+															$sesi = $start . '/' . $end; 
+														@endphp
+														<option value="{{ $sesi }}">
+															{{ $sesi }}
+														</option>
+													@endfor
+												</select>
+
 											</div>
+
 										</div>
 										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
 											<!--begin::Input group-->
 											<div class="mb-5">
-												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+												<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
+													<option></option>
+													<option value="1">Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+													<option value="2">Sesi 2 (Kemasukan Januari sehingga Jun)</option>
+												</select>
 											</div>
 										</div>
 										<!--end::Col-->
@@ -213,16 +245,48 @@
 									<div class="row gx-10 mb-5">
 										<!--begin::Col-->
 										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
 											<div class="mb-5">
-												<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+												@php
+													$year = date('Y'); 
+													$nextYear = $year + 1; 
+													$sesiSemasa = $year . '/' . $nextYear; 
+												@endphp
+
+												<select id="sesi" name="sesi"  
+													class="form-select form-select-solid" 
+													data-control="select2" 
+													data-hide-search="true" 
+													data-placeholder="Pilih" 
+													required 
+													oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
+													oninput="setCustomValidity('')">
+
+													<option></option>
+													@for ($i = -1; $i <= 1; $i++) 
+														@php 
+															$start = $year + $i; 
+															$end = $start + 1; 
+															$sesi = $start . '/' . $end; 
+														@endphp
+														<option value="{{ $sesi }}">
+															{{ $sesi }}
+														</option>
+													@endfor
+												</select>
+
 											</div>
+
 										</div>
 										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
 											<!--begin::Input group-->
 											<div class="mb-5">
-												<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+												<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
+													<option></option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+												</select>
 											</div>
 										</div>
 										<!--end::Col-->

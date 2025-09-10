@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Month;
 
 class TuntutanController extends Controller
 {
@@ -28,6 +29,7 @@ class TuntutanController extends Controller
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
 
         $akademik = DB::table('smoku_akademik')
+            ->orderBy('id', 'desc')
             ->where('smoku_id',$permohonan->smoku_id)
             ->where('smoku_akademik.status', 1)
             ->first();
@@ -88,7 +90,7 @@ class TuntutanController extends Controller
             while ($tarikhNextSem < $tarikhTamat) 
             {
                 $nextSemesterDates[] = [
-                    'date' => $tarikhNextSem->format('Y-m-d'),
+                    'date' => $tarikhNextSem->format('F Y'),
                     'semester' => $semSemasa,
                     'sesi' => $sesiMula,
                 ];
@@ -156,12 +158,32 @@ class TuntutanController extends Controller
             // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
             // dd('sini');
             // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
+            
+            
+            // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
+            // sesi 1 untuk kemasukan bulan julai sehingga disember
+            // sesi 2 untuk kemasukan bulan januari sehingga jun
 
-            if ($semLepas != 0 ) {
-                if($semSemasa != $semLepas){
+            $bulanMasuk = Carbon::parse($akademik->tarikh_mula)->month; // hasil: 1 - 12
+
+            if (in_array($bulanMasuk, [7,8,9,10,11,12])) {
+                $sesi = 1; // sesi 1 untuk kemasukan bulan Julai hingga Disember
+            } elseif (in_array($bulanMasuk, [1,2,3,4,5,6])) {
+                $sesi = 2; // sesi 2 untuk kemasukan bulan Januari hingga Jun
+            }
+
+            // echo 'Tahun Lepas: ' . $previousSesi . PHP_EOL . '<br>';
+            // echo 'Tahun Semasa: ' . $currentSesi . PHP_EOL . '<br>';
+            // echo 'Sesi: ' . $sesi . PHP_EOL . '<br>';
+            // dd('sini');
+
+            if ($currentDate <= $semesterEndDate ) {
+                // if ($semLepas != 0 ) {
+                if($currentSesi != $previousSesi){
                     // semak dah upload result ke belum
                     $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                    ->where('semester', $semLepas)
+                    ->where('sesi', $previousSesi)
+                    ->where('semester', $sesi)
                     ->first();
                     if($result == null){
                         // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
@@ -174,6 +196,11 @@ class TuntutanController extends Controller
                     }
 
                 }
+                // }
+            }
+            else
+            {
+                return back()->with('sem', 'Tamat pengajian.');
             }
 
             // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
