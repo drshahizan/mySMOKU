@@ -40,7 +40,7 @@ class TuntutanController extends Controller
             ->where('jenis', 'Wang Saku')
             ->first();	   	
 
-        if ($permohonan && $permohonan->status == 8) {
+        if ($permohonan && $permohonan->status == 6 || $permohonan->status == 8) {
 
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                     ->where('permohonan_id', $permohonan->id)
@@ -164,9 +164,9 @@ class TuntutanController extends Controller
                     ->where('semester', $semLepas)
                     ->first();
                     if($result == null){
-                        if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-                            return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
-                        }
+                        // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
+                        //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
+                        // }
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }elseif($result && $result->pengesahan_rendah== 1){
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan dalam semakan.');
@@ -243,7 +243,7 @@ class TuntutanController extends Controller
             
             return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
                 
-        } else if ($permohonan && $permohonan->status !=8) {
+        } else if ($permohonan && $permohonan->status !=6) {
 
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Permohonan anda masih dalam semakan.');
         } else {
