@@ -42,40 +42,33 @@ class TuntutanController extends Controller
             ->where('jenis', 'Wang Saku')
             ->first();	   	
 
-        if ($permohonan && $permohonan->status == 6 || $permohonan->status == 8) {
-
-            $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
-                    ->where('permohonan_id', $permohonan->id)
-                    ->orderBy('tuntutan.id', 'desc')
-                    ->first(['tuntutan.*']);
+        if ($permohonan && $permohonan->status == 6 || $permohonan->status == 7 || $permohonan->status == 8) {
 
             $bilSem = ($akademik->bil_bulan_per_sem == 6) ? 2 : 3;
             $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
-            $currentYear = date('Y');
-
             $currentDate = Carbon::now();
+
             $tarikhMula = Carbon::parse($akademik->tarikh_mula);
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-            // Check if month is January (1) or March (3)
-            $bulanMula  = $tarikhMula->format('n'); // 'n' returns numeric month without leading zero
-            // Check if special pattern applies (Jan or Mar start)
+
+            $bulanMula  = $tarikhMula->format('n');
             $isSpecialStart = in_array($bulanMula, [1, 3]);
 
-            // Initialize session year
+            // Initialize tahun sesi
             $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
             $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
-            // Define semester pattern based on start month
+            // Define semester pattern
             if (in_array($bulanMula, [1, 3])) {
                 if ($akademik->bil_bulan_per_sem == 6) {
-                    $pattern = [1, 2]; // First sesi has 1 semester, then 2 semesters per sesi
+                    $pattern = [1, 2];
                 } elseif ($akademik->bil_bulan_per_sem == 4) {
-                    $pattern = [2, 3]; // First sesi has 2 semesters, then 3 semesters per sesi
+                    $pattern = [2, 3];
                 } else {
-                    $pattern = [$bilSem]; // fallback
+                    $pattern = [$bilSem];
                 }
             } else {
-                $pattern = [$bilSem]; // fallback for other months
+                $pattern = [$bilSem];
             }
             
             $patternIndex = 0;
@@ -87,36 +80,39 @@ class TuntutanController extends Controller
             $semCounter = 0;
             $semSemasa = 1;
 
-            while ($tarikhNextSem < $tarikhTamat) 
-            {
+            // Build all semesters
+            while ($tarikhNextSem < $tarikhTamat) {
+                $bulanMasuk = $tarikhNextSem->month;
+                //     // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
+                //     // sesi 1 untuk kemasukan bulan julai sehingga disember
+                //     // sesi 2 untuk kemasukan bulan januari sehingga jun
+                $sesi_bulan = in_array($bulanMasuk, [7,8,9,10,11,12]) ? 1 : 2;
+
                 $nextSemesterDates[] = [
-                    'date' => $tarikhNextSem->format('F Y'),
-                    'semester' => $semSemasa,
-                    'sesi' => $sesiMula,
+                    'date'       => $tarikhNextSem->format('F Y'),
+                    'semester'   => $semSemasa,
+                    'sesi'       => $sesiMula,    // tahun akademik
+                    'sesi_bulan' => $sesi_bulan,  // sesi 1 atau 2
                 ];
 
                 $semSemasa++;
                 $semCounter++;
                 $semInCurrentSesi++;
 
-                // Move to next semester
                 $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
 
                 if ($isSpecialStart) {
                     if ($semInCurrentSesi >= $currentPattern) {
-                        // Reset counter and update sesi
                         $semInCurrentSesi = 0;
                         $tahunSesi++;
                         $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
-                        // Move to next pattern
                         if ($patternIndex < count($pattern) - 1) {
                             $patternIndex++;
                         }
-                        $currentPattern = $pattern[$patternIndex] ?? $pattern[count($pattern) - 1]; // stay on last pattern
+                        $currentPattern = $pattern[$patternIndex] ?? $pattern[count($pattern) - 1];
                     }
                 } else {
-                    // For normal start, update sesi every bilSem
                     if ($semCounter % $bilSem == 0) {
                         $tahunSesi++;
                         $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
@@ -124,71 +120,67 @@ class TuntutanController extends Controller
                 }
             }
 
-           
+            // Vars to store current/previous
+            $currentSesi = null;
+            $previousSesi = null;
+            $semSemasa = null;
+            $sesiSemasa = null;
 
-            $currentSesi = null; // Initialize a variable to store the current session
-            $previousSesi = null; // Initialize a variable to store the previous session
-            $semSemasa = null; // Initialize a variable to store the current semester
-            $sesiSemasa = null; // Initialize a variable to store the current session
+            // Find current semester/session
+            foreach ($nextSemesterDates as $key => $data) {
+                $dateOfSemester = Carbon::parse($data['date']);
 
-            foreach ($nextSemesterDates as $key => $data) 
-            {
-                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'] . '<br>';
-                $dateOfSemester = \Carbon\Carbon::parse($data['date']);
-                
-                // Set the end date to be just before the start of the next semester
-                $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) ? \Carbon\Carbon::parse($nextSemesterDates[$key + 1]['date']) : null;
-                // $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : $dateOfSemester->endOfDay();
-                $semesterEndDate = $nextSemesterStartDate ? $nextSemesterStartDate->subSecond() : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Tahun: ' . $data['sesi'] . ', Sesi: ' . $data['sesi_bulan'] . '<br>';
 
-                // Check if the current date is within the range of the semester
+                $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) 
+                    ? Carbon::parse($nextSemesterDates[$key + 1]['date']) 
+                    : null;
+
+                $semesterEndDate = $nextSemesterStartDate 
+                    ? $nextSemesterStartDate->subSecond() 
+                    : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+
                 if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
-                    $currentSesi = $data['sesi'];
-                    $semSemasa = $data['semester'];
-                    $semLepas = $data['semester'] - 1;
-                    $sesiSemasa = $data['sesi'];
-                    $previousSesi = isset($nextSemesterDates[$key - 1]) ? $nextSemesterDates[$key - 1]['sesi'] : null;
+                    $currentSesi = $data['sesi'];        // tahun akademik (eg. 2025/2026)
+                    $sesiSemasa  = $data['sesi_bulan'];  // sesi 1 atau 2
+                    $semSemasa   = $data['semester'];
+                    $semLepas    = $data['semester'] - 1;
+
+                    $sesiLepas = isset($nextSemesterDates[$key - 1]) 
+                        ? $nextSemesterDates[$key - 1]['sesi_bulan'] 
+                        : 'Tiada';
+                    $previousSesi = isset($nextSemesterDates[$key - 1]) 
+                        ? $nextSemesterDates[$key - 1]['sesi'] 
+                        : $data['sesi'];    
                 }
             }
 
-            // Output the results
-            // echo 'Current Session: ' . $currentSesi . PHP_EOL;
-            // echo 'Previous Session: ' . $previousSesi . PHP_EOL;
-            // echo 'Current Semester: ' . $semSemasa . PHP_EOL;
-            // echo 'Current Session: ' . $sesiSemasa . PHP_EOL;
+            // Example debug output
+            // echo '<br>';
+            // echo 'Tahun Lepas: ' . $previousSesi . '<br>';
+            // echo 'Tahun Semasa: ' . $currentSesi . '<br>';
+            // echo 'Sesi Lepas: ' . $sesiLepas . '<br>';
+            // echo 'Sesi Semasa: ' . $sesiSemasa . '<br>';
+            // echo 'Semester Semasa: ' . $semSemasa . '<br>';
             // dd('sini');
-            // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Sesi: ' . $data['sesi'];
-            
-            
-            // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
-            // sesi 1 untuk kemasukan bulan julai sehingga disember
-            // sesi 2 untuk kemasukan bulan januari sehingga jun
 
-            $bulanMasuk = Carbon::parse($akademik->tarikh_mula)->month; // hasil: 1 - 12
-
-            if (in_array($bulanMasuk, [7,8,9,10,11,12])) {
-                $sesi = 1; // sesi 1 untuk kemasukan bulan Julai hingga Disember
-            } elseif (in_array($bulanMasuk, [1,2,3,4,5,6])) {
-                $sesi = 2; // sesi 2 untuk kemasukan bulan Januari hingga Jun
-            }
-
-            // echo 'Tahun Lepas: ' . $previousSesi . PHP_EOL . '<br>';
-            // echo 'Tahun Semasa: ' . $currentSesi . PHP_EOL . '<br>';
-            // echo 'Sesi: ' . $sesi . PHP_EOL . '<br>';
-            // dd('sini');
+            $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                ->where('permohonan_id', $permohonan->id)
+                ->whereNotIn('status', [6,8])
+                // ->where('sesi', $sesiSemasa)
+                // ->where('semester', $semSemasa)
+                ->whereNull('data_migrate')
+                ->orderBy('tuntutan.id', 'desc')
+                ->first(['tuntutan.*']);
 
             if ($currentDate <= $semesterEndDate ) {
-                // if ($semLepas != 0 ) {
                 if($currentSesi != $previousSesi){
                     // semak dah upload result ke belum
                     $result = Peperiksaan::where('permohonan_id', $permohonan->id)
                     ->where('sesi', $previousSesi)
-                    ->where('semester', $sesi)
+                    ->where('semester', $sesiLepas)
                     ->first();
                     if($result == null){
-                        // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-                        //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
-                        // }
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }elseif($result && $result->pengesahan_rendah== 1){
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan dalam semakan.');
@@ -196,16 +188,11 @@ class TuntutanController extends Controller
                     }
 
                 }
-                // }
             }
             else
             {
                 return back()->with('sem', 'Tamat pengajian.');
             }
-
-            // if(($semSemasa == $semLepas || $semSemasa == $akademik->sem_semasa) && $permohonan->yuran == null && $permohonan->wang_saku == '1'){
-            //     return back()->with('sem', 'Wang saku boleh dituntut pada sem seterusnya.');
-            // }
        
             if (($currentSesi === $akademik->sesi) || $previousSesi === null) 
             {
@@ -255,11 +242,11 @@ class TuntutanController extends Controller
                 }
             }   
 
-            if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 5)) {
+            if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5)) {
                 
                 $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
             } 
-            else if ($tuntutan && !in_array($tuntutan->status, [7, 8, 9])) {
+            else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4)) {
                 
                 return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
             }
@@ -287,7 +274,7 @@ class TuntutanController extends Controller
 
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
 
-        if(!$tuntutan || $tuntutan->status == 8 || $tuntutan->status == 9){
+        if(!$tuntutan || $tuntutan->status == 6 || $tuntutan->status == 8 || $tuntutan->status == 9){
             
             $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
                 ->groupBy('no_rujukan_tuntutan')
@@ -296,93 +283,103 @@ class TuntutanController extends Controller
             $bil = $biltuntutan->count();
 
             $running_num =  $bil + 1; //sebab nak guna satu id je  
-            $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num; // try duluuu  
+            $no_rujukan_tuntutan =  $no_rujukan_permohonan.'/'.$running_num;   
 
         } 
-        else {  
+        else {
             $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
         }
 
-       // dd($no_rujukan_tuntutan);
-
-        //simpan dalam table tuntutan_item
-        $tuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
-            ->where('permohonan_id', '=', $permohonan->id)
-            ->where('sesi', '=', $request->sesi)
-            ->where('semester', '=', $request->semester)
-            ->where('no_rujukan_tuntutan', '=', $no_rujukan_tuntutan)
+        //simpan dalam table tuntutan
+        $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+            ->where('permohonan_id', $permohonan->id)
+            ->where('sesi', $request->sesi)
+            ->where('no_rujukan_tuntutan', $no_rujukan_tuntutan)
             ->first();
 
-        if(!$tuntutan){
-            $tuntutan = Tuntutan::create([
-                'smoku_id' => $smoku_id->id,
-                'permohonan_id' => $permohonan->id,
-                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
-                'semester' => $request->semester,
-                'yuran' => '1',
-                'status' => '1',
-            ]);
+        // if ($tuntutan) {
+        //     // kalau semester sama dengan yang sedia ada
+        //     if ($tuntutan->semester == $request->semester) {
+        //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+        //     }
+        // } else {
 
-            $tuntutan->save();
-        }    
+        //     $akademik = Akademik::where('smoku_id',$id)
+        //         ->where('smoku_akademik.status', 1)
+        //         ->first();
+        //     // semak kalau semester permohonan sama dengan request
+        //     if ($akademik->sem_semasa == $request->semester) {
+        //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
+        //     }
+        // }
+
+        // kalau tak ada record, atau semester lain → buat rekod baru
+        $tuntutan = Tuntutan::create([
+            'smoku_id' => $smoku_id->id,
+            'permohonan_id' => $permohonan->id,
+            'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+            'sesi' => $request->sesi,
+            'semester' => $request->semester,    
+            'yuran' => '1',
+            'status' => '1',
+        ]);
 
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::orderBy('id', 'desc')
             ->where('smoku_id', '=', $smoku_id->id)
             ->where('permohonan_id', '=', $permohonan->id)
-            ->first();    
+            ->first();
 
-
-        $resit = $request->file('resit'); 
-        $counter = 1; 
+        $resit = $request->resit;
+        $counter = 1;
 
     
         // Check if $request->resit is not null before iterating
-        if ($resit && is_array($resit)) {
+        if ($resit !== null && is_array($resit) && isset($resit[0]) && $resit[0] !== null) {
             foreach ($resit as $resitItem) {
-                if ($resitItem) {
-                    $filenameresit = $resitItem->getClientOriginalName();
+                $filenameresit = $resitItem->getClientOriginalName();
+                $uniqueFilename = $counter . '_' . $filenameresit;
+
+                // Append increment to the filename until it's unique
+                while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
+                    $counter++;
                     $uniqueFilename = $counter . '_' . $filenameresit;
+                }
 
-                    while (file_exists(public_path('assets/dokumen/tuntutan/' . $uniqueFilename))) {
-                        $counter++;
-                        $uniqueFilename = $counter . '_' . $filenameresit;
-                    }
+                $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
 
-                    $resitItem->move(public_path('assets/dokumen/tuntutan'), $uniqueFilename);
+                // Create an array with all data
+                $data = [
+                    'tuntutan_id' => $tuntutan->id,
+                    'jenis_yuran' => $request->jenis_yuran,
+                    'no_resit' => $request->no_resit,
+                    'nota_resit' => $request->nota_resit,
+                    'amaun' => $request->amaun_yuran,
+                    'resit' => $uniqueFilename,
+                ];
 
-                    $data = [
+                // Update or create the record
+                TuntutanItem::updateOrCreate(
+                    [
                         'tuntutan_id' => $tuntutan->id,
                         'jenis_yuran' => $request->jenis_yuran,
-                        'no_resit'   => $request->no_resit,
-                        'nota_resit' => $request->nota_resit,
-                        'amaun'      => $request->amaun_yuran,
-                        'resit'      => $uniqueFilename,
-                    ];
+                    ],
+                    $data
+                );
 
-                    TuntutanItem::updateOrCreate(
-                        [
-                            'tuntutan_id' => $tuntutan->id,
-                            'jenis_yuran' => $request->jenis_yuran,
-                        ],
-                        $data
-                    );
-
-                    $counter++;
-                }
+                $counter++;
             }
         } else {
-            // no file uploaded, update other data only
+            // If $request->resit is null, update other data without updating resit
             TuntutanItem::updateOrCreate(
                 [
                     'tuntutan_id' => $tuntutan->id,
                     'jenis_yuran' => $request->jenis_yuran,
                 ],
                 [
-                    'no_resit'   => $request->no_resit,
+                    'no_resit' => $request->no_resit,
                     'nota_resit' => $request->nota_resit,
-                    'amaun'      => $request->amaun_yuran,
+                    'amaun' => $request->amaun_yuran,
                 ]
             );
         }
@@ -395,7 +392,6 @@ class TuntutanController extends Controller
                 'status'   => '1',
             ]
         );
-
             
         return redirect()->route('tuntutan.baharu')->with('message', 'simpan.');
     }

@@ -56,7 +56,7 @@
 														$end = $start + 1; 
 														$sesi = $start . '/' . $end; 
 													@endphp
-													<option value="{{ $sesi }}">
+													<option value="{{ $sesi }}" {{ $previousSesi == $sesi ? 'selected' : '' }}>
 														{{ $sesi }}
 													</option>
 												@endfor
@@ -69,8 +69,8 @@
 										<div class="mb-5">
 											<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
 												<option></option>
-												<option value="1">Sesi 1 (Kemasukan Julai sehingga Disember)</option>
-												<option value="2">Sesi 2 (Kemasukan Januari sehingga Jun)</option>
+												<option value="1" {{ $sesiLepas == '1' ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+												<option value="2" {{ $sesiLepas == '2' ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
 											</select>
 										</div>
 									</div>
