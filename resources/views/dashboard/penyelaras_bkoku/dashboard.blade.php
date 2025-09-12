@@ -152,7 +152,7 @@
                                     <td class="text-center">{{ $smoku->no_kp}}</td>
                                     <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
                                     <td class="text-center">{{$pemohon}}</td>
-                                    @if($isWithinRange)
+                                    @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
                                         <td class="text-center">
                                             <a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
                                                 @if ($smoku->status == 1)
