@@ -65,7 +65,7 @@ class SemakUserController extends Controller
     {
         $request->validate([
             'cuti' => ['required'],
-            'terimaBiasiswa' => ['required'],
+            // 'terimaBiasiswa' => ['required'],
             'id_institusi' => ['required'],
             'peringkat_pengajian' => ['required'],
             'nama_kursus' => ['required'],
