@@ -161,7 +161,7 @@
 			<!--begin::Sidebar-->
 			<div class="flex-lg-auto min-w-lg-450px">
 				<!--begin::Card-->
-				<div class="card" data-kt-sticky="true" data-kt-sticky-name="invoice" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '250px', lg: '300px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+				<div class="card">
 					<!--begin::Card body-->
 					<div class="card-body p-10">
 						<!--begin::Input group-->
