@@ -314,7 +314,7 @@ class TuntutanController extends Controller
         // }
 
         // kalau tak ada record, atau semester lain → buat rekod baru
-        $tuntutan = Tuntutan::create([
+        $tuntutan = Tuntutan::updateOrCreate([
             'smoku_id' => $smoku_id->id,
             'permohonan_id' => $permohonan->id,
             'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
@@ -435,7 +435,7 @@ class TuntutanController extends Controller
                 ])->first();
 
                 if (!$tuntutan) {
-                    $tuntutan = Tuntutan::create([
+                    $tuntutan = Tuntutan::updateOrCreate([
                         'smoku_id' => $smoku_id->id,
                         'permohonan_id' => $permohonan->id,
                         'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
