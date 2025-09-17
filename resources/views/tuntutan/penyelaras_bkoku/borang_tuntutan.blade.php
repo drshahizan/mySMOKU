@@ -315,6 +315,7 @@
 								<!--end::Wrapper-->
 								<div class="d-flex">
 									<span class="input-group-text">RM</span>
+									<input type="hidden" id="max_limit" name="max_limit" class="input-group-text" style="width: 100%;" value="{{$maxLimit}}"/>
 									<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
 									<input type="hidden" id="amaun_ws" name="amaun_ws" class="input-group-text" style="width: 100%;" value="{{ $tuntutan->amaun_wang_saku ?? '0.00' }}" />
 									<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
@@ -487,7 +488,8 @@
 	
 		// Define the maximum limit for 'amaun_yuran'
 		var baki_total = document.getElementById('baki_total');
-		var maxLimit = parseFloat(baki_total.value);
+		// var maxLimit = parseFloat(baki_total.value); //17092025
+		var maxLimit = parseInt(document.getElementById('max_limit').value);
 		console.log('Calculated maxLimit:', maxLimit);
 	
 		if (total_yuran > maxLimit) {
@@ -504,28 +506,28 @@
 		var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
 	
 		if (checkBox.checked == true) {
-			if (total <= maxLimit) {
+			// if (total <= maxLimit) {
 				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
 				var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
 				document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
 				console.log("Total amount is within the limit: " + parseFloat(total));
-			} else {
-				var baki_wang_saku = maxLimit - totalAmaun;
-				console.log("baki_wang_saku: " + parseFloat(baki_wang_saku));
-				var amaun_ws = parseInt(document.getElementById('amaun_ws').value);
-				console.log("baki_wang_saku_sini: " + parseFloat(amaun_ws));
+			// } else {
+			// 	var baki_wang_saku = maxLimit - totalAmaun;
+			// 	console.log("baki_wang_saku: " + parseFloat(baki_wang_saku));
+			// 	var amaun_ws = parseInt(document.getElementById('amaun_ws').value);
+			// 	console.log("baki_wang_saku_sini: " + parseFloat(amaun_ws));
 			
-				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = (amaun_ws).toFixed(2);
-					// document.getElementById("amaun_wang_saku").value = (baki_wang_saku).toFixed(2);
-					console.log("Total amount exceeds the limit sini: " + parseFloat(total));
-					var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-					document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
-				} else {
-					document.getElementById("amaun_wang_saku").value = "0.00";
-					console.log("Invalid input. Cannot calculate total amount.");
-				}
-			}
+			// 	if (!isNaN(baki_wang_saku)) {
+			// 		document.getElementById("amaun_wang_saku").value = (amaun_ws).toFixed(2);
+			// 		// document.getElementById("amaun_wang_saku").value = (baki_wang_saku).toFixed(2);
+			// 		console.log("Total amount exceeds the limit sini: " + parseFloat(total));
+			// 		var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
+			// 		document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
+			// 	} else {
+			// 		document.getElementById("amaun_wang_saku").value = "0.00";
+			// 		console.log("Invalid input. Cannot calculate total amount.");
+			// 	}
+			// }
 			
 		} else {
 			document.getElementById("amaun_wang_saku").value = "";

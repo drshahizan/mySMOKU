@@ -1256,7 +1256,7 @@ class PenyelarasController extends Controller
                 $tuntutan_item = collect(); // An empty collection
             }
 
-            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
+            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total','maxLimit'));
             
         } 
         else if ($permohonan && $permohonan->status !=6) {
