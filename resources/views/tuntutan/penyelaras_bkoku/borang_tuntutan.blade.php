@@ -411,25 +411,33 @@
 
 <script>
 
-	var max_yuran; // Declare these variables in a higher scope
-	var max_wang_saku;
-	// Make an AJAX request to fetch data based on the selected semester
 	$.ajax({
 		type: 'GET',
-		url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+		url: '/fetch-amaun/bkoku',
 		success: function(response) {
-			// Format the value to display with .00
-			var max_yuran = response.amaun_yuran;
-			var max_wang_saku = response.amaun_wang_saku;
-	
-			document.getElementById("max_yuran").value = max_yuran;
-			document.getElementById("max_wang_saku").value = max_wang_saku;
-	
+			max_yuran = parseFloat(response.amaun_yuran);
+			max_wang_saku = parseFloat(response.amaun_wang_saku);
+
+			document.getElementById("max_yuran").value = max_yuran.toFixed(2);
+			document.getElementById("max_wang_saku").value = max_wang_saku.toFixed(2);
+
+			// Run calculation immediately after values load
+			myFunction();
+
+			// Also check if checkbox is already checked at page load
+			let checkBox = document.getElementById("wang_saku");
+			if (checkBox.checked) {
+				myFunction();
+			}
+
+			// Recalculate when checkbox is toggled
+			checkBox.addEventListener("change", myFunction);
 		},
 		error: function(error) {
 			console.error('Error fetching data:', error);
 		}
-	});	
+	});
+
 	
 	function myFunction() {
 	
@@ -445,11 +453,11 @@
 		if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
 			 var tarikhNextSem = new Date(tarikhMulaTimestamp);
 			 tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
-			//  alert(tarikhNextSem);
+			
 	
 			if (currentDate > tarikhNextSem) {
 				var wang_saku = wang_saku_perbulan * bilbulan;
-		// 		break; // Exit the loop
+		
 			} else {
 				var wang_saku = 0.00;
 			}
