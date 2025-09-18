@@ -33,14 +33,18 @@ class TuntutanController extends Controller
             ->where('smoku_id',$permohonan->smoku_id)
             ->where('smoku_akademik.status', 1)
             ->first();
-        $maxLimit = DB::table('bk_jumlah_tuntutan')
+        $maxLimitRow = DB::table('bk_jumlah_tuntutan')
             ->where('program','BKOKU')
             ->where('jenis', 'Yuran')
-            ->first();	
-        $limitWangSaku = DB::table('bk_jumlah_tuntutan')
+            ->first();    
+
+        $limitWangSakuRow = DB::table('bk_jumlah_tuntutan')
             ->where('program','BKOKU')
             ->where('jenis', 'Wang Saku')
-            ->first();	   	
+            ->first();    
+
+        $maxLimit = $maxLimitRow->jumlah ?? 0;  
+        $limitWangSaku = $limitWangSakuRow->jumlah ?? 0;  	
 
         if ($permohonan && $permohonan->status == 6 || $permohonan->status == 7 || $permohonan->status == 8) {
 
@@ -203,7 +207,7 @@ class TuntutanController extends Controller
                     }
 
                     //nak tahu baki sesi semasa permohonan lepas
-                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit->jumlah;
+                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit;
                     //  dd($baki_total);
                 }
                 else{
@@ -213,7 +217,7 @@ class TuntutanController extends Controller
                         ->first();
                     
                     if($ada -> sesi ==  null){
-                        $baki_total = $maxLimit->jumlah;	
+                        $baki_total = $maxLimit;	
                     }else{
                         $jumlah_tuntut = DB::table('tuntutan')
                         ->where('permohonan_id', $tuntutan->permohonan_id)
@@ -222,7 +226,7 @@ class TuntutanController extends Controller
                         $sum = $jumlah_tuntut->sum('jumlah');	
                         
                         // $baki_total = $permohonan->baki_dibayar - $sum;	
-                        $baki_total = $maxLimit->jumlah - $sum;	
+                        $baki_total = $maxLimit - $sum;	
                     }	
                 }	
             }
@@ -231,14 +235,14 @@ class TuntutanController extends Controller
                 if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
                     if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
                         // dd($akademik->bil_bulan_per_sem);
-                        $baki_total = $limitWangSaku->jumlah * $akademik->bil_bulan_per_sem; 
+                        $baki_total = $limitWangSaku * $akademik->bil_bulan_per_sem; 
                     }
                     else {
                         $baki_total = '0'; 
                     }
                 }
                 else {
-                    $baki_total = $maxLimit->jumlah;
+                    $baki_total = $maxLimit;
                 }
             }   
 
@@ -255,7 +259,7 @@ class TuntutanController extends Controller
                 $tuntutan_item = collect(); // An empty collection
             }
             
-            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total'));
+            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total','maxLimit'));
                 
         } else if ($permohonan && $permohonan->status !=6) {
 
