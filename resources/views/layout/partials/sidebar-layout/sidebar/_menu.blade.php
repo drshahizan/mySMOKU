@@ -115,7 +115,7 @@
 					</div>
 				@endif
 
-				@if($permohonan != null && $permohonan->status == 8 || $permohonan->status == 6)
+				@if($permohonan && ($permohonan->status == 8 || $permohonan->status == 6))
 					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
