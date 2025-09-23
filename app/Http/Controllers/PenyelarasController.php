@@ -1280,6 +1280,7 @@ class PenyelarasController extends Controller
         if(!$tuntutan || $tuntutan->status == 6 || $tuntutan->status == 8 || $tuntutan->status == 9){
             
             $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
+                ->where('permohonan_id', '=', $permohonan->id)
                 ->groupBy('no_rujukan_tuntutan')
                 ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
                 ->get();
