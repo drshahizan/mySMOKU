@@ -273,7 +273,7 @@ class TuntutanController extends Controller
     public function simpanTuntutan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $smoku_id->id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
@@ -281,6 +281,7 @@ class TuntutanController extends Controller
         if(!$tuntutan || $tuntutan->status == 6 || $tuntutan->status == 8 || $tuntutan->status == 9){
             
             $biltuntutan = Tuntutan::where('smoku_id', '=', $smoku_id->id)
+                ->where('permohonan_id', '=', $permohonan->id)
                 ->groupBy('no_rujukan_tuntutan')
                 ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan') 
                 ->get();
