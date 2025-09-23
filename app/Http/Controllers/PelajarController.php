@@ -66,6 +66,7 @@ class PelajarController extends Controller
 
         $tuntutan_id = Tuntutan::orderBy("id","desc")
             ->where('smoku_id', $smoku_id->id)
+            ->where('permohonan_id', $permohonan_id->id)
             ->first();
 
         if ($tuntutan_id !== null) {
