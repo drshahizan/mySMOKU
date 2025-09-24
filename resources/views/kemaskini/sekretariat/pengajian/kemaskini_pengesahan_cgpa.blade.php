@@ -114,8 +114,8 @@
                                         @csrf
                                         <select name="status" style="padding: 6px;" class="form-select" onchange="submitForm(this)">
                                             <option>Pilih</option>
-                                            <option value="2">Disokong</option>
-                                            <option value="0">Tidak Disokong</option>
+                                            <option value="2" {{ $pelajar->pengesahan_rendah == '2' ? 'selected' : '' }}>Disokong</option>
+                                            <option value="0" {{ $pelajar->pengesahan_rendah == '0' ? 'selected' : '' }}>Tidak Disokong</option>
                                             
                                         </select>
                                     </form>
