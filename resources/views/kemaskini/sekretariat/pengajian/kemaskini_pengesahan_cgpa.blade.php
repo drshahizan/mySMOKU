@@ -96,11 +96,11 @@
                                 
                                
                                     <td class="text-center">
-                                        @if($pelajar->pengesahan_rendah == 2)
+                                        @if($pelajar->pengesahan_rendah == '2')
 											<div class="badge badge-light-success fw-bold">Berjaya</div>
-										@elseif($pelajar->pengesahan_rendah == 1)
+										@elseif($pelajar->pengesahan_rendah == '1')
                                             <div class="badge badge-light-warning fw-bold">Pengesahan GPA</div>
-                                        @else    
+                                        @elseif($pelajar->pengesahan_rendah == '0')    
 											<div class="badge badge-light-danger fw-bold">Tidak Berjaya</div>
 										@endif
                                         
@@ -110,7 +110,7 @@
                                 
                                 <td class="text-center">
                                     <!--begin::Edit-->
-                                    <form action="{{ route('kemaskini.pengesahan.cgpa', $pelajar->permohonan_id) }}" method="post">
+                                    <form action="{{ route('kemaskini.pengesahan.cgpa', $pelajar->id_result) }}" method="post">
                                         @csrf
                                         <select name="status" style="padding: 6px;" class="form-select" onchange="submitForm(this)">
                                             <option>Pilih</option>

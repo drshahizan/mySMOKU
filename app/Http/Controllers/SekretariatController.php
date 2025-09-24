@@ -3947,7 +3947,7 @@ class SekretariatController extends Controller
         ->join('smoku','smoku.id','=','permohonan.smoku_id')
         ->where('permohonan_peperiksaan.cgpa', '<', 2.0)
         ->orderBy('permohonan_peperiksaan.id', 'DESC')
-        ->get(['smoku.*','permohonan_peperiksaan.*']);
+        ->get(['smoku.*','permohonan_peperiksaan.*','permohonan_peperiksaan.id as id_result']);
         //  dd($pengesahan_cgpa);
 
         // $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
@@ -3961,7 +3961,7 @@ class SekretariatController extends Controller
 
     public function kemaskiniPengesahanCGPA(Request $request, $id)
     {
-        $pengesahan_cgpa = Peperiksaan::updateOrCreate(['permohonan_id' => $id]);
+        $pengesahan_cgpa = Peperiksaan::updateOrCreate(['id' => $id]);
         $pengesahan_cgpa->pengesahan_rendah = $request->input('status');
         $pengesahan_cgpa->save();
 
