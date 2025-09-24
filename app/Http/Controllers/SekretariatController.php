@@ -3945,6 +3945,7 @@ class SekretariatController extends Controller
     {
         $pengesahan_cgpa = Peperiksaan::join('permohonan','permohonan.id','=','permohonan_peperiksaan.permohonan_id')
         ->join('smoku','smoku.id','=','permohonan.smoku_id')
+        ->where('permohonan_peperiksaan.cgpa', '<', 2.0)
         ->orderBy('permohonan_peperiksaan.id', 'DESC')
         ->get(['smoku.*','permohonan_peperiksaan.*']);
         //  dd($pengesahan_cgpa);
