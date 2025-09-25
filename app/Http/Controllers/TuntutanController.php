@@ -299,35 +299,35 @@ class TuntutanController extends Controller
         $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
             ->where('permohonan_id', $permohonan->id)
             ->where('sesi', $request->sesi)
-            ->where('no_rujukan_tuntutan', $no_rujukan_tuntutan)
+            ->where('semester', $request->semester)
             ->first();
 
-        // if ($tuntutan) {
-        //     // kalau semester sama dengan yang sedia ada
-        //     if ($tuntutan->semester == $request->semester) {
-        //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
-        //     }
-        // } else {
+        if ($tuntutan) {
+            // Case: same sesi + semester found
+            if (in_array($tuntutan->status, [1, 2, 5])) {
+                // update existing
+                $tuntutan->update([
+                    'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                    'yuran' => '1',
+                    'status' => '1', // or keep existing if you don’t want to reset
+                ]);
+            } else {
+                // status not in 1,2,5 → cannot update
+                return back()->with('sem', 'Tuntutan tidak boleh dikemaskini untuk status ini.');
+            }
+        } else {
+            // Case: sesi + semester not found → create new
+            $tuntutan = Tuntutan::create([
+                'smoku_id' => $smoku_id->id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+                'semester' => $request->semester,
+                'yuran' => '1',
+                'status' => '1',
+            ]);
+        }
 
-        //     $akademik = Akademik::where('smoku_id',$id)
-        //         ->where('smoku_akademik.status', 1)
-        //         ->first();
-        //     // semak kalau semester permohonan sama dengan request
-        //     if ($akademik->sem_semasa == $request->semester) {
-        //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
-        //     }
-        // }
-
-        // kalau tak ada record, atau semester lain → buat rekod baru
-        $tuntutan = Tuntutan::updateOrCreate([
-            'smoku_id' => $smoku_id->id,
-            'permohonan_id' => $permohonan->id,
-            'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-            'sesi' => $request->sesi,
-            'semester' => $request->semester,    
-            'yuran' => '1',
-            'status' => '1',
-        ]);
 
         //simpan dalam table tuntutan_item
         $tuntutan = Tuntutan::orderBy('id', 'desc')
