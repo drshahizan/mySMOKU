@@ -45,6 +45,13 @@ class DrafSPBB1a implements FromCollection, WithHeadings, WithColumnWidths, With
 
     public function collection()
     {
+        // Retrieve data from bk_tarikh_iklan table
+        $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+
+        // Combine date + time into full Carbon instances
+        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+
         // Fetch data from the database based on the institusi ID
         $senarai = Permohonan::join('smoku as b', 'b.id', '=', 'permohonan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'permohonan.smoku_id')
@@ -57,6 +64,7 @@ class DrafSPBB1a implements FromCollection, WithHeadings, WithColumnWidths, With
             ->whereNull('permohonan.data_migrate')
             ->where('d.jenis', 'Yuran')
             ->whereIn('f.id_institusi', $this->id_institusi)
+            ->whereBetween('permohonan.tarikh_hantar', [$tarikhMula, $tarikhTamat])
             ->select(
                 'b.id',
                 'b.nama',
