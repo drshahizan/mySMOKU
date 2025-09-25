@@ -2147,32 +2147,43 @@ class PenyelarasController extends Controller
     //PENYALURAN - PEMBAYARAN
     public function senaraiPemohonLayak(Request $request)
     {
-        $sesiBayaran = '';
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
+        // $sesiBayaran = '';
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
 
-        if ($currentMonth == 6) {
-            $sesiBayaran = '1/' . $currentYear;
-        } elseif ($currentMonth == 8) {
-            $sesiBayaran = '2/' . $currentYear;
-        } elseif ($currentMonth == 10) {
-            $sesiBayaran = '3/' . $currentYear;
-        } else{
-            $sesiBayaran = '4/' . $currentYear;
-        }
+        // if ($currentMonth == 6) {
+        //     $sesiBayaran = '1/' . $currentYear;
+        // } elseif ($currentMonth == 8) {
+        //     $sesiBayaran = '2/' . $currentYear;
+        // } elseif ($currentMonth == 10) {
+        //     $sesiBayaran = '3/' . $currentYear;
+        // } else{
+        //     $sesiBayaran = '4/' . $currentYear;
+        // }
+
+        $sesiLatest = DB::table('bk_sesi_salur')->orderBy('created_at', 'desc')->first();
+        $sesiBayaran =$sesiLatest->sesi;
         
         $user = auth()->user();
         $institusiId = $user->id_institusi;
+
+        // Retrieve data from bk_tarikh_iklan table
+        $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+
+        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
 
 
         // $permohonanLayak = Permohonan::orderBy('id', 'desc')->where('permohonan.status', '=', '6')->where('permohonan.data_migrate', 'NULL')->get();
         $permohonanLayak = Permohonan::orderBy('id', 'desc')
                             ->where('status', '=', '6')
+                            ->whereBetween('tarikh_hantar', [$tarikhMula, $tarikhTamat])
                             ->whereNull('data_migrate')
                             ->get();
         
         $tuntutanLayak = Tuntutan::orderBy('id', 'desc')
                             ->where('status', '=', '6')
+                            ->whereBetween('tarikh_hantar', [$tarikhMula, $tarikhTamat])
                             ->whereNull('data_migrate')
                             ->get();
 

@@ -45,6 +45,14 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
 
     public function collection()
     {
+
+        // Retrieve data from bk_tarikh_iklan table
+        $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
+
+        // Combine date + time into full Carbon instances
+        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+
         // Fetch data from the database based on the institusi ID
         $senarai = Tuntutan::join('smoku as b', 'b.id', '=', 'tuntutan.smoku_id')
             ->join('smoku_akademik as c', 'c.smoku_id', '=', 'tuntutan.smoku_id')
@@ -56,9 +64,9 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             ->join('tuntutan_saringan as a', 'a.tuntutan_id','=','tuntutan.id')
             ->where('tuntutan.status', 6)
             ->whereNull('tuntutan.data_migrate')
-            // ->where('tuntutan.data_migrate', '!=', '1')
             ->where('d.jenis', 'Yuran')
             ->whereIn('f.id_institusi', $this->institusi_user)
+            ->whereBetween('tuntutan.tarikh_hantar', [$tarikhMula, $tarikhTamat])
             ->select(
                 'b.id',
                 'b.nama',
