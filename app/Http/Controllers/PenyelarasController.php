@@ -1312,7 +1312,7 @@ class PenyelarasController extends Controller
                 ]);
             } else {
                 // status not in 1,2,5 → cannot update
-                return back()->with('sem', 'Tuntutan tidak boleh dikemaskini untuk status ini.');
+                return back()->with('sem', 'Tuntutan telah dituntut untuk semester ini.');
             }
         } else {
             // Case: sesi + semester not found → create new
