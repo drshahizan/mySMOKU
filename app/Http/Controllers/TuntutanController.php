@@ -309,7 +309,7 @@ class TuntutanController extends Controller
                 $tuntutan->update([
                     'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
                     'yuran' => '1',
-                    'status' => '1', // or keep existing if you don’t want to reset
+                    'status' => '1',
                 ]);
             } else {
                 // status not in 1,2,5 → cannot update
