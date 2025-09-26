@@ -13,19 +13,63 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
+
         <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     </head>
 
     <style>
-        .nav{
+        /* .nav{
             margin-left: 20px!important;
-        }
+        } */
+
         .custom-width-select {
-            width: 400px !important; /* Important to override other styles */
+            width: 400px !important; 
         }
         .form-select {
                 margin-left: 10px !important; 
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                display: flex;
+                flex-direction: column;
+                gap: 10px; /* Add space between the buttons */
+                width: 100%; /* Ensure it takes full width */
+            }
+
+            .nav-tabs .nav-item {
+                flex: 1; /* Make each item take equal width */
+            }
+
+            .nav-tabs .nav-link {
+                display: block;
+                text-align: center;
+                width: 100%; 
+                padding: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                border: none; /* Remove default borders */
+                border-radius: 5px; /* Add rounded corners */
+            }
+
+            .nav-tabs .nav-link.active {
+                background-color: #003366; /* Change active tab background color */
+                color: white; /* Active tab text color */
+            }
+
+            .nav-tabs .nav-link {
+                background-color: #f8f9fa; /* Inactive tab background color */
+                color: black; /* Inactive tab text color */
+            }
+
+            .custom-width-select {
+                width: 100% !important; /* override desktop */
+            }
+
+            .form-select {
+                margin-left: 0 !important; /* remove left margin */
+            }
+            
         }
     </style>
 
@@ -73,8 +117,8 @@
         <div id="main-content">
             <div class="container-fluid">
                 <!-- Page header section  -->
-                <div class="row clearfix">
-                    <div class="col-lg-12">
+                <div class="block-header">
+                    <div class="row clearfix">
                         <div class="card">
                             <div class="header">
                                 <h2>Senarai Pembayaran<br><small>Klik ID Permohonan untuk melihat maklumat pembayaran.</small></h2>
@@ -112,30 +156,32 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
-                                <div class="d-flex justify-content-between" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
+                                <div class="d-flex justify-content-between mt-5 mb-0" style="margin-left: 20px;" data-kt-subscription-table-toolbar="base">
                                     <!--begin::Filter-->
-                                    <div data-kt-subscription-table-filter="form">
+                                    <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
-                                        <div class="row mb-0">
-                                            <div class="col-md-8 fv-row">
+                                        <div class="row">
+                                            <div class="col-md-5">
                                                 <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-2 fv-row">
-                                                <!--begin::Actions-->
-                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                            <!-- FILTER BUTTON -->
+                                            <div class="col-md-2 d-flex justify-content-center ms-6">
+                                                <button type="submit" class="btn btn-primary fw-semibold" 
+                                                        data-kt-menu-dismiss="true" 
+                                                        data-kt-subscription-table-filter="filter" 
+                                                        onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
                                                 </button>
-                                                <!--end::Actions-->
                                             </div>
                                         
-                                            <div class="col-md-2 fv-row export-container"> 
-                                                <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" style=" width: 150%;">
+                                            <div class="col-md-3 fv-row export-container"> 
+                                                <a id="exportLink" href="{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}" target="_blank" class="btn btn-secondary btn-round" >
                                                     <i class="fa fa-file-excel" style="color: black;"></i> Muat Turun
                                                 </a> 
                                             </div>
@@ -145,14 +191,6 @@
                                     <!--end::Filter-->
                                 </div>
                                 <!--end::Toolbar-->
-
-                                <!--begin::Group actions-->
-                                <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-                                    <div class="fw-bold me-5">
-                                    <span class="me-2" data-kt-subscription-table-select="selected_count"></span>Selected</div>
-                                    <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">Delete Selected</button>
-                                </div>
-                                <!--end::Group actions-->
                             </div>
                             <!--end::Card toolbar-->
 
@@ -162,58 +200,60 @@
                                 <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
                                     <div class="body">
-                                        <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
-                                        {{csrf_field()}}
-                                            <!--begin::Table-->
-                                            <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
-                                                        <th>ID Permohonan</th>
-                                                        <th>Nama</th>
-                                                        <th>Institusi Pengajian</th>
-                                                        <th>No Baucar</th>
-                                                        <th>Tarikh Baucar</th>
-                                                        <th>No Cek</th>
-                                                        <th>Tarikh Dibayar</th>
-                                                        <th>Status</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                            <!--end::Table-->
+                                        <div class="table-responsive">
+                                            <form action="{{ route('sekretariat.infocek.submit') }}" method="POST">
+                                            {{csrf_field()}}
+                                                <!--begin::Table-->
+                                                <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all-bkokuUA" onclick="toggle('bkokuUA');" /></th>
+                                                            <th>ID Permohonan</th>
+                                                            <th>Nama</th>
+                                                            <th>Institusi Pengajian</th>
+                                                            <th>No Baucar</th>
+                                                            <th>Tarikh Baucar</th>
+                                                            <th>No Cek</th>
+                                                            <th>Tarikh Dibayar</th>
+                                                            <th>Status</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                                <!--end::Table-->
 
-                                            <!-- Button trigger modal --> 
-                                            <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
-                                                Kemaskini
-                                            </button>
-                                            <!-- Modal --> 
-                                            <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
+                                                <!-- Button trigger modal --> 
+                                                <button type="button" class="btn btn-primary btn-round float-end mb-10" data-bs-toggle="modal" data-bs-target="#baucer">
+                                                    Kemaskini
+                                                </button>
+                                                <!-- Modal --> 
+                                                <div class="modal fade" id="baucer" tabindex="-1" aria-labelledby="baucer" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="pengesahanModalLabelBKOKU2">Kemaskini Maklumat Penyaluran</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
 
-                                                        <div class="modal-body">
-                                                            <div class="mb-3">
-                                                                <label for="recipient-name" class="col-form-label">No Cek / No EFT:</label>
-                                                                <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label for="recipient-name" class="col-form-label">No Cek / No EFT:</label>
+                                                                    <input type="text" class="form-control" id="noCek" name="noCek" required oninvalid="this.setCustomValidity('Sila isi no cek.')" oninput="setCustomValidity('')">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
+                                                                    <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi" required oninvalid="this.setCustomValidity('Sila isi tarikh transaksi.')" oninput="setCustomValidity('')">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label for="message-text" class="col-form-label">Tarikh Transaksi:</label>
-                                                                <input type="date" class="form-control" id="tarikhTransaksi" name="tarikhTransaksi" required oninvalid="this.setCustomValidity('Sila isi tarikh transaksi.')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary btn-round float-end">Hantar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div> 
-                                        </form>   
+                                                        </div> 
+                                                    </div>
+                                                </div> 
+                                            </form>
+                                        </div>        
                                     </div>
                                 </div>
 
@@ -222,7 +262,7 @@
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable2" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Permohonan</th>
@@ -244,7 +284,7 @@
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable3" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Permohonan</th>
@@ -266,7 +306,7 @@
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable1" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Permohonan</th>
@@ -288,7 +328,7 @@
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
-                                            <table id="sortTable5" class="table table-striped table-hover dataTable js-exportable">
+                                            <table id="sortTable5" class="table table-bordered table-striped" style="margin-top: 0 !important;">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Permohonan</th>
@@ -306,8 +346,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                </div>
+                    </div>
+                </div>    
             </div>
         </div>
 

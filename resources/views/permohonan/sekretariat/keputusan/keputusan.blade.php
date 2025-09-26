@@ -18,23 +18,60 @@
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+
         <style>
-            .nav{
+            /* .nav{
                 margin-left: 20px!important;
+            } */
+
+            .custom-width-select {
+                width: 400px !important; 
+            }
+            .form-select {
+                    margin-left: 10px !important; 
             }
 
-            .dash {
-                width: 15px;
-                height: 1px;
-                background: black;
-                margin: 0 5px;
-                margin-bottom: 20px;
-                display: inline-block;
-                background-color: #fff; /* Set background color to white or your container's background color */
-            }
+            @media (max-width: 768px) {
+                .nav-tabs {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px; /* Add space between the buttons */
+                    width: 100%; /* Ensure it takes full width */
+                }
 
-            .form-filter {
-                margin-left: 20px !important; 
+                .nav-tabs .nav-item {
+                    flex: 1; /* Make each item take equal width */
+                }
+
+                .nav-tabs .nav-link {
+                    display: block;
+                    text-align: center;
+                    width: 100%; 
+                    padding: 10px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: none; /* Remove default borders */
+                    border-radius: 5px; /* Add rounded corners */
+                }
+
+                .nav-tabs .nav-link.active {
+                    background-color: #003366; /* Change active tab background color */
+                    color: white; /* Active tab text color */
+                }
+
+                .nav-tabs .nav-link {
+                    background-color: #f8f9fa; /* Inactive tab background color */
+                    color: black; /* Inactive tab text color */
+                }
+
+                .custom-width-select {
+                    width: 100% !important; /* override desktop */
+                }
+
+                .form-select {
+                    margin-left: 0 !important; /* remove left margin */
+                }
+                
             }
         </style>
     </head>
@@ -124,51 +161,53 @@
                                     <!--begin::Filter-->
                                     <div class="col-md-12" data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
-                                        <div class="row form-filter" >
-                                            <div class="col-md-4" style="display: flex; align-items: center;">
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="start_date" id="start_date" value="" class="form-control" />
-                                                </div>
-                                            
-                                                <div class="dash">-</div>
-                                            
-                                                <div class="flex-grow-1">
-                                                    <input type="date" name="end_date" id="end_date" value="" class="form-control" />
-                                                </div>
+                                        <div class="row g-3 align-items-center">
+
+                                            <!-- Row 1: Date range -->
+                                            <div class="col-md-8 d-flex align-items-center" style="margin-left:1%;">
+                                                <input type="date" name="start_date" id="start_date" class="form-control me-2" />
+                                                <span class="mx-2">-</span>
+                                                <input type="date" name="end_date" id="end_date" class="form-control" />
                                             </div>
-                                            
-                                            <div class="col-md-2">
-                                                <select id="status" name="status" class="form-select">
+
+                                            <!-- Row 2: Keputusan + Institusi + Filter button -->
+                                            <div class="col-md-4">
+                                                <select id="status" name="status" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Layak</option>
                                                     <option value="Tidak Lulus">Tidak Layak</option>
                                                 </select>
-                                            </div> 
+                                            </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <select id="institusiDropdown" name="institusi" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
                                             </div>
+                                            <div class="col-md-1">
+                                                
+                                            </div>
 
-                                            <div class="col-md-1 fv-row">
-                                                <!--begin::Actions-->
-                                                <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
+                                            <div class="col-md-1 d-flex">
+                                                <button type="submit" class="btn btn-primary fw-semibold"
+                                                        data-kt-menu-dismiss="true"
+                                                        data-kt-subscription-table-filter="filter"
+                                                        onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
                                                 </button>
-                                                <!--end::Actions-->
                                             </div>
-                                        
+
+                                            <!-- Export buttons -->
                                             <div class="col-md-2 export-container" data-program-code="IPTS"> 
                                                 <a id="exportIPTS" href="{{ route('senarai.keputusan.BKOKU.IPTS.pdf', [
                                                     'start_date' => Request::get('start_date'),
                                                     'end_date' => Request::get('end_date'),
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU IPTS
                                                 </a>
                                             </div>
@@ -179,7 +218,7 @@
                                                     'end_date' => Request::get('end_date'),
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU POLI
                                                 </a>
                                             </div>
@@ -190,7 +229,7 @@
                                                     'end_date' => Request::get('end_date'),
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU KK
                                                 </a>
                                             </div>
@@ -201,7 +240,7 @@
                                                     'end_date' => Request::get('end_date'),
                                                     'status' => Request::get('status'),
                                                     'institusi' => Request::get('institusi'),]) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> BKOKU UA
                                                 </a>
                                             </div>
@@ -212,10 +251,11 @@
                                                     'end_date' => '" + endDate + "',
                                                     'status' => '" + status + "',
                                                     'institusi' => '" + selectedInstitusi + "']) }}" 
-                                                    target="_blank" class="btn btn-secondary btn-round">
+                                                    target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
                                             </div>
+                                            
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -367,18 +407,6 @@
             });
         </script>   
 
-        <style>
-            .custom-width-btn {
-                width: 105px; 
-                height: 35px;
-            }
-            .custom-width-select {
-                width: 400px !important; /* Important to override other styles */
-            }
-            .form-select {
-                margin-left: 10px !important; 
-            }
-        </style>
 
         <script>
             $(document).ready(function() {
