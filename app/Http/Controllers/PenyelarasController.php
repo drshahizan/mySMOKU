@@ -1007,6 +1007,7 @@ class PenyelarasController extends Controller
         $akademik = Akademik::where('smoku_id',$id)
             ->where('smoku_akademik.status', 1)
             ->first();
+        $smoku = Smoku::where('id',$id)->first();    
 
         // against missing akademik
         if (!$akademik) {
@@ -1256,7 +1257,7 @@ class PenyelarasController extends Controller
                 $tuntutan_item = collect(); // An empty collection
             }
 
-            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total','maxLimit'));
+            return view('tuntutan.penyelaras_bkoku.borang_tuntutan', compact('permohonan','tuntutan','tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total','maxLimit','smoku'));
             
         } 
         else if ($permohonan && $permohonan->status !=6) {

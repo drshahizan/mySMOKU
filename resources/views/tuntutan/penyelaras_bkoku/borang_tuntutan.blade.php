@@ -40,6 +40,25 @@
 								<div class="mb-0">
 									<!--begin::Row-->
 									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Nama</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="nama" name="nama" value="{{ $smoku?->nama }}" class="form-control form-control-solid" placeholder="" oninput="setCustomValidity('')" readonly/>
+											</div>
+										</div>
+									</div>
+									<div class="row gx-10 mb-5">
+										<div class="col-lg-12">
+											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. Kad Pengenalan</label>
+											<!--begin::Input group-->
+											<div class="mb-5">
+												<input type="text" id="no_kp" name="no_kp" value="{{ $smoku?->no_kp }}" class="form-control form-control-solid" placeholder="" oninput="setCustomValidity('')" readonly/>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row gx-10 mb-5">
 										<!--begin::Col-->
 										<div class="col-lg-6">
 											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
