@@ -784,6 +784,7 @@ class PenyelarasController extends Controller
     {   
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $smoku_id = $id;
+        $smoku = Smoku::where('id',$id)->first(); 
 
         $akademik = Akademik::where('smoku_id',$id)
             ->where('smoku_akademik.status', 1)
@@ -917,7 +918,7 @@ class PenyelarasController extends Controller
                                     ->where('semester', $sesiLepas)
 									->first();
 
-            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','result'));
+            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','result','smoku'));
         } 
         else 
         {
@@ -1158,8 +1159,8 @@ class PenyelarasController extends Controller
                 ->whereNull('data_migrate')
                 ->orderBy('tuntutan.id', 'desc')
                 ->first(['tuntutan.*']);
-            
 
+            //semak keputusan    
             if ($currentDate <= $semesterEndDate ) {
                 if($currentSesi != $previousSesi){
                     // semak dah upload result ke belum
@@ -1167,7 +1168,7 @@ class PenyelarasController extends Controller
                     ->where('sesi', $previousSesi)
                     ->where('semester', $sesiLepas)
                     ->first();
-                    if($result == null){
+                    if(!$result && !$tuntutan){
                         return redirect()->route('bkoku.kemaskini.keputusan', ['id' => $id])->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }elseif($result && $result->pengesahan_rendah== 1){
                         return back()->with('sem', 'Keputusan peperiksaan dalam semakan.');
@@ -1182,7 +1183,6 @@ class PenyelarasController extends Controller
                 return back()->with('sem', 'Tamat pengajian.');
             }
             
-            // dd($akademik->sesi);
        
             if (($currentSesi === $akademik->sesi) || $previousSesi === null) {
             
