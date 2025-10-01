@@ -184,7 +184,7 @@ class TuntutanController extends Controller
                     ->where('sesi', $previousSesi)
                     ->where('semester', $sesiLepas)
                     ->first();
-                    if($result == null){
+                    if(!$result && !$tuntutan){
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
                     }elseif($result && $result->pengesahan_rendah== 1){
                         return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan dalam semakan.');
