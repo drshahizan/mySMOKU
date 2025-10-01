@@ -66,7 +66,7 @@
 															$end = $start + 1; 
 															$sesi = $start . '/' . $end; 
 														@endphp
-														<option value="{{ $sesi }}">
+														<option value="{{ $sesi }}" {{ $tuntutan?->sesi == $sesi ? 'selected' : '' }}>
 															{{ $sesi }}
 														</option>
 													@endfor
@@ -81,8 +81,8 @@
 											<div class="mb-5">
 												<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
 													<option></option>
-													<option value="1">Sesi 1 (Kemasukan Julai sehingga Disember)</option>
-													<option value="2">Sesi 2 (Kemasukan Januari sehingga Jun)</option>
+													<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+													<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
 												</select>
 											</div>
 										</div>
@@ -269,7 +269,7 @@
 															$end = $start + 1; 
 															$sesi = $start . '/' . $end; 
 														@endphp
-														<option value="{{ $sesi }}">
+														<option value="{{ $sesi }}" {{ $tuntutan?->sesi == $sesi ? 'selected' : '' }}>
 															{{ $sesi }}
 														</option>
 													@endfor
@@ -284,8 +284,8 @@
 											<div class="mb-5">
 												<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
 													<option></option>
-													<option value="1">1</option>
-													<option value="2">2</option>
+													<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+													<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
 												</select>
 											</div>
 										</div>
