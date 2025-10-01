@@ -168,7 +168,7 @@
                                             </div>
 
                                             <!-- FILTER BUTTON -->
-                                            <div class="col-md-2 d-flex justify-content-center ms-6">
+                                            <div class="col-md-2 d-flex">
                                                 <button type="submit" class="btn btn-primary fw-semibold" 
                                                         data-kt-menu-dismiss="true" 
                                                         data-kt-subscription-table-filter="filter" 

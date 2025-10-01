@@ -13,14 +13,62 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
         <style>
-            .nav{
+            /* .nav{
                 margin-left: 20px!important;
+            } */
+
+            .custom-width-select {
+                width: 400px !important; 
             }
-            
+            .form-select {
+                    margin-left: 10px !important; 
+            }
+
+            @media (max-width: 768px) {
+                .nav-tabs {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px; /* Add space between the buttons */
+                    width: 100%; /* Ensure it takes full width */
+                }
+
+                .nav-tabs .nav-item {
+                    flex: 1; /* Make each item take equal width */
+                }
+
+                .nav-tabs .nav-link {
+                    display: block;
+                    text-align: center;
+                    width: 100%; 
+                    padding: 10px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border: none; /* Remove default borders */
+                    border-radius: 5px; /* Add rounded corners */
+                }
+
+                .nav-tabs .nav-link.active {
+                    background-color: #003366; /* Change active tab background color */
+                    color: white; /* Active tab text color */
+                }
+
+                .nav-tabs .nav-link {
+                    background-color: #f8f9fa; /* Inactive tab background color */
+                    color: black; /* Inactive tab text color */
+                }
+
+                .custom-width-select {
+                    width: 100% !important; /* override desktop */
+                }
+
+                .form-select {
+                    margin-left: 0 !important; /* remove left margin */
+                }
+                
+            }
         </style>
     </head>
 
@@ -251,18 +299,6 @@
         </div>
     </div>
 
-    <style>
-        .custom-width-btn {
-                width: 131px; 
-                height: 30px;
-        }
-        .custom-width-select {
-            width: 400px !important; /* Important to override other styles */
-        }
-        .form-select {
-                margin-left: 10px !important; 
-        }
-    </style>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
