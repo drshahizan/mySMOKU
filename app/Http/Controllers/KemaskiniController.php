@@ -1117,14 +1117,14 @@ class KemaskiniController extends Controller
         $smoku = Smoku::findOrFail($smoku_id);
         $nokp_pelajar = $smoku->no_kp;
 
-        // 1️⃣ Update Smoku
+        // Update Smoku
         $smoku->update([
             'umur'       => $request->umur,
             'email'      => $request->emel,
             'keturunan'  => $request->keturunan,
         ]);
 
-        // 2️⃣ Butiran Pelajar
+        // Butiran Pelajar
         ButiranPelajar::updateOrCreate(
             ['smoku_id' => $smoku_id],
             [
@@ -1150,7 +1150,7 @@ class KemaskiniController extends Controller
             ]
         );
 
-        // 3️⃣ Waris
+        // Waris
         Waris::updateOrCreate(
             ['smoku_id' => $smoku_id],
             [
@@ -1169,7 +1169,7 @@ class KemaskiniController extends Controller
             ]
         );
 
-        // 4️⃣ Akademik
+        // Akademik
         Akademik::updateOrCreate(
             ['smoku_id' => $smoku_id],
             [
@@ -1192,7 +1192,7 @@ class KemaskiniController extends Controller
             ]
         );
 
-        // 5️⃣ Permohonan & Sejarah
+        // Permohonan & Sejarah
         $programCode = $request->program === 'BKOKU' ? 'B' : 'P';
         $permohonan = Permohonan::updateOrCreate(
             ['smoku_id' => $smoku_id],
@@ -1215,7 +1215,7 @@ class KemaskiniController extends Controller
             ]
         );
 
-        // 6️⃣ Dokumen
+        // Dokumen
         $runningNumber = rand(1000, 9999);
         $documentTypes = [
             'akaunBank'   => 1,
@@ -1242,7 +1242,7 @@ class KemaskiniController extends Controller
             }
         }
 
-        // 7️⃣ Create user if not exist
+        // Create user if not exist
         $user = User::where('no_kp', $nokp_pelajar)->first();
         if (!$user) {
             $password = collect(str_split('abcdefghijklmn123456789!@#$%^&'))
@@ -1266,7 +1266,7 @@ class KemaskiniController extends Controller
             ));
         }
 
-        // 8️⃣ Update daftar
+        // Update daftar
         DB::table('smoku_daftar')
             ->where('smoku_id', $smoku_id)
             ->update([
