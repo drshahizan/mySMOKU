@@ -80,40 +80,42 @@
 					</div>
 				@endif
 
-				@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
-					<div class="menu-item pt-5">
-						<div class="menu-content">
-							<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Kali Pertama</span>
+				@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
+					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+						<div class="menu-item pt-5">
+							<div class="menu-content">
+								<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Kali Pertama</span>
+							</div>
 						</div>
-					</div>
 
-					
-					@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
-						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
-							@if($institusi->jenis_institusi === 'IPTS')
+						
+						
+							@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
+								@if($institusi->jenis_institusi === 'IPTS')
+									<div class="menu-item">
+										<a class="menu-link" href="{{ route('permohonan') }}">
+											<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+											<span class="menu-title">Baharu</span>
+										</a>
+									</div>
+								@endif	
+							@else
 								<div class="menu-item">
-									<a class="menu-link" href="{{ route('permohonan') }}">
+									<a class="menu-link" href="#" onclick="showAlert()">
 										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 										<span class="menu-title">Baharu</span>
 									</a>
 								</div>
-							@endif	
-						@else
-							<div class="menu-item">
-								<a class="menu-link" href="#" onclick="showAlert()">
-									<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
-									<span class="menu-title">Baharu</span>
-								</a>
-							</div>
-						@endif
-					@endif
+							@endif
+						
 
-					<div class="menu-item">
-						<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
-							<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
-							<span class="menu-title">Sejarah</span>
-						</a>
-					</div>
+						<div class="menu-item">
+							<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
+								<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
+								<span class="menu-title">Sejarah</span>
+							</a>
+						</div>
+					@endif
 				@endif
 
 				@if($permohonan && ($permohonan->status == 8 || $permohonan->status == 6))
