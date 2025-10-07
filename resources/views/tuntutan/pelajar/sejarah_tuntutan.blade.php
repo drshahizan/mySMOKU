@@ -99,7 +99,7 @@
                                                     
                                                     <tr>
                                                         <td>{{$item['no_rujukan_tuntutan']}}</td>
-                                                        <td class="text-center">{{$item['updated_at']->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{ $item['tarikh_hantar'] ? \Carbon\Carbon::parse($item['tarikh_hantar'])->format('d/m/Y') : '-' }}</td>
                                                         <td class="text-center">{{ucwords(strtolower($peringkat))}}</td>
                                                         <td class="text-center">
                                                             {{ !empty($item['yuran_dibayar']) ? 'RM '.$item['yuran_dibayar'] : '-' }}
@@ -107,7 +107,7 @@
                                                         <td class="text-center">
                                                             {{ !empty($item['wang_saku_dibayar']) ? 'RM '.$item['wang_saku_dibayar'] : '-' }}
                                                         </td>
-                                                        <td class="text-center">{{\Carbon\Carbon::parse($item['tarikh_transaksi'])->format('d/m/Y')}}</td>
+                                                        <td class="text-center">{{ $item['tarikh_transaksi'] ? \Carbon\Carbon::parse($item['tarikh_transaksi'])->format('d/m/Y') : '-' }}</td>
                                                         
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
