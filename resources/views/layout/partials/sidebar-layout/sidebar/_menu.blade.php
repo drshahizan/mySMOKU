@@ -517,6 +517,12 @@
 						<span class="menu-title">Maklumat Pelajar</span>
 					</a>
 				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('kemaskini.sekretariat.daftar.pelajar')}}">
+						<span class="menu-icon">{!! getIcon('bookmark', 'fs-2') !!}</span>
+						<span class="menu-title">Pendaftaran Pelajar Sedia Ada</span>
+					</a>
+				</div>
 
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('kemaskini.sekretariat.surat.tawaran')}}">

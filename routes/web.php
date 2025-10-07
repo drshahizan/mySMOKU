@@ -224,11 +224,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //Kemaskini - Sekretariat - Senarai Pelajar
         Route::get('kemaskini/sekretariat/senarai/pelajar/institusi', [KemaskiniController::class, 'senaraiProfilDiriPelajar'])->name('kemaskini.sekretariat.senarai.profil');
-        Route::get('kemaskini/sekretariat/getPermohonanUA', [KemaskiniController::class, 'getSenaraiPelajar'])->name('kemaskini.getSenaraiPelajar');
+        Route::get('kemaskini/sekretariat/getSenaraiPelajar', [KemaskiniController::class, 'getSenaraiPelajar'])->name('kemaskini.getSenaraiPelajar');
         Route::get('kemaskini/sekretariat/profil/pelajar/{id}', [KemaskiniController::class, 'kemaskiniProfilDiriPelajar'])->name('kemaskini.sekretariat.profil');
         Route::post('kemaskini/sekretariat/profil/pelajar/simpan/{id}', [KemaskiniController::class, 'simpanProfilDiriPelajar'])->name('kemaskini.sekretariat.simpan.profil');
         Route::get('/peringkatProfilPelajar/{id}', [KemaskiniController::class, 'peringkatProfilPelajar']);
         Route::get('/kursusProfilPelajar/{kodperingkat}/{id}', [KemaskiniController::class, 'kursusProfilPelajar']);
+
+        //Kemaskini - Sekretariat - Pendaftaran Pelajar
+        Route::get('kemaskini/sekretariat/pelajar/pendaftaran_pelajar', [KemaskiniController::class, 'tambahPelajar'])->name('kemaskini.sekretariat.daftar.pelajar');
+        Route::post('kemaskini/sekretariat/pelajar/semak_smoku', [KemaskiniController::class, 'semakSMOKU'])->name('kemaskini.sekretariat.semak.pelajar');
+        Route::get('kemaskini/sekretariat/daftar/pelajar/{id}', [KemaskiniController::class, 'kemaskiniDaftarPelajar'])->name('kemaskini.sekretariat.daftar');
+        Route::post('kemaskini/sekretariat/daftar/pelajar/simpan/{id}', [KemaskiniController::class, 'simpanDaftarPelajar'])->name('kemaskini.sekretariat.simpan.daftar');
 
         //Kemaskini - Sekretariat - Senarai Surat Tawaran
         Route::get('kemaskini/sekretariat/senarai/surat/tawaran', [KemaskiniController::class, 'senaraiSuratTawaran'])->name('kemaskini.sekretariat.surat.tawaran');
