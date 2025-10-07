@@ -322,6 +322,7 @@
 									<div class="d-flex">
 										<span class="input-group-text">RM</span>
 										<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
+										<input type="hidden" id="max_limit" name="max_limit" class="input-group-text" style="width: 100%;" value="{{$maxLimit}}"/>
 										<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
 									</div>
 							@endif
@@ -446,16 +447,9 @@ function myFunction() {
 	// alert('Is tarikhMula earlier than tarikhTamat? ' + (tarikhMulaTimestamp < tarikhTamatTimestamp));
 
 	if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
-	 	var tarikhNextSem = new Date(tarikhMulaTimestamp);
-	 	tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
-	 	// alert('helll');
 
-		if (currentDate > tarikhNextSem) {
-			var wang_saku = wang_saku_perbulan * bilbulan;
-	// 		break; // Exit the loop
-		} else {
-			var wang_saku = 0.00;
-		}
+		var wang_saku = wang_saku_perbulan * bilbulan;
+	
 	}
 
 	// alert(wang_saku);
@@ -495,22 +489,23 @@ function myFunction() {
 	console.log(maxLimit);
 
 
-	if (total_yuran > maxLimit) {
-		yuranInput.value = '';
-			Swal.fire({
-				icon: 'error',
-				title: 'Ralat',
-				text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
-			});
+	// if (total_yuran > maxLimit) {
+	// 	yuranInput.value = '';
+	// 		Swal.fire({
+	// 			icon: 'error',
+	// 			title: 'Ralat',
+	// 			text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
+	// 		});
 
-			return;
-	}
+	// 		return;
+	// }
 
 	var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
 
     if (checkBox.checked == true) {
 		// if (total <= maxLimit) {
 			document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
+			
 			var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
 			document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
 			console.log("Total amount is within the limit: " + parseFloat(total));
