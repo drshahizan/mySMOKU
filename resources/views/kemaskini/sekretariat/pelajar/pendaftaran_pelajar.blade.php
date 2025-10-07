@@ -169,7 +169,7 @@
                                                                 </td>
                                                                 
                                                                 <td class="text-center">
-                                                                    <a href="{{ route('pendaftaran.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam pendaftaran ini?')">
+                                                                    <a href="{{ route('pendaftaran.pelajar.delete', ['id' => $smoku->smoku_id]) }}" onclick="return confirm('Adakah anda pasti ingin padam pendaftaran ini?')">
                                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Pendaftaran">
                                                                             <i class="fa fa-trash fa-sm custom-white-icon"></i>
                                                                         </span>

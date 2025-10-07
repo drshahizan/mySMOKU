@@ -235,6 +235,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('kemaskini/sekretariat/pelajar/semak_smoku', [KemaskiniController::class, 'semakSMOKU'])->name('kemaskini.sekretariat.semak.pelajar');
         Route::get('kemaskini/sekretariat/daftar/pelajar/{id}', [KemaskiniController::class, 'kemaskiniDaftarPelajar'])->name('kemaskini.sekretariat.daftar');
         Route::post('kemaskini/sekretariat/daftar/pelajar/simpan/{id}', [KemaskiniController::class, 'simpanDaftarPelajar'])->name('kemaskini.sekretariat.simpan.daftar');
+        Route::get('kemaskini/pendaftaran/delete/{id}', [KemaskiniController::class, 'deletePendaftaranPelajar'])->name('pendaftaran.pelajar.delete');
 
         //Kemaskini - Sekretariat - Senarai Surat Tawaran
         Route::get('kemaskini/sekretariat/senarai/surat/tawaran', [KemaskiniController::class, 'senaraiSuratTawaran'])->name('kemaskini.sekretariat.surat.tawaran');

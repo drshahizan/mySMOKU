@@ -1274,9 +1274,14 @@ class KemaskiniController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect()->route('kemaskini.sekretariat.daftar.pelajar');
+        return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with('success', 'Pendaftaran pelajar sedia ada telah berjaya.');
     }
 
-
+    public function deletePendaftaranPelajar($id)
+    {
+        DB::table('smoku_daftar')->where('smoku_id',$id)->delete();
+        
+        return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with('success', 'Pendaftaran pelajar telah di padam.');
+    }
 
 }
