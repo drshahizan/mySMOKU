@@ -2,7 +2,7 @@
 @if(Auth::user()->tahap=='1')
 	@php
 		$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
-		$permohonan = DB::table('permohonan')->where('smoku_id', $smoku_id->id)->first();
+		$permohonan = DB::table('permohonan')->orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
 		$akademik = DB::table('smoku_akademik')
 			->where('smoku_id', $smoku_id->id)
 			->where('status', 1)
@@ -87,9 +87,10 @@
 						</div>
 					</div>
 
-					@if($institusi->jenis_institusi === 'IPTS')
+					
+					@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
 						@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
-							@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
+							@if($institusi->jenis_institusi === 'IPTS')
 								<div class="menu-item">
 									<a class="menu-link" href="{{ route('permohonan') }}">
 										<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
