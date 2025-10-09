@@ -1306,11 +1306,16 @@ class PenyelarasController extends Controller
             // Case: same sesi + semester found
             if (in_array($tuntutan->status, [1, 2, 5])) {
                 // update existing
-                $tuntutan->update([
+                $updateData = [
                     'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
                     'yuran' => '1',
-                    'status' => '1',
-                ]);
+                ];
+
+                if ($tuntutan->status != '5') {
+                    $updateData['status'] = '1';
+                }
+
+                $tuntutan->update($updateData);
             } else {
                 // status not in 1,2,5 → cannot update
                 return back()->with('sem', 'Tuntutan telah dituntut untuk semester ini.');
@@ -1481,9 +1486,6 @@ class PenyelarasController extends Controller
                     $tuntutan->update([
                         'wang_saku' => $request->wang_saku,
                         'amaun_wang_saku' => $request->amaun_wang_saku,
-                        'jumlah' => $request->jumlah,
-                        'tarikh_hantar' => now()->format('Y-m-d'),
-                        'status' => '2',
                     ]);
                 }
             }
@@ -1492,11 +1494,16 @@ class PenyelarasController extends Controller
             $tuntutan = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
 
             if ($tuntutan) {
-                $tuntutan->update([
+                $updateData = [
                     'jumlah' => $request->jumlah,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
                     'status' => '2',
-                ]);
+                ];
+
+                if ($tuntutan->status != '5') {
+                    $updateData['tarikh_hantar'] = now()->format('Y-m-d');
+                }
+
+                $tuntutan->update($updateData);
             }
         }
 

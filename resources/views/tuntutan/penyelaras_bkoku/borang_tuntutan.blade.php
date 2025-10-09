@@ -357,8 +357,11 @@
 							<br>
 							<!--end::Actions-->
 							<div class="d-flex justify-content-end">
-								<button type="submit" id="submitButton" class="btn btn-primary">
-									Hantar
+								<button 
+									type="submit" 
+									id="submitButton" 
+									class="btn {{ ($tuntutan && $tuntutan->status == 5) ? 'btn-danger' : 'btn-primary' }}">
+									{{ ($tuntutan && $tuntutan->status == 5) ? 'Hantar Semula' : 'Hantar' }}
 								</button>
 							</div>
 						</form>	
@@ -470,16 +473,9 @@
 		// alert('Is tarikhMula earlier than tarikhTamat? ' + (tarikhMulaTimestamp < tarikhTamatTimestamp));
 	
 		if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
-			 var tarikhNextSem = new Date(tarikhMulaTimestamp);
-			 tarikhNextSem.setMonth(tarikhNextSem.getMonth() + bilbulan);
-			
-	
-			if (currentDate > tarikhNextSem) {
-				var wang_saku = wang_saku_perbulan * bilbulan;
+
+			var wang_saku = wang_saku_perbulan * bilbulan;
 		
-			} else {
-				var wang_saku = 0.00;
-			}
 		}
 	
 		// alert(wang_saku);

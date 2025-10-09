@@ -99,6 +99,13 @@
                                                             }
                                                         }
                                                         $pemohon = implode(' ', $result);
+
+                                                        $saringan = DB::table('tuntutan_saringan')
+                                                            ->where('tuntutan_id', $item['id'])
+                                                            ->where('status', $item['status'])
+                                                            ->orderBy('id', 'desc')
+                                                            ->value('catatan');
+
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
                                                     <tr>
@@ -116,7 +123,23 @@
                                                         @elseif ($item['status']=='4')
                                                             <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                             <td class="text-center">
+                                                                <!-- Button -->
+                                                                <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $item['id'] }}">{{ ucwords(strtolower($status)) }}</button>
+
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="saringanModal{{ $item['id'] }}" tabindex="-1" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content p-3" style="border-radius: 12px;">
+                                                                            <div class="modal-body text-center">
+                                                                                <p class="mb-3">
+                                                                                    {{ $saringan ? ucwords(strtolower($saringan)) : '-' }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                         @elseif ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='7')
