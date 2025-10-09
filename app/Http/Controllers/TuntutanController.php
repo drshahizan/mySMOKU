@@ -12,6 +12,7 @@ use App\Models\Akademik;
 use App\Models\EmelKemaskini;
 use App\Models\InfoIpt;
 use App\Models\Peperiksaan;
+use App\Models\SaringanTuntutan;
 use App\Models\User;
 use Carbon\Carbon;
 use DateInterval;
@@ -306,11 +307,16 @@ class TuntutanController extends Controller
             // Case: same sesi + semester found
             if (in_array($tuntutan->status, [1, 2, 5])) {
                 // update existing
-                $tuntutan->update([
-                    'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                $updateData = [
+                   'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
                     'yuran' => '1',
-                    'status' => '1',
-                ]);
+                ];
+
+                if ($tuntutan->status != '5') {
+                    $updateData['status'] = '1';
+                }
+
+                $tuntutan->update($updateData);
             } else {
                 // status not in 1,2,5 → cannot update
                 return back()->with('sem', 'Tuntutan telah dituntut untuk semester ini.');
@@ -470,23 +476,27 @@ class TuntutanController extends Controller
                     $tuntutan->update([
                         'wang_saku' => $request->wang_saku,
                         'amaun_wang_saku' => $request->amaun_wang_saku,
-                        'jumlah' => $request->jumlah,
-                        'tarikh_hantar' => now()->format('Y-m-d'),
-                        'status' => '2',
                     ]);
                 }
+
             }
 
             // === KEMASKINI UMUM (dijalankan selepas semua kes) ===
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
 
             if ($tuntutan) {
-                $tuntutan->update([
+                $updateData = [
                     'jumlah' => $request->jumlah,
-                    'tarikh_hantar' => now()->format('Y-m-d'),
                     'status' => '2',
-                ]);
+                ];
+
+                if ($tuntutan->status != '5') {
+                    $updateData['tarikh_hantar'] = now()->format('Y-m-d');
+                }
+
+                $tuntutan->update($updateData);
             }
+
         }
 
         $sejarah = SejarahTuntutan::create([

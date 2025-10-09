@@ -95,6 +95,12 @@
                                                         $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null;
                                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
                                                     
+                                                        $saringan = DB::table('tuntutan_saringan')
+                                                            ->where('tuntutan_id', $item['id'])
+                                                            ->where('status', $item['status'])
+                                                            ->orderBy('id', 'desc')
+                                                            ->value('catatan');
+
                                                     @endphp
                                                     
                                                     <tr>
@@ -118,7 +124,23 @@
                                                         @elseif ($item['status']=='4')
                                                             <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center">
+                                                                <!-- Button -->
+                                                                <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $item['id'] }}">{{ ucwords(strtolower($status)) }}</button>
+
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="saringanModal{{ $item['id'] }}" tabindex="-1" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content p-3" style="border-radius: 12px;">
+                                                                            <div class="modal-body text-center">
+                                                                                <p class="mb-3">
+                                                                                    {{ $saringan ? ucwords(strtolower($saringan)) : '-' }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                         @elseif ($item['status']=='6')
                                                             <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                                         @elseif ($item['status']=='7')
@@ -143,14 +165,14 @@
                                                                     </span>
                                                                 </a>
                                                             </td>
-                                                            @elseif ($item['status']=='2')
+                                                            {{-- @elseif ($item['status']=='2')
                                                             <td class="text-center">
                                                                 <a href="{{ route('tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan tuntutan ini?')">
                                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Tuntutan">
                                                                         <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
                                                                     </span>
                                                                 </a>
-                                                            </td>
+                                                            </td> --}}
                                                             @elseif ($item['status']=='5')
                                                             <td class="text-center">
                                                                 <a href="{{ route('tuntutan.baharu') }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">

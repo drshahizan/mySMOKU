@@ -343,10 +343,13 @@
 							<br>
 							<!--end::Actions-->
 							<div class="d-flex justify-content-end">
-								{{-- <button type="submit" class="btn btn-primary" @if ($tuntutan && $tuntutan->status >= 2) disabled @endif> --}}
-								<button type="submit" id="submitButton" class="btn btn-primary">
-									Hantar
+								<button 
+									type="submit" 
+									id="submitButton" 
+									class="btn {{ ($tuntutan && $tuntutan->status == 5) ? 'btn-danger' : 'btn-primary' }}">
+									{{ ($tuntutan && $tuntutan->status == 5) ? 'Hantar Semula' : 'Hantar' }}
 								</button>
+
 							</div>
 						</form>	
 					</div>
