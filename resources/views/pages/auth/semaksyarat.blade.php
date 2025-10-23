@@ -59,19 +59,6 @@
                     </label>
                 </div>
             </div>
-
-            <!-- Biasiswa Dropdown -->
-            <div class="fv-row mb-10" id="div_biasiswa" style="display:none;">													
-                <label style="font-size: 20px" class="form-label">Biasiswa / Tajaan Lain</label>
-                <select style="font-size: 20px" id="nama_penaja" name="nama_penaja" 
-                        class="form-select form-select-lg form-select-solid js-example-basic-single"  
-                        data-control="select2" data-hide-search="true">
-                    <option value="">Pilih</option>
-                    @foreach ($penaja as $penaja)	
-                        <option value="{{ $penaja->id}}">{{ strtoupper($penaja->penaja)}}</option> 
-                    @endforeach
-                </select>
-            </div>
         </div>
   
         <div class="text-center mb-11">
@@ -114,26 +101,6 @@
         <!-- Script -->
         {{-- <script src="assets/js/custom/authentication/semak/general.js"></script> --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const radios = document.querySelectorAll("input[name='terimBiasiswa']");
-            const divBiasiswa = document.getElementById("div_biasiswa");
-
-            // hide by default
-            divBiasiswa.style.display = "none";
-
-            radios.forEach(radio => {
-                radio.addEventListener("change", function () {
-                    if (this.value === "ya") {
-                        divBiasiswa.style.display = "block";
-                    } else {
-                        divBiasiswa.style.display = "none";
-                    }
-                });
-            });
-        });
-        </script>
 
         <script type='text/javascript'>
         $(document).ready(function(){

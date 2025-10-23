@@ -21,9 +21,6 @@ class SemakUserController extends Controller
         $iklan = TarikhIklan::orderBy('created_at', 'desc')->first();
         $catatan = $iklan->catatan ?? "";
 
-        $penaja = Penaja::orderby("penaja")
-             ->whereIn('sumber_id',['1','2'])
-             ->get();
         $ipt = InfoIpt::orderby("nama_institusi","asc")
              ->where('jenis_institusi','=','IPTS')
              ->get();
@@ -31,7 +28,6 @@ class SemakUserController extends Controller
             ->get();
 
         return view('pages.auth.semaksyarat', compact('catatan'))
-        ->with("penaja",$penaja)
         ->with("ipt",$ipt)
         ->with("kod_peringkat",$kodperingkat);
    }
@@ -65,7 +61,6 @@ class SemakUserController extends Controller
     {
         $request->validate([
             'cuti' => ['required'],
-            // 'terimaBiasiswa' => ['required'],
             'id_institusi' => ['required'],
             'peringkat_pengajian' => ['required'],
             'nama_kursus' => ['required'],
