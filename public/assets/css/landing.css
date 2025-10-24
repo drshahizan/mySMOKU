@@ -21,7 +21,7 @@
 			.header-background {
 				position: relative;
 				width: 100%;
-				height: 100vh; 
+				height: 150vh; 
 				display: flex;
 				/* justify-content: space-between; */
 				align-items: center;
@@ -164,7 +164,7 @@
 				display: flex;
 				justify-content: space-between; /* Align the left and right content to the edges */
 				align-items: center; /* Vertically centers the content */
-				padding: 60px; /* Optional: Add padding for spacing */
+				padding: 10px; /* Optional: Add padding for spacing */
 			}
 		
 			/* CSS for table */
@@ -268,8 +268,8 @@
 					object-fit: cover; /* Ensure the video scales nicely */
 				}
 
-				.header-background {
-					text-align: center; /* Ensure text stays centered */
+				.butang {
+					text-align: center; 
 				}
 				
 				.overlay {
@@ -282,7 +282,7 @@
 				}
 
 				.bg-card-st, .bg-card {
-					text-align: center; /* Ensure text stays centered */
+					/* text-align: center;  */
 					font-size: 0.9rem !important; /* Further reduce font size */
 					margin: 5 auto;
 				}
@@ -305,6 +305,14 @@
 				.bg-card-container span {
 					width: auto; /* Adjust width */
 					font-size: 1rem !important; /* Adjust font size */
+				}
+
+				.penyelaras-row {
+					flex-direction: column;
+				}
+
+				.penyelaras-right {
+					margin-top: 10px;
 				}
 			}
 
@@ -313,8 +321,8 @@
 					object-fit: cover; /* Ensure the video scales nicely */
 				}
 
-				.header-background {
-					text-align: center; /* Ensure text stays centered */
+				.butang {
+					text-align: center; 
 				}
 				
 				.overlay {
@@ -327,7 +335,7 @@
 				}
 
 				.bg-card-st, .bg-card {
-					text-align: center; /* Ensure text stays centered */
+					/* text-align: center;  */
 					font-size: 0.9rem !important; /* Further reduce font size */
 					margin: 5 auto;
 				}
@@ -350,6 +358,14 @@
 				.bg-card-container span {
 					width: auto; /* Adjust width */
 					font-size: 1rem !important; /* Adjust font size */
+				}
+
+				.penyelaras-row {
+					flex-direction: column;
+				}
+
+				.penyelaras-right {
+					margin-top: 10px;
 				}
 			}
 
@@ -358,8 +374,8 @@
 					object-fit: cover; /* Ensure the video scales nicely */
 				}
 
-				.header-background {
-					text-align: center; /* Ensure text stays centered */
+				.butang {
+					text-align: center; 
 				}
 				
 				.overlay {
@@ -372,7 +388,7 @@
 				}
 
 				.bg-card-st, .bg-card {
-					text-align: center; /* Ensure text stays centered */
+					/* text-align: center;  */
 					font-size: 0.9rem !important; /* Further reduce font size */
 					margin: 5 auto;
 				}
@@ -396,4 +412,48 @@
 					width: auto; /* Adjust width */
 					font-size: 1rem !important; /* Adjust font size */
 				}
+
+				.penyelaras-row {
+					flex-direction: column;
+				}
+
+				.penyelaras-right {
+					margin-top: 10px;
+				}
 			}
+
+			
+
+
+
+.tatacara-box {
+  font-size: 1rem;
+ 
+}
+
+.tatacara-content {
+   line-height: 1.0;
+}
+
+.penyelaras-row {
+  display: flex;
+}
+
+.penyelaras-left {
+  flex: 1;
+}
+
+.penyelaras-right {
+  flex: 1;
+
+}
+
+.note {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #333;
+  margin-top: 10px;
+}
+
+
+

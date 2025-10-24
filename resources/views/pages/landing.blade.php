@@ -2,19 +2,16 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href=""/>
-		<title>Selamat Datang - Sistem BKOKU</title>
+		<title>Selamat Datang - Sistem Penajaan Orang Kurang Upaya (SisPO)</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Bantuan ini merupakan keistimewaan yang diberikan kepada pelajar OKU. Oleh itu, ianya harus dibezakan dengan kemudahan-kemudahan lain yang turut diterima oleh pelajar bukan OKU. Ini bermakna sekiranya seseorang pelajar OKU itu menerima biasiswa atau kemudahan lain yang juga turut dinikmati oleh pelajar bukan OKU, maka pelajar OKU tersebut adalah layak menerima elaun ini." />
 		<meta name="keywords" content="bkoku, ppk, bantuan, oku" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Sistem BKOKU" />
-		<meta property="og:site_name" content="Sistem BKOKU" />
+		<meta property="og:title" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
+		<meta property="og:site_name" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-		<!--begin::Fonts(mandatory for all pages)-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-		<link href="https://fonts.googleapis.com/css2?family=Blacksword&display=swap" rel="stylesheet">
 
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
@@ -26,7 +23,7 @@
 	    <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
 </head>
 	<!--end::Head-->
-	
+
 	<!--begin::Body-->
 	<body  id="laman_utama" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank" >
 		<div class="d-flex flex-column flex-root" id="kt_app_root">
@@ -97,13 +94,54 @@
 							<div class="col-md-5" >
 								{{-- TUTUP BUTTON PERMOHONAN --}}
 								<div class="bg-card-st">
-									<div class="col-md-12">
+									<div class="butang">
 										<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">KLIK DI SINI UNTUK PERMOHONAN</div>
 										<a href="{{ env('APP_URL') }}/login" class="btn btn-permohonan">
 											PERMOHONAN&nbsp;<img src="assets/media/arrow.png" alt="klik">
 										</a>
 									</div>
 								</div>
+								<div class="bg-card-st">
+									<div class="left" style="color: rgb(2, 2, 55); text-align: center; font-weight: bold;">TATACARA PERMOHONAN</div>
+									<div class="tatacara-box">
+										<div>
+											<p><strong>i.</strong> Permohonan boleh diakses oleh:</p>
+
+											<div class="tatacara-content">
+												<div class="tatacara-left">
+												<ul class="tatacara-list">
+													<li>
+													<strong>Pelajar</strong>
+													<p>Institusi Pengajian Tinggi Swasta (IPTS)</p>
+													</li>
+
+													<li>
+													<div class="penyelaras-row">
+														<div class="penyelaras-left">
+														<strong>Penyelaras Institusi</strong>
+														<div class="institution-box">
+															<p>Universiti Awam (UA),<br>
+															Politeknik,<br>
+															Kolej Komuniti, dan<br>
+															Program Pendidikan Khas (PPK)
+															</p>
+														</div>
+														</div>
+														<div class="penyelaras-right">
+														<p class="note">**Pelajar yang ingin memohon boleh menghubungi penyelaras di institusi pengajian tinggi masing-masing</p>
+														</div>
+													</div>
+													</li>
+												</ul>
+												</div>
+											</div>
+										</div>
+										<div>
+											<p><strong>ii.</strong> Pelajar perlu mengemukakan akaun bank atas nama pelajar dan menggunakan <strong>Bank Islam SAHAJA</strong> bagi tujuan permohonan BKOKU. (kecuali pelajar Universiti Awam)</p>
+										</div>
+									</div>
+								</div>
+
 								<div class="bg-card-container">
 									<div class="bg-card-wrapper">
 										<div class="bg-card">
@@ -1209,6 +1247,7 @@
 
 		</script>
 		<script>
+			
 			// Hide all sections initially
 			$(`#utama, #manual, #hubungi, #bkoku, #ppk`).hide();
 
