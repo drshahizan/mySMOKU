@@ -262,6 +262,32 @@
 				transform: translateY(-10px);
 			}
 
+			.tatacara-box {
+				font-size: 1.2rem;
+			}
+
+			.tatacara-content {
+				line-height: 1.0;
+			}
+
+			.penyelaras-row {
+				display: flex;
+			}
+
+			.penyelaras-left {
+				flex: 1;
+			}
+
+			.penyelaras-right {
+				flex: 1;
+			}
+
+			.note {
+				font-size: 0.9rem;
+				font-style: italic;
+				color: #333;
+				margin-top: 10px;
+			}
 
 			@media (max-width: 1200px) {
 				.background-video {
@@ -426,34 +452,7 @@
 
 
 
-.tatacara-box {
-  font-size: 1rem;
- 
-}
 
-.tatacara-content {
-   line-height: 1.0;
-}
-
-.penyelaras-row {
-  display: flex;
-}
-
-.penyelaras-left {
-  flex: 1;
-}
-
-.penyelaras-right {
-  flex: 1;
-
-}
-
-.note {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #333;
-  margin-top: 10px;
-}
 
 
 
