@@ -157,11 +157,12 @@ class DokumenSPPB1 implements FromCollection, WithHeadings, WithColumnWidths, Wi
             $nota_resit = '-';
         }
 
-        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+        if (($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) && ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL)) 
+        {
             $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI ' . $tuntutan->sesi;
-        } elseif ($item['yuran'] == 1) {
+        } elseif ($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) {
             $result = 'YURAN PENGAJIAN SESI ' . $tuntutan->sesi;
-        } elseif ($item['wang_saku'] == 1) {
+        } elseif ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL) {
             $result = 'ELAUN WANG SAKU SESI ' . $tuntutan->sesi;
         } else {
             $result = 'LAIN-LAIN';
