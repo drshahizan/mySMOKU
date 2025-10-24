@@ -21,14 +21,15 @@
 			.header-background {
 				position: relative;
 				width: 100%;
-				height: 100vh; 
+				min-height: 100vh;
 				display: flex;
-				/* justify-content: space-between; */
 				align-items: center;
-				overflow: hidden; /* To ensure any overflow is hidden */
+				justify-content: center;
+				overflow: hidden;
+				background: #000;
 			}
 
-			/* Background video styling */
+			/* Background video behind everything */
 			.background-video {
 				position: absolute;
 				top: 50%;
@@ -37,68 +38,27 @@
 				height: 100%;
 				object-fit: cover;
 				transform: translate(-50%, -50%);
-				z-index: 0; /* Background video behind everything */
+				z-index: 0; 
 			}
 
 			.overlay {
-				position: absolute; /* Ensure it's positioned relative to its closest positioned ancestor */
-				margin-top: 30px;
-				left: 0;
+				position: relative; 
+				z-index: 1;
 				width: 100%;
-				z-index: 1; /* Ensure content is above the video */
-				/* background: rgba(255, 255, 255, 0.8);  */
-				padding: 30px; 
-
+				padding: 30px;
+				color: white;
 			}
 
-			
-
-			.bg-card-container {
-				position: relative;
-				width: 100%;         /* make it fill the column */
-				max-width: 100%;     /* no fixed limit */
-				overflow: hidden;
-				height: 100%;        /* Adjust height as needed */
-			}
-
-			.bg-card-wrapper {
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-				/* animation: verticalScroll 15s linear infinite; */
-			}
-
-			.bg-card {
-				width: 100%;         /* responsive full width */
-				max-width: 100%;     
-				margin: 0 auto;
-				background-color: rgba(255, 255, 255, 0.705);
-				padding: 10px;
-				margin-bottom: 10px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-				font-family: 'Inter', sans-serif;
-				font-size: 1.5rem;
-				font-weight: 400;
-				color: black;        /* changed from white so text is visible */
-				overflow: hidden;
-				box-sizing: border-box; /* include padding in width */
-			}
-
+			.bg-card,
 			.bg-card-st {
-				width: 100%;         /* responsive full width */
-				max-width: 100%;     
-				background-color: rgba(255, 255, 255, 0.705);
-				padding: 10px;
-				margin-top: 10px;
-				margin-bottom: 10px;
+				background-color: rgba(255, 255, 255, 0.85);
+				color: black;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-				font-family: 'Inter', sans-serif;
-				font-size: 1.5rem;
-				font-weight: 400;
-				color: black;        /* changed from white for readability */
-				overflow: hidden;
-				box-sizing: border-box;
+				padding: 10px;
+				margin: 10px 0;
+				border-radius: 8px;
 			}
+
 
 
 			/* Keyframes for vertical scrolling */
