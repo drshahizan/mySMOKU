@@ -43,72 +43,72 @@
 				<div class="card mb-5 mb-xl-8">
 					<!--begin::Card body-->
 					<div class="card-body pt-15">
-						<!--begin::Summary-->
+						<!--begin::Profile Summary-->
 						<div class="d-flex flex-center flex-column mb-5">
-							<!--begin::Avatar-->
 							@foreach($user as $user1)
-								<div class="symbol symbol-150px symbol-circle mb-7">
-									@if(Auth::user()->profile_photo_path !== null)
-									<img class="image rounded-circle" src="/assets/profile_photo_path/{{$user1->profile_photo_path}}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-									@else
-									<img class="image rounded-circle" src="{{ asset('assets/media/auth/default.png') }}" alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
-									@endif
+								<!--begin::Avatar-->
+								<div class="symbol symbol-150px symbol-circle mb-4">
+									<img 
+										class="image rounded-circle" 
+										src="{{ Auth::user()->profile_photo_path 
+											? asset('assets/profile_photo_path/' . $user1->profile_photo_path) 
+											: asset('assets/media/auth/default.png') }}" 
+										alt="profile_image" 
+										style="width: 100px; height: 100px; object-fit: cover;"
+									>
 								</div>
 								<!--end::Avatar-->
-								<!--begin::Name-->
-								@if(!empty($pelajar))
-								<div class="fs-5 text-gray-800 text-dark fw-bold mb-1">{{$pelajar->nama_pelajar}}</div>
-								@else
-								<div class="fs-5 text-gray-800 text-dark fw-bold mb-1">{{$user1->nama}}</div>
-								@endif
-								<!--end::Name-->
-								<!--begin::Email-->
-								@if(!empty($pelajar))
-								<div class="fs-5 fw-semibold text-muted mb-6">{{$pelajar->emel}}</div>
-								@else
-								<div class="fs-5 fw-semibold text-muted mb-6">{{$user1->email}}</div>
-								@endif
-								<!--end::Email-->
+
+								<!--begin::User Info-->
+								<div class="text-center">
+									<div class="fs-5 text-dark fw-bold mb-1">{{ $user1->nama }}</div>
+									<div class="fs-6 fw-semibold text-muted">{{ $user1->email }}</div>
+								</div>
+								<!--end::User Info-->
 							@endforeach
 						</div>
-						<!--end::Summary-->
-						<!--begin::Details toggle-->
+						<!--end::Profile Summary-->
+
+						<!--begin::Section Title-->
 						<div class="d-flex flex-stack fs-4 py-3">
 							<div class="fw-bold">Maklumat Pelajar</div>
 						</div>
-						<!--end::Details toggle-->
 						<div class="separator separator-dashed my-3"></div>
-						<!--begin::Details content-->
+						<!--end::Section Title-->
+
+						<!--begin::Details Content-->
 						<div class="pb-5 fs-6">
-							<!--begin::Details item-->
-							<div class="fw-bold mt-5">Alamat Emel</div>
-							<div class="text-gray-600">
-								@if(!empty($pelajar))
-								<a href="#" class="text-gray-600 text-hover-primary">{{$pelajar->emel}}</a>
-								@else
+							<!-- Email -->
+							<div class="mb-4">
+								<div class="fw-bold">Alamat Emel</div>
 								@foreach($user as $user1)
-								<a href="#" class="text-gray-600 text-hover-primary">{{$user1->email}}</a>
+									<div>
+										<a href="mailto:{{ $user1->email }}" class="text-gray-600 text-hover-primary">
+											{{ $user1->email }}
+										</a>
+									</div>
 								@endforeach
-								@endif
 							</div>
-							<!--begin::Details item-->
-							<div class="fw-bold mt-5">Nama Kursus</div>
-							@if(!empty($akademik))
-								<div class="text-gray-600">{{$akademik->nama_kursus}}</div>
-							@else
-								<div class="fs-5 fw-semibold text-muted mb-6">Tiada</div>
-							@endif
-							<!--begin::Details item-->
-							<div class="fw-bold mt-5">Nama Institusi</div>
-							@if(!empty($akademik))
-								<div class="text-gray-600">{{$akademik->nama_institusi}}</div>
-							@else
-								<div class="fs-5 fw-semibold text-muted mb-6">Tiada</div>
-							@endif
-							
+
+							<!-- Course -->
+							<div class="mb-4">
+								<div class="fw-bold">Nama Kursus</div>
+								<div class="text-gray-600">
+									{{ !empty($akademik) ? $akademik->nama_kursus : 'Tiada' }}
+								</div>
+							</div>
+
+							<!-- Institution -->
+							<div>
+								<div class="fw-bold">Nama Institusi</div>
+								<div class="text-gray-600">
+									{{ !empty($akademik) ? $akademik->nama_institusi : 'Tiada' }}
+								</div>
+							</div>
 						</div>
-						<!--end::Details content-->
+						<!--end::Details Content-->
 					</div>
+
 					<!--end::Card body-->
 				</div>
 				<!--end::Card-->
