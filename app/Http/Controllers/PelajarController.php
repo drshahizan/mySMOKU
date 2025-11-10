@@ -64,10 +64,14 @@ class PelajarController extends Controller
         }
 
 
-        $tuntutan_id = Tuntutan::orderBy("id","desc")
-            ->where('smoku_id', $smoku_id->id)
-            ->where('permohonan_id', $permohonan_id->id)
-            ->first();
+        if ($permohonan_id) {
+            $tuntutan_id = Tuntutan::where('smoku_id', $smoku_id->id)
+                ->where('permohonan_id', $permohonan_id->id)
+                ->orderBy("id", "desc")
+                ->first();
+        } else {
+            $tuntutan_id = null;
+        }
 
         if ($tuntutan_id !== null) {
             $tuntutan = Tuntutan::orderBy("sejarah_tuntutan.created_at", "desc")
