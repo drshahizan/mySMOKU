@@ -80,7 +80,7 @@
 					</div>
 				@endif
 
-				@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 ))
+				@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || $permohonan->status == 5 || $permohonan->status == 1))
 					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
