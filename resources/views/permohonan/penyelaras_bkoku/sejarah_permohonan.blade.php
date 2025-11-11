@@ -201,14 +201,14 @@
                                                                 </span>
                                                             </a>
                                                         </td>
-                                                    @elseif ($item['status']=='2')
+                                                    {{-- @elseif ($item['status']=='2')
                                                         <td class="text-center">
                                                             <a href="{{ route('bkoku.permohonan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
                                                                     <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
                                                                 </span>
                                                             </a>
-                                                        </td>
+                                                        </td> --}}
                                                     @elseif ($item['status']=='5')
                                                         <td class="text-center">
                                                             <a href="{{ route('penyelaras.permohonan.baharu', $item['smoku_id']) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini permohonan ini?')">
