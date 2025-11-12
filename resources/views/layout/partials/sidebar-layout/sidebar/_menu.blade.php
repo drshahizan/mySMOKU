@@ -60,7 +60,7 @@
 						</a>
 					</div>
 				@endif	
-				@if($permohonan != null && $permohonan->status == 8 && $institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
+				@if($permohonan != null && in_array($permohonan->status,[6,8]) && $institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 					<div class="menu-item pt-5">
 						<div class="menu-content">
 							<span class="menu-heading fw-bold text-uppercase fs-4">Kemaskini</span>
@@ -72,12 +72,14 @@
 							<span class="menu-title">Keputusan Peperiksaan</span>
 						</a>
 					</div>
-					<div class="menu-item">
-						<a class="menu-link" href="{{ route('tamat.pengajian') }}">
-							<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
-							<span class="menu-title">Lapor Tamat Pengajian</span>
-						</a>
-					</div>
+					@if($akademik->tarikh_tamat < NOW())
+						<div class="menu-item">
+							<a class="menu-link" href="{{ route('tamat.pengajian') }}">
+								<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
+								<span class="menu-title">Lapor Tamat Pengajian</span>
+							</a>
+						</div>
+					@endif
 				@endif
 
 				@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || in_array($permohonan->status, [1, 2, 5, 7, 9])))
