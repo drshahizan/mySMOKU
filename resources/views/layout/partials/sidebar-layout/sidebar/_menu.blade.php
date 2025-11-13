@@ -17,6 +17,13 @@
 				->first();
 		}
 
+		$tuntutan_latest = DB::table('tuntutan')
+			->where('smoku_id', $smoku_id->id)
+			->where('permohonan_id', $permohonan->id)
+			->whereNull('data_migrate')
+			->orderBy('tuntutan.id', 'desc')
+			->first();
+
 		// Retrieve data from bk_tarikh_iklan table
 		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
 
@@ -29,6 +36,16 @@
 
 		// Check if current date and time fall within the allowed range
 		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+
+		// Check if student already submitted a claim during the current session window
+		$hasClaimInRange = false;
+		if ($tuntutan_latest && $tuntutan_latest->tarikh_hantar) {
+			$tarikhHantar = \Carbon\Carbon::parse($tuntutan_latest->tarikh_hantar);
+			// Only consider claims in the current range and not with status 1, 2, 5 or 7
+			if ($tarikhHantar->between($tarikhMula, $tarikhTamat) && !in_array($tuntutan_latest->status, [1, 2, 5, 7])) {
+				$hasClaimInRange = true;
+			}
+		}
 	@endphp
 			
 	<!--begin::sidebar menu-->
@@ -130,13 +147,23 @@
 				
 						@if($institusi->jenis_institusi === 'IPTS')
 							@if($isWithinRange && ($bk_tarikh_iklan->tuntutan == 1))
-								@if($akademik->tarikh_tamat >= today())
+								@if($hasClaimInRange)
+									{{-- Already has claim in this session --}}
 									<div class="menu-item">
-										<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
+										<a class="menu-link" href="#" onclick="showAlertTuntutanOnce()">
 											<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
 											<span class="menu-title">Baharu</span>
 										</a>
 									</div>
+								@else
+									@if($akademik->tarikh_tamat >= today())
+										<div class="menu-item">
+											<a class="menu-link" href="{{ route('tuntutan.baharu') }}">
+												<span class="menu-icon">{!! getIcon('book', 'fs-2') !!}</span>
+												<span class="menu-title">Baharu</span>
+											</a>
+										</div>
+									@endif	
 								@endif	
 							@else
 								<div class="menu-item">
@@ -910,8 +937,8 @@
 	{
 		Swal.fire({
 		icon: 'error',
-		title: 'Permohonan telah ditutup.',
-		text: ' {!! session('failed') !!}',
+		title: 'Tidak Berjaya!',
+		text: 'Permohonan telah ditutup.',
 		confirmButtonText: 'OK'
 		});
 	}
@@ -920,9 +947,19 @@
 	{
 		Swal.fire({
 		icon: 'error',
-		title: 'Tuntutan ditutup pada masa sekarang.',
-		text: ' {!! session('failed') !!}',
+		title: 'Tidak Berjaya!',
+		text: 'Tuntutan ditutup pada masa sekarang.',
 		confirmButtonText: 'OK'
 		});
 	}
+
+	function showAlertTuntutanOnce() 
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'Tidak Berjaya!',
+        text: 'Hanya satu kali tuntutan bagi sesi pengajian yang sama.',
+        confirmButtonText: 'OK'
+        });
+    }
 </script>
