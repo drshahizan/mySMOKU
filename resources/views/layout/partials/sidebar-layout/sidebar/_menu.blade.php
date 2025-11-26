@@ -1,56 +1,75 @@
 {{-- PELAJAR UA/IPTS/PPK --}}
 @if(Auth::user()->tahap=='1')
 	@php
-		$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
-		$permohonan = DB::table('permohonan')->orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
+		$smoku = DB::table('smoku')
+			->where('no_kp', Auth::user()->no_kp)
+			->first();
+
+		$permohonan = DB::table('permohonan')
+			->where('smoku_id', $smoku->id)
+			->orderBy('id', 'desc')
+			->first();
+
 		$akademik = DB::table('smoku_akademik')
-			->where('smoku_id', $smoku_id->id)
+			->where('smoku_id', $smoku->id)
 			->where('status', 1)
 			->first();
-		// dd($akademik->tarikh_tamat);	
 
 		$institusi = null;
-
-		if ($akademik && $akademik->id_institusi !== null) {
+		if ($akademik && $akademik->id_institusi) {
 			$institusi = DB::table('bk_info_institusi')
 				->where('id_institusi', $akademik->id_institusi)
 				->first();
 		}
 
-		if ($permohonan !== null) {
-
+		// Latest tuntutan (only if permohonan exists)
+		$tuntutan_latest = null;
+		if ($permohonan) {
 			$tuntutan_latest = DB::table('tuntutan')
-				->where('smoku_id', $smoku_id->id)
+				->where('smoku_id', $smoku->id)
 				->where('permohonan_id', $permohonan->id)
 				->whereNull('data_migrate')
-				->orderBy('tuntutan.id', 'desc')
+				->orderBy('id', 'desc')
 				->first();
+		}
 
-			// Check if student already submitted a claim during the current session window
-			$hasClaimInRange = false;
+		// Get bk_tarikh_iklan
+		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')
+			->orderBy('created_at', 'desc')
+			->first();
+
+		$isWithinRange = false;
+		$hasClaimInRange = false;
+
+		if ($bk_tarikh_iklan) {
+
+			$tarikhMula = \Carbon\Carbon::parse(
+				$bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula
+			);
+
+			$tarikhTamat = \Carbon\Carbon::parse(
+				$bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat
+			);
+
+			$today = now();
+
+			// current time is within iklan
+			$isWithinRange = $today->between($tarikhMula, $tarikhTamat);
+
+			// ada tuntutan latest
 			if ($tuntutan_latest && $tuntutan_latest->tarikh_hantar) {
 				$tarikhHantar = \Carbon\Carbon::parse($tuntutan_latest->tarikh_hantar);
-				// Only consider claims in the current range and not with status 1, 2, 5 or 7
-				if ($tarikhHantar->between($tarikhMula, $tarikhTamat) && !in_array($tuntutan_latest->status, [1, 2, 5, 7])) {
+
+				if ($tarikhHantar->between($tarikhMula, $tarikhTamat) &&
+					!in_array($tuntutan_latest->status, [1, 2, 5, 7])) {
+					
 					$hasClaimInRange = true;
 				}
 			}
-
 		}
-
-		// Retrieve data from bk_tarikh_iklan table
-		$bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
-
-		// Get current date and time
-		$currentDateTime = now();
-
-		// Check if current date and time fall within the allowed range
-		$tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
-		$tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
-
-		// Check if current date and time fall within the allowed range
-		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
 	@endphp
+
+
 			
 	<!--begin::sidebar menu-->
 	<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
@@ -103,7 +122,7 @@
 					@endif
 				@endif
 
-				@if($akademik->tarikh_tamat == NULL || $akademik->tarikh_tamat >= today() && (!$permohonan || in_array($permohonan->status, [1, 2, 5, 7, 9])))
+				@if((!$akademik || $akademik->tarikh_tamat == null || $akademik->tarikh_tamat >= today()) && (!$permohonan || in_array($permohonan->status, [1, 2, 5, 7, 9])))
 					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
@@ -111,8 +130,6 @@
 							</div>
 						</div>
 
-						
-						
 							@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
 								@if($institusi->jenis_institusi === 'IPTS')
 									<div class="menu-item">
@@ -131,7 +148,6 @@
 								</div>
 							@endif
 						
-
 						<div class="menu-item">
 							<a class="menu-link" href="{{ route('pelajar.sejarah.permohonan') }}">
 								<span class="menu-icon">{!! getIcon('search-list', 'fs-2') !!}</span>
