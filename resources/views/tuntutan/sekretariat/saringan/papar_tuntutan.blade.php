@@ -111,7 +111,7 @@
                             <br>
                             @php
                                 if($tuntutan->status==5){
-                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 4)->value('created_at');
+                                    $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 5)->value('created_at');
                                 }
                                 elseif($tuntutan->status==6){
                                     $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 6)->value('created_at');
