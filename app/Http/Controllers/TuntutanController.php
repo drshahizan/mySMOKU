@@ -34,18 +34,8 @@ class TuntutanController extends Controller
             ->where('smoku_id',$permohonan->smoku_id)
             ->where('smoku_akademik.status', 1)
             ->first();
-        $maxLimitRow = DB::table('bk_jumlah_tuntutan')
-            ->where('program','BKOKU')
-            ->where('jenis', 'Yuran')
-            ->first();    
+          
 
-        $limitWangSakuRow = DB::table('bk_jumlah_tuntutan')
-            ->where('program','BKOKU')
-            ->where('jenis', 'Wang Saku')
-            ->first();    
-
-        $maxLimit = $maxLimitRow->jumlah ?? 0;  
-        $limitWangSaku = $limitWangSakuRow->jumlah ?? 0;  	
 
         if ($permohonan && $permohonan->status == 6 || $permohonan->status == 7 || $permohonan->status == 8) {
 
@@ -135,8 +125,6 @@ class TuntutanController extends Controller
             foreach ($nextSemesterDates as $key => $data) {
                 $dateOfSemester = Carbon::parse($data['date']);
 
-                // echo 'Date: ' . $data['date'] . ', Semester: ' . $data['semester'] . ', Tahun: ' . $data['sesi'] . ', Sesi: ' . $data['sesi_bulan'] . '<br>';
-
                 $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) 
                     ? Carbon::parse($nextSemesterDates[$key + 1]['date']) 
                     : null;
@@ -172,95 +160,38 @@ class TuntutanController extends Controller
             $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
                 ->where('permohonan_id', $permohonan->id)
                 ->whereNotIn('status', [6,8])
-                // ->where('sesi', $sesiSemasa)
-                // ->where('semester', $semSemasa)
                 ->whereNull('data_migrate')
                 ->orderBy('tuntutan.id', 'desc')
                 ->first(['tuntutan.*']);
 
+            //semak keputusan    
             if ($currentDate <= $semesterEndDate ) {
-                if($currentSesi != $previousSesi){
-                    // semak dah upload result ke belum
-                    $result = Peperiksaan::where('permohonan_id', $permohonan->id)
-                    ->where('sesi', $previousSesi)
-                    ->where('semester', $sesiLepas)
-                    ->first();
-                    if(!$result && !$tuntutan){
-                        return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
-                    }elseif($result && $result->pengesahan_rendah== 1){
-                        return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan dalam semakan.');
-
-                    }
+                // semak dah upload result ke belum
+                $result = Peperiksaan::where('permohonan_id', $permohonan->id)
+                ->where('sesi', $previousSesi)
+                ->where('semester', $sesiLepas)
+                ->first();
+                if(!$result && !$tuntutan && $sesiLepas != 'Tiada'){
+                    return redirect()->route('kemaskini.keputusan')->with('error', 'Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu.');
+                }elseif($result && $result->pengesahan_rendah== 1){
+                    return redirect()->route('kemaskini.keputusan')->with('error', 'Keputusan peperiksaan dalam semakan.');
 
                 }
+
             }
             else
             {
                 return back()->with('sem', 'Tamat pengajian.');
             }
-       
-            if (($currentSesi === $akademik->sesi) || $previousSesi === null) 
-            {
-                // dd('sini');
-                if (!$tuntutan || $tuntutan->status == 1) {
-                   if ($semSemasa == $semLepas){
-                        $wang_saku = 0.00;
-                    }
 
-                    //nak tahu baki sesi semasa permohonan lepas
-                    $baki_total = $permohonan->baki_dibayar ?? $maxLimit;
-                    //  dd($baki_total);
-                }
-                else{
-                    $ada = DB::table('tuntutan')
-                        ->where('permohonan_id', $tuntutan->permohonan_id)
-                        ->orderBy('id', 'desc')
-                        ->first();
-                    
-                    if($ada -> sesi ==  null){
-                        $baki_total = $maxLimit;	
-                    }else{
-                        $jumlah_tuntut = DB::table('tuntutan')
-                        ->where('permohonan_id', $tuntutan->permohonan_id)
-                        ->where('status','!=', 9)
-                        ->get();
-                        $sum = $jumlah_tuntut->sum('jumlah');	
-                        
-                        // $baki_total = $permohonan->baki_dibayar - $sum;	
-                        $baki_total = $maxLimit - $sum;	
-                    }	
-                }	
-            }
-            else {
-                // dd('situ');
-                if ($permohonan->yuran == null && $permohonan->wang_saku == '1') {
-                    if($semSemasa != $semLepas && $semSemasa != $akademik->sem_semasa){
-                        // dd($akademik->bil_bulan_per_sem);
-                        $baki_total = $limitWangSaku * $akademik->bil_bulan_per_sem; 
-                    }
-                    else {
-                        $baki_total = '0'; 
-                    }
-                }
-                else {
-                    $baki_total = $maxLimit;
-                }
-            }   
-
-            if ($tuntutan && ($tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5)) {
-                
-                $tuntutan_item = TuntutanItem::where('tuntutan_id', $tuntutan->id)->get();
-            } 
-            else if ($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4)) {
-                
-                return redirect()->route('pelajar.dashboard')->with('sem', 'Tuntutan anda masih dalam semakan.');
-            }
-            else {
-                
-                $tuntutan_item = collect(); // An empty collection
+            // Retrieve amount ews // penerima biasiswa sedia ada, amaun masih 2400
+            if ($akademik->sumber_biaya == 1){
+                $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'BKOKU')->where('jenis', 'Wang Saku')->where('semester', 'B')->first();
+            } else{
+                $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
             }
             
-            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan', 'tuntutan_item','akademik','smoku_id','sesiSemasa','semSemasa','baki_total','maxLimit'));
+            return view('tuntutan.pelajar.tuntutan_baharu', compact('permohonan', 'tuntutan','akademik','smoku_id','amaun'));
                 
         } else if ($permohonan && $permohonan->status !=6) {
 
@@ -271,6 +202,7 @@ class TuntutanController extends Controller
         }
     }
 
+    //TK GUNA DAH
     public function simpanTuntutan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
@@ -415,100 +347,67 @@ class TuntutanController extends Controller
         if ($permohonan) {
             $no_rujukan_tuntutan = null;
 
-            // === CASE 1: Wang Saku Sahaja (yuran == null & wang_saku == 1) ===
-            if (is_null($permohonan->yuran) && $permohonan->wang_saku == 1) {
-                // Guna permohonan pertama
-                $permohonan = Permohonan::where('smoku_id', $smoku_id->id)->orderBy('id')->first();
-                $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
+            // Ambil no rujukan permohonan pertama
+            $permohonan_awal = Permohonan::where('smoku_id', $smoku_id->id)->orderBy('id')->first();
+            $no_rujukan_permohonan = $permohonan_awal->no_rujukan_permohonan;
 
-                $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
+            // Semak tuntutan terakhir
+            $tuntutan_akhir = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
 
-                if (!$tuntutan || in_array($tuntutan->status, [8, 9])) {
-                    $biltuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
-                        ->groupBy('no_rujukan_tuntutan')
-                        ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
-                        ->get();
-                    $bil = $biltuntutan->count();
+            if (!$tuntutan_akhir || ($tuntutan_akhir && in_array($tuntutan_akhir->status, [6, 8, 9]))) {
+                $biltuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                    ->groupBy('no_rujukan_tuntutan')
+                    ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
+                    ->get();
 
-                    $running_num = $bil + 1;
-                    $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
-                } else {
-                    $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
-                }
-
-                // Cipta tuntutan jika belum wujud untuk kombinasi ini
-                $tuntutan = Tuntutan::where([
-                    ['smoku_id', '=', $smoku_id->id],
-                    ['permohonan_id', '=', $permohonan->id],
-                    ['sesi', '=', $request->sesi],
-                    ['semester', '=', $request->semester],
-                    ['no_rujukan_tuntutan', '=', $no_rujukan_tuntutan],
-                ])->first();
-
-                if (!$tuntutan) {
-                    $tuntutan = Tuntutan::updateOrCreate([
-                        'smoku_id' => $smoku_id->id,
-                        'permohonan_id' => $permohonan->id,
-                        'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                        'sesi' => $request->sesi,
-                        'semester' => $request->semester,
-                        'wang_saku' => $request->wang_saku,
-                        'amaun_wang_saku' => $request->amaun_wang_saku,
-                        'status' => '1',
-                    ]);
-                }
-
-                $sejarah = SejarahTuntutan::create([
-                    'tuntutan_id' => $tuntutan->id,
-                    'smoku_id' => $smoku_id->id,
-                    'status' => '1',
-                    'dilaksanakan_oleh' =>  Auth::user()->id,
-            
-                ]);
-                $sejarah->save();
+                $bil = $biltuntutan->count();
+                $running_num = $bil + 1;
+                $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
+            } else {
+                $no_rujukan_tuntutan = $tuntutan_akhir->no_rujukan_tuntutan;
             }
 
-            // === CASE 2: Wang Saku + Yuran ===
-            elseif ($permohonan->yuran == 1 && $permohonan->wang_saku == 1) {
-                $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
+            // --- Cari rekod sedia ada (kalau ada)
+            $tuntutan = [
+                'smoku_id' => $smoku_id->id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+            ];
 
-                if ($tuntutan) {
-                    $tuntutan->update([
-                        'wang_saku' => $request->wang_saku,
-                        'amaun_wang_saku' => $request->amaun_wang_saku,
-                    ]);
-                }
+            $existing = Tuntutan::where($tuntutan)->orderByDesc('id')->first();
 
+            // Semak sama ada sebelum ini status = 5 (dikembalikan)
+            $wasReturned = $existing && $existing->status === '5';
+
+            // --- Data untuk dikemas kini / cipta
+            $updateData = [
+                'semester' => $request->semester,
+                'wang_saku' => '1',
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'jumlah' => $request->amaun_wang_saku,
+                'status' => '2',
+            ];
+
+            // Tambah tarikh_hantar hanya jika status sebelum ini bukan 5
+            if (! $wasReturned) {
+                $updateData['tarikh_hantar'] = now()->format('Y-m-d');
             }
 
-            // === KEMASKINI UMUM (dijalankan selepas semua kes) ===
-            $tuntutan = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
-
-            if ($tuntutan) {
-                $updateData = [
-                    'jumlah' => $request->jumlah,
-                    'status' => '2',
-                ];
-
-                if ($tuntutan->status != '5') {
-                    $updateData['tarikh_hantar'] = now()->format('Y-m-d');
-                }
-
-                $tuntutan->update($updateData);
-            }
+            // --- Cipta atau kemas kini rekod
+            $tuntutan = Tuntutan::updateOrCreate($tuntutan, $updateData);
 
         }
 
-        $sejarah = SejarahTuntutan::create([
+        // Rekod sejarah tuntutan
+        SejarahTuntutan::create([
             'tuntutan_id' => $tuntutan->id,
             'smoku_id' => $smoku_id->id,
             'status' => '2',
-            'dilaksanakan_oleh' =>  Auth::user()->id,
-    
+            'dilaksanakan_oleh' => Auth::id(),
         ]);
-        $sejarah->save();
 
-        // COMMENT PROD
+        // === Emel Pemberitahuan ===
         $catatan = "Tuntutan";
         $emel = EmelKemaskini::where('emel_id',14)->first();
         Mail::to($smoku_id->email)->send(new TuntutanHantar($catatan,$emel));

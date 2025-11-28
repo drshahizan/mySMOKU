@@ -30,21 +30,11 @@ var KTCreateAccount = function () {
 				formSubmitButton.classList.add('d-none');
 				formContinueButton.classList.add('d-none');
 			} else if (stepperObj.getCurrentStepIndex() === 4) {
-				var mod = form.querySelector('[name="mod"]').value; // Assuming 'mod' is a form field
 				var sumber = form.querySelector('[name="sumber_biaya"]').value; // Assuming 'sumber_biaya' is a form field
 		
-				if (mod === '1' && sumber === '1') {
-					formContinueButton.classList.remove('d-none'); // show the continue button
-				}else if (mod === '1' && sumber === '4') {
-					formContinueButton.classList.remove('d-none'); // show the continue button
-				}else if (mod === '1' && sumber === '3') {
-					formContinueButton.classList.remove('d-none'); // show the continue button
-				}else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
-					formContinueButton.classList.remove('d-none'); // show the continue button
-				}else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
+				if (sumber === '1') {
 					formContinueButton.classList.add('d-none'); // hide the continue button
-				}else {
-					formContinueButton.classList.add('d-none'); // hide the continue button
+				
 				}
 			
 				

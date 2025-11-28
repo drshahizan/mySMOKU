@@ -153,7 +153,7 @@
                                     <td class="space">&nbsp;</td>
                                     <td><strong>Tarikh Permohonan</strong></td>
                                     <td>:</td>
-                                    <td>{{$permohonan->created_at->format('d/m/Y')}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($permohonan->tarikh_hantar)->format('d/m/Y') }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Nama</strong></td>

@@ -1384,7 +1384,7 @@
 							<br>
 							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
 							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" placeholder="" step="0.01" inputmode="decimal" value="" readonly/>
-							<div class="row mb-10" id="divyuran">
+							{{-- <div class="row mb-10" id="divyuran">
 								<br>
 								<br>
 								<div class="col-6">
@@ -1402,7 +1402,7 @@
 									</div>
 									<!--end::Input-->
 								</div>
-							</div>
+							</div> --}}
 							<br>
 							<div class="row mb-10" id="divelaun">
 								<br>
@@ -1428,12 +1428,10 @@
 								<br>
 								<br>
 								<div class="col-12">
-									{{-- <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-6">Tidak memenuhi syarat untuk memohon. Sila rujuk syarat-syarat kelayakan di pautan: #letak link web</label> --}}
-									{{-- <img src="/assets/contoh/pembiayaan.jpeg" alt="pembiayaan" width="500" height="350"> --}}
 									<div class="alert alert-danger" style="color:black; text-align: center;">
 										Tidak memenuhi syarat untuk memohon. 
 										Sila rujuk syarat-syarat kelayakan di pautan: 
-										<a href="http://bkokudev.mohe.gov.my/landing" target="_blank">Maklumat Pembiayaan</a>
+										<a href="https://bkoku.mohe.gov.my/#syarat_bkoku" target="_blank">Maklumat Pembiayaan</a>
 									</div>
 
 								</div>
@@ -1487,7 +1485,7 @@
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
 								<tr>
-									<td class="text-gray-800">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+									<td class="text-gray-800">Salinan Resit / Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
 								</tr>
@@ -1498,8 +1496,8 @@
 						<table class="table table-row-dashed fs-6 gy-5">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-									<th class="min-w-50px"></th>
-									<th class="min-w-500px"></th>
+									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 
@@ -1507,11 +1505,11 @@
 								<tr>
 									<td>
 										<!-- Add More Button -->
-										<button class="btn btn-success btn-sm btn-add-more" type="button">+</button>
+										<button class="btn btn-success btn-sm btn-add-more" type="button">Tambah Dokumen +</button>
 										<!-- End -->
 									</td>
 									<td class="input-group control-group img_div form-group col-md-10 mt-2">
-										Salinan Resit/Invois Tambahan (Jika ada)
+										Salinan Resit / Invois Tambahan (Jika ada)
 									</td>
 								</tr>
 								<tr>
@@ -2113,6 +2111,7 @@
 				}
 			});
 
+			//TARIKH MULA & TARIKH TAMAT
 			function dateCheck(){
 				let startDate = new Date($("#tarikh_mula").val());
 				let endDate = new Date($("#tarikh_tamat").val());
@@ -2139,20 +2138,16 @@
 
 
 			//TAMBAH UPLOAD FILE
-			// $("#tambahresit").hide();
-			// function onButtonClick() {
-			// 	$("#tambahresit").show();
-			// }
 			$(document).ready(function() {
  
-			$(".btn-add-more").click(function(){ 
-				var html = $(".clone").html();
-				$(".img_div").after(html);
-			});
+				$(".btn-add-more").click(function(){ 
+					var html = $(".clone").html();
+					$(".img_div").after(html);
+				});
 
-			$("body").on("click",".btn-remove",function(){ 
-				$(this).parents(".control-group").remove();
-			});
+				$("body").on("click",".btn-remove",function(){ 
+					$(this).parents(".control-group").remove();
+				});
 
 			});
 			
@@ -2238,21 +2233,15 @@
 
 	<script>
 	$(document).ready(function(){
-		var max_yuran; // Declare these variables in a higher scope
 		var max_wang_saku;
-		// Make an AJAX request to fetch data based on the selected semester
+		
 		$.ajax({
 			type: 'GET',
-			url: '/fetch-amaun/bkoku', // Replace with the actual route for fetching data
+			url: '/fetch-amaun/bkoku', 
 			success: function(response) {
-				// Format the value to display with .00
-				var max_yuran = response.amaun_yuran;
 				var max_wang_saku = response.amaun_wang_saku;
 
-				$('#max_yuran').val(max_yuran);
 				$('#max_wang_saku').val(max_wang_saku);
-
-				console.log("yuran: ", max_yuran);
 				console.log("max_wang_saku: ", max_wang_saku);
 				
 				updateDisplay();
@@ -2263,272 +2252,39 @@
 			}
 		});
 	
-		// console.clear();
-		function updateDisplay() {
-			var mod, sumber;
-			var mod = document.getElementById('mod').value;
-			var sumber = document.getElementById('sumber_biaya').value;
-			var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-
-			// Log raw values
-			console.log('Raw max_yuran value:', $('#max_yuran').val());
-			console.log('Raw max_wang_saku value:', $('#max_wang_saku').val());
-
-			// Convert and round values to two decimal places
-			var parsed_max_yuran = parseFloat($('#max_yuran').val().trim()) || 0;
-			var parsed_max_wang_saku = parseFloat($('#max_wang_saku').val().trim()) || 0;
-
-			console.log('yurannnn: ', parsed_max_yuran.toFixed(2));
-			console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
-			var wang_saku_perbulan = parsed_max_wang_saku;
-			var wang_saku = wang_saku_perbulan * bilbulan;
-			document.getElementById("tidaklayak").style.display = "none";
-				
-			//sepenuh masa && biasiswa	
-			if (mod === '1' && sumber === '1') {
-						
-				// console.log("wang: ", wang_saku);
-
-				document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "";
-				document.getElementById("wang_saku").disabled = false;
-				document.getElementById("yuran").value = '';
-				document.getElementById("amaun_yuran").value = '';
-				document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
-			} 
-			//sepenuh masa && pembiayaan sendiri@tiada penaja
-			else if (mod === '1' && sumber === '4') {
-				console.log("Condition mod==='1' && sumber==='4' is met.");
-				console.log("Debug - mod: ", mod);
-				console.log("Debug - sumber: ", sumber);
-
-				// var wang_saku_perbulan = max_wang_saku;
-				// var wang_saku = wang_saku_perbulan * bilbulan;
-
-				document.getElementById("yuran").value = '1';
-				document.getElementById("divyuran").style.display = "";
-				document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "";
-				document.getElementById("wang_saku").value = '1';
-				document.getElementById("wang_saku").disabled = false;
-
-			}
-			//sepenuh masa && pinjaman pelajaran
-			else if (mod === '1' && sumber === '3') {
-				console.log("Condition mod==='1' && sumber==='3' is met.");
-				console.log("Debug - mod: ", mod);
-				console.log("Debug - sumber: ", sumber);
-
-				// var wang_saku_perbulan = max_wang_saku;
-				// var wang_saku = wang_saku_perbulan * bilbulan;
-
-				document.getElementById("yuran").value = '1';
-				document.getElementById("divyuran").style.display = "";
-				document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "";
-				document.getElementById("wang_saku").value = '1';
-				document.getElementById("wang_saku").disabled = false;
-
-			} 
-			//separuh masa/jarak jauh/dalam talian && pinjaman pelajaran/ pembiayaan sendiri@tiada penaja
-			else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
-				console.log("Condition mod ==='2' && sumber !=='1' is met.");
-				document.getElementById("yuran").value = '1';
-				document.getElementById("divyuran").style.display = "";
-				document.getElementById("yuran").disabled = false;
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("wang_saku").value = '';
-				document.getElementById("amaun_wang_saku").value = '';
-
-			} 
-			//separuh masa/jarak jauh/dalam talian && biasiswa
-			else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
-				console.log("Condition mod ==='2' && sumber ==='1' is met.");
-				document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("tidaklayak").style.display = "";
-				
-			} 
-			//selain tu tak layak semua
-			else {
-				document.getElementById("divyuran").style.display = "none";
-				document.getElementById("divelaun").style.display = "none";
-				document.getElementById("tidaklayak").style.display = "";
-
-			}
-
-		}
-
-		// Trigger the function initially based on the initial values of mod and sumber
-		updateDisplay();
-
-		// Add event listeners to mod and sumber elements
-		$('#mod').on('change', function () {
-			mod = this.value;
-			updateDisplay(); // Call the function when mod changes
-		});
-
+		console.clear();
 		$('#sumber_biaya').on('change', function () {
 			sumber = this.value;
 			updateDisplay(); // Call the function when sumber changes
 		});
 
+		function updateDisplay() {
+			var sumber = document.getElementById('sumber_biaya').value;
+			console.log('Raw max_wang_saku value:', $('#max_wang_saku').val());
+
+			// Convert and round values to two decimal places
+			var parsed_max_wang_saku = parseFloat($('#max_wang_saku').val().trim()) || 0;
+
+			console.log('amaunwang: ', parsed_max_wang_saku.toFixed(2));
+			var wang_saku= parsed_max_wang_saku;
+			document.getElementById("tidaklayak").style.display = "none";
+				
+			//biasiswa	
+			if (sumber === '1') {
+				document.getElementById("divelaun").style.display = "none";
+				document.getElementById("tidaklayak").style.display = "";
+			}
+			else {
+				document.getElementById("divelaun").style.display = "";
+				document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
+			} 
+
+			console.clear();
+			
+		}
+
+		
 	});
-
-	function select1(){
-		console.clear();
-		
-		sessionStorage.setItem('mod', document.getElementById('mod').value);
-		sessionStorage.setItem('sumber', document.getElementById('sumber_biaya').value);
-
-		var mod = sessionStorage.getItem('mod');
-		var sumber = sessionStorage.getItem('sumber');
-		var bilbulan = document.getElementById('bil_bulan_per_sem').value;
-		console.log("Debug - mod: ", mod);
-		console.log("Debug - sumber: ", sumber);
-		
-		var max_yuran = parseFloat(document.getElementById('max_yuran').value).toFixed(2);
-		var max_wang_saku = parseFloat(document.getElementById('max_wang_saku').value).toFixed(2);
-
-		// var max_wang_saku = document.getElementById('max_wang_saku').value.toFixed(2);
-		var yuranInput = document.getElementById('amaun_yuran');
-		var yuran = parseFloat(yuranInput.value).toFixed(2);
-
-		// Define the maximum limit for 'amaun_yuran'
-		var maxLimit = max_yuran;
-		console.log(yuran > maxLimit);  // This will be false
-
-		if (!isNaN(yuran)) {
-			if (parseFloat(yuran) > parseFloat(maxLimit)) {
-				yuranInput.value = '';
-				// alert('Ralat: Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM'+ maxLimit+ ' / tahun kalendar akademik.' );
-				// return;
-				Swal.fire({
-					icon: 'error',
-					title: 'Ralat',
-					text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
-				});
-
-				return;
-			}
-		}
-		
-		if (mod === '1' && sumber === '1') { //sepenuh masa && biasiswa
-			
-			var wang_saku_perbulan = max_wang_saku;
-			var wang_saku = wang_saku_perbulan * bilbulan;
-
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divelaun").style.display = "";
-			document.getElementById("wang_saku").disabled = false;
-			document.getElementById("yuran").value = '';
-			document.getElementById("amaun_yuran").value = '';
-			document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
-		}
-		else if(mod === '1' && sumber === '4'){
-
-			var wang_saku_perbulan = max_wang_saku;
-			var wang_saku = wang_saku_perbulan * bilbulan;
-
-			if (isNaN(yuran)) {
-				yuran = 0; // Set yuran to 0 or handle it as needed
-			}
-			var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
-			if (total <= max_yuran) {
-				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
-				console.log("Total amount is within the limit: " + parseFloat(total));
-			} else {
-
-				var baki_wang_saku = max_yuran - yuran;
-				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
-					console.log("Total amount exceeds the limit: " + parseFloat(total));
-				} 
-				else {
-					document.getElementById("amaun_wang_saku").value = "";
-					console.log("Invalid input. Cannot calculate total amount.");
-				}
-
-			}
-			document.getElementById("yuran").value = '1';
-			document.getElementById("divyuran").style.display = "";
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("divelaun").style.display = "";
-			document.getElementById("wang_saku").value = '1';
-			document.getElementById("wang_saku").disabled = false;
-			
-		}
-		else if(mod === '1' && sumber === '3'){
-			console.log("Condition mod==='1' && sumber==='3' is met.");
-			console.log("Debug - mod: ", mod);
-			console.log("Debug - sumber: ", sumber);
-
-			var wang_saku_perbulan = max_wang_saku;
-
-			var wang_saku = wang_saku_perbulan * bilbulan;
-
-			console.log("Total amount yuran: " + parseFloat(yuran));
-			if (isNaN(yuran)) {
-				yuran = 0; // Set yuran to 0 or handle it as needed
-			}
-			var total = (parseFloat(wang_saku) + parseFloat(yuran)).toFixed(2);
-			if (total <= max_yuran) {
-				document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
-				console.log("Total amount is within the limit: " + parseFloat(total));
-			} else {
-
-				var baki_wang_saku = max_yuran - yuran;
-				if (!isNaN(baki_wang_saku)) {
-					document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
-					console.log("Total amount exceeds the limit: " + parseFloat(total));
-				} 
-				else {
-					document.getElementById("amaun_wang_saku").value = "";
-					console.log("Invalid input. Cannot calculate total amount.");
-				}
-
-			}
-			document.getElementById("yuran").value = '1';
-			document.getElementById("divyuran").style.display = "";
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("divelaun").style.display = "";
-			document.getElementById("wang_saku").value = '1';
-			document.getElementById("wang_saku").disabled = false;
-
-			
-		}
-		else if(mod === '2' && sumber !== '1'){
-			console.log("Condition mod ==='2' && sumber !=='1' is met.");
-			document.getElementById("yuran").value = '1';
-			document.getElementById("divyuran").style.display = "";
-			document.getElementById("yuran").disabled = false;
-			document.getElementById("divelaun").style.display = "none";
-			document.getElementById("wang_saku").value = '';
-			document.getElementById("amaun_wang_saku").value = '';
-
-
-		}
-		else if(mod === '2' && sumber === '1'){
-			console.log("Condition mod ==='2' && sumber ==='1' is met.");
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("divelaun").style.display = "none";
-		}
-		else{
-			var wang_saku_perbulan = max_wang_saku;
-
-			var wang_saku = wang_saku_perbulan * bilbulan;
-
-			document.getElementById("divyuran").style.display = "none";
-			document.getElementById("yuran").value = '';
-			document.getElementById("amaun_yuran").value = '';
-			document.getElementById("divelaun").style.display = "";
-			document.getElementById("wang_saku").disabled = false;
-			document.getElementById("wang_saku").value = '1';
-			document.getElementById("amaun_wang_saku").value = wang_saku.toFixed(2);
-			
-		}
-		
-	}
 
 	</script>
 

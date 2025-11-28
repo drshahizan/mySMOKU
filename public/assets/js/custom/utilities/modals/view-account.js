@@ -534,19 +534,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				var mod = form.querySelector('[name="mod"]').value;
 				var sumber = form.querySelector('[name="sumber_biaya"]').value;
 			
-				if (mod === '1' && sumber === '1') {
-					validationStatus[clickedStepIndex] = "Valid";
-				} else if (mod === '1' && sumber === '4') {
-					validationStatus[clickedStepIndex] = "Valid";
-				} else if (mod === '1' && sumber === '3') {
-					validationStatus[clickedStepIndex] = "Valid";
-				} else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
-					validationStatus[clickedStepIndex] = "Valid";
-				} else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
+				if (sumber === '1') {
 					validationStatus[clickedStepIndex] = "Invalid";
 					status = "Tidak";
-				} else {
-					validationStatus[clickedStepIndex] = "Invalid";
 				}
 			
 				// console.log("firstInvalid Step: " + firstInvalidStep);
@@ -680,64 +670,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 formContinueButton.classList.add('d-none');
             } else if (stepper.getCurrentStepIndex() === 4) {
                 // Handle specific logic for step 4
-                var mod = form.querySelector('[name="mod"]').value;
                 var sumber = form.querySelector('[name="sumber_biaya"]').value;
     
-                if (mod === '1' && sumber === '1') {
-                    formContinueButton.classList.remove('d-none'); // show the continue button
-                } else if (mod === '1' && sumber === '4') {
-                    formContinueButton.classList.remove('d-none'); // show the continue button
-                } else if (mod === '1' && sumber === '3') {
-                    formContinueButton.classList.remove('d-none'); // show the continue button
-                } else if ((mod === '2' || mod === '3' || mod === '4') && (sumber === '3' || sumber === '4')) {
-                    formContinueButton.classList.remove('d-none'); // show the continue button
-                } else if ((mod === '2' || mod === '3' || mod === '4') && sumber === '1') {
-                    formContinueButton.classList.add('d-none'); // hide the continue button
-					if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
-                
-						if (formContinueButton.classList.contains('d-none')) {
-							// Handle validation error
-							Swal.fire({
-								text: "Tidak layak.",
-								icon: "error",
-								buttonsStyling: false,
-								confirmButtonText: "Ok",
-								customClass: {
-									confirmButton: "btn btn-light",
-								},
-							}).then(function () {
-								stepper.goPrevious();
-								KTUtil.scrollTop();
-							});
-							
-						   
-						}
-					}
-                } 
-				else {
-                    formContinueButton.classList.add('d-none'); // hide the continue button
-					if (stepper.getCurrentStepIndex() === 5 || stepper.getCurrentStepIndex() === 6 || stepper.getCurrentStepIndex() === 7) {
-                
-						if (formContinueButton.classList.contains('d-none')) {
-							// Handle validation error
-							Swal.fire({
-								text: "Tidak layak.",
-								icon: "error",
-								buttonsStyling: false,
-								confirmButtonText: "Ok",
-								customClass: {
-									confirmButton: "btn btn-light",
-								},
-							}).then(function () {
-								stepper.goPrevious();
-								KTUtil.scrollTop();
-							});
-							
-						   
-						}
-					}
-				}
+                if (sumber === '1') {
+					formContinueButton.classList.add('d-none'); // hide the continue button
+					
+				}  
+				
             } 
+			
 			else {
                 formSubmitButton.classList.remove('d-inline-block');
                 formSubmitButton.classList.remove('d-none');

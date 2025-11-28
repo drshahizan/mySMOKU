@@ -998,8 +998,7 @@ class PenyelarasController extends Controller
         return back();
     }
 
-
-
+    //TK GUNA DAH
     public function tuntutanBaharu($id)
     {   
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id',$id)->first();
@@ -1270,7 +1269,7 @@ class PenyelarasController extends Controller
         }
         
     }
-
+    //TK GUNA DAH
     public function simpanTuntutan(Request $request, $id)
     {   
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $id)->first();
@@ -1412,122 +1411,85 @@ class PenyelarasController extends Controller
         if ($permohonan) {
             $no_rujukan_tuntutan = null;
 
-            // === CASE 1: Wang Saku Sahaja (yuran == null & wang_saku == 1) ===
-            if (is_null($permohonan->yuran) && $permohonan->wang_saku == 1) {
-                // Guna permohonan pertama
-                $permohonan = Permohonan::where('smoku_id', $id)->orderBy('id')->first();
-                $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
+            // Ambil no rujukan permohonan pertama
+            $permohonan_awal = Permohonan::where('smoku_id', $id)->orderBy('id')->first();
+            $no_rujukan_permohonan = $permohonan_awal->no_rujukan_permohonan;
 
-                $tuntutan = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
+            // Semak tuntutan terakhir
+            $tuntutan_akhir = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
 
-                if (!$tuntutan || in_array($tuntutan->status, [8, 9])) {
-                    $biltuntutan = Tuntutan::where('smoku_id', $id)
-                        ->groupBy('no_rujukan_tuntutan')
-                        ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
-                        ->get();
-                    $bil = $biltuntutan->count();
+            if (!$tuntutan_akhir || ($tuntutan_akhir && in_array($tuntutan_akhir->status, [6, 8, 9]))) {
+                $biltuntutan = Tuntutan::where('smoku_id', $id)
+                    ->groupBy('no_rujukan_tuntutan')
+                    ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
+                    ->get();
 
-                    $running_num = $bil + 1;
-                    $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
-                } else {
-                    $no_rujukan_tuntutan = $tuntutan->no_rujukan_tuntutan;
-                }
-
-                //simpan dalam table tuntutan
-                $tuntutan = Tuntutan::where('smoku_id', $id)
-                    ->where('permohonan_id', $permohonan->id)
-                    ->where('sesi', $request->sesi)
-                    ->where('no_rujukan_tuntutan', $no_rujukan_tuntutan)
-                    ->first();
-
-                // if ($tuntutan) {
-                //     // kalau semester sama dengan yang sedia ada
-                //     if ($tuntutan->semester == $request->semester) {
-                //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
-                //     }
-                // } else {
-
-                //     $akademik = Akademik::where('smoku_id',$id)
-                //         ->where('smoku_akademik.status', 1)
-                //         ->first();
-                //     // semak kalau semester permohonan sama dengan request
-                //     if ($akademik->sem_semasa == $request->semester) {
-                //         return back()->with('sem', 'Tuntutan pelajar boleh dituntut pada sem seterusnya.');
-                //     }
-                // }
-
-                // kalau tak ada record, atau semester lain → buat rekod baru
-                $tuntutan = Tuntutan::updateOrCreate([
-                    'smoku_id' => $id,
-                    'permohonan_id' => $permohonan->id,
-                    'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                    'sesi' => $request->sesi,
-                    'semester' => $request->semester,    
-                    'wang_saku' => $request->wang_saku,
-                    'amaun_wang_saku' => $request->amaun_wang_saku,
-                    'status' => '1',
-                ]);
-
-                $sejarah = SejarahTuntutan::create([
-                    'tuntutan_id' => $tuntutan->id,
-                    'smoku_id' => $id,
-                    'status' => '1',
-                    'dilaksanakan_oleh' =>  Auth::user()->id,
-            
-                ]);
-                $sejarah->save();
+                $bil = $biltuntutan->count();
+                $running_num = $bil + 1;
+                $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
+            } else {
+                $no_rujukan_tuntutan = $tuntutan_akhir->no_rujukan_tuntutan;
             }
 
-            // === CASE 2: Wang Saku + Yuran ===
-            elseif ($permohonan->yuran == 1 && $permohonan->wang_saku == 1) {
-                $tuntutan = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
+            // --- Cari rekod sedia ada (kalau ada)
+            $tuntutan = [
+                'smoku_id' => $id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+            ];
 
-                if ($tuntutan) {
-                    $tuntutan->update([
-                        'wang_saku' => $request->wang_saku,
-                        'amaun_wang_saku' => $request->amaun_wang_saku,
-                    ]);
-                }
+            $existing = Tuntutan::where($tuntutan)->orderByDesc('id')->first();
+
+            // Semak sama ada sebelum ini status = 5 (dikembalikan)
+            $wasReturned = $existing && $existing->status === '5';
+
+            // --- Data untuk dikemas kini / cipta
+            $updateData = [
+                'semester' => $request->semester,
+                'wang_saku' => '1',
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'jumlah' => $request->amaun_wang_saku,
+                'status' => '2',
+            ];
+
+            // Tambah tarikh_hantar hanya jika status sebelum ini bukan 5
+            if (! $wasReturned) {
+                $updateData['tarikh_hantar'] = now()->format('Y-m-d');
             }
 
-            // === KEMASKINI UMUM (dijalankan selepas semua kes) ===
-            $tuntutan = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
+            // --- Cipta atau kemas kini rekod
+            $tuntutan = Tuntutan::updateOrCreate($tuntutan, $updateData);
 
-            if ($tuntutan) {
-                $updateData = [
-                    'jumlah' => $request->jumlah,
-                    'status' => '2',
-                ];
-
-                if ($tuntutan->status != '5') {
-                    $updateData['tarikh_hantar'] = now()->format('Y-m-d');
-                }
-
-                $tuntutan->update($updateData);
-            }
         }
 
-        $sejarah = SejarahTuntutan::create([
+
+        // Rekod sejarah tuntutan
+        SejarahTuntutan::create([
             'tuntutan_id' => $tuntutan->id,
             'smoku_id' => $id,
             'status' => '2',
-            'dilaksanakan_oleh' =>  Auth::user()->id,
-    
+            'dilaksanakan_oleh' => Auth::id(),
         ]);
-        $sejarah->save();
 
-        // COMMENT PROD
-        //emel kepada pelajar
-        $emel_pelajar = Smoku::where('id',$id)->first();
-        $cc_pelajar = $emel_pelajar->email;
+        // === Emel Pemberitahuan ===
 
-        //emel kepada penyelaras
-        $user = User::where('no_kp',Auth::user()->no_kp)->first();
+        // Emel kepada pelajar
+        $pelajar = Smoku::find($id);
+        $cc_pelajar = $pelajar?->email;
 
-        $catatan = "Tuntutan";
-        $emel = EmelKemaskini::where('emel_id',14)->first();
-    
-        Mail::to($user->email)->cc($cc_pelajar)->send(new TuntutanHantar($catatan,$emel));
+        // Emel kepada penyelaras
+        $penyelaras = User::where('no_kp', Auth::user()->no_kp)->first();
+        $emel_penyelaras = $penyelaras?->email;
+
+        if ($emel_penyelaras && $cc_pelajar) {
+            $catatan = "Tuntutan";
+            $emel = EmelKemaskini::where('emel_id', 14)->first();
+
+            Mail::to($emel_penyelaras)
+                ->cc($cc_pelajar)
+                ->send(new TuntutanHantar($catatan, $emel));
+        }
         
         return redirect()->route('senarai.bkoku.tuntutanBaharu')->with('message', 'Tuntutan pelajar telah di hantar.');
     }

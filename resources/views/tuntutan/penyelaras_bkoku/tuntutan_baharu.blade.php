@@ -2,12 +2,11 @@
 <head>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>    
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
@@ -79,6 +78,160 @@
                                     @endphp
 
                                     @php
+                                        $permohonan = DB::table('permohonan')
+                                            ->orderBy('id', 'desc')->where('smoku_id',$layak->smoku_id)->first();
+
+                                        $akademik = DB::table('smoku_akademik')
+                                            ->where('smoku_id',$layak->smoku_id)
+                                            ->where('smoku_akademik.status', 1)
+                                            ->first();
+                                        
+                                        $smoku = DB::table('smoku')
+                                            ->where('id',$layak->smoku_id)->first();
+
+                                        $bilSem = ($akademik->bil_bulan_per_sem == 6) ? 2 : 3;
+                                        $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
+                                        $currentDate = Carbon::now();
+
+                                        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
+                                        $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+
+                                        $bulanMula  = $tarikhMula->format('n');
+                                        $isSpecialStart = in_array($bulanMula, [1, 3]);
+
+                                        // Initialize tahun sesi
+                                        $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
+                                        $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+                                        // Define semester pattern
+                                        if (in_array($bulanMula, [1, 3])) {
+                                            if ($akademik->bil_bulan_per_sem == 6) {
+                                                $pattern = [1, 2];
+                                            } elseif ($akademik->bil_bulan_per_sem == 4) {
+                                                $pattern = [2, 3];
+                                            } else {
+                                                $pattern = [$bilSem];
+                                            }
+                                        } else {
+                                            $pattern = [$bilSem];
+                                        }
+
+                                        $patternIndex = 0;
+                                        $currentPattern = $pattern[$patternIndex];
+                                        $semInCurrentSesi = 0;
+
+                                        $tarikhNextSem = clone $tarikhMula;
+                                        $nextSemesterDates = [];
+                                        $semCounter = 0;
+                                        $semSemasa = 1;
+
+                                        // Build all semesters
+                                        while ($tarikhNextSem < $tarikhTamat) {
+                                            $bulanMasuk = $tarikhNextSem->month;
+                                            //     // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
+                                            //     // sesi 1 untuk kemasukan bulan julai sehingga disember
+                                            //     // sesi 2 untuk kemasukan bulan januari sehingga jun
+                                            $sesi_bulan = in_array($bulanMasuk, [7,8,9,10,11,12]) ? 1 : 2;
+
+                                            $nextSemesterDates[] = [
+                                                'date'       => $tarikhNextSem->format('F Y'),
+                                                'semester'   => $semSemasa,
+                                                'sesi'       => $sesiMula,    // tahun akademik
+                                                'sesi_bulan' => $sesi_bulan,  // sesi 1 atau 2
+                                            ];
+
+                                            $semSemasa++;
+                                            $semCounter++;
+                                            $semInCurrentSesi++;
+
+                                            $tarikhNextSem->add(new DateInterval("P{$akademik->bil_bulan_per_sem}M"));
+
+                                            if ($isSpecialStart) {
+                                                if ($semInCurrentSesi >= $currentPattern) {
+                                                    $semInCurrentSesi = 0;
+                                                    $tahunSesi++;
+                                                    $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+
+                                                    if ($patternIndex < count($pattern) - 1) {
+                                                        $patternIndex++;
+                                                    }
+                                                    $currentPattern = $pattern[$patternIndex] ?? $pattern[count($pattern) - 1];
+                                                }
+                                            } else {
+                                                if ($semCounter % $bilSem == 0) {
+                                                    $tahunSesi++;
+                                                    $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
+                                                }
+                                            }
+                                        }
+
+                                        // Vars to store current/previous
+                                        $currentSesi = null;
+                                        $previousSesi = null;
+                                        $semSemasa = null;
+                                        $sesiSemasa = null;
+
+                                        // Find current semester/session
+                                        foreach ($nextSemesterDates as $key => $data) {
+                                            $dateOfSemester = Carbon::parse($data['date']);
+
+                                            $nextSemesterStartDate = isset($nextSemesterDates[$key + 1]) 
+                                                ? Carbon::parse($nextSemesterDates[$key + 1]['date']) 
+                                                : null;
+
+                                            $semesterEndDate = $nextSemesterStartDate 
+                                                ? $nextSemesterStartDate->subSecond() 
+                                                : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+
+                                            if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
+                                                $currentSesi = $data['sesi'];        // tahun akademik (eg. 2025/2026)
+                                                $sesiSemasa  = $data['sesi_bulan'];  // sesi 1 atau 2
+                                                $semSemasa   = $data['semester'];
+                                                $semLepas    = $data['semester'] - 1;
+
+                                                $sesiLepas = isset($nextSemesterDates[$key - 1]) 
+                                                    ? $nextSemesterDates[$key - 1]['sesi_bulan'] 
+                                                    : 'Tiada';
+                                                $previousSesi = isset($nextSemesterDates[$key - 1]) 
+                                                    ? $nextSemesterDates[$key - 1]['sesi'] 
+                                                    : $data['sesi'];    
+                                            }
+                                        }
+
+                                        $tuntutan = DB::table('tuntutan')
+                                            ->where('smoku_id', $layak->smoku_id)
+                                            ->where('permohonan_id', $permohonan->id)
+                                            ->whereNotIn('status', [6,8])
+                                            ->whereNull('data_migrate')
+                                            ->orderBy('tuntutan.id', 'desc')
+                                            ->first(['tuntutan.*']);
+
+                                        //semak keputusan    
+                                        if ($currentDate <= $semesterEndDate ) {
+                                            // if($currentSesi != $previousSesi){
+                                                // semak dah upload result ke belum
+                                                $result = DB::table('permohonan_peperiksaan')
+                                                ->where('permohonan_id', $permohonan->id)
+                                                ->where('sesi', $previousSesi)
+                                                ->where('semester', $sesiLepas)
+                                                ->first();
+                                                
+                                            // }
+                                            
+                                        }   
+
+                
+                                    @endphp
+
+                                    @php
+
+                                        $tuntutan_latest = DB::table('tuntutan')
+                                            ->where('smoku_id', $layak->smoku_id)
+                                            ->where('permohonan_id', $permohonan->id)
+                                            ->whereNull('data_migrate')
+                                            ->orderBy('tuntutan.id', 'desc')
+                                            ->first();
+
                                         // Retrieve data from bk_tarikh_iklan table
                                         $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
 
@@ -91,6 +244,24 @@
 
                                         // Check if current date and time fall within the allowed range
                                         $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+
+                                        // Check if student already submitted a claim during the current session window
+                                        $hasClaimInRange = false;
+                                        if ($tuntutan_latest && $tuntutan_latest->tarikh_hantar) {
+                                            $tarikhHantar = \Carbon\Carbon::parse($tuntutan_latest->tarikh_hantar);
+                                            // Only consider claims in the current range and not with status 2 or 5
+                                            if ($tarikhHantar->between($tarikhMula, $tarikhTamat) && !in_array($tuntutan_latest->status, [1, 2, 5])) {
+                                                $hasClaimInRange = true;
+                                            }
+                                        }
+
+                                        // Retrieve amount ews // penerima biasiswa sedia ada, amaun masih 2400
+                                        if ($akademik->sumber_biaya == 1){
+                                            $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'BKOKU')->where('jenis', 'Wang Saku')->where('semester', 'B')->first();
+                                        } else{
+                                            $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'BKOKU')->where('jenis', 'Wang Saku')->first();
+                                        }
+                                        
                                     @endphp
                                     <tr>
                                         <td>{{ $layak->no_rujukan_permohonan}}</td>
@@ -139,22 +310,58 @@
                                                 </a>
 
                                                 @if($isWithinRange)
-                                                    <a href="{{ route('bkoku.tuntutan.baharu', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                            <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
-                                                        </span>
-                                                    </a>
+                                                    @if($hasClaimInRange)
+                                                        {{-- Already has claim in this session --}}
+                                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
+                                                            data-bs-toggle="tooltip" data-bs-trigger="hover" 
+                                                            title="Borang Tuntutan. Hanya satu kali tuntutan bagi sesi pengajian yang sama"
+                                                            onclick="showAlertTuntutanOnce()">
+                                                            <span>
+                                                                <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;"></i>
+                                                            </span>
+                                                        </a>
+                                                    @else
+                                                        {{-- Normal behavior --}}
+                                                        <a href="{{ $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('bkoku.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
+                                                            class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+                                                            @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8 || $tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5))
+                                                                @if($semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                                    @if (!$result && !$tuntutan && $sesiLepas != 'Tiada')
+                                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan. Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
+                                                                    @elseif ($result && $result->pengesahan_rendah== 1)
+                                                                        data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan. Keputusan peperiksaan pelajar dengan PNG bawah 2.00 masih dalam semakan sekretariat KPT."    
+                                                                    @else
+                                                                        data-bs-toggle="modal" data-bs-trigger="hover" title="Borang Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
+                                                                    @endif
+                                                                @elseif($currentDate->greaterThan($tarikhTamat))  
+                                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
+                                                                @endif
+                                                            @elseif($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4))
+                                                                data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan masih dalam semakan."  
+                                                            @endif
+                                                        >
+                                                            <span>
+                                                                <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;"></i>
+                                                            </span>
+                                                        </a>
+                                                    @endif
                                                 @else
                                                     <a href="#" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
-                                                            <i class="fa-solid fa-money-check-dollar fs-2"  style="color: #000000;" onclick="showAlertTuntutan()"></i>
+                                                            <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;" onclick="showAlertTuntutan()"></i>
                                                         </span>
                                                     </a>
                                                 @endif
+
                                                 <!--end::Edit-->
                                             </div>
                                         </td>
                                     </tr>
+                                    <!--begin::Modal Tuntutan-->
+                                        @include('tuntutan.penyelaras_bkoku.modal_tuntutan', [
+                                            'layak' => $layak
+                                        ]) 
+                                    <!--end::Modal Tuntutan-->
                                 @endif    
                             @endforeach
                         </tbody>
@@ -170,6 +377,8 @@
 </div>
 
 <!--begin::Javascript-->
+
+
 <script>
 	$('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
@@ -208,15 +417,52 @@
 	@endif
 </script>
 <script>
+    function showAlertTuntutanOnce() 
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'Tidak Berjaya!',
+        text: 'Hanya satu kali tuntutan bagi sesi pengajian yang sama.',
+        confirmButtonText: 'OK'
+        });
+    }
     function showAlertTuntutan() 
     {
         Swal.fire({
         icon: 'error',
-        title: 'Tuntutan telah ditutup.',
-        text: ' {!! session('failed') !!}',
+        title: 'Tidak Berjaya!',
+        text: 'Tuntutan telah ditutup.',
         confirmButtonText: 'OK'
         });
     }
+    
 </script>
+<!--begin::Javascript-->
+<script>
+$(document).ready(function() {
+    $(document).on('shown.bs.modal', function (e) {
+        var $modal = $(e.target);
+
+        $modal.find('[data-control="select2"]').each(function() {
+            var $select = $(this);
+
+            if ($select.data('select2')) {
+                $select.select2('destroy');
+            }
+
+            $select.select2({
+                dropdownParent: $modal.find('.modal-content'),
+                width: '100%',
+                placeholder: 'Pilih'
+            });
+
+        });
+    });
+});
+</script>
+
+
+
+
 <!--end::Javascript-->     
 </x-default-layout>

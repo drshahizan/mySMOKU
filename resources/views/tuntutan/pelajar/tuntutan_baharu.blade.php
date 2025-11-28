@@ -13,332 +13,91 @@
 	<div id="kt_app_content_container" class="app-container container-xxl">
 		<!--begin::Layout-->
 		<div class="d-flex flex-column flex-lg-row">
-			@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4', '5'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4', '5'])))
-			<!--begin::Content-->
-			<input type="hidden" id="requireYuran" value="{{ $permohonan->yuran == '1' ? '1' : '0' }}">
-			<input type="hidden" id="requireWangSaku" value="{{ $permohonan->wang_saku == '1' ? '1' : '0' }}">
-			<div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
-				<!--begin::Card-->
-				<div class="card">
-					<!--begin::Card body-->
-					<div class="card-body p-8">
-						<!--begin::Form-->
-						<form action="{{ route('pelajar.simpan.tuntutan') }}" method="post" enctype="multipart/form-data">
-							@csrf
-							<!--begin::Wrapper-->
-							<div class="d-flex flex-column align-items-start flex-xxl-row">
-								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-									<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
-								</div>
-							</div>
-							<br>
-							<!--begin::Wrapper-->
-							<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
-							<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
-							
-							<div class="mb-0">
-								<!--begin::Row-->
-								<div class="row gx-10 mb-5">
-									<!--begin::Col-->
-									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
-										<div class="mb-5">
-											@php
-												$year = date('Y'); 
-												$nextYear = $year + 1; 
-												$sesiSemasa = $year . '/' . $nextYear; 
-											@endphp
-
-											<select id="sesi" name="sesi"  
-												class="form-select form-select-solid" 
-												data-control="select2" 
-												data-hide-search="true" 
-												data-placeholder="Pilih" 
-												required 
-												oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
-												oninput="setCustomValidity('')">
-
-												<option></option>
-												@for ($i = -1; $i <= 1; $i++) 
-													@php 
-														$start = $year + $i; 
-														$end = $start + 1; 
-														$sesi = $start . '/' . $end; 
-													@endphp
-													<option value="{{ $sesi }}" {{ $tuntutan?->sesi == $sesi ? 'selected' : '' }}>
-														{{ $sesi }}
-													</option>
-
-												@endfor
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
-												<option></option>
-												<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
-												<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
-											</select>
-										</div>
-									</div>
-									<!--end::Col-->
-								</div>
-								<!--end::Row-->
-								<div class="row gx-10 mb-5">
-									<!--begin::Col-->
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Jenis Yuran</label>
-										<!--begin::Input group-->
-										<select id="jenis_yuran" name="jenis_yuran" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih jenis yuran.')" oninput="setCustomValidity('')">
-											<option></option>
-											<option value="Yuran Pengajian">Yuran Pengajian</option>
-											<option value="Yuran Pendaftaran Pengajian">Yuran Pendaftaran Pengajian</option>
-											<option value="Kad Kampus/Kad Matrik">Kad Kampus/ Kad Matrik</option>
-											<option value="Yuran Peperiksaan">Yuran Peperiksaan</option>
-											<option value="Yuran Perpustakaan">Yuran Perpustakaan</option>
-											<option value="Yuran Peralatan/ Bahan Makmal">Yuran Peralatan/ Bahan Makmal</option>
-											<option value="Yuran Perkhidmatan">Yuran Perkhidmatan</option>
-											<option value="Yuran Pemeriksaan/ Yuran Tesis">Yuran Pemeriksaan/ Yuran Tesis</option>
-											<option value="Yuran Komputer">Yuran Komputer</option>						
-										</select>
-										<!--end::Input group-->
-									</div>
-									<!--end::Col-->
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. resit/ invois</label>
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" id="no_resit" name="no_resit" class="form-control form-control-solid" placeholder="" required oninvalid="this.setCustomValidity('Sila isi no. resit.')" oninput="setCustomValidity('')"/>
-										</div>
-									</div>
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Perihal</label>
-										<div class="mb-5">
-											<input type="text" id="nota_resit" name="nota_resit" class="form-control form-control-solid" placeholder="Yuran Pengajian Semester 1 2023/2024" required oninvalid="this.setCustomValidity('Sila isi perihal.')" oninput="setCustomValidity('')"/>
-										</div>
-									</div>
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Amaun Yuran</label>
-										<!--begin::Input group-->
-										<div class="d-flex">
-											<span class="input-group-text">RM</span>
-											<input type="hidden" id="max_limit" name="max_limit" class="input-group-text" style="width: 100%;" value="{{$maxLimit}}"/>
-											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
-											<input type="number" id="amaun_yuran" name="amaun_yuran" onchange="myFunction()" class="form-control form-control-solid" placeholder="" step="0.01" inputmode="decimal" required oninvalid="this.setCustomValidity('Sila isi amaun yuran.')" oninput="setCustomValidity('')"/>
-										</div>
-									</div>
-								</div>
-								<div class="row gx-10 mb-5">
-									<div class="col-lg-12">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Salinan Resit/Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></label>
-										<div class="input-group control-group img_div form-group col-md-11">
-											<input type="file" 
-												id="resit" 
-												name="resit[]" 
-												accept=".jpg,.jpeg,.png,.pdf"
-												{{-- required 
-												oninvalid="this.setCustomValidity('Sila upload resit dalam format JPG, PNG atau PDF.')" 
-												oninput="this.setCustomValidity('')"  --}}
-											/>
-										</div>
-										<div id="fileLinkContainer" class="input-group control-group img_div form-group col-md-11" >
-											<input type="hidden" id="resit" name="resit[]" />
-											<span id="fileNameDisplay"></span>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex flex-center mt-15">
-									<button type="submit" class="btn btn-primary">
-										Simpan
-									</button>&nbsp;&nbsp;&nbsp;
-								</div>
-							</div>
-							<!--end::Wrapper-->
-						</form>
-						<!--end::Form-->
-					</div>
-					<!--end::Card body-->
-				</div>
-				<!--end::Card-->
-			</div>
-			<!--end::Content-->
-			@endif
+			
 			<!--begin::Sidebar-->
 			<div class="flex-lg-auto min-w-lg-450px">
 				<!--begin::Card-->
 				<div class="card">
 					<!--begin::Card body-->
 					<div class="card-body p-10">
-						<!--begin::Input group-->
-						@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['3', '4', '5'])) || (in_array($akademik->mod, ['2','3','4']) && in_array($akademik->sumber_biaya, ['3', '4', '5'])))
-						<div class="mb-10">
-							<!--begin::Label-->
-							<label class="fs-3 fw-bold text-gray-800">Item Tuntutan</label>
-							<br>
-							<br>
-							<div class="table-responsive">
-								<table id="itemtuntutan" class="table table-striped table-hover dataTable js-exportable">
-									<thead>
-										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
-											<th class="text-center">Bil</th>
-											<th class="text-center">Jenis Yuran</th>
-											<th class="text-center">No. Resit</th>
-											<th class="text-center">Perihal</th>
-											<th class="text-center">RM</th>
-											<th class="text-center"></th>
-										</tr>
-									</thead>
-									<tbody class="fw-semibold text-gray-600">
-										@foreach ($tuntutan_item as $tuntutan_item)
-										<tr>
-											<td>{{ $loop->iteration }}.</td>
-											<td>{{ $tuntutan_item->jenis_yuran}}</td>
-											<td>
-												@if(!empty($tuntutan_item->resit))
-													<a href="/assets/dokumen/tuntutan/{{ $tuntutan_item->resit }}" target="_blank">
-														{{ $tuntutan_item->no_resit }}
-													</a>
-												@else
-													{{ $tuntutan_item->no_resit }}
-												@endif
-											</td>
-
-											<td>{{ $tuntutan_item->nota_resit}}</td>
-											<td id="amaun" class="text-right">{{number_format($tuntutan_item->amaun, 2, '.', '')}}</td>
-											<td class="text-center">
-												<a href="{{ route('tuntutan.item.delete', ['id' => $tuntutan_item->id]) }}" onclick="return confirm('Adakah anda pasti ingin padam item tuntutan ini?')">
-													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam">
-														<i class="fa fa-trash fa-sm custom-white-icon"></i>
-													</span>
-												</a>
-											</td>
-										</tr>
-										@endforeach	
-									</tbody>
-								</table>
-								<div style="font-size: 11px;"> Klik dua kali untuk kemaskini item tuntutan. </div>
-							</div>
-						</div>
-						@endif
 						<!--begin::Form-->
 						<form action="{{ route('hantar.tuntutan') }}" method="post" enctype="multipart/form-data">
 						@csrf
 							<!--begin::Item-->
-							
-							@if (($akademik->mod == '1' && in_array($akademik->sumber_biaya, ['1', '3', '4', '5'])))
-								@if ($akademik->mod == '1' && $akademik->sumber_biaya =='1')
-									<!--begin::Wrapper-->
-									<div class="d-flex flex-column align-items-start flex-xxl-row">
-										<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
-											<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
-										</div>
-									</div>
-									<br>
-									<!--begin::Wrapper-->
-									<!--begin::Wrapper-->
-									<input type="hidden" class="form-control form-control-solid" name="max_yuran" id="max_yuran" value=""/>
-									<input type="hidden" class="form-control form-control-solid" name="max_wang_saku" id="max_wang_saku" value=""/>
-									<!--begin::Row-->
-									<div class="row gx-10 mb-5">
-										<!--begin::Col-->
-										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
-											<div class="mb-5">
-												@php
-													$year = date('Y'); 
-													$nextYear = $year + 1; 
-													$sesiSemasa = $year . '/' . $nextYear; 
-												@endphp
-
-												<select id="sesi" name="sesi"  
-													class="form-select form-select-solid" 
-													data-control="select2" 
-													data-hide-search="true" 
-													data-placeholder="Pilih" 
-													required 
-													oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
-													oninput="setCustomValidity('')">
-
-													<option></option>
-													@for ($i = -1; $i <= 1; $i++) 
-														@php 
-															$start = $year + $i; 
-															$end = $start + 1; 
-															$sesi = $start . '/' . $end; 
-														@endphp
-														<option value="{{ $sesi }}" {{ $tuntutan?->sesi == $sesi ? 'selected' : '' }}>
-															{{ $sesi }}
-														</option>
-													@endfor
-												</select>
-
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
-											<!--begin::Input group-->
-											<div class="mb-5">
-												<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
-													<option></option>
-													<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
-													<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
-												</select>
-											</div>
-										</div>
-										<!--end::Col-->
-									</div>
-									<!--end::Row-->
-								@endif
-									<div class="d-flex flex-stack">
-										<div class="me-5">
-											<input type="hidden" id="baki_total" name="baki_total" class="form-control form-control-solid" placeholder="" value={{$baki_total}}>
-
-											<input id="wang_saku" name="wang_saku" onclick="myFunction()" type="checkbox" value="1" @if(($tuntutan->wang_saku ?? 0) == 1) checked @endif />
-										<label class="form-label fw-bold fs-4 text-700">Elaun Wang Saku</label>
-										</div>
-									</div>
-								
-									<!--end::Item-->
-									<br>
-									<!--begin::Wrapper-->
-									<div class="d-flex flex-stack flex-grow-1">
-										<!--begin::Content-->
-										<div class="fw-semibold">
-											<div class="fs-6 text-dark">Amaun Wang Saku </div>
-										</div>
-										<!--end::Content-->
-									</div>
-									<!--end::Wrapper-->
-									
-									<div class="d-flex">
-										<span class="input-group-text">RM</span>
-										<input type="hidden" id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="input-group-text" style="width: 100%;" value="{{$akademik->bil_bulan_per_sem}}"/>
-										<input type="hidden" id="max_limit" name="max_limit" class="input-group-text" style="width: 100%;" value="{{$maxLimit}}"/>
-										<input type="text" id="amaun_wang_saku" name="amaun_wang_saku" class="input-group-text" style="width: 100%;" value="" readonly/>
-									</div>
-							@endif
-							<br>
-							<br>
-							<div class="d-flex flex-stack flex-grow-1">
-								<!--begin::Content-->
-								<div class="fw-semibold">
-									<div class="fs-6 text-dark"><b>Jumlah Keseluruhan Tuntutan</b></div>
+							<div class="d-flex flex-column align-items-start flex-xxl-row">
+								<div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" data-bs-toggle="tooltip" data-bs-trigger="hover">
+									<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
 								</div>
-								<!--end::Content-->
 							</div>
-							<div class="d-flex">
-								<span class="input-group-text">RM</span>
-								<input type="text" id="jumlah" name="jumlah" class="input-group-text" style="width: 100%;" readonly/>
+							<br>
+							<div class="row gx-10 mb-5">
+								<!--begin::Col-->
+								<div class="col-lg-6">
+									<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
+									<div class="mb-5">
+										@php
+											$year = date('Y'); 
+											$nextYear = $year + 1; 
+											$sesiSemasa = $year . '/' . $nextYear; 
+										@endphp
+
+										<select id="sesi" name="sesi"  
+											class="form-select form-select-solid" 
+											data-control="select2" 
+											data-hide-search="true" 
+											data-placeholder="Pilih" 
+											required 
+											oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
+											oninput="setCustomValidity('')">
+
+											<option></option>
+											@for ($i = -1; $i <= 1; $i++) 
+												@php 
+													$start = $year + $i; 
+													$end = $start + 1; 
+													$sesi = $start . '/' . $end; 
+												@endphp
+												<option value="{{ $sesi }}" {{ $tuntutan?->sesi == $sesi ? 'selected' : '' }}>
+													{{ $sesi }}
+												</option>
+											@endfor
+										</select>
+
+									</div>
+
+								</div>
+								<div class="col-lg-6">
+									<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
+									<!--begin::Input group-->
+									<div class="mb-5">
+										<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
+											<option></option>
+											<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+											<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
+										</select>
+									</div>
+								</div>
+								<!--end::Col-->
 							</div>
+							<div class="row gx-10 mb-5">
+								<div class="col-lg-6">
+									<input class="form-check-input" type="checkbox" value="1" id="wang_saku" name="wang_saku" checked disabled/>
+									<label class="fs-6 fw-semibold form-label">
+										Tuntut Elaun Wang Saku
+									</label>
+								</div>
+							</div>
+							<br>
+
+							<div class="row gx-10 mb-5">
+								<label class="fs-6 fw-semibold mb-2">Amaun Wang Saku</label>
+								<div class="d-flex">
+									<span class="input-group-text">RM</span>
+									<input type="number" name="amaun_wang_saku" class="form-control form-control-solid"
+										value="{{ number_format($amaun->jumlah, 2, '.', '') }}" step="0.01" readonly/>
+								</div>
+							</div>
+							
 							<br>
 							<br>
 							<!--end::Actions-->
@@ -346,11 +105,15 @@
 								<button 
 									type="submit" 
 									id="submitButton" 
-									class="btn {{ ($tuntutan && $tuntutan->status == 5) ? 'btn-danger' : 'btn-primary' }}">
-									{{ ($tuntutan && $tuntutan->status == 5) ? 'Hantar Semula' : 'Hantar' }}
+									class="btn {{ ($tuntutan && $tuntutan->status == 5) ? 'btn-danger' : 'btn-primary' }}"
+									{{ ($tuntutan && $tuntutan->status == 2) ? 'disabled' : '' }}>
+									
+									{{ ($tuntutan && $tuntutan->status == 5) ? 'Hantar Semula' : (($tuntutan && $tuntutan->status == 2) ? 'Tuntutan Telah Dihantar' : 'Hantar') }}
 								</button>
-
 							</div>
+
+
+
 						</form>	
 					</div>
 					<!--end::Card body-->
@@ -367,232 +130,8 @@
 
 <!--begin::Javascript-->
 <script>
-    function checkButtonState() {
-		const submitButton = document.getElementById("submitButton");
-		const wangSakuCheckbox = document.getElementById("wang_saku");
-		const tableBody = document.querySelector("#itemtuntutan tbody");
-
-		const hasItems = tableBody ? tableBody.children.length > 0 : false;
-		const wangSakuChecked = wangSakuCheckbox ? wangSakuCheckbox.checked : false;
-
-		const requireYuran = document.getElementById("requireYuran").value === '1';
-		const requireWangSaku = document.getElementById("requireWangSaku").value === '1';
-
-		let enable = false;
-
-		if (requireYuran && requireWangSaku) {
-			enable = hasItems && wangSakuChecked;
-		} else if (requireYuran && !requireWangSaku) {
-			enable = hasItems;
-		} else if (!requireYuran && requireWangSaku) {
-			enable = wangSakuChecked;
-		}
-
-		submitButton.disabled = !enable;
-	}
-
-	checkButtonState();
-
-	const wangSakuCheckbox = document.getElementById("wang_saku");
-	if (wangSakuCheckbox) {
-		wangSakuCheckbox.addEventListener("change", checkButtonState);
-	}
-
-	const tableBody = document.querySelector("#itemtuntutan tbody");
-	if (tableBody) {
-		const observer = new MutationObserver(checkButtonState);
-		observer.observe(tableBody, { childList: true });
-	}
-</script>
-
-
-<script>
-
-var max_yuran; // Declare these variables in a higher scope
-var max_wang_saku;
-// Make an AJAX request to fetch data based on the selected semester
-$.ajax({
-	type: 'GET',
-	url: '/fetch-amaun/bkoku',
-	success: function(response) {
-		max_yuran = parseFloat(response.amaun_yuran);
-		max_wang_saku = parseFloat(response.amaun_wang_saku);
-
-		document.getElementById("max_yuran").value = max_yuran.toFixed(2);
-		document.getElementById("max_wang_saku").value = max_wang_saku.toFixed(2);
-
-		// Run calculation immediately after values load
-		myFunction();
-
-		// Also check if checkbox is already checked at page load
-		let checkBox = document.getElementById("wang_saku");
-		if (checkBox.checked) {
-			myFunction();
-		}
-
-		// Recalculate when checkbox is toggled
-		checkBox.addEventListener("change", myFunction);
-	},
-	error: function(error) {
-		console.error('Error fetching data:', error);
-	}
-});
-
-function myFunction() {
-
-    var checkBox = document.getElementById("wang_saku");
-	var bilbulan = parseInt(document.getElementById('bil_bulan_per_sem').value); // Convert to integer
-	var wang_saku_perbulan = parseInt(document.getElementById('max_wang_saku').value);
-	
-	var currentDate = Date.now();
-	var tarikhMulaTimestamp = new Date('<?php echo $akademik->tarikh_mula; ?>').getTime();
-	var tarikhTamatTimestamp = new Date('<?php echo $akademik->tarikh_tamat; ?>').getTime();
-	// alert('Is tarikhMula earlier than tarikhTamat? ' + (tarikhMulaTimestamp < tarikhTamatTimestamp));
-
-	if (tarikhMulaTimestamp < tarikhTamatTimestamp) {
-
-		var wang_saku = wang_saku_perbulan * bilbulan;
-	
-	}
-
-	// alert(wang_saku);
-
-	console.log('Calculated wang_saku:', wang_saku);
-
-
-	// Initialize a variable to store the total
-	var totalAmaun = 0;
-
-	// Query the table rows using the correct selector
-	var rows = document.querySelectorAll("table#itemtuntutan tbody tr");
-
-	for (var i = 0; i < rows.length; i++) {
-		var amaunCell = rows[i].querySelector("td#amaun");
-		if (amaunCell) {
-			var amaunText = amaunCell.textContent.trim();
-			var amaunValue = parseFloat(amaunText) || 0;
-			totalAmaun += amaunValue;
-		}
-	}
-
-	var yuranInput = document.getElementById('amaun_yuran');
-	// console.log(yuranInput);
-	if (yuranInput !== null) {
-		var yuran = parseFloat(yuranInput.value).toFixed(2);
-	} else {
-		// Set yuran to 0.00 if yuranInput is null
-		var yuran = '0.00';
-	}
-	var total_yuran = (parseFloat(yuran) + parseFloat(totalAmaun)).toFixed(2);
-
-	// Define the maximum limit for 'amaun_yuran'
-	var baki_total = document.getElementById('baki_total');
-	// var maxLimit = parseFloat(baki_total.value); //17092025
-	var maxLimit = parseInt(document.getElementById('max_limit').value);
-	console.log(maxLimit);
-
-
-	// if (total_yuran > maxLimit) {
-	// 	yuranInput.value = '';
-	// 		Swal.fire({
-	// 			icon: 'error',
-	// 			title: 'Ralat',
-	// 			text: 'Amaun Yuran Pengajian dan Wang Saku tidak boleh melebihi RM' + maxLimit + ' / tahun kalendar akademik.',
-	// 		});
-
-	// 		return;
-	// }
-
-	var total = (parseFloat(wang_saku) + parseFloat(totalAmaun)).toFixed(2);
-
-    if (checkBox.checked == true) {
-		// if (total <= maxLimit) {
-			document.getElementById("amaun_wang_saku").value= wang_saku.toFixed(2);
-			
-			var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-			document.getElementById("jumlah").value = (amaun_wang_saku + totalAmaun).toFixed(2);
-			console.log("Total amount is within the limit: " + parseFloat(total));
-		// } else {
-		// 	var baki_wang_saku = maxLimit - totalAmaun;
-		// 	if (!isNaN(baki_wang_saku)) {
-		// 		document.getElementById("amaun_wang_saku").value = parseFloat(baki_wang_saku).toFixed(2);
-		// 		console.log("Total amount exceeds the limit: " + parseFloat(total));
-		// 		var amaun_wang_saku = parseFloat(document.getElementById('amaun_wang_saku').value) || 0; 
-		// 		document.getElementById("jumlah").value = (baki_wang_saku + totalAmaun).toFixed(2);
-		// 	} else {
-		// 		document.getElementById("amaun_wang_saku").value = "0.00";
-		// 		console.log("Invalid input. Cannot calculate total amount.");
-		// 	}
-		// }
-        
-    } else {
-        document.getElementById("amaun_wang_saku").value = "";
-		document.getElementById("jumlah").value = totalAmaun.toFixed(2);
-    }
-}
-
-
-// Initialize a variable to store the total
-var totalAmaun = 0;
-
-// Query the table rows using the correct selector
-var rows = document.querySelectorAll("table#itemtuntutan tbody tr");
-
-for (var i = 0; i < rows.length; i++) {
-	var amaunCell = rows[i].querySelector("td#amaun");
-	if (amaunCell) {
-		var amaunText = amaunCell.textContent.trim();
-		var amaunValue = parseFloat(amaunText) || 0;
-		totalAmaun += amaunValue;
-	}
-}
-
-document.getElementById("jumlah").value = totalAmaun.toFixed(2);
-
-myFunction();
-</script>
-<script>
-    $(document).ready(function () {
-		$('#itemtuntutan tbody tr').on('dblclick', function () {
-			var rowData = $(this).find('td'); 
-
-			// Extract data 
-			var jenisValue = $(rowData[1]).text(); 
-			var noresitValue = $(rowData[2]).text().trim();
-			var notaresitValue = $(rowData[3]).text().trim(); 
-			var amaunyuranValue = $(rowData[4]).text(); 
-
-			var linkElement = $(rowData[2]).find('a');
-			var hrefValue = linkElement.length ? linkElement.attr('href') : null;
-
-			var fileLinkContainer = $('#fileLinkContainer');
-			fileLinkContainer.empty();
-
-			if (hrefValue) {
-				// Create an anchor element dynamically
-				var fileLink = $('<a>')
-					.attr('href', hrefValue)
-					.attr('target', '_blank')
-					.text(hrefValue.split('/').pop()); // filename at the end of URL
-
-				fileLinkContainer.append(fileLink);
-			} else {
-				// If no link, show "TIADA DOKUMEN"
-    			fileLinkContainer.text("TIADA DOKUMEN");
-			}
-
-			// Set the selected options in the form
-			$('#jenis_yuran').val(jenisValue).trigger('change');
-			$('#no_resit').val(noresitValue).trigger('change');
-			$('#nota_resit').val(notaresitValue).trigger('change');
-			$('#amaun_yuran').val(amaunyuranValue).trigger('change');
-
-			// Show the form
-			$('#dataForm').show();
-		});
-	});
-
 
 </script>
+
 
 </x-default-layout> 
