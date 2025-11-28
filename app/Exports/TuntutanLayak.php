@@ -115,16 +115,24 @@ class TuntutanLayak implements FromCollection, WithHeadings, WithColumnWidths, W
         $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', $item['smoku_id'])->first();
         $tuntutan_item = TuntutanItem::orderBy('id', 'desc')->where('tuntutan_id', $tuntutan->id)->first();
  
-        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+        // Default fallback for nota_resit
+        $nota_resit = strtoupper(trim($tuntutan_item->nota_resit ?? ''));
+
+        if (empty($nota_resit)) {
+            $nota_resit = '-';
+        }
+
+        if (($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) && ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL)) 
+        {
             $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI ' . $tuntutan->sesi;
-        } elseif ($item['yuran'] == 1) {
+        } elseif ($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) {
             $result = 'YURAN PENGAJIAN SESI ' . $tuntutan->sesi;
-        } elseif ($item['wang_saku'] == 1) {
+        } elseif ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL) {
             $result = 'ELAUN WANG SAKU SESI ' . $tuntutan->sesi;
         } else {
             $result = 'LAIN-LAIN';
         }
-        // dd($result);
+
         return $result;
     }
 
