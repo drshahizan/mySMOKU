@@ -94,16 +94,17 @@ class DrafLejarPermohonan implements FromCollection, WithHeadings, WithColumnWid
         // Fetch sesi from Akademik table
         $sesi = Akademik::where('smoku_id', $item['smoku_id'])->value('sesi');
  
-        if ($item['yuran'] == 1 && $item['wang_saku'] == 1) {
+        if (($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) && ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL)) 
+        {
             $result = 'YURAN PENGAJIAN DAN ELAUN WANG SAKU SESI ' . $sesi;
-        } elseif ($item['yuran'] == 1) {
+        } elseif ($item['yuran_disokong'] != '0.00' && $item['yuran_disokong'] != NULL) {
             $result = 'YURAN PENGAJIAN SESI ' . $sesi;
-        } elseif ($item['wang_saku'] == 1) {
+        } elseif ($item['wang_saku_disokong'] != '0.00' && $item['wang_saku_disokong'] != NULL) {
             $result = 'ELAUN WANG SAKU SESI ' . $sesi;
         } else {
             $result = 'LAIN-LAIN';
         }
-        // dd($result);
+
         return $result;
     }
 
