@@ -304,7 +304,7 @@ class SaringanController extends Controller
                     }, 'smoku'])
                     ->join('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
                     ->select('permohonan.*', 'smoku_waris.pendapatan_waris')
-                    ->orderBy('smoku_waris.pendapatan_waris', 'asc') // sort by income
+                    ->orderByRaw("CAST(REPLACE(smoku_waris.pendapatan_waris, ',', '') AS UNSIGNED) ASC")
                     ->get();
 
         // Append name of 'dilaksanakan_oleh'
