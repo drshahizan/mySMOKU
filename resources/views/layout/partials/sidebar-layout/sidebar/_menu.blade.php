@@ -606,6 +606,12 @@
 						<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>
 					</a>
 				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.muat-turun.lejar')}}">
+						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
+						<span class="menu-title">Muat Turun Lejar</span>
+					</a>
+				</div>
 
 				<div class="menu-item pt-5">
 					<div class="menu-content">

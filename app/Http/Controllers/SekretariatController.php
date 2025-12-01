@@ -10,6 +10,8 @@ use App\Exports\DrafSPBB1a;
 use App\Exports\DrafSPBB2;
 use App\Exports\DrafSPBB2a;
 use App\Exports\DrafSPBB3;
+use App\Exports\LejarPermohonan;
+use App\Exports\LejarTuntutan;
 use App\Exports\PenyaluranTuntutan;
 use App\Exports\SenaraiPendek;
 use App\Exports\SenaraiPendekBKOKU;
@@ -4232,6 +4234,28 @@ class SekretariatController extends Controller
         ]);
 
         return back()->with('success', 'Sesi salur berjaya disimpan.');
+    }
+
+    //PENYALURAN SPBB
+
+    //Muat Turn Lejar
+    public function muatTurunLejar()
+    {
+        $sesiSalur = SesiSalur::orderBy('id', 'desc')->get();
+        $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
+        
+        return view('spbb.sekretariat.muat_turun_lejar', compact('institusiPengajianUA','sesiSalur'));
+    }
+
+    public function muatTurunLejarPermohonan($id_institusi, $sesi)
+    {
+        return Excel::download(new LejarPermohonan($id_institusi, $sesi), 'Lejar-Baharu_Permohonan.xlsx');
+    }
+
+    public function muatTurunLejarTuntutan($id_institusi, $sesi)
+    {
+        
+        return Excel::download(new LejarTuntutan($id_institusi, $sesi), 'Lejar-SediaAda_Tuntutan.xlsx');
     }
 
 }
