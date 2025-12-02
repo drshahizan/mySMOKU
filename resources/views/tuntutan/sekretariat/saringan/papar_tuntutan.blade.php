@@ -232,7 +232,7 @@
                                         <table class="table table-hover table-bordered mb-5">
                                             <thead class="table-primary">
                                             <tr>
-                                                <th style="width: 5%;">No.</th>
+                                                <th style="width: 6%;">No.</th>
                                                 <th style="width: 20%;">Item</th>
                                                 <th style="width: 15%;">Keputusan Saringan</th>
                                                 <th style="width: 20%;">No. Resit</th>
@@ -246,10 +246,10 @@
                                                         // dd($keputusan);
                                                     @endphp
                                                 <tr>
-                                                    <td style="text-align:left;">1</td>
+                                                    <td>1</td>
                                                     <td>
                                                         @if($salinan->kepPeperiksaan)
-                                                            <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                            <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                         @else
                                                             <span>Keputusan Peperiksaan</span>
                                                         @endif
