@@ -96,7 +96,7 @@
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
-                                        $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
+                                        // $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
                                         $tkh_bayaran = DB::table('sejarah_tuntutan')->where('id', $sejarah_t->id)->value('created_at');
                                         // nama pemohon
                                         $text = ucwords(strtolower($smoku->nama)); 
@@ -243,7 +243,7 @@
                                                 <tr>
                                                     <td>Catatan</td>
                                                     <td>:</td>
-                                                    <td>{{$saringan->catatan}}</td>
+                                                    <td>{{$saringan->catatan ?? '-'}}</td>
                                                 </tr>
                                             </table>
                                         </div>
