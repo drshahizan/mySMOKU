@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
     <head>
-        <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta property="og:type" content="article"/>
-        <link rel="stylesheet" href="/assets/css/style.bundle.css">
-        <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+         <link rel="stylesheet" href="/assets/css/saringan.css">
 
         <style>
             body{
@@ -115,9 +107,40 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
+                                        if($tuntutan->status==5){
+                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 5)->value('created_at');
+                                        }
+                                        elseif($tuntutan->status==6){
+                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 6)->value('created_at');
+                                        }
+                                        elseif($tuntutan->status==7){
+                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 7)->value('created_at');
+                                        }
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
+                                        $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', $tuntutan->status)->latest()->value('dilaksanakan_oleh');
+
+                                        if($user_id==null){
+                                            $user_name = "Tiada Maklumat";
+                                        }
+                                        else{
+                                            $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                            $text = ucwords(strtolower($user_name));
+                                            $conjunctions = ['bin', 'binti'];
+                                            $words = explode(' ', $text);
+                                            $result = [];
+                                            foreach ($words as $word) {
+                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                    $result[] = Str::lower($word);
+                                                } else {
+                                                    $result[] = $word;
+                                                }
+                                            }
+                                            $user_name = implode(' ', $result);
+                                        }
+
+                                        $status = DB::table('bk_status')->where('kod_status', $sejarah_t->status)->value('status');
                                         $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
 
                                         // nama pemohon
@@ -182,6 +205,10 @@
                                             @else
                                                 <td>Tidak Ditaja</td>
                                             @endif
+                                            <td class="space">&nbsp;</td>
+                                    <td><strong>Status</strong></td>
+                                    <td>:</td>
+                                    <td>{{ucwords(strtolower($status_tuntutan))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -201,7 +228,7 @@
                                                 <table class="table table-hover table-bordered mb-5">
                                                     <thead class="table-primary">
                                                     <tr>
-                                                        <th style="width: 5%;">No.</th>
+                                                        <th style="width: 6%;">No.</th>
                                                         <th style="width: 20%;">Item</th>
                                                         <th style="width: 15%;">Keputusan Saringan</th>
                                                         <th style="width: 20%;">No. Resit</th>
@@ -210,16 +237,28 @@
                                                     </thead>
                                                     <tbody>
                                                     @if($sama_semester==false)
+                                                        @php
+                                                            $salinan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
+                                                            // dd($keputusan);
+                                                        @endphp
                                                         <tr>
-                                                            <td style="text-align:right;">1</td>
+                                                            <td>1</td>
                                                             <td>
-                                                                <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                                @if($salinan && $salinan->kepPeperiksaan)
+                                                                    <span>
+                                                                        <a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">
+                                                                            Keputusan Peperiksaan
+                                                                        </a>
+                                                                    </span>
+                                                                @else
+                                                                    <span>Keputusan Peperiksaan</span>
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 {{$saringan->saringan_kep_peperiksaan}}
                                                             </td>
                                                             <td>
-                                                                -
+                                                                CGPA - {{ $salinan->cgpa ?? '-' }}
                                                             </td>
                                                             <td>
                                                                 Keseluruhan keputusan peperiksaan
@@ -231,7 +270,7 @@
                                                             $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
                                                         @endphp
                                                         <tr>
-                                                            <td style="text-align:right;">{{$i++}}</td>
+                                                            <td>{{$i++}}</td>
                                                             <td>
                                                                 <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
                                                             </td>
@@ -283,8 +322,6 @@
                                                     <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                    {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
-                                                    {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>--}}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -310,11 +347,6 @@
                                                     <td>:</td>
                                                     <td>{{number_format($tuntutan->yuran_disokong + $tuntutan->wang_saku_disokong, 2)}}</td>
                                                 </tr>
-                                                {{--                                                <tr>--}}
-                                                {{--                                                    <td>Jumlah tuntutan yang dibayar (RM)</td>--}}
-                                                {{--                                                    <td>:</td>--}}
-                                                {{--                                                    <td>{{number_format($tuntutan->yuran_dibayar + $tuntutan->wang_saku_dibayar, 2)}}</td>--}}
-                                                {{--                                                </tr>--}}
                                                 <tr>
                                                     <td>Catatan</td>
                                                     <td>:</td>
@@ -341,7 +373,6 @@
                                                     <th class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Jenis Tuntutan</th>
                                                     <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dituntut (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
-                                                    {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -349,7 +380,6 @@
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest">Wang Saku</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->amaun_wang_saku, 2)}}</td>
                                                     <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_disokong, 2)}}</td>
-                                                    {{--                                                    <td class="border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest text-right">{{number_format($tuntutan->wang_saku_dibayar, 2)}}</td>--}}
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -395,8 +425,6 @@
                                                     <th class="th-yellow border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Disokong (RM)</th>
                                                     <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>
-                                                    {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Dibayar (RM)</th>--}}
-                                                    {{--                                                    <th class="th-green border-top-0 pr-0 py-4 font-size-h6 font-weight-boldest bold white">Baki (RM)</th>--}}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -479,5 +507,5 @@
             </div>
         </div>
     </body>
-</html>
+</x-default-layout>
 

@@ -214,7 +214,7 @@
                                             <table class="table table-hover table-bordered mb-5">
                                                 <thead class="table-primary">
                                                 <tr>
-                                                    <th style="width: 5%;">No.</th>
+                                                    <th style="width: 6%;">No.</th>
                                                     <th style="width: 20%;">Item</th>
                                                     <th style="width: 15%;">Keputusan Saringan</th>
                                                     <th style="width: 20%;">No. Resit</th>
@@ -222,16 +222,28 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php
+                                                        $salinan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
+                                                        // dd($keputusan);
+                                                    @endphp
                                                 <tr>
-                                                    <td style="text-align:right;">1</td>
+                                                    <td>1</td>
                                                     <td>
-                                                        <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan') }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                        @if($salinan && $salinan->kepPeperiksaan)
+                                                            <span>
+                                                                <a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">
+                                                                    Keputusan Peperiksaan
+                                                                </a>
+                                                            </span>
+                                                        @else
+                                                            <span>Keputusan Peperiksaan</span>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         {{$saringan->saringan_kep_peperiksaan}}
                                                     </td>
                                                     <td>
-                                                        -
+                                                        CGPA - {{ $salinan->cgpa ?? '-' }}
                                                     </td>
                                                     <td>
                                                         Keseluruhan keputusan peperiksaan
@@ -239,7 +251,7 @@
                                                 </tr>
                                                 @foreach($tuntutan_item as $item)
                                                     <tr>
-                                                        <td style="text-align:right;">{{$i++}}</td>
+                                                        <td>{{$i++}}</td>
                                                         <td>
                                                             <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
                                                         </td>

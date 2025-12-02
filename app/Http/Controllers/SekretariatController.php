@@ -3867,12 +3867,242 @@ class SekretariatController extends Controller
     public function hantarSaringan(Request $request, $id)
     {
         $t_id = SejarahTuntutan::where('id', $id)->value('tuntutan_id');
-        Tuntutan::where('id', $t_id)
-            ->update([
-                'yuran_disokong'        =>  $request->get('yuran_disokong'),
-                'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
-                'baki_disokong'         =>  $request->get('baki_disokong'),
+        $no_rujukan_tuntutan= Tuntutan::where('id', $t_id)->value('no_rujukan_tuntutan');
+        $permohonan_id = Tuntutan::where('id', $t_id)->value('permohonan_id');
+        $smoku_id = Tuntutan::where('id', $t_id)->value('smoku_id');
+        // dd($no_rujukan_tuntutan);
+        // Tuntutan::where('id', $t_id)
+        //     ->update([
+        //         'yuran_disokong'        =>  $request->get('yuran_disokong'),
+        //         'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+        //         'baki_disokong'         =>  $request->get('baki_disokong'),
+        //     ]);
+
+        // 1) LAYAK
+        if($request->get('keputusan')=="Layak"){
+
+            Tuntutan::where('id', $t_id)
+                ->update([
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'status'                =>  6,
+                ]);
+
+            $i=0;
+
+            $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $t_id)->first();
+            // Update rekod sedia ada
+            $existingTuntutan->update([
+                'catatan' => $request->catatan,
+                'status'  => 6,
             ]);
+            
+            $status_rekod = new SejarahTuntutan([
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $t_id,
+                'status'            =>  6,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
+            ]);
+            $status_rekod->save();
+
+            // EMEL
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $t_id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
+            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
+            if ($program == "BKOKU") {
+                $emel = EmelKemaskini::where('emel_id', 5)->first();
+
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    }
+                    
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                    }
+                    else{
+                        Mail::to($smoku_emel)->send(new TuntutanLayak($emel));
+                    }
+                }
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',11)->first();
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanLayak($emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanLayak($emel));
+                }
+            }
+
+            $status_kod=1;
+            $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Layak'.";
+        }
+        
+        // 2) TIDAK LAYAK
+        elseif($request->get('keputusan')=="TidakLayak"){
+
+            Tuntutan::where('id', $t_id)
+                ->update([
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'status'                =>  7,
+                ]);
+
+            $i=0;
+
+            $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $t_id)->first();
+            // Update rekod sedia ada
+            $existingTuntutan->update([
+                'catatan' => $request->catatan,
+                'status'  => 7,
+            ]);
+            
+            $status_rekod = new SejarahTuntutan([
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $t_id,
+                'status'            =>  7,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
+            ]);
+            $status_rekod->save();
+            $saringan = SaringanTuntutan::where('tuntutan_id',$t_id)->first();
+            $tuntutan_item = TuntutanItem::where('tuntutan_id', $t_id)->get();
+
+            // EMEL
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $t_id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
+            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
+            if ($program == "BKOKU") {
+                $emel = EmelKemaskini::where('emel_id', 6)->first();
+
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    }
+                    
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    } else{
+                        Mail::to($smoku_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                    }
+                }
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',12)->first();
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanTidakLayak($saringan,$tuntutan_item,$emel));
+                }
+            }
+
+            $status_kod=1;
+            $status = "Tuntutan ".$no_rujukan_tuntutan." telah disaring dengan status 'Tidak Layak'.";
+        } 
+
+        // 3) DIKEMBALIKAN
+        elseif($request->get('keputusan')=="Kembalikan"){
+
+            Tuntutan::where('id', $t_id)
+                ->update([
+                    'yuran_disokong'        =>  $request->get('yuran_disokong'),
+                    'wang_saku_disokong'    =>  $request->get('w_saku_disokong'),
+                    'status'                =>  5,
+                ]);
+
+            $i=0;
+
+            $existingTuntutan = SaringanTuntutan::where('tuntutan_id', $t_id)->first();
+            // Update rekod sedia ada
+            $existingTuntutan->update([
+                'catatan' => $request->catatan,
+                'status'  => 5,
+            ]);
+            
+            $status_rekod = new SejarahTuntutan([
+                'smoku_id'          =>  $smoku_id,
+                'tuntutan_id'       =>  $t_id,
+                'status'            =>  5,
+                'dilaksanakan_oleh' =>  Auth::user()->id,
+            ]);
+            $status_rekod->save();
+            $saringan = SaringanTuntutan::where('tuntutan_id',$t_id)->first();
+            $tuntutan_item = TuntutanItem::where('tuntutan_id', $t_id)->get();
+
+            // EMEL
+            $penyelaras_id = SejarahTuntutan::where('tuntutan_id', $id)->where('status', 2)->value('dilaksanakan_oleh');
+            $penyelaras_emel = User::where('id', $penyelaras_id)->value('email');
+            $smoku_emel =Smoku::where('id', $smoku_id)->value('email');
+            $program = Permohonan::where('id', $permohonan_id)->value('program');
+            $id_institusi = Akademik::where('id', $smoku_id)->value('id_institusi');
+            $jenis_institusi = InfoIpt::where('id_institusi', $id_institusi)->value('jenis_institusi');
+
+            if($program=="BKOKU"){
+                $emel = EmelKemaskini::where('emel_id',4)->first();
+                // Clean and validate $smoku_emel
+                $smoku_emel = trim($smoku_emel);
+                
+                // Validate email
+                $isValidEmail = filter_var($smoku_emel, FILTER_VALIDATE_EMAIL);
+
+                if (empty(trim($smoku_emel)) || !$isValidEmail) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    if($jenis_institusi != 'IPTS'){
+                        Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }else{
+                        Mail::to($smoku_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                    }
+                }
+               
+            }
+            elseif($program=="PPK"){
+                $emel = EmelKemaskini::where('emel_id',10)->first();
+                if (empty(trim($smoku_emel))) {
+                    // If $smoku_emel is blank or contains only spaces, just send to penyelaras
+                    Mail::to($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                } else {
+                    // Otherwise, send to smoku with cc to penyelaras
+                    Mail::to($smoku_emel)->cc($penyelaras_emel)->send(new TuntutanDikembalikan($saringan,$tuntutan_item,$emel));
+                }
+            }
+
+            $status_kod=2;
+            $status = "Tuntutan ".$no_rujukan_tuntutan." telah dikembalikan.";
+        }
 
         $sejarah_t = SejarahTuntutan::where('id', $id)->first();
         $tuntutan = Tuntutan::where('id', $sejarah_t->tuntutan_id)->first();

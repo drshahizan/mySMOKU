@@ -75,7 +75,6 @@
                                                     <th>Tarikh Tuntutan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status</th>
-                                                    <!-- Add more columns as needed -->
                                                 </tr>
                                             </thead>
                                         </table>
@@ -125,156 +124,157 @@
                             
                         },
                         columns: [
-                        { 
-                            data: 'no_rujukan_tuntutan',
-                            render: function(data, type, row) {
-                                // Construct the URL using the no_rujukan_permohonan value
-                                var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
-                                // Create and return the link element
-                                return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                            }
-                        },
-                        { data: 'no_baucer' },  
-                        {   
-                            data: 'tarikh_baucer',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                            { 
+                                data: 'no_rujukan_tuntutan',
+                                render: function(data, type, row) {
+                                    // Construct the URL using the no_rujukan_permohonan value
+                                    var url = "{{ url('tuntutan/sekretariat/sejarah/rekod-tuntutan/') }}" + '/' + row.id;
+                                    // Create and return the link element
+                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                }
+                            },
+                            { data: 'no_baucer' },  
+                            {   
+                                data: 'tarikh_baucer',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                } 
+
+                            },  
+                            {
+                                data: 'yuran_dibayar',
+                                render: function(data, type, row) {
+                                    // If the data is being displayed, add .00 to the end
+                                    if (data === null) {
+                                        return '-';
+                                    }
+                                    // If the data is being displayed, add .00 to the end
+                                    else if (type === 'display' || type === 'filter') {
+                                        return data + '.00';
+                                    }
                                     return data;
                                 }
-                            } 
-
-                        },  
-                        {
-                            data: 'yuran_dibayar',
-                            render: function(data, type, row) {
-                                // If the data is being displayed, add .00 to the end
-                                if (data === null) {
-                                    return '-';
-                                }
-                                // If the data is being displayed, add .00 to the end
-                                else if (type === 'display' || type === 'filter') {
-                                    return data + '.00';
-                                }
-                                return data;
-                            }
-                        },  
-                        {
-                            data: 'wang_saku_dibayar',
-                            render: function(data, type, row) {
-                                // If the data is being displayed, add .00 to the end
-                                if (data === null) {
-                                    return '-';
-                                }
-                                // If the data is being displayed, add .00 to the end
-                                else if (type === 'display' || type === 'filter') {
-                                    return data + '.00';
-                                }
-                                return data;
-                            }
-                        },  
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
-
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
+                            },  
+                            {
+                                data: 'wang_saku_dibayar',
+                                render: function(data, type, row) {
+                                    // If the data is being displayed, add .00 to the end
+                                    if (data === null) {
+                                        return '-';
+                                    }
+                                    // If the data is being displayed, add .00 to the end
+                                    else if (type === 'display' || type === 'filter') {
+                                        return data + '.00';
+                                    }
                                     return data;
                                 }
-                            }
-                        },
-                        {
-                            data: 'tarikh_transaksi',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                            },  
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'tarikh_transaksi',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
+
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
+
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
+                                    } else {
+                                        // For sorting and other purposes, return the original data
+                                        return data;
+                                    }
+                                }
+                            }, 
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
+
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
                                 }
                             }
-                        }, 
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
-
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
-
-                                return status;
-                            }
-                        }]
+                        ]
 
                     });
                 }

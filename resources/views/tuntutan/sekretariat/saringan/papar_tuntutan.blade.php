@@ -270,7 +270,7 @@
                                                     $invoisResit = "/assets/dokumen/tuntutan/".$item['resit'];
                                                 @endphp
                                                 <tr>
-                                                    <td style="text-align:left;">{{$i++}}</td>
+                                                    <td>{{$i++}}</td>
                                                     <td>
                                                         @if($item->resit)
                                                             <span><a href="{{ url($invoisResit) }}" target="_blank">{{$item['jenis_yuran']}}</a></span>
@@ -504,7 +504,7 @@
                             @endif
                             <!--end: Invoice body-->
                             <div class="col-md-6 text-right">
-                                <a href="{{ url('tuntutan/sekretariat/saringan/senarai-tuntutan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Teruskan </button></a>
+                                <a href="{{ url('tuntutan/sekretariat/saringan/senarai-tuntutan') }}" class="white"><button class="btn btn-primary theme-bg gradient action-btn" value="Simpan" id="check">Kembali </button></a>
                             </div>
                         </div>
                     </div>
