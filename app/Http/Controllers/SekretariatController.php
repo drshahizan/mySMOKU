@@ -3570,11 +3570,17 @@ class SekretariatController extends Controller
                                 $subQuery->where('jenis_institusi', '=', 'IPTS');
                             });
                     })
-                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
+                    ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
                             ->with('infoipt');
                     }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
                     ->get();
 
         return response()->json($permohonan);
@@ -3589,11 +3595,17 @@ class SekretariatController extends Controller
                                 $subQuery->where('jenis_institusi', '=', 'P');
                             });
                     })
-                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
+                    ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
                             ->with('infoipt');
                     }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
                     ->get();
 
         return response()->json($permohonan);
@@ -3608,11 +3620,17 @@ class SekretariatController extends Controller
                                 $subQuery->where('jenis_institusi', '=', 'KK');
                             });
                     })
-                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
+                    ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
                             ->with('infoipt');
                     }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
                     ->get();
 
         return response()->json($permohonan);
@@ -3627,11 +3645,17 @@ class SekretariatController extends Controller
                             $subQuery->where('jenis_institusi', '=', 'UA');
                         });
                     })
-                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
+                    ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
                         $query->with('infoipt');
                     }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
                     ->get();
 
 
@@ -3645,11 +3669,17 @@ class SekretariatController extends Controller
                         $query->where('status', 1);
                         $query->whereHas('infoipt');
                     })
-                    ->whereHas('tuntutan') // Filter only Permohonan records that have associated Tuntutan records
+                    ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
                         $query->with('infoipt');
                     }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
                     ->get();
 
 
