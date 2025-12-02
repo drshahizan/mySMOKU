@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
     <head>
-        <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta property="og:type" content="article"/>
-        <link rel="stylesheet" href="/assets/css/style.bundle.css">
         <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <style>
             .maklumat, .maklumat td{
@@ -187,13 +179,25 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @php
+                                                            $salinan = DB::table('permohonan_peperiksaan')->where('permohonan_id', $permohonan->id)->orderBy('id', 'DESC')->first();
+                                                            // dd($keputusan);
+                                                        @endphp
                                                     <tr>
-                                                        <td style="text-align:right;">1</td>
+                                                        <td>1</td>
                                                         <td>
-                                                            <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
+                                                            @if($salinan && $salinan->kepPeperiksaan)
+                                                                <span>
+                                                                    <a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">
+                                                                        Keputusan Peperiksaan
+                                                                    </a>
+                                                                </span>
+                                                            @else
+                                                                <span>Keputusan Peperiksaan</span>
+                                                            @endif
                                                         </td>
                                                         <td>
-                                                            -
+                                                            CGPA - {{ $salinan->cgpa ?? '-' }}
                                                         </td>
                                                         <td>
                                                             Keseluruhan keputusan peperiksaan
@@ -201,7 +205,7 @@
                                                     </tr>
                                                     @foreach($tuntutan_item as $item)
                                                         <tr>
-                                                            <td style="text-align:right;">{{$i++}}</td>
+                                                            <td>{{$i++}}</td>
                                                             <td>
                                                                 @if(!empty($item['resit']))
                                                                     <a href="/assets/dokumen/tuntutan/{{ $item['resit'] }}" target="_blank">
@@ -232,4 +236,4 @@
             </div>
         </div>
     </body>
-</html>
+</x-default-layout>
