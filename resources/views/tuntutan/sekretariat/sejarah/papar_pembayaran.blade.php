@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
     <head>
-        <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta property="og:type" content="article"/>
-        <link rel="stylesheet" href="/assets/css/style.bundle.css">
         <link rel="stylesheet" href="/assets/css/saringan.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <style>
             body{
@@ -411,4 +403,4 @@
             </div>
         </div>
     </body>
-</html>
+</x-default-layout>
