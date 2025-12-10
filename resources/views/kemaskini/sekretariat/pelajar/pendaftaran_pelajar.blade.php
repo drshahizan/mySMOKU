@@ -217,6 +217,28 @@
                 confirmButtonText: 'OK'
             });
         @endif
+
+        @if(session('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Telah Didaftarkan!',
+                text: ' {!! session('warning') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('failed_msg'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                html: `
+                    {{ session('failed_msg') }} <br>
+                    <a href="{{ session('failed_url') }}">Klik disini untuk semak</a>
+                `,
+                confirmButtonText: 'OK'
+            });
+        @endif
+
     </script>
 
 </x-default-layout>

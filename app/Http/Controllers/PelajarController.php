@@ -43,12 +43,23 @@ class PelajarController extends Controller
     {
         $user = User::all()->where('no_kp',Auth::user()->no_kp);
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->where('smoku_id',$smoku_id->id)
+        ->where('status',1)
+        ->first();
 
-        $permohonan_id = Permohonan::orderBy("id", "desc")
-            ->where('smoku_id', $smoku_id->id)
+        $permohonan_id = Permohonan::where('smoku_id', $smoku_id->id)
+            ->whereRaw("
+                    SUBSTRING_INDEX(
+                        SUBSTRING_INDEX(no_rujukan_permohonan, '/', 2),
+                        '/',
+                        -1
+                    ) = ?
+                ", [$akademik->peringkat_pengajian])
+            ->orderBy("id", "desc")
             ->first();
 
-        if ($permohonan_id !== null) {
+        if ($permohonan_id) {
             $permohonan = SejarahPermohonan::orderBy("sejarah_permohonan.created_at", "desc")
                 ->join('bk_status', 'bk_status.kod_status', '=', 'sejarah_permohonan.status')
                 ->where('sejarah_permohonan.smoku_id', $smoku_id->id)
@@ -73,7 +84,7 @@ class PelajarController extends Controller
             $tuntutan_id = null;
         }
 
-        if ($tuntutan_id !== null) {
+        if ($tuntutan_id) {
             $tuntutan = Tuntutan::orderBy("sejarah_tuntutan.created_at", "desc")
                 ->join('sejarah_tuntutan', 'sejarah_tuntutan.tuntutan_id', '=', 'tuntutan.id')
                 ->join('bk_status', 'bk_status.kod_status', '=', 'sejarah_tuntutan.status')
@@ -91,14 +102,7 @@ class PelajarController extends Controller
             $tuntutan = collect(); // empty collection instead of []
         }
 
-        
-
-        $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->where('smoku_id',$smoku_id->id)
-        ->where('status',1)
-        ->first();
-
-        if($akademik !== null)
+        if($akademik)
         {
             $currentDate = Carbon::now();
             $tarikhMula = Carbon::parse($akademik->tarikh_mula);

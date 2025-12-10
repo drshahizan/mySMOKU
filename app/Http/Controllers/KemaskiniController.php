@@ -14,6 +14,7 @@ use App\Models\Hubungan;
 use App\Models\InfoIpt;
 use App\Models\JenisOku;
 use App\Models\JumlahPeruntukan;
+use App\Models\KelasPenganugerahan;
 use App\Models\Keturunan;
 use App\Models\Kursus;
 use App\Models\Mod;
@@ -25,6 +26,7 @@ use App\Models\Permohonan;
 use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\SumberBiaya;
+use App\Models\TamatPengajian;
 use App\Models\Tuntutan;
 use App\Models\User;
 use App\Models\Waris;
@@ -267,7 +269,6 @@ class KemaskiniController extends Controller
         
         return view('kemaskini.sekretariat.pelajar.senarai_pelajar_institusi', compact('institusiPengajian'));
 
-
     }
 
     public function getSenaraiPelajar()
@@ -284,6 +285,13 @@ class KemaskiniController extends Controller
             ->orderBy('nama')
             ->get()
             ->map(function ($item) {
+                // Check tamat pengajian
+                $permohonanId = optional($item->permohonan->first())->id;
+
+                $tamat_pengajian = TamatPengajian::where('smoku_id', $item->id)
+                    ->where('permohonan_id', $permohonanId)
+                    ->exists();
+                
                 // Ambil hanya satu rekod akademik yang status=1
                 $akademik = $item->akademik->first();
                 return [
@@ -296,13 +304,12 @@ class KemaskiniController extends Controller
                     'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
-                    'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now())
+                    'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
+                    'tamat_pengajian' => $tamat_pengajian
                 ];
             });
 
         return response()->json($pelajar);
-
-
 
     }
 
@@ -936,7 +943,7 @@ class KemaskiniController extends Controller
     public function tambahPelajar()
     {
         $smoku = Smoku::join('smoku_daftar', 'smoku_daftar.smoku_id', '=', 'smoku.id')
-            ->where('pendaftar_id', '=', Auth::user()->id)
+            // ->where('pendaftar_id', '=', Auth::user()->id)
             ->where('status', '=', 0)
             ->get();
 
@@ -1038,25 +1045,38 @@ class KemaskiniController extends Controller
             );
 
             $smoku=Smoku::where([['no_kp', '=', $no_kp]])->first();
-            $pendaftar=DB::table('smoku_daftar')->where('smoku_id', '=', $smoku->id)->first();
-            $pendaftar_sama=DB::table('smoku_daftar')->where('smoku_id', '=', $smoku->id)->where([['pendaftar_id', '=', Auth::user()->id]])->first();
+            $permohonan=Permohonan::where([['smoku_id', '=', $smoku->id]])->first();
+            if(!$permohonan){
+                $alreadyRegistered = DB::table('smoku_daftar')
+                    ->where('smoku_id', $smoku->id)
+                    ->exists();
 
-            if ($smoku != null && $pendaftar_sama == null) {
-                if ($pendaftar == null) {
-                    DB::table('smoku_daftar')->insert([
-                        'smoku_id' => $smoku->id,
-                        'pendaftar_id' => Auth::user()->id,
-                        'status' => '0',
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                } else {
-                    return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with($no_kp)
-                        ->with('failed', $no_kp . ' Maklumat pelajar telah wujud dalam Sistem SiSPO.');
+                $alreadyByUser = DB::table('smoku_daftar')
+                    ->where('smoku_id', $smoku->id)
+                    ->where('pendaftar_id', Auth::id())
+                    ->exists();
+
+                if ($alreadyRegistered && $alreadyByUser) {
+                    return redirect()->route('kemaskini.sekretariat.daftar.pelajar')
+                        ->with($no_kp)
+                        ->with('warning', $no_kp . ' Maklumat pelajar telah didaftarkan.');
+                }else if ($alreadyRegistered && !$alreadyByUser) {
+                    return redirect()->route('kemaskini.sekretariat.daftar.pelajar')
+                        ->with($no_kp)
+                        ->with('warning', $no_kp . ' Maklumat pelajar telah didaftarkan oleh sekretariat lain.');
                 }
+
+                DB::table('smoku_daftar')->insert([
+                    'smoku_id' => $smoku->id,
+                    'pendaftar_id' => Auth::id(),
+                    'status' => '0',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             } else {
-                return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with($no_kp)
-                    ->with('failed', $no_kp . ' Telah didaftarkan.');
+                return redirect()->route('kemaskini.sekretariat.daftar.pelajar')
+                    ->with('failed_url', route('kemaskini.sekretariat.senarai.profil'))
+                    ->with('failed_msg', $no_kp . ' Maklumat pelajar telah wujud dalam SisPO.');
             }
 
             $smoku = Smoku::where('no_kp', $no_kp)->first();
@@ -1282,6 +1302,198 @@ class KemaskiniController extends Controller
         DB::table('smoku_daftar')->where('smoku_id',$id)->delete();
         
         return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with('success', 'Pendaftaran pelajar telah di padam.');
+    }
+
+    //Sekretariat lapor tamat pengajian pelajar
+    public function tamatPengajianPelajar($smoku_id)
+    {   
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku->id)->first();
+        $maklumat_kerja = ButiranPelajar::where('smoku_id', $smoku->id)->first();
+
+        $kelas = KelasPenganugerahan::all()->sortBy('id');
+
+        $ipt = InfoIpt::orderBy('nama_institusi', 'asc')
+              ->whereIn('jenis_institusi', ['UA', 'IPTS', 'P', 'KK'])
+              ->get();
+       
+        // Initialize variables to hold uploaded file information
+        $uploadedSijilTamat = [];
+        $uploadedTranskrip = [];
+        $cgpa = '';
+        $kelas_p = '';
+        $perakuan = '';
+        $status_pekerjaan = '';
+        $sektor = '';
+        $pekerjaan = '';
+        $pendapatan = '';
+        $uploadedTawaran = [];
+        $institusi = '';
+        $peringkat = '';
+        $kursus = '';
+
+        // Check if $tamat_pengajian is not null and has uploaded files
+        if ($tamat_pengajian) {
+            if ($tamat_pengajian->sijil_tamat) {
+                $uploadedSijilTamat = is_array($tamat_pengajian->sijil_tamat) ? $tamat_pengajian->sijil_tamat : [$tamat_pengajian->sijil_tamat];
+            }
+
+            if ($tamat_pengajian->transkrip) {
+                $uploadedTranskrip = is_array($tamat_pengajian->transkrip) ? $tamat_pengajian->transkrip : [$tamat_pengajian->transkrip];
+            }
+
+            if($tamat_pengajian->cgpa){
+                $cgpa = $tamat_pengajian->cgpa;
+            }
+
+            if($tamat_pengajian->kelas){
+                $kelas_p = $tamat_pengajian->kelas;
+            }
+
+            if($tamat_pengajian->perakuan){
+                $perakuan = $tamat_pengajian->perakuan;
+            }
+        }
+        // Check if $maklumat_kerja is not null
+        if ($maklumat_kerja) {
+           
+
+            if ($maklumat_kerja->status_pekerjaan) {
+                $status_pekerjaan = $maklumat_kerja->status_pekerjaan ? $maklumat_kerja->status_pekerjaan : [$maklumat_kerja->status_pekerjaan];
+            }
+
+            if ($maklumat_kerja->sektor) {
+                $sektor = $maklumat_kerja->sektor ? $maklumat_kerja->sektor : [$maklumat_kerja->sektor];
+            }
+            
+            if ($maklumat_kerja->pekerjaan) {
+                $pekerjaan = $maklumat_kerja->pekerjaan ? $maklumat_kerja->pekerjaan : [$maklumat_kerja->pekerjaan];
+            }
+
+            if($maklumat_kerja->pendapatan){
+                $pendapatan = $maklumat_kerja->pendapatan ? $maklumat_kerja->pendapatan : [$maklumat_kerja->pendapatan];
+            }
+        }
+        // Check if $pengajian_baharu is not null and has uploaded files
+        if ($tamat_pengajian) {
+            if ($tamat_pengajian->tawaran) {
+                $uploadedTawaran = is_array($tamat_pengajian->tawaran) ? $tamat_pengajian->tawaran : [$tamat_pengajian->tawaran];
+            }
+
+            if($tamat_pengajian->institusi){
+                $institusi = $tamat_pengajian->id_institusi;
+            }
+
+            if($tamat_pengajian->peringkat){
+                $peringkat = $tamat_pengajian->peringkat_pengajian;
+            }
+
+            if($tamat_pengajian->kursus){
+                $kursus = $tamat_pengajian->nama_kursus;
+            }
+        }
+
+        // dd($pekerjaan);
+
+           
+
+        return view('kemaskini.sekretariat.pelajar.lapor_tamat_pengajian', compact('smoku', 'uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'status_pekerjaan', 'sektor', 'pekerjaan', 'pendapatan', 'kelas', 'uploadedTawaran', 'ipt', 'tamat_pengajian'));
+    }
+
+    public function hantarTamatPengajianPelajar(Request $request, $smoku_id)
+    {
+        $smoku = Smoku::where('id', $smoku_id)->first();
+        $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+        $akademik = Akademik::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+
+        // Validate incoming file uploads
+        $validatedData = $request->validate([
+            'sijilTamat.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'transkrip.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'tawaran.*'    => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
+
+        $uploadedSijilTamat = [];
+        $uploadedTranskrip = [];
+        $uploadedTawaran = [];
+
+        $sijilTamat = $request->file('sijilTamat');
+        $transkrip = $request->file('transkrip');
+        $tawaran = $request->file('tawaran');
+
+        $cgpa = $request->cgpa;
+        $kelas = $request->kelas;
+        $perakuan = $request->perakuan;
+
+        // Find or create a TamatPengajian record
+        $tamatPengajian = TamatPengajian::firstOrNew([
+            'smoku_id' => $smoku->id,
+            'permohonan_id' => $permohonan->id,
+        ]);
+
+        // Handle sijil tamat & transkrip
+        if ($sijilTamat && $transkrip) {
+            foreach ($sijilTamat as $key => $sijil) {
+                $filenameSijil = uniqid() . '_' . $sijil->getClientOriginalName();
+                $sijil->move('assets/dokumen/sijil_tamat', $filenameSijil);
+                $uploadedSijilTamat[] = $filenameSijil;
+
+                $filenameTranskrip = uniqid() . '_' . $transkrip[$key]->getClientOriginalName();
+                $transkrip[$key]->move('assets/dokumen/salinan_transkrip', $filenameTranskrip);
+                $uploadedTranskrip[] = $filenameTranskrip;
+
+                // Store only last file if multiple uploaded
+                $tamatPengajian->sijil_tamat = $filenameSijil;
+                $tamatPengajian->transkrip = $filenameTranskrip;
+            }
+        }
+
+        // Handle tawaran
+        if ($tawaran) {
+            foreach ($tawaran as $file) {
+                $filenameTawaran = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move('assets/dokumen/permohonan', $filenameTawaran);
+                $uploadedTawaran[] = $filenameTawaran;
+
+                // Store only last file if multiple uploaded
+                $tamatPengajian->tawaran = $filenameTawaran;
+            }
+
+        }
+
+        // Save academic info
+        $tamatPengajian->cgpa = $cgpa;
+        $tamatPengajian->kelas = $kelas;
+        // Save new permohonan info
+        $tamatPengajian->institusi = $request->id_institusi;
+        $tamatPengajian->peringkat = $request->peringkat_pengajian;
+        $tamatPengajian->kursus = $request->nama_kursus;
+        $tamatPengajian->institusi_lama = $akademik->id_institusi; //simpan maklumat lama
+        $tamatPengajian->peringkat_lama = $akademik->peringkat_pengajian;
+        $tamatPengajian->kursus_lama = $akademik->nama_kursus;
+        $tamatPengajian->perakuan = $perakuan;
+        $tamatPengajian->save();
+
+        // Update employment info
+        $status_pekerjaan = $request->status_pekerjaan;
+        $sektor = $status_pekerjaan === 'TIDAK BEKERJA' ? null : $request->sektor;
+        $pekerjaan = $status_pekerjaan === 'TIDAK BEKERJA' ? null : strtoupper($request->pekerjaan);
+        $pendapatan = $status_pekerjaan === 'TIDAK BEKERJA' ? null : $request->pendapatan;
+
+        ButiranPelajar::where('smoku_id', $smoku->id)->update([
+            'status_pekerjaan' => $status_pekerjaan,
+            'sektor'           => $sektor,
+            'pekerjaan'        => $pekerjaan,
+            'pendapatan'       => $pendapatan,
+        ]);
+
+        // Store uploaded filenames in session
+        session()->put('uploadedSijilTamat', $uploadedSijilTamat);
+        session()->put('uploadedTranskrip', $uploadedTranskrip);
+        session()->put('uploadedTawaran', $uploadedTawaran);
+        session()->put('perakuan', $perakuan);
+
+        return redirect()->route('kemaskini.sekretariat.senarai.profil')->with('success', 'Dokumen lapor diri tamat pengajian telah berjaya dihantar.');
     }
 
 }

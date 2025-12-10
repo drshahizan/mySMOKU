@@ -5,15 +5,26 @@
 			->where('no_kp', Auth::user()->no_kp)
 			->first();
 
-		$permohonan = DB::table('permohonan')
-			->where('smoku_id', $smoku->id)
-			->orderBy('id', 'desc')
-			->first();
-
 		$akademik = DB::table('smoku_akademik')
 			->where('smoku_id', $smoku->id)
 			->where('status', 1)
 			->first();
+
+		$permohonan = null;
+
+		if ($akademik) {
+			$permohonan = DB::table('permohonan')
+				->where('smoku_id', $smoku->id)
+				->whereRaw("
+					SUBSTRING_INDEX(
+						SUBSTRING_INDEX(no_rujukan_permohonan, '/', 2),
+						'/',
+						-1
+					) = ?
+				", [$akademik->peringkat_pengajian])
+				->orderBy('id', 'desc')
+				->first();
+		}
 
 		$institusi = null;
 		if ($akademik && $akademik->id_institusi) {

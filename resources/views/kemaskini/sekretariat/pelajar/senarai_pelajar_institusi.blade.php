@@ -262,6 +262,16 @@
                                 if (data) {
                                     return '<div class="badge badge-light-success fw-bold">Aktif</div>';
                                 } else {
+
+                                    var url = "{{ route('kemaskini.sekretariat.tamat.pengajian', ['id' => '__id__']) }}".replace('__id__', row.smoku_id);
+
+                                    if (!row.tamat_pengajian) {
+                                        return  '<div class="badge badge-light-danger fw-bold mb-2">Tidak Aktif</div>' +
+                                                '<br>' +
+                                                '<a href="' + url + '" class="btn btn-sm btn-primary mt-2" title="Lapor Tamat Pengajian">' +
+                                                    'Lapor Tamat Pengajian' +
+                                                '</a>';
+                                    }
                                     return '<div class="badge badge-light-danger fw-bold">Tidak Aktif</div>';
                                 }
                             },
