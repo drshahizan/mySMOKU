@@ -147,4 +147,8 @@
             }
         });
     </script>
+    <script>
+        localStorage.clear();
+    </script>
+
 </x-auth-layout>

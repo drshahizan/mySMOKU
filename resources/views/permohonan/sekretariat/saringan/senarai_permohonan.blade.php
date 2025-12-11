@@ -400,163 +400,171 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
                     });
                 }
 
@@ -575,163 +583,171 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
                     });
                 }
 
@@ -750,163 +766,172 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
+
                     });
                 }
 
@@ -925,163 +950,171 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
                     });
                 }
 
@@ -1100,163 +1133,171 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
                     });
                 }
 
@@ -1275,175 +1316,187 @@
                             url: "/assets/lang/Malay.json"
                         },
                         columns: [
-                        {
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                let url = '';
-                                const status = row.status;
-                                const ownerId = row.user_id;
-                                const id = row.id;
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    let url = '';
+                                    const status = row.status;
+                                    const ownerId = row.user_id;
+                                    const id = row.id;
 
-                                if (status == 2) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId == currentUserId) {
-                                    url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                } else if (status == 3 && ownerId != currentUserId) {
-                                    return data;
-                                } else {
-                                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
-                                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                                }
-                            }
-                        }, 
-                        { 
-                            data: 'smoku.nama', 
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                    if (status == 2) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId == currentUserId) {
+                                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                                    } else if (status == 3 && ownerId != currentUserId) {
+                                        return data;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
+                            }, 
+                            { 
+                                data: 'smoku.nama', 
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
 
-                                return formatted_nama;
-                            }
-                        },
-                        { data: 'akademik.infoipt.nama_institusi' }, 
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
 
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
 
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
 
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
+                                    return formatted_nama;
                                 }
-                            }
-                        },
-                        {
-                            data: 'pendapatan_waris',
-                            render: function (data, type, row) {
-                                if (data == null || data === "") return "RM 0.00";
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!data) return ' '; // handle null, undefined, or empty string
 
-                                // convert to float and format with 2 decimals
-                                let num = parseFloat(data);
-                                return "RM " + num.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                            }
-                        },
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
+                                        var date = new Date(data);
+                                        if (isNaN(date.getTime())) return ' '; // handle invalid dates
 
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
+                                        // Get the year, month, and day components
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+                                        var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
 
-                                return status;
-                            }
-                        },
-                        {
-                            data: 'dilaksanakan_oleh_nama',
-                            render: function(data, type, row) {
-                                // Define conjunctions to be handled differently
-                                var conjunctions_lower = ['bin', 'binti'];
-                                var conjunctions_upper = ['A/L', 'A/P'];
-
-                                // Split the nama field into words
-                                var words = data.split(' ');
-
-                                // Process each word
-                                for (var i = 0; i < words.length; i++) {
-                                    var word = words[i];
-
-                                    // Check if the word is a conjunction to be displayed in lowercase
-                                    if (conjunctions_lower.includes(word.toLowerCase())) {
-                                        // Convert the word to lowercase
-                                        words[i] = word.toLowerCase();
-                                    } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                        // Convert the word to uppercase
-                                        words[i] = word.toUpperCase();
+                                        // Return the formatted date as YYYY/MM/DD
+                                        return day + '/' + month + '/' + year;
                                     } else {
-                                        // Capitalize the first letter of other words
-                                        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        // For sorting and other purposes, return the original data
+                                        return data;
                                     }
                                 }
+                            },
+                            {
+                                data: 'pendapatan_waris',
+                                render: function (data, type, row) {
+                                    if (data == null || data === "") return "RM 0.00";
 
-                                // Join the words back into a single string
-                                var formatted_nama = words.join(' ');
+                                    // convert to float and format with 2 decimals
+                                    let num = parseFloat(data);
+                                    return "RM " + num.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                                }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    var status = ''; // Initialize an empty string for the button HTML
 
-                                return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    // Define the button HTML based on the status value
+                                    switch (data) {
+                                        case '1':
+                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            break;
+                                        case '2':
+                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            break;
+                                        case '3':
+                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            break;
+                                        case '4':
+                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            break;
+                                        case '5':
+                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            break;
+                                        case '6':
+                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            break;
+                                        case '7':
+                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            break;
+                                        case '8':
+                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            break;
+                                        case '9':
+                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            break;
+                                        case '10':
+                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            break;    
+                                        default:
+                                            status = ''; // Set empty string for unknown status values
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    // Define conjunctions to be handled differently
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+
+                                    // Split the nama field into words
+                                    var words = data.split(' ');
+
+                                    // Process each word
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        // Check if the word is a conjunction to be displayed in lowercase
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            // Convert the word to lowercase
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            // Convert the word to uppercase
+                                            words[i] = word.toUpperCase();
+                                        } else {
+                                            // Capitalize the first letter of other words
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    // Join the words back into a single string
+                                    var formatted_nama = words.join(' ');
+
+                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                }
+                            }
+                        ],
+
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
                             }
                         }
-                        ]
                     });
                 }
+
+                $('#institusiDropdown').on('change', function () {
+                    localStorage.setItem('selectedInstitusi_permohonan', $(this).val());
+                });
 
                 // Function to clear filters for all tables
                 function clearFilters() {
@@ -1475,11 +1528,28 @@
                     // Add default option
                     $('#institusiDropdown').append('<option value="">Pilih Institusi Pengajian</option>');
 
-                    // Add options based on the selected tab
+                    // Add options
                     for (var i = 0; i < institusiList.length; i++) {
-                        $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
+                        $('#institusiDropdown').append(
+                            '<option value="' + institusiList[i].nama_institusi + '">' +
+                            institusiList[i].nama_institusi +
+                            '</option>'
+                        );
+                    }
+
+                    // Load saved institusi
+                    let saved = localStorage.getItem('selectedInstitusi_permohonan');
+
+                    // Check if saved value exists in this tab's dropdown
+                    if (saved && $('#institusiDropdown option[value="' + saved + '"]').length > 0) {
+                        $('#institusiDropdown').val(saved);
+                    } else {
+                        // The saved institution is not in this category → clear it
+                        $('#institusiDropdown').val("");
                     }
                 }
+
+
 
                 // Add an event listener for tab clicks
                 $('.nav-link').on('click', function() {
@@ -1525,55 +1595,32 @@
             });
         </script>
          
+
+
         <script>
             function applyFilter() 
             {
-                // Reinitialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable2', 'datatable2');
-                initDataTable('#sortTable3', 'datatable3');
-                initDataTable('#sortTable4', 'datatable4');
-                initDataTable('#sortTable5', 'datatable5');
-                initDataTable('#sortTable6', 'datatable6');
+                var selectedInstitusi = $('#institusiDropdown').val() || '';
 
-                function initDataTable(tableId, variableName) {
-                    // Check if the datatable is already initialized
-                    if ($.fn.DataTable.isDataTable(tableId)) {
-                        // Destroy the existing DataTable instance
-                        $(tableId).DataTable().destroy();
-                    }
-
-                    // Initialize the datatable and assign it to the global variable
-                    window[variableName] = $(tableId).DataTable({
-                        ordering: true, // Enable manual sorting
-                        order: [], // Disable initial sorting
-                        language: {
-                            url: "/assets/lang/Malay.json"
-                        },
-                        columnDefs: [
-                            { orderable: false, targets: [0] }
-                        ]
-                    });
-                }
-
-                var selectedInstitusi = $('[name="institusi"]').val();
-
-                // Apply search filter and log data for all tables
-                applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-                applyAndLogFilter('Table 2', datatable2, selectedInstitusi);
-                applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
-                applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
-                applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
-                applyAndLogFilter('Table 6', datatable6, selectedInstitusi);
+                filterTable('#sortTable1', selectedInstitusi);
+                filterTable('#sortTable2', selectedInstitusi);
+                filterTable('#sortTable3', selectedInstitusi);
+                filterTable('#sortTable4', selectedInstitusi);
+                filterTable('#sortTable5', selectedInstitusi);
+                filterTable('#sortTable6', selectedInstitusi);
             }
 
-            function applyAndLogFilter(tableName, table, filterValue) {
-                // Apply search filter to the table
-                table.column(2).search(filterValue).draw();
-
-                // Go to the first page for the table
-                table.page(0).draw(false);
+            function filterTable(tableSelector, filterValue) {
+                if ($.fn.DataTable.isDataTable(tableSelector)) {
+                    var table = $(tableSelector).DataTable();
+                    table.column(2).search(filterValue).draw();
+                    table.page(0).draw(false);
+                }
             }
         </script>
+
+
+        
+
     </body>
 </x-default-layout>
