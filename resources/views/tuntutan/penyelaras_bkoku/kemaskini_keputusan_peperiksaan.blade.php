@@ -110,26 +110,37 @@
 									</div>
 
 									<div class="col-lg-6">
+										<!-- PILIHAN -->
 										<div>
 											<label>
-												<input type="radio" name="choice" value="cgpa" required oninvalid="this.setCustomValidity('Sila pilih salah satu.')" oninput="setCustomValidity('')"> CGPA
+												<input type="radio" name="choice" value="pointer" required oninvalid="this.setCustomValidity('Sila pilih salah satu.')" oninput="setCustomValidity('')"> CGPA
 											</label>
 											<label>
 												<input type="radio" name="choice" value="penyelidikan" required oninvalid="this.setCustomValidity('Sila pilih salah satu.')" oninput="setCustomValidity('')"> Penyelidikan
 											</label>
 										</div>
-
+										<!-- CGPA -->
 										<div id="cgpa-input" class="mb-5" style="display:none;">
 											<label class="fs-6 fw-semibold form-label mb-2">
-												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="3.50">
-													<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-												</span>
+												<i class="fa-solid fa-circle-info text-info"></i>
 											</label>
-											<input type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" />
+											<input
+												type="number"
+												class="form-control form-control-solid"
+												step="0.01"
+												max="4.00"
+												pattern="^[0-4](\.\d{1,2})?$"
+												name="cgpa"
+												oninvalid="this.setCustomValidity('Sila isi CGPA.')"
+												oninput="this.setCustomValidity('')">
 										</div>
-
+										<!-- PENYELIDIKAN -->
 										<div id="penyelidikan-input" class="mb-5" style="display:none;">
-											<select name="cgpa" class="form-select form-control-solid" required oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
+											<select
+												class="form-select form-control-solid"
+												name="cgpa"
+												oninvalid="this.setCustomValidity('Sila pilih.')"
+												oninput="this.setCustomValidity('')">
 												<option value="" disabled selected>Sila pilih</option>
 												<option value="LULUS">Lulus</option>
 												<option value="TIDAK LULUS">Tidak Lulus</option>
@@ -249,28 +260,37 @@
     const cgpaField = cgpaInput.find('input');
     const penyelidikanField = penyelidikanInput.find('select');
 
-    $('input[name="choice"]').on('change', function() {
-        if (this.value === 'cgpa') {
-            cgpaInput.show();
-            penyelidikanInput.hide().find('select').val('');
+    $('input[name="choice"]').on('change', function () {
+		if (this.value === 'pointer') {
+			// Show CGPA, hide Penyelidikan
+			cgpaInput.show();
+			penyelidikanInput.hide();
+			penyelidikanField.val('');
 
-            // Make CGPA required and remove required from Penyelidikan
-            cgpaField.prop('required', true);
-            penyelidikanField.prop('required', false);
-        } else if (this.value === 'penyelidikan') {
-            cgpaInput.hide().find('input').val('');
-            penyelidikanInput.show();
+			// Enable + name cgpa (so it will submit)
+			cgpaField.prop('disabled', false).prop('required', true).attr('name', 'cgpa');
 
-            // Make Penyelidikan required and remove required from CGPA
-            penyelidikanField.prop('required', true);
-            cgpaField.prop('required', false);
-        }
+			// Disable + remove name (so it won't submit)
+			penyelidikanField.prop('disabled', true).prop('required', false).removeAttr('name').val('');
 
-		// Clear radio button validity
-		$('input[name="choice"]').each(function() {
+		} else if (this.value === 'penyelidikan') {
+			// Show Penyelidikan, hide CGPA
+			penyelidikanInput.show();
+			cgpaInput.hide();
+			cgpaField.val('');
+
+			// Enable + name cgpa (so it will submit)
+			penyelidikanField.prop('disabled', false).prop('required', true).attr('name', 'cgpa');
+
+			// Disable + remove name (so it won't submit)
+			cgpaField.prop('disabled', true).prop('required', false).removeAttr('name').val('');
+		}
+
+		// Clear radio validity
+		$('input[name="choice"]').each(function () {
 			this.setCustomValidity('');
 		});
-    });
+	});
 
     cgpaField.on('change', function() {
         const cgpa = parseFloat($(this).val());
