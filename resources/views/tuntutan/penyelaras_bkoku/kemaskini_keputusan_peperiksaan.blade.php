@@ -196,7 +196,7 @@
 						<!--begin::Input group-->
 						<div class="mb-10">
 							<!--begin::Label-->
-							<label class="fs-3 fw-bold text-gray-800">Keputusan Peperiksaan.</label>
+							<label class="fs-3 fw-bold text-gray-800">Keputusan Peperiksaan</label>
 							<br>
 							<br>
 							<div class="table-responsive">
