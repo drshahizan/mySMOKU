@@ -30,17 +30,66 @@
 							<div class="mb-0">
 								<!--begin::Row-->
 								<div class="row gx-10 mb-5">
+									<div class="col-lg-12">
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Nama</label>
+										<!--begin::Input group-->
+										<div class="mb-5">
+											<input type="text" id="nama" name="nama" value="{{ $smoku?->nama }}" class="form-control form-control-solid" placeholder="" oninput="setCustomValidity('')" readonly/>
+										</div>
+									</div>
+								</div>
+								<div class="row gx-10 mb-5">
+									<div class="col-lg-12">
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">No. Kad Pengenalan</label>
+										<!--begin::Input group-->
+										<div class="mb-5">
+											<input type="text" id="no_kp" name="no_kp" value="{{ $smoku?->no_kp }}" class="form-control form-control-solid" placeholder="" oninput="setCustomValidity('')" readonly/>
+										</div>
+									</div>
+								</div>
+								<div class="row gx-10 mb-5">
 									<!--begin::Col-->
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi Pengajian</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
 										<div class="mb-5">
-											<input type="text" id="sesi" name="sesi" class="form-control form-control-solid" placeholder="" value="{{$sesiSemasa}}" readonly/>
+											@php
+												$year = date('Y'); 
+												$nextYear = $year + 1; 
+												$sesiSemasa = $year . '/' . $nextYear; 
+											@endphp
+
+											<select id="sesi" name="sesi"  
+												class="form-select form-select-solid" 
+												data-control="select2" 
+												data-hide-search="true" 
+												data-placeholder="Pilih" 
+												required 
+												oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
+												oninput="setCustomValidity('')">
+
+												<option></option>
+												@for ($i = -2; $i <= 1; $i++) 
+													@php 
+														$start = $year + $i; 
+														$end = $start + 1; 
+														$sesi = $start . '/' . $end; 
+													@endphp
+													<option value="{{ $sesi }}" {{ $previousSesi == $sesi ? 'selected' : '' }}>
+														{{ $sesi }}
+													</option>
+												@endfor
+											</select>
+
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Semester</label>
+										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
 										<div class="mb-5">
-											<input type="text" id="semester" name="semester" class="form-control form-control-solid" placeholder="" value="{{$semSemasa}}" readonly/>
+											<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
+												<option></option>
+												<option value="1" {{ $sesiLepas == '1' ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
+												<option value="2" {{ $sesiLepas == '2' ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
+											</select>
 										</div>
 									</div>
 									<!--end::Col-->
