@@ -71,17 +71,35 @@ class PenyelarasController extends Controller
     public function index()
     {
         $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
-            ->leftJoin('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
+            // akademik: ambil status=1 sahaja
+            ->leftJoin('smoku_akademik as sa', function ($join) {
+                $join->on('sa.smoku_id', '=', 'smoku.id')
+                    ->where('sa.status', 1);
+            })
+
+            // permohonan: join ikut smoku_id DAN peringkat dalam no_rujukan_permohonan
+            ->leftJoin('permohonan as p', function ($join) {
+                $join->on('p.smoku_id', '=', 'smoku.id')
+                    ->where(function ($w) {
+                        $w->whereRaw("
+                                CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
+                                = sa.peringkat_pengajian
+                            ")
+                        ->orWhereRaw("
+                                NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') IS NULL
+                            ");
+                    });
+            })
             ->where('penyelaras_id', '=', Auth::user()->id)
             ->where(function ($query) {
-                $query->where('permohonan.status', '<', '2')
-                    ->orWhereNull('permohonan.status');
+                $query->where('p.status', '<', '2')
+                    ->orWhereNull('p.status');
             })
-            ->orWhereRaw("(SELECT permohonan.status FROM permohonan 
-                JOIN smoku_penyelaras ON smoku_penyelaras.smoku_id = permohonan.smoku_id 
-                WHERE permohonan.smoku_id = smoku.id AND penyelaras_id = " . Auth::user()->id . " 
-                ORDER BY permohonan.id DESC LIMIT 1) = 9")
-            ->select('smoku.*', 'smoku_penyelaras.*', 'permohonan.status', 'permohonan.id as permohonan_id')
+            ->orWhereRaw("(SELECT p.status FROM permohonan 
+                JOIN smoku_penyelaras ON smoku_penyelaras.smoku_id = p.smoku_id 
+                WHERE p.smoku_id = smoku.id AND penyelaras_id = " . Auth::user()->id . " 
+                ORDER BY p.id DESC LIMIT 1) = 9")
+            ->select('smoku.*', 'smoku_penyelaras.*', 'p.status', 'p.id as permohonan_id')
             ->get();
 
         return view('dashboard.penyelaras_bkoku.dashboard', compact('smoku'));
