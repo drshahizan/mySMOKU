@@ -73,7 +73,10 @@
                                                 <input type="datetime-local" name="email_verified_at"
                                                     class="form-control"
                                                     value="{{ $akaun_pelajar->email_verified_at ? $akaun_pelajar->email_verified_at->format('Y-m-d\TH:i') : '' }}"
-                                                    style="flex: 1;">
+                                                    style="flex: 1;"
+                                                    required 
+												    oninvalid="this.setCustomValidity('Sila masukkan tarikh pengesahan e-mel')" 
+												    oninput="setCustomValidity('')">
 
                                                 @if (is_null($akaun_pelajar->email_verified_at))
                                                     <span class="text-danger ms-12" style="font-size: 1.0rem; white-space: nowrap; align-self: center;">
