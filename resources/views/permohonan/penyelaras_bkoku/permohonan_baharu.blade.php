@@ -2202,7 +2202,7 @@
 
 								response['data'].forEach(function(item) {
 									var uppercaseValue = item.nama_kursus.toUpperCase();
-									var option = `<option value="${item.nama_kursus}">${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
+									var option = `<option value="${item.nama_kursus}">${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()}) - ${item.no_rujukan}</option>`;
 									$("#nama_kursus").append(option);
 								});
 							}

@@ -2051,22 +2051,26 @@
 		<script type='text/javascript'>
 			$(document).ready(function() {
 				var id_institusi = $('#id_institusi').val();
-				var kod_peringkat = $('#peringkat_pengajian').val();
+				var kod_peringkat = $('#peringkat').val();
 
 				// Function to fetch peringkat options
 				function fetchPeringkat(id) {
 					$.ajax({
-						url: '/peringkat/'+id_institusi,
+						url: '/peringkat/' + id,
 						type: 'get',
 						dataType: 'json',
 						success: function(response) {
 							$("#peringkat_pengajian").empty();
 							
-							$("#peringkat_pengajian").append('<option value="" disabled selected>PILIH</option>');
 							if (response['data']) {
+								var selectedValue = $('#peringkat').val();
+
+								if (!selectedValue) {
+									$("#peringkat_pengajian").append('<option value="" selected disabled></option>');
+								}
 
 								response['data'].forEach(function(item) {
-									var option = `<option value="${item.kod_peringkat}">${item.peringkat}</option>`;
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 
@@ -2083,23 +2087,44 @@
 					});
 				}
 
+
 				// Function to fetch kursus options based on id_institusi and kod_peringkat
 				function fetchKursus(id_institusi, kod_peringkat) {
 					$.ajax({
-						url: '/kursus/'+kod_peringkat+'/'+id_institusi,
+						url: '/kursus/' + kod_peringkat + '/' + id_institusi,
 						type: 'get',
 						dataType: 'json',
 						success: function(response) {
 							$("#nama_kursus").empty();
 
-							$("#nama_kursus").append('<option value="" disabled selected>PILIH</option>');
 							if (response['data']) {
+								var selectedValue = $('#nama_kursus_asal').val();
+								var found = false;
+
+								if (!selectedValue) {
+									$("#nama_kursus").append('<option value="" selected disabled></option>');
+								}
+
+								// If selectedValue is not in the list, add it manually
+								if (!found && selectedValue) {
+									var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
+									$("#nama_kursus").append(fallbackOption);
+								}
 
 								response['data'].forEach(function(item) {
 									var uppercaseValue = item.nama_kursus.toUpperCase();
-									var option = `<option value="${item.nama_kursus}">${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
+									var isSelected = item.nama_kursus === selectedValue;
+
+									if (isSelected) found = true;
+
+									var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
+										${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()}) - ${item.no_rujukan}
+									</option>`;
 									$("#nama_kursus").append(option);
+
 								});
+
+								
 							}
 						},
 						error: function() {
