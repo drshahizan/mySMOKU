@@ -396,76 +396,77 @@
 						</div>
 						<!--end::Input group-->
 						@php
-						
-							if (preg_match('/\b(\d{5})\b/', $smoku->alamat_tetap, $matches)) {
+							$postcode = '';
+							if (preg_match('/\b(\d{5})\b/', $smoku->alamat_tetap ?? '', $matches)) {
 								$postcode = $matches[1];
-							} else {
-								$postcode = '';
 							}
 
-							
-
-							// Split the address by the postcode
-							$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
-							// dd($addressParts);
-
-							// Check if the second part (after the postcode) exists
-							if (isset($addressParts[1])) {
-
-							// Extract state from the second part
-							$statePart = trim($addressParts[1]);
-
-							// Initialize variables
 							$selectedState = '';
-							$selectedCity = '';
+							$selectedCity  = '';
+							$stateID = null;
+							$cityID  = null;
 
-							// Search for the state in your $negeri collection
-							foreach ($negeri as $state) {
-								$stateName = $state->negeri;
-								$stateID = $state->id;
+							if ($postcode !== '') {
 
-								// Check if the state name is present in the address
-								if (stripos($statePart, $stateName) !== false) {
-									$selectedState = $stateName;
-									break; // Stop the loop once a match is found
+								// Split by postcode
+								$addressParts = explode($postcode, $smoku->alamat_tetap, 2);
+
+								if (isset($addressParts[1])) {
+									$statePart = trim($addressParts[1]);
+
+									// Cari negeri
+									foreach ($negeri as $state) {
+										if (stripos($statePart, $state->negeri) !== false) {
+											$selectedState = $state->negeri;
+											$stateID = $state->id;
+											break;
+										}
+									}
+
+									// Cari bandar hanya kalau negeri jumpa
+									if ($stateID) {
+										$bandar_city = DB::table('bk_bandar')
+											->where('negeri_id', $stateID)
+											->orderBy('id', 'asc')
+											->select('id', 'bandar')
+											->get();
+
+										foreach ($bandar_city as $city) {
+											if (stripos($statePart, $city->bandar) !== false) {
+												$selectedCity = $city->bandar;
+												$cityID = $city->id;
+												break;
+											}
+										}
+									}
 								}
 							}
 
-							// Trim any leading or trailing spaces in $statePart
-							$statePart = trim($statePart);
-
-							// Search for the city in your $bandar collection
-							$bandar_city = DB::table('bk_bandar')->where("negeri_id", $stateID)->orderBy("id", "asc")->select('id', 'bandar')->get();
-
-							foreach ($bandar_city as $city) {
-								$cityName = $city->bandar;
-								$cityID = $city->id;
-
-								// Check if the city name is present in the extracted part of the address
-								if (stripos($statePart, $cityName) !== false) {
-									$selectedCity = $cityName;
-									break; // Stop the loop once a match is found
-								}
+							// Trim address (buang postcode/state/city kalau ada)
+							$trimmedAddress = $smoku->alamat_tetap ?? '';
+							if ($postcode !== '') {
+								$trimmedAddress = str_replace($postcode, '', $trimmedAddress);
 							}
-							} else {
-							$selectedState = '';
-							$selectedCity = '';
+							if ($selectedState !== '') {
+								$trimmedAddress = str_replace($selectedState, '', $trimmedAddress);
 							}
-							if ($selectedCity === '') {
-								$cityID = '';
+							if ($selectedCity !== '') {
+								$trimmedAddress = str_replace($selectedCity, '', $trimmedAddress);
 							}
 
-							// Remove state and city from the address
-							$trimmedAddress = str_replace([$selectedCity, $selectedState, $postcode], '', $smoku->alamat_tetap);
-
-							// Remove "W.P." and extra spaces
 							$trimmedAddress = trim(str_replace(['W.P.', 'WILAYAH PERSEKUTUAN'], '', $trimmedAddress));
+							$trimmedAddress = preg_replace('/\s+/', ' ', $trimmedAddress);
 
-							//parlimen dengan dun
-							$parlimen = DB::table('bk_parlimen')->where('negeri_id', $stateID)
-										->orderby("id","asc")->get();
-
+							// Parlimen hanya kalau stateID ada
+							$parlimen = collect();
+							if ($stateID) {
+								$parlimen = DB::table('bk_parlimen')
+									->where('negeri_id', $stateID)
+									->orderBy('id', 'asc')
+									->get();
+							}
 						@endphp
+
 
 						<!--begin::Input group-->
 						<div class="fv-row mb-10">
