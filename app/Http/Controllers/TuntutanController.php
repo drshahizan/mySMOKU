@@ -47,14 +47,14 @@ class TuntutanController extends Controller
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
 
             $bulanMula  = $tarikhMula->format('n');
-            $isSpecialStart = in_array($bulanMula, [1, 3]);
+            $isSpecialStart = in_array($bulanMula, [1, 2, 3, 4, 5, 6]);
 
             // Initialize tahun sesi
             $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
             $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
             // Define semester pattern
-            if (in_array($bulanMula, [1, 3])) {
+            if (in_array($bulanMula, [1, 2, 3, 4, 5, 6])) {
                 if ($akademik->bil_bulan_per_sem == 6) {
                     $pattern = [1, 2];
                 } elseif ($akademik->bil_bulan_per_sem == 4) {
