@@ -117,13 +117,14 @@
 							<span class="menu-heading fw-bold text-uppercase fs-4">Kemaskini</span>
 						</div>
 					</div>
+					@if($akademik->tarikh_tamat > NOW())
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('kemaskini.keputusan') }}">
 							<span class="menu-icon">{!! getIcon('update-file', 'fs-2') !!}</span>
 							<span class="menu-title">Keputusan Peperiksaan</span>
 						</a>
 					</div>
-					@if($akademik->tarikh_tamat < NOW())
+					@else
 						<div class="menu-item">
 							<a class="menu-link" href="{{ route('tamat.pengajian') }}">
 								<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
