@@ -169,8 +169,8 @@
 								<table id="sortTable" class="table table-striped table-hover dataTable js-exportable">
 									<thead>
 										<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+											<th>Tahun</th>
 											<th>Sesi</th>
-											<th>Semester</th>
 											<th>Keputusan (CGPA)</th>
 											<th>Salinan</th>
 											<th class="text-center"></th>
