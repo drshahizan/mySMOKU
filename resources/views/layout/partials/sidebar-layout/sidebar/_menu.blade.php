@@ -24,6 +24,9 @@
 				", [$akademik->peringkat_pengajian])
 				->orderBy('id', 'desc')
 				->first();
+			if (!$permohonan) {
+				$permohonan = null;
+			}	
 		}
 
 		$institusi = null;
@@ -134,7 +137,7 @@
 					@endif
 				@endif
 
-				@if((!$akademik || $akademik->tarikh_tamat == null || $akademik->tarikh_tamat >= today()) && (!$permohonan || in_array($permohonan->status, [1, 2, 5, 7, 9])))
+				@if((!$akademik || $akademik->tarikh_tamat == null || $akademik->tarikh_tamat >= today()) && ($permohonan == null || in_array($permohonan->status, [1, 2, 5, 7, 9])))
 					@if($institusi && in_array($institusi->jenis_institusi, ['IPTS', 'UA', 'KK', 'P']))
 						<div class="menu-item pt-5">
 							<div class="menu-content">
