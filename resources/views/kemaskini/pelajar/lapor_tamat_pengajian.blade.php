@@ -317,7 +317,7 @@
 													<td>
 														<!--begin::Input-->
 														<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{ $tamat_pengajian->peringkat ?? '' }}" />
-														<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid"  data-control="select2" data-hide-search="true" data-placeholder="PILIH">
+														<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-lg form-select-solid basic-search"  data-control="select2" data-hide-search="true" data-placeholder="PILIH">
 															<option></option>
 														</select>
 														<!--end::Input-->
@@ -332,7 +332,7 @@
 													<td>
 														<!--begin::Input-->
 														<input type="hidden" id="nama_kursus_asal" value="{{ $tamat_pengajian->kursus ?? '' }}">
-														<select id='nama_kursus' name='nama_kursus' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" data-placeholder="PILIH">
+														<select id='nama_kursus' name='nama_kursus' class="form-select form-select-lg form-select-solid basic-search"  data-control="select2" data-hide-search="true" data-placeholder="PILIH">
 															<option></option>
 														</select>
 														<!--end::Input-->
