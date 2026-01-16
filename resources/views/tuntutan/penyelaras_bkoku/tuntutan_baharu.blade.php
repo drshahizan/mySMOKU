@@ -125,6 +125,11 @@
                                         $semCounter = 0;
                                         $semSemasa = 1;
 
+                                        // if (!$akademik || empty($akademik->bil_bulan_per_sem)) {
+                                        //     dd('AKADEMIK INVALID', $layak->smoku_id, $akademik);
+                                        // }
+                                        
+
                                         // Build all semesters
                                         while ($tarikhNextSem < $tarikhTamat) {
                                             $bulanMasuk = $tarikhNextSem->month;

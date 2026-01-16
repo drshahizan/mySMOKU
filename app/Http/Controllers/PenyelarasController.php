@@ -70,37 +70,55 @@ class PenyelarasController extends Controller
 {
     public function index()
     {
-        $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
-            // akademik: ambil status=1 sahaja
-            ->leftJoin('smoku_akademik as sa', function ($join) {
+        $ipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($ipt && $ipt->id_induk != null && $ipt->id_induk == $ipt->id_institusi) {
+            // user di IPT induk → boleh tengok semua anak
+            $idInstitusiList = InfoIpt::where('id_induk', Auth::user()->id_institusi)
+                ->pluck('id_institusi')
+                ->toArray();
+        } else {
+            // user di IPT anak / tiada induk → tengok IPT sendiri sahaja
+            $idInstitusiList = [Auth::user()->id_institusi];
+        }
+
+        $smoku = Smoku::leftJoin('smoku_akademik as sa', function ($join) {
                 $join->on('sa.smoku_id', '=', 'smoku.id')
                     ->where('sa.status', 1);
             })
-
-            // permohonan: join ikut smoku_id DAN peringkat dalam no_rujukan_permohonan
             ->leftJoin('permohonan as p', function ($join) {
                 $join->on('p.smoku_id', '=', 'smoku.id')
                     ->where(function ($w) {
                         $w->whereRaw("
-                                CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
-                                = sa.peringkat_pengajian
-                            ")
+                            CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
+                            = sa.peringkat_pengajian
+                        ")
                         ->orWhereRaw("
-                                NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') IS NULL
-                            ");
+                            NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(p.no_rujukan_permohonan,'/',2),'/',-1), '') IS NULL
+                        ");
                     });
             })
-            ->where('penyelaras_id', '=', Auth::user()->id)
-            ->where(function ($query) {
-                $query->where('p.status', '<', '2')
-                    ->orWhereNull('p.status');
+
+            ->whereIn('sa.id_institusi', $idInstitusiList)
+
+            ->where(function ($q) {
+                $q->where(function ($q2) {
+                        $q2->where('p.status', '<', 2)
+                        ->orWhereNull('p.status');
+                    })
+                ->orWhereRaw("
+                    (SELECT p2.status
+                    FROM permohonan p2
+                    WHERE p2.smoku_id = smoku.id
+                    ORDER BY p2.id DESC
+                    LIMIT 1) = 9
+                ");
             })
-            ->orWhereRaw("(SELECT p.status FROM permohonan 
-                JOIN smoku_penyelaras ON smoku_penyelaras.smoku_id = p.smoku_id 
-                WHERE p.smoku_id = smoku.id AND penyelaras_id = " . Auth::user()->id . " 
-                ORDER BY p.id DESC LIMIT 1) = 9")
-            ->select('smoku.*', 'smoku_penyelaras.*', 'p.status', 'p.id as permohonan_id')
+
+            ->select('smoku.*', 'sa.*', 'p.status', 'p.id as permohonan_id')
             ->get();
+
+
 
         return view('dashboard.penyelaras_bkoku.dashboard', compact('smoku'));
     }
@@ -773,25 +791,48 @@ class PenyelarasController extends Controller
         // Extract all `id_institusi` values (handles both single and multiple records)
         $idInstitusiList = $infoiptCollection->pluck('id_institusi');
         
-        $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
-        ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        ->leftJoin('tuntutan', function ($join) {
-            $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
-                ->whereRaw('tuntutan.id = (
-                    SELECT MAX(t.id) 
-                    FROM tuntutan t
-                    WHERE t.permohonan_id = permohonan.id
-                )')
-                ->whereNull('tuntutan.data_migrate');
-        })
-        ->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
-        ->whereIn('permohonan.status', [6,8]) 
-        ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
-        ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
-        ->distinct()
-        ->get();
+        $layak = Smoku::join('permohonan', 'permohonan.smoku_id', '=', 'smoku.id')
+
+                // akademik: hanya status=1 + match peringkat dari no_rujukan_permohonan
+                ->join('smoku_akademik as sa', function ($join) {
+                    $join->on('sa.smoku_id', '=', 'smoku.id')
+                        ->where('sa.status', 1)
+                        ->whereRaw("
+                            CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
+                            = sa.peringkat_pengajian
+                        ");
+                })
+
+                ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'sa.id_institusi')
+
+                ->leftJoin('tuntutan', function ($join) {
+                    $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
+                        ->whereRaw('tuntutan.id = (
+                            SELECT MAX(t.id)
+                            FROM tuntutan t
+                            WHERE t.permohonan_id = permohonan.id
+                        )')
+                        ->whereNull('tuntutan.data_migrate');
+                })
+
+                ->whereIn('sa.id_institusi', $idInstitusiList)
+                ->whereIn('permohonan.status', [6, 8])
+                ->whereDate('sa.tarikh_tamat', '>', today())
+                ->orderBy('permohonan.tarikh_hantar', 'DESC')
+
+                ->select(
+                    'smoku.*',
+                    'permohonan.program',
+                    'permohonan.id as permohonan_id',
+                    'permohonan.no_rujukan_permohonan',
+                    'permohonan.tarikh_hantar',
+                    'tuntutan.status as tuntutan_status',
+                    'sa.*',
+                    'bk_info_institusi.nama_institusi'
+                )
+                ->distinct()
+                ->get();
+
 
         // dd($layak);
 
