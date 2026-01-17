@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Month;
 
 class TuntutanController extends Controller
@@ -205,6 +206,12 @@ class TuntutanController extends Controller
     //TK GUNA DAH
     public function simpanTuntutan(Request $request)
     {   
+        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'resit' => 'sometimes|array',
+            'resit.*' => $resitRules,
+        ]);
+
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
@@ -274,20 +281,13 @@ class TuntutanController extends Controller
             ->first();
 
         $resit = $request->resit;
-        $counter = 1;
 
     
         // Check if $request->resit is not null before iterating
         if ($resit !== null && is_array($resit) && isset($resit[0]) && $resit[0] !== null) {
             foreach ($resit as $resitItem) {
-                $filenameresit = $resitItem->getClientOriginalName();
-                $uniqueFilename = $counter . '_' . $filenameresit;
-
-                // Append increment to the filename until it's unique
-                while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
-                    $counter++;
-                    $uniqueFilename = $counter . '_' . $filenameresit;
-                }
+                $extension = strtolower($resitItem->getClientOriginalExtension());
+                $uniqueFilename = Str::uuid()->toString() . '.' . $extension;
 
                 $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
 
@@ -309,8 +309,6 @@ class TuntutanController extends Controller
                     ],
                     $data
                 );
-
-                $counter++;
             }
         } else {
             // If $request->resit is null, update other data without updating resit

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ProfilController extends Controller
 {
@@ -23,25 +24,13 @@ class ProfilController extends Controller
         
         // Validate the file
         $request->validate([
-            'profile_photo_path' => 'required|image|mimes:jpg,jpeg,png|max:2048', // 2MB max
+            'profile_photo_path' => 'required|file|mimes:jpg,jpeg,png|mimetypes:image/jpeg,image/png|max:2048', // 2MB max
         ]);
 
 
         if ($request->hasFile('profile_photo_path')) {
-            // Get the original file name and extension
-            $originalFilename = $request->file('profile_photo_path')->getClientOriginalName();
-            $extension = $request->file('profile_photo_path')->getClientOriginalExtension();
-
-            if (substr_count($originalFilename, '.') > 1) {
-                return back()->withErrors('Nama fail tidak sah.');
-            }
-            
-            // Sanitize the filename by removing special characters, excluding the extension
-            $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-            $sanitizedFilename = preg_replace('/[^A-Za-z0-9\-\_]/', '', $filenameWithoutExtension);
-
-            // Generate a unique filename
-            $filename = Auth::user()->no_kp . "_" . time() . "_" . $sanitizedFilename . '.' . $extension;
+            $extension = strtolower($request->file('profile_photo_path')->getClientOriginalExtension());
+            $filename = Str::uuid()->toString() . '.' . $extension;
 
             // Move the file to the designated directory
             $request->file('profile_photo_path')->move(public_path('assets/profile_photo_path'), $filename);

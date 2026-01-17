@@ -16,6 +16,7 @@ use App\Models\Smoku;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mod;
 use App\Models\StatusTuntutan;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -63,9 +64,14 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {  
+        $request->validate([
+            'profile_photo_path' => 'nullable|file|mimes:jpg,jpeg,png|mimetypes:image/jpeg,image/png',
+        ]);
+
         if($request->hasFile('profile_photo_path'))
         {
-            $filename = strval(Auth::user()->no_kp) . "_" . $request->profile_photo_path->getClientOriginalName();
+            $extension = strtolower($request->profile_photo_path->getClientOriginalExtension());
+            $filename = Str::uuid()->toString() . '.' . $extension;
             //$request->profile_photo_path->storeAs('profile_photo_path',$filename,'public');
             $request->profile_photo_path->move('assets/profile_photo_path',$filename);
             //Auth()->user()->update(['profile_photo_path'=>$filename]);

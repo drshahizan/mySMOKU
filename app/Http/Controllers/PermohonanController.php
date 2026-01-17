@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PermohonanController extends Controller
 {
@@ -419,6 +420,15 @@ class PermohonanController extends Controller
 
     public function hantarPermohonan(Request $request)
     {   
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'akaunBank' => $docRules,
+            'suratTawaran' => $docRules,
+            'invoisResit' => $docRules,
+            'dokumen' => 'sometimes|array',
+            'dokumen.*' => $docRules,
+        ]);
+
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         
@@ -456,10 +466,8 @@ class PermohonanController extends Controller
             $file = $request->file($inputName);
 
             if ($file) {
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $newFilename);
 
                 // Check if the document already exists
@@ -493,12 +501,8 @@ class PermohonanController extends Controller
         // Check if $dokumen is a valid array and $catatan is an array
         if (is_array($dokumen) && is_array($catatan)) {
             foreach ($dokumen as $key => $img) {
-                $originalFilename = $img->getClientOriginalName();
-                $extension = $img->getClientOriginalExtension();
-                
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $runningNumber = rand(1000, 9999);
-                $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($img->getClientOriginalExtension());
+                $profileImage = Str::uuid()->toString() . '.' . $extension;
                 $img->move('assets/dokumen/permohonan/', $profileImage);
                 
                 $tambahan = new dokumen();
@@ -865,24 +869,21 @@ class PermohonanController extends Controller
 
     public function save(Request $request)
     {   
+        $request->validate([
+            'kepPeperiksaan' => 'required|array',
+            'kepPeperiksaan.*' => 'file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+        ]);
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         $emailmain = "bkoku@mohe.gov.my";
 
         $kepPeperiksaan=$request->kepPeperiksaan;
-        $counter = 1; 
 
         foreach($kepPeperiksaan as $kepPeperiksaan) {
         
-            $filenamekepP =$kepPeperiksaan->getClientOriginalName();  
-            $uniqueFilename = $counter . '_' . $filenamekepP;
-
-            // Append increment to the filename until it's unique
-            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                $counter++;
-                $uniqueFilename = $counter . '_' . $filenamekepP;
-            }
+            $extension = strtolower($kepPeperiksaan->getClientOriginalExtension());
+            $uniqueFilename = Str::uuid()->toString() . '.' . $extension;
             $kepPeperiksaan->move('assets/dokumen/peperiksaan',$uniqueFilename);
 
             $cgpa = $request->cgpa;
@@ -913,8 +914,6 @@ class PermohonanController extends Controller
             $data->pengesahan_rendah=$pengesahan;
             $data->kepPeperiksaan=$uniqueFilename;
             $data->save();
-
-            $counter++;
         }    
 
         return redirect()->route('kemaskini.keputusan')->with('success', 'Keputusan peperiksaan telah di simpan.');

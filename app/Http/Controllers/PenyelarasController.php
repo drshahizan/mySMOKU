@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Smoku;
 use App\Models\ButiranPelajar;
 use App\Models\Waris;
@@ -589,6 +590,15 @@ class PenyelarasController extends Controller
 
     public function hantar(Request $request)
     {   
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'akaunBank' => $docRules,
+            'suratTawaran' => $docRules,
+            'invoisResit' => $docRules,
+            'dokumen' => 'sometimes|array',
+            'dokumen.*' => $docRules,
+        ]);
+
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         // dd($permohonan->id);
@@ -628,10 +638,8 @@ class PenyelarasController extends Controller
             $file = $request->file($inputName);
 
             if ($file) {
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $newFilename);
 
                 // Check if the document already exists
@@ -666,12 +674,8 @@ class PenyelarasController extends Controller
         // Check if $dokumen is a valid array and $catatan is an array
         if (is_array($dokumen) && is_array($catatan)) {
             foreach ($dokumen as $key => $img) {
-                $originalFilename = $img->getClientOriginalName();
-                $extension = $img->getClientOriginalExtension();
-                
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $runningNumber = rand(1000, 9999);
-                $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($img->getClientOriginalExtension());
+                $profileImage = Str::uuid()->toString() . '.' . $extension;
                 $img->move('assets/dokumen/permohonan/', $profileImage);
                 
                 $tambahan = new dokumen();
@@ -989,26 +993,19 @@ class PenyelarasController extends Controller
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
+        $request->validate([
+            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+        ]);
+
         $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
         $smoku_id = Smoku::where('id',$id)->first();
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;
-        $counter = 1; 
-
-        // Check if files were uploaded
-        // tak wajib
-        $counter = 1; // Initialize the counter
 
         if ($request->hasFile('kepPeperiksaan')) {
             $kepPeperiksaan = $request->file('kepPeperiksaan');
-            $filenamekepP = $kepPeperiksaan->getClientOriginalName();
-            $uniqueFilename = $counter . '_' . $filenamekepP;
-
-            // Append increment to the filename until it's unique
-            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                $counter++;
-                $uniqueFilename = $counter . '_' . $filenamekepP;
-            }
+            $extension = strtolower($kepPeperiksaan->getClientOriginalExtension());
+            $uniqueFilename = Str::uuid()->toString() . '.' . $extension;
 
             // Move the uploaded file
             $kepPeperiksaan->move('assets/dokumen/peperiksaan', $uniqueFilename);
@@ -1333,6 +1330,12 @@ class PenyelarasController extends Controller
     //TK GUNA DAH
     public function simpanTuntutan(Request $request, $id)
     {   
+        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'resit' => 'sometimes|array',
+            'resit.*' => $resitRules,
+        ]);
+
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
@@ -1400,19 +1403,12 @@ class PenyelarasController extends Controller
             ->first();
 
         $resit = $request->resit;
-        $counter = 1;
 
         // Check if $request->resit is not null before iterating
         if ($resit !== null && is_array($resit) && isset($resit[0]) && $resit[0] !== null) {
             foreach ($resit as $resitItem) {
-                $filenameresit = $resitItem->getClientOriginalName();
-                $uniqueFilename = $counter . '_' . $filenameresit;
-
-                // Append increment to the filename until it's unique
-                while (file_exists('assets/dokumen/tuntutan/' . $uniqueFilename)) {
-                    $counter++;
-                    $uniqueFilename = $counter . '_' . $filenameresit;
-                }
+                $extension = strtolower($resitItem->getClientOriginalExtension());
+                $uniqueFilename = Str::uuid()->toString() . '.' . $extension;
 
                 $resitItem->move('assets/dokumen/tuntutan', $uniqueFilename);
 
@@ -1435,7 +1431,6 @@ class PenyelarasController extends Controller
                     $data
                 );
 
-                $counter++;
             }
         } else {
             // If $request->resit is null, update other data without updating resit
@@ -1875,12 +1870,12 @@ class PenyelarasController extends Controller
 
         // Validation rules
         $rules = [
-            'dokumen1.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
-            'dokumen1a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
-            'dokumen2.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
-            'dokumen2a.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
-            'dokumen3.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
-            'dokumen4.*' => 'sometimes|nullable|mimes:pdf,xls,xlsx|max:8192',
+            'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen3.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen4.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
         ];
 
         $customMessages = [
@@ -1926,7 +1921,8 @@ class PenyelarasController extends Controller
         $processFile = function ($inputName, $folder, $oldFile = null) use ($request, &$uploadedAnyFile) {
             $file = $request->file($inputName)[0] ?? null;
             if ($file && $file->isValid()) {
-                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename = Str::uuid()->toString() . '.' . $extension;
                 $file->move("assets/dokumen/{$folder}", $filename);
                 $uploadedAnyFile = true; // mark as uploaded
                 return $filename;
@@ -1977,7 +1973,7 @@ class PenyelarasController extends Controller
     public function uploadedFilePembayaranPermohonan(Request $request)
     {
         $request->validate([
-            'modified_excel_file1' => 'required|mimes:xlsx,xls',
+            'modified_excel_file1' => 'required|file|mimes:xlsx,xls|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
 
         $file = $request->file('modified_excel_file1');
@@ -2043,7 +2039,7 @@ class PenyelarasController extends Controller
     public function uploadedFilePembayaranTuntutan(Request $request)
     {
         $request->validate([
-            'modified_excel_file2' => 'required|mimes:xlsx,xls',
+            'modified_excel_file2' => 'required|file|mimes:xlsx,xls|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);
 
         $file = $request->file('modified_excel_file2');
@@ -2128,7 +2124,9 @@ class PenyelarasController extends Controller
         $bankExist = MaklumatBank::where('institusi_id', $id)->first();
 
         $rules = [
-            'penyata' => $bankExist ? 'file|mimes:pdf,png|max:2048' : 'required|file|mimes:pdf,png|max:2048',
+            'penyata' => $bankExist
+                ? 'file|mimes:pdf,png|mimetypes:application/pdf,image/png|max:2048'
+                : 'required|file|mimes:pdf,png|mimetypes:application/pdf,image/png|max:2048',
         ];
 
         $messages = [
@@ -2144,7 +2142,8 @@ class PenyelarasController extends Controller
         // Handle file upload only if a new file is provided
         if ($request->hasFile('penyata')) {
             $file = $request->file('penyata');
-            $fileName = uniqid() . '_' . $file->getClientOriginalName(); // Generate a unique filename
+            $extension = strtolower($file->getClientOriginalExtension());
+            $fileName = Str::uuid()->toString() . '.' . $extension;
 
             // Move the uploaded file to the desired directory
             $file->move('assets/dokumen/penyata_bank_islam', $fileName);
@@ -2774,6 +2773,13 @@ class PenyelarasController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'upload_akaunBank' => $docRules,
+            'upload_suratTawaran' => $docRules,
+            'upload_invoisResit' => $docRules,
+        ]);
+
         $documentTypes = [
             'akaunBank' => 1,
             'suratTawaran' => 2,
@@ -2795,10 +2801,8 @@ class PenyelarasController extends Controller
 
             if ($file) {
                 // Generate new filename
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 // dd($newFilename);
                 // Move the file to the designated path
                 $file->move($uploadPath, $newFilename);

@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class KemaskiniController extends Controller
 {
@@ -557,6 +558,13 @@ class KemaskiniController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'upload_akaunBank' => $docRules,
+            'upload_suratTawaran' => $docRules,
+            'upload_invoisResit' => $docRules,
+        ]);
+
         $documentTypes = [
             'akaunBank' => 1,
             'suratTawaran' => 2,
@@ -578,10 +586,8 @@ class KemaskiniController extends Controller
 
             if ($file) {
                 // Generate new filename
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 // dd($newFilename);
                 // Move the file to the designated path
                 $file->move($uploadPath, $newFilename);
@@ -1243,10 +1249,17 @@ class KemaskiniController extends Controller
             'invoisResit' => 3,
         ];
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'akaunBank' => $docRules,
+            'suratTawaran' => $docRules,
+            'invoisResit' => $docRules,
+        ]);
+
         foreach ($documentTypes as $inputName => $idDokumen) {
             if ($file = $request->file($inputName)) {
-                $newFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)
-                            . "_{$runningNumber}." . $file->getClientOriginalExtension();
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $newFilename);
 
                 Dokumen::updateOrCreate(
@@ -1408,9 +1421,9 @@ class KemaskiniController extends Controller
 
         // Validate incoming file uploads
         $validatedData = $request->validate([
-            'sijilTamat.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'transkrip.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'tawaran.*'    => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sijilTamat.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
+            'transkrip.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
+            'tawaran.*'    => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
         ]);
 
         $uploadedSijilTamat = [];
@@ -1434,11 +1447,13 @@ class KemaskiniController extends Controller
         // Handle sijil tamat & transkrip
         if ($sijilTamat && $transkrip) {
             foreach ($sijilTamat as $key => $sijil) {
-                $filenameSijil = uniqid() . '_' . $sijil->getClientOriginalName();
+                $extension = strtolower($sijil->getClientOriginalExtension());
+                $filenameSijil = Str::uuid()->toString() . '.' . $extension;
                 $sijil->move('assets/dokumen/sijil_tamat', $filenameSijil);
                 $uploadedSijilTamat[] = $filenameSijil;
 
-                $filenameTranskrip = uniqid() . '_' . $transkrip[$key]->getClientOriginalName();
+                $transkripExtension = strtolower($transkrip[$key]->getClientOriginalExtension());
+                $filenameTranskrip = Str::uuid()->toString() . '.' . $transkripExtension;
                 $transkrip[$key]->move('assets/dokumen/salinan_transkrip', $filenameTranskrip);
                 $uploadedTranskrip[] = $filenameTranskrip;
 
@@ -1451,7 +1466,8 @@ class KemaskiniController extends Controller
         // Handle tawaran
         if ($tawaran) {
             foreach ($tawaran as $file) {
-                $filenameTawaran = uniqid() . '_' . $file->getClientOriginalName();
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filenameTawaran = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $filenameTawaran);
                 $uploadedTawaran[] = $filenameTawaran;
 

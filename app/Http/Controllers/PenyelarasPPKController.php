@@ -10,6 +10,7 @@ use App\Models\Agama;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\Models\Smoku;
 use App\Models\Hubungan;
 use App\Models\Negeri;
@@ -582,7 +583,16 @@ class PenyelarasPPKController extends Controller
     }
 
     public function hantar(Request $request)
-    {
+    {   
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'akaunBank' => $docRules,
+            'suratTawaran' => $docRules,
+            'invoisResit' => $docRules,
+            'dokumen' => 'sometimes|array',
+            'dokumen.*' => $docRules,
+        ]);
+
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
 
         $permohonan = Permohonan::orderBy('id', 'desc')
@@ -623,10 +633,8 @@ class PenyelarasPPKController extends Controller
             $file = $request->file($inputName);
 
             if ($file) {
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $newFilename);
 
                 // Check if the document already exists
@@ -660,12 +668,8 @@ class PenyelarasPPKController extends Controller
         // Check if $dokumen is a valid array and $catatan is an array
         if (is_array($dokumen) && is_array($catatan)) {
             foreach ($dokumen as $key => $img) {
-                $originalFilename = $img->getClientOriginalName();
-                $extension = $img->getClientOriginalExtension();
-                
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $runningNumber = rand(1000, 9999);
-                $profileImage = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($img->getClientOriginalExtension());
+                $profileImage = Str::uuid()->toString() . '.' . $extension;
                 $img->move('assets/dokumen/permohonan/', $profileImage);
                 
                 $tambahan = new dokumen();
@@ -953,6 +957,10 @@ class PenyelarasPPKController extends Controller
 
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
+        $request->validate([
+            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+        ]);
+
         $permohonan = Permohonan::orderBy('id', 'DESC')
             ->where('smoku_id', '=', $id)
             ->first();
@@ -969,22 +977,11 @@ class PenyelarasPPKController extends Controller
 
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;
-        $counter = 1; 
-
-        // Check if files were uploaded
-        // tak wajib
-        $counter = 1; // Initialize the counter
 
         if ($request->hasFile('kepPeperiksaan')) {
             $kepPeperiksaan = $request->file('kepPeperiksaan');
-            $filenamekepP = $kepPeperiksaan->getClientOriginalName();
-            $uniqueFilename = $counter . '_' . $filenamekepP;
-
-            // Append increment to the filename until it's unique
-            while (file_exists('assets/dokumen/peperiksaan/' . $uniqueFilename)) {
-                $counter++;
-                $uniqueFilename = $counter . '_' . $filenamekepP;
-            }
+            $extension = strtolower($kepPeperiksaan->getClientOriginalExtension());
+            $uniqueFilename = Str::uuid()->toString() . '.' . $extension;
 
             // Move the uploaded file
             $kepPeperiksaan->move('assets/dokumen/peperiksaan', $uniqueFilename);
@@ -1617,6 +1614,13 @@ class PenyelarasPPKController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'upload_akaunBank' => $docRules,
+            'upload_suratTawaran' => $docRules,
+            'upload_invoisResit' => $docRules,
+        ]);
+
         $documentTypes = [
             'akaunBank' => 1,
             'suratTawaran' => 2,
@@ -1638,10 +1642,8 @@ class PenyelarasPPKController extends Controller
 
             if ($file) {
                 // Generate new filename
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 // dd($newFilename);
                 // Move the file to the designated path
                 $file->move($uploadPath, $newFilename);

@@ -36,6 +36,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PelajarController extends Controller
 {
@@ -267,9 +268,9 @@ class PelajarController extends Controller
 
         // Validate incoming file uploads
         $validatedData = $request->validate([
-            'sijilTamat.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'transkrip.*' => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
-            'tawaran.*'    => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sijilTamat.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
+            'transkrip.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
+            'tawaran.*'    => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
         ]);
 
         $uploadedSijilTamat = [];
@@ -293,11 +294,13 @@ class PelajarController extends Controller
         // Handle sijil tamat & transkrip
         if ($sijilTamat && $transkrip) {
             foreach ($sijilTamat as $key => $sijil) {
-                $filenameSijil = uniqid() . '_' . $sijil->getClientOriginalName();
+                $extension = strtolower($sijil->getClientOriginalExtension());
+                $filenameSijil = Str::uuid()->toString() . '.' . $extension;
                 $sijil->move('assets/dokumen/sijil_tamat', $filenameSijil);
                 $uploadedSijilTamat[] = $filenameSijil;
 
-                $filenameTranskrip = uniqid() . '_' . $transkrip[$key]->getClientOriginalName();
+                $transkripExtension = strtolower($transkrip[$key]->getClientOriginalExtension());
+                $filenameTranskrip = Str::uuid()->toString() . '.' . $transkripExtension;
                 $transkrip[$key]->move('assets/dokumen/salinan_transkrip', $filenameTranskrip);
                 $uploadedTranskrip[] = $filenameTranskrip;
 
@@ -310,7 +313,8 @@ class PelajarController extends Controller
         // Handle tawaran
         if ($tawaran) {
             foreach ($tawaran as $file) {
-                $filenameTawaran = uniqid() . '_' . $file->getClientOriginalName();
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filenameTawaran = Str::uuid()->toString() . '.' . $extension;
                 $file->move('assets/dokumen/permohonan', $filenameTawaran);
                 $uploadedTawaran[] = $filenameTawaran;
 
@@ -375,6 +379,14 @@ class PelajarController extends Controller
             return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
         }
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'suratTangguh' => 'sometimes|array',
+            'suratTangguh.*' => $docRules,
+            'sokongan' => 'sometimes|array',
+            'sokongan.*' => $docRules,
+        ]);
+
         $suratTangguh = $request->file('suratTangguh');
         $sokongan = $request->file('sokongan');
         $uploadedsuratTangguh = [];
@@ -387,11 +399,13 @@ class PelajarController extends Controller
 
         if ($suratTangguh && $sokongan) {
             foreach ($suratTangguh as $key => $surat) {
-                $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
+                $suratExtension = strtolower($surat->getClientOriginalExtension());
+                $uniqueFilenameSurat = Str::uuid()->toString() . '.' . $suratExtension;
                 $surat->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSurat);
                 $uploadedsuratTangguh[] = $uniqueFilenameSurat;
 
-                $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
+                $sokonganExtension = strtolower($sokongan[$key]->getClientOriginalExtension());
+                $uniqueFilenameSokongan = Str::uuid()->toString() . '.' . $sokonganExtension;
                 $sokongan[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSokongan);
                 $uploadedSokongan[] = $uniqueFilenameSokongan;
 
@@ -441,6 +455,16 @@ class PelajarController extends Controller
             return redirect()->route('lanjut.pengajian')->with('error', 'Permohonan tidak ditemui.');
         }
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'suratLanjut' => 'sometimes|array',
+            'suratLanjut.*' => $docRules,
+            'jadual' => 'sometimes|array',
+            'jadual.*' => $docRules,
+            'sokongan' => 'sometimes|array',
+            'sokongan.*' => $docRules,
+        ]);
+
         $suratLanjut = $request->file('suratLanjut');
         $jadual = $request->file('jadual');
         $sokongan = $request->file('sokongan');
@@ -455,15 +479,18 @@ class PelajarController extends Controller
 
         if ($suratLanjut && $jadual && $sokongan) {
             foreach ($suratLanjut as $key => $surat) {
-                $uniqueFilenameSurat = uniqid() . '_' . $surat->getClientOriginalName();
+                $suratExtension = strtolower($surat->getClientOriginalExtension());
+                $uniqueFilenameSurat = Str::uuid()->toString() . '.' . $suratExtension;
                 $surat->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSurat);
                 $uploadedSuratLanjut[] = $uniqueFilenameSurat;
 
-                $uniqueFilenameJadual = uniqid() . '_' . $jadual[$key]->getClientOriginalName();
+                $jadualExtension = strtolower($jadual[$key]->getClientOriginalExtension());
+                $uniqueFilenameJadual = Str::uuid()->toString() . '.' . $jadualExtension;
                 $jadual[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameJadual);
                 $uploadedJadual[] = $uniqueFilenameJadual;
 
-                $uniqueFilenameSokongan = uniqid() . '_' . $sokongan[$key]->getClientOriginalName();
+                $sokonganExtension = strtolower($sokongan[$key]->getClientOriginalExtension());
+                $uniqueFilenameSokongan = Str::uuid()->toString() . '.' . $sokonganExtension;
                 $sokongan[$key]->move('assets/dokumen/surat_tangguh_lanjut', $uniqueFilenameSokongan);
                 $uploadedSokongan[] = $uniqueFilenameSokongan;
 
@@ -714,6 +741,13 @@ class PelajarController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $request->validate([
+            'upload_akaunBank' => $docRules,
+            'upload_suratTawaran' => $docRules,
+            'upload_invoisResit' => $docRules,
+        ]);
+
         $documentTypes = [
             'akaunBank' => 1,
             'suratTawaran' => 2,
@@ -735,10 +769,8 @@ class PelajarController extends Controller
 
             if ($file) {
                 // Generate new filename
-                $originalFilename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $filenameWithoutExtension = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $newFilename = $filenameWithoutExtension . '_' . $runningNumber . '.' . $extension;
+                $extension = strtolower($file->getClientOriginalExtension());
+                $newFilename = Str::uuid()->toString() . '.' . $extension;
                 // dd($newFilename);
                 // Move the file to the designated path
                 $file->move($uploadPath, $newFilename);
