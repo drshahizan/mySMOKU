@@ -104,18 +104,18 @@
                                         <tr>
                                             <td><b>Bil. Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" style="padding: 5px; width:150px;" required></td>
+                                            <td><input type="text" id="noMesyuarat" name="noMesyuarat" class="form-control" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tarikh Mesyuarat</b></td>
                                             <td><b>:</b></td>
-                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" style="padding: 5px; width:150px;" required></td>
+                                            <td><input type="date" id="tarikhMesyuarat" name="tarikhMesyuarat" class="form-control" required></td>
                                         </tr>
                                         <tr>
                                             <td><b>Keputusan</b></td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <select id="keputusan" name="keputusan" style="padding: 7px; width:150px;" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
+                                                <select id="keputusan" name="keputusan" class="form-select" onchange="select1()" oninvalid="this.setCustomValidity('Sila pilih keputusan dalam senarai')" oninput="setCustomValidity('')" required>
                                                     <option value="">Pilih Keputusan</option>
                                                     <option value="Lulus">Lulus</option>
                                                     <option value="Tidak Lulus">Tidak Lulus</option>
@@ -128,7 +128,7 @@
                                             <td>
                                                 <div id="catatan-container">
                                                     <div class="catatan-row">
-                                                        <input type="text" id="catatan" name="catatan[]" style="padding: 5px; width:300px; margin-right:4px;">
+                                                        <input type="text" id="catatan" name="catatan[]" class="form-control">
                                                         <button type="button" class="add-catatan-button" onclick="addCatatanField(this)">+</button>
                                                     </div>
                                                 </div>
@@ -147,6 +147,8 @@
             </div>
         </div>
     </div>  
+
+    
 
     <!-- Javascript -->
     <script>
@@ -182,6 +184,7 @@
             var newCatatanField = document.createElement('input');
             newCatatanField.type = 'text';
             newCatatanField.name = 'catatan[]';
+            newCatatanField.className = 'form-control';
             newCatatanField.style.padding = '5px';
             newCatatanField.style.width = '300px';
             newCatatanField.style.marginTop = '5px';
@@ -205,8 +208,6 @@
         }
     </script>
 
-    <script src="assets/bundles/libscripts.bundle.js"></script>    
-    <script src="assets/bundles/vendorscripts.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </body>
 </x-default-layout> 
