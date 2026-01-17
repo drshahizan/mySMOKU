@@ -721,7 +721,8 @@ class PermohonanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku_id->id)->first();
-        $akademik = Akademik::where('smoku_id',$smoku_id->id)
+        $akademik = Akademik::with(['infoipt', 'peringkat'])
+            ->where('smoku_id', $smoku_id->id)
             ->where('smoku_akademik.status', 1)
             ->first();
         
@@ -859,7 +860,7 @@ class PermohonanController extends Controller
                                     ->where('semester', $sesiLepas)
 									->first();
      
-            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','result'));
+            return view('tuntutan.pelajar.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','result','akademik'));
         } 
         else {
             return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
