@@ -64,6 +64,9 @@
                                         <tr>
                                             <th style="width: 17%"><b>ID Permohonan</b></th>
                                             <th style="width: 33%"><b>Nama</b></th>
+                                            <th style="width: 20%"><b>Nama Institusi</b></th>
+                                            <th style="width: 15%"><b>Peringkat Pengajian</b></th>
+                                            <th style="width: 20%"><b>Nama Kursus</b></th>
                                             <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                             <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                             <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
@@ -103,6 +106,9 @@
                                                         <a href="{{ route('bkoku.rekod.permohonan', $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                     </td>
                                                     <td>{{$pemohon}}</td>
+                                                    <td>{{ $item->akademik_nama_institusi ?? '-' }}</td>
+                                                    <td>{{ $item->akademik_peringkat ?? '-' }}</td>
+                                                    <td>{{ $item->akademik_nama_kursus ?? '-' }}</td>
                                                     <td class="text-center">{{$formattedDate}}</td>
                                                     @if ($item['status']=='1')
                                                         <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
