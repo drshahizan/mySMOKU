@@ -1467,6 +1467,7 @@
                     $(alamat_surat_negeri).trigger('change.select2');
                     $(alamat_surat_bandar).trigger('change.select2');
                 }
+				console.clear();
             }	
 
 			function alamatWaris() {
@@ -1506,6 +1507,7 @@
 					$(alamat_negeri_waris).trigger('change.select2');
 					$(alamat_bandar_waris).trigger('change.select2');
 				}
+				console.clear();
 			}	
 
             //NEGERI ALAMAT TETAP
@@ -1566,7 +1568,7 @@
 					if (!idnegeri) return; // Exit if no value is selected
 
 					console.log("Fetching Parlimen for Negeri ID:", idnegeri); // Debugging
-
+					
 					// AJAX request 
 					$.ajax({
 						url: '/getParlimen/' + idnegeri,
@@ -1590,6 +1592,7 @@
 							console.error('AJAX request failed for parlimen');
 						}
 					});
+					console.clear();
 				}
 
 				// Clear only when negeri changes
@@ -1656,6 +1659,7 @@
 
 					});
 				});
+				console.clear();
 
 			});
 
@@ -1822,6 +1826,7 @@
 				} else {
 					console.error("Error: penajaOptions is not an array");
 				}
+				console.clear();
 			});
 
 			//CALCULATE TARIKH TAMAT
@@ -1886,6 +1891,7 @@
 						// 	alert('Failed to load peringkat options');
 						// }
 					});
+					console.clear();
 				}
 
 				// Function to fetch kursus options based on id_institusi and kod_peringkat
@@ -1927,6 +1933,7 @@
 							alert('Failed to load kursus options');
 						}
 					});
+					console.clear();
 				}
 
 				// Initial load

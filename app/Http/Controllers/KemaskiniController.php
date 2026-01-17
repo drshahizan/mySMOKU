@@ -15,6 +15,7 @@ use App\Models\InfoIpt;
 use App\Models\JenisOku;
 use App\Models\JumlahPeruntukan;
 use App\Models\KelasPenganugerahan;
+use App\Models\Kelulusan;
 use App\Models\Keturunan;
 use App\Models\Kursus;
 use App\Models\Mod;
@@ -1230,6 +1231,14 @@ class KemaskiniController extends Controller
                 'perakuan'    => '1',
                 'status'      => '8',
                 'data_migrate'=> '1',
+            ]
+        );
+
+        $permohonan_kelulusan = Kelulusan::updateOrCreate(
+            ['permohonan_id' => $permohonan->id],
+            [
+                'keputusan'    => 'Lulus',
+                'catatan'      => 'DILULUSKAN',
             ]
         );
 
