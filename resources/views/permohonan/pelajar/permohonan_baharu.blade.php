@@ -1722,6 +1722,8 @@
 					$(alamat_surat_negeri).trigger('change.select2');
 					$(alamat_surat_bandar).trigger('change.select2');
 				}
+
+				console.clear();
 			}
 			
 			function alamatWaris() {
@@ -1761,6 +1763,7 @@
 					$(alamat_negeri_waris).trigger('change.select2');
 					$(alamat_bandar_waris).trigger('change.select2');
 				}
+				console.clear();
 			}	
 
 
@@ -2253,6 +2256,7 @@
 			error: function(error) {
 				console.error('Error fetching da.ta:', error);
 			}
+			
 		});
 	
 		console.clear();
