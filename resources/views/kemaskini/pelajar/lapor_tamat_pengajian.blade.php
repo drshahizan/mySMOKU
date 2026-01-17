@@ -372,7 +372,24 @@
 											</tbody>
 										</table>
 									</div>
-									<div class="d-flex flex-center mt-10">
+									<div class="d-flex flex-column align-items-center mt-10 w-100">
+										@if($tamat_pengajian && ($tamat_pengajian->tawaran || $tamat_pengajian->peringkat_baharu))
+											<div class="mb-3">
+												<strong>Status Kelulusan Peringkat Pengajian Baharu:</strong>
+												@if($tamat_pengajian->peringkat_baharu)
+													<span class="{{ $tamat_pengajian->peringkat_baharu === 'LULUS' ? 'text-success' : ($tamat_pengajian->peringkat_baharu === 'TIDAK LULUS' ? 'text-danger' : 'text-muted') }}">
+														{{ $tamat_pengajian->peringkat_baharu }}
+													</span>
+												@else
+													<span class="text-warning">DALAM SEMAKAN SEKRETARIAT</span>
+												@endif
+											</div>
+										@else
+											<div class="mb-3">
+												<strong>Status Kelulusan Peringkat Pengajian Baharu:</strong>
+												<span class="text-info">TIADA PERMOHONAN TUKAR PERINGKAT PENGAJIAN BAHARU</span>
+											</div>	
+										@endif
 										<button type="submit" class="btn btn-primary btn-sm">
 											Simpan
 										</button>

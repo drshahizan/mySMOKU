@@ -108,18 +108,18 @@ class PelajarController extends Controller
             $currentDate = Carbon::now();
             $tarikhMula = Carbon::parse($akademik->tarikh_mula);
             $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
-            $tarikhNextSem = $tarikhMula->addMonths($akademik->bil_bulan_per_sem);
 
-            if($akademik->bil_bulan_per_sem == 6){
-                $bilSem = 2;
-            } else {
-                $bilSem = 3;
+            $tamat_pengajian = null;
+            $lanjut_pengajian = null;
+            $tangguh_pengajian = null;
+
+            if ($permohonan_id) {
+                $tamat_pengajian = TamatPengajian::where('smoku_id', $smoku_id->id)->where('permohonan_id', $permohonan_id->id)->first();
+                $lanjut_pengajian = LanjutPengajian::where('smoku_id', $smoku_id->id)->where('permohonan_id', $permohonan_id->id)->first();
+                $tangguh_pengajian = TangguhPengajian::where('smoku_id', $smoku_id->id)->where('permohonan_id', $permohonan_id->id)->first();
             }
-                
-            $semSemasa = $akademik->sem_semasa;
-            $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
 
-            if ($currentDate->greaterThan($tarikhTamat)) {
+            if ($currentDate->greaterThan($tarikhTamat) && (!$tamat_pengajian && !$lanjut_pengajian && !$tangguh_pengajian)) {
                 echo "<script>
                     var userChoice;
                     var isValidChoice = false;
