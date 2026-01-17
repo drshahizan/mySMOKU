@@ -11,7 +11,7 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
 		<meta property="og:site_name" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="icon" href="/favicon.ico">
 
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
