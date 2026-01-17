@@ -347,11 +347,11 @@ class TuntutanController extends Controller
 
     public function hantarTuntutan(Request $request)
     {   
-        $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
-        $akademik = Akademik::join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
-            ->where('smoku_id', $smoku_id->id)
-            ->where('status', 1)
-            ->first();
+        $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->where('smoku_id',$smoku_id->id)
+        ->where('status',1)
+        ->first();
 
         $peringkat_pengajian = $akademik->peringkat_pengajian;
         $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
@@ -363,62 +363,62 @@ class TuntutanController extends Controller
                     NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(no_rujukan_permohonan,'/',2),'/',-1), '') IS NULL
                 ");
             })
-            ->orderByDesc('id')
+            ->orderBy('id', 'desc')
             ->first();
 
-        if (! $permohonan) {
-            return redirect()->route('pelajar.dashboard')->with('permohonan', 'Sila hantar permohonan terlebih dahulu.');
+        if ($permohonan) {
+            
+            // Ambil no rujukan permohonan
+            $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
+
+            // Semak tuntutan terakhir
+            $tuntutan_akhir = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
+
+            if (!$tuntutan_akhir || ($tuntutan_akhir && in_array($tuntutan_akhir->status, [6, 8, 9]))) {
+                $biltuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
+                    ->where('permohonan_id', $permohonan->id)
+                    ->groupBy('no_rujukan_tuntutan')
+                    ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
+                    ->get();
+
+                $bil = $biltuntutan->count();
+                $running_num = $bil + 1;
+                $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
+            } else {
+                $no_rujukan_tuntutan = $tuntutan_akhir->no_rujukan_tuntutan;
+            }
+
+            // --- Cari rekod sedia ada (kalau ada)
+            $tuntutan = [
+                'smoku_id' => $smoku_id->id,
+                'permohonan_id' => $permohonan->id,
+                'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
+                'sesi' => $request->sesi,
+            ];
+
+            $existing = Tuntutan::where($tuntutan)->orderByDesc('id')->first();
+
+            // Semak sama ada sebelum ini status = 5 (dikembalikan)
+            $wasReturned = $existing && $existing->status === '5';
+
+            // --- Data untuk dikemas kini / cipta
+            $updateData = [
+                'semester' => $request->semester,
+                'wang_saku' => '1',
+                'amaun_wang_saku' => $request->amaun_wang_saku,
+                'jumlah' => $request->amaun_wang_saku,
+                'status' => '2',
+            ];
+
+            // Tambah tarikh_hantar hanya jika status sebelum ini bukan 5
+            if (! $wasReturned) {
+                $updateData['tarikh_hantar'] = now()->format('Y-m-d');
+            }
+
+            // --- Cipta atau kemas kini rekod
+            $tuntutan = Tuntutan::updateOrCreate($tuntutan, $updateData);
+
         }
-
-        // Ambil no rujukan permohonan
-        $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
-
-        // Semak tuntutan terakhir
-        $tuntutan_akhir = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
-
-        if (! $tuntutan_akhir || in_array($tuntutan_akhir->status, [6, 8, 9], true)) {
-            $bil = Tuntutan::where('smoku_id', $smoku_id->id)
-                ->where('permohonan_id', $permohonan->id)
-                ->groupBy('no_rujukan_tuntutan')
-                ->selectRaw('no_rujukan_tuntutan, count(id) AS bilangan')
-                ->get()
-                ->count();
-
-            $running_num = $bil + 1;
-            $no_rujukan_tuntutan = $no_rujukan_permohonan . '/' . $running_num;
-        } else {
-            $no_rujukan_tuntutan = $tuntutan_akhir->no_rujukan_tuntutan;
-        }
-
-        // --- Cari rekod sedia ada (kalau ada)
-        $tuntutan = [
-            'smoku_id' => $smoku_id->id,
-            'permohonan_id' => $permohonan->id,
-            'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-            'sesi' => $request->sesi,
-        ];
-
-        $existing = Tuntutan::where($tuntutan)->orderByDesc('id')->first();
-
-        // Semak sama ada sebelum ini status = 5 (dikembalikan)
-        $wasReturned = $existing && $existing->status === '5';
-
-        // --- Data untuk dikemas kini / cipta
-        $updateData = [
-            'semester' => $request->semester,
-            'wang_saku' => '1',
-            'amaun_wang_saku' => $request->amaun_wang_saku,
-            'jumlah' => $request->amaun_wang_saku,
-            'status' => '2',
-        ];
-
-        // Tambah tarikh_hantar hanya jika status sebelum ini bukan 5
-        if (! $wasReturned) {
-            $updateData['tarikh_hantar'] = now()->format('Y-m-d');
-        }
-
-        // --- Cipta atau kemas kini rekod
-        $tuntutan = Tuntutan::updateOrCreate($tuntutan, $updateData);
 
         // Rekod sejarah tuntutan
         SejarahTuntutan::create([
@@ -440,12 +440,26 @@ class TuntutanController extends Controller
     {
         $smoku_id = Smoku::where('no_kp', Auth::user()->no_kp)->first();
 
-        $akademik = Akademik::where('smoku_id', $smoku_id->id)->where('status', 1)->first();
+        $akademik = Akademik::join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->where('smoku_id',$smoku_id->id)
+        ->where('status',1)
+        ->first();
+
         $institusi = InfoIpt::where('id_institusi', $akademik->id_institusi)->first();   
 
         if ($smoku_id) {
-            $permohonan = Permohonan::orderBy('id', 'desc')
-                ->where('smoku_id', '=', $smoku_id->id)->first();
+            $peringkat_pengajian = $akademik->peringkat_pengajian;
+            $permohonan = Permohonan::where('smoku_id', $smoku_id->id)
+            ->where(function ($q) use ($peringkat_pengajian) {
+                $q->whereRaw("
+                    CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED) = ?
+                ", [$peringkat_pengajian])
+                ->orWhereRaw("
+                    NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(no_rujukan_permohonan,'/',2),'/',-1), '') IS NULL
+                ");
+            })
+            ->orderBy('id', 'desc')
+            ->first();
 
             if ($permohonan) {
                 $tuntutan = Tuntutan::orderBy('id', 'desc')->where('tuntutan.status', '!=', '4')
