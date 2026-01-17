@@ -12,7 +12,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     </head>
 
@@ -66,6 +65,9 @@
                                                 <tr>
                                                     <th style="width: 17%"><b>ID Permohonan</b></th>
                                                     <th style="width: 33%"><b>Nama</b></th>
+                                                    <th style="width: 20%"><b>Nama Institusi</b></th>
+                                                    <th style="width: 15%"><b>Peringkat Pengajian</b></th>
+                                                    <th style="width: 20%"><b>Nama Kursus</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
                                                     <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
                                                     <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
@@ -108,85 +110,88 @@
 
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
-                                                    <tr>
-                                                        <td>
-                                                            <a href="{{ route('bkoku.rekod.tuntutan', $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
-                                                        </td>
-                                                        <td>{{$pemohon}}</td>
-                                                        <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                                        @if ($item['status']=='1')
-                                                            <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='2')
-                                                            <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='5')
-                                                             <td class="text-center">
-                                                                <!-- Button -->
-                                                                <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $item['id'] }}">{{ ucwords(strtolower($status)) }}</button>
+                                                        <tr>
+                                                            <td>
+                                                                <a href="{{ route('bkoku.rekod.tuntutan', $item['id']) }}" title="">{{$item['no_rujukan_tuntutan']}}</a>
+                                                            </td>
+                                                            <td>{{$pemohon}}</td>
+                                                            <td>{{ $item->akademik_nama_institusi ?? '-' }}</td>
+                                                            <td>{{ $item->akademik_peringkat ?? '-' }}</td>
+                                                            <td>{{ $item->akademik_nama_kursus ?? '-' }}</td>
+                                                            <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
+                                                            @if ($item['status']=='1')
+                                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='2')
+                                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='3')
+                                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='4')
+                                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='5')
+                                                                <td class="text-center">
+                                                                    <!-- Button -->
+                                                                    <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $item['id'] }}">{{ ucwords(strtolower($status)) }}</button>
 
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="saringanModal{{ $item['id'] }}" tabindex="-1" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered">
-                                                                        <div class="modal-content p-3" style="border-radius: 12px;">
-                                                                            <div class="modal-body text-center">
-                                                                                <p class="mb-3">
-                                                                                    {{ $saringan ? ucwords(strtolower($saringan)) : '-' }}
-                                                                                </p>
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade" id="saringanModal{{ $item['id'] }}" tabindex="-1" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <div class="modal-content p-3" style="border-radius: 12px;">
+                                                                                <div class="modal-body text-center">
+                                                                                    <p class="mb-3">
+                                                                                        {{ $saringan ? ucwords(strtolower($saringan)) : '-' }}
+                                                                                    </p>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                        @elseif ($item['status']=='6')
-                                                            <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='8')
-                                                            <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='9')
-                                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                                        @elseif ($item['status']=='10')
-                                                            <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
-                                                        @endif
+                                                                </td>
+                                                            @elseif ($item['status']=='6')
+                                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='7')
+                                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='8')
+                                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='9')
+                                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            @elseif ($item['status']=='10')
+                                                                <td class="text-center"><button class="btn btn-round btn-sm custom-width-btn text-white" style="background-color: #488BCD">{{ucwords(strtolower($status))}}</button></td>
+                                                            @endif
 
-                                                        @if ($item['status']=='1')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                    </span>
-                                                                </a>
-                                                                <a href="{{ route('bkoku.tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
-                                                                        <i class="fa fa-trash fa-sm custom-white-icon"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                            @elseif ($item['status']=='2')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('bkoku.tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
-                                                                        <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                            @elseif ($item['status']=='5')
-                                                            <td class="text-center">
-                                                                <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
-                                                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                        <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                                                                    </span>
-                                                                </a>
-                                                            </td>
-                                                            @else
-                                                            <td class="text-center"></td> 
-                                                        @endif
-                                                    </tr>
-                                                @endif
-                                            @endforeach
+                                                            @if ($item['status']=='1')
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="{{ route('bkoku.tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Padam Permohonan">
+                                                                            <i class="fa fa-trash fa-sm custom-white-icon"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                                {{-- @elseif ($item['status']=='2')
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('bkoku.tuntutan.batal', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin membatalkan permohonan ini?')">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Batal Permohonan">
+                                                                            <i class="fa fa-times-circle fa-sm custom-white-icon" style="color: red"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td> --}}
+                                                                @elseif ($item['status']=='5')
+                                                                <td class="text-center">
+                                                                    <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
+                                                                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                                @else
+                                                                <td class="text-center"></td> 
+                                                            @endif
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
