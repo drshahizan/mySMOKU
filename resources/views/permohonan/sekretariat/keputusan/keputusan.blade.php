@@ -482,7 +482,12 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
-                            { data: 'kelulusan.keputusan' },
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 className: 'text-center',
@@ -524,26 +529,23 @@
                                 }
                             },
                             {
-                                data: 'kelulusan.no_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return getKelulusanValue(row, 'no_mesyuarat');
                                 }
                             },
                             {
-                                data: 'kelulusan.tarikh_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
                                     if (type === 'display' || type === 'filter') {
-                                        if (data === null) {
+                                        if (!tarikhMesyuarat) {
                                             return '';
                                         } else {
                                             // Convert the date to a JavaScript Date object
-                                            var date = new Date(data);
+                                            var date = new Date(tarikhMesyuarat);
 
                                             // Get the year, month, and day components
                                             var year = date.getFullYear();
@@ -555,18 +557,19 @@
                                         }
                                     } else {
                                         // For sorting and other purposes, return the original data
-                                        return data;
+                                        return tarikhMesyuarat;
                                     }
                                 }
                             },
                             {
-                                data: 'kelulusan.keputusan',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
 
                                     // Define the button HTML based on the status value
-                                    switch (data) {
+                                    switch (keputusan) {
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
@@ -589,6 +592,10 @@
                         
 
                     });
+                }
+
+                function getKelulusanValue(row, key) {
+                    return row && row.kelulusan && row.kelulusan[key] ? row.kelulusan[key] : '';
                 }
 
                 function initializeDataTable1() {
@@ -647,7 +654,12 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
-                            { data: 'kelulusan.keputusan' },
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -689,25 +701,22 @@
                                 }
                             },
                             {
-                                data: 'kelulusan.no_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return getKelulusanValue(row, 'no_mesyuarat');
                                 }
                             },
                             {
-                                data: 'kelulusan.tarikh_mesyuarat',
+                                data: null,
                                 render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
                                     if (type === 'display' || type === 'filter') {
-                                        if (data === null) {
+                                        if (!tarikhMesyuarat) {
                                             return '';
                                         } else {
                                             // Convert the date to a JavaScript Date object
-                                            var date = new Date(data);
+                                            var date = new Date(tarikhMesyuarat);
 
                                             // Get the year, month, and day components
                                             var year = date.getFullYear();
@@ -719,18 +728,19 @@
                                         }
                                     } else {
                                         // For sorting and other purposes, return the original data
-                                        return data;
+                                        return tarikhMesyuarat;
                                     }
                                 },
                                 className: 'text-center'
                             },
                             {
-                                data: 'kelulusan.keputusan',
+                                data: null,
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
 
                                     // Define the button HTML based on the status value
-                                    switch (data) {
+                                    switch (keputusan) {
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
@@ -811,7 +821,12 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
-                            { data: 'kelulusan.keputusan' },
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -853,25 +868,22 @@
                                 }
                             },
                             {
-                                data: 'kelulusan.no_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return getKelulusanValue(row, 'no_mesyuarat');
                                 }
                             },
                             {
-                                data: 'kelulusan.tarikh_mesyuarat',
+                                data: null,
                                 render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
                                     if (type === 'display' || type === 'filter') {
-                                        if (data === null) {
+                                        if (!tarikhMesyuarat) {
                                             return '';
                                         } else {
                                             // Convert the date to a JavaScript Date object
-                                            var date = new Date(data);
+                                            var date = new Date(tarikhMesyuarat);
 
                                             // Get the year, month, and day components
                                             var year = date.getFullYear();
@@ -883,18 +895,19 @@
                                         }
                                     } else {
                                         // For sorting and other purposes, return the original data
-                                        return data;
+                                        return tarikhMesyuarat;
                                     }
                                 },
                                 className: 'text-center'
                             },
                             {
-                                data: 'kelulusan.keputusan',
+                                data: null,
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
 
                                     // Define the button HTML based on the status value
-                                    switch (data) {
+                                    switch (keputusan) {
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
@@ -973,7 +986,12 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
-                            { data: 'kelulusan.keputusan' },
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -1015,25 +1033,22 @@
                                 }
                             },
                             {
-                                data: 'kelulusan.no_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return getKelulusanValue(row, 'no_mesyuarat');
                                 }
                             },
                             {
-                                data: 'kelulusan.tarikh_mesyuarat',
+                                data: null,
                                 render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
                                     if (type === 'display' || type === 'filter') {
-                                        if (data === null) {
+                                        if (!tarikhMesyuarat) {
                                             return '';
                                         } else {
                                             // Convert the date to a JavaScript Date object
-                                            var date = new Date(data);
+                                            var date = new Date(tarikhMesyuarat);
 
                                             // Get the year, month, and day components
                                             var year = date.getFullYear();
@@ -1045,18 +1060,19 @@
                                         }
                                     } else {
                                         // For sorting and other purposes, return the original data
-                                        return data;
+                                        return tarikhMesyuarat;
                                     }
                                 },
                                 className: 'text-center'
                             },
                             {
-                                data: 'kelulusan.keputusan',
+                                data: null,
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
 
                                     // Define the button HTML based on the status value
-                                    switch (data) {
+                                    switch (keputusan) {
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
@@ -1135,7 +1151,12 @@
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
                             { data: 'akademik.infoipt.id_institusi' },
-                            { data: 'kelulusan.keputusan' },
+                            { 
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
                             {
                                 data: 'akademik.peringkat.peringkat',
                                 render: function(data, type, row) {
@@ -1166,25 +1187,22 @@
                                 }
                             },
                             {
-                                data: 'kelulusan.no_mesyuarat',
+                                data: null,
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return getKelulusanValue(row, 'no_mesyuarat');
                                 }
                             },
                             {
-                                data: 'kelulusan.tarikh_mesyuarat',
+                                data: null,
                                 render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
                                     if (type === 'display' || type === 'filter') {
-                                        if (data === null) {
+                                        if (!tarikhMesyuarat) {
                                             return '';
                                         } else {
                                             // Convert the date to a JavaScript Date object
-                                            var date = new Date(data);
+                                            var date = new Date(tarikhMesyuarat);
 
                                             // Get the year, month, and day components
                                             var year = date.getFullYear();
@@ -1196,18 +1214,19 @@
                                         }
                                     } else {
                                         // For sorting and other purposes, return the original data
-                                        return data;
+                                        return tarikhMesyuarat;
                                     }
                                 },
                                 className: 'text-center'
                             },
                             {
-                                data: 'kelulusan.keputusan',
+                                data: null,
                                 render: function(data, type, row) {
                                     var status = ''; // Initialize an empty string for the button HTML
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
 
                                     // Define the button HTML based on the status value
-                                    switch (data) {
+                                    switch (keputusan) {
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
