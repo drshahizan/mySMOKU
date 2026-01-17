@@ -12,7 +12,6 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
@@ -215,7 +214,7 @@
                                                         <form id="kemaskiniForm_{{ $items->smoku_id }}" action="{{ route('kemaskini.peringkat.pengajian', $items->smoku_id) }}" method="post">
                                                             @csrf
                                                             @if ($items->tawaran)
-                                                                <select name="peringkat_baharu" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})">
+                                                                <select name="peringkat_baharu" style="padding: 6px;" onchange="submitForm(this, {{ $items->smoku_id }})" {{ in_array($items->peringkat_baharu, ['LULUS', 'TIDAK LULUS'], true) ? 'disabled' : '' }}>
                                                                     <option {{ $items->peringkat_baharu == null ? 'selected' : '' }}>Pilih</option>
                                                                     <option value="LULUS" {{ $items->peringkat_baharu == 'LULUS' ? 'selected' : '' }}>Lulus</option>
                                                                     <option value="TIDAK LULUS" {{ $items->peringkat_baharu == 'TIDAK LULUS' ? 'selected' : '' }}>Tidak Lulus</option>
@@ -239,8 +238,6 @@
         </div>
         
         <!-- Javascript -->
-        <script src="assets/bundles/libscripts.bundle.js"></script>    
-        <script src="assets/bundles/vendorscripts.bundle.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
