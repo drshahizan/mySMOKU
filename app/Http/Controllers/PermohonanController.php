@@ -804,6 +804,7 @@ class PermohonanController extends Controller
         $previousSesi = null;
         $semSemasa = null;
         $sesiSemasa = null;
+        
 
         // Find current semester/session
         foreach ($nextSemesterDates as $key => $data) {
@@ -833,6 +834,8 @@ class PermohonanController extends Controller
                     : $data['sesi'];    
             }
         }
+
+        $sesiLepas = $sesiLepas ?? null;
 
         // Example debug output
         // echo '<br>';
