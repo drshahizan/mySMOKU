@@ -407,8 +407,11 @@
 		$bayarT   = $withAkademik('tuntutan')->where('tuntutan.status', 8)->count();
 		$totalT   = $withAkademik('tuntutan')->count();
 
+		//peringkat
+		$peringkat = DB::table('tamat_pengajian')->whereNULL('peringkat_baharu')->where('tawaran', '!=', NULL)->count();
 		//tukar institusi
 		$tukarInstitusi = DB::table('tukar_institusi')->where('status', '=', '0')->count();
+		//pengesahan CGPA
 		$pengesahanCGPA = DB::table('permohonan_peperiksaan')->where('pengesahan_rendah', '=', '1')->count();
 	@endphp
 
@@ -513,7 +516,7 @@
 				<div class="menu-item">
 					<a class="menu-link" href="{{ route('peringkat.pengajian') }}">
 						<span class="menu-icon">{!! getIcon('teacher', 'fs-2') !!}</span>
-						<span class="menu-title">Peringkat Pengajian</span>
+						<span class="menu-title">Peringkat Pengajian ({{$peringkat}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
