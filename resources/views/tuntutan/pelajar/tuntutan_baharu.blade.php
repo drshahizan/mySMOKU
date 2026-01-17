@@ -29,7 +29,43 @@
 									<span class="fs-3 fw-bold text-gray-800">Borang Tuntutan</span>
 								</div>
 							</div>
-							<br>
+							<div class="separator separator-dashed my-5"></div>
+							<div class="mb-6">
+								<div class="fw-bold mb-4">Maklumat Akademik</div>
+								<div class="row gx-10 gy-4">
+									<div class="col-lg-6">
+										<div class="fw-semibold text-gray-600">Nama Institusi</div>
+										<div class="text-gray-800">
+											{{ $akademik->nama_institusi ?? '-' }}
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="fw-semibold text-gray-600">Peringkat Pengajian</div>
+										<div class="text-gray-800">
+											{{ $akademik?->peringkat?->peringkat ?? $akademik->peringkat_pengajian ?? '-' }}
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="fw-semibold text-gray-600">Tarikh Mula</div>
+										<div class="text-gray-800">
+											{{ $akademik?->tarikh_mula ? \Carbon\Carbon::parse($akademik->tarikh_mula)->format('d/m/Y') : '-' }}
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="fw-semibold text-gray-600">Nama Kursus</div>
+										<div class="text-gray-800">
+											{{ $akademik->nama_kursus ?? '-' }}
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="fw-semibold text-gray-600">Tarikh Tamat</div>
+										<div class="text-gray-800">
+											{{ $akademik?->tarikh_tamat ? \Carbon\Carbon::parse($akademik->tarikh_tamat)->format('d/m/Y') : '-' }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="separator separator-dashed my-5"></div>
 							<div class="row gx-10 mb-5">
 								<!--begin::Col-->
 								<div class="col-lg-6">
