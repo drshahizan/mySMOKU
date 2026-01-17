@@ -1182,11 +1182,11 @@
                 initDataTable('#sortTable5', 'datatable5');
 
                 // Log data for all tables
-                logTableData('Table 1 Data:', datatable1);
-                logTableData('Table 2 Data:', datatable2);
-                logTableData('Table 3 Data:', datatable3);
-                logTableData('Table 4 Data:', datatable4);
-                logTableData('Table 5 Data:', datatable5);
+                // logTableData('Table 1 Data:', datatable1);
+                // logTableData('Table 2 Data:', datatable2);
+                // logTableData('Table 3 Data:', datatable3);
+                // logTableData('Table 4 Data:', datatable4);
+                // logTableData('Table 5 Data:', datatable5);
             });
 
             function initDataTable(tableId, variableName) {
@@ -1294,6 +1294,8 @@
             function logTableData(message, table) {
                 console.log(message, table.rows().data().toArray());
             }
+
+            console.clear();
         </script>
     </body>
 </x-default-layout> 
