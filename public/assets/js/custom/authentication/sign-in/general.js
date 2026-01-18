@@ -174,6 +174,12 @@ var KTSigninGeneral = function () {
                             if (validationErrors.tahap_not_allowed) {
                                 // Show error for tahap_not_allowed
                                 showError(validationErrors.tahap_not_allowed[0]);
+                            } else if (validationErrors.status) {
+                                // Show error for inactive account
+                                showError(validationErrors.status[0]);
+                            } else if (validationErrors.email_verified_at) {
+                                // Show error for unverified email
+                                showError(validationErrors.email_verified_at[0]);
                             } else if (validationErrors.password) {
                                 // Show error for password if tahap_not_allowed is not present
                                 showError(validationErrors.password[0]);
