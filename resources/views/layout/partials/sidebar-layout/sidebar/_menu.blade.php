@@ -366,6 +366,12 @@
 							<span class="menu-title">Surat Tawaran Pelajar</span>
 						</a>
 					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="{{ route('senarai.penyelaras')}}">
+							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+							<span class="menu-title">Senarai Penyelaras</span>
+						</a>
+					</div>
 				@if($institusi->jenis_institusi === 'UA')	
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('maklumat.bank')}}">

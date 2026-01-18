@@ -55,6 +55,7 @@ use App\Imports\ModifiedTuntutanImport;
 use App\Mail\MailDaftarPentadbir;
 use App\Mail\PengesahanCGPA;
 use App\Models\JumlahTuntutan;
+use App\Models\Role;
 use App\Models\SaringanTuntutan;
 use App\Models\SenaraiBank;
 use App\Models\TukarInstitusi;
@@ -3135,6 +3136,144 @@ class PenyelarasController extends Controller
 
         // No updates were made
         return back();
+    }
+
+    public function senaraiPenyelarasInstitusi()
+    {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+        }
+
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
+        $institusiPengajian = InfoIpt::whereIn('id_institusi', $idInstitusiList)->orderBy('nama_institusi')->get();
+
+        $tahap = Role::all()->sortBy('id');
+        $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->orderBy('nama_institusi')->get();
+        $infoppk = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+
+        return view('kemaskini.penyelaras.senarai_penyelaras_institusi', compact('institusiPengajian', 'tahap', 'infoipt', 'infoppk'));
+    }
+
+    public function getSenaraiPenyelaras()
+    {
+        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+
+        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
+            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        } else {
+            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+        }
+
+        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+
+        $penyelaras = User::whereIn('users.tahap', [2,6]) // Penyelaras sahaja
+            ->whereIn('id_institusi', $idInstitusiList)
+            ->with(['role','infoipt'])
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'nama' => $item->nama,
+                    'no_kp' => $item->no_kp,
+                    'email' => $item->email,
+                    'tahap' => $item->role->id ?? null,
+                    'peranan' => $item->role->name ?? '-',
+                    'institusi' => $item->infoipt->nama_institusi ?? '-',
+                    'id_institusi' => $item->infoipt->id_institusi ?? null,
+                    'jawatan' => $item->jawatan,
+                    'created_at' => $item->created_at,
+                    'status' => $item->status
+                ];
+            });
+    
+
+
+        return response()->json($penyelaras);
+    }
+
+    public function kemaskiniPenyelaras(Request $request)
+    {
+        $request->validate([
+            'nama' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'no_kp' => ['required', 'string'],
+            'tahap' => ['required'],
+            'jawatan' => ['required', 'string'],
+            'id_institusi' => ['required_without_all:edit_institusi_ipt,edit_institusi_ppk'],
+            'edit_institusi_ipt' => ['required_without_all:id_institusi,edit_institusi_ppk'],
+            'edit_institusi_ppk' => ['required_without_all:id_institusi,edit_institusi_ipt'],
+        ]);
+
+        $user = User::where('no_kp', $request->no_kp)->first();
+        $status = $request->input('status');
+        if ($status === null) {
+            $status = $user ? $user->status : 1;
+        }
+
+        // Generate a random password
+        $characters = 'abcdef12345!@#$%^&';
+        $password_length = 12;
+        $password = '';
+        for ($i = 0; $i < $password_length; $i++) {
+            $password .= $characters[random_int(0, strlen($characters) - 1)];
+        }
+
+        // Determine institution ID
+        $institutionId = $request->edit_institusi_ipt ?? $request->edit_institusi_ppk ?? $request->id_institusi;
+
+        // dd($institutionId);
+        if (is_null($user)) {
+            // Create new user
+            $user = User::create([
+                'nama' => strtoupper($request->nama),
+                'no_kp' => $request->no_kp,
+                'email' => $request->email,
+                'tahap' => $request->tahap,
+                'jawatan' => strtoupper($request->jawatan),
+                'password' => Hash::make($password),
+                'status' => $status,
+                'id_institusi' => $institutionId,
+            ]);
+
+            Mail::to($request->email)->send(new MailDaftarPentadbir($request->email, $request->no_kp, $password));
+
+            // return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
+        }
+
+        // User exists – check if status changed
+        if ($user->status != $status) {
+            $user->update([
+                'nama' => strtoupper($request->nama),
+                'email' => $request->email,
+                'tahap' => $request->tahap,
+                'jawatan' => strtoupper($request->jawatan),
+                'status' => $status,
+                'id_institusi' => $institutionId,
+            ]);
+
+            if ($status == 1) {
+                return redirect()->route('senarai.penyelaras')->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
+            } else {
+                return redirect()->route('senarai.penyelaras')->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
+            }
+        }
+
+        // Status remains the same – just update info
+        $user->update([
+            'nama' => strtoupper($request->nama),
+            'email' => $request->email,
+            'tahap' => $request->tahap,
+            'jawatan' => strtoupper($request->jawatan),
+            'id_institusi' => $institutionId,
+        ]);
+
+        return redirect()->route('senarai.penyelaras');
     }
 
     public function senaraiPelajar()
