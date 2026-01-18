@@ -130,8 +130,6 @@ class LoginRequest extends FormRequest
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
-            'email_verified_at' => trans('auth.email_not_verified'), // Add this line
-            'password' => trans('auth.password'),
         ]);
     }
 
