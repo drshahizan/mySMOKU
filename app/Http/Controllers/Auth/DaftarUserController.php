@@ -12,7 +12,10 @@ use App\Models\TarikhIklan;
 use App\Models\User;
 use DateTime;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use JsonException;
 
 class DaftarUserController extends Controller
 {
@@ -28,8 +31,7 @@ class DaftarUserController extends Controller
     {
         //using api smoku
         $request->validate([
-            'no_kp' => ['required', 'string'],
-            
+            'no_kp' => ['required', 'digits:12'],
         ]);
 
         $nokp_in = $request->no_kp;
@@ -45,13 +47,40 @@ class DaftarUserController extends Controller
             $client = new Client();
             $url = 'https://oku.jkm.gov.my/api/oku/' . $request->no_kp;
             // $url = 'https://oku-staging.jkm.gov.my/api/oku/' . $request->no_kp;
-            $guzzleRequest = $client->get($url, ['headers' => $headers]);
+            try {
+                $guzzleRequest = $client->get($url, ['headers' => $headers]);
+            } catch (GuzzleException $e) {
+                Log::warning('JKM API request failed', [
+                    'no_kp' => $request->no_kp,
+                    'message' => $e->getMessage(),
+                ]);
+                return redirect()->route('login')
+                    ->with('message', 'Perkhidmatan JKM tidak dapat dicapai. Sila cuba lagi.');
+            }
 
-            $response = $guzzleRequest ? $guzzleRequest->getBody()->getContents() : null;
-            $status = $guzzleRequest ? $guzzleRequest->getStatusCode() : 500;
+            $response = $guzzleRequest->getBody()->getContents();
+            $status = $guzzleRequest->getStatusCode();
+
+            if ($status !== 200 || $response === '') {
+                Log::warning('JKM API non-200 response', [
+                    'no_kp' => $request->no_kp,
+                    'status' => $status,
+                ]);
+                return redirect()->route('login')
+                    ->with('message', 'Maklumat JKM tidak dapat diambil. Sila cuba lagi.');
+            }
 
             // Parse the JSON string
-            $data = json_decode($response, true);
+            try {
+                $data = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+            } catch (JsonException $e) {
+                Log::warning('JKM API invalid JSON', [
+                    'no_kp' => $request->no_kp,
+                    'message' => $e->getMessage(),
+                ]);
+                return redirect()->route('login')
+                    ->with('message', 'Maklumat JKM tidak sah. Sila cuba lagi.');
+            }
             
 
             // Access the "data" field
