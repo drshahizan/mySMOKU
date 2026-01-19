@@ -63,7 +63,7 @@
                             <!--begin::Input group-"-->
                             <div class="col-xs-3">
                             <!--begin::Name-->
-                            <input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
+                            <input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
                             <!--end::Name-->
                             </div>
                             <!--begin::Submit button-->
