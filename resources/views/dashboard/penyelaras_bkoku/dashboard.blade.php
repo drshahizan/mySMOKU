@@ -110,6 +110,7 @@
                                     <th class="text-center">No. Kad Pengenalan</th>
                                     <th class="text-center">No. Kad JKM</th>
                                     <th class="text-center">Nama</th>
+                                    <th class="text-center">Penyelaras</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center"></th>
                                 </tr>
@@ -131,6 +132,20 @@
                                             }
                                         }
                                         $pemohon = implode(' ', $result);
+
+                                        $penyelarasText = $smoku->penyelaras_nama ? ucwords(strtolower($smoku->penyelaras_nama)) : null;
+                                        $penyelarasResult = [];
+                                        if ($penyelarasText) {
+                                            $penyelarasWords = explode(' ', $penyelarasText);
+                                            foreach ($penyelarasWords as $word) {
+                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                    $penyelarasResult[] = Str::lower($word);
+                                                } else {
+                                                    $penyelarasResult[] = $word;
+                                                }
+                                            }
+                                        }
+                                        $penyelarasNama = $penyelarasText ? implode(' ', $penyelarasResult) : '-';
                                     @endphp
 
                                     @php
@@ -152,6 +167,7 @@
                                     <td class="text-center">{{ $smoku->no_kp}}</td>
                                     <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
                                     <td class="text-center">{{$pemohon}}</td>
+                                    <td class="text-center">{{ $penyelarasNama }}</td>
                                     @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
                                         <td class="text-center">
                                             <a href="{{ route('penyelaras.permohonan.baharu', $smoku->smoku_id ?? $smoku->id) }}">

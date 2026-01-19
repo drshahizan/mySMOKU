@@ -105,11 +105,7 @@ class PenyelarasController extends Controller
                     });
             })
 
-            ->where(function ($q) use ($idInstitusiList) {
-                $q->whereIn('users.id_institusi', $idInstitusiList)
-                    ->orWhereNull('smoku_penyelaras.smoku_id');
-            })
-            ->where('smoku_penyelaras.penyelaras_id', Auth::user()->id)
+            ->whereIn('users.id_institusi', $idInstitusiList)
             ->where(function ($q) use ($idInstitusiList) {
                 $q->whereIn('sa.id_institusi', $idInstitusiList)
                     ->orWhereNull('sa.id_institusi');
@@ -129,7 +125,7 @@ class PenyelarasController extends Controller
                 ");
             })
 
-            ->select('smoku.*', 'sa.*', 'p.status', 'p.id as permohonan_id', 'smoku.id as smoku_id')
+            ->select('smoku.*', 'sa.*', 'p.status', 'p.id as permohonan_id', 'users.nama as penyelaras_nama', 'smoku.id as smoku_id')
             ->get();
 
 
