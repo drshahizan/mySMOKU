@@ -88,6 +88,8 @@ class PenyelarasController extends Controller
                 $join->on('sa.smoku_id', '=', 'smoku.id')
                     ->where('sa.status', 1);
             })
+            ->leftJoin('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
+            ->leftJoin('users', 'users.id', '=', 'smoku_penyelaras.penyelaras_id')
             ->leftJoin('permohonan as p', function ($join) {
                 $join->on('p.smoku_id', '=', 'smoku.id')
                     ->where(function ($w) {
@@ -101,7 +103,15 @@ class PenyelarasController extends Controller
                     });
             })
 
-            ->whereIn('sa.id_institusi', $idInstitusiList)
+            ->where(function ($q) use ($idInstitusiList) {
+                $q->whereIn('users.id_institusi', $idInstitusiList)
+                    ->orWhereNull('smoku_penyelaras.smoku_id');
+            })
+            ->where('smoku_penyelaras.penyelaras_id', Auth::user()->id)
+            ->where(function ($q) use ($idInstitusiList) {
+                $q->whereIn('sa.id_institusi', $idInstitusiList)
+                    ->orWhereNull('sa.id_institusi');
+            })
 
             ->where(function ($q) {
                 $q->where(function ($q2) {
@@ -117,7 +127,7 @@ class PenyelarasController extends Controller
                 ");
             })
 
-            ->select('smoku.*', 'sa.*', 'p.status', 'p.id as permohonan_id')
+            ->select('smoku.*', 'sa.*', 'p.status', 'p.id as permohonan_id', 'smoku.id as smoku_id')
             ->get();
 
 

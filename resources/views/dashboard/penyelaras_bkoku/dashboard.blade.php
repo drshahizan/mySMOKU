@@ -154,7 +154,7 @@
                                     <td class="text-center">{{$pemohon}}</td>
                                     @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
                                         <td class="text-center">
-                                            <a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
+                                            <a href="{{ route('penyelaras.permohonan.baharu', $smoku->smoku_id ?? $smoku->id) }}">
                                                 @if ($smoku->status == 1)
                                                     <button class="btn bg-info text-white">Deraf</button>
                                                 @elseif ($smoku->status == 9)

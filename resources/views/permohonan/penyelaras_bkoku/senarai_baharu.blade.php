@@ -69,7 +69,7 @@
 								$formattedDate = $smoku->tarikh_hantar->format('d/m/Y');
 							@endphp
 							<tr>
-								<td><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">{{ $smoku->no_rujukan_permohonan}}</a></td>
+								<td><a href="{{ route('penyelaras.permohonan.baharu', $smoku->smoku_id ?? $smoku->id) }}">{{ $smoku->no_rujukan_permohonan}}</a></td>
 								<td>{{ $pemohon}}</td>
 								<td>{{ $smoku->nama_kursus}}</td>
 								<td class="text-center">{{ $formattedDate}}</td>

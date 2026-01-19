@@ -136,7 +136,7 @@
 								<td class="" colspan="2">
 									<span class="text-gray-800 fw-bold text-center mb-1 fs-6">{{$pemohon}}</span>
 								</td>
-								<td class="text-center"><a href="{{route('penyelaras.permohonan.baharu',$smoku->smoku_id)}}">
+								<td class="text-center"><a href="{{ route('penyelaras.permohonan.baharu', $smoku->smoku_id ?? $smoku->id) }}">
 									<button class="btn bg-primary text-white">Belum Mohon</button></a>
 								</td>
 							</tr>
