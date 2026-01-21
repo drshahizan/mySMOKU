@@ -1366,7 +1366,7 @@
 							$saring_resit = Str::contains($saringan, 'Ralat pada resit');
 
 							//user migrate
-							$user = DB::table('users')->where('no_kp', Auth::user()->no_kp)->first();
+							// $user = DB::table('users')->where('no_kp', Auth::user()->no_kp)->first();
 							
 						@endphp
 						<!--begin::Table-->
@@ -1434,7 +1434,7 @@
 											@endif
 										</tr>
 									@endforeach	
-								@elseif ($dokumen->isEmpty() && $user->data_migrate == 1)
+								@elseif ($dokumen->isEmpty() && $permohonan->data_migrate == 1)
 									<tr>
 										<td class="text-gray-800">Salinan Penyata Bank&nbsp;<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 										<td class="fv-row">N/A</td>

@@ -130,7 +130,7 @@ class PermohonanController extends Controller
                 }
    
             }else{
-
+                
                 $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
                     ->leftJoin('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
                     ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
