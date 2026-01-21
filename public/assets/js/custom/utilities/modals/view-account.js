@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		));
 
 		// Step 2
-		validations.push(FormValidation.formValidation(
+		var step2Validator = FormValidation.formValidation(
 			form,
 			{
 				fields: {
@@ -179,8 +179,12 @@ document.addEventListener("DOMContentLoaded", function () {
 					},
 					'no_kp_waris': {
 						validators: {
-							notEmpty: {
-								message: 'No. Kad Pengenalan diperlukan'
+							callback: {
+								message: 'No. Kad Pengenalan diperlukan',
+								callback: function (input) {
+									var pasportValue = form.querySelector('[name="no_pasport_waris"]').value;
+									return input.value.trim() !== '' || pasportValue.trim() !== '';
+								}
 							}
 						}
 					},
@@ -262,7 +266,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					})
 				}
 			}
-		));
+		);
+		validations.push(step2Validator);
+		var noPasportWaris = form.querySelector('[name="no_pasport_waris"]');
+		if (noPasportWaris) {
+			noPasportWaris.addEventListener('input', function () {
+				step2Validator.revalidateField('no_kp_waris');
+			});
+		}
 
 		// Step 3
 		validations.push(FormValidation.formValidation(
