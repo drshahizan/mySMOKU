@@ -451,9 +451,11 @@ class PenyelarasController extends Controller
             // ->select('id_institusi','kod_peringkat','nama_kursus')
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
+            ->select('no_rujukan', 'nama_kursus', 'kod_nec', 'bidang')
             ->get();
 
         return response()->json($kursusData);
+
     }
 
     public function simpan(Request $request)
