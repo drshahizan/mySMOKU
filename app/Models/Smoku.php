@@ -55,6 +55,11 @@ class Smoku extends Model
         return $this->hasOne(ButiranPelajar::class, 'smoku_id', 'id');
     }
 
+    public function jantinaRelation()
+    {
+        return $this->belongsTo(Jantina::class, 'jantina', 'kod_jantina');
+    }
+
     public function keturunanRelation()
     {
         return $this->belongsTo(Keturunan::class, 'keturunan', 'id');

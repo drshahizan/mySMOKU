@@ -33,6 +33,28 @@ class ButiranPelajar extends Model
         
     ];
 
+    public function smoku()
+    {
+        return $this->belongsTo(Smoku::class, 'smoku_id', 'id');
+    }
+
+    public function waris()
+    {
+        return $this->hasOne(Waris::class, 'smoku_id', 'smoku_id');
+    }
+
+    public function akademik()
+    {
+        return $this->hasOne(Akademik::class, 'smoku_id', 'smoku_id')
+            ->where('status', 1)
+            ->orderByDesc('id');
+    }
+
+    public function permohonan()
+    {
+        return $this->hasMany(Permohonan::class, 'smoku_id', 'smoku_id');
+    }
+
     public function negeri()
     {
         return $this->belongsTo(Negeri::class, 'alamat_tetap_negeri');
