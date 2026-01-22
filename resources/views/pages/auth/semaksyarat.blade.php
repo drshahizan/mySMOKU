@@ -135,7 +135,7 @@
 
                                 var id_institusi = response['data'][i].id_institusi;
                                 var kod_peringkat = response['data'][i].kod_peringkat;
-                                var peringkat = response['data'][i].peringkat;
+                                var peringkat = response['data'][i].peringkat.toUpperCase();
 
                                 var option = "<option value='"+kod_peringkat+"'>"+peringkat+"</option>";
 
