@@ -2171,7 +2171,8 @@
 							if (response['data']) {
 
 								response['data'].forEach(function(item) {
-									var option = `<option value="${item.kod_peringkat}">${item.peringkat}</option>`;
+									var peringkatValue = item.peringkat.toUpperCase();
+									var option = `<option value="${item.kod_peringkat}">${peringkatValue}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 
@@ -2202,7 +2203,8 @@
 
 								response['data'].forEach(function(item) {
 									var uppercaseValue = item.nama_kursus.toUpperCase();
-									var option = `<option value="${item.nama_kursus}">${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()}) - ${item.no_rujukan}</option>`;
+									var bidang = (item.bidang || '').toUpperCase();
+									var option = `<option value="${item.nama_kursus}">${uppercaseValue} - ${item.kod_nec} (${bidang}) - ${item.no_rujukan}</option>`;
 									$("#nama_kursus").append(option);
 								});
 							}
