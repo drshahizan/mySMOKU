@@ -1104,34 +1104,23 @@
 								<span class="">Nama Pusat Pengajian</span>
 							</label>
 							<!--end::Label-->
-							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								@if($akademikmqa && $akademikmqa->id_institusi)
-								   <option value="{{ $akademikmqa->id_institusi }}">{{ strtoupper($akademikmqa->nama_institusi) }}</option>
-								@else
-								   @foreach ($infoipt as $infoipt)
-									  <option></option>
-									  <option value="{{ $infoipt->id_institusi }}">{{ strtoupper($infoipt->nama_institusi) }}</option>
-								   @endforeach
-								@endif
-							 </select>							 
-						</div>
-						<div class="d-flex flex-column mb-7 fv-row">
-							<!--begin::Label-->
-							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Nama Kursus</span>
-							</label>
-							<!--end::Label-->
-							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-								@if($akademikmqa && $akademikmqa->nama_kursus)
-									<option value="{{ $akademikmqa->nama_kursus}}">{{ strtoupper($akademikmqa->nama_kursus)}}</option>
-								@else
-									<option value=""></option>
-								@endif
+							 <select id="id_institusi" name="id_institusi" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required>
+								@foreach ($infoipt as $institusi)
+								<option value="{{$institusi->id_institusi}}" {{$akademikmqa->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
+								@endforeach
 							</select>
 						</div>
-						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">No Pendaftaran Pelajar</span>
+									
+								</label>
+								<!--end::Label-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+							</div>
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1140,34 +1129,27 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										@if($akademikmqa && $akademikmqa->kod_peringkat)
-											<option value="{{ $akademikmqa->kod_peringkat }}" selected>{{ $akademikmqa->peringkat }}</option>
-										@else
-											<option value=""></option>
-										@endif
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademikmqa->kod_peringkat}}"/>
+									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+										<option value="">Pilih</option>
 									</select>
-									
 									<!--end::Input wrapper-->
 								</div>
 								<!--end::Row-->
 							</div>
 							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-									@foreach ($mod as $mod)
-									<option></option>
-									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
-									@endforeach
-								</select>
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Kursus</span>
+							</label>
+							<!--end::Label-->
+							<input type="hidden" class="form-control form-control-solid" placeholder="" id="nama_kursus_asal" name="nama_kursus_asal" value="{{$akademikmqa->nama_kursus}}"/>
+							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+								<option value="">Pilih</option>
+							</select>
 						</div>
 						<!--end::Input group-->
 						<div class="row mb-10">
@@ -1182,7 +1164,7 @@
 											<option value="{{ ($i == (int)$i) ? (int)$i : $i }}">{{ ($i == (int)$i) ? (int)$i : number_format($i, 1) }}</option>
 										@endfor
 									</select>
-									<!--end::Input wrapper-->
+								<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
 							<div class="col-md-6 fv-row">
@@ -1202,6 +1184,7 @@
 								<!--end::Row-->
 							</div>
 						</div>
+						<!--begin::Input group-->
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1228,16 +1211,25 @@
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
+							
+							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">No Pendaftaran Pelajar</span>
-									
-								</label>
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="" />
+								<!--begin::Input wrapper-->
+								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+									@foreach ($mod as $mod)
+									<option></option>
+									<option value="{{$mod->kod_mod}}">{{$mod->mod}}</option>
+									@endforeach
+								</select>
+								<!--end::Input wrapper-->
 							</div>
+							<!--end::Col-->
 						</div>
+						<!--end::Input group-->
+						
 						<!--begin::Input group-->
 						<div class="row mb-10">
 							<!--begin::Col-->
@@ -2180,58 +2172,97 @@
 			
 		</script>
 
-<script type='text/javascript'>
-	$(document).ready(function(){
-		var kodperingkat = document.getElementById('peringkat_pengajian').value;
-		//alert (kodperingkat);
-		// institusi Change
-		$('#id_institusi').change(function(){
+<script>
+	$(document).ready(function() {
+		var id_institusi = $('#id_institusi').val();
+		var kod_peringkat = $('#peringkat').val();
 
-			// institusi id
-			var idipt = $(id_institusi).val();
-			
-
-			// Empty the dropdown
-			//$('#peringkat_pengajian').find('option').not(':first').remove();
-			$('#nama_kursus').find('option').not(':first').remove();
-
-			// AJAX request 
+		// Function to fetch peringkat options
+		function fetchPeringkat(id) {
 			$.ajax({
-				url: 'kursusPermohonan/'+kodperingkat+'/'+idipt,
+				url: '/getPeringkatPermohonan/' + id,
 				type: 'get',
 				dataType: 'json',
-			
-				success: function(response){
+				success: function(response) {
+					$("#peringkat_pengajian").empty();
+					
+					if (response['data']) {
+						var selectedValue = $('#peringkat').val();
 
-					var len = 0;
-					if(response['data'] != null){
-						len = response['data'].length;
+						response['data'].forEach(function(item) {
+							var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat.toUpperCase()}</option>`;
+							$("#peringkat_pengajian").append(option);
+						});
+
+						// Update kod_peringkat to the newly selected value
+						kod_peringkat = $('#peringkat_pengajian').val();
+
+						// Fetch courses based on the new id_institusi and kod_peringkat
+						fetchKursus(id_institusi, kod_peringkat);
 					}
-
-					if(len > 0){
-						// Read data and create <option >
-						for(var i=0; i<len; i++){
-
-							var id_institusi = response['data'][i].id_institusi;
-							var kod_peringkat = response['data'][i].kod_peringkat;
-							var nama_kursus = response['data'][i].nama_kursus;
-							var kod_nec = response['data'][i].kod_nec;
-							var bidang = (response['data'][i].bidang || '').toUpperCase();
-							var uppercaseValue  = (response['data'][i].nama_kursus || '').toUpperCase();
-
-							var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
-
-							$("#nama_kursus").append(option); 
-							
-						}
-					}
-
+				},
+				error: function() {
+					alert('Failed to load peringkat options');
 				}
 			});
+		}
 
+		// Function to fetch kursus options based on id_institusi and kod_peringkat
+		function fetchKursus(id_institusi, kod_peringkat) {
+			$.ajax({
+				url: 'kursusPermohonan/' + kod_peringkat + '/' + id_institusi,
+				type: 'get',
+				dataType: 'json',
+				success: function(response) {
+					$("#nama_kursus").empty();
+
+					if (response['data']) {
+						var selectedValue = $('#nama_kursus_asal').val();
+						var found = false;
+
+						// If selectedValue is not in the list, add it manually
+						if (!found && selectedValue) {
+							var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
+							$("#nama_kursus").append(fallbackOption);
+						}
+
+						response['data'].forEach(function(item) {
+							var uppercaseValue = (item.nama_kursus || '').toUpperCase();
+							var bidang = (item.bidang || '').toUpperCase();
+							var isSelected = item.nama_kursus === selectedValue;
+
+							if (isSelected) found = true;
+
+							var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
+								${uppercaseValue} - ${item.kod_nec} (${bidang || '-'}) - ${item.no_rujukan}
+							</option>`;
+							$("#nama_kursus").append(option);
+
+						});
+
+						
+					}
+				},
+				error: function() {
+					alert('Failed to load kursus options');
+				}
+			});
+		}
+
+		// Initial load
+		fetchPeringkat(id_institusi);
+
+		// When id_institusi changes
+		$('#id_institusi').change(function() {
+			id_institusi = $(this).val();
+			fetchPeringkat(id_institusi);  // Reload peringkat options
 		});
 
-
+		// When peringkat changes
+		$('#peringkat_pengajian').change(function() {
+			kod_peringkat = $(this).val();
+			fetchKursus(id_institusi, kod_peringkat);  // Reload kursus options based on new kod_peringkat
+		});
 	});
 
 </script>

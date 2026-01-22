@@ -158,7 +158,7 @@ class PermohonanController extends Controller
         }
         else {
 
-            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','mod','biaya','penaja','penajaArray','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
+            return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','penajaArray','hubungan','negeri','bandar','agama','parlimen','dun','keturunan'));
         }
 
     }
