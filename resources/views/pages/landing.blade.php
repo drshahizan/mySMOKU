@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<!--begin::Head-->
-	<head><base href=""/>
+	<head><base href="/">
 		<title>Selamat Datang - Sistem Penajaan Orang Kurang Upaya (SisPO)</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Bantuan ini merupakan keistimewaan yang diberikan kepada pelajar OKU. Oleh itu, ianya harus dibezakan dengan kemudahan-kemudahan lain yang turut diterima oleh pelajar bukan OKU. Ini bermakna sekiranya seseorang pelajar OKU itu menerima biasiswa atau kemudahan lain yang juga turut dinikmati oleh pelajar bukan OKU, maka pelajar OKU tersebut adalah layak menerima elaun ini." />
@@ -11,7 +11,11 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
 		<meta property="og:site_name" content="Sistem Penajaan Orang Kurang Upaya (SisPO)" />
-		<link rel="icon" href="/favicon.ico">
+		<link rel="icon" href="/favicon.ico" sizes="any">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
