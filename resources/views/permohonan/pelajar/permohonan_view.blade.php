@@ -592,7 +592,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" />
+									<input type="text" class="form-control form-control-solid" id="emel" name="emel" placeholder="" value="{{$butiranPelajar->emel}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
 									<!--end::Input-->
 								</div>
 								<!--end::Input wrapper-->
@@ -973,25 +973,23 @@
 								<span class="">Nama Pusat Pengajian</span>
 							</label>
 							<!--end::Label-->
-							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
-								@foreach ($institusi as $institusi)
+							<select id="id_institusi" name="id_institusi" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+								@foreach ($infoipt as $institusi)
 								<option value="{{$institusi->id_institusi}}" {{$butiranPelajar->id_institusi == $institusi->id_institusi ? 'selected' : ''}}>{{ strtoupper($institusi->nama_institusi)}}</option>
 								@endforeach
 							</select>
 						</div>
-						<div class="d-flex flex-column mb-7 fv-row">
-							<!--begin::Label-->
-							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-								<span class="">Nama Kursus</span>
-							</label>
-							<!--end::Label-->
-							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
-								<option value="{{ $butiranPelajar->nama_kursus}}">{{ strtoupper($butiranPelajar->nama_kursus)}}</option>
-							</select>
-						</div>
-						<!--end::Input group-->
 						<!--begin::Input group-->
 						<div class="row mb-10">
+							<div class="col-md-6 fv-row">
+								<!--begin::Label-->
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+									<span class="">No Pendaftaran Pelajar</span>
+									
+								</label>
+								<!--end::Label-->
+								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$butiranPelajar->no_pendaftaran_pelajar}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+							</div>
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1000,33 +998,31 @@
 								<!--begin::Row-->
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
-									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" disabled>
-										@foreach ($peringkat as $peringkat)
-										<option value="{{$peringkat->kod_peringkat}}" {{$butiranPelajar->peringkat_pengajian == $peringkat->kod_peringkat ? 'selected' : ''}}>{{ $peringkat->peringkat}}</option>
-										@endforeach
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$butiranPelajar->peringkat_pengajian}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}/>
+									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+										<option value="">Pilih</option>
 									</select>
 									<!--end::Input wrapper-->
 								</div>
 								<!--end::Row-->
 							</div>
 							<!--end::Col-->
-							<!--begin::Col-->
-							<div class="col-md-6 fv-row">
-								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
-								<!--end::Label-->
-								<!--begin::Input wrapper-->
-								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-									<option></option>
-									@foreach ($mod as $mod)
-									<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
-									@endforeach
-								</select>
-								<!--end::Input wrapper-->
-							</div>
-							<!--end::Col-->
 						</div>
 						<!--end::Input group-->
+
+						<div class="d-flex flex-column mb-7 fv-row">
+							<!--begin::Label-->
+							<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
+								<span class="">Nama Kursus</span>
+							</label>
+							<!--end::Label-->
+							<input type="hidden" class="form-control form-control-solid" placeholder="" id="nama_kursus_asal" name="nama_kursus_asal" value="{{$butiranPelajar->nama_kursus}}"  {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}/>
+							<select id="nama_kursus" name="nama_kursus" class="form-select form-select-solid js-example-basic-single" data-control="select2" data-hide-search="true" data-placeholder="Pilih" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+								<option value="">Pilih</option>
+							</select>
+						</div>
+						<!--end::Input group-->
+
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1060,19 +1056,16 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 										<select id="bil_bulan_per_sem" name="bil_bulan_per_sem" class="form-select form-select-solid" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
-											<option></option>
-											@if(!empty($butiranPelajar->bil_bulan_per_sem))
-												<option value="{{$butiranPelajar->bil_bulan_per_sem}}" selected>{{$butiranPelajar->bil_bulan_per_sem}}</option>
-											@else
-												<option value="4">4</option>
-												<option value="6">6</option>
-											@endif
+											<option value="4" {{$butiranPelajar->bil_bulan_per_sem == "4" ? 'selected' : ''}}>4</option>
+											<option value="6" {{$butiranPelajar->bil_bulan_per_sem == "6" ? 'selected' : ''}}>6</option>
 										</select>
 									<!--end::Input wrapper-->
 								</div>
 								<!--end::Row-->
 							</div>
 						</div>
+
+						<!--begin::Input group-->
 						<div class="row mb-10">
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
@@ -1105,16 +1098,24 @@
 									<!--end::Input wrapper-->
 							</div>
 							<!--end::Col-->
+							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								<!--begin::Label-->
-								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-									<span class="">No Pendaftaran Pelajar</span>
-									
-								</label>
+								<label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">Mod Pengajian</label>
 								<!--end::Label-->
-								<input type="text" class="form-control form-control-solid" placeholder="" id="no_pendaftaran_pelajar" name="no_pendaftaran_pelajar" value="{{$butiranPelajar->no_pendaftaran_pelajar}}" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'readonly' : '' }}/>
+								<!--begin::Input wrapper-->
+								<select name="mod" id="mod" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<option></option>
+									@foreach ($mod as $mod)
+										<option value="{{$mod->kod_mod}}" {{$butiranPelajar->mod == $mod->kod_mod ? 'selected' : ''}}>{{ $mod->mod}}</option>
+									@endforeach
+								</select>
+								<!--end::Input wrapper-->
 							</div>
+							<!--end::Col-->
 						</div>
+						<!--end::Input group-->
+						
 						<!--begin::Input group-->
 						<div class="row mb-10">
 							<!--begin::Col-->
@@ -1952,6 +1953,102 @@
 		</script>
 
 		<script>
+			$(document).ready(function() {
+				var id_institusi = $('#id_institusi').val();
+				var kod_peringkat = $('#peringkat').val();
+
+				// Function to fetch peringkat options
+				function fetchPeringkat(id) {
+					$.ajax({
+						url: '/getPeringkatPermohonan/' + id,
+						type: 'get',
+						dataType: 'json',
+						success: function(response) {
+							$("#peringkat_pengajian").empty();
+							
+							if (response['data']) {
+								var selectedValue = $('#peringkat').val();
+
+								response['data'].forEach(function(item) {
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat.toUpperCase()}</option>`;
+									$("#peringkat_pengajian").append(option);
+								});
+
+								// Update kod_peringkat to the newly selected value
+								kod_peringkat = $('#peringkat_pengajian').val();
+
+								// Fetch courses based on the new id_institusi and kod_peringkat
+								fetchKursus(id_institusi, kod_peringkat);
+							}
+						},
+						error: function() {
+							alert('Failed to load peringkat options');
+						}
+					});
+				}
+
+				// Function to fetch kursus options based on id_institusi and kod_peringkat
+				function fetchKursus(id_institusi, kod_peringkat) {
+					$.ajax({
+						url: 'kursusPermohonan/' + kod_peringkat + '/' + id_institusi,
+						type: 'get',
+						dataType: 'json',
+						success: function(response) {
+							$("#nama_kursus").empty();
+
+							if (response['data']) {
+								var selectedValue = $('#nama_kursus_asal').val();
+								var found = false;
+
+								// If selectedValue is not in the list, add it manually
+								if (!found && selectedValue) {
+									var fallbackOption = `<option value="${selectedValue}" selected>${selectedValue} (-)</option>`;
+									$("#nama_kursus").append(fallbackOption);
+								}
+
+								response['data'].forEach(function(item) {
+									var uppercaseValue = (item.nama_kursus || '').toUpperCase();
+									var bidang = (item.bidang || '').toUpperCase();
+									var isSelected = item.nama_kursus === selectedValue;
+
+									if (isSelected) found = true;
+
+									var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
+										${uppercaseValue} - ${item.kod_nec} (${bidang || '-'}) - ${item.no_rujukan}
+									</option>`;
+									$("#nama_kursus").append(option);
+
+								});
+
+								
+							}
+						},
+						error: function() {
+							alert('Failed to load kursus options');
+						}
+					});
+				}
+
+				// Initial load
+				fetchPeringkat(id_institusi);
+
+				// When id_institusi changes
+				$('#id_institusi').change(function() {
+					id_institusi = $(this).val();
+					fetchPeringkat(id_institusi);  // Reload peringkat options
+				});
+
+				// When peringkat changes
+				$('#peringkat_pengajian').change(function() {
+					kod_peringkat = $(this).val();
+					fetchKursus(id_institusi, kod_peringkat);  // Reload kursus options based on new kod_peringkat
+				});
+			});
+
+		</script>
+
+
+		<script>
 			//BEKERJA
 			$(document).ready(function(){
 				var status_pekerjaan = document.getElementById('status_pekerjaan').value;
@@ -1989,6 +2086,8 @@
 				}
 				});
 			});
+
+			
 
 			//SUMBER BIAYA DAN PENAJA
 			$(document).ready(function () {

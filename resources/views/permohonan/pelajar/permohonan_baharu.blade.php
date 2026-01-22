@@ -2197,7 +2197,7 @@
 
 			// AJAX request 
 			$.ajax({
-				url: 'kursus/'+kodperingkat+'/'+idipt,
+				url: 'kursusPermohonan/'+kodperingkat+'/'+idipt,
 				type: 'get',
 				dataType: 'json',
 			
@@ -2216,8 +2216,8 @@
 							var kod_peringkat = response['data'][i].kod_peringkat;
 							var nama_kursus = response['data'][i].nama_kursus;
 							var kod_nec = response['data'][i].kod_nec;
-							var bidang = response['data'][i].bidang.toUpperCase();
-							var uppercaseValue  = response['data'][i].nama_kursus.toUpperCase();
+							var bidang = (response['data'][i].bidang || '').toUpperCase();
+							var uppercaseValue  = (response['data'][i].nama_kursus || '').toUpperCase();
 
 							var option = "<option value='"+nama_kursus+"'>"+uppercaseValue+" - "+kod_nec+" ( "+bidang+" )</option>";
 

@@ -123,7 +123,7 @@ class PermohonanController extends Controller
                         ->first();
         
                     $dokumen = Dokumen::where('permohonan_id', $permohonan_baru->id)->get();
-                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan','agama'));
+                    return view('permohonan.pelajar.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','institusi','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan','agama'));
                 }
                 else{
                      return view('permohonan.pelajar.permohonan_baharu', compact('smoku','akademikmqa','infoipt','mod','biaya','penaja','penajaArray','hubungan','negeri','parlimen','dun','keturunan','agama','bandar'));
@@ -154,7 +154,7 @@ class PermohonanController extends Controller
             }
 
             $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
-            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan'));
+            return view('permohonan.pelajar.permohonan_view', compact('smoku','butiranPelajar','hubungan','negeri','bandar','agama','institusi','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','permohonan','parlimen','dun','keturunan'));
         }
         else {
 
@@ -218,7 +218,7 @@ class PermohonanController extends Controller
     {
 
         $kursusData['data'] = Kursus::orderby("nama_kursus","asc")
-            ->select('id_institusi','kod_peringkat','nama_kursus')
+            // ->select('id_institusi','kod_peringkat','nama_kursus')
             ->where('kod_peringkat',$kodperingkat)
             ->where('id_institusi',$ipt)
             ->get();
@@ -596,6 +596,9 @@ class PermohonanController extends Controller
         Akademik::where('smoku_id' ,$smoku_id->id)->where('status' ,1)
         ->update([
 
+            'id_institusi' => $request->id_institusi,
+            'peringkat_pengajian' => $request->peringkat_pengajian,
+            'nama_kursus' => $request->nama_kursus,
             'mod' => $request->mod,
             'tempoh_pengajian' => $request->tempoh_pengajian,
             'bil_bulan_per_sem' => $request->bil_bulan_per_sem,
