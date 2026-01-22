@@ -2070,7 +2070,7 @@
 								}
 
 								response['data'].forEach(function(item) {
-									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat}</option>`;
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat.toUpperCase()}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 
