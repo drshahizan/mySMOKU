@@ -2118,7 +2118,7 @@
 									if (isSelected) found = true;
 
 									var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
-										${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()}) - ${item.no_rujukan}
+										${uppercaseValue} - ${item.kod_nec} (${(item.bidang || '').toUpperCase()}) - ${item.no_rujukan}
 									</option>`;
 									$("#nama_kursus").append(option);
 
