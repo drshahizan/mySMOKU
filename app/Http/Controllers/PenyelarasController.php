@@ -105,10 +105,12 @@ class PenyelarasController extends Controller
                     });
             })
 
-            ->whereIn('users.id_institusi', $idInstitusiList)
             ->where(function ($q) use ($idInstitusiList) {
                 $q->whereIn('sa.id_institusi', $idInstitusiList)
-                    ->orWhereNull('sa.id_institusi');
+                  ->orWhere(function ($q2) {
+                      $q2->whereNull('sa.id_institusi')
+                         ->where('users.id_institusi', Auth::user()->id_institusi);
+                  });
             })
 
             ->where(function ($q) {

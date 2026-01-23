@@ -487,7 +487,7 @@
 							if (response['data']) {
 								response['data'].forEach(function (item) {
 									const selected = preselect && item.kod_peringkat === kod_peringkat ? "selected" : "";
-									const option = `<option value="${item.kod_peringkat}" ${selected}>${item.peringkat}</option>`;
+									const option = `<option value="${item.kod_peringkat}" ${selected}>${item.peringkat.toUpperCase()}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 
