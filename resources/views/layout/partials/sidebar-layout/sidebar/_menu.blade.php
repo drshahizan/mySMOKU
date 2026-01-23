@@ -98,7 +98,7 @@
 						<span class="menu-title">Laman Utama</span>
 					</a>
 				</div>
-				@if($permohonan != null && $permohonan->status >= 2)
+				@if($permohonan != null && $permohonan->status >= 2 && (!$akademik || $akademik->tarikh_tamat == null || $akademik->tarikh_tamat >= now()))
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('profil.pelajar') }}">
 							<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
