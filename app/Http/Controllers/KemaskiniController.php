@@ -959,8 +959,7 @@ class KemaskiniController extends Controller
     public function getSenaraiKursus()
     {
 
-        $kursus = Kursus::leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'bk_kursus.id_institusi')
-            ->orderBy('bk_info_institusi.nama_institusi')
+        $kursus = Kursus::orderBy('bk_kursus.nama_institusi')
             ->orderBy('bk_kursus.peringkat')
             ->get([
                 'bk_kursus.id_institusi',
@@ -970,7 +969,7 @@ class KemaskiniController extends Controller
                 'bk_kursus.kod_nec',
                 'bk_kursus.bidang',
                 'bk_kursus.peringkat',
-                'bk_info_institusi.nama_institusi',
+                'bk_kursus.nama_institusi',
             ])
             ->map(function ($item) {
                 return [
@@ -989,6 +988,68 @@ class KemaskiniController extends Controller
 
 
 
+    }
+
+    public function senaraiInstitusi()
+    {
+        return view('kemaskini.sekretariat.institusi.senarai_institusi');
+    }
+
+    public function getSenaraiInstitusi()
+    {
+        $institusi = InfoIpt::orderBy('nama_institusi')
+            ->get([
+                'id_institusi',
+                'nama_institusi',
+                'nama_institusi_bi',
+                'poskod',
+                'jenis_institusi',
+                'jenis_permohonan',
+                'id_induk',
+                'institusi_esp',
+            ])
+            ->map(function ($item) {
+                return [
+                    'id_institusi' => $item->id_institusi,
+                    'nama_institusi' => $item->nama_institusi,
+                    'nama_institusi_bi' => $item->nama_institusi_bi,
+                    'poskod' => $item->poskod,
+                    'jenis_institusi' => $item->jenis_institusi,
+                    'jenis_permohonan' => $item->jenis_permohonan,
+                    'id_induk' => $item->id_induk,
+                    'institusi_esp' => $item->institusi_esp,
+                ];
+            });
+
+        return response()->json($institusi);
+    }
+
+    public function updateInstitusi(Request $request, $id_institusi)
+    {
+        $request->validate([
+            'nama_institusi' => ['required', 'string'],
+            'nama_institusi_bi' => ['nullable', 'string'],
+            'poskod' => ['nullable', 'string'],
+            'jenis_institusi' => ['required', 'string'],
+            'jenis_permohonan' => ['required', 'string'],
+            'id_induk' => ['nullable', 'string'],
+            'institusi_esp' => ['nullable', 'string'],
+        ]);
+
+        $institusi = InfoIpt::where('id_institusi', $id_institusi)->firstOrFail();
+        $institusi->update($request->only([
+            'nama_institusi',
+            'nama_institusi_bi',
+            'poskod',
+            'jenis_institusi',
+            'jenis_permohonan',
+            'id_induk',
+            'institusi_esp',
+        ]));
+
+        return redirect()
+            ->route('kemaskini.sekretariat.institusi')
+            ->with('success', 'Maklumat institusi berjaya dikemaskini.');
     }
 
     public function tambahPelajar()

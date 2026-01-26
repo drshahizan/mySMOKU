@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\Kursus;
+use App\Models\InfoIpt;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class dataMQR extends Command
 {
@@ -28,6 +30,7 @@ class dataMQR extends Command
     public function handle()
     {
         set_time_limit(1200);
+        Log::channel('mqr')->info('data:mqr started');
 
         $response = Http::post('http://10.29.216.151/api/bkoku/request-MQR');
 
@@ -36,6 +39,8 @@ class dataMQR extends Command
 
             if (isset($data['dataMQR'])) {
                 $counter = 0;
+                $institusiCreated = 0;
+                $institusiUpdated = 0;
                 foreach ($data['dataMQR'] as $item) {
                     //if ($counter < 1) {
 
@@ -75,15 +80,39 @@ class dataMQR extends Command
                         ]
                     );
 
+                    if (!empty($item['IdAgensi'])) {
+                        $institusi = InfoIpt::updateOrCreate(
+                            ['id_institusi' => $item['IdAgensi']],
+                            [
+                                'nama_institusi' => $item['NamaAgensiBM'],
+                                'nama_institusi_bi' => $item['NamaAgensiBI'],
+                                'poskod' => $item['Poskod'],
+                            ]
+                        );
+                        if ($institusi->wasRecentlyCreated) {
+                            $institusiCreated++;
+                        } else {
+                            $institusiUpdated++;
+                        }
+                    }
+
                     //MaklumatKursusMQA::create($item);
-                    //$counter++;
+                    $counter++;
                     // } else {
                     //    break; // Break the loop after inserting 10 records
                     // }
                 }
-                return response()->json(['message' => 'Data inserted successfully'], 200);
+                Log::channel('mqr')->info('data:mqr finished', [
+                    'kursus_total' => $counter,
+                    'institusi_created' => $institusiCreated,
+                    'institusi_updated' => $institusiUpdated,
+                ]);
+                $this->info('Data inserted successfully');
+                return Command::SUCCESS;
             } else {
-                return response()->json(['error' => 'Invalid API response format'], 500);
+                Log::channel('mqr')->warning('data:mqr invalid API response format');
+                $this->error('Invalid API response format');
+                return Command::FAILURE;
             }
             //untuk papar
             // foreach ($data['dataMQR'] as $item) {
@@ -94,7 +123,11 @@ class dataMQR extends Command
             //     echo "<br>"; // Add a line break between items
             // }
         } else {
-            return response()->json(['error' => 'Unable to fetch data from API'], $response->status());
+            Log::channel('mqr')->error('data:mqr unable to fetch data from API', [
+                'status' => $response->status(),
+            ]);
+            $this->error('Unable to fetch data from API');
+            return Command::FAILURE;
         }
     }
 }

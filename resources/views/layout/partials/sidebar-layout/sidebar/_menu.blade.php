@@ -613,6 +613,12 @@
 						<span class="menu-title">Senarai Kursus</span>
 					</a>
 				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('kemaskini.sekretariat.institusi')}}">
+						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
+						<span class="menu-title">Senarai Institusi</span>
+					</a>
+				</div>
 
 				<div class="menu-item pt-5">
 					<div class="menu-content">

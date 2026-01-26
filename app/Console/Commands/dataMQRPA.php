@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\Kursus;
+use App\Models\InfoIpt;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class dataMQRPA extends Command
 {
@@ -28,6 +30,7 @@ class dataMQRPA extends Command
     public function handle()
     {
         set_time_limit(1200);
+        Log::channel('mqr')->info('data:mqrpa started');
 
         $response = Http::post('http://10.29.216.151/api/bkoku/request-MQAPA');
 
@@ -36,6 +39,9 @@ class dataMQRPA extends Command
 
             if (isset($data['dataMQRPA'])) {
                 // $counter = 0;
+                $counter = 0;
+                $institusiCreated = 0;
+                $institusiUpdated = 0;
                 foreach ($data['dataMQRPA'] as $item) {
 
                     // if ($counter < 1) {
@@ -61,15 +67,39 @@ class dataMQRPA extends Command
                         ]
                     );
 
+                    if (!empty($item['IdAgensi'])) {
+                        $institusi = InfoIpt::updateOrCreate(
+                            ['id_institusi' => $item['IdAgensi']],
+                            [
+                                'nama_institusi' => $item['NamaIPTBM'],
+                                'nama_institusi_bi' => $item['NamaIPTBI'],
+                                'poskod' => $item['Poskod'],
+                            ]
+                        );
+                        if ($institusi->wasRecentlyCreated) {
+                            $institusiCreated++;
+                        } else {
+                            $institusiUpdated++;
+                        }
+                    }
+
                     //MaklumatKursusMQA::create($item);
-                    //    $counter++;
+                    $counter++;
                     // } else {
                     //    break; // Break the loop after inserting 10 records
                     // }
                 }
-                return response()->json(['message' => 'Data inserted successfully'], 200);
+                Log::channel('mqr')->info('data:mqrpa finished', [
+                    'kursus_total' => $counter,
+                    'institusi_created' => $institusiCreated,
+                    'institusi_updated' => $institusiUpdated,
+                ]);
+                $this->info('Data inserted successfully');
+                return Command::SUCCESS;
             } else {
-                return response()->json(['error' => 'Invalid API response format'], 500);
+                Log::channel('mqr')->warning('data:mqrpa invalid API response format');
+                $this->error('Invalid API response format');
+                return Command::FAILURE;
             }
             //untuk papar
             // foreach ($data['dataMQR'] as $item) {
@@ -80,7 +110,11 @@ class dataMQRPA extends Command
             //     echo "<br>"; // Add a line break between items
             // }
         } else {
-            return response()->json(['error' => 'Unable to fetch data from API'], $response->status());
+            Log::channel('mqr')->error('data:mqrpa unable to fetch data from API', [
+                'status' => $response->status(),
+            ]);
+            $this->error('Unable to fetch data from API');
+            return Command::FAILURE;
         }
     }
 }

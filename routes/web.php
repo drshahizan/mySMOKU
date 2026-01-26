@@ -247,6 +247,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Kemaskini - Sekretariat - Senarai Kursus
         Route::get('kemaskini/sekretariat/senarai/kursus', [KemaskiniController::class, 'senaraiKursus'])->name('kemaskini.sekretariat.kursus');
         Route::get('kemaskini/sekretariat/getSenaraiKursus', [KemaskiniController::class, 'getSenaraiKursus'])->name('kemaskini.getSenaraiKursus');
+        //Kemaskini - Sekretariat - Senarai Institusi
+        Route::get('kemaskini/sekretariat/senarai/institusi', [KemaskiniController::class, 'senaraiInstitusi'])->name('kemaskini.sekretariat.institusi');
+        Route::get('kemaskini/sekretariat/getSenaraiInstitusi', [KemaskiniController::class, 'getSenaraiInstitusi'])->name('kemaskini.getSenaraiInstitusi');
+        Route::put('kemaskini/sekretariat/institusi/{id_institusi}', [KemaskiniController::class, 'updateInstitusi'])->name('kemaskini.sekretariat.institusi.update');
 
         //Kemaskini - Sekretariat - Emel - BKOKU - Permohonan
         Route::get('kemaskini/sekretariat/emel/BKOKU/permohonan/kemaskini-dikembalikan', [KemaskiniController::class, 'pKemaskiniDikembalikanBKOKU']);

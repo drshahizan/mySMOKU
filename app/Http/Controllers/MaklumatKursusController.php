@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kursus;
+use App\Models\InfoIpt;
 use Illuminate\Support\Facades\Http;
 
 class MaklumatKursusController extends Controller
@@ -21,6 +22,7 @@ class MaklumatKursusController extends Controller
                 $counter = 0;
                 foreach ($data['dataMQR'] as $item) {
                     //if ($counter < 1) {
+                    
 
                         Kursus::updateOrInsert(
                             ['no_rujukan' => $item['NoRujProg']], // Condition to find the record
@@ -57,6 +59,17 @@ class MaklumatKursusController extends Controller
                                 'PMonthTo' => $item['PMonthTo'] 
                             ]
                         );
+
+                        if (!empty($item['IdAgensi'])) {
+                            InfoIpt::updateOrCreate(
+                                ['id_institusi' => $item['IdAgensi']],
+                                [
+                                    'nama_institusi' => $item['NamaAgensiBM'],
+                                    'nama_institusi_bi' => $item['NamaAgensiBI'],
+                                    'poskod' => $item['Poskod'],
+                                ]
+                            );
+                        }
                         
                         //MaklumatKursusMQA::create($item);
                        //$counter++;
@@ -116,6 +129,17 @@ class MaklumatKursusController extends Controller
                                 'institusi_penganugerahan' => $item['InstitusiPenganugerahan']
                             ]
                         );
+
+                        if (!empty($item['IdAgensi'])) {
+                            InfoIpt::updateOrCreate(
+                                ['id_institusi' => $item['IdAgensi']],
+                                [
+                                    'nama_institusi' => $item['NamaIPTBM'],
+                                    'nama_institusi_bi' => $item['NamaIPTBI'],
+                                    'poskod' => $item['Poskod'],
+                                ]
+                            );
+                        }
                         
                         //MaklumatKursusMQA::create($item);
                     //    $counter++;
