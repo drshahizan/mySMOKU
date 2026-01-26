@@ -947,6 +947,50 @@ class KemaskiniController extends Controller
 
     }
 
+    public function senaraiKursus()
+    {
+        $institusiPengajian = InfoIpt::orderBy('nama_institusi')->get();
+        
+        return view('kemaskini.sekretariat.kursus.senarai_kursus', compact('institusiPengajian'));
+
+
+    }
+
+    public function getSenaraiKursus()
+    {
+
+        $kursus = Kursus::leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'bk_kursus.id_institusi')
+            ->orderBy('bk_info_institusi.nama_institusi')
+            ->orderBy('bk_kursus.peringkat')
+            ->get([
+                'bk_kursus.id_institusi',
+                'bk_kursus.no_rujukan',
+                'bk_kursus.nama_kursus',
+                'bk_kursus.nama_kursus_bi',
+                'bk_kursus.kod_nec',
+                'bk_kursus.bidang',
+                'bk_kursus.peringkat',
+                'bk_info_institusi.nama_institusi',
+            ])
+            ->map(function ($item) {
+                return [
+                    'id_institusi' => $item->id_institusi,
+                    'no_rujukan' => $item->no_rujukan,
+                    'nama_kursus' => $item->nama_kursus,
+                    'nama_kursus_bi' => $item->nama_kursus_bi,
+                    'kod_nec' => $item->kod_nec,
+                    'bidang' => $item->bidang,
+                    'peringkat' => $item->peringkat,
+                    'nama_institusi' => $item->nama_institusi,
+                ];
+            });
+
+        return response()->json($kursus);
+
+
+
+    }
+
     public function tambahPelajar()
     {
         $smoku = Smoku::join('smoku_daftar', 'smoku_daftar.smoku_id', '=', 'smoku.id')
