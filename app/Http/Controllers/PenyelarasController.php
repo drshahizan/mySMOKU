@@ -1062,6 +1062,9 @@ class PenyelarasController extends Controller
         // echo 'Sesi Lepas: ' . $sesiLepas . '<br>';
         // echo 'Sesi Semasa: ' . $sesiSemasa . '<br>';
         // echo 'Semester Semasa: ' . $semSemasa . '<br>';
+        // echo 'Total Sem: ' . $totalSemesters . '<br>';
+        // echo 'Tarikh Tamat: ' . $tarikhTamat . '<br>';
+        
         // dd('sini');
 
         if ($permohonan) 
@@ -1086,7 +1089,7 @@ class PenyelarasController extends Controller
             'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
         ]);
 
-        $permohonan = Permohonan::all()->where('smoku_id', '=', $id)->first();
+        $permohonan = Permohonan::where('smoku_id', '=', $id)->orderBy('id', 'desc')->first();
         $smoku_id = Smoku::where('id',$id)->first();
         //simpan dalam table peperiksaan
         $kepPeperiksaan=$request->kepPeperiksaan;
