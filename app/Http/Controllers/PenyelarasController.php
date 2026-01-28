@@ -257,17 +257,34 @@ class PenyelarasController extends Controller
                 ]
             );
 
-            $smoku=Smoku::where([['no_kp', '=', $no_kp]])->first();
+            $smoku = Smoku::where([['no_kp', '=', $no_kp]])->first();
             // dd($smoku);
-            $penyelaras=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
-            ->first();
-            $penyelaras_sama=DB::table('smoku_penyelaras')->where('smoku_id', '=', $smoku->id)
-            ->where([['penyelaras_id', '=', Auth::user()->id]])
-            ->first();
-            // dd($penyelaras_sama);
+            $penyelaras = DB::table('smoku_penyelaras')
+                ->join('users', 'users.id', '=', 'smoku_penyelaras.penyelaras_id')
+                ->leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'users.id_institusi')
+                ->where('smoku_penyelaras.smoku_id', '=', $smoku->id)
+                ->select(
+                    'smoku_penyelaras.*',
+                    'users.nama as penyelaras_nama',
+                    'users.id_institusi as penyelaras_id_institusi',
+                    'bk_info_institusi.nama_institusi as penyelaras_nama_institusi'
+                )
+                ->first();
+            // dd($penyelaras);
 
-            if ($smoku != null && $penyelaras_sama == null) {
+            if ($smoku != null) {
                 if ($penyelaras == null) {
+                    $akademik = Akademik::leftJoin('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+                        ->where('smoku_akademik.smoku_id', $smoku->id)
+                        ->where('smoku_akademik.status', 1)
+                        ->select('smoku_akademik.id_institusi', 'bk_info_institusi.nama_institusi')
+                        ->first();
+
+                    if ($akademik != null && $akademik->nama_institusi != null) {
+                        return redirect()->route('penyelaras.dashboard')->with($no_kp)
+                            ->with('failed', 'Pelajar ' . $no_kp . ' sudah didaftarkan di:<br>Institusi: ' . $akademik->nama_institusi);
+                    }
+
                     DB::table('smoku_penyelaras')->insert([
                         'smoku_id' => $smoku->id,
                         'penyelaras_id' => Auth::user()->id,
@@ -276,12 +293,18 @@ class PenyelarasController extends Controller
                         'updated_at' => now(),
                     ]);
                 } else {
+                    if ((string) $penyelaras->penyelaras_id_institusi === (string) Auth::user()->id_institusi) {
+                        $namaPenyelaras = $penyelaras->penyelaras_nama ?? 'penyelaras';
+                        $namaInstitusi = $penyelaras->penyelaras_nama_institusi ?? 'institusi ini';
+                        return redirect()->route('penyelaras.dashboard')->with($no_kp)
+                            ->with('failed', 'Pelajar ' . $no_kp . ' sudah didaftarkan oleh:<br>Penyelaras: ' . $namaPenyelaras . '<br>Institusi: ' . $namaInstitusi);
+                    }
+
+                    $namaPenyelaras = $penyelaras->penyelaras_nama ?? 'lain';
+                    $namaInstitusi = $penyelaras->penyelaras_nama_institusi ?? 'institusi lain';
                     return redirect()->route('penyelaras.dashboard')->with($no_kp)
-                        ->with('failed', $no_kp . ' Sudah didaftarkan di universiti lain.');
+                        ->with('failed', 'Pelajar ' . $no_kp . ' sudah didaftarkan oleh:<br>Penyelaras: ' . $namaPenyelaras . '<br>Institusi: ' . $namaInstitusi);
                 }
-            } else {
-                return redirect()->route('penyelaras.dashboard')->with($no_kp)
-                    ->with('failed', $no_kp . ' Sudah didaftarkan.');
             }
 
             $smoku = Smoku::where('no_kp', $no_kp)->first();

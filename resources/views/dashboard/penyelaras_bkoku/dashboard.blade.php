@@ -248,7 +248,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Tidak Berjaya!',
-                text: ' {!! session('failed') !!}',
+                html: ' {!! session('failed') !!}',
                 confirmButtonText: 'OK'
             });
         @endif
