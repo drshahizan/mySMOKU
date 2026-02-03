@@ -459,6 +459,7 @@ class KemaskiniController extends Controller
         $smoku->update([
             'nama' => strtoupper($request->nama_pelajar),
             'email' => $request->emel ?? '',
+            'keturunan' => $request->keturunan,
             'no_daftar_oku' => $request->no_daftar_oku,
             'kategori' => $request->oku,
         ]);
