@@ -391,7 +391,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<input type="hidden" class="form-control form-control-solid" placeholder="" id="alamat_bandar" name="alamat_bandar" value="{{$butiranPelajar->alamat_tetap_bandar}}" />
+									<input type="hidden" class="form-control form-control-solid" placeholder="" id="alamat_bandar" name="alamat_bandar" value="{{ $butiranPelajar->alamat_tetap_bandar ?? '' }}" />
 									<select id='alamat_tetap_bandar' name='alamat_tetap_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
 										{{-- @foreach ($bandar as $bandartetap)	
@@ -461,7 +461,7 @@
 										<!--begin::Label-->
 										<div class="me-5">
 											<!--begin::Input-->
-											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_baru == $butiranPelajar->alamat_tetap_baru) checked @endif />
+										<input class="form-check-input" id="sama" name="sama" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_baru == $butiranPelajar->alamat_tetap_baru) checked @endif />
 											<!--end::Input-->
 											<!--begin::Label-->
 											<label class="form-label">Sama seperti Alamat Tetap</label>
@@ -484,7 +484,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id="alamat_surat_negeri" name="alamat_surat_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single no-select2"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 											<option value="">Pilih</option>
 											@foreach ($negeri as $negerisurat)	
 											<option value="{{$negerisurat->id}}" {{$butiranPelajar->alamat_surat_negeri == $negerisurat->id ? 'selected' : ''}}>{{ $negerisurat->negeri}}</option>
@@ -501,7 +501,7 @@
 									<!--begin::Input wrapper-->
 									<div class="col-12">
 										<!--begin::Input-->
-										<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id='alamat_surat_bandar' name='alamat_surat_bandar' class="form-select form-select-lg form-select-solid js-example-basic-single no-select2"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 											<option value="">Pilih</option>
 											@foreach ($bandar as $bandarsurat)	
 											<option value="{{$bandarsurat->id}}" {{$butiranPelajar->alamat_surat_bandar == $bandarsurat->id ? 'selected' : ''}}>{{ $bandarsurat->bandar}}</option>
@@ -792,7 +792,7 @@
 									<!--begin::Label-->
 									<div class="me-5">
 										<!--begin::Input-->
-										<input class="form-check-input" id="sama_waris" name="sama_waris" onclick="alamatWaris()" type="checkbox" value="1" @if($butiranPelajar->alamat_waris == $butiranPelajar->alamat_tetap_baru) checked @endif/>
+										<input class="form-check-input" id="sama_waris" name="sama_waris" type="checkbox" value="1" @if($butiranPelajar->alamat_waris == $butiranPelajar->alamat_tetap_baru) checked @endif/>
 										<!--end::Input-->
 										<!--begin::Label-->
 										<label class="form-label">Sama seperti Alamat Tetap Pelajar</label>
@@ -816,7 +816,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id="alamat_negeri_waris" name="alamat_negeri_waris" class="form-select form-select-lg form-select-solid js-example-basic-single no-select2" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
 										@foreach ($negeri as $negeri)
 										<option value="{{$negeri->id}}" {{$butiranPelajar->alamat_negeri_waris == $negeri->id ? 'selected' : ''}}>{{ $negeri->negeri}}</option>
@@ -833,7 +833,7 @@
 								<!--begin::Input wrapper-->
 								<div class="col-12">
 									<!--begin::Input-->
-									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id='alamat_bandar_waris' name='alamat_bandar_waris' class="form-select form-select-lg form-select-solid js-example-basic-single no-select2" data-placeholder="Pilih" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option></option>
 										@foreach ($bandar as $bandar)
 										<option value="{{$bandar->id}}" {{$butiranPelajar->alamat_bandar_waris == $bandar->id ? 'selected' : ''}}>{{ $bandar->bandar}}</option>
@@ -1595,35 +1595,117 @@
 				$('[data-bs-toggle="tooltip"]').tooltip();
 			});
 		</script>	
-		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script>
+			function loadBandarOptions(selectId, idnegeri, selectedValue) {
+				if (!idnegeri) return;
+
+				var jq = (window.jQuery && window.jQuery.fn && window.jQuery.fn.select2) ? window.jQuery : null;
+				var $select = jq ? jq(selectId) : $(selectId);
+				$select.empty().append("<option value='' selected>Pilih</option>");
+
+				$.ajax({
+					url: '/bandar/' + idnegeri,
+					type: 'get',
+					dataType: 'json',
+					success: function (response) {
+						if (response && response.data) {
+							for (var i = 0; i < response.data.length; i++) {
+								var id = response.data[i].id;
+								var bandar = response.data[i].bandar;
+								var isSelected = String(id) === String(selectedValue);
+								var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + bandar + "</option>";
+								$select.append(option);
+							}
+						}
+
+						if (selectedValue) {
+							$select.val(String(selectedValue));
+						}
+
+						// Force select2 to pick up the new value
+						if (jq && jq.fn.select2) {
+							if ($select.data('select2')) {
+								$select.select2('destroy');
+							}
+							$select.select2();
+						}
+						$select.trigger('change');
+					}
+				});
+			}
+
+			function setSelect2Value(selectId, value) {
+				var el = document.querySelector(selectId);
+				if (!el) return;
+
+				var wasDisabled = el.disabled;
+				if (wasDisabled) el.disabled = false;
+
+				var v = String(value);
+				if (v && !el.querySelector("option[value='" + v + "']")) {
+					var opt = document.createElement('option');
+					opt.value = v;
+					opt.textContent = v;
+					el.appendChild(opt);
+				}
+				for (var i = 0; i < el.options.length; i++) {
+					el.options[i].selected = (el.options[i].value === v);
+				}
+				el.value = v;
+
+				var jq = (window.jQuery && window.jQuery.fn && window.jQuery.fn.select2) ? window.jQuery : null;
+				if (jq) {
+					var $select = jq(el);
+					if ($select.data('select2')) {
+						$select.select2('destroy');
+					}
+					$select.select2();
+					$select.val(v).trigger('change');
+				} else {
+					el.dispatchEvent(new Event('change', { bubbles: true }));
+				}
+
+				// Re-apply after a short delay to handle async select2 render.
+				setTimeout(function () {
+					if (jq) {
+						var $select = jq(el);
+						$select.val(v).trigger('change.select2');
+					} else {
+						el.value = v;
+					}
+				}, 100);
+
+				if (wasDisabled) el.disabled = true;
+			}
+
 			function myFunction() {
 				var checkBox = document.getElementById("sama");  
 				var alamat_tetap = document.getElementById("alamat_tetap");
 				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
 				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
 				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var alamat_bandar_hidden = document.getElementById("alamat_bandar");
 
 				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
 				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
 				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
 				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
 				if (checkBox.checked == true){
+					var negeriTetapVal = $('#alamat_tetap_negeri').val() || (alamat_tetap_negeri && alamat_tetap_negeri.value) || '';
 					alamat_surat_menyurat.value=alamat_tetap.value; 
-					alamat_surat_negeri.value=alamat_tetap_negeri.value;
-					alamat_surat_bandar.value=alamat_tetap_bandar.value;
+					setSelect2Value('#alamat_surat_negeri', negeriTetapVal);
 					alamat_surat_poskod.value=alamat_tetap_poskod.value;
-					// Trigger select2 update
-					$(alamat_surat_negeri).trigger('change.select2');
-					$(alamat_surat_bandar).trigger('change.select2');
+					var selectedBandar = (alamat_tetap_bandar && alamat_tetap_bandar.value) || (alamat_bandar_hidden && alamat_bandar_hidden.value) || '';
+					loadBandarOptions('#alamat_surat_bandar', negeriTetapVal, selectedBandar);
 				} else {
-					alamat_surat_menyurat.value="{{$butiranPelajar->alamat_surat_baru}}";
-					alamat_surat_negeri.value="{{$butiranPelajar->alamat_surat_negeri}}";
-					alamat_surat_bandar.value="{{$butiranPelajar->alamat_surat_bandar}}";
-					alamat_surat_poskod.value="{{$butiranPelajar->alamat_surat_poskod}}";
-					// Trigger select2 update
-					$(alamat_surat_negeri).trigger('change.select2');
-					$(alamat_surat_bandar).trigger('change.select2');
+					alamat_surat_menyurat.value = @json($butiranPelajar->alamat_surat_baru);
+					alamat_surat_negeri.value = @json($butiranPelajar->alamat_surat_negeri);
+					alamat_surat_poskod.value = @json($butiranPelajar->alamat_surat_poskod);
+					// Clear bandar options when unticked (no data yet).
+					if (alamat_surat_bandar) {
+						alamat_surat_bandar.innerHTML = "<option value='' selected>Pilih</option>";
+						alamat_surat_bandar.value = '';
+					}
 				}
 			}	
 
@@ -1633,54 +1715,66 @@
 				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
 				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
 				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
-				console.log('negeri_p:', alamat_tetap_negeri);
-				console.log('bandar_p:', alamat_tetap_bandar);
+				var alamat_bandar_hidden = document.getElementById("alamat_bandar");
 
 				var alamat_waris = document.getElementById("alamat_waris");
 				var alamat_negeri_waris = document.getElementById("alamat_negeri_waris");
 				var alamat_bandar_waris = document.getElementById("alamat_bandar_waris");
 				var alamat_poskod_waris = document.getElementById("alamat_poskod_waris");
-				console.log('negeri_w:', alamat_negeri_waris);
-				console.log('bandar_w:', alamat_bandar_waris);
 
 				if (checkBox.checked == true){
+					var negeriTetapVal = $('#alamat_tetap_negeri').val() || (alamat_tetap_negeri && alamat_tetap_negeri.value) || '';
 					alamat_waris.value=alamat_tetap.value; 
-					alamat_negeri_waris.value=alamat_tetap_negeri.value;
-					alamat_bandar_waris.value=alamat_tetap_bandar.value;
-					console.log('negeri:', alamat_negeri_waris.value);
-					console.log('bandar:', alamat_bandar_waris.value);
+					setSelect2Value('#alamat_negeri_waris', negeriTetapVal);
 					alamat_poskod_waris.value=alamat_tetap_poskod.value;
-					
-					// Trigger select2 update
-					$(alamat_negeri_waris).trigger('change.select2');
-					$(alamat_bandar_waris).trigger('change.select2');
+					var selectedBandar = (alamat_tetap_bandar && alamat_tetap_bandar.value) || (alamat_bandar_hidden && alamat_bandar_hidden.value) || '';
+					loadBandarOptions('#alamat_bandar_waris', negeriTetapVal, selectedBandar);
 				} else {
 					alamat_waris.value = '';
 					alamat_negeri_waris.value = '';
-					alamat_bandar_waris.value = '';
+					// Clear bandar options when unticked (no data yet).
+					if (alamat_bandar_waris) {
+						alamat_bandar_waris.innerHTML = "<option value='' selected>Pilih</option>";
+						alamat_bandar_waris.value = '';
+					}
 					alamat_poskod_waris.value = '';
 
-					// Trigger select2 update.
-					$(alamat_negeri_waris).trigger('change.select2');
-					$(alamat_bandar_waris).trigger('change.select2');
+					$(alamat_bandar_waris).val('').trigger('change');
+					// Ensure async loads do not repopulate after untick.
+					setTimeout(function () {
+						if (alamat_bandar_waris) {
+							alamat_bandar_waris.innerHTML = "<option value='' selected>Pilih</option>";
+							alamat_bandar_waris.value = '';
+						}
+					}, 200);
 				}
 			}
 
 			$(document).ready(function () {
-				var previousIdNegeri = $('#alamat_negeri').val();
+				$('#sama').on('change', myFunction);
+				$('#sama_waris').on('change', alamatWaris);
 
+				var previousIdNegeri = $('#alamat_negeri').val();
+				var currentSelectNegeri = $('#alamat_tetap_negeri').val();
+				if (currentSelectNegeri) {
+					previousIdNegeri = currentSelectNegeri;
+				}
 				function getBandarData(idnegeri) {
 					$("#alamat_tetap_bandar").empty();
 					$("#parlimen").empty();
 
 					$.ajax({
-						url: '/getBandar/' + idnegeri,
+						url: '/bandar/' + idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function (response) {
-							if (response['data']) {
-								var selectedValue = $("#alamat_bandar").val();
+							var selectedValue = $("#alamat_bandar").val();
 
+							$("#alamat_tetap_bandar")
+								.empty()
+								.append("<option value='' " + (!selectedValue ? "selected" : "") + ">Pilih</option>");
+
+							if (response['data']) {
 								for (var i = 0; i < response['data'].length; i++) {
 									var id = response['data'][i].id;
 									var bandar = response['data'][i].bandar;
@@ -1732,9 +1826,16 @@
 				getBandarData(previousIdNegeri);
 				getParlimenData(previousIdNegeri);
 
+				// Auto-apply if checkboxes already checked on load
+				if ($('#sama').is(':checked')) {
+					myFunction();
+				}
+				if ($('#sama_waris').is(':checked')) {
+					alamatWaris();
+				}
+
 				$('#alamat_tetap_negeri').on('change', function () {
 					var idnegeri = $(this).val();
-					// alert(previousIdNegeri);
 					// alert(idnegeri);
 					
 					previousIdNegeri = idnegeri;
@@ -1808,7 +1909,7 @@
 					// AJAX request 
 					$.ajax({
 						
-						url: '/getBandar/'+idnegeri,
+						url: '/bandar/'+idnegeri,
 						type: 'get',
 						dataType: 'json',
 						success: function(response){
@@ -1819,17 +1920,21 @@
 									}
 
 									if(len > 0){
+										var selectedValue = $("#alamat_surat_bandar").data('selected') || '';
 										// Read data and create <option >
 										for(var i=0; i<len; i++){
 
 											var id = response['data'][i].id;
 											var bandar = response['data'][i].bandar;
 
-											var option = "<option value='"+id+"'>"+bandar+"</option>";
+											var option = "<option value='"+id+"'" + (String(id) === String(selectedValue) ? " selected" : "") + ">"+bandar+"</option>";
 
 											$("#alamat_surat_bandar").append(option); 
 										}
 									}
+									// clear selected stash after use
+									$("#alamat_surat_bandar").removeData('selected');
+									$("#alamat_surat_bandar").trigger('change.select2');
 							}, 
 							error: function(){
 							// alert('AJAX load did not work bandar surat');
@@ -1840,50 +1945,19 @@
 
 			});
 
-    		$(document).ready(function(){
-				$('#alamat_negeri_waris').on('change', function() {
-					var idnegeri = $(this).val();
-					//alert(id);
-					// Empty the dropdown
-					$('#alamat_bandar_waris').find('option').not(':first').remove();
-
-					// AJAX request 
-					$.ajax({
-						
-						url: '/getBandar/'+idnegeri,
-						type: 'get',
-						dataType: 'json',
-						success: function(response){
-							//alert('AJAX loaded something');
-							var len = 0;
-									if(response['data'] != null){
-										len = response['data'].length;
-									}
-
-									if(len > 0){
-										// Read data and create <option >
-										for(var i=0; i<len; i++){
-
-											var id = response['data'][i].id;
-											var bandar = response['data'][i].bandar;
-
-											var option = "<option value='"+id+"'>"+bandar+"</option>";
-
-											$("#alamat_bandar_waris").append(option); 
-										}
-									}
-							}, 
-							error: function(){
-							// alert('AJAX load did not work bandar waris');
-							}
-
-					});
-				});
-
-			});
-
+			
 			$(document).ready(function() {
-			$('.js-example-basic-single').select2();
+				$('.js-example-basic-single').not('.no-select2').select2();
+
+				// Ensure waris selects are NOT enhanced by select2.
+				['#alamat_negeri_waris', '#alamat_bandar_waris', '#alamat_surat_negeri', '#alamat_surat_bandar'].forEach(function (sel) {
+					var $el = $(sel);
+					if ($el.length && $el.data('select2')) {
+						$el.select2('destroy');
+					}
+					$el.removeClass('select2-hidden-accessible');
+					$el.next('.select2').remove();
+				});
 			});
 		</script>
 
@@ -2149,6 +2223,138 @@
 				});
 			});
 
+		</script>
+		<script>
+			// Hard bind globals to avoid "not defined" errors from inline onclick.
+			window.myFunction = function () {
+				var checkBox = document.getElementById("sama");
+				if (!checkBox) return;
+
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var alamat_bandar_hidden = document.getElementById("alamat_bandar");
+
+				var alamat_surat_menyurat = document.getElementById("alamat_surat_menyurat");
+				var alamat_surat_negeri = document.getElementById("alamat_surat_negeri");
+				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
+				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
+
+				if (!alamat_surat_negeri || !alamat_surat_bandar) return;
+
+				if (checkBox.checked === true) {
+					if (alamat_surat_menyurat && alamat_tetap) alamat_surat_menyurat.value = alamat_tetap.value;
+					if (alamat_surat_negeri && alamat_tetap_negeri) alamat_surat_negeri.value = alamat_tetap_negeri.value;
+					if (alamat_surat_poskod && alamat_tetap_poskod) alamat_surat_poskod.value = alamat_tetap_poskod.value;
+
+					var selectedBandar = (alamat_tetap_bandar && alamat_tetap_bandar.value) || (alamat_bandar_hidden && alamat_bandar_hidden.value) || '';
+					if (typeof window.loadBandarOptions === 'function') {
+						window.loadBandarOptions('#alamat_surat_bandar', alamat_surat_negeri.value, selectedBandar);
+					}
+				} else {
+					if (alamat_surat_menyurat) alamat_surat_menyurat.value = @json($butiranPelajar->alamat_surat_baru);
+					if (alamat_surat_negeri) alamat_surat_negeri.value = @json($butiranPelajar->alamat_surat_negeri);
+					if (alamat_surat_poskod) alamat_surat_poskod.value = @json($butiranPelajar->alamat_surat_poskod);
+
+					if (typeof window.loadBandarOptions === 'function') {
+						window.loadBandarOptions('#alamat_surat_bandar', alamat_surat_negeri.value, @json($butiranPelajar->alamat_surat_bandar));
+					}
+				}
+			};
+
+			window.alamatWaris = function () {
+				var checkBox = document.getElementById("sama_waris");
+				if (!checkBox) return;
+
+				var alamat_tetap = document.getElementById("alamat_tetap");
+				var alamat_tetap_negeri = document.getElementById("alamat_tetap_negeri");
+				var alamat_tetap_bandar = document.getElementById("alamat_tetap_bandar");
+				var alamat_tetap_poskod = document.getElementById("alamat_tetap_poskod");
+				var alamat_bandar_hidden = document.getElementById("alamat_bandar");
+
+				var alamat_waris = document.getElementById("alamat_waris");
+				var alamat_negeri_waris = document.getElementById("alamat_negeri_waris");
+				var alamat_bandar_waris = document.getElementById("alamat_bandar_waris");
+				var alamat_poskod_waris = document.getElementById("alamat_poskod_waris");
+
+				if (!alamat_negeri_waris || !alamat_bandar_waris) return;
+
+				if (checkBox.checked === true) {
+					if (alamat_waris && alamat_tetap) alamat_waris.value = alamat_tetap.value;
+					if (alamat_negeri_waris && alamat_tetap_negeri) alamat_negeri_waris.value = alamat_tetap_negeri.value;
+					if (alamat_poskod_waris && alamat_tetap_poskod) alamat_poskod_waris.value = alamat_tetap_poskod.value;
+
+					var selectedBandar = (alamat_tetap_bandar && alamat_tetap_bandar.value) || (alamat_bandar_hidden && alamat_bandar_hidden.value) || '';
+					if (typeof window.loadBandarOptions === 'function') {
+						window.loadBandarOptions('#alamat_bandar_waris', alamat_negeri_waris.value, selectedBandar);
+					}
+				} else {
+					if (alamat_waris) alamat_waris.value = '';
+					if (alamat_negeri_waris) alamat_negeri_waris.value = '';
+					if (alamat_bandar_waris) {
+						alamat_bandar_waris.innerHTML = "<option value='' selected>Pilih</option>";
+						alamat_bandar_waris.value = '';
+					}
+					if (alamat_poskod_waris) alamat_poskod_waris.value = '';
+				}
+			};
+
+			// Vanilla listeners to avoid jQuery version conflicts.
+			document.addEventListener('DOMContentLoaded', function () {
+				var sama = document.getElementById('sama');
+				if (sama) {
+					sama.addEventListener('change', window.myFunction);
+					if (sama.checked) window.myFunction();
+				}
+				var samaWaris = document.getElementById('sama_waris');
+				if (samaWaris) {
+					samaWaris.addEventListener('change', window.alamatWaris);
+					if (samaWaris.checked) window.alamatWaris();
+				}
+			});
+		</script>
+		
+		<script>
+			// Fallback init to ensure bandar list loads on page load.
+			window.addEventListener('load', function () {
+				if (window.__alamatTetapBandarInitDone) return;
+				window.__alamatTetapBandarInitDone = true;
+
+				var negeriSelect = document.getElementById('alamat_tetap_negeri');
+				var negeriHidden = document.getElementById('alamat_negeri');
+				var bandarSelect = document.getElementById('alamat_tetap_bandar');
+				var selectedHidden = document.getElementById('alamat_bandar');
+
+				if (!bandarSelect) return;
+
+				var idnegeri = (negeriSelect && negeriSelect.value) || (negeriHidden && negeriHidden.value);
+				if (!idnegeri) return;
+
+				fetch('/bandar/' + idnegeri, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+					.then(function (res) { return res.json(); })
+					.then(function (response) {
+						var selectedValue = selectedHidden ? selectedHidden.value : '';
+						bandarSelect.innerHTML = "<option value='' " + (!selectedValue ? "selected" : "") + ">Pilih</option>";
+
+						if (response && response.data && response.data.length) {
+							response.data.forEach(function (item) {
+								var opt = document.createElement('option');
+								opt.value = item.id;
+								opt.textContent = item.bandar;
+								if (String(item.id) === String(selectedValue)) opt.selected = true;
+								bandarSelect.appendChild(opt);
+							});
+						}
+
+						if (window.jQuery && $(bandarSelect).data('select2')) {
+							$(bandarSelect).trigger('change.select2');
+						}
+					})
+					.catch(function () {
+						// ignore
+					});
+			});
 		</script>
 
 

@@ -219,13 +219,21 @@ class PermohonanController extends Controller
 
     public function getBandar($idnegeri=0)
     {
+        $kodNegeri = Negeri::where('id', $idnegeri)->value('kod_negeri');
 
-        $bandarData['data'] = Bandar::orderby("bandar","asc")
-         ->select('id','bandar','negeri_id')
-         ->where('negeri_id',$idnegeri)
-         ->get();
+        $bandarData['data'] = Bandar::orderby("bandar", "asc")
+            ->select('id', 'bandar', 'negeri_id')
+            ->when($kodNegeri, function ($query) use ($idnegeri, $kodNegeri) {
+                $query->where(function ($q) use ($idnegeri, $kodNegeri) {
+                    $q->where('negeri_id', $idnegeri)
+                      ->orWhere('negeri_id', $kodNegeri);
+                });
+            }, function ($query) use ($idnegeri) {
+                $query->where('negeri_id', $idnegeri);
+            })
+            ->get();
 
-         return response()->json($bandarData);
+        return response()->json($bandarData);
 
     }
 
