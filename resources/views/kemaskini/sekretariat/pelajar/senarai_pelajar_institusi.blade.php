@@ -281,8 +281,12 @@
                             data: 'smoku_id',
                             render: function (data, type, row) {
                                 var url = "{{ route('kemaskini.sekretariat.profil', ['id' => '__id__']) }}".replace('__id__', data);
+                                var deleteUrl = "{{ route('pelajar.delete', ['id' => '__id__']) }}".replace('__id__', data);
                                 return '<a href="' + url + '" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" title="Kemaskini Profil">' +
                                         '<i class="ki-solid ki-pencil text-dark fs-2"></i>' +
+                                    '</a>' +
+                                    '<a href="' + deleteUrl + '" class="btn btn-icon btn-active-light-danger w-30px h-30px me-3" title="Padam Pelajar" onclick="return confirm(\'Adakah anda pasti ingin padam data pelajar ini?\')">' +
+                                        '<i class="fa fa-trash fa-sm text-dark"></i>' +
                                     '</a>';
                             },
                             orderable: false,

@@ -1434,6 +1434,21 @@ class KemaskiniController extends Controller
         return redirect()->route('kemaskini.sekretariat.daftar.pelajar')->with('success', 'Pendaftaran pelajar telah di padam.');
     }
 
+    public function deletePelajar($id)
+    {
+        $smoku = Smoku::where('id', $id)->first();
+        if (!$smoku) {
+            return redirect()->route('kemaskini.sekretariat.senarai.profil')
+                ->with('failed', 'Rekod pelajar tidak ditemui.');
+        }
+
+        DB::table('users')->where('no_kp', $smoku->no_kp)->where('tahap', 1)->delete();
+        $smoku->delete();
+
+        return redirect()->route('kemaskini.sekretariat.senarai.profil')
+            ->with('success', 'Data pelajar telah di padam.');
+    }
+
     //Sekretariat lapor tamat pengajian pelajar
     public function tamatPengajianPelajar($smoku_id)
     {   

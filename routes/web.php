@@ -229,6 +229,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('kemaskini/sekretariat/profil/pelajar/simpan/{id}', [KemaskiniController::class, 'simpanProfilDiriPelajar'])->name('kemaskini.sekretariat.simpan.profil');
         Route::get('/peringkatProfilPelajar/{id}', [KemaskiniController::class, 'peringkatProfilPelajar']);
         Route::get('/kursusProfilPelajar/{kodperingkat}/{id}', [KemaskiniController::class, 'kursusProfilPelajar']);
+        Route::get('kemaskini/sekretariat/senarai/pelajar/delete/{id}', [KemaskiniController::class, 'deletePelajar'])->name('pelajar.delete');
 
         Route::get('kemaskini/sekretariat/lapor/tamat/pengajian/{id}', [KemaskiniController::class, 'tamatPengajianPelajar'])->name('kemaskini.sekretariat.tamat.pengajian');
         Route::post('kemaskini/sekretariat/hantar/tamat/pengajian/{id}', [KemaskiniController::class, 'hantarTamatPengajianPelajar'])->name('kemaskini.sekretariat.hantar.tamat.pengajian');
