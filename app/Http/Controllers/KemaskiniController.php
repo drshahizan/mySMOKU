@@ -399,6 +399,7 @@ class KemaskiniController extends Controller
         $currentValues = [
             'nama' => $smoku->nama,
             'no_kp' => $smoku->no_kp,
+            'jantina' => $smoku->jantina,
             'tarikh_lahir' => $smoku->tarikh_lahir,
             'umur' => $smoku->umur,
             'keturunan' => $smoku->keturunan,
@@ -459,6 +460,7 @@ class KemaskiniController extends Controller
         $smoku->update([
             'nama' => strtoupper($request->nama_pelajar),
             'email' => $request->emel ?? '',
+            'jantina' => $request->jantina,
             'keturunan' => $request->keturunan,
             'no_daftar_oku' => $request->no_daftar_oku,
             'kategori' => $request->oku,
