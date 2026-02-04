@@ -107,22 +107,14 @@
                                 <div class="col-md-6 col-sm-6">
                                     <br>
                                     @php
-                                        if($tuntutan->status==5){
-                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', 5)->value('created_at');
-                                        }
-                                        elseif($tuntutan->status==6){
-                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 6)->value('created_at');
-                                        }
-                                        elseif($tuntutan->status==7){
-                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 7)->value('created_at');
-                                        }
-                                        elseif($tuntutan->status==8){
-                                            $tarikh_status = DB::table('sejarah_tuntutan')->where('tuntutan_id',$tuntutan->id)->where('status', 6)->value('created_at');
-                                        }
+                                        // Dalam paparan sejarah, guna status pada rekod sejarah yang dipilih.
+                                        $kod_status_rekod = $sejarah_t->status ?? $tuntutan->status;
+                                        $tarikh_status = $sejarah_t->created_at ?? null;
+
                                         $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                         $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                         $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
-                                        $user_id = DB::table('sejarah_tuntutan')->where('tuntutan_id', $tuntutan->id)->where('status', $tuntutan->status)->latest()->value('dilaksanakan_oleh');
+                                        $user_id = $sejarah_t->dilaksanakan_oleh ?? null;
 
                                         if($user_id==null){
                                             $user_name = "Tiada Maklumat";
@@ -144,7 +136,7 @@
                                         }
 
                                         $status = DB::table('bk_status')->where('kod_status', $sejarah_t->status)->value('status');
-                                        $status_tuntutan = DB::table('bk_status')->where('kod_status', $saringan->status)->value('status');
+                                        $status_tuntutan = DB::table('bk_status')->where('kod_status', $kod_status_rekod)->value('status');
 
                                         // nama pemohon
                                         $text = ucwords(strtolower($smoku->nama));
@@ -211,7 +203,7 @@
                                             <td class="space">&nbsp;</td>
                                     <td><strong>Status</strong></td>
                                     <td>:</td>
-                                    <td>{{ucwords(strtolower($status_tuntutan))}} ({{date('d/m/Y', strtotime($tarikh_status))}} oleh {{$user_name}})</td>
+                                    <td>{{ucwords(strtolower($status_tuntutan))}} ({{ $tarikh_status ? date('d/m/Y', strtotime($tarikh_status)) : '-' }} oleh {{$user_name}})</td>
                                         </tr>
                                     </table>
                                     <hr>
