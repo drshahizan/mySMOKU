@@ -34,7 +34,7 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 @foreach($peperiksaan as $item)
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="exam-tab-{{$item->id}}" data-toggle="tab" data-target="#exam-{{$item->id}}" type="button" role="tab" aria-controls="exam-{{$item->id}}" aria-selected="true">
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="exam-tab-{{$item->id}}" data-toggle="tab" data-target="#exam-{{$item->id}}" type="button" role="tab" aria-controls="exam-{{$item->id}}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">
                         {{$item->sesi}}-0{{$item->semester}}
                     </button>
                 </li>
@@ -44,13 +44,13 @@
             <div class="tab-content" id="myTabContent">
                 @foreach($peperiksaan as $item)
                     @if($item->kepPeperiksaan)
-                         <div class="tab-pane fade show active" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
+                         <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
                             <div style="text-align: center">
                                 <embed src="/assets/dokumen/peperiksaan/{{$item['kepPeperiksaan']}}#zoom=90" width="70%" height="605px"/>
                             </div>
                         </div>
                     @else
-                        <div class="tab-pane fade show active" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="exam-{{$item->id}}" role="tabpanel" aria-labelledby="exam-tab-{{$item->id}}">
                             <div style="text-align: center; color: red;">
                                 <p>-</p>
                             </div>
@@ -62,7 +62,3 @@
         </div>
     </body>
 </html>
-<script>
-    $('.nav').find('.nav-link:first').addClass('active');
-    $('.tab-content').find('.tab-pane:first').addClass('active');
-</script>
