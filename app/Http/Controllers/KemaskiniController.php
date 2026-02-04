@@ -279,7 +279,6 @@ class KemaskiniController extends Controller
         $pelajar = Smoku::whereHas('akademik', function ($query) {
                 $query->where('status', 1);
             })
-            ->whereHas('permohonan')
             ->with(['akademik' => function ($query) {
                 $query->where('status', 1)->with('infoipt');
                  },
@@ -287,12 +286,16 @@ class KemaskiniController extends Controller
             ->orderBy('nama')
             ->get()
             ->map(function ($item) {
+                $hasPermohonan = $item->permohonan->isNotEmpty();
+
                 // Check tamat pengajian
                 $permohonanId = optional($item->permohonan->first())->id;
 
-                $tamat_pengajian = TamatPengajian::where('smoku_id', $item->id)
-                    ->where('permohonan_id', $permohonanId)
-                    ->exists();
+                $tamat_pengajian = $permohonanId
+                    ? TamatPengajian::where('smoku_id', $item->id)
+                        ->where('permohonan_id', $permohonanId)
+                        ->exists()
+                    : false;
                 
                 // Ambil hanya satu rekod akademik yang status=1
                 $akademik = $item->akademik->first();
@@ -307,6 +310,7 @@ class KemaskiniController extends Controller
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
+                    'has_permohonan' => $hasPermohonan,
                     'tamat_pengajian' => $tamat_pengajian
                 ];
             });
@@ -323,7 +327,7 @@ class KemaskiniController extends Controller
             ->where('smoku.id', $smoku_id)
             ->get(['smoku.*','smoku.id as smoku_id','bk_jenis_oku.*','bk_jantina.*','bk_keturunan.*'])
             ->first();
-        $butiranPelajar = ButiranPelajar::where('smoku_id', $smoku->smoku_id)->first();
+        $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smoku->smoku_id]);
         
         $negeri = Negeri::all()->sortBy('id');
         $bandar = Bandar::all()->sortBy('id');
@@ -333,10 +337,11 @@ class KemaskiniController extends Controller
         $dun = Dun::all()->sortBy('id');
         $oku = JenisOku::all()->sortBy('id');
 
-        $waris = Waris::where('smoku_id', $smoku->smoku_id)->first();
+        $waris = Waris::firstOrNew(['smoku_id' => $smoku->smoku_id]);
         $hubungan = Hubungan::all()->sortBy('kod_hubungan');
 
-        $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first();
+        $akademik = Akademik::where('smoku_id', $smoku->smoku_id)->where('status', 1)->first()
+            ?? Akademik::firstOrNew(['smoku_id' => $smoku->smoku_id, 'status' => 1]);
         
         $institusi = InfoIpt::whereIn('jenis_institusi', ['UA','IPTS','KK','P'])->orderby("nama_institusi","asc")->select('id_institusi','nama_institusi')->get();
         // dd($institusi);

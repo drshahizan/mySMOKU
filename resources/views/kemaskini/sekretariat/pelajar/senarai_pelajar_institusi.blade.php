@@ -259,6 +259,10 @@
                     {  
                             data: 'status_aktif',
                             render: function (data, type, row) {
+                                if (!row.has_permohonan) {
+                                    return '<div class="badge badge-light-warning fw-bold">Daftar</div>';
+                                }
+
                                 if (data) {
                                     return '<div class="badge badge-light-success fw-bold">Aktif</div>';
                                 } else {
