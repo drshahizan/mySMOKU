@@ -207,7 +207,7 @@
                                         $tuntutan = DB::table('tuntutan')
                                             ->where('smoku_id', $layak->smoku_id)
                                             ->where('permohonan_id', $permohonan->id)
-                                            ->whereNotIn('status', [6,8,9])
+                                            ->whereNotIn('status', [6,7,8,9])
                                             ->whereNull('data_migrate')
                                             ->orderBy('tuntutan.id', 'desc')
                                             ->first(['tuntutan.*']);
@@ -362,6 +362,7 @@
 
                                                 <!--end::Edit-->
                                             </div>
+                                           <!--// app.debug -->
                                         </td>
                                     </tr>
                                     <!--begin::Modal Tuntutan-->
