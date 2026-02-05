@@ -340,6 +340,9 @@
                                                                     @else
                                                                         data-bs-toggle="modal" data-bs-trigger="hover" title="Borang Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
                                                                     @endif
+                                                                @elseif($semSemasa > $totalSemesters)
+                                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila semak maklumat akademik pelajar."
+                                                                    onclick="showAlertSemestersExceeded()"
                                                                 @elseif($currentDate->greaterThan($tarikhTamat))  
                                                                     data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
                                                                 @endif
@@ -440,6 +443,15 @@
         icon: 'error',
         title: 'Tidak Berjaya!',
         text: 'Tuntutan telah ditutup.',
+        confirmButtonText: 'OK'
+        });
+    }
+    function showAlertSemestersExceeded() 
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'Tidak Berjaya!',
+        text: 'Sila semak maklumat akademik pelajar. Tempoh Pengajian, Tarikh Mula, Tarikh Tamat',
         confirmButtonText: 'OK'
         });
     }
