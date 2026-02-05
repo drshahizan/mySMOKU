@@ -219,6 +219,13 @@
 				<!--begin::Step 1-->
 				<div class="current" data-kt-stepper-element="content">
 				@csrf
+					@php
+						// Defaults to avoid undefined variables when $smoku is empty.
+						$postcode_surat = '';
+						$stateID_surat = '';
+						$cityID_surat = '';
+						$trimmedAddress_surat = '';
+					@endphp
 					<!--begin::Wrapper-->
 					<div class="w-100">
 						<!--begin::Heading-->
