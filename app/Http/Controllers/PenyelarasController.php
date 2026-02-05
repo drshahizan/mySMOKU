@@ -652,14 +652,25 @@ class PenyelarasController extends Controller
 
     public function hantar(Request $request)
     {   
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
-        $request->validate([
-            'akaunBank' => $docRules,
-            'suratTawaran' => $docRules,
-            'invoisResit' => $docRules,
-            'dokumen' => 'sometimes|array',
-            'dokumen.*' => $docRules,
-        ]);
+        // Some PDFs are detected as octet-stream; validate by extension instead of MIME guess.
+        $allowedExt = ['pdf', 'jpg', 'jpeg', 'png'];
+        $extRule = function ($attribute, $value, $fail) use ($allowedExt) {
+            if (!$value) {
+                return;
+            }
+            $ext = strtolower($value->getClientOriginalExtension());
+            if (!in_array($ext, $allowedExt, true)) {
+                $fail('The ' . str_replace('_', ' ', $attribute) . ' must be a file of type: pdf, jpg, jpeg, png.');
+            }
+        };
+
+        Validator::make($request->all(), [
+            'akaunBank' => ['nullable', 'file', $extRule],
+            'suratTawaran' => ['nullable', 'file', $extRule],
+            'invoisResit' => ['nullable', 'file', $extRule],
+            'dokumen' => ['sometimes', 'array'],
+            'dokumen.*' => ['nullable', 'file', $extRule],
+        ])->validate();
 
         $smoku_id = Smoku::where('no_kp',$request->no_kp)->first();
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
@@ -1086,7 +1097,7 @@ class PenyelarasController extends Controller
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
         $request->validate([
-            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
         ]);
 
         $permohonan = Permohonan::where('smoku_id', '=', $id)->orderBy('id', 'desc')->first();
@@ -1422,7 +1433,7 @@ class PenyelarasController extends Controller
     //TK GUNA DAH
     public function simpanTuntutan(Request $request, $id)
     {   
-        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'resit' => 'sometimes|array',
             'resit.*' => $resitRules,
@@ -2004,12 +2015,12 @@ class PenyelarasController extends Controller
 
         // Validation rules
         $rules = [
-            'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen2a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen3.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen4.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen3.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen4.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
         ];
 
         $customMessages = [
@@ -2259,8 +2270,8 @@ class PenyelarasController extends Controller
 
         $rules = [
             'penyata' => $bankExist
-                ? 'file|mimes:pdf,png|mimetypes:application/pdf,image/png|max:2048'
-                : 'required|file|mimes:pdf,png|mimetypes:application/pdf,image/png|max:2048',
+                ? 'file|mimes:pdf,png|max:2048'
+                : 'required|file|mimes:pdf,png|max:2048',
         ];
 
         $messages = [
@@ -2910,7 +2921,7 @@ class PenyelarasController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'upload_akaunBank' => $docRules,
             'upload_suratTawaran' => $docRules,
