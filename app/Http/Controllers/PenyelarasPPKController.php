@@ -584,7 +584,7 @@ class PenyelarasPPKController extends Controller
 
     public function hantar(Request $request)
     {   
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'akaunBank' => $docRules,
             'suratTawaran' => $docRules,
@@ -958,7 +958,7 @@ class PenyelarasPPKController extends Controller
     public function hantarKeputusanPeperiksaan(Request $request, $id)
     {
         $request->validate([
-            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+            'kepPeperiksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
         ]);
 
         $permohonan = Permohonan::orderBy('id', 'DESC')
@@ -1614,7 +1614,7 @@ class PenyelarasPPKController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'upload_akaunBank' => $docRules,
             'upload_suratTawaran' => $docRules,

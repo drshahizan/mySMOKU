@@ -24,7 +24,7 @@ class ProfilController extends Controller
         
         // Validate the file
         $request->validate([
-            'profile_photo_path' => 'required|file|mimes:jpg,jpeg,png|mimetypes:image/jpeg,image/png|max:2048', // 2MB max
+            'profile_photo_path' => 'required|file|mimes:jpg,jpeg,png|max:2048', // 2MB max
         ]);
 
 

@@ -268,9 +268,9 @@ class PelajarController extends Controller
 
         // Validate incoming file uploads
         $validatedData = $request->validate([
-            'sijilTamat.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
-            'transkrip.*' => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
-            'tawaran.*'    => 'required|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png|max:2048',
+            'sijilTamat.*' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'transkrip.*' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'tawaran.*'    => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         $uploadedSijilTamat = [];
@@ -379,7 +379,7 @@ class PelajarController extends Controller
             return redirect()->route('tamat.pengajian')->with('error', 'Permohonan tidak ditemui.');
         }
 
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'suratTangguh' => 'sometimes|array',
             'suratTangguh.*' => $docRules,
@@ -455,7 +455,7 @@ class PelajarController extends Controller
             return redirect()->route('lanjut.pengajian')->with('error', 'Permohonan tidak ditemui.');
         }
 
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'suratLanjut' => 'sometimes|array',
             'suratLanjut.*' => $docRules,
@@ -741,7 +741,7 @@ class PelajarController extends Controller
         $runningNumber = rand(1000, 9999);
         $uploadPath = 'assets/dokumen/permohonan';
 
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'upload_akaunBank' => $docRules,
             'upload_suratTawaran' => $docRules,

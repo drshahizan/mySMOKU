@@ -214,7 +214,7 @@ class TuntutanController extends Controller
     //TK GUNA DAH
     public function simpanTuntutan(Request $request)
     {   
-        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $resitRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'resit' => 'sometimes|array',
             'resit.*' => $resitRules,

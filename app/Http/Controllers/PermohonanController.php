@@ -482,7 +482,7 @@ class PermohonanController extends Controller
 
     public function hantarPermohonan(Request $request)
     {   
-        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png';
+        $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
         $request->validate([
             'akaunBank' => $docRules,
             'suratTawaran' => $docRules,
@@ -937,7 +937,7 @@ class PermohonanController extends Controller
     {   
         $request->validate([
             'kepPeperiksaan' => 'required|array',
-            'kepPeperiksaan.*' => 'file|mimes:pdf,jpg,jpeg,png|mimetypes:application/pdf,image/jpeg,image/png',
+            'kepPeperiksaan.*' => 'file|mimes:pdf,jpg,jpeg,png',
         ]);
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();

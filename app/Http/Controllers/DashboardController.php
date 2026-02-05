@@ -65,7 +65,7 @@ class DashboardController extends Controller
     public function store(Request $request)
     {  
         $request->validate([
-            'profile_photo_path' => 'nullable|file|mimes:jpg,jpeg,png|mimetypes:image/jpeg,image/png',
+            'profile_photo_path' => 'nullable|file|mimes:jpg,jpeg,png',
         ]);
 
         if($request->hasFile('profile_photo_path'))
