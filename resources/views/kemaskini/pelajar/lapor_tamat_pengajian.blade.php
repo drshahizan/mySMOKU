@@ -464,7 +464,7 @@
 				if (response['data']) {
 					response['data'].forEach(function (item) {
 						const selected = preselect && item.kod_peringkat === kod_peringkat ? "selected" : "";
-						const option = `<option value="${item.kod_peringkat}" ${selected}>${item.peringkat}</option>`;
+						const option = `<option value="${item.kod_peringkat}" ${selected}>${item.peringkat.toUpperCase()}</option>`;
 						$("#peringkat_pengajian").append(option);
 					});
 
@@ -493,12 +493,19 @@
 				if (response['data']) {
 					const selectedValue = $('#nama_kursus_asal').val();
 
-					response['data'].forEach(function (item) {
-						const uppercaseValue = item.nama_kursus.toUpperCase();
-						const selected = item.nama_kursus === selectedValue ? "selected" : "";
-						const option = `<option value="${item.nama_kursus}" ${selected}>${uppercaseValue} - ${item.kod_nec} (${item.bidang.toUpperCase()})</option>`;
-						$("#nama_kursus").append(option);
-					});
+						response['data'].forEach(function(item) {
+							var uppercaseValue = (item.nama_kursus || '').toUpperCase();
+							var bidang = (item.bidang || '').toUpperCase();
+							var isSelected = item.nama_kursus === selectedValue;
+
+							if (isSelected) found = true;
+
+							var option = `<option value="${item.nama_kursus}" ${isSelected ? "selected" : ""}>
+								${uppercaseValue} - ${item.kod_nec} (${bidang || '-'}) - ${item.no_rujukan}
+							</option>`;
+							$("#nama_kursus").append(option);
+
+						});
 				}
 			},
 			error: function () {
