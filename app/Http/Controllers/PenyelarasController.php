@@ -369,7 +369,12 @@ class PenyelarasController extends Controller
             ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
             ->join('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
             ->where('smoku.id', $id)
-            ->get(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*']);
+            ->first(['smoku.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*']);
+
+        if (!$smoku) {
+            return redirect()->route('penyelaras.dashboard')
+                ->with('failed', 'Rekod pelajar tidak dijumpai.');
+        }
         
         $biaya = SumberBiaya::all()->where('kod_biaya','!=','2')->sortBy('kod_biaya');
         $penaja = Penaja::all()->sortBy('kod_penaja');
