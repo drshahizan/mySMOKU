@@ -67,13 +67,8 @@ class SemakUserController extends Controller
             
         ]);
 
-        $smokuId = $request->session()->get('id');
-        if (!$smokuId) {
-            return redirect()->back()->with('failed', 'Rekod pelajar tidak dijumpai. Sila semak semula No. KP.');
-        }
-
         Akademik::updateOrCreate(
-            ['smoku_id' => $smokuId, 'status' => 1], // Condition to find the record
+            ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
             [
                 'id_institusi' => $request->id_institusi,
                 'peringkat_pengajian' => $request->peringkat_pengajian,
