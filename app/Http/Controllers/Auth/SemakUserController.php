@@ -12,6 +12,7 @@ use App\Models\Akademik;
 use App\Models\Penaja;
 use App\Models\SumberBiaya;
 use App\Models\TarikhIklan;
+use App\Models\Smoku;
 
 class SemakUserController extends Controller
 {
@@ -67,8 +68,24 @@ class SemakUserController extends Controller
             
         ]);
 
+        $smokuId = $request->session()->get('id');
+        if (!$smokuId) {
+            $noKp = $request->session()->get('no_kp');
+            if ($noKp) {
+                $smokuId = Smoku::where('no_kp', $noKp)->value('id');
+                if ($smokuId) {
+                    $request->session()->put('id', $smokuId);
+                }
+            }
+        }
+
+        if (!$smokuId) {
+            return redirect()->route('login')
+                ->with('message', 'Sesi anda telah tamat. Sila semak kelayakan semula.');
+        }
+
         Akademik::updateOrCreate(
-            ['smoku_id' => $request->session()->get('id'), 'status' => 1], // Condition to find the record
+            ['smoku_id' => $smokuId, 'status' => 1], // Condition to find the record
             [
                 'id_institusi' => $request->id_institusi,
                 'peringkat_pengajian' => $request->peringkat_pengajian,
