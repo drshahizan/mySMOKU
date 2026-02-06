@@ -486,12 +486,6 @@ class PenyelarasController extends Controller
     public function simpan(Request $request)
     {   
         $smoku = Smoku::where('no_kp', '=', $request->no_kp)->first();
-        if (!$smoku) {
-            if ($request->expectsJson()) {
-                return response()->json(['message' => 'Rekod pelajar tidak dijumpai.'], 422);
-            }
-            return redirect()->back()->with('failed', 'Rekod pelajar tidak dijumpai.');
-        }
         $id = $smoku->id;
         $nokp_pelajar = $smoku->no_kp;
 
