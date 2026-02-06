@@ -322,6 +322,12 @@ class PermohonanController extends Controller
     public function simpanPermohonan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        if (!$smoku_id) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Rekod pelajar tidak dijumpai.'], 422);
+            }
+            return redirect()->back()->with('failed', 'Rekod pelajar tidak dijumpai.');
+        }
 
         Smoku::updateOrCreate(
             ['id' => $smoku_id->id],
