@@ -1689,10 +1689,10 @@
 				var alamat_surat_bandar = document.getElementById("alamat_surat_bandar");
 				var alamat_surat_poskod = document.getElementById("alamat_surat_poskod");
 
-				var postcode_surat = "{{ $postcode_surat ?? '' }}";
-				var stateID_surat = "{{ $stateID_surat ?? '' }}";
-				var cityID_surat = "{{ $cityID_surat ?? '' }}";
-				var trimmedAddress_surat = "{{ $trimmedAddress_surat ?? '' }}";
+				var postcode_surat = "{{$postcode_surat}}";
+				var stateID_surat = "{{$stateID_surat}}";
+				var cityID_surat = "{{$cityID_surat}}";
+				var trimmedAddress_surat = "{{$trimmedAddress_surat}}";
 				console.log('stateID_surat:', stateID_surat);
 				console.log('cityID_surat:', cityID_surat);
 
