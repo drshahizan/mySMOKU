@@ -161,6 +161,8 @@
                                 
                                         // Check if current date and time fall within the allowed range
                                         $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+                                        $canBypassIklanWindow = in_array((int) ($smoku->status ?? 0), [1, 5], true);
+                                        $canOpenPermohonan = ($isWithinRange && ($bk_tarikh_iklan->permohonan == 1)) || $canBypassIklanWindow;
                                     @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}.</td>
@@ -168,11 +170,13 @@
                                     <td class="text-center">{{ $smoku->no_daftar_oku}}</td>
                                     <td class="text-center">{{$pemohon}}</td>
                                     <td class="text-center">{{ $penyelarasNama }}</td>
-                                    @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
+                                    @if($canOpenPermohonan)
                                         <td class="text-center">
                                             <a href="{{ route('penyelaras.permohonan.baharu', $smoku->smoku_id ?? $smoku->id) }}">
                                                 @if ($smoku->status == 1)
                                                     <button class="btn bg-info text-white">Deraf</button>
+                                                @elseif ($smoku->status == 5)
+                                                    <button class="btn bg-dikembalikan text-white">Dikembalikan</button>
                                                 @elseif ($smoku->status == 9)
                                                     <button class="btn bg-batal text-white">Batal</button>
                                                 @else 
@@ -184,6 +188,8 @@
                                         <td class="text-center">
                                             @if ($smoku->status == 1)
                                                 <button class="btn bg-info text-white" onclick="showAlert()">Deraf</button>
+                                            @elseif ($smoku->status == 5)
+                                                <button class="btn bg-dikembalikan text-white" onclick="showAlert()">Dikembalikan</button>
                                             @elseif ($smoku->status == 9)
                                                 <button class="btn bg-batal text-white">Batal</button>
                                             @else 

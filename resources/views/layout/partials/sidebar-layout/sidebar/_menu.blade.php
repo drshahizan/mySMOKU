@@ -238,7 +238,29 @@
 		$tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
 
 		// Check if current date and time fall within the allowed range
-		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);	
+		$isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+
+		$idInstitusiList = collect([$user->id_institusi]);
+		if ($institusi && $institusi->id_induk != null && $institusi->id_induk == $institusi->id_institusi) {
+			$idInstitusiList = DB::table('bk_info_institusi')
+				->where('id_induk', $user->id_institusi)
+				->pluck('id_institusi');
+		}
+
+		$hasPermohonanBypass = DB::table('permohonan')
+			->join('smoku_akademik as sa', function ($join) {
+				$join->on('sa.smoku_id', '=', 'permohonan.smoku_id')
+					->where('sa.status', 1)
+					->whereRaw("
+						CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
+						= sa.peringkat_pengajian
+					");
+			})
+			->whereIn('sa.id_institusi', $idInstitusiList)
+			->whereIn('permohonan.status', [1, 5])
+			->exists();
+
+		$canOpenPermohonanMenu = ($bk_tarikh_iklan->permohonan == 1) || $hasPermohonanBypass;
 	
 	@endphp
 
@@ -262,7 +284,7 @@
 					</div>
 				</div>
 				{{-- @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1)) --}}
-				@if(($bk_tarikh_iklan->permohonan == 1))
+				@if($canOpenPermohonanMenu)
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
 							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
