@@ -261,6 +261,30 @@
 			->exists();
 
 		$canOpenPermohonanMenu = ($bk_tarikh_iklan->permohonan == 1) || $hasPermohonanBypass;
+
+		$hasTuntutanBypass = DB::table('tuntutan')
+			->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+			->join('smoku_akademik as sa', function ($join) {
+				$join->on('sa.smoku_id', '=', 'permohonan.smoku_id')
+					->where('sa.status', 1)
+					->whereRaw("
+						CAST(NULLIF(SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan,'/',2),'/',-1), '') AS UNSIGNED)
+						= sa.peringkat_pengajian
+					");
+			})
+			->whereIn('sa.id_institusi', $idInstitusiList)
+			->whereNull('tuntutan.data_migrate')
+			->whereIn('tuntutan.status', [1, 5])
+			->whereRaw('tuntutan.id = (
+				SELECT MAX(t2.id)
+				FROM tuntutan t2
+				WHERE t2.permohonan_id = tuntutan.permohonan_id
+				AND t2.smoku_id = tuntutan.smoku_id
+				AND t2.data_migrate IS NULL
+			)')
+			->exists();
+
+		$canOpenTuntutanMenu = ($bk_tarikh_iklan->tuntutan == 1) || $hasTuntutanBypass;
 	
 	@endphp
 
@@ -313,7 +337,7 @@
 						</div>
 				</div>
 				{{-- @if($isWithinRange && ($bk_tarikh_iklan->tuntutan == 1)) --}}
-				@if(($bk_tarikh_iklan->tuntutan == 1))
+				@if($canOpenTuntutanMenu)
 					<div class="menu-item">
 						<a class="menu-link" href="{{route('senarai.bkoku.tuntutanBaharu')}}">
 							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
