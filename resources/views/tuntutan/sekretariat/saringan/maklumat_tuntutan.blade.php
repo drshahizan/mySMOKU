@@ -212,7 +212,7 @@
                                                         <tr>
                                                             <td style="text-align:left;">{{$i++}}</td>
                                                             <td>
-                                                                @if($salinan->kepPeperiksaan)
+                                                                @if($salinan && $salinan->kepPeperiksaan)
                                                                     <span><a href="{{ url('tuntutan/sekretariat/saringan/keputusan-peperiksaan/'.$permohonan->id) }}" target="_blank">Keputusan Peperiksaan</a></span>
                                                                 @else
                                                                     <span>Keputusan Peperiksaan</span>
@@ -228,7 +228,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                CGPA - {{$salinan->cgpa}}
+                                                                CGPA - {{$salinan->cgpa ?? '-'}}
                                                             </td>
                                                             <td>
                                                                 Keseluruhan keputusan peperiksaan
