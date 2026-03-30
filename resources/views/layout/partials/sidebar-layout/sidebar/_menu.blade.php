@@ -261,7 +261,8 @@
 						<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar Baharu</span>
 					</div>
 				</div>
-				@if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1))
+				{{-- @if($isWithinRange && ($bk_tarikh_iklan->permohonan == 1)) --}}
+				@if(($bk_tarikh_iklan->permohonan == 1))
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.permohonanBaharu')}}">
 							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>
@@ -289,7 +290,8 @@
 							<span class="menu-heading fw-bold text-uppercase fs-4">Permohonan Pelajar <br>Sedia Ada</span>
 						</div>
 				</div>
-				@if($isWithinRange && ($bk_tarikh_iklan->tuntutan == 1))
+				{{-- @if($isWithinRange && ($bk_tarikh_iklan->tuntutan == 1)) --}}
+				@if(($bk_tarikh_iklan->tuntutan == 1))
 					<div class="menu-item">
 						<a class="menu-link" href="{{route('senarai.bkoku.tuntutanBaharu')}}">
 							<span class="menu-icon">{!! getIcon('wallet', 'fs-2') !!}</span>

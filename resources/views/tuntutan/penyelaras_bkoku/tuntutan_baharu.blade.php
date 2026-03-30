@@ -251,6 +251,10 @@
                                         // Check if current date and time fall within the allowed range
                                         $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
 
+                                        // Allow draft and returned claims to remain editable even after the iklan window closes.
+                                        $canBypassIklanWindow = $tuntutan_latest && in_array((int) $tuntutan_latest->status, [1, 5], true);
+                                        $canOpenTuntutan = $isWithinRange || $canBypassIklanWindow;
+
                                         // Check if student already submitted a claim during the current session window
                                         $hasClaimInRange = false;
                                         if ($tuntutan_latest && $tuntutan_latest->tarikh_hantar) {
@@ -316,7 +320,7 @@
                                                     </span>
                                                 </a>
 
-                                                @if($isWithinRange)
+                                                @if($canOpenTuntutan)
                                                     @if($hasClaimInRange)
                                                         {{-- Already has claim in this session --}}
                                                         <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
@@ -329,10 +333,10 @@
                                                         </a>
                                                     @else
                                                         {{-- Normal behavior --}}
-                                                        <a href="{{ $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('bkoku.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
+                                                        <a href="{{ $semSemasa <= $totalSemesters && $result == null && $canOpenTuntutan ? route('bkoku.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
                                                             class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
                                                             @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8 || $tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5))
-                                                                @if($semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                                @if($semSemasa <= $totalSemesters && $canOpenTuntutan)
                                                                     @if (!$result && !$tuntutan && $sesiLepas != 'Tiada')
                                                                         data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan. Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
                                                                     @elseif ($result && $result->pengesahan_rendah== 1)
