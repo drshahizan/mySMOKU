@@ -285,6 +285,16 @@
                                             {{ !empty($layak->tarikh_tamat) ? \Carbon\Carbon::parse($layak->tarikh_tamat)->format('d/m/Y') : 'N/A' }}
                                         </td>
                                         @if($status != null)
+                                            @php
+                                                $catatanDikembalikan = null;
+                                                if ($layak->tuntutan_status == '5' && $tuntutan_latest) {
+                                                    $catatanDikembalikan = DB::table('tuntutan_saringan')
+                                                        ->where('tuntutan_id', $tuntutan_latest->id)
+                                                        ->where('status', 5)
+                                                        ->orderBy('id', 'desc')
+                                                        ->value('catatan');
+                                                }
+                                            @endphp
 
                                             @if ($layak->tuntutan_status=='1')
                                                 <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
@@ -295,7 +305,21 @@
                                             @elseif ($layak->tuntutan_status=='4')
                                                 <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif ($layak->tuntutan_status=='5')
-                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center">
+                                                    <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $layak->smoku_id }}">{{ucwords(strtolower($status))}}</button>
+
+                                                    <div class="modal fade" id="saringanModal{{ $layak->smoku_id }}" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content p-3" style="border-radius: 12px;">
+                                                                <div class="modal-body text-center">
+                                                                    <p class="mb-3">
+                                                                        {{ $catatanDikembalikan ? ucwords(strtolower($catatanDikembalikan)) : '-' }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             @elseif ($layak->tuntutan_status=='6')
                                                 <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif ($layak->tuntutan_status=='7')
@@ -314,7 +338,7 @@
                                         <td class="text-center">
                                             <div>
                                                 <!--begin::Edit-->
-                                                <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                <a href="{{ route('bkoku.kemaskini.keputusan', $layak->smoku_id)}}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-2">
                                                     <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Keputusan Peperiksaan">
                                                         <i class="ki-solid ki-pencil text-dark fs-2"></i>
                                                     </span>
@@ -323,7 +347,7 @@
                                                 @if($canOpenTuntutan)
                                                     @if($hasClaimInRange)
                                                         {{-- Already has claim in this session --}}
-                                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
+                                                        <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-2"
                                                             data-bs-toggle="tooltip" data-bs-trigger="hover" 
                                                             title="Borang Tuntutan. Hanya satu kali tuntutan bagi sesi pengajian yang sama"
                                                             onclick="showAlertTuntutanOnce()">
@@ -334,7 +358,7 @@
                                                     @else
                                                         {{-- Normal behavior --}}
                                                         <a href="{{ $semSemasa <= $totalSemesters && $result == null && $canOpenTuntutan ? route('bkoku.kemaskini.keputusan', $layak->smoku_id) : '#' }}" 
-                                                            class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+                                                            class="btn btn-icon btn-active-light-primary w-30px h-30px me-2" 
                                                             @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8 || $tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5))
                                                                 @if($semSemasa <= $totalSemesters && $canOpenTuntutan)
                                                                     @if (!$result && !$tuntutan && $sesiLepas != 'Tiada')
@@ -360,7 +384,7 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-10px h-10px me-1">
+                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-2">
                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan">
                                                             <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;" onclick="showAlertTuntutan()"></i>
                                                         </span>

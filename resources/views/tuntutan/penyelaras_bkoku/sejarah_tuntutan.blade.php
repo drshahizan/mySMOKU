@@ -108,6 +108,25 @@
                                                             ->orderBy('id', 'desc')
                                                             ->value('catatan');
 
+                                                        $smokuModal = DB::table('smoku')->where('id', $item['smoku_id'])->first();
+                                                        $akademikModal = DB::table('smoku_akademik')
+                                                            ->where('smoku_id', $item['smoku_id'])
+                                                            ->where('status', 1)
+                                                            ->first();
+
+                                                        if ($akademikModal && $akademikModal->sumber_biaya == 1) {
+                                                            $amaunModal = DB::table('bk_jumlah_tuntutan')
+                                                                ->where('program', 'BKOKU')
+                                                                ->where('jenis', 'Wang Saku')
+                                                                ->where('semester', 'B')
+                                                                ->first();
+                                                        } else {
+                                                            $amaunModal = DB::table('bk_jumlah_tuntutan')
+                                                                ->where('program', 'BKOKU')
+                                                                ->where('jenis', 'Wang Saku')
+                                                                ->first();
+                                                        }
+
                                                     @endphp
                                                     @if ($permohonan->program=="BKOKU")
                                                         <tr>
@@ -159,9 +178,14 @@
 
                                                             @if ($item['status']=='1')
                                                                 <td class="text-center">
-                                                                    <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <a href="#"
+                                                                        class="btn btn-icon btn-active-light-primary w-10px h-10px me-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-trigger="hover"
+                                                                        data-bs-target="#kt_modal_tuntutan{{ $item['smoku_id'] }}"
+                                                                        title="Kemaskini Tuntutan">
                                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                            <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;"></i>
                                                                         </span>
                                                                     </a>
                                                                     <a href="{{ route('bkoku.tuntutan.delete', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin padam permohonan ini?')">
@@ -180,9 +204,14 @@
                                                                 </td> --}}
                                                                 @elseif ($item['status']=='5')
                                                                 <td class="text-center">
-                                                                    <a href="{{ route('bkoku.tuntutan.baharu', ['id' => $item['smoku_id']]) }}" onclick="return confirm('Adakah anda pasti ingin kemaskini tuntutan ini?')">
+                                                                    <a href="#"
+                                                                        class="btn btn-icon btn-active-light-primary w-10px h-10px me-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-trigger="hover"
+                                                                        data-bs-target="#kt_modal_tuntutan{{ $item['smoku_id'] }}"
+                                                                        title="Kemaskini Tuntutan">
                                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini Tuntutan">
-                                                                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                                                                            <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;"></i>
                                                                         </span>
                                                                     </a>
                                                                 </td>
@@ -190,6 +219,14 @@
                                                                 <td class="text-center"></td> 
                                                             @endif
                                                         </tr>
+                                                        @if (in_array((int) $item['status'], [1, 5], true) && $smokuModal && $amaunModal)
+                                                            @include('tuntutan.penyelaras_bkoku.modal_tuntutan', [
+                                                                'layak' => $item,
+                                                                'smoku' => $smokuModal,
+                                                                'tuntutan' => $item,
+                                                                'amaun' => $amaunModal,
+                                                            ])
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </tbody>
