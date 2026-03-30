@@ -257,7 +257,7 @@
 					");
 			})
 			->whereIn('sa.id_institusi', $idInstitusiList)
-			->whereIn('permohonan.status', [1, 5])
+			->whereIn('permohonan.status', [1, 2, 5, 7])
 			->exists();
 
 		$canOpenPermohonanMenu = ($bk_tarikh_iklan->permohonan == 1) || $hasPermohonanBypass;
@@ -274,7 +274,7 @@
 			})
 			->whereIn('sa.id_institusi', $idInstitusiList)
 			->whereNull('tuntutan.data_migrate')
-			->whereIn('tuntutan.status', [1, 5])
+			->whereIn('tuntutan.status', [1, 2, 5, 7])
 			->whereRaw('tuntutan.id = (
 				SELECT MAX(t2.id)
 				FROM tuntutan t2
