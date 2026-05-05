@@ -2082,16 +2082,17 @@ class PenyelarasController extends Controller
 
         // Validation rules
         $rules = [
-            'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen2a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen3.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
-            'dokumen4.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen2a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen3.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
+            'dokumen4.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
         ];
 
         $customMessages = [
             'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
+            'mimetypes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
             'max' => 'Saiz maksimum bagi :attribute adalah 8 MB.',
         ];
 
