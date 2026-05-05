@@ -418,24 +418,28 @@ class PenyelarasController extends Controller
             $permohonan = Permohonan::orderby("id","desc")->where('smoku_id', $id)->first();
         }
 
-        $butiranPelajar = ButiranPelajar::orderBy('permohonan.id', 'desc')
-        ->join('smoku','smoku.id','=','smoku_butiran_pelajar.smoku_id')
-        ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku_butiran_pelajar.smoku_id')
-        ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku_butiran_pelajar.smoku_id')
-        ->leftJoin('permohonan','permohonan.smoku_id','=','smoku_butiran_pelajar.smoku_id')
+        $butiranPelajar = Smoku::orderBy('permohonan.id', 'desc')
+        ->leftJoin('smoku_butiran_pelajar','smoku_butiran_pelajar.smoku_id','=','smoku.id')
+        ->leftJoin('smoku_waris','smoku_waris.smoku_id','=','smoku.id')
+        ->leftJoin('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
+        ->leftJoin('permohonan','permohonan.smoku_id','=','smoku.id')
         ->leftJoin('bk_jantina','bk_jantina.kod_jantina','=','smoku.jantina')
         ->leftJoin('bk_keturunan', 'bk_keturunan.kod_keturunan', '=', 'smoku.keturunan')
         ->leftJoin('bk_hubungan','bk_hubungan.kod_hubungan','=','smoku.hubungan_waris')
         ->leftJoin('bk_jenis_oku','bk_jenis_oku.kod_oku','=','smoku.kategori')
         ->leftJoin('bk_parlimen','bk_parlimen.id','=','smoku_butiran_pelajar.parlimen')
-        ->get(['smoku_butiran_pelajar.*','smoku_butiran_pelajar.alamat_tetap as alamat_tetap_baru',
-            'smoku_butiran_pelajar.alamat_surat_menyurat as alamat_surat_baru',
-            'smoku_butiran_pelajar.tel_bimbit as tel_bimbit_baru',
-            'smoku_butiran_pelajar.status_pekerjaan as status_pekerjaan_baru',
-            'smoku_butiran_pelajar.pekerjaan as pekerjaan_baru',
-            'smoku_butiran_pelajar.pendapatan as pendapatan_baru',
-            'smoku_butiran_pelajar.tel_rumah as tel_rumah_baru', 'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*', 'bk_parlimen.*', 'bk_parlimen.id as id_parlimen'])
-        ->where('smoku_id', $id) 
+        ->where('smoku.id', $id)
+        ->select([
+            'smoku_butiran_pelajar.*',
+            DB::raw('COALESCE(smoku_butiran_pelajar.alamat_tetap, smoku.alamat_tetap) as alamat_tetap_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.alamat_surat_menyurat, smoku.alamat_surat_menyurat) as alamat_surat_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.tel_bimbit, smoku.tel_bimbit) as tel_bimbit_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.status_pekerjaan, smoku.status_pekerjaan) as status_pekerjaan_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.pekerjaan, smoku.pekerjaan) as pekerjaan_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.pendapatan, smoku.pendapatan) as pendapatan_baru'),
+            DB::raw('COALESCE(smoku_butiran_pelajar.tel_rumah, smoku.tel_rumah) as tel_rumah_baru'),
+            'smoku.*','smoku_waris.*','smoku_akademik.*','permohonan.*', 'bk_jantina.*', 'bk_keturunan.*', 'bk_hubungan.*', 'bk_jenis_oku.*', 'bk_parlimen.*', 'bk_parlimen.id as id_parlimen'
+        ])
         ->first();
 
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
