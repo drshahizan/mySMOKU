@@ -442,6 +442,69 @@ class PenyelarasController extends Controller
         ])
         ->first();
 
+        if ($butiranPelajar) {
+            $fillAddressParts = function ($address, $negeriId, $bandarId, $poskod) use ($negeri) {
+                $address = trim((string) $address);
+
+                if ($address === '') {
+                    return [$negeriId, $bandarId, $poskod];
+                }
+
+                if (empty($poskod) && preg_match('/\b(\d{5})\b/', $address, $matches)) {
+                    $poskod = $matches[1];
+                }
+
+                if (empty($negeriId)) {
+                    $normalizedAddress = Str::upper($address);
+
+                    $matchedNegeri = $negeri
+                        ->sortByDesc(fn ($item) => strlen($item->negeri))
+                        ->first(fn ($item) => Str::contains($normalizedAddress, Str::upper($item->negeri)));
+
+                    if ($matchedNegeri) {
+                        $negeriId = $matchedNegeri->id;
+                    }
+                }
+
+                if (empty($bandarId) && !empty($negeriId)) {
+                    $normalizedAddress = Str::upper($address);
+
+                    $matchedBandar = Bandar::where('negeri_id', $negeriId)
+                        ->get(['id', 'bandar'])
+                        ->sortByDesc(fn ($item) => strlen($item->bandar))
+                        ->first(fn ($item) => Str::contains($normalizedAddress, Str::upper($item->bandar)));
+
+                    if ($matchedBandar) {
+                        $bandarId = $matchedBandar->id;
+                    }
+                }
+
+                return [$negeriId, $bandarId, $poskod];
+            };
+
+            [
+                $butiranPelajar->alamat_tetap_negeri,
+                $butiranPelajar->alamat_tetap_bandar,
+                $butiranPelajar->alamat_tetap_poskod,
+            ] = $fillAddressParts(
+                $butiranPelajar->alamat_tetap_baru,
+                $butiranPelajar->alamat_tetap_negeri,
+                $butiranPelajar->alamat_tetap_bandar,
+                $butiranPelajar->alamat_tetap_poskod
+            );
+
+            [
+                $butiranPelajar->alamat_surat_negeri,
+                $butiranPelajar->alamat_surat_bandar,
+                $butiranPelajar->alamat_surat_poskod,
+            ] = $fillAddressParts(
+                $butiranPelajar->alamat_surat_baru,
+                $butiranPelajar->alamat_surat_negeri,
+                $butiranPelajar->alamat_surat_bandar,
+                $butiranPelajar->alamat_surat_poskod
+            );
+        }
+
         if ($permohonan && $permohonan->status >= '1' && $permohonan->status != '9') {
             $dokumen = Dokumen::all()->where('permohonan_id', $permohonan->id);
             return view('permohonan.penyelaras_bkoku.permohonan_view', compact('butiranPelajar','hubungan','negeri','bandar','infoipt','peringkat','mod','biaya','penaja','penajaArray','dokumen','agama','parlimen','dun','keturunan','permohonan'));
