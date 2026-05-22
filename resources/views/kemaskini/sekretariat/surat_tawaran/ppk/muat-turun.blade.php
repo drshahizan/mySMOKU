@@ -160,7 +160,8 @@
                 <br>
                 {{$suratTawaran->kandungan1}}</p>
             <p><b>3. KADAR PEMBIAYAAN</b>
-                <br>{{$suratTawaran->kandungan2}}</p>
+                <br><b>Sebelum 2026:</b> {{$suratTawaran->kandungan2_lama ?? $suratTawaran->kandungan2}}
+                <br><b>Mulai 2026:</b> {{$suratTawaran->kandungan2_baru ?? $suratTawaran->kandungan2}}</p>
             <p><b>4. HAK KERAJAAN</b>
                 <br>{{$suratTawaran->kandungan3}}</p>
         </div>

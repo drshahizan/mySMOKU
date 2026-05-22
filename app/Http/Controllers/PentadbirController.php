@@ -435,16 +435,23 @@ class PentadbirController extends Controller
 
     public function jumlahTuntutan()
     {
-        $jumlah = JumlahTuntutan::get();
+        $jumlah = JumlahTuntutan::orderBy('program')
+            ->orderBy('jenis')
+            ->orderBy('semester')
+            ->orderBy('tahun_kuat_kuasa')
+            ->get();
 
         return view('kemaskini.pentadbir.jumlah_tuntutan', compact('jumlah'));
     }
 
     public function simpanJumlah(Request $request)
     {
+        $tahunKuatKuasa = $request->tahun_kuat_kuasa ?: null;
+
         $jumlah = JumlahTuntutan::where('program', $request->program)
         ->where('jenis', $request->jenis)
         ->where('semester', $request->semester)
+        ->where('tahun_kuat_kuasa', $tahunKuatKuasa)
         ->first();
         if ($jumlah === null) {
             $jumlah = JumlahTuntutan::create([
@@ -452,6 +459,7 @@ class PentadbirController extends Controller
                 'jenis' => $request->jenis,
                 'semester' => $request->semester,
                 'jumlah' => $request->jumlah,
+                'tahun_kuat_kuasa' => $tahunKuatKuasa,
             ]);
         } 
         else {
@@ -460,6 +468,7 @@ class PentadbirController extends Controller
                 'jenis' => $request->jenis,
                 'semester' => $request->semester,
                 'jumlah' => $request->jumlah,
+                'tahun_kuat_kuasa' => $tahunKuatKuasa,
             ]);
         }
         

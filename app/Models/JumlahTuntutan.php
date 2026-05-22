@@ -15,5 +15,6 @@ class JumlahTuntutan extends Model
         'jenis',
         'semester',
         'jumlah',
+        'tahun_kuat_kuasa',
     ];
 }

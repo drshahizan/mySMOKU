@@ -258,7 +258,23 @@
                                         }
 
                                         // Retrieve amount sem 2
-                                        $amaun = DB::table('bk_jumlah_tuntutan')->where('program', 'PPK')->where('semester', '2')->first();
+                                        $tahunKelulusan = $layak->tarikh_mesyuarat ? \Carbon\Carbon::parse($layak->tarikh_mesyuarat)->year : null;
+                                        if ($tahunKelulusan && $tahunKelulusan >= 2026) {
+                                            $amaun = DB::table('bk_jumlah_tuntutan')
+                                                ->where('program', 'PPK')
+                                                ->where('jenis', 'Wang Saku')
+                                                ->where('tahun_kuat_kuasa', '<=', (string) $tahunKelulusan)
+                                                ->whereNull('semester')
+                                                ->orderByDesc('tahun_kuat_kuasa')
+                                                ->first();
+                                        } else {
+                                            $amaun = DB::table('bk_jumlah_tuntutan')
+                                                ->where('program', 'PPK')
+                                                ->where('semester', '2')
+                                                ->whereNull('tahun_kuat_kuasa')
+                                                ->first();
+                                        }
+                                        $amaunWangSaku = $amaun ? $amaun->jumlah : 0;
 
                                     @endphp
 
@@ -451,7 +467,7 @@
                                                                     <div class="d-flex">
                                                                         <!--begin::Input-->
                                                                         <span class="input-group-text">RM</span>
-                                                                        <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ number_format($amaun->jumlah, 2, '.', '') }}" step="0.01" inputmode="decimal" readonly/>
+                                                                        <input type="number" name="amaun_wang_saku" class="form-control form-control-solid" placeholder="RM" value="{{ number_format($amaunWangSaku, 2, '.', '') }}" step="0.01" inputmode="decimal" readonly/>
                                                                         <!--end::Input-->
                                                                     </div>
                                                                 </div>

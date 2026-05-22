@@ -111,6 +111,18 @@
 								</div>
 								<!--end::Input group-->
 							</div>
+							<div class="row mb-10">
+								<!--begin::Input group-->
+								<div class="col-md-6 fv-row">
+									<!--begin::Label-->
+									<label class="fs-6 fw-semibold mb-2">Tahun Kuat Kuasa</label>
+									<!--end::Label-->
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid" name="tahun_kuat_kuasa" id="tahun_kuat_kuasa" value="" placeholder="Contoh: 2026" />
+									<!--end::Input-->
+								</div>
+								<!--end::Input group-->
+							</div>
 							
 							
 							<br>
@@ -140,6 +152,7 @@
 										<th class="min-w-125px align-center">Jenis</th>
 										<th class="min-w-125px align-center">Semester</th>
 										<th class="min-w-125px align-center">Jumlah</th>
+										<th class="min-w-125px align-center">Tahun Kuat Kuasa</th>
 										<th class="min-w-125px align-center">Tarikh Kemaskini</th>
 									</tr>
 								</thead>
@@ -148,8 +161,9 @@
 									<tr>
 										<td>{{ $jumlah->program}}</td>
 										<td>{{ $jumlah->jenis}}</td>
-										<td>{{ $jumlah->semester}}</td>
+										<td>{{ $jumlah->semester ?? ($jumlah->program == 'PPK' && $jumlah->tahun_kuat_kuasa ? 'Semua' : '')}}</td>
 										<td>RM {{ $jumlah->jumlah}}</td>
+										<td>{{ $jumlah->tahun_kuat_kuasa ?? 'Lama'}}</td>
 										<td>{{ $jumlah->updated_at->format('d/m/Y')}}</td>
 		
 									</tr>
@@ -181,8 +195,9 @@
 				// Extract data for the Program and Jenis fields (adjust column indices as needed)
 				var programValue = $(rowData[0]).text(); // Assuming Program data is in the first column
 				var jenisValue = $(rowData[1]).text(); // Assuming Jenis data is in the second column
-				var semValue = $(rowData[2]).text(); // Assuming Jenis data is in the second column
+				var semValue = $(rowData[2]).text().replace('Semua', ''); // Assuming Jenis data is in the second column
 				var jumlahValue = $(rowData[3]).text().replace('RM ', ''); // Assuming Jenis data is in the second column
+				var tahunKuatKuasaValue = $(rowData[4]).text().replace('Lama', '');
 				
 
 				// Set the selected options in the <select> elements
@@ -190,6 +205,7 @@
 				$('#jenis').val(jenisValue);
 				$('#semester').val(semValue);
 				$('#jumlah').val(jumlahValue);
+				$('#tahun_kuat_kuasa').val(tahunKuatKuasaValue);
 
 				$('#program').trigger('change');
 				$('#jenis').trigger('change');

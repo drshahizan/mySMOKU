@@ -186,8 +186,18 @@
                                     </div>
                                     <br>
                                     <div class="col-md-12 fv-row">
-                                        <label class="fs-6 fw-semibold mb-2"><b>3. KADAR PEMBIAYAAN</b></label>
+                                        <label class="fs-6 fw-semibold mb-2"><b>3. KADAR PEMBIAYAAN (MASTER)</b></label>
                                         <textarea class="form-control form-control-solid" name="kandungan2" id="kandungan2">{{$suratTawaran->kandungan2}}</textarea>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 fv-row">
+                                        <label class="fs-6 fw-semibold mb-2"><b>3. KADAR PEMBIAYAAN (SEBELUM 2026)</b></label>
+                                        <textarea class="form-control form-control-solid" name="kandungan2_lama" id="kandungan2_lama">{{$suratTawaran->kandungan2_lama}}</textarea>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12 fv-row">
+                                        <label class="fs-6 fw-semibold mb-2"><b>3. KADAR PEMBIAYAAN (MULAI 2026)</b></label>
+                                        <textarea class="form-control form-control-solid" name="kandungan2_baru" id="kandungan2_baru">{{$suratTawaran->kandungan2_baru}}</textarea>
                                     </div>
                                     <br>
                                     <div class="col-md-12 fv-row">

@@ -67,6 +67,34 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SekretariatController extends Controller
 {
+    private function applyPpkKelulusanAmount(Permohonan $permohonan, ?string $tarikhMesyuarat): void
+    {
+        if ($permohonan->program !== 'PPK' || empty($tarikhMesyuarat)) {
+            return;
+        }
+
+        $tahunKelulusan = Carbon::parse($tarikhMesyuarat)->year;
+
+        if ($tahunKelulusan < 2026) {
+            return;
+        }
+
+        $jumlahTuntutan = JumlahTuntutan::where('program', 'PPK')
+            ->where('jenis', 'Wang Saku')
+            ->where('tahun_kuat_kuasa', '<=', (string) $tahunKelulusan)
+            ->whereNull('semester')
+            ->orderByDesc('tahun_kuat_kuasa')
+            ->first();
+
+        if ($jumlahTuntutan === null) {
+            return;
+        }
+
+        $permohonan->update([
+            'amaun_wang_saku' => number_format($jumlahTuntutan->jumlah, 2, '.', ''),
+        ]);
+    }
+
     //PERMOHONAN
     public function dashboardSekretariat()
     {
@@ -1190,6 +1218,8 @@ class SekretariatController extends Controller
             $existingRecord->tujuan = $request->tujuan;
             $existingRecord->kandungan1 = $request->kandungan1;
             $existingRecord->kandungan2 = $request->kandungan2;
+            $existingRecord->kandungan2_lama = $request->kandungan2_lama;
+            $existingRecord->kandungan2_baru = $request->kandungan2_baru;
             $existingRecord->kandungan3 = $request->kandungan3;
             $existingRecord->penutup1 = $request->penutup1;
             $existingRecord->penutup2 = $request->penutup2;
@@ -1436,6 +1466,14 @@ class SekretariatController extends Controller
             $info_mesyuarat->save();
         }
 
+        if ($keputusan == "Lulus") {
+            $permohonan = Permohonan::find($id);
+
+            if ($permohonan) {
+                $this->applyPpkKelulusanAmount($permohonan, $request->get('tarikhMesyuarat'));
+            }
+        }
+
         // Update sejarah_permohonan table
         $sejarah = new SejarahPermohonan([
             'smoku_id' => $smoku_id,
@@ -1536,6 +1574,8 @@ class SekretariatController extends Controller
                             'catatan' => $request->input('catatan'),
                         ]);
                     }
+
+                    $this->applyPpkKelulusanAmount($item, $request->input('tarikhMesyuarat'));
 
                     // COMMENT PROD
                     // Send email notifications to all student email addresses

@@ -94,6 +94,9 @@
 
         @php
             $tarikh_kelulusan = DB::table('permohonan_kelulusan')->where('permohonan_id',$permohonan['id'])->value('tarikh_mesyuarat');
+            $kadar_pembiayaan = $tarikh_kelulusan && \Carbon\Carbon::parse($tarikh_kelulusan)->year >= 2026
+                ? ($kandungan_surat->kandungan2_baru ?? $kandungan_surat->kandungan2)
+                : ($kandungan_surat->kandungan2_lama ?? $kandungan_surat->kandungan2);
             $nama = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.nama');
             $no_kp = DB::table('smoku')->where('id',$permohonan['smoku_id'])->value('smoku.no_kp');
             $alamat = DB::table('smoku_butiran_pelajar')->where('smoku_id',$permohonan['smoku_id'])->value('alamat_tetap');
@@ -202,7 +205,7 @@
                 <br>
                 {{$kandungan_surat->kandungan1}}</p>
             <p><b>3. KADAR PEMBIAYAAN</b>
-                <br>{{$kandungan_surat->kandungan2}}</p>
+                <br>{{$kadar_pembiayaan}}</p>
             <p><b>4. HAK KERAJAAN</b>
                 <br>{{$kandungan_surat->kandungan3}}</p>
         </div>

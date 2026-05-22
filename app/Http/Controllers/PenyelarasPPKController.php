@@ -49,6 +49,34 @@ use Illuminate\Support\Facades\Mail;
 
 class PenyelarasPPKController extends Controller
 {
+    private function getPpkAmountForTuntutan(Permohonan $permohonan, ?string $semester = null): ?float
+    {
+        $tarikhKelulusan = Kelulusan::where('permohonan_id', $permohonan->id)->value('tarikh_mesyuarat');
+
+        if ($tarikhKelulusan && Carbon::parse($tarikhKelulusan)->year >= 2026) {
+            $jumlahTuntutan = JumlahTuntutan::where('program', 'PPK')
+                ->where('jenis', 'Wang Saku')
+                ->where('tahun_kuat_kuasa', '<=', (string) Carbon::parse($tarikhKelulusan)->year)
+                ->whereNull('semester')
+                ->orderByDesc('tahun_kuat_kuasa')
+                ->first();
+
+            if ($jumlahTuntutan) {
+                return (float) $jumlahTuntutan->jumlah;
+            }
+        }
+
+        $jumlahTuntutan = JumlahTuntutan::where('program', 'PPK')
+            ->where('jenis', 'Wang Saku')
+            ->when($semester, function ($query) use ($semester) {
+                $query->where('semester', $semester);
+            })
+            ->whereNull('tahun_kuat_kuasa')
+            ->first();
+
+        return $jumlahTuntutan ? (float) $jumlahTuntutan->jumlah : null;
+    }
+
     public function index()
     {
         $smoku = Smoku::join('smoku_penyelaras', 'smoku_penyelaras.smoku_id', '=', 'smoku.id')
@@ -324,9 +352,33 @@ class PenyelarasPPKController extends Controller
     public function fetchAmaun(Request $request)
     {
         $sem_semasa = $request->input('sem_semasa');
-        $amaunModel = JumlahTuntutan::where('program', 'PPK')->where('semester', $sem_semasa)->first();
+        $tahunKuatKuasa = null;
 
-        return response()->json(['amaun' => $amaunModel ? $amaunModel->jumlah : null]);
+        if ($request->filled('sesi')) {
+            $tahunKuatKuasa = Str::before($request->input('sesi'), '/');
+        }
+
+        $amaunQuery = JumlahTuntutan::where('program', 'PPK')
+            ->where('jenis', 'Wang Saku');
+
+        if ($tahunKuatKuasa) {
+            $amaunModel = (clone $amaunQuery)
+                ->where('semester', $sem_semasa)
+                ->where('tahun_kuat_kuasa', $tahunKuatKuasa)
+                ->first();
+
+            $amaunModel = $amaunModel ?? (clone $amaunQuery)
+                ->whereNull('semester')
+                ->where('tahun_kuat_kuasa', $tahunKuatKuasa)
+                ->first();
+        }
+
+        $amaunModel = $amaunModel ?? $amaunQuery
+            ->where('semester', $sem_semasa)
+            ->whereNull('tahun_kuat_kuasa')
+            ->first();
+
+        return response()->json(['amaun' => $amaunModel ? (float) $amaunModel->jumlah : null]);
     }
 
     public function peringkat($ipt=0)
@@ -789,6 +841,7 @@ class PenyelarasPPKController extends Controller
         $layak = Smoku::join('permohonan','permohonan.smoku_id','=','smoku.id')
         ->join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
         ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
+        ->leftJoin('permohonan_kelulusan','permohonan_kelulusan.permohonan_id','=','permohonan.id')
         ->leftJoin('tuntutan', function ($join) {
             $join->on('tuntutan.permohonan_id', '=', 'permohonan.id')
                 ->whereRaw('tuntutan.id = (
@@ -802,7 +855,7 @@ class PenyelarasPPKController extends Controller
         ->whereIn('permohonan.status', [6,8]) 
         ->whereDate('smoku_akademik.tarikh_tamat', '>', today())
         ->orderBy('permohonan.tarikh_hantar', 'DESC')
-        ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
+        ->select('smoku.*', 'permohonan.program', 'permohonan.id as permohonan_id', 'permohonan.no_rujukan_permohonan', 'permohonan.tarikh_hantar', 'permohonan_kelulusan.tarikh_mesyuarat', 'tuntutan.status as tuntutan_status','smoku_akademik.*', 'bk_info_institusi.nama_institusi')
         ->distinct()
         ->get();
 
@@ -1039,6 +1092,7 @@ class PenyelarasPPKController extends Controller
     {
         $permohonan = Permohonan::orderBy('id', 'DESC')
         ->where('smoku_id', '=', $id)->first();
+        $amaunWangSaku = $this->getPpkAmountForTuntutan($permohonan, $request->semester) ?? (float) $request->amaun_wang_saku;
 
         $biltuntutan = Tuntutan::where('smoku_id', '=', $id)
             ->groupBy('no_rujukan_tuntutan')
@@ -1062,7 +1116,7 @@ class PenyelarasPPKController extends Controller
             'sesi' => $request->sesi,
             'semester' => $request->semester,    
             'wang_saku' => $request->wang_saku,
-            'amaun_wang_saku' => $request->amaun_wang_saku,
+            'amaun_wang_saku' => number_format($amaunWangSaku, 2, '.', ''),
             'tarikh_hantar' => now()->format('Y-m-d'),
             'status' => '2',
         ]);

@@ -16,6 +16,8 @@ class SuratTawaran extends Model
         'tujuan',
         'kandungan1',
         'kandungan2',
+        'kandungan2_lama',
+        'kandungan2_baru',
         'kandungan3',
         'penutup1',
         'penutup2',

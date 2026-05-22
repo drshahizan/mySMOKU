@@ -965,7 +965,7 @@
 								</label>
 								<!--end::Label-->
 									<!--begin::Input wrapper-->
-									<select id="sesi" name="sesi" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
+									<select id="sesi" name="sesi" onchange="select1()" class="form-select form-select-solid" data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>
 										<option value="">Pilih</option>
 										@if(empty($butiranPelajar->sesi))
 											@php
@@ -2049,13 +2049,14 @@
 <script>
     function select1() {
         var sem_semasa = document.getElementById('sem_semasa').value;
+        var sesi = document.getElementById('sesi').value;
         console.log('Selected Semester:', sem_semasa);
 
         // Make an AJAX request to fetch data based on the selected semester
         $.ajax({
             type: 'GET',
             url: '/fetch-amaun', // Replace with the actual route for fetching data
-            data: {sem_semasa: sem_semasa},
+            data: {sem_semasa: sem_semasa, sesi: sesi},
             success: function(response) {
                 // Format the value to display with .00
             	var formattedAmaun = response.amaun ? response.amaun.toFixed(2) : '';
