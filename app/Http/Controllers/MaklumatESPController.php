@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akademik;
 use App\Models\Dokumen;
 use App\Models\InfoIpt;
 use App\Models\JumlahTuntutan;
@@ -158,21 +159,7 @@ class MaklumatESPController extends Controller
 
     public function getSenaraiEspBKOKUUA()
     {
-        $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                        $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '=', 'UA');
-                        });
-                    })
-                    ->where('status', '=','6')
-                    ->whereNull('data_migrate')
-                    ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
-                    }, 'smoku'])
-                    ->orderBy('tarikh_hantar', 'desc')
-                    ->get();
+        $permohonan = $this->getPermohonanEspByAkademik('BKOKU', 'UA');
 
         return response()->json($permohonan);
 
@@ -180,21 +167,7 @@ class MaklumatESPController extends Controller
 
     public function getSenaraiEspBKOKUPOLI()
     {
-        $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                        $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '=', 'P');
-                        });
-                    })
-                    ->where('status', '=','6')
-                    ->whereNull('data_migrate')
-                    ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
-                    }, 'smoku'])
-                    ->orderBy('tarikh_hantar', 'desc')
-                    ->get();
+        $permohonan = $this->getPermohonanEspByAkademik('BKOKU', 'P');
 
         return response()->json($permohonan);
 
@@ -202,21 +175,7 @@ class MaklumatESPController extends Controller
 
     public function getSenaraiEspBKOKUKK()
     {
-        $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                        $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '=', 'KK');
-                        });
-                    })
-                    ->where('status', '=','6')
-                    ->whereNull('data_migrate')
-                    ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
-                    }, 'smoku'])
-                    ->orderBy('tarikh_hantar', 'desc')
-                    ->get();
+        $permohonan = $this->getPermohonanEspByAkademik('BKOKU', 'KK');
 
         return response()->json($permohonan);
 
@@ -224,21 +183,7 @@ class MaklumatESPController extends Controller
 
     public function getSenaraiEspBKOKUIPTS()
     {
-        $permohonan = Permohonan::where('program', 'BKOKU')
-                    ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                        $query->whereHas('infoipt', function ($subQuery) {
-                            $subQuery->where('jenis_institusi', '=', 'IPTS');
-                        });
-                    })
-                    ->where('status', '=','6')
-                    ->whereNull('data_migrate')
-                    ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
-                    }, 'smoku'])
-                    ->orderBy('tarikh_hantar', 'desc')
-                    ->get();
+        $permohonan = $this->getPermohonanEspByAkademik('BKOKU', 'IPTS');
 
         return response()->json($permohonan);
 
@@ -246,21 +191,52 @@ class MaklumatESPController extends Controller
 
     public function getSenaraiEspPPK()
     {
-        $permohonan = Permohonan::where('program', 'PPK')
-                    ->whereHas('akademik', function ($query) {
-                        $query->where('status', 1);
-                    })
-                    ->where('status', '=','6')
-                    ->whereNull('data_migrate')
-                    ->with(['akademik' => function ($query) {
-                        $query->where('status', 1);
-                        $query->with('infoipt');
-                    }, 'smoku'])
-                    ->orderBy('tarikh_hantar', 'desc')
-                    ->get();
+        $permohonan = $this->getPermohonanEspByAkademik('PPK');
 
         return response()->json($permohonan);
 
+    }
+
+    private function getPermohonanEspByAkademik($program, $jenisInstitusi = null)
+    {
+        $permohonan = Permohonan::where('program', $program)
+                    ->whereHas('akademik', function ($query) use ($jenisInstitusi) {
+                        $query->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+
+                        if ($jenisInstitusi) {
+                            $query->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
+                                $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
+                            });
+                        } else {
+                            $query->whereHas('infoipt');
+                        }
+                    })
+                    ->where('status', '=','6')
+                    ->whereNull('data_migrate')
+                    ->with('smoku')
+                    ->orderBy('tarikh_hantar', 'desc')
+                    ->get();
+
+        $permohonan->each(function ($item) use ($jenisInstitusi) {
+            $rujukan = explode('/', $item->no_rujukan_permohonan);
+            $peringkat = $rujukan[1] ?? null;
+
+            $akademik = Akademik::where('smoku_id', $item->smoku_id)
+                        ->where('peringkat_pengajian', $peringkat)
+                        ->with('infoipt');
+
+            if ($jenisInstitusi) {
+                $akademik->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
+                    $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
+                });
+            } else {
+                $akademik->whereHas('infoipt');
+            }
+
+            $item->setRelation('akademik', $akademik->first());
+        });
+
+        return $permohonan;
     }
 
     public function tuntutan()
