@@ -424,6 +424,14 @@
                 var bkokuIPTSList = @json($institusiPengajianIPTS);
                 var ppkList = @json($institusiPengajianPPK);
 
+                function formatAmount(data) {
+                    if (data === null || data === '') {
+                        return '';
+                    }
+
+                    return parseFloat(data).toFixed(2);
+                }
+
                 $('.export-container[data-program-code="UA"]').show();
                 $('.export-container[data-program-code="POLI"]').hide();
                 $('.export-container[data-program-code="KK"]').hide();
@@ -517,22 +525,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -689,22 +689,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -856,22 +848,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -1021,22 +1005,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -1186,11 +1162,7 @@
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
