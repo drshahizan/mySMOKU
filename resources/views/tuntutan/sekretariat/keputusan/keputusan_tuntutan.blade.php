@@ -343,6 +343,14 @@
                 var bkokuUAList = @json($institusiPengajianUA);
                 var ppkList = @json($institusiPengajianPPK);
 
+                function formatAmount(data) {
+                    if (data === null || data === '') {
+                        return '';
+                    }
+
+                    return parseFloat(data).toFixed(2);
+                }
+
                 // DataTable initialization functions
                 function initializeDataTable1() {
                     $('#sortTable1').DataTable({
@@ -422,22 +430,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -477,7 +477,7 @@
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
@@ -576,22 +576,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -631,7 +623,7 @@
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
@@ -728,22 +720,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -783,7 +767,7 @@
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
@@ -880,22 +864,14 @@
                                 data: 'yuran_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -935,7 +911,7 @@
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
@@ -1034,11 +1010,7 @@
                                 data: 'wang_saku_disokong',
                                 className: 'text-center',
                                 render: function(data, type, row) {
-                                    if (data === null) {
-                                        return ''; // Return empty string if data is null
-                                    } else {
-                                        return data; // Return the original data if not null
-                                    }
+                                    return formatAmount(data);
                                 }
                             },
                             {
@@ -1078,7 +1050,7 @@
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
