@@ -3100,84 +3100,28 @@ class SekretariatController extends Controller
 
     public function getKeputusanTuntutanIPTS()
     {
-        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-                $query->where('status', 1)
-                    ->whereHas('infoipt', function ($subQuery) {
-                        $subQuery->where('jenis_institusi', '=', 'IPTS');
-                    });
-                $query->whereHas('peringkat');
-            })
-            ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'BKOKU');
-            })
-            ->whereIn('status', ['5','6','7'])
-            ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt')->with('peringkat');
-            }, 'smoku', 'permohonan'])
-            ->get();
+        $tuntutan = $this->getKeputusanTuntutanByAkademik('BKOKU', 'IPTS');
 
         return response()->json($tuntutan);
     }
 
     public function getKeputusanTuntutanPOLI()
     {
-        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-                $query->where('status', 1)
-                    ->whereHas('infoipt', function ($subQuery) {
-                        $subQuery->where('jenis_institusi', '=', 'P');
-                    });
-                $query->whereHas('peringkat');
-            })
-            ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'BKOKU');
-            })
-            ->whereIn('status', ['5','6','7'])
-            ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt')->with('peringkat');
-            }, 'smoku', 'permohonan'])
-            ->get();
+        $tuntutan = $this->getKeputusanTuntutanByAkademik('BKOKU', 'P');
 
         return response()->json($tuntutan);
     }
 
     public function getKeputusanTuntutanKK()
     {
-        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-                $query->where('status', 1)
-                    ->whereHas('infoipt', function ($subQuery) {
-                        $subQuery->where('jenis_institusi', '=', 'KK');
-                    });
-                $query->whereHas('peringkat');
-            })
-            ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'BKOKU');
-            })
-            ->whereIn('status', ['5','6','7'])
-            ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt')->with('peringkat');
-            }, 'smoku', 'permohonan'])
-            ->get();
+        $tuntutan = $this->getKeputusanTuntutanByAkademik('BKOKU', 'KK');
 
         return response()->json($tuntutan);
     }
 
     public function getKeputusanTuntutanBKOKUUA()
     {
-        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-                $query->where('status', 1)
-                    ->whereHas('infoipt', function ($subQuery) {
-                        $subQuery->where('jenis_institusi', '=', 'UA');
-                    });
-                $query->whereHas('peringkat');
-            })
-            ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'BKOKU');
-            })
-            ->whereIn('status', ['5','6','7'])
-            ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt')->with('peringkat');
-            }, 'smoku', 'permohonan'])
-            ->get();
+        $tuntutan = $this->getKeputusanTuntutanByAkademik('BKOKU', 'UA');
 
         return response()->json($tuntutan);
 
@@ -3185,22 +3129,67 @@ class SekretariatController extends Controller
 
     public function getKeputusanTuntutanPPK()
     {
-        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
-                $query->where('status', 1)
-                    ->whereHas('infoipt');
-                $query->whereHas('peringkat');
-            })
-            ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'PPK');
-            })
-            ->whereIn('status', ['5','6','7'])
-            ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt')->with('peringkat');
-            }, 'smoku', 'permohonan'])
-            ->get();
+        $tuntutan = $this->getKeputusanTuntutanByAkademik('PPK');
 
         return response()->json($tuntutan);
 
+    }
+
+    private function getKeputusanTuntutanByAkademik($program, $jenisInstitusi = null)
+    {
+        return DB::table('tuntutan')
+            ->join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
+            ->join('permohonan', 'permohonan.id', '=', 'tuntutan.permohonan_id')
+            ->join('smoku_akademik', function ($join) {
+                $join->on('smoku_akademik.smoku_id', '=', 'tuntutan.smoku_id')
+                    ->where('smoku_akademik.status', 1)
+                    ->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+            })
+            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+            ->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
+            ->where('permohonan.program', $program)
+            ->whereIn('tuntutan.status', ['5', '6', '7'])
+            ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
+                return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+            })
+            ->orderByDesc('tuntutan.updated_at')
+            ->select([
+                'tuntutan.id',
+                'tuntutan.permohonan_id',
+                'tuntutan.no_rujukan_tuntutan',
+                'tuntutan.status',
+                'tuntutan.yuran_disokong',
+                'tuntutan.wang_saku_disokong',
+                'tuntutan.updated_at',
+                'smoku.nama',
+                'bk_info_institusi.id_institusi',
+                'bk_info_institusi.nama_institusi',
+                'bk_peringkat_pengajian.peringkat',
+            ])
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'permohonan_id' => $item->permohonan_id,
+                    'no_rujukan_tuntutan' => $item->no_rujukan_tuntutan,
+                    'status' => (string) $item->status,
+                    'yuran_disokong' => $item->yuran_disokong,
+                    'wang_saku_disokong' => $item->wang_saku_disokong,
+                    'updated_at' => $item->updated_at,
+                    'smoku' => [
+                        'nama' => $item->nama,
+                    ],
+                    'akademik' => [
+                        'infoipt' => [
+                            'id_institusi' => $item->id_institusi,
+                            'nama_institusi' => $item->nama_institusi,
+                        ],
+                        'peringkat' => [
+                            'peringkat' => $item->peringkat,
+                        ],
+                    ],
+                ];
+            });
     }
 
     //Papar Tuntutan Telah Disaring
