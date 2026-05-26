@@ -29,6 +29,13 @@
             .form-select {
                     margin-left: 10px !important; 
             }
+            .keputusan-tuntutan-status-btn {
+                align-items: center;
+                display: inline-flex;
+                gap: 6px;
+                justify-content: center;
+                width: 125px;
+            }
 
             @media (max-width: 768px) {
                 .nav-tabs {
@@ -157,8 +164,8 @@
                                             <div class="col-md-4">
                                                 <select id="status" name="status" class="form-select js-example-basic-single">
                                                     <option value="">Pilih Keputusan</option>
-                                                    <option value="Lulus">Layak</option>
-                                                    <option value="Tidak Lulus">Tidak Layak</option>
+                                                    <option value="6">Layak</option>
+                                                    <option value="7">Tidak Layak</option>
                                                 </select>
                                             </div> 
 
@@ -465,17 +472,17 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<button class="btn bg-dikembalikan btn-round btn-sm keputusan-tuntutan-status-btn text-white">Dikembalikan</button>';
                                             break;
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-tuntutan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -619,17 +626,17 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<button class="btn bg-dikembalikan btn-round btn-sm keputusan-tuntutan-status-btn text-white">Dikembalikan</button>';
                                             break;
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-tuntutan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -771,17 +778,17 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<button class="btn bg-dikembalikan btn-round btn-sm keputusan-tuntutan-status-btn text-white">Dikembalikan</button>';
                                             break;
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-tuntutan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -923,17 +930,17 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<button class="btn bg-dikembalikan btn-round btn-sm keputusan-tuntutan-status-btn text-white">Dikembalikan</button>';
                                             break;
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-tuntutan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1066,17 +1073,17 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<button class="btn bg-dikembalikan btn-round btn-sm keputusan-tuntutan-status-btn text-white">Dikembalikan</button>';
                                             break;
                                         case '6':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.permohonan_id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-tuntutan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-tuntutan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
