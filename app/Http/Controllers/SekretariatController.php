@@ -1745,6 +1745,8 @@ class SekretariatController extends Controller
             ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
                 return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
             })
+            ->orderByDesc('permohonan_kelulusan.tarikh_mesyuarat')
+            ->orderByDesc('permohonan_kelulusan.updated_at')
             ->select([
                 'permohonan.id',
                 'permohonan.no_rujukan_permohonan',
