@@ -30,6 +30,13 @@
             .form-select {
                     margin-left: 10px !important; 
             }
+            .keputusan-status-btn {
+                align-items: center;
+                display: inline-flex;
+                gap: 6px;
+                justify-content: center;
+                width: 125px;
+            }
 
             @media (max-width: 768px) {
                 .nav-tabs {
@@ -573,12 +580,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -744,12 +751,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -911,12 +918,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; 
@@ -1076,12 +1083,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1230,12 +1237,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
+                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
