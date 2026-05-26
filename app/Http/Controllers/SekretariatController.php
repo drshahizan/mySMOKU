@@ -1731,43 +1731,59 @@ class SekretariatController extends Controller
 
     private function getKeputusanPermohonanByAkademik($program, $jenisInstitusi = null)
     {
-        $permohonan = Permohonan::where('program', $program)
-                    ->whereNotIn('status', [1, 2, 3, 4, 5, 7, 9, 10])
-                    ->whereHas('akademik', function ($query) use ($jenisInstitusi) {
-                        $query->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)")
-                            ->whereHas('peringkat');
-
-                        if ($jenisInstitusi) {
-                            $query->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
-                                $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
-                            });
-                        } else {
-                            $query->whereHas('infoipt');
-                        }
-                    })
-                    ->with(['smoku', 'kelulusan'])
-                    ->get();
-
-        $permohonan->each(function ($item) use ($jenisInstitusi) {
-            $rujukan = explode('/', $item->no_rujukan_permohonan);
-            $peringkat = $rujukan[1] ?? null;
-
-            $akademik = Akademik::where('smoku_id', $item->smoku_id)
-                        ->where('peringkat_pengajian', $peringkat)
-                        ->with(['infoipt', 'peringkat']);
-
-            if ($jenisInstitusi) {
-                $akademik->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
-                    $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
-                });
-            } else {
-                $akademik->whereHas('infoipt');
-            }
-
-            $item->setRelation('akademik', $akademik->first());
-        });
-
-        return $permohonan;
+        return DB::table('permohonan')
+            ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+            ->join('smoku_akademik', function ($join) {
+                $join->on('smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
+                    ->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+            })
+            ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
+            ->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
+            ->leftJoin('permohonan_kelulusan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->where('permohonan.program', $program)
+            ->whereNotIn('permohonan.status', [1, 2, 3, 4, 5, 9, 10])
+            ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
+                return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+            })
+            ->select([
+                'permohonan.id',
+                'permohonan.no_rujukan_permohonan',
+                'permohonan.yuran_disokong',
+                'permohonan.wang_saku_disokong',
+                'smoku.nama',
+                'bk_info_institusi.id_institusi',
+                'bk_info_institusi.nama_institusi',
+                'bk_peringkat_pengajian.peringkat',
+                'permohonan_kelulusan.no_mesyuarat',
+                'permohonan_kelulusan.tarikh_mesyuarat',
+                'permohonan_kelulusan.keputusan',
+            ])
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'no_rujukan_permohonan' => $item->no_rujukan_permohonan,
+                    'yuran_disokong' => $item->yuran_disokong,
+                    'wang_saku_disokong' => $item->wang_saku_disokong,
+                    'smoku' => [
+                        'nama' => $item->nama,
+                    ],
+                    'akademik' => [
+                        'infoipt' => [
+                            'id_institusi' => $item->id_institusi,
+                            'nama_institusi' => $item->nama_institusi,
+                        ],
+                        'peringkat' => [
+                            'peringkat' => $item->peringkat,
+                        ],
+                    ],
+                    'kelulusan' => [
+                        'no_mesyuarat' => $item->no_mesyuarat,
+                        'tarikh_mesyuarat' => $item->tarikh_mesyuarat,
+                        'keputusan' => $item->keputusan,
+                    ],
+                ];
+            });
     }
 
     public function cetakKeputusanPermohonanIPTS(Request $request)
