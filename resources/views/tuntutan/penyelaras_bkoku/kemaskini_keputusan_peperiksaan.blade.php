@@ -83,9 +83,9 @@
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Tahun Pengajian</label>
 										<div class="mb-5">
 											@php
-												$year = date('Y'); 
-												$nextYear = $year + 1; 
-												$sesiSemasa = $year . '/' . $nextYear; 
+												// $year = date('Y'); 
+												// $nextYear = $year + 1; 
+												// $sesiSemasa = $year . '/' . $nextYear; 
 											@endphp
 
 											<input type="hidden" name="sesi" value="{{ $previousSesi }}">
@@ -96,8 +96,11 @@
 									<div class="col-lg-6">
 										<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
 										<div class="mb-5">
-											<input type="hidden" name="semester" value="{{ $sesiLepas }}">
-											<input type="text" class="form-control form-control-solid" value="@if ($sesiLepas == '1')Sesi 1 (Kemasukan Julai sehingga Disember)@elseif ($sesiLepas == '2')Sesi 2 (Kemasukan Januari sehingga Jun)@else-@endif" readonly>
+											@php
+												$sesiPaparan = (blank($sesiLepas) || $sesiLepas === 'Tiada') ? $sesiSemasa : $sesiLepas;
+											@endphp
+											<input type="hidden" name="semester" value="{{ $sesiPaparan }}">
+											<input type="text" class="form-control form-control-solid" value="@if ($sesiPaparan == '1')Sesi 1 (Kemasukan Julai sehingga Disember)@elseif ($sesiPaparan == '2')Sesi 2 (Kemasukan Januari sehingga Jun)@else-@endif" readonly>
 										</div>
 									</div>
 									<!--end::Col-->

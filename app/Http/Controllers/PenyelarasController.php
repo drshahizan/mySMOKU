@@ -1137,7 +1137,7 @@ class PenyelarasController extends Controller
         // echo '<br>';
         // echo 'Tahun Lepas: ' . $previousSesi . '<br>';
         // echo 'Tahun Semasa: ' . $currentSesi . '<br>';
-        // echo 'Sesi Lepas: ' . $sesiLepas . '<br>';
+        // echo 'Sesi Lepas: ' . $sesiLepas . ' Kalau Sesi Lepas Tiada,Jadi Papar Sesi Semasa: ' . $sesiSemasa .'<br>';
         // echo 'Sesi Semasa: ' . $sesiSemasa . '<br>';
         // echo 'Semester Semasa: ' . $semSemasa . '<br>';
         // echo 'Total Sem: ' . $totalSemesters . '<br>';
@@ -1153,7 +1153,7 @@ class PenyelarasController extends Controller
                                     ->where('semester', $sesiLepas)
 									->first();
 
-            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','result','smoku','akademik'));
+            return view('tuntutan.penyelaras_bkoku.kemaskini_keputusan_peperiksaan', compact('peperiksaan','smoku_id','permohonan','previousSesi','sesiLepas','sesiSemasa','result','smoku','akademik'));
         } 
         else 
         {
