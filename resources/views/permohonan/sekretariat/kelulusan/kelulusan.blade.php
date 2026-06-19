@@ -321,6 +321,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
+                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
+                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
+                                                                }, $pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -473,6 +476,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
+                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
+                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
+                                                                }, $pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -626,6 +632,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
+                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
+                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
+                                                                }, $pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -779,6 +788,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
+                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
+                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
+                                                                }, $pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -932,6 +944,9 @@
                                                                     }
                                                                 }
                                                                 $pemohon = implode(' ', $result);
+                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
+                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
+                                                                }, $pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
