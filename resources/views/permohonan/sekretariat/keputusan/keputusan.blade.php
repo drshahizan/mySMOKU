@@ -38,6 +38,30 @@
                 width: 125px;
             }
 
+            .keputusan-status-pill {
+                align-items: center;
+                border: 0;
+                border-radius: 8px;
+                color: #fff !important;
+                display: inline-flex;
+                font-weight: 700;
+                gap: 8px;
+                justify-content: center;
+                min-height: 40px;
+                padding: 9px 14px;
+                text-align: center;
+                white-space: nowrap;
+                width: 142px;
+            }
+
+            .keputusan-status-pill:hover {
+                color: #fff !important;
+                text-decoration: none;
+            }
+
+            .keputusan-status-layak { background-color: #50cd89; }
+            .keputusan-status-tidak-layak { background-color: #f1416c; }
+
             @media (max-width: 768px) {
                 .nav-tabs {
                     display: flex;
@@ -485,7 +509,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -580,12 +608,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -649,7 +677,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -743,12 +775,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -808,7 +840,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -902,12 +938,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         default:
                                             status = ''; 
@@ -965,7 +1001,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1059,12 +1099,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1122,7 +1162,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1209,12 +1253,12 @@
                                         case 'Lulus':
                                             var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                             var url = route.replace(':permohonanId', row.id);
-                                            status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn keputusan-status-btn text-white">' +
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
                                                         '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
                                                     '</a>';
                                             break;
                                         case 'Tidak Lulus':
-                                            status = '<button class="btn bg-danger btn-round btn-sm keputusan-status-btn text-white">Tidak Layak</button>';
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         default:
                                             status = ''; // Set empty string for unknown status values
