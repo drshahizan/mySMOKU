@@ -1307,7 +1307,7 @@ class SaringanController extends Controller
                     ->where('status', 8)
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->get();
 
@@ -1326,7 +1326,7 @@ class SaringanController extends Controller
                     ->where('status', 8)
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->get();
 
@@ -1345,7 +1345,7 @@ class SaringanController extends Controller
                     ->where('status', 8)
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->get();
 
@@ -1364,7 +1364,7 @@ class SaringanController extends Controller
                     ->where('status', 8)
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->get();
 
@@ -1382,7 +1382,7 @@ class SaringanController extends Controller
                     ->where('status', 8)                    
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->get();
 
