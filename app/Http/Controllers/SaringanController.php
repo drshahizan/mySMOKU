@@ -1091,41 +1091,49 @@ class SaringanController extends Controller
 
     private function getSejarahPermohonanByAkademik($program, $jenisInstitusi = null)
     {
-        $permohonan = Permohonan::where('program', $program)
-                    ->whereHas('akademik', function ($query) use ($jenisInstitusi) {
-                        $query->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+        $permohonan = Permohonan::query()
+            ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+            ->join('smoku_akademik as akademik', function ($join) {
+                $join->on('akademik.smoku_id', '=', 'permohonan.smoku_id')
+                    ->whereRaw("akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+            })
+            ->join('bk_info_institusi as infoipt', 'infoipt.id_institusi', '=', 'akademik.id_institusi')
+            ->where('permohonan.program', $program)
+            ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
+                $query->where('infoipt.jenis_institusi', $jenisInstitusi);
+            })
+            ->orderBy('permohonan.tarikh_hantar', 'desc')
+            ->get([
+                'permohonan.id',
+                'permohonan.smoku_id',
+                'permohonan.no_rujukan_permohonan',
+                'permohonan.tarikh_hantar',
+                'permohonan.tarikh_transaksi',
+                'permohonan.status',
+                'smoku.nama as smoku_nama',
+                'akademik.nama_kursus',
+                'infoipt.nama_institusi',
+            ]);
 
-                        if ($jenisInstitusi) {
-                            $query->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
-                                $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
-                            });
-                        } else {
-                            $query->whereHas('infoipt');
-                        }
-                    })
-                    ->with('smoku')
-                    ->get();
-
-        $permohonan->each(function ($item) use ($jenisInstitusi) {
-            $rujukan = explode('/', $item->no_rujukan_permohonan);
-            $peringkat = $rujukan[1] ?? null;
-
-            $akademik = Akademik::where('smoku_id', $item->smoku_id)
-                        ->where('peringkat_pengajian', $peringkat)
-                        ->with('infoipt');
-
-            if ($jenisInstitusi) {
-                $akademik->whereHas('infoipt', function ($subQuery) use ($jenisInstitusi) {
-                    $subQuery->where('jenis_institusi', '=', $jenisInstitusi);
-                });
-            } else {
-                $akademik->whereHas('infoipt');
-            }
-
-            $item->setRelation('akademik', $akademik->first());
+        return $permohonan->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'smoku_id' => $item->smoku_id,
+                'no_rujukan_permohonan' => $item->no_rujukan_permohonan,
+                'tarikh_hantar' => $item->tarikh_hantar,
+                'tarikh_transaksi' => $item->tarikh_transaksi,
+                'status' => $item->status,
+                'smoku' => [
+                    'nama' => $item->smoku_nama,
+                ],
+                'akademik' => [
+                    'nama_kursus' => $item->nama_kursus,
+                    'infoipt' => [
+                        'nama_institusi' => $item->nama_institusi,
+                    ],
+                ],
+            ];
         });
-
-        return $permohonan;
     }
 
     public function rekodPermohonan($id)

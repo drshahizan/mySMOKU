@@ -26,6 +26,59 @@
             .form-select {
                     margin-left: 10px !important; 
             }
+            #sortTable1 tbody td:last-child .status-wrap,
+            #sortTable2 tbody td:last-child .status-wrap,
+            #sortTable3 tbody td:last-child .status-wrap,
+            #sortTable4 tbody td:last-child .status-wrap,
+            #sortTable5 tbody td:last-child .status-wrap {
+                align-items: center;
+                display: inline-grid;
+                justify-content: center;
+                width: 156px;
+            }
+            #sortTable1 tbody td:last-child .status-pill,
+            #sortTable2 tbody td:last-child .status-pill,
+            #sortTable3 tbody td:last-child .status-pill,
+            #sortTable4 tbody td:last-child .status-pill,
+            #sortTable5 tbody td:last-child .status-pill {
+                align-items: center;
+                border-radius: 8px;
+                color: #fff;
+                display: inline-flex;
+                font-weight: 700;
+                justify-content: center;
+                min-height: 34px;
+                padding-left: 12px;
+                padding-right: 12px;
+                text-decoration: none;
+                width: 156px;
+            }
+            .status-info { background-color: #7239ea; }
+            .status-baharu { background-color: #1f73e8; }
+            .status-saringan { background-color: #17a2b8; }
+            .status-disokong { background-color: #ffc107; color: #111 !important; }
+            .status-dikembalikan { background-color: #f59e0b; }
+            .status-layak { background-color: #50cd89; }
+            .status-tidak-layak { background-color: #f1416c; }
+            .status-dibayar { background-color: #12a8b3; }
+            .status-batal { background-color: #6c757d; }
+            .status-pill i {
+                color: #fff !important;
+                margin-right: 6px;
+            }
+            #sortTable1 th:nth-child(2),
+            #sortTable1 td:nth-child(2),
+            #sortTable2 th:nth-child(2),
+            #sortTable2 td:nth-child(2),
+            #sortTable3 th:nth-child(2),
+            #sortTable3 td:nth-child(2),
+            #sortTable4 th:nth-child(2),
+            #sortTable4 td:nth-child(2),
+            #sortTable5 th:nth-child(2),
+            #sortTable5 td:nth-child(2) {
+                min-width: 180px;
+                white-space: normal;
+            }
 
             @media (max-width: 768px) {
                 .nav-tabs {
@@ -317,6 +370,43 @@
             var bkokuUAList = @json($institusiPengajianUA);
             var ppkList = @json($institusiPengajianPPK);
 
+            function statusBadge(label, className) {
+                return '<span class="status-wrap"><span class="status-pill ' + className + '">' + label + '</span></span>';
+            }
+
+            function statusBadgeWithDownload(label, className, url) {
+                return '<span class="status-wrap">' +
+                    '<a href="' + url + '" class="status-pill ' + className + '" title="Muat turun">' +
+                        '<i class="fa fa-download fa-sm"></i>' + label +
+                    '</a>' +
+                '</span>';
+            }
+
+            function formatNama(data) {
+                if (!data) {
+                    return '';
+                }
+
+                var conjunctions_lower = ['bin', 'binti'];
+                var conjunctions_upper = ['A/L', 'A/P'];
+
+                return data.split(' ').map(function(word) {
+                    if (conjunctions_lower.includes(word.toLowerCase())) {
+                        return word.toLowerCase();
+                    }
+
+                    if (conjunctions_upper.includes(word.toUpperCase())) {
+                        return word.toUpperCase();
+                    }
+
+                    return word.replace(/^(')?([A-Za-zÀ-ÖØ-öø-ÿ])/, function(match, quote, letter) {
+                        return (quote || '') + letter.toUpperCase();
+                    }).replace(/([^'\s]+)$/g, function(segment) {
+                        return segment.charAt(0) + segment.slice(1).toLowerCase();
+                    });
+                }).join(' ');
+            }
+
 
             // DataTable initialization functions
             function initializeDataTable1() {
@@ -347,77 +437,13 @@
                     { 
                         data: 'smoku.nama', 
                         render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
+                            return formatNama(data);
                         }
                     },
                     { 
                         data: 'akademik.nama_kursus',
                         render: function(data, type, row) {
-                            // Check if data is null
-                            if (data === null) {
-                                return ''; // Return an empty string or any other placeholder value
-                            }
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (word.includes('(') && word.includes(')')) {
-                                    // Retain the original casing of words within brackets
-                                    // Extract the content within the brackets
-                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                    // Capitalize the first letter of the content within brackets
-                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                    // Replace the content within brackets with the capitalized version
-                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-
-
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_kursus = words.join(' ');
-
-                            return formatted_kursus;
+                            return data || '';
                         }
                     }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
@@ -473,42 +499,38 @@
                             // Define the button HTML based on the status value
                             switch (data) {
                                 case '1':
-                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    status = statusBadge('Deraf', 'status-info');
                                     break;
                                 case '2':
-                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    status = statusBadge('Baharu', 'status-baharu');
                                     break;
                                 case '3':
-                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    status = statusBadge('Sedang Disaring', 'status-saringan');
                                     break;
                                 case '4':
-                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    status = statusBadge('Disokong', 'status-disokong');
                                     break;
                                 case '5':
-                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    status = statusBadge('Dikembalikan', 'status-dikembalikan');
                                     break;
                                 case '6':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
+                                    status = statusBadgeWithDownload('Layak', 'status-layak', url);
                                     break;
                                 case '7':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    status = statusBadge('Tidak Layak', 'status-tidak-layak');
                                     break;
                                 case '8':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                            '</a>';
+                                    status = statusBadgeWithDownload('Dibayar', 'status-dibayar', url);
                                     break;
                                 case '9':
-                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    status = statusBadge('Batal', 'status-batal');
                                     break;
                                 case '10':
-                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    status = statusBadge('Berhenti', 'status-batal');
                                     break;    
                                 default:
                                     status = ''; // Set empty string for unknown status values
@@ -550,77 +572,13 @@
                     { 
                         data: 'smoku.nama', 
                         render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
+                            return formatNama(data);
                         }
                     },
                     { 
                         data: 'akademik.nama_kursus',
                         render: function(data, type, row) {
-                            // Check if data is null
-                            if (data === null) {
-                                return ''; // Return an empty string or any other placeholder value
-                            }
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (word.includes('(') && word.includes(')')) {
-                                    // Retain the original casing of words within brackets
-                                    // Extract the content within the brackets
-                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                    // Capitalize the first letter of the content within brackets
-                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                    // Replace the content within brackets with the capitalized version
-                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-
-
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_kursus = words.join(' ');
-
-                            return formatted_kursus;
+                            return data || '';
                         }
                     }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
@@ -676,44 +634,38 @@
                             // Define the button HTML based on the status value
                             switch (data) {
                                 case '1':
-                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    status = statusBadge('Deraf', 'status-info');
                                     break;
                                 case '2':
-                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    status = statusBadge('Baharu', 'status-baharu');
                                     break;
                                 case '3':
-                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    status = statusBadge('Sedang Disaring', 'status-saringan');
                                     break;
                                 case '4':
-                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    status = statusBadge('Disokong', 'status-disokong');
                                     break;
                                 case '5':
-                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    status = statusBadge('Dikembalikan', 'status-dikembalikan');
                                     break;
                                     case '6':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    status = statusBadgeWithDownload('Layak', 'status-layak', url);
                                     break;
                                 case '7':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    status = statusBadge('Tidak Layak', 'status-tidak-layak');
                                     break;
                                 case '8':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    status = statusBadgeWithDownload('Dibayar', 'status-dibayar', url);
                                     break;
                                 case '9':
-                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    status = statusBadge('Batal', 'status-batal');
                                     break;
                                 case '10':
-                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    status = statusBadge('Berhenti', 'status-batal');
                                     break;    
                                 default:
                                     status = ''; // Set empty string for unknown status values
@@ -755,77 +707,13 @@
                     { 
                         data: 'smoku.nama', 
                         render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
+                            return formatNama(data);
                         }
                     },
                     { 
                         data: 'akademik.nama_kursus',
                         render: function(data, type, row) {
-                            // Check if data is null
-                            if (data === null) {
-                                return ''; // Return an empty string or any other placeholder value
-                            }
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (word.includes('(') && word.includes(')')) {
-                                    // Retain the original casing of words within brackets
-                                    // Extract the content within the brackets
-                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                    // Capitalize the first letter of the content within brackets
-                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                    // Replace the content within brackets with the capitalized version
-                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-
-
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_kursus = words.join(' ');
-
-                            return formatted_kursus;
+                            return data || '';
                         }
                     }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
@@ -881,44 +769,38 @@
                             // Define the button HTML based on the status value
                             switch (data) {
                                 case '1':
-                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    status = statusBadge('Deraf', 'status-info');
                                     break;
                                 case '2':
-                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    status = statusBadge('Baharu', 'status-baharu');
                                     break;
                                 case '3':
-                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    status = statusBadge('Sedang Disaring', 'status-saringan');
                                     break;
                                 case '4':
-                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    status = statusBadge('Disokong', 'status-disokong');
                                     break;
                                 case '5':
-                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    status = statusBadge('Dikembalikan', 'status-dikembalikan');
                                     break;
                                     case '6':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    status = statusBadgeWithDownload('Layak', 'status-layak', url);
                                     break;
                                 case '7':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    status = statusBadge('Tidak Layak', 'status-tidak-layak');
                                     break;
                                 case '8':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    status = statusBadgeWithDownload('Dibayar', 'status-dibayar', url);
                                     break;
                                 case '9':
-                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    status = statusBadge('Batal', 'status-batal');
                                     break;
                                 case '10':
-                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    status = statusBadge('Berhenti', 'status-batal');
                                     break;    
                                 default:
                                     status = ''; // Set empty string for unknown status values
@@ -960,77 +842,13 @@
                     { 
                         data: 'smoku.nama', 
                         render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
+                            return formatNama(data);
                         }
                     },
                     { 
                         data: 'akademik.nama_kursus',
                         render: function(data, type, row) {
-                            // Check if data is null
-                            if (data === null) {
-                                return ''; // Return an empty string or any other placeholder value
-                            }
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (word.includes('(') && word.includes(')')) {
-                                    // Retain the original casing of words within brackets
-                                    // Extract the content within the brackets
-                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                    // Capitalize the first letter of the content within brackets
-                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                    // Replace the content within brackets with the capitalized version
-                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-
-
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_kursus = words.join(' ');
-
-                            return formatted_kursus;
+                            return data || '';
                         }
                     }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
@@ -1086,44 +904,38 @@
                             // Define the button HTML based on the status value
                             switch (data) {
                                 case '1':
-                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    status = statusBadge('Deraf', 'status-info');
                                     break;
                                 case '2':
-                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    status = statusBadge('Baharu', 'status-baharu');
                                     break;
                                 case '3':
-                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    status = statusBadge('Sedang Disaring', 'status-saringan');
                                     break;
                                 case '4':
-                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    status = statusBadge('Disokong', 'status-disokong');
                                     break;
                                 case '5':
-                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    status = statusBadge('Dikembalikan', 'status-dikembalikan');
                                     break;
                                     case '6':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    status = statusBadgeWithDownload('Layak', 'status-layak', url);
                                     break;
                                 case '7':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    status = statusBadge('Tidak Layak', 'status-tidak-layak');
                                     break;
                                 case '8':
                                     var route = "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    status = statusBadgeWithDownload('Dibayar', 'status-dibayar', url);
                                     break;
                                 case '9':
-                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    status = statusBadge('Batal', 'status-batal');
                                     break;
                                 case '10':
-                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    status = statusBadge('Berhenti', 'status-batal');
                                     break;    
                                 default:
                                     status = ''; // Set empty string for unknown status values
@@ -1165,78 +977,13 @@
                     { 
                         data: 'smoku.nama', 
                         render: function(data, type, row) {
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['bin', 'binti'];
-                            var conjunctions_upper = ['A/L', 'A/P'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                    // Convert the word to uppercase
-                                    words[i] = word.toUpperCase();
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_nama = words.join(' ');
-
-                            return formatted_nama;
+                            return formatNama(data);
                         }
                     },
                     { 
                         data: 'akademik.nama_kursus',
                         render: function(data, type, row) {
-                            // Check if data is null
-                            if (data === null) {
-                                return ''; // Return an empty string or any other placeholder value
-                            }
-
-                            // Define conjunctions to be handled differently
-                            var conjunctions_lower = ['of', 'in', 'with', 'and'];
-
-                            // Split the nama field into words
-                            var words = data.split(' ');
-
-                            // Process each word
-                            for (var i = 0; i < words.length; i++) {
-                                var word = words[i];
-
-                                // Check if the word is a conjunction to be displayed in lowercase
-                                if (conjunctions_lower.includes(word.toLowerCase())) {
-                                    // Convert the word to lowercase
-                                    words[i] = word.toLowerCase();
-                                } else if (word.includes('(') && word.includes(')')) {
-                                    // Retain the original casing of words within brackets
-                                    // Extract the content within the brackets
-                                    var contentWithinBrackets = word.substring(word.indexOf('(') + 1, word.indexOf(')'));
-                                    // Capitalize the first letter of the content within brackets
-                                    var capitalizedContent = contentWithinBrackets.charAt(0).toUpperCase() + contentWithinBrackets.slice(1).toLowerCase();
-                                    // Replace the content within brackets with the capitalized version
-                                    words[i] = word.replace(contentWithinBrackets, capitalizedContent);
-                                } else {
-                                    // Capitalize the first letter of other words
-                                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                                }
-
-
-                            }
-
-                            // Join the words back into a single string
-                            var formatted_kursus = words.join(' ');
-
-                            return formatted_kursus;
+                            return data || '';
                         }
                     }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
@@ -1292,44 +1039,38 @@
                             // Define the button HTML based on the status value
                             switch (data) {
                                 case '1':
-                                    status = '<button class="btn bg-info text-white">Deraf</button>';
+                                    status = statusBadge('Deraf', 'status-info');
                                     break;
                                 case '2':
-                                    status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                    status = statusBadge('Baharu', 'status-baharu');
                                     break;
                                 case '3':
-                                    status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                    status = statusBadge('Sedang Disaring', 'status-saringan');
                                     break;
                                 case '4':
-                                    status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                    status = statusBadge('Disokong', 'status-disokong');
                                     break;
                                 case '5':
-                                    status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                    status = statusBadge('Dikembalikan', 'status-dikembalikan');
                                     break;
                                     case '6':
                                     var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-success btn-round btn-sm custom-width-btn text-white">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Lulus</button>';
+                                    status = statusBadgeWithDownload('Layak', 'status-layak', url);
                                     break;
                                 case '7':
-                                    status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                    status = statusBadge('Tidak Layak', 'status-tidak-layak');
                                     break;
                                 case '8':
                                     var route = "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}";
                                     var url = route.replace(':permohonanId', row.id);
-                                    status = '<a href="' + url + '" class="btn bg-dibayar btn-round btn-sm custom-width-btn">' +
-                                                '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar' +
-                                            '</a>';
-                                    // status = '<button class="btn bg-danger text-white">Dibayar</button>';
+                                    status = statusBadgeWithDownload('Dibayar', 'status-dibayar', url);
                                     break;
                                 case '9':
-                                    status = '<button class="btn bg-batal text-white">Batal</button>';
+                                    status = statusBadge('Batal', 'status-batal');
                                     break;
                                 case '10':
-                                    status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                    status = statusBadge('Berhenti', 'status-batal');
                                     break;    
                                 default:
                                     status = ''; // Set empty string for unknown status values
@@ -1419,44 +1160,17 @@
     <script>
         function applyFilter() 
         {
-            // Reinitialize DataTables
-            initDataTable('#sortTable1', 'datatable1');
-            initDataTable('#sortTable2', 'datatable2');
-            initDataTable('#sortTable3', 'datatable3');
-            initDataTable('#sortTable4', 'datatable4');
-            initDataTable('#sortTable5', 'datatable5');
+            var selectedInstitusi = $('[name="institusi"]').val();
+            var activeTable = $('.tab-pane.active table.dataTable').attr('id');
 
-            function initDataTable(tableId, variableName) {
-                // Check if the datatable is already initialized
-                if ($.fn.DataTable.isDataTable(tableId)) {
-                    // Destroy the existing DataTable instance
-                    $(tableId).DataTable().destroy();
-                }
-
-                // Initialize the datatable and assign it to the global variable
-                window[variableName] = $(tableId).DataTable({
-                    ordering: true, // Enable manual sorting
-                    order: [], // Disable initial sorting
-                    language: {
-                        url: "/assets/lang/Malay.json"
-                    },
-                    columnDefs: [
-                        { orderable: false, targets: [0] }
-                    ]
-                });
+            if (!activeTable || !$.fn.DataTable.isDataTable('#' + activeTable)) {
+                return;
             }
 
-            var selectedInstitusi = $('[name="institusi"]').val();
-
-            // Apply search filter and log data for all tables
-            applyAndLogFilter('Table 1', datatable1, selectedInstitusi);
-            applyAndLogFilter('Table 2', datatable2, selectedInstitusi);
-            applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
-            applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
-            applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
+            applyAndLogFilter($('#' + activeTable).DataTable(), selectedInstitusi);
         }
 
-        function applyAndLogFilter(tableName, table, filterValue) {
+        function applyAndLogFilter(table, filterValue) {
             // Apply search filter to the table
             table.column(3).search(filterValue).draw();
 
