@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\Penyaluran;
+use App\Exports\SaringanPermohonanExport;
 use App\Mail\SaringanMail;
 use App\Models\Akademik;
 use App\Models\ButiranPelajar;
@@ -323,6 +324,17 @@ class SaringanController extends Controller
 
         return response()->json($permohonan);
 
+    }
+
+    public function cetakSenaraiSaringanExcel(Request $request, $programCode)
+    {
+        $institusi = $request->input('institusi');
+        $programName = $programCode === 'ALL' ? 'RANKING_GAJI' : $programCode;
+
+        return Excel::download(
+            new SaringanPermohonanExport($programCode, $institusi),
+            'Senarai_Saringan_Permohonan_' . $programName . '.xlsx'
+        );
     }
 
     public function maklumatPermohonan($id)

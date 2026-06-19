@@ -279,6 +279,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         //Permohonan - Sekretariat - Saringan
         Route::get('permohonan/sekretariat/saringan/senarai-permohonan', [SaringanController::class, 'senaraiPermohonan'])->name('senarai.permohonan');
+        Route::get('permohonan/sekretariat/saringan/senarai-excel/{programCode}', [SaringanController::class, 'cetakSenaraiSaringanExcel'])->name('senarai.permohonan.saringan.excel');
         Route::get('permohonan/sekretariat/saringan/senarai/BKOKUUA', [SaringanController::class, 'getSenaraiPermohonanBKOKUUA'])->name('senarai.permohonan.BKOKUUA');
         Route::get('permohonan/sekretariat/saringan/senarai/BKOKUPOLI', [SaringanController::class, 'getSenaraiPermohonanBKOKUPOLI'])->name('senarai.permohonan.BKOKUPOLI');
         Route::get('permohonan/sekretariat/saringan/senarai/BKOKUKK', [SaringanController::class, 'getSenaraiPermohonanBKOKUKK'])->name('senarai.permohonan.BKOKUKK');

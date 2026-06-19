@@ -196,9 +196,6 @@
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 fv-row none-container"> 
-                                                
-                                            </div>
                                             <div class="col-md-2 fv-row">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
@@ -208,6 +205,11 @@
                                                     </i>
                                                 </button>
                                                 <!--end::Actions-->
+                                            </div>
+                                            <div class="col-md-2 fv-row">
+                                                <a id="exportSaringanExcel" href="{{ route('senarai.permohonan.saringan.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round" style="font-size:12px; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> BKOKU UA
+                                                </a>
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -1496,6 +1498,7 @@
 
                 $('#institusiDropdown').on('change', function () {
                     localStorage.setItem('selectedInstitusi_permohonan', $(this).val());
+                    updateSaringanExportLink();
                 });
 
                 // Function to clear filters for all tables
@@ -1547,6 +1550,7 @@
                         // The saved institution is not in this category → clear it
                         $('#institusiDropdown').val("");
                     }
+                    updateSaringanExportLink();
                 }
 
 
@@ -1586,11 +1590,13 @@
                             initializeDataTable6();
                             break;    
                     }
+                    updateSaringanExportLink(activeTabId);
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
                 updateInstitusiDropdown(bkokuUAList);
                 initializeDataTable4(); // Initialize DataTable1 on page load
+                updateSaringanExportLink();
 
             });
         </script>
@@ -1608,6 +1614,7 @@
                 filterTable('#sortTable4', selectedInstitusi);
                 filterTable('#sortTable5', selectedInstitusi);
                 filterTable('#sortTable6', selectedInstitusi);
+                updateSaringanExportLink();
             }
 
             function filterTable(tableSelector, filterValue) {
@@ -1616,6 +1623,30 @@
                     table.column(2).search(filterValue).draw();
                     table.page(0).draw(false);
                 }
+            }
+
+            function updateSaringanExportLink(activeTabId)
+            {
+                activeTabId = activeTabId || $('.nav-link.active').attr('id') || 'bkokuUA-tab';
+                var programMap = {
+                    'bkokuUA-tab': { code: 'UA', label: 'BKOKU UA' },
+                    'bkokuPOLI-tab': { code: 'POLI', label: 'BKOKU POLI' },
+                    'bkokuKK-tab': { code: 'KK', label: 'BKOKU KK' },
+                    'bkokuIPTS-tab': { code: 'IPTS', label: 'BKOKU IPTS' },
+                    'ppk-tab': { code: 'PPK', label: 'PPK' },
+                    'gaji-tab': { code: 'ALL', label: 'RANKING GAJI' }
+                };
+                var selectedProgram = programMap[activeTabId] || programMap['bkokuUA-tab'];
+                var exportUrl = "{{ route('senarai.permohonan.saringan.excel', ['programCode' => '__PROGRAM__']) }}".replace('__PROGRAM__', selectedProgram.code);
+                var selectedInstitusi = $('#institusiDropdown').val() || '';
+
+                if (selectedInstitusi) {
+                    exportUrl += '?institusi=' + encodeURIComponent(selectedInstitusi);
+                }
+
+                $('#exportSaringanExcel')
+                    .attr('href', exportUrl)
+                    .html('<i class="fa fa-file-excel" style="color: black;"></i><span>' + selectedProgram.label + '</span>');
             }
         </script>
 
