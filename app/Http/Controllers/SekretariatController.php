@@ -1790,284 +1790,121 @@ class SekretariatController extends Controller
 
     public function cetakKeputusanPermohonanIPTS(Request $request)
     {
-        set_time_limit(1200);
-        // Retrieve filter parameters from the request
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
-        $status = $request->query('status');
-        $institusi = $request->query('institusi');
+        $permohonan = $this->getKeputusanPermohonanPdfData($request, 'BKOKU', 'IPTS');
 
-        $query = Kelulusan::where('bk_info_institusi.jenis_institusi', '=', 'IPTS')
-            ->where('permohonan.program', '=', 'BKOKU')
-            ->join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-            ->when(!empty($status), function ($q) use ($status) {
-                return $q->where('permohonan_kelulusan.keputusan', $status);
-            })
-            ->when(!empty($institusi), function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.nama_institusi', $institusi);
-            })
-            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
-
-        $permohonan = $query->get();
-        //  dd($permohonan);
-
-        // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_IPTS_pdf', compact('permohonan'))->render();
-        
-        // Create Dompdf options
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $options->set('chroot', public_path());
-    
-        // Create Dompdf instance with options
-        $pdf = new Dompdf($options);
-    
-        // Load HTML into Dompdf
-        $pdf->loadHtml($html);
-    
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'landscape');
-    
-        // Render the PDF
-        $pdf->render();
-    
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-    
-        // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-    
-        // Save the PDF to a file or stream it
-        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-IPTS.pdf');
+        return $this->streamKeputusanPermohonanPdf(
+            'permohonan.sekretariat.keputusan.senarai_keputusan_IPTS_pdf',
+            $permohonan,
+            'Senarai-Keputusan-Permohonan-BKOKU-IPTS.pdf'
+        );
     }
 
     public function cetakKeputusanPermohonanPOLI(Request $request)
     {
-        set_time_limit(1200);
-        // Retrieve filter parameters from the request
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
-        $status = $request->query('status');
-        $institusi = $request->query('institusi');
+        $permohonan = $this->getKeputusanPermohonanPdfData($request, 'BKOKU', 'P');
 
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-            ->when(!empty($status), function ($q) use ($status) {
-                return $q->where('permohonan_kelulusan.keputusan', $status);
-            })
-            ->when(!empty($institusi), function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.nama_institusi', $institusi);
-            })
-            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
-
-        $permohonan = $query->get();
-        
-        // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_POLI_pdf', compact('permohonan'))->render();
-        
-        
-        // Create Dompdf options
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $options->set('chroot', public_path());
-    
-        // Create Dompdf instance with options
-        $pdf = new Dompdf($options);
-    
-        // Load HTML into Dompdf
-        $pdf->loadHtml($html);
-    
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'landscape');
-    
-        // Render the PDF
-        $pdf->render();
-    
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-    
-        // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-    
-        // Save the PDF to a file or stream it
-        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-POLI.pdf');
+        return $this->streamKeputusanPermohonanPdf(
+            'permohonan.sekretariat.keputusan.senarai_keputusan_POLI_pdf',
+            $permohonan,
+            'Senarai-Keputusan-Permohonan-BKOKU-POLI.pdf'
+        );
     }
 
     public function cetakKeputusanPermohonanKK(Request $request)
     {
-        set_time_limit(1200);
-        // Retrieve filter parameters from the request
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
-        $status = $request->query('status');
-        $institusi = $request->query('institusi');
+        $permohonan = $this->getKeputusanPermohonanPdfData($request, 'BKOKU', 'KK');
 
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when(!empty($startDate) && !empty($endDate), function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-            ->when(!empty($status), function ($q) use ($status) {
-                return $q->where('permohonan_kelulusan.keputusan', $status);
-            })
-            ->when(!empty($institusi), function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.nama_institusi', $institusi);
-            })
-            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
-
-        $permohonan = $query->get();
-
-        // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_KK_pdf', compact('permohonan'))->render();
-        
-        // Create Dompdf options
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $options->set('chroot', public_path());
-    
-        // Create Dompdf instance with options
-        $pdf = new Dompdf($options);
-    
-        // Load HTML into Dompdf
-        $pdf->loadHtml($html);
-    
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'landscape');
-    
-        // Render the PDF
-        $pdf->render();
-    
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-    
-        // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-    
-        // Save the PDF to a file or stream it
-        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
+        return $this->streamKeputusanPermohonanPdf(
+            'permohonan.sekretariat.keputusan.senarai_keputusan_KK_pdf',
+            $permohonan,
+            'Senarai-Keputusan-Permohonan-BKOKU-KK.pdf'
+        );
     }
 
     public function cetakKeputusanPermohonanUA(Request $request)
     {
-        set_time_limit(1200);
-        // Retrieve filter parameters from the request
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
-        $status = $request->query('status');
-        $institusi = $request->query('institusi');
+        $permohonan = $this->getKeputusanPermohonanPdfData($request, 'BKOKU', 'UA');
 
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-            ->when($status, function ($q) use ($status) {
-                return $q->where('permohonan_kelulusan.keputusan', $status);
-            })
-            ->when($institusi, function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.nama_institusi', $institusi);
-            })
-            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
-
-        $permohonan = $query->get();
-
-        // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf', compact('permohonan'))->render();
-        
-        // Create Dompdf options
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
-        $options->set('chroot', public_path());
-    
-        // Create Dompdf instance with options
-        $pdf = new Dompdf($options);
-    
-        // Load HTML into Dompdf
-        $pdf->loadHtml($html);
-    
-        // Set paper size and orientation
-        $pdf->setPaper('A4', 'landscape');
-    
-        // Render the PDF
-        $pdf->render();
-    
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-    
-        // Add page numbers using CSS
-        $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
-    
-        return $pdf->stream('Senarai-Keputusan-Permohonan-BKOKU-UA.pdf');
+        return $this->streamKeputusanPermohonanPdf(
+            'permohonan.sekretariat.keputusan.senarai_keputusan_BKOKU_UA_pdf',
+            $permohonan,
+            'Senarai-Keputusan-Permohonan-BKOKU-UA.pdf'
+        );
     }
 
     public function cetakKeputusanPermohonanPPK(Request $request)
     {
-        set_time_limit(1200);
-        // Retrieve filter parameters from the request
+        $permohonan = $this->getKeputusanPermohonanPdfData($request, 'PPK');
+
+        return $this->streamKeputusanPermohonanPdf(
+            'permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf',
+            $permohonan,
+            'Senarai-Keputusan-Permohonan-PPK.pdf'
+        );
+    }
+
+    private function getKeputusanPermohonanPdfData(Request $request, string $program, ?string $jenisInstitusi = null)
+    {
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
         $status = $request->query('status');
         $institusi = $request->query('institusi');
-        
-        $query = Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->leftJoin('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-            ->when($startDate && $endDate, function ($q) use ($startDate, $endDate) {
-                return $q->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
-            })
-            ->when($status, function ($q) use ($status) {
-                return $q->where('permohonan_kelulusan.keputusan', $status);
-            })
-            ->when($institusi, function ($q) use ($institusi) {
-                return $q->where('bk_info_institusi.nama_institusi', $institusi);
-            })
-            ->orderBy('permohonan_kelulusan.updated_at', 'desc');
 
-        $permohonan = $query->get();
-        
-        // Load your HTML content
-        $html = view('permohonan.sekretariat.keputusan.senarai_keputusan_PPK_pdf', compact('permohonan'))->render();
-        
-        // Create Dompdf options
+        return Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
+            ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
+            ->leftJoin('smoku_akademik', function ($join) {
+                $join->on('permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                    ->whereRaw("smoku_akademik.peringkat_pengajian = SUBSTRING_INDEX(SUBSTRING_INDEX(permohonan.no_rujukan_permohonan, '/', 2), '/', -1)");
+            })
+            ->leftJoin('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
+            ->leftJoin('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
+            ->where('permohonan.program', $program)
+            ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
+                return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+            })
+            ->when(!empty($startDate) && !empty($endDate), function ($query) use ($startDate, $endDate) {
+                return $query->whereBetween('permohonan_kelulusan.tarikh_mesyuarat', [$startDate, $endDate]);
+            })
+            ->when(!empty($status), function ($query) use ($status) {
+                return $query->where('permohonan_kelulusan.keputusan', $status);
+            })
+            ->when(!empty($institusi), function ($query) use ($institusi) {
+                return $query->where('bk_info_institusi.nama_institusi', $institusi);
+            })
+            ->orderBy('bk_info_institusi.nama_institusi')
+            ->orderBy('smoku.nama')
+            ->select([
+                'permohonan_kelulusan.no_mesyuarat',
+                'permohonan_kelulusan.tarikh_mesyuarat',
+                'permohonan_kelulusan.keputusan',
+                'permohonan.no_rujukan_permohonan',
+                'smoku.nama',
+                'bk_info_institusi.nama_institusi',
+                'bk_info_institusi.jenis_institusi',
+                'bk_peringkat_pengajian.peringkat as nama_peringkat',
+            ])
+            ->get();
+    }
+
+    private function streamKeputusanPermohonanPdf(string $view, $permohonan, string $filename)
+    {
+        set_time_limit(1200);
+
+        $html = view($view, compact('permohonan'))->render();
+
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
-        $options->set('isPhpEnabled', true);
+        $options->set('isPhpEnabled', false);
+        $options->set('isFontSubsettingEnabled', true);
         $options->set('chroot', public_path());
-    
-        // Create Dompdf instance with options
+
         $pdf = new Dompdf($options);
-    
-        // Load HTML into Dompdf
         $pdf->loadHtml($html);
-    
-        // Set paper size and orientation
         $pdf->setPaper('A4', 'landscape');
-    
-        // Render the PDF
         $pdf->render();
-    
-        // Get the total number of pages
-        $totalPages = $pdf->getCanvas()->get_page_count();
-    
-        // Add page numbers using CSS
         $pdf->getCanvas()->page_text(400, 570, "{PAGE_NUM} - {PAGE_COUNT}", null, 10);
 
-        return $pdf->stream('Senarai-Keputusan-Permohonan-PPK.pdf');
+        return $pdf->stream($filename);
     }
 
     public function muatTurunSuratTawaran($permohonanId)

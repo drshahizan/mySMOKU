@@ -3,12 +3,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Senarai Permohonan BKOKU Layak</title>
-        <link rel="stylesheet" href="assets/css/style.bundle.css">
-        <link rel="stylesheet" href="assets/css/saringan.css">
         <style>
+            *{
+                box-sizing: border-box;
+            }
             table{
                 border: 1px solid black!important;
                 width: 100%;
+                border-collapse: collapse;
             }
             th{
                 padding-top: 6px!important;
@@ -21,11 +23,19 @@
             }
             body{
                 font-size: 11px!important;
+                font-family: Arial, Helvetica, sans-serif;
             }
             td{
                 vertical-align: top!important;
+                padding: 6px!important;
                 padding-bottom: 6px!important;
                 text-transform:capitalize;
+            }
+            .text-center{
+                text-align: center;
+            }
+            .table-striped tbody tr:nth-child(odd){
+                background-color: #f5f5f5;
             }
             td:first-line {
                 text-transform: capitalize;
@@ -82,7 +92,13 @@
             </div>
 
             {{-- Table --}}
-            <table class="table table-striped page-break-table" style="padding-top: 10px; padding-bottom: 20px;">
+            @php
+                $i = 1;
+                require_once app_path('helpers.php'); 
+            @endphp
+
+            @foreach ($permohonan->chunk(100) as $chunkIndex => $permohonanChunk)
+            <table class="table table-striped page-break-table" style="padding-top: 10px; padding-bottom: 20px; @if($chunkIndex > 0) page-break-before: always; @endif">
                 <thead>
                     <tr style="color: white; background-color: #3d0066;">
                         <th style="width: 3%" class="text-center no-sort"><b>No.</b></th>
@@ -96,28 +112,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $i = 1;
-                        require_once app_path('helpers.php'); 
-                    @endphp
-
-                    @foreach ($permohonan as $item)
+                    @foreach ($permohonanChunk as $item)
                         @php
-                            $no_rujukan_permohonan = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('no_rujukan_permohonan');
-                            $nama = DB::table('permohonan')->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')->where('permohonan.id', $item['permohonan_id'])->value('smoku.nama');
-                            $program = DB::table('permohonan')->where('id',$item['permohonan_id'])->value('program');
-                            $jenis_institusi = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                                ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                                ->where('permohonan.id', $item['permohonan_id'])
-                                                                ->value('bk_info_institusi.jenis_institusi');
-
-                            //peringkat pengajian
-                            preg_match('/\/(\d+)\//', $no_rujukan_permohonan, $matches); // Extract peringkat pengajian value using regular expression
-                            $peringkat_pengajian = isset($matches[1]) ? $matches[1] : null; // $matches[1] will contain the extracted peringkat pengajian value
-                            $nama_peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $peringkat_pengajian)->value('peringkat');
-
-                            //nama pemohon
-                            $text = ucwords(strtolower($nama));
+                            $text = ucwords(strtolower($item->nama ?? ''));
                             $conjunctions = ['bin', 'binti'];
                             $words = explode(' ', $text);
                             $result = [];
@@ -130,48 +127,39 @@
                             }
                             $pemohon = implode(' ', $result);
 
-                            //institusi pengajian
-                            $institusi_pengajian = DB::table('permohonan')->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
-                                                    ->join('bk_info_institusi', 'smoku_akademik.id_institusi', '=', 'bk_info_institusi.id_institusi')
-                                                    ->where('permohonan.id', $item['permohonan_id'])
-                                                    ->value('bk_info_institusi.nama_institusi');
-
-                            $text3 = ucwords(strtolower($institusi_pengajian)); 
-                                $conjunctions = ['of', 'in', 'and'];
-                                $words = explode(' ', $text3);
-                                $result = [];
-                                foreach ($words as $word) {
-                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                        $result[] = Str::lower($word);
-                                    } else {
-                                        $result[] = $word;
-                                    }
+                            $text3 = ucwords(strtolower($item->nama_institusi ?? '')); 
+                            $conjunctions = ['of', 'in', 'and'];
+                            $words = explode(' ', $text3);
+                            $result = [];
+                            foreach ($words as $word) {
+                                if (in_array(Str::lower($word), $conjunctions)) {
+                                    $result[] = Str::lower($word);
+                                } else {
+                                    $result[] = $word;
                                 }
+                            }
                             $institusi = implode(' ', $result);
                             $nama_institusi = transformBracketsToUppercase($institusi);
                         @endphp
 
-                        @if($program == "BKOKU")
-                            @if ($jenis_institusi == "P")
-                                <tr>
-                                    <td class="text-center">{{$i++}}</td>
-                                    <td>{{$no_rujukan_permohonan}}</td>
-                                    <td>{{$pemohon}}</td>
-                                    <td>{{$nama_institusi}}</td>
-                                    <td class="text-center">{{ucwords(strtolower($nama_peringkat))}}</td>
-                                    <td class="text-center">{{$item->no_mesyuarat}}</td>
-                                    <td class="text-center">{{ $item->tarikh_mesyuarat ? date('d/m/Y', strtotime($item->tarikh_mesyuarat)) : '' }}</td>
-                                    @if($item->keputusan == "Lulus")
-                                        <td class="text-center">Layak</td>
-                                    @elseif($item->keputusan == "Tidak Lulus")
-                                        <td class="text-center">Tidak Layak</td>
-                                    @endif
-                                </tr>
+                        <tr>
+                            <td class="text-center">{{$i++}}</td>
+                            <td>{{$item->no_rujukan_permohonan}}</td>
+                            <td>{{$pemohon}}</td>
+                            <td>{{$nama_institusi}}</td>
+                            <td class="text-center">{{ucwords(strtolower($item->nama_peringkat ?? ''))}}</td>
+                            <td class="text-center">{{$item->no_mesyuarat}}</td>
+                            <td class="text-center">{{ $item->tarikh_mesyuarat ? date('d/m/Y', strtotime($item->tarikh_mesyuarat)) : '' }}</td>
+                            @if($item->keputusan == "Lulus")
+                                <td class="text-center">Layak</td>
+                            @elseif($item->keputusan == "Tidak Lulus")
+                                <td class="text-center">Tidak Layak</td>
                             @endif
-                        @endif
+                        </tr>
                     @endforeach            
                 </tbody>
             </table>
+            @endforeach
         </div>
 
         {{-- <script>
