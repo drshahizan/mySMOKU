@@ -111,7 +111,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     
                     ->orderBy('tarikh_hantar', 'desc')
@@ -150,7 +150,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->orderBy('tarikh_hantar', 'desc')
                     ->get();
@@ -188,7 +188,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->orderBy('tarikh_hantar', 'desc')
                     ->get();
@@ -226,7 +226,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->orderBy('tarikh_hantar', 'desc')
                     ->get();
@@ -261,7 +261,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->orderBy('tarikh_hantar', 'desc')
                     ->get();
@@ -298,7 +298,7 @@ class SaringanController extends Controller
                     ->whereIn('status', ['2','3'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
                     ->join('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
                     ->select('permohonan.*', 'smoku_waris.pendapatan_waris')

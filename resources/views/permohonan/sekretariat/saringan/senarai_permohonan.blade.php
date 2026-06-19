@@ -27,6 +27,50 @@
                     margin-left: 10px !important; 
             }
 
+            #sortTable1 th:nth-child(2),
+            #sortTable1 td:nth-child(2),
+            #sortTable2 th:nth-child(2),
+            #sortTable2 td:nth-child(2),
+            #sortTable3 th:nth-child(2),
+            #sortTable3 td:nth-child(2),
+            #sortTable4 th:nth-child(2),
+            #sortTable4 td:nth-child(2),
+            #sortTable5 th:nth-child(2),
+            #sortTable5 td:nth-child(2),
+            #sortTable6 th:nth-child(2),
+            #sortTable6 td:nth-child(2) {
+                min-width: 220px;
+            }
+
+            #sortTable1 .status-pill,
+            #sortTable2 .status-pill,
+            #sortTable3 .status-pill,
+            #sortTable4 .status-pill,
+            #sortTable5 .status-pill,
+            #sortTable6 .status-pill {
+                align-items: center;
+                border-radius: 8px;
+                color: #fff;
+                display: inline-flex;
+                font-weight: 700;
+                justify-content: center;
+                min-height: 34px;
+                padding: 8px 14px;
+                text-align: center;
+                white-space: nowrap;
+                width: 156px;
+            }
+
+            .status-deraf { background-color: #7239ea; }
+            .status-baharu { background-color: #1f73e8; }
+            .status-sedang-disaring { background-color: #f1bc00; }
+            .status-disokong { background-color: #ffb800; }
+            .status-dikembalikan { background-color: #e65f4f; }
+            .status-layak { background-color: #50cd89; }
+            .status-tidak-layak { background-color: #f1416c; }
+            .status-dibayar { background-color: #10a4ad; }
+            .status-batal { background-color: #6c757d; }
+
             @media (max-width: 768px) {
                 .nav-tabs {
                     display: flex;
@@ -241,6 +285,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -262,6 +307,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -283,6 +329,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -304,6 +351,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -325,6 +373,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -346,6 +395,7 @@
                                                     <th><b>ID Permohonan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Permohonan</b></th>
                                                     <th><b>Pendapatan Isi Rumah</b></th>
                                                     <th><b>Status Saringan</b></th>
@@ -423,7 +473,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -447,7 +497,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -458,6 +512,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -488,34 +548,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -548,7 +608,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -606,7 +670,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -630,7 +694,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -641,6 +709,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -671,34 +745,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -731,7 +805,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -789,7 +867,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -813,7 +891,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -824,6 +906,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -854,34 +942,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -914,7 +1002,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -973,7 +1065,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -997,7 +1089,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1008,6 +1104,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -1038,34 +1140,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1098,7 +1200,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1156,7 +1262,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -1180,7 +1286,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1191,6 +1301,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -1221,34 +1337,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1281,7 +1397,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1339,7 +1459,7 @@
                                         return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                                     }
                                 }
-                            }, 
+                            },
                             { 
                                 data: 'smoku.nama', 
                                 render: function(data, type, row) {
@@ -1363,7 +1483,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1374,6 +1498,12 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -1414,34 +1544,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = '<span class="status-pill status-deraf">Deraf</span>';
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = '<span class="status-pill status-baharu">Baharu</span>';
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = '<span class="status-pill status-disokong">Disokong</span>';
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = '<span class="status-pill status-layak">Layak</span>';
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = '<span class="status-pill status-dibayar">Dibayar</span>';
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = '<span class="status-pill status-batal">Batal</span>';
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = '<span class="status-pill status-batal">Berhenti</span>';
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1474,7 +1604,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
