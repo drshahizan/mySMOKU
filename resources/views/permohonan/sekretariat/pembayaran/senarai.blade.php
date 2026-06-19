@@ -1560,7 +1560,7 @@
 
                 // Update the export link with the selected institusi for Table 2
                 var exportLink = document.getElementById('exportLink');
-                exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + selectedInstitusi;
+                exportLink.href = "{{ route('senarai.penyaluran.excel', ['programCode' => 'BKOKU']) }}?institusi=" + encodeURIComponent(selectedInstitusi);
             }
 
             function applyAndLogFilter(tableName, table, filterValue) {

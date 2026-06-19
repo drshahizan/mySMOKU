@@ -1385,8 +1385,15 @@ class SaringanController extends Controller
     public function cetakSenaraiPenyaluranExcel(Request $request, $programCode)
     {
         $institusi = $request->input('institusi');
+        $filenameParts = ['Senarai', 'Penyaluran', $programCode];
 
-        return Excel::download(new Penyaluran($programCode, $institusi), 'SenaraiPenyaluran.xlsx');
+        if (!empty($institusi)) {
+            $filenameParts[] = preg_replace('/[^A-Za-z0-9]+/', '_', $institusi);
+        }
+
+        $filename = trim(implode('_', $filenameParts), '_') . '.xlsx';
+
+        return Excel::download(new Penyaluran($programCode, $institusi), $filename);
     }
 
     public function kemaskiniInfoCek(Request $request)
