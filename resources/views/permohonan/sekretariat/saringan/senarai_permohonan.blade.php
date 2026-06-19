@@ -619,7 +619,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
@@ -816,7 +816,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
@@ -1013,7 +1013,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
@@ -1211,7 +1211,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
@@ -1408,7 +1408,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
@@ -1615,7 +1615,7 @@
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama && formatted_nama !== 'Tiada Maklumat' ? formatted_nama : '-';
                                 }
                             }
                         ],
