@@ -13,6 +13,7 @@ use App\Exports\DrafSPBB3;
 use App\Exports\LejarPermohonan;
 use App\Exports\LejarTuntutan;
 use App\Exports\PenyaluranTuntutan;
+use App\Exports\SaringanTuntutanExport;
 use App\Exports\SenaraiPendek;
 use App\Exports\SenaraiPendekBKOKU;
 use App\Exports\SenaraiPendekPOLI;
@@ -2181,7 +2182,7 @@ class SekretariatController extends Controller
             $item->user_id = $user_id;            
 
             if ($user_id === null || in_array($item->status, [1, 2])) {
-                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+                $item->dilaksanakan_oleh_nama = "-";
             } else {
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
@@ -2225,7 +2226,7 @@ class SekretariatController extends Controller
             $item->user_id = $user_id;            
 
             if ($user_id === null || in_array($item->status, [1, 2])) {
-                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+                $item->dilaksanakan_oleh_nama = "-";
             } else {
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
@@ -2269,7 +2270,7 @@ class SekretariatController extends Controller
             $item->user_id = $user_id;            
 
             if ($user_id === null || in_array($item->status, [1, 2])) {
-                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+                $item->dilaksanakan_oleh_nama = "-";
             } else {
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
@@ -2313,7 +2314,7 @@ class SekretariatController extends Controller
             $item->user_id = $user_id;            
 
             if ($user_id === null || in_array($item->status, [1, 2])) {
-                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+                $item->dilaksanakan_oleh_nama = "-";
             } else {
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
@@ -2357,7 +2358,7 @@ class SekretariatController extends Controller
             $item->user_id = $user_id;            
 
             if ($user_id === null || in_array($item->status, [1, 2])) {
-                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+                $item->dilaksanakan_oleh_nama = "-";
             } else {
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
@@ -2365,6 +2366,17 @@ class SekretariatController extends Controller
 
         return response()->json($tuntutan);
 
+    }
+
+    public function cetakSenaraiSaringanTuntutanExcel(Request $request, $programCode)
+    {
+        $institusi = $request->input('institusi');
+        $programName = $programCode === 'PPK' ? 'PPK' : 'BKOKU_' . $programCode;
+
+        return Excel::download(
+            new SaringanTuntutanExport($programCode, $institusi),
+            'Senarai_Saringan_Tuntutan_' . $programName . '.xlsx'
+        );
     }
 
     public function keputusanPeperiksaan($id)

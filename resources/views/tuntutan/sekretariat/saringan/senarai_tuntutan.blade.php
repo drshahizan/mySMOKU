@@ -26,6 +26,27 @@
             .form-select {
                     margin-left: 10px !important; 
             }
+            .status-pill {
+                align-items: center;
+                border-radius: 8px;
+                color: #fff;
+                display: inline-flex;
+                font-weight: 700;
+                justify-content: center;
+                min-height: 34px;
+                padding: 6px 12px;
+                text-decoration: none;
+                width: 156px;
+            }
+            .status-info { background-color: #7239ea; }
+            .status-baharu { background-color: #1f73e8; }
+            .status-saringan { background-color: #17a2b8; }
+            .status-disokong { background-color: #ffc107; }
+            .status-dikembalikan { background-color: #e65f4f; }
+            .status-layak { background-color: #50cd89; }
+            .status-tidak-layak { background-color: #f1416c; }
+            .status-dibayar { background-color: #12a8b3; }
+            .status-batal { background-color: #6c757d; }
 
             @media (max-width: 768px) {
                 .nav-tabs {
@@ -182,16 +203,13 @@
                                     <!--begin::Content-->
                                     <div data-kt-subscription-table-filter="form">
                                         <!--begin::Input group-->
-                                        <div class="row mb-0">
-                                            <div class="col-md-8 fv-row">
+                                        <div class="d-flex align-items-center flex-wrap gap-4 mb-0">
+                                            <div class="fv-row" style="min-width: 450px;">
                                                 <select id="institusiDropdown" name="institusi" class="form-select custom-width-select js-example-basic-single">
                                                     <option value="">Pilih Institusi Pengajian</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 fv-row none-container"> 
-                                                
-                                            </div>
-                                            <div class="col-md-2 fv-row">
+                                            <div class="fv-row">
                                                 <!--begin::Actions-->
                                                 <button type="submit" class="btn btn-primary fw-semibold" data-kt-menu-dismiss="true" data-kt-subscription-table-filter="filter" onclick="applyFilter()">
                                                     <i class="ki-duotone ki-filter fs-2">
@@ -201,8 +219,11 @@
                                                 </button>
                                                 <!--end::Actions-->
                                             </div>
-                                            
-                                            
+                                            <div class="fv-row">
+                                                <a id="exportSaringanTuntutanExcel" href="{{ route('senarai.tuntutan.saringan.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round" style="font-size:12px; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> BKOKU UA
+                                                </a>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         
@@ -235,6 +256,7 @@
                                                     <th><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Tuntutan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -256,6 +278,7 @@
                                                     <th><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Tuntutan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -277,6 +300,7 @@
                                                     <th><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Tuntutan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -298,6 +322,7 @@
                                                     <th><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Tuntutan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -319,6 +344,7 @@
                                                     <th><b>ID Tuntutan</b></th>
                                                     <th><b>Nama</b></th>
                                                     <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
                                                     <th><b>Tarikh Tuntutan</b></th>
                                                     <th><b>Status Saringan</b></th>
                                                     <th><b>Disaring Oleh</b></th>
@@ -343,6 +369,10 @@
         </script>
         <script>
             const currentUserId = {{ Auth::id() }};
+
+            function statusPill(label, className) {
+                return '<span class="status-pill ' + className + '">' + label + '</span>';
+            }
         </script>
         
         <script>
@@ -416,7 +446,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -427,6 +461,7 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -457,34 +492,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = statusPill('Deraf', 'status-info');
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = statusPill('Baharu', 'status-baharu');
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = statusPill('Sedang Disaring', 'status-saringan');
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = statusPill('Layak', 'status-layak');
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = statusPill('Tidak Layak', 'status-tidak-layak');
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = statusPill('Dibayar', 'status-dibayar');
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = statusPill('Batal', 'status-batal');
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = statusPill('Berhenti', 'status-batal');
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -517,14 +552,18 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama || '-';
                                 }
                             }
                         ],
@@ -600,7 +639,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -611,6 +654,7 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -641,34 +685,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = statusPill('Deraf', 'status-info');
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = statusPill('Baharu', 'status-baharu');
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = statusPill('Sedang Disaring', 'status-saringan');
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = statusPill('Layak', 'status-layak');
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = statusPill('Tidak Layak', 'status-tidak-layak');
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = statusPill('Dibayar', 'status-dibayar');
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = statusPill('Batal', 'status-batal');
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = statusPill('Berhenti', 'status-batal');
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -701,14 +745,18 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama || '-';
                                 }
                             }
                         ],
@@ -783,7 +831,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -794,6 +846,7 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -824,34 +877,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = statusPill('Deraf', 'status-info');
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = statusPill('Baharu', 'status-baharu');
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = statusPill('Sedang Disaring', 'status-saringan');
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = statusPill('Layak', 'status-layak');
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = statusPill('Tidak Layak', 'status-tidak-layak');
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = statusPill('Dibayar', 'status-dibayar');
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = statusPill('Batal', 'status-batal');
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = statusPill('Berhenti', 'status-batal');
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -884,14 +937,18 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama || '-';
                                 }
                             }
                         ],
@@ -966,7 +1023,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -977,6 +1038,7 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -1007,34 +1069,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = statusPill('Deraf', 'status-info');
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = statusPill('Baharu', 'status-baharu');
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = statusPill('Sedang Disaring', 'status-saringan');
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = statusPill('Layak', 'status-layak');
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = statusPill('Tidak Layak', 'status-tidak-layak');
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = statusPill('Dibayar', 'status-dibayar');
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = statusPill('Batal', 'status-batal');
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = statusPill('Berhenti', 'status-batal');
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1067,14 +1129,18 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama || '-';
                                 }
                             }
                         ],
@@ -1149,7 +1215,11 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
@@ -1160,6 +1230,7 @@
                                 }
                             },
                             { data: 'akademik.infoipt.nama_institusi' }, 
+                            { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                             {
                                 data: 'tarikh_hantar',
                                 render: function(data, type, row) {
@@ -1190,34 +1261,34 @@
                                     // Define the button HTML based on the status value
                                     switch (data) {
                                         case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
+                                            status = statusPill('Deraf', 'status-info');
                                             break;
                                         case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
+                                            status = statusPill('Baharu', 'status-baharu');
                                             break;
                                         case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
+                                            status = statusPill('Sedang Disaring', 'status-saringan');
                                             break;
                                         case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
+                                            status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
+                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
                                             break;
                                         case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
+                                            status = statusPill('Layak', 'status-layak');
                                             break;
                                         case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
+                                            status = statusPill('Tidak Layak', 'status-tidak-layak');
                                             break;
                                         case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
+                                            status = statusPill('Dibayar', 'status-dibayar');
                                             break;
                                         case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
+                                            status = statusPill('Batal', 'status-batal');
                                             break;
                                         case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
+                                            status = statusPill('Berhenti', 'status-batal');
                                             break;    
                                         default:
                                             status = ''; // Set empty string for unknown status values
@@ -1250,14 +1321,18 @@
                                             words[i] = word.toUpperCase();
                                         } else {
                                             // Capitalize the first letter of other words
-                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            if (word.charAt(0) === "'" && word.length > 1) {
+                                                words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                            } else {
+                                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                            }
                                         }
                                     }
 
                                     // Join the words back into a single string
                                     var formatted_nama = words.join(' ');
 
-                                    return formatted_nama ? formatted_nama : 'Tiada Maklumat';
+                                    return formatted_nama || '-';
                                 }
                             }
                         ],
@@ -1351,11 +1426,14 @@
                             initializeDataTable5();
                             break;
                     }
+
+                    updateSaringanTuntutanExportLink(activeTabId);
                 });
 
                 // Trigger the function for the default active tab (bkoku-tab)
                 updateInstitusiDropdown(bkokuUAList);
                 initializeDataTable4(); // Initialize DataTable1 on page load
+                updateSaringanTuntutanExportLink('bkokuUA-tab');
             });
         </script>
         
@@ -1370,6 +1448,7 @@
                 filterTable('#sortTable4', selectedInstitusi);
                 filterTable('#sortTable5', selectedInstitusi);
                 filterTable('#sortTable6', selectedInstitusi);
+                updateSaringanTuntutanExportLink();
             }
 
             function filterTable(tableSelector, filterValue) {
@@ -1378,6 +1457,29 @@
                     table.column(2).search(filterValue).draw();
                     table.page(0).draw(false);
                 }
+            }
+
+            function updateSaringanTuntutanExportLink(activeTabId)
+            {
+                activeTabId = activeTabId || $('.nav-link.active').attr('id') || 'bkokuUA-tab';
+                var programMap = {
+                    'bkokuUA-tab': { code: 'UA', label: 'BKOKU UA' },
+                    'bkokuPOLI-tab': { code: 'POLI', label: 'BKOKU POLI' },
+                    'bkokuKK-tab': { code: 'KK', label: 'BKOKU KK' },
+                    'bkokuIPTS-tab': { code: 'IPTS', label: 'BKOKU IPTS' },
+                    'ppk-tab': { code: 'PPK', label: 'PPK' }
+                };
+                var selectedProgram = programMap[activeTabId] || programMap['bkokuUA-tab'];
+                var exportUrl = "{{ route('senarai.tuntutan.saringan.excel', ['programCode' => '__PROGRAM__']) }}".replace('__PROGRAM__', selectedProgram.code);
+                var selectedInstitusi = $('#institusiDropdown').val() || '';
+
+                if (selectedInstitusi) {
+                    exportUrl += '?institusi=' + encodeURIComponent(selectedInstitusi);
+                }
+
+                $('#exportSaringanTuntutanExcel')
+                    .attr('href', exportUrl)
+                    .html('<i class="fa fa-file-excel" style="color: black;"></i><span>' + selectedProgram.label + '</span>');
             }
         </script>
     </body>
