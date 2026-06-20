@@ -95,7 +95,7 @@ class MaklumatESPController extends Controller
     {
         $type = strtoupper($type);
         $dokumen = match ($type) {
-            'IPTS', 'PPK' => Dokumen::where('permohonan_id', $id)->get(),
+            'UA', 'POLI', 'KK', 'IPTS', 'PPK' => Dokumen::where('permohonan_id', $id)->get(),
             default => collect(),
         };
 
