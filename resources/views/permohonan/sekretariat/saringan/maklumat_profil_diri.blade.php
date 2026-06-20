@@ -13,12 +13,12 @@
     @php
         $jantina_p = DB::table('bk_jantina')->where('kod_jantina', $smoku->jantina)->value('jantina');
         $keturunan_p = DB::table('bk_keturunan')->where('kod_keturunan', $smoku->keturunan)->value('keturunan');
-        $hubungan_w = DB::table('bk_hubungan')->where('kod_hubungan', $waris->hubungan_waris)->value('hubungan');
-        $alamat_tetap = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_tetap_negeri)->where('bk_bandar.id', $pelajar->alamat_tetap_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first();
-        $alamat_surat = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_surat_negeri)->where('bk_bandar.id', $pelajar->alamat_surat_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first();
-        $alamat_waris = DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $waris->alamat_negeri_waris)->where('bk_bandar.id', $waris->alamat_bandar_waris)->get(['bk_negeri.*','bk_bandar.*'])->first();
-        $negeri_lahir = DB::table('bk_negeri')->where('bk_negeri.id', $pelajar->negeri_lahir)->get(['bk_negeri.*'])->first();
-        $agama = DB::table('bk_agama')->where('id', $pelajar->agama)->value('agama');
+        $hubungan_w = $waris ? DB::table('bk_hubungan')->where('kod_hubungan', $waris->hubungan_waris)->value('hubungan') : null;
+        $alamat_tetap = $pelajar ? DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_tetap_negeri)->where('bk_bandar.id', $pelajar->alamat_tetap_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first() : null;
+        $alamat_surat = $pelajar ? DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $pelajar->alamat_surat_negeri)->where('bk_bandar.id', $pelajar->alamat_surat_bandar)->get(['bk_negeri.*','bk_bandar.*'])->first() : null;
+        $alamat_waris = $waris ? DB::table('bk_negeri')->join('bk_bandar','bk_bandar.negeri_id','=','bk_negeri.id')->where('bk_negeri.id', $waris->alamat_negeri_waris)->where('bk_bandar.id', $waris->alamat_bandar_waris)->get(['bk_negeri.*','bk_bandar.*'])->first() : null;
+        $negeri_lahir = $pelajar ? DB::table('bk_negeri')->where('bk_negeri.id', $pelajar->negeri_lahir)->get(['bk_negeri.*'])->first() : null;
+        $agama = $pelajar ? DB::table('bk_agama')->where('id', $pelajar->agama)->value('agama') : null;
         $kategori_oku = DB::table('bk_jenis_oku')->where('kod_oku', $smoku->kategori)->value('kecacatan');
     @endphp
     <table class="profile-form">
@@ -52,7 +52,7 @@
             <tr class="gap-left">
                 <td style="width: 16%">Negeri Lahir</td>
                 <td style="width: 2%">:</td>
-                <td>{{$negeri_lahir->negeri}}</td>
+                <td>{{ $negeri_lahir->negeri ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Umur</td>
@@ -87,12 +87,12 @@
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Tetap</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_tetap}}</td>
+                <td>{{ $pelajar->alamat_tetap ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Poskod</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_tetap_poskod}}</td>
+                <td>{{ $pelajar->alamat_tetap_poskod ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bandar</td>
@@ -107,12 +107,12 @@
             <tr class="gap-left">
                 <td style="width: 16%">Alamat Surat-menyurat</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_surat_menyurat}}</td>
+                <td>{{ $pelajar->alamat_surat_menyurat ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Poskod</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->alamat_surat_poskod}}</td>
+                <td>{{ $pelajar->alamat_surat_poskod ?? '' }}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 16%">Bandar</td>
@@ -127,13 +127,13 @@
             <tr class="gap-left">
                 <td style="width: 16%">No. Tel (HP)</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pelajar->tel_bimbit}}</td>
+                <td>{{ $pelajar->tel_bimbit ?? '' }}</td>
             </tr>
-            @if ($pelajar->tel_rumah != null)
+            @if (($pelajar->tel_rumah ?? null) != null)
                 <tr class="gap-left">
                     <td style="width: 16%">No. Tel Rumah</td>
                     <td style="width: 2%">:</td>
-                    <td>{{$pelajar->tel_rumah}}</td>
+                    <td>{{ $pelajar->tel_rumah }}</td>
                 </tr>
             @endif
             <tr class="gap-left">
@@ -144,7 +144,7 @@
             <tr class="gap-left">
                 <td class="gap-bottom" style="width: 16%">No. Akaun Bank</td>
                 <td class="gap-bottom" style="width: 2%">:</td>
-                <td class="gap-bottom">{{$pelajar->no_akaun_bank}}</td>
+                <td class="gap-bottom">{{ $pelajar->no_akaun_bank ?? '' }}</td>
             </tr>
         </div>
         <tr>
@@ -161,7 +161,7 @@
                 <td style="width: 2%">:</td>
                 <td>{{ $waris->no_kp_waris ?? '' }}</td>
             </tr>
-            @if ($waris->no_pasport_waris != null) {
+            @if (($waris->no_pasport_waris ?? null) != null) {
                 <tr class="gap-left">
                     <td style="width: 16%">No Pasport</td>
                     <td style="width: 2%">:</td>

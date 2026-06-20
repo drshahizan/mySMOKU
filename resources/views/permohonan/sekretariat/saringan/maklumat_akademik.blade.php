@@ -17,6 +17,15 @@
             $mod = DB::table('bk_mod')->where('kod_mod', $akademik->mod ?? '')->value('mod');
             $sumber_biaya = DB::table('bk_sumber_biaya')->where('kod_biaya', $akademik->sumber_biaya ?? '')->value('biaya');
             $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja ?? '')->value('penaja');
+            $formatTarikh = function ($tarikh) {
+                if (empty($tarikh)) {
+                    return '';
+                }
+
+                $timestamp = strtotime($tarikh);
+
+                return $timestamp ? date('d/m/Y', $timestamp) : '';
+            };
         @endphp
 
         <table class="profile-form">
@@ -57,13 +66,13 @@
                 <tr class="gap-left">
                     <td style="width: 16%">Tarikh Mula Pengajian</td>
                     <td style="width: 2%">:</td>
-                    <td>{{date('d/m/Y', strtotime($akademik->tarikh_mula ?? ''))}}</td>
+                    <td>{{ $formatTarikh($akademik->tarikh_mula ?? null) }}</td>
                     
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 16%">Tarikh Tamat Pengajian</td>
                     <td style="width: 2%">:</td>
-                    <td>{{date('d/m/Y', strtotime($akademik->tarikh_tamat ?? ''))}}</td>
+                    <td>{{ $formatTarikh($akademik->tarikh_tamat ?? null) }}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 16%">Semester Semasa</td>

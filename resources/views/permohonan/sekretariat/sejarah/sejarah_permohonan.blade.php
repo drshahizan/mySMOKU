@@ -57,7 +57,7 @@
             .status-baharu { background-color: #1f73e8; }
             .status-saringan { background-color: #17a2b8; }
             .status-disokong { background-color: #ffc107; color: #fff !important; }
-            .status-dikembalikan { background-color: #f59e0b; }
+            .status-dikembalikan { background-color: #e65f4f; }
             .status-layak { background-color: #50cd89; }
             .status-tidak-layak { background-color: #f1416c; }
             .status-dibayar { background-color: #12a8b3; }

@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
 <!--begin::Head-->
 <head>
     <title>{{ config('app.name', 'SistemBKOKU') }}</title>
@@ -218,4 +216,4 @@
     </div>
 </div>
 </body>
-</html>
+</x-default-layout>

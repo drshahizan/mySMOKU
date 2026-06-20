@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
 <!--begin::Head-->
 <head>
     <title>{{ config('app.name', 'SistemBKOKU') }}</title>
@@ -371,33 +370,8 @@
                                     }
                                     $pemohon = implode(' ', $result);
 
-                                    //nama kursus
-                                    $text2 = ucwords(strtolower($akademik->nama_kursus)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['of', 'in', 'and'];
-                                    $words = explode(' ', $text2);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
-                                        }
-                                    }
-                                    $kursus = implode(' ', $result);
-
-                                    //institusi pengajian
-                                    $text3 = ucwords(strtolower($nama_institusi)); // Assuming you're sending the text as a POST parameter
-                                    $conjunctions = ['of', 'in', 'and'];
-                                    $words = explode(' ', $text3);
-                                    $result = [];
-                                    foreach ($words as $word) {
-                                        if (in_array(Str::lower($word), $conjunctions)) {
-                                            $result[] = Str::lower($word);
-                                        } else {
-                                            $result[] = $word;
-                                        }
-                                    }
-                                    $institusi = implode(' ', $result);
+                                    $kursus = $akademik->nama_kursus;
+                                    $institusi = $nama_institusi;
                                 @endphp
                                 <table class="maklumat">
                                     <tr>
@@ -643,4 +617,4 @@
         </div>
     </div>
 </body>
-</html>
+</x-default-layout>

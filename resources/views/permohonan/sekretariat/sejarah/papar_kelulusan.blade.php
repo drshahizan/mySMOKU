@@ -1,3 +1,4 @@
+<x-default-layout>
 <head>
     <title>{{ config('app.name', 'SistemBKOKU') }}</title>
     <link rel="stylesheet" href="/assets/css/style.bundle.css">
@@ -144,3 +145,4 @@
     </div>
 </div>
 </body>
+</x-default-layout>
