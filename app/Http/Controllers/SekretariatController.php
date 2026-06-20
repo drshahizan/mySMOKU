@@ -1849,6 +1849,10 @@ class SekretariatController extends Controller
         $endDate = $request->query('end_date');
         $status = $request->query('status');
         $institusi = $request->query('institusi');
+        $startDate = str_contains((string) $startDate, '+') ? null : $startDate;
+        $endDate = str_contains((string) $endDate, '+') ? null : $endDate;
+        $status = str_contains((string) $status, '+') ? null : $status;
+        $institusi = str_contains((string) $institusi, '+') ? null : $institusi;
 
         return Kelulusan::join('permohonan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
             ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')

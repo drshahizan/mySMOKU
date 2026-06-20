@@ -278,10 +278,10 @@
                     
                                             <div class="col-md-2 export-container" data-program-code="PPK">
                                                 <a id="exportPPK" href="{{ route('senarai.keputusan.PPK.pdf', [
-                                                    'start_date' => '" + startDate + "',
-                                                    'end_date' => '" + endDate + "',
-                                                    'status' => '" + status + "',
-                                                    'institusi' => '" + selectedInstitusi + "']) }}" 
+                                                    'start_date' => Request::get('start_date'),
+                                                    'end_date' => Request::get('end_date'),
+                                                    'status' => Request::get('status'),
+                                                    'institusi' => Request::get('institusi'),]) }}"
                                                     target="_blank" class="btn btn-secondary btn-round" style="font-size:12px;">
                                                     <i class="fa fa-file-pdf" style="color: black;"></i> PPK
                                                 </a>
