@@ -1893,6 +1893,14 @@ class SekretariatController extends Controller
     private function streamKeputusanPermohonanPdf(string $view, $permohonan, string $filename)
     {
         set_time_limit(1200);
+        ini_set('memory_limit', '1024M');
+        ini_set('max_execution_time', '1200');
+        ini_set('pcre.backtrack_limit', '10000000');
+
+        $dompdfTempPath = storage_path('app/dompdf');
+        if (!is_dir($dompdfTempPath)) {
+            mkdir($dompdfTempPath, 0775, true);
+        }
 
         $html = view($view, compact('permohonan'))->render();
 
@@ -1901,6 +1909,10 @@ class SekretariatController extends Controller
         $options->set('isPhpEnabled', false);
         $options->set('isFontSubsettingEnabled', true);
         $options->set('chroot', public_path());
+        $options->set('tempDir', $dompdfTempPath);
+        $options->set('fontDir', $dompdfTempPath);
+        $options->set('fontCache', $dompdfTempPath);
+        $options->set('dpi', 96);
 
         $pdf = new Dompdf($options);
         $pdf->loadHtml($html);
