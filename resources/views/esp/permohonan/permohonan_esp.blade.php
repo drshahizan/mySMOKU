@@ -28,6 +28,37 @@
                   margin-left: 10px !important; 
           }
 
+          .esp-status-pill {
+              align-items: center;
+              border-radius: 8px;
+              color: #fff;
+              display: inline-flex;
+              font-weight: 700;
+              justify-content: center;
+              min-height: 34px;
+              padding: 8px 12px;
+              text-align: center;
+              white-space: nowrap;
+              width: 132px;
+          }
+
+          .esp-status-success { background-color: #50cd89; }
+          .esp-status-error { background-color: #f1416c; }
+          .esp-status-pending { background-color: #6c757d; }
+
+          #sortTable1 th:nth-child(3),
+          #sortTable1 td:nth-child(3),
+          #sortTable2 th:nth-child(3),
+          #sortTable2 td:nth-child(3),
+          #sortTable3 th:nth-child(3),
+          #sortTable3 td:nth-child(3),
+          #sortTable4 th:nth-child(3),
+          #sortTable4 td:nth-child(3),
+          #sortTable5 th:nth-child(3),
+          #sortTable5 td:nth-child(3) {
+              min-width: 240px;
+          }
+
           @media (max-width: 768px) {
               .nav-tabs {
                   display: flex;
@@ -227,10 +258,12 @@
                               </th>
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -255,10 +288,12 @@
                               </th>
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -283,10 +318,12 @@
                               </th>
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -311,10 +348,12 @@
                               </th>
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -339,9 +378,11 @@
                               </th>
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -536,6 +577,45 @@
           var bkokuUAList = @json($institusiPengajianUA);
           var ppkList = @json($institusiPengajianPPK);
 
+          function formatTarikhPermohonan(data, type) {
+              if (type !== 'display' && type !== 'filter') {
+                  return data || '';
+              }
+
+              if (!data) {
+                  return '';
+              }
+
+              var date = new Date(data);
+              if (isNaN(date.getTime())) {
+                  return '';
+              }
+
+              var day = ('0' + date.getDate()).slice(-2);
+              var month = ('0' + (date.getMonth() + 1)).slice(-2);
+              var year = date.getFullYear();
+
+              return day + '/' + month + '/' + year;
+          }
+
+          function renderStatusEsp(data) {
+              if (data === 'success') {
+                  return '<span class="esp-status-pill esp-status-success">Berjaya</span>';
+              }
+
+              if (data === 'error') {
+                  return '<span class="esp-status-pill esp-status-error">Tidak Berjaya</span>';
+              }
+
+              return '<span class="esp-status-pill esp-status-pending">Belum Hantar</span>';
+          }
+
+          function renderEspCheckbox(data, type, row, meta) {
+              var disabled = row.esp_sent_status === 'success' ? ' disabled' : '';
+
+              return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}"${disabled} />`;
+          }
+
           // DataTable initialization functions
           function initializeDataTable1() {
               $('#sortTable1').DataTable({
@@ -555,10 +635,7 @@
                   {
                       data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                       className: 'text-center',
-                      width: '4%',
-                      render: function (data, type, row, meta) {
-                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                      }
+                      render: renderEspCheckbox
                   },
                   {
                       data: 'no_rujukan_permohonan',
@@ -597,7 +674,11 @@
                                   words[i] = word.toUpperCase();
                               } else {
                                   // Capitalize the first letter of other words
-                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  if (word.charAt(0) === "'" && word.length > 1) {
+                                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                  } else {
+                                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  }
                               }
                           }
 
@@ -607,10 +688,12 @@
                           return formatted_nama;
                       }
                   },
-                  { data: 'akademik.nama_kursus' }, 
                   { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
                   { data: 'yuran_disokong' },
-                  { data: 'wang_saku_disokong' }
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
                   ]
               });
           }
@@ -633,10 +716,7 @@
                   {
                       data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                       className: 'text-center',
-                      width: '4%',
-                      render: function (data, type, row, meta) {
-                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                      }
+                      render: renderEspCheckbox
                   },
                   {
                       data: 'no_rujukan_permohonan',
@@ -675,7 +755,11 @@
                                   words[i] = word.toUpperCase();
                               } else {
                                   // Capitalize the first letter of other words
-                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  if (word.charAt(0) === "'" && word.length > 1) {
+                                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                  } else {
+                                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  }
                               }
                           }
 
@@ -685,10 +769,12 @@
                           return formatted_nama;
                       }
                   },
-                  { data: 'akademik.nama_kursus' }, 
                   { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
                   { data: 'yuran_disokong' },
-                  { data: 'wang_saku_disokong' }
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
                   ]
               });
           }
@@ -711,10 +797,7 @@
                   {
                       data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                       className: 'text-center',
-                      width: '4%',
-                      render: function (data, type, row, meta) {
-                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                      }
+                      render: renderEspCheckbox
                   },
                   {
                       data: 'no_rujukan_permohonan',
@@ -753,7 +836,11 @@
                                   words[i] = word.toUpperCase();
                               } else {
                                   // Capitalize the first letter of other words
-                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  if (word.charAt(0) === "'" && word.length > 1) {
+                                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                  } else {
+                                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  }
                               }
                           }
 
@@ -763,10 +850,12 @@
                           return formatted_nama;
                       }
                   },
-                  { data: 'akademik.nama_kursus' }, 
                   { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
                   { data: 'yuran_disokong' },
-                  { data: 'wang_saku_disokong' }
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
                   ]
               });
           }
@@ -789,10 +878,7 @@
                   {
                       data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                       className: 'text-center',
-                      width: '4%',
-                      render: function (data, type, row, meta) {
-                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                      }
+                      render: renderEspCheckbox
                   },
                   {
                       data: 'no_rujukan_permohonan',
@@ -831,7 +917,11 @@
                                   words[i] = word.toUpperCase();
                               } else {
                                   // Capitalize the first letter of other words
-                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  if (word.charAt(0) === "'" && word.length > 1) {
+                                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                  } else {
+                                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  }
                               }
                           }
 
@@ -841,10 +931,12 @@
                           return formatted_nama;
                       }
                   },
-                  { data: 'akademik.nama_kursus' }, 
                   { data: 'akademik.infoipt.nama_institusi' }, 
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
                   { data: 'yuran_disokong' },
-                  { data: 'wang_saku_disokong' }
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
                   ]
               });
           }
@@ -867,10 +959,7 @@
                   {
                       data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                       className: 'text-center',
-                      width: '4%',
-                      render: function (data, type, row, meta) {
-                          return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                      }
+                      render: renderEspCheckbox
                   },
                   {
                       data: 'no_rujukan_permohonan',
@@ -909,7 +998,11 @@
                                   words[i] = word.toUpperCase();
                               } else {
                                   // Capitalize the first letter of other words
-                                  words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  if (word.charAt(0) === "'" && word.length > 1) {
+                                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                  } else {
+                                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                  }
                               }
                           }
 
@@ -919,9 +1012,11 @@
                           return formatted_nama;
                       }
                   },
-                  { data: 'akademik.nama_kursus' }, 
                   { data: 'akademik.infoipt.nama_institusi' }, 
-                  { data: 'wang_saku_disokong' }
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
                   ]
               });
           }
@@ -1076,7 +1171,7 @@
 
       function applyAndLogFilter(tableName, table, filterValue) {
           // Apply search filter to the table
-          table.column(4).search(filterValue).draw();
+          table.column(3).search(filterValue).draw();
 
           // Go to the first page for the table
           table.page(0).draw(false);
@@ -1117,6 +1212,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
   <script>
+    function getEspPayloadRecords() {
+      try {
+        return JSON.parse(document.getElementById('data').value || '[]');
+      } catch (error) {
+        console.error('Invalid ESP payload JSON:', error);
+        return [];
+      }
+    }
+
+    function markEspSentStatus(status, response, records) {
+      if (!records.length) {
+        return Promise.resolve();
+      }
+
+      return fetch("{{ route('maklumat.esp.status-hantar') }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        body: JSON.stringify({
+          status: status,
+          response: response,
+          records: records
+        })
+      }).catch(error => {
+        console.error('Gagal kemaskini status hantar ESP:', error);
+      });
+    }
+
     function sendData() {
       const secretKey = "{{ $secretKey }}";
       const time = {{ time() }}; 
@@ -1131,13 +1256,23 @@
       tokenTextarea.value = JSON.stringify(tokenArray, null, 2);
       // console.log("Token JSON:", tokenTextarea.value);
 
+      const payloadRecords = getEspPayloadRecords();
+      if (!payloadRecords.length) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tiada Rekod',
+          text: 'Sila pilih sekurang-kurangnya satu rekod untuk dihantar ke ESP.',
+        });
+        return;
+      }
+
       const form = document.getElementById('hantar_maklumat');
-      const data = new FormData(form);
+      const formData = new FormData(form);
 
 
       fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
           method: 'POST',
-          body: data
+          body: formData
       })
       .then(response => response.json())
       .then(data => {
@@ -1148,11 +1283,11 @@
           console.log(responseDataString);
           console.log(data.status);
           if (data.status === 'error'){
-            Swal.fire({
+            markEspSentStatus('error', data, payloadRecords).then(() => Swal.fire({
               icon: 'error',
               title: 'Tidak Berjaya',
               text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
-            }).then((result) => {
+            })).then((result) => {
                 // Check if the user clicked OK
                 if (result.isConfirmed) {
                     // Reload the page
@@ -1163,11 +1298,11 @@
             // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
             
           }else{
-            Swal.fire({
+            markEspSentStatus('success', data, payloadRecords).then(() => Swal.fire({
               icon: 'success',
               title: 'Berjaya',
               text: 'Data berjaya di hantar ke ESP. Semak ESP',
-            }).then((result) => {
+            })).then((result) => {
                 // Check if the user clicked OK
                 if (result.isConfirmed) {
                     // Reload the page
@@ -1184,7 +1319,9 @@
 
       .catch(error => {
           console.error('API Request failed:', error);
-          location.reload(); // Refresh the page
+          markEspSentStatus('error', { message: error.message }, payloadRecords).then(() => {
+            location.reload(); // Refresh the page
+          });
       });
     }
 
