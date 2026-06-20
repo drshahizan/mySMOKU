@@ -309,21 +309,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); 
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
-                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
-                                                                }, $pemohon);
+                                                                $pemohon = formatNamaPemohon($nama_pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -464,21 +450,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
                                                                 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); 
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
-                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
-                                                                }, $pemohon);
+                                                                $pemohon = formatNamaPemohon($nama_pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -620,21 +592,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
                                                                 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); 
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
-                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
-                                                                }, $pemohon);
+                                                                $pemohon = formatNamaPemohon($nama_pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -776,21 +734,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
                                                                 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); 
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
-                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
-                                                                }, $pemohon);
+                                                                $pemohon = formatNamaPemohon($nama_pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -932,21 +876,7 @@
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
 
                                                                 // nama pemohon
-                                                                $text = ucwords(strtolower($nama_pemohon)); 
-                                                                $conjunctions = ['bin', 'binti'];
-                                                                $words = explode(' ', $text);
-                                                                $result = [];
-                                                                foreach ($words as $word) {
-                                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                                        $result[] = Str::lower($word);
-                                                                    } else {
-                                                                        $result[] = $word;
-                                                                    }
-                                                                }
-                                                                $pemohon = implode(' ', $result);
-                                                                $pemohon = preg_replace_callback("/(^|\s)'([a-z])/i", function ($matches) {
-                                                                    return $matches[1] . "'" . Str::upper($matches[2]);
-                                                                }, $pemohon);
+                                                                $pemohon = formatNamaPemohon($nama_pemohon);
 
                                                                 //nama kursus
                                                                 $text2 = ucwords(strtolower($nama_kursus)); 
@@ -1313,4 +1243,4 @@
             console.clear();
         </script>
     </body>
-</x-default-layout> 
+</x-default-layout>

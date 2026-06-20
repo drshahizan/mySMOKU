@@ -56,7 +56,7 @@
             .status-info { background-color: #7239ea; }
             .status-baharu { background-color: #1f73e8; }
             .status-saringan { background-color: #17a2b8; }
-            .status-disokong { background-color: #ffc107; color: #111 !important; }
+            .status-disokong { background-color: #ffc107; color: #fff !important; }
             .status-dikembalikan { background-color: #f59e0b; }
             .status-layak { background-color: #50cd89; }
             .status-tidak-layak { background-color: #f1416c; }
@@ -244,8 +244,8 @@
                                                 <tr>
                                                     <th>ID Permohonan</th>
                                                     <th>Nama</th>
-                                                    <th>Nama Kursus</th>
                                                     <th>Institusi Pengajian</th>
+                                                    <th>Peringkat Pengajian</th>
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
@@ -267,8 +267,8 @@
                                                 <tr>
                                                     <th>ID Permohonan</th>
                                                     <th>Nama</th>
-                                                    <th>Nama Kursus</th>
                                                     <th>Institusi Pengajian</th>
+                                                    <th>Peringkat Pengajian</th>
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
@@ -289,8 +289,8 @@
                                                 <tr>
                                                     <th>ID Permohonan</th>
                                                     <th>Nama</th>
-                                                    <th>Nama Kursus</th>
                                                     <th>Institusi Pengajian</th>
+                                                    <th>Peringkat Pengajian</th>
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
@@ -311,8 +311,8 @@
                                                 <tr>
                                                     <th>ID Permohonan</th>
                                                     <th>Nama</th>
-                                                    <th>Nama Kursus</th>
                                                     <th>Institusi Pengajian</th>
+                                                    <th>Peringkat Pengajian</th>
                                                     <th>Tarikh Permohonan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
@@ -333,8 +333,8 @@
                                                 <tr>
                                                     <th>ID Permohonan</th>
                                                     <th>Nama</th>
-                                                    <th>Nama Kursus</th>
                                                     <th>Institusi Pengajian</th>
+                                                    <th>Peringkat Pengajian</th>
                                                     <th>Tarikh Tuntutan</th>
                                                     <th>Tarikh Dibayar</th>
                                                     <th>Status Terkini</th>
@@ -399,11 +399,13 @@
                         return word.toUpperCase();
                     }
 
-                    return word.replace(/^(')?([A-Za-zÀ-ÖØ-öø-ÿ])/, function(match, quote, letter) {
-                        return (quote || '') + letter.toUpperCase();
-                    }).replace(/([^'\s]+)$/g, function(segment) {
-                        return segment.charAt(0) + segment.slice(1).toLowerCase();
-                    });
+                    var lowerWord = word.toLowerCase();
+
+                    if (lowerWord.charAt(0) === "'") {
+                        return "'" + lowerWord.charAt(1).toUpperCase() + lowerWord.slice(2);
+                    }
+
+                    return lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
                 }).join(' ');
             }
 
@@ -428,9 +430,8 @@
                     { 
                         data: 'no_rujukan_permohonan',
                         render: function(data, type, row) {
-                            // Construct the URL using the no_rujukan_permohonan value
-                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                            var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            // Construct the URL using the permohonan id.
+                            var url = "{{ route('rekod.permohonan.id', ['id' => ':permohonan_id']) }}".replace(':permohonan_id', row.id);// Create and return the link element
                             return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                         }
                     }, 
@@ -440,13 +441,8 @@
                             return formatNama(data);
                         }
                     },
-                    { 
-                        data: 'akademik.nama_kursus',
-                        render: function(data, type, row) {
-                            return data || '';
-                        }
-                    }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                     {
                         data: 'tarikh_hantar',
                         render: function(data, type, row) {
@@ -563,9 +559,8 @@
                     { 
                         data: 'no_rujukan_permohonan',
                         render: function(data, type, row) {
-                            // Construct the URL using the no_rujukan_permohonan value
-                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                            var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            // Construct the URL using the permohonan id.
+                            var url = "{{ route('rekod.permohonan.id', ['id' => ':permohonan_id']) }}".replace(':permohonan_id', row.id);// Create and return the link element
                             return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                         }
                     }, 
@@ -575,13 +570,8 @@
                             return formatNama(data);
                         }
                     },
-                    { 
-                        data: 'akademik.nama_kursus',
-                        render: function(data, type, row) {
-                            return data || '';
-                        }
-                    }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                     {
                         data: 'tarikh_hantar',
                         render: function(data, type, row) {
@@ -698,9 +688,8 @@
                     { 
                         data: 'no_rujukan_permohonan',
                         render: function(data, type, row) {
-                            // Construct the URL using the no_rujukan_permohonan value
-                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                            var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            // Construct the URL using the permohonan id.
+                            var url = "{{ route('rekod.permohonan.id', ['id' => ':permohonan_id']) }}".replace(':permohonan_id', row.id);// Create and return the link element
                             return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                         }
                     }, 
@@ -710,13 +699,8 @@
                             return formatNama(data);
                         }
                     },
-                    { 
-                        data: 'akademik.nama_kursus',
-                        render: function(data, type, row) {
-                            return data || '';
-                        }
-                    }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                     {
                         data: 'tarikh_hantar',
                         render: function(data, type, row) {
@@ -833,9 +817,8 @@
                     { 
                         data: 'no_rujukan_permohonan',
                         render: function(data, type, row) {
-                            // Construct the URL using the no_rujukan_permohonan value
-                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                            var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            // Construct the URL using the permohonan id.
+                            var url = "{{ route('rekod.permohonan.id', ['id' => ':permohonan_id']) }}".replace(':permohonan_id', row.id);// Create and return the link element
                             return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                         }
                     }, 
@@ -845,13 +828,8 @@
                             return formatNama(data);
                         }
                     },
-                    { 
-                        data: 'akademik.nama_kursus',
-                        render: function(data, type, row) {
-                            return data || '';
-                        }
-                    }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                     {
                         data: 'tarikh_hantar',
                         render: function(data, type, row) {
@@ -968,9 +946,8 @@
                     { 
                         data: 'no_rujukan_permohonan',
                         render: function(data, type, row) {
-                            // Construct the URL using the no_rujukan_permohonan value
-                            // var url = "{{ url('tuntutan/sekretariat/sejarah/sejarah-tuntutan/') }}" + '/' + row.smoku_id;
-                            var url = "{{ route('rekod.permohonan.id', ['id' => ':smoku_id']) }}".replace(':smoku_id', row.smoku_id);// Create and return the link element
+                            // Construct the URL using the permohonan id.
+                            var url = "{{ route('rekod.permohonan.id', ['id' => ':permohonan_id']) }}".replace(':permohonan_id', row.id);// Create and return the link element
                             return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
                         }
                     }, 
@@ -980,13 +957,8 @@
                             return formatNama(data);
                         }
                     },
-                    { 
-                        data: 'akademik.nama_kursus',
-                        render: function(data, type, row) {
-                            return data || '';
-                        }
-                    }, 
                     { data: 'akademik.infoipt.nama_institusi' }, 
+                    { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                     {
                         data: 'tarikh_hantar',
                         render: function(data, type, row) {
@@ -1172,7 +1144,7 @@
 
         function applyAndLogFilter(table, filterValue) {
             // Apply search filter to the table
-            table.column(3).search(filterValue).draw();
+            table.column(2).search(filterValue).draw();
 
             // Go to the first page for the table
             table.page(0).draw(false);

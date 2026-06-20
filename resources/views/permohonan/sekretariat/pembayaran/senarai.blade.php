@@ -512,11 +512,13 @@
                             return word.toUpperCase();
                         }
 
-                        return word.replace(/^(')?([A-Za-zÀ-ÖØ-öø-ÿ])/, function(match, quote, letter) {
-                            return (quote || '') + letter.toUpperCase();
-                        }).replace(/([^'\s]+)$/g, function(segment) {
-                            return segment.charAt(0) + segment.slice(1).toLowerCase();
-                        });
+                        var lowerWord = word.toLowerCase();
+
+                        if (lowerWord.charAt(0) === "'") {
+                            return "'" + lowerWord.charAt(1).toUpperCase() + lowerWord.slice(2);
+                        }
+
+                        return lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
                     }).join(' ');
                 }
 

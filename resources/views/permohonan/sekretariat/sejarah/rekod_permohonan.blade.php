@@ -19,6 +19,83 @@
         .nav{
             margin-left: 10px!important;
         }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 145px;
+            height: 32px;
+            padding: 0 18px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .status-info {
+            background-color: #7c3aed;
+        }
+
+        .status-baharu {
+            background-color: #2877e3;
+        }
+
+        .status-saringan {
+            background-color: #f59e0b;
+        }
+
+        .status-disokong {
+            background-color: #f59e0b;
+        }
+
+        .status-dikembalikan {
+            background-color: #e95b4f;
+        }
+
+        .status-layak {
+            background-color: #51cb85;
+        }
+
+        .status-tidak-layak {
+            background-color: #f2386b;
+        }
+
+        .status-dibayar {
+            background-color: #16a6ad;
+        }
+
+        .status-batal {
+            background-color: #6c757d;
+        }
+
+        .sejarah-table td,
+        .sejarah-table th {
+            vertical-align: middle;
+        }
+
+        .sejarah-table .status-cell {
+            text-align: center;
+        }
+
+        .sejarah-table .id-column {
+            width: 42%;
+        }
+
+        .sejarah-table .date-column {
+            width: 15%;
+        }
+
+        .sejarah-table .status-column {
+            width: 20%;
+        }
+
+        .sejarah-table .executor-column {
+            width: 23%;
+            white-space: normal;
+            word-break: normal;
+        }
     </style>
 
     <!--begin::Page title-->
@@ -56,20 +133,79 @@
                             <h2>Sejarah Permohonan <br><small> Klik ID Permohonan untuk melihat maklumat lanjut rekod permohonan</small></h2>
                         </div>
                         <div class="body">
+                            @php
+                                $formatNama = function ($nama) {
+                                    if (!$nama) {
+                                        return null;
+                                    }
+
+                                    $conjunctions = ['bin', 'binti'];
+                                    $words = explode(' ', strtolower($nama));
+
+                                    return collect($words)->map(function ($word) use ($conjunctions) {
+                                        if (in_array($word, $conjunctions, true)) {
+                                            return $word;
+                                        }
+
+                                        return collect(explode("'", $word))->map(function ($part) {
+                                            return ucfirst($part);
+                                        })->implode("'");
+                                    })->implode(' ');
+                                };
+
+                                $statusMap = [
+                                    1 => ['label' => 'Deraf', 'class' => 'status-info', 'route' => 'papar.rekod.permohonan.id'],
+                                    2 => ['label' => 'Baharu', 'class' => 'status-baharu', 'route' => 'papar.rekod.permohonan.id'],
+                                    3 => ['label' => 'Sedang Disaring', 'class' => 'status-saringan', 'route' => 'papar.rekod.permohonan.id'],
+                                    4 => ['label' => 'Disokong', 'class' => 'status-disokong', 'route' => 'papar.rekod.saringan.id'],
+                                    5 => ['label' => 'Dikembalikan', 'class' => 'status-dikembalikan', 'route' => 'papar.rekod.saringan.id'],
+                                    6 => ['label' => 'Layak', 'class' => 'status-layak', 'route' => 'papar.rekod.kelulusan.id'],
+                                    7 => ['label' => 'Tidak Layak', 'class' => 'status-tidak-layak', 'route' => 'papar.rekod.kelulusan.id'],
+                                    8 => ['label' => 'Dibayar', 'class' => 'status-dibayar', 'route' => 'papar.rekod.pembayaran.id'],
+                                    9 => ['label' => 'Batal', 'class' => 'status-batal', 'route' => 'papar.rekod.permohonan.id'],
+                                    10 => ['label' => 'Berhenti', 'class' => 'status-batal', 'route' => 'papar.rekod.permohonan.id'],
+                                ];
+                                $pelaksanaDisokong = $sejarah_p->firstWhere('status', 4)?->pelaksana;
+                            @endphp
+
                             <div class="table-responsive">
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                <table class="table table-striped table-hover sejarah-table">
                                     <thead>
-                                    <tr>
-                                        <th>ID Permohonan</th>
-                                        <th>No Baucer</th>
-                                        <th>Tarikh Baucer</th>
-                                        <th>Amaun Yuran (RM)</th>
-                                        <th>Amaun Wang Saku (RM)</th>
-                                        <th>Tarikh Permohonan</th>
-                                        <th>Tarikh Dibayar</th>
-                                        <th>Status</th>
-                                    </tr>
+                                        <tr>
+                                            <th class="id-column">ID Permohonan</th>
+                                            <th class="date-column">Tarikh Status</th>
+                                            <th class="status-column status-cell">Status</th>
+                                            <th class="executor-column">Dilaksanakan Oleh</th>
+                                        </tr>
                                     </thead>
+                                    <tbody>
+                                    @forelse ($sejarah_p as $rekod)
+                                        @php
+                                            $statusInfo = $statusMap[(int) $rekod->status] ?? ['label' => 'Tiada Maklumat', 'class' => 'status-batal', 'route' => 'papar.rekod.permohonan.id'];
+                                            $detailUrl = route($statusInfo['route'], ['id' => $rekod->id]);
+                                            $statusDate = optional($rekod->created_at)->format('d/m/Y');
+                                            $pelaksanaUser = $rekod->pelaksana;
+
+                                            if (in_array((int) $rekod->status, [6, 7], true) && !$pelaksanaUser) {
+                                                $pelaksanaUser = $pelaksanaDisokong;
+                                            }
+
+                                            $pelaksana = $formatNama($pelaksanaUser->name ?? $pelaksanaUser->nama ?? null);
+                                        @endphp
+                                        <tr>
+                                            <td><a href="{{ $detailUrl }}">{{ $permohonan->no_rujukan_permohonan }}</a></td>
+                                            <td>{{ $statusDate ?: '-' }}</td>
+                                            <td class="status-cell">
+                                                <span class="status-pill {{ $statusInfo['class'] }}">{{ $statusInfo['label'] }}</span>
+                                            </td>
+                                            <td class="executor-column">{{ $pelaksana ?: '-' }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">Tiada rekod sejarah ditemui.</td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -78,186 +214,6 @@
             </div>
         </div>
     </div>
-    <script>
-            const smoku_id = "{{ $smoku_id }}";
-
-            $(document).ready(function() {
-
-                // DataTable initialization functions
-                function initializeDataTable1() {
-                    $('#sortTable1').DataTable({
-                        ordering: true, // Enable manual sorting
-                            order: [], // Disable initial sorting
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            columnDefs: [
-                                { orderable: false, targets: [0] }
-                            ],
-                        ajax: {
-                            url: '{{ route("sejarah.permohonan.data", ["id" => ":smoku_id"]) }}'.replace(':smoku_id', smoku_id),
-                            dataSrc: '' // Property in the response object containing the data array
-                            
-                        },
-                        columns: [
-                        { 
-                            data: 'no_rujukan_permohonan',
-                            render: function(data, type, row) {
-                                // Construct the URL using the no_rujukan_permohonan value
-                                var url = "{{ url('permohonan/sekretariat/sejarah/papar-permohonan/') }}" + '/' + row.smoku_id;
-                                // Create and return the link element
-                                return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
-                            }
-                        },
-                        { data: 'no_baucer' },  
-                        {   
-                            data: 'tarikh_baucer',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
-
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
-                                }
-                            } 
-
-                        },  
-                        {
-                            data: 'yuran_dibayar',
-                            render: function(data, type, row) {
-                                // If the data is being displayed, add .00 to the end
-                                if (data === null) {
-                                    return '-';
-                                }
-                                // If the data is being displayed, add .00 to the end
-                                else if (type === 'display' || type === 'filter') {
-                                    return data + '.00';
-                                }
-                                return data;
-                            }
-                        },  
-                        {
-                            data: 'wang_saku_dibayar',
-                            render: function(data, type, row) {
-                                // If the data is being displayed, add .00 to the end
-                                if (data === null) {
-                                    return '-';
-                                }
-                                // If the data is being displayed, add .00 to the end
-                                else if (type === 'display' || type === 'filter') {
-                                    return data + '.00';
-                                }
-                                return data;
-                            }
-                        },  
-                        {
-                            data: 'tarikh_hantar',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
-
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
-                                }
-                            }
-                        },
-                        {
-                            data: 'tarikh_transaksi',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    if (!data) return ' '; // handle null, undefined, or empty string
-
-                                    var date = new Date(data);
-                                    if (isNaN(date.getTime())) return ' '; // handle invalid dates
-
-                                    // Get the year, month, and day components
-                                    var year = date.getFullYear();
-                                    var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
-                                    var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
-
-                                    // Return the formatted date as YYYY/MM/DD
-                                    return day + '/' + month + '/' + year;
-                                } else {
-                                    // For sorting and other purposes, return the original data
-                                    return data;
-                                }
-                            }
-                        }, 
-                        {
-                            data: 'status',
-                            render: function(data, type, row) {
-                                var status = ''; // Initialize an empty string for the button HTML
-
-                                // Define the button HTML based on the status value
-                                switch (data) {
-                                    case '1':
-                                        status = '<button class="btn bg-info text-white">Deraf</button>';
-                                        break;
-                                    case '2':
-                                        status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                        break;
-                                    case '3':
-                                        status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                        break;
-                                    case '4':
-                                        status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                        break;
-                                    case '5':
-                                        status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                        break;
-                                    case '6':
-                                        status = '<button class="btn bg-success text-white">Layak</button>';
-                                        break;
-                                    case '7':
-                                        status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                        break;
-                                    case '8':
-                                        status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                        break;
-                                    case '9':
-                                        status = '<button class="btn bg-batal text-white">Batal</button>';
-                                        break;
-                                    case '10':
-                                        status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                        break;    
-                                    default:
-                                        status = ''; // Set empty string for unknown status values
-                                        break;
-                                }
-
-                                return status;
-                            }
-                        }]
-
-                    });
-                }
-
-                initializeDataTable1(); // Initialize DataTable1 on page load
-
-            });
-        </script>
 
     </body>
 </x-default-layout>

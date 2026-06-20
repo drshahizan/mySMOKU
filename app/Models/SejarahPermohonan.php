@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class SejarahPermohonan extends Model
 {
@@ -16,4 +17,9 @@ class SejarahPermohonan extends Model
         'status',
         'dilaksanakan_oleh',
     ];
+
+    public function pelaksana()
+    {
+        return $this->belongsTo(User::class, 'dilaksanakan_oleh', 'id');
+    }
 }

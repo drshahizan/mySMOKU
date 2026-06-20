@@ -132,7 +132,7 @@
                                 $peringkat = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian)->value('peringkat');
                                 $nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $akademik->id_institusi)->value('nama_institusi');
                                 $nama_penaja = DB::table('bk_penaja')->where('id', $akademik->nama_penaja)->value('penaja');
-                                $tkh_bayaran = DB::table('sejarah_permohonan')->where('id', $sejarah_p->id)->value('created_at');
+                                $tkh_bayaran = $permohonan->tarikh_transaksi;
                                 // nama pemohon
                                 $text = ucwords(strtolower($smoku->nama)); // Assuming you're sending the text as a POST parameter
                                 $conjunctions = ['bin', 'binti', 'of', 'in', 'and'];
@@ -197,6 +197,15 @@
                                     <td><strong>Tarikh Bayaran</strong></td>
                                     <td>:</td>
                                     <td>{{ $tkh_bayaran ? date('d/m/Y', strtotime($tkh_bayaran)) : '-' }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>No Baucer</strong></td>
+                                    <td>:</td>
+                                    <td>{{ $permohonan->no_baucer ?: '-' }}</td>
+                                    <td class="space">&nbsp;</td>
+                                    <td><strong>Tarikh Baucer</strong></td>
+                                    <td>:</td>
+                                    <td>{{ $permohonan->tarikh_baucer ? date('d/m/Y', strtotime($permohonan->tarikh_baucer)) : '-' }}</td>
                                 </tr>
                             </table>
                             <hr>
