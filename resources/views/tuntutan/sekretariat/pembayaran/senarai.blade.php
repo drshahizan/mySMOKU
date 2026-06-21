@@ -46,7 +46,7 @@
             }
             .status-info { background-color: #7239ea; }
             .status-baharu { background-color: #1b84ff; }
-            .status-saringan { background-color: #f6a000; }
+            .status-saringan { background-color: #ea4fb5; }
             .status-disokong { background-color: #ffc700; }
             .status-dikembalikan,
             .status-tidak-layak { background-color: #f1416c; }

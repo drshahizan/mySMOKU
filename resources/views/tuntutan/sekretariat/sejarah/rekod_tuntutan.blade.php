@@ -16,6 +16,29 @@
     </head>
 
     <style>
+        .history-status-pill {
+            align-items: center;
+            border-radius: 7px;
+            color: #fff !important;
+            display: inline-flex;
+            font-weight: 700;
+            justify-content: center;
+            min-width: 130px;
+            padding: 9px 18px;
+            text-align: center;
+        }
+        .history-status-info { background-color: #7239ea; }
+        .history-status-baharu { background-color: #1b84ff; }
+        .history-status-saringan { background-color: #ea4fb5; }
+        .history-status-disokong { background-color: #ffc700; }
+        .history-status-dikembalikan { background-color: #e65f4f; }
+        .history-status-tidak-layak { background-color: #f1416c; }
+        .history-status-layak { background-color: #50cd89; }
+        .history-status-dibayar { background-color: #11a6af; }
+        .history-status-batal { background-color: #6c757d; }
+    </style>
+
+    <style>
         body{
             margin: 20px!important;
         }
@@ -129,29 +152,25 @@
                                                 <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                             @endif
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
-                                            @if ($item['status']=='1')
-                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='2')
-                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='3')
-                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='4')
-                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='5')
-                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='6')
-                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='7')
-                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='8')
-                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='9')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @elseif ($item['status']=='10')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
-                                            @else
-                                                <td class="text-center">{{ucwords(strtolower($status))}}</td>
-                                            @endif
+                                            @php
+                                                $statusClassMap = [
+                                                    '1' => 'history-status-info',
+                                                    '2' => 'history-status-baharu',
+                                                    '3' => 'history-status-saringan',
+                                                    '4' => 'history-status-disokong',
+                                                    '5' => 'history-status-dikembalikan',
+                                                    '6' => 'history-status-layak',
+                                                    '7' => 'history-status-tidak-layak',
+                                                    '8' => 'history-status-dibayar',
+                                                    '9' => 'history-status-batal',
+                                                    '10' => 'history-status-batal',
+                                                ];
+                                            @endphp
+                                            <td class="text-center">
+                                                <span class="history-status-pill {{ $statusClassMap[(string) $item['status']] ?? 'history-status-batal' }}">
+                                                    {{ ucwords(strtolower($status)) }}
+                                                </span>
+                                            </td>
                                             <td>{{$oleh}}</td>
                                         </tr>
                                     @endforeach

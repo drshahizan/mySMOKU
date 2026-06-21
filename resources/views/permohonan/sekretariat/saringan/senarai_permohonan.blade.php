@@ -63,7 +63,7 @@
 
             .status-deraf { background-color: #7239ea; }
             .status-baharu { background-color: #1f73e8; }
-            .status-sedang-disaring { background-color: #f1bc00; }
+            .status-sedang-disaring { background-color: #ea4fb5; }
             .status-disokong { background-color: #ffb800; }
             .status-dikembalikan { background-color: #e65f4f; }
             .status-layak { background-color: #50cd89; }

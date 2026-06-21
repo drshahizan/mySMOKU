@@ -43,7 +43,7 @@
         }
 
         .status-saringan {
-            background-color: #f59e0b;
+            background-color: #ea4fb5;
         }
 
         .status-disokong {
