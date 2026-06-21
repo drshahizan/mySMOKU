@@ -246,6 +246,7 @@
                               <th><b>Nama</b></th>
                               <th><b>Institusi Pengajian</b></th>
                               <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
                               <th><b>Status ESP</b></th>
@@ -276,6 +277,7 @@
                               <th><b>Nama</b></th>
                               <th><b>Institusi Pengajian</b></th>
                               <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
                               <th><b>Status ESP</b></th>
@@ -305,6 +307,7 @@
                               <th><b>Nama</b></th>
                               <th><b>Institusi Pengajian</b></th>
                               <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
                               <th><b>Status ESP</b></th>
@@ -334,6 +337,7 @@
                               <th><b>Nama</b></th>
                               <th><b>Institusi Pengajian</b></th>
                               <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
                               <th><b>Status ESP</b></th>
@@ -364,6 +368,7 @@
                               <th><b>Nama</b></th>
                               <th><b>Institusi Pengajian</b></th>
                               <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
                               <th><b>Status ESP</b></th>
                             </tr>
@@ -586,6 +591,37 @@
             return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}"${disabled} />`;
         }
 
+        function formatTarikhTuntutan(data, type) {
+            if (type !== 'display' && type !== 'filter') {
+                return data || '';
+            }
+
+            if (!data) {
+                return '';
+            }
+
+            var date = new Date(data);
+            if (isNaN(date.getTime())) {
+                return '';
+            }
+
+            var day = ('0' + date.getDate()).slice(-2);
+            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+            var year = date.getFullYear();
+
+            return day + '/' + month + '/' + year;
+        }
+
+        function formatAmaun(data) {
+            var amount = parseFloat(data || 0);
+
+            if (isNaN(amount)) {
+                amount = 0;
+            }
+
+            return amount.toFixed(2);
+        }
+
         // DataTable initialization functions
         function initializeDataTable1() {
             $('#sortTable1').DataTable({
@@ -611,10 +647,11 @@
                 {
                     data: 'permohonan.no_rujukan_permohonan',
                     render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
                       return `
                         <a href="#" 
                           class="open-modal-link" 
-                          data-id="${row.permohonan_id}" 
+                          data-id="${permohonanId}"
                           data-type="IPTS"
                           data-bs-toggle="modal" 
                           data-bs-target="#dokumenModal">
@@ -631,8 +668,9 @@
                 },
                 { data: 'akademik.infoipt.nama_institusi' }, 
                 { data: 'akademik.peringkat.peringkat', defaultContent: '' },
-                { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'yuran_disokong', render: formatAmaun },
+                { data: 'wang_saku_disokong', render: formatAmaun },
                 { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
@@ -662,10 +700,11 @@
                 {
                     data: 'permohonan.no_rujukan_permohonan',
                     render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
                       return `
                         <a href="#" 
                           class="open-modal-link" 
-                          data-id="${row.permohonan_id}" 
+                          data-id="${permohonanId}"
                           data-type="POLI"
                           data-bs-toggle="modal" 
                           data-bs-target="#dokumenModal">
@@ -682,8 +721,9 @@
                 },
                 { data: 'akademik.infoipt.nama_institusi' }, 
                 { data: 'akademik.peringkat.peringkat', defaultContent: '' },
-                { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'yuran_disokong', render: formatAmaun },
+                { data: 'wang_saku_disokong', render: formatAmaun },
                 { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
@@ -713,10 +753,11 @@
                 {
                     data: 'permohonan.no_rujukan_permohonan',
                     render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
                       return `
                         <a href="#" 
                           class="open-modal-link" 
-                          data-id="${row.permohonan_id}" 
+                          data-id="${permohonanId}"
                           data-type="KK"
                           data-bs-toggle="modal" 
                           data-bs-target="#dokumenModal">
@@ -733,8 +774,9 @@
                 },
                 { data: 'akademik.infoipt.nama_institusi' }, 
                 { data: 'akademik.peringkat.peringkat', defaultContent: '' },
-                { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'yuran_disokong', render: formatAmaun },
+                { data: 'wang_saku_disokong', render: formatAmaun },
                 { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
@@ -764,10 +806,11 @@
                 {
                     data: 'permohonan.no_rujukan_permohonan',
                     render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
                       return `
                         <a href="#" 
                           class="open-modal-link" 
-                          data-id="${row.permohonan_id}" 
+                          data-id="${permohonanId}"
                           data-type="UA"
                           data-bs-toggle="modal" 
                           data-bs-target="#dokumenModal">
@@ -784,8 +827,9 @@
                 },
                 { data: 'akademik.infoipt.nama_institusi' }, 
                 { data: 'akademik.peringkat.peringkat', defaultContent: '' },
-                { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'yuran_disokong', render: formatAmaun },
+                { data: 'wang_saku_disokong', render: formatAmaun },
                 { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
@@ -815,10 +859,11 @@
                 {
                     data: 'permohonan.no_rujukan_permohonan',
                     render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
                       return `
                         <a href="#" 
                           class="open-modal-link" 
-                          data-id="${row.permohonan_id}" 
+                          data-id="${permohonanId}"
                           data-type="PPK"
                           data-bs-toggle="modal" 
                           data-bs-target="#dokumenModal">
@@ -835,7 +880,8 @@
                 },
                 { data: 'akademik.infoipt.nama_institusi' }, 
                 { data: 'akademik.peringkat.peringkat', defaultContent: '' },
-                { data: 'wang_saku_disokong' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'wang_saku_disokong', render: formatAmaun },
                 { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
