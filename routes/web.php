@@ -212,6 +212,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/tuntutanESP/BKOKUIPTS', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUIPTS'])->name('senarai.esp.tuntutan.BKOKUIPTS');
         Route::get('/tuntutanESP/PPK', [MaklumatESPController::class, 'getSenaraiEspTuntutanPPK'])->name('senarai.esp.tuntutan.PPK');
         Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
+        Route::post('/tuntutanESP/status-hantar', [MaklumatESPController::class, 'markStatusHantarTuntutan'])->name('maklumat_tuntutan.esp.status-hantar');
 
         //Kemaskini - Sekretariat - Emel
         Route::get('kemaskini/sekretariat/emel/senarai-emel', [KemaskiniController::class, 'senaraiEmel']);

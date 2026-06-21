@@ -28,6 +28,24 @@
                 margin-left: 10px !important; 
         }
 
+        .esp-status-pill {
+            align-items: center;
+            border-radius: 8px;
+            color: #fff;
+            display: inline-flex;
+            font-weight: 700;
+            justify-content: center;
+            min-height: 34px;
+            padding: 8px 12px;
+            text-align: center;
+            white-space: nowrap;
+            width: 132px;
+        }
+
+        .esp-status-success { background-color: #50cd89; }
+        .esp-status-error { background-color: #f1416c; }
+        .esp-status-pending { background-color: #6c757d; }
+
         @media (max-width: 768px) {
             .nav-tabs {
                 display: flex;
@@ -226,10 +244,11 @@
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>ID Tuntutan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                           </thead>
                           
                         </table>
@@ -255,10 +274,11 @@
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>ID Tuntutan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                           </thead>
                         </table>
                       </div>
@@ -283,10 +303,11 @@
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>ID Tuntutan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                           </thead>
                         </table>
                       </div>
@@ -311,10 +332,11 @@
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>ID Tuntutan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
                               <th><b>Yuran Disokong (RM)</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -340,9 +362,10 @@
                               <th><b>ID Permohonan</b></th>                                                   
                               <th><b>ID Tuntutan</b></th>                                                   
                               <th><b>Nama</b></th>
-                              <th><b>Nama Kursus</b></th>
                               <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
                               <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
                             </tr>
                           </thead>
                         </table>
@@ -519,6 +542,50 @@
         var bkokuUAList = @json($institusiPengajianUA);
         var ppkList = @json($institusiPengajianPPK);
 
+        function formatStudentName(data) {
+            if (!data) {
+                return '';
+            }
+
+            var conjunctionsLower = ['bin', 'binti'];
+            var conjunctionsUpper = ['A/L', 'A/P'];
+            var words = data.trim().split(/\s+/);
+
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+
+                if (conjunctionsLower.includes(word.toLowerCase())) {
+                    words[i] = word.toLowerCase();
+                } else if (conjunctionsUpper.includes(word.toUpperCase())) {
+                    words[i] = word.toUpperCase();
+                } else if (word.charAt(0) === "'" && word.length > 1) {
+                    words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                } else {
+                    words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                }
+            }
+
+            return words.join(' ');
+        }
+
+        function renderStatusEsp(data) {
+            if (data === 'success') {
+                return '<span class="esp-status-pill esp-status-success">Berjaya</span>';
+            }
+
+            if (data === 'error') {
+                return '<span class="esp-status-pill esp-status-error">Tidak Berjaya</span>';
+            }
+
+            return '<span class="esp-status-pill esp-status-pending">Belum Hantar</span>';
+        }
+
+        function renderEspCheckbox(data, type, row, meta) {
+            var disabled = row.esp_sent_status === 'success' ? ' disabled' : '';
+
+            return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}"${disabled} />`;
+        }
+
         // DataTable initialization functions
         function initializeDataTable1() {
             $('#sortTable1').DataTable({
@@ -539,9 +606,7 @@
                     data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                     className: 'text-center',
                     width: '4%',
-                    render: function (data, type, row, meta) {
-                        return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                    }
+                    render: renderEspCheckbox
                 },
                 {
                     data: 'permohonan.no_rujukan_permohonan',
@@ -561,40 +626,14 @@
                 { 
                     data: 'smoku.nama', 
                     render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
+                        return formatStudentName(data);
                     }
                 },
-                { data: 'akademik.nama_kursus' }, 
                 { data: 'akademik.infoipt.nama_institusi' }, 
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                 { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' }
+                { data: 'wang_saku_disokong' },
+                { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
         }
@@ -618,9 +657,7 @@
                     data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                     className: 'text-center',
                     width: '4%',
-                    render: function (data, type, row, meta) {
-                        return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                    }
+                    render: renderEspCheckbox
                 },
                 {
                     data: 'permohonan.no_rujukan_permohonan',
@@ -640,40 +677,14 @@
                 { 
                     data: 'smoku.nama', 
                     render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
+                        return formatStudentName(data);
                     }
                 },
-                { data: 'akademik.nama_kursus' }, 
                 { data: 'akademik.infoipt.nama_institusi' }, 
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                 { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' }
+                { data: 'wang_saku_disokong' },
+                { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
         }
@@ -697,9 +708,7 @@
                     data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                     className: 'text-center',
                     width: '4%',
-                    render: function (data, type, row, meta) {
-                        return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                    }
+                    render: renderEspCheckbox
                 },
                 {
                     data: 'permohonan.no_rujukan_permohonan',
@@ -719,40 +728,14 @@
                 { 
                     data: 'smoku.nama', 
                     render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
+                        return formatStudentName(data);
                     }
                 },
-                { data: 'akademik.nama_kursus' }, 
                 { data: 'akademik.infoipt.nama_institusi' }, 
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                 { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' }
+                { data: 'wang_saku_disokong' },
+                { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
         }
@@ -776,9 +759,7 @@
                     data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                     className: 'text-center',
                     width: '4%',
-                    render: function (data, type, row, meta) {
-                        return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                    }
+                    render: renderEspCheckbox
                 },
                 {
                     data: 'permohonan.no_rujukan_permohonan',
@@ -798,40 +779,14 @@
                 { 
                     data: 'smoku.nama', 
                     render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
+                        return formatStudentName(data);
                     }
                 },
-                { data: 'akademik.nama_kursus' }, 
                 { data: 'akademik.infoipt.nama_institusi' }, 
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
                 { data: 'yuran_disokong' },
-                { data: 'wang_saku_disokong' }
+                { data: 'wang_saku_disokong' },
+                { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
         }
@@ -855,9 +810,7 @@
                     data: 'smoku.no_kp', // Assuming 'no_kp' is a unique identifier in your dataset
                     className: 'text-center',
                     width: '4%',
-                    render: function (data, type, row, meta) {
-                        return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}" />`;
-                    }
+                    render: renderEspCheckbox
                 },
                 {
                     data: 'permohonan.no_rujukan_permohonan',
@@ -877,39 +830,13 @@
                 { 
                     data: 'smoku.nama', 
                     render: function(data, type, row) {
-                        // Define conjunctions to be handled differently
-                        var conjunctions_lower = ['bin', 'binti'];
-                        var conjunctions_upper = ['A/L', 'A/P'];
-
-                        // Split the nama field into words
-                        var words = data.split(' ');
-
-                        // Process each word
-                        for (var i = 0; i < words.length; i++) {
-                            var word = words[i];
-
-                            // Check if the word is a conjunction to be displayed in lowercase
-                            if (conjunctions_lower.includes(word.toLowerCase())) {
-                                // Convert the word to lowercase
-                                words[i] = word.toLowerCase();
-                            } else if (conjunctions_upper.includes(word.toUpperCase())) {
-                                // Convert the word to uppercase
-                                words[i] = word.toUpperCase();
-                            } else {
-                                // Capitalize the first letter of other words
-                                words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-                            }
-                        }
-
-                        // Join the words back into a single string
-                        var formatted_nama = words.join(' ');
-
-                        return formatted_nama;
+                        return formatStudentName(data);
                     }
                 },
-                { data: 'akademik.nama_kursus' }, 
                 { data: 'akademik.infoipt.nama_institusi' }, 
-                { data: 'wang_saku_disokong' }
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                { data: 'wang_saku_disokong' },
+                { data: 'esp_sent_status', render: renderStatusEsp }
                 ]
             });
         }
@@ -1064,7 +991,7 @@
 
       function applyAndLogFilter(tableName, table, filterValue) {
           // Apply search filter to the table
-          table.column(5).search(filterValue).draw();
+          table.column(4).search(filterValue).draw();
 
           // Go to the first page for the table
           table.page(0).draw(false);
@@ -1104,6 +1031,36 @@
 
   <script>
 
+    function getEspPayloadRecords() {
+      try {
+        return JSON.parse(document.getElementById('data').value || '[]');
+      } catch (error) {
+        console.error('Invalid ESP payload JSON:', error);
+        return [];
+      }
+    }
+
+    function markEspSentStatus(status, response, records) {
+      if (!records.length) {
+        return Promise.resolve();
+      }
+
+      return fetch("{{ route('maklumat_tuntutan.esp.status-hantar') }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        body: JSON.stringify({
+          status: status,
+          response: response,
+          records: records
+        })
+      }).catch(error => {
+        console.error('Gagal kemaskini status hantar ESP tuntutan:', error);
+      });
+    }
+
     function sendData() {
       const secretKey = "{{ $secretKey }}";
       const time = {{ time() }}; 
@@ -1120,6 +1077,16 @@
       // console.log("Token JSON:", tokenTextarea.value);
 
       const form = document.getElementById('hantar_maklumat');
+      const payloadRecords = getEspPayloadRecords();
+      if (!payloadRecords.length) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Tiada Rekod',
+          text: 'Sila pilih sekurang-kurangnya satu rekod untuk dihantar ke ESP.',
+        });
+        return;
+      }
+
       const data = new FormData(form);
 
       fetch('https://espb.mohe.gov.my/api/studentsInfo.php', {
@@ -1134,11 +1101,11 @@
           const responseDataString = JSON.stringify(data, null, 2);
 
           if (data.status === 'error'){
-            Swal.fire({
+            markEspSentStatus('error', data, payloadRecords).then(() => Swal.fire({
               icon: 'error',
               title: 'Tidak Berjaya',
               text: 'Data tidak berjaya hantar ke ESP. Sila hantar sekali lagi.',
-            }).then((result) => {
+            })).then((result) => {
                 // Check if the user clicked OK
                 if (result.isConfirmed) {
                     // Reload the page
@@ -1150,11 +1117,11 @@
             // alert(`Data tidak berjaya di hantar ke ESP\n\nAPI Response:\n${responseDataString}`);
             
           }else{
-            Swal.fire({
+            markEspSentStatus('success', data, payloadRecords).then(() => Swal.fire({
               icon: 'success',
               title: 'Berjaya',
               text: 'Data berjaya di hantar ke ESP. Semak ESP',
-            }).then((result) => {
+            })).then((result) => {
                 // Check if the user clicked OK
                 if (result.isConfirmed) {
                     // Reload the page
@@ -1170,7 +1137,9 @@
 
       .catch(error => {
           console.error('API Request failed:', error);
-          location.reload(); // Refresh the page
+          markEspSentStatus('error', { message: error.message }, payloadRecords).then(() => {
+            location.reload(); // Refresh the page
+          });
       });
       
 

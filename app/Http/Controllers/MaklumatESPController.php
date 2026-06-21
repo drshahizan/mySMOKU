@@ -391,7 +391,7 @@ class MaklumatESPController extends Controller
             ->where('status', '=','6')
             ->whereNull('data_migrate')
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->orderBy('tarikh_hantar', 'desc')
             ->get();
@@ -415,7 +415,7 @@ class MaklumatESPController extends Controller
             ->where('status', '=','6')
             ->whereNull('data_migrate')
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->orderBy('tarikh_hantar', 'desc')
             ->get();
@@ -439,7 +439,7 @@ class MaklumatESPController extends Controller
             ->where('status', '=','6')
             ->whereNull('data_migrate')
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->orderBy('tarikh_hantar', 'desc')
             ->get();
@@ -463,7 +463,7 @@ class MaklumatESPController extends Controller
             ->where('status', '=','6')
             ->whereNull('data_migrate')
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->orderBy('tarikh_hantar', 'desc')
             ->get();
@@ -487,13 +487,48 @@ class MaklumatESPController extends Controller
             ->where('status', '=','6')
             ->whereNull('data_migrate')
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->orderBy('tarikh_hantar', 'desc')
             ->get();
 
         return response()->json($tuntutan);
 
+    }
+
+    public function markStatusHantarTuntutan(Request $request)
+    {
+        $status = $request->input('status') === 'success' ? 'success' : 'error';
+        $response = $request->input('response', []);
+        $records = collect($request->input('records', []))
+            ->filter(function ($record) {
+                return !empty($record['id_tuntutan']);
+            })
+            ->unique('id_tuntutan')
+            ->values();
+
+        if ($records->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Tiada rekod tuntutan dipilih untuk dikemaskini.',
+            ], 422);
+        }
+
+        $updated = 0;
+
+        foreach ($records as $record) {
+            $updated += Tuntutan::where('no_rujukan_tuntutan', $record['id_tuntutan'])
+                ->update([
+                    'esp_sent_status' => $status,
+                    'esp_sent_at' => now(),
+                    'esp_sent_response' => json_encode($response),
+                ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'updated' => $updated,
+        ]);
     }
 
     public function hantar(Request $request)

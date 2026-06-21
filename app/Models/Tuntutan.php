@@ -43,6 +43,9 @@ class Tuntutan extends Model
         'status_pemohon',
         'sesi_bayaran',
         'data_migrate',
+        'esp_sent_status',
+        'esp_sent_at',
+        'esp_sent_response',
     ];
 
     public function akademik()
