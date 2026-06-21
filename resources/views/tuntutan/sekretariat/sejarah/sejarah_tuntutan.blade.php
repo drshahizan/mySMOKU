@@ -36,7 +36,7 @@
             .history-status-baharu { background-color: #1b84ff; }
             .history-status-saringan { background-color: #f6a000; }
             .history-status-disokong { background-color: #ffc700; }
-            .history-status-dikembalikan,
+            .history-status-dikembalikan { background-color: #e65f4f; }
             .history-status-tidak-layak { background-color: #f1416c; }
             .history-status-layak { background-color: #50cd89; }
             .history-status-dibayar { background-color: #11a6af; }
