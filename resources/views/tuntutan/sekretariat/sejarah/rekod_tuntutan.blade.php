@@ -81,22 +81,27 @@
                                                 $status='Sedang Disaring';
                                             }
                                             if($item['dilaksanakan_oleh']==null){
-                                                $oleh = "Tiada Maklumat";
+                                                $oleh = "-";
                                             }
                                             else{
                                                 $user_name = DB::table('users')->where('id', $item['dilaksanakan_oleh'])->value('nama');
-                                                $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
-                                                $conjunctions = ['bin', 'binti'];
-                                                $words = explode(' ', $text);
-                                                $result = [];
-                                                foreach ($words as $word) {
-                                                    if (in_array(Str::lower($word), $conjunctions)) {
-                                                        $result[] = Str::lower($word);
-                                                    } else {
-                                                        $result[] = $word;
-                                                    }
+                                                if($user_name == null || Str::lower($user_name) == 'tiada maklumat'){
+                                                    $oleh = "-";
                                                 }
-                                                $oleh = implode(' ', $result);
+                                                else{
+                                                    $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                                    $conjunctions = ['bin', 'binti'];
+                                                    $words = explode(' ', $text);
+                                                    $result = [];
+                                                    foreach ($words as $word) {
+                                                        if (in_array(Str::lower($word), $conjunctions)) {
+                                                            $result[] = Str::lower($word);
+                                                        } else {
+                                                            $result[] = $word;
+                                                        }
+                                                    }
+                                                    $oleh = implode(' ', $result);
+                                                }
                                             }
                                         @endphp
                                         <tr>
@@ -106,6 +111,8 @@
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-tuntutan/'.$item['id'])}}">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='3')
                                                 <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
+                                            @elseif ($item['status']=='4')
+                                                <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='5')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-saringan/'.$item['id'])}}">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='6')
@@ -116,6 +123,10 @@
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-pembayaran/'.$item['id'])}}">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
                                             @elseif ($item['status']=='9')
                                                 <td><a href="{{url('tuntutan/sekretariat/sejarah/papar-tuntutan/'.$item['id'])}}">{{$tuntutan->no_rujukan_tuntutan}}</a></td>
+                                            @elseif ($item['status']=='10')
+                                                <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
+                                            @else
+                                                <td>{{$tuntutan->no_rujukan_tuntutan}}</td>
                                             @endif
                                             <td class="text-center">{{$item['created_at']->format('d/m/Y')}}</td>
                                             @if ($item['status']=='1')
@@ -136,6 +147,10 @@
                                                 <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
                                             @elseif ($item['status']=='9')
                                                 <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @elseif ($item['status']=='10')
+                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                            @else
+                                                <td class="text-center">{{ucwords(strtolower($status))}}</td>
                                             @endif
                                             <td>{{$oleh}}</td>
                                         </tr>

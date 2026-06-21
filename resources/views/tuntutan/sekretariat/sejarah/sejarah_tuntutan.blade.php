@@ -20,6 +20,27 @@
             .nav{
                 margin-left: 20px!important;
             }
+
+            .history-status-pill {
+                align-items: center;
+                border-radius: 7px;
+                color: #fff !important;
+                display: inline-flex;
+                font-weight: 700;
+                justify-content: center;
+                min-width: 130px;
+                padding: 9px 18px;
+                text-align: center;
+            }
+            .history-status-info { background-color: #7239ea; }
+            .history-status-baharu { background-color: #1b84ff; }
+            .history-status-saringan { background-color: #f6a000; }
+            .history-status-disokong { background-color: #ffc700; }
+            .history-status-dikembalikan,
+            .history-status-tidak-layak { background-color: #f1416c; }
+            .history-status-layak { background-color: #50cd89; }
+            .history-status-dibayar { background-color: #11a6af; }
+            .history-status-batal { background-color: #6c757d; }
         </style>
     </head>
 
@@ -106,6 +127,32 @@
             const smoku_id = "{{ $smoku_id }}";
 
             $(document).ready(function() {
+                function renderStatusPill(data) {
+                    switch (String(data)) {
+                        case '1':
+                            return '<span class="history-status-pill history-status-info">Deraf</span>';
+                        case '2':
+                            return '<span class="history-status-pill history-status-baharu">Baharu</span>';
+                        case '3':
+                            return '<span class="history-status-pill history-status-saringan">Sedang Disaring</span>';
+                        case '4':
+                            return '<span class="history-status-pill history-status-disokong">Disokong</span>';
+                        case '5':
+                            return '<span class="history-status-pill history-status-dikembalikan">Dikembalikan</span>';
+                        case '6':
+                            return '<span class="history-status-pill history-status-layak">Layak</span>';
+                        case '7':
+                            return '<span class="history-status-pill history-status-tidak-layak">Tidak Layak</span>';
+                        case '8':
+                            return '<span class="history-status-pill history-status-dibayar">Dibayar</span>';
+                        case '9':
+                            return '<span class="history-status-pill history-status-batal">Batal</span>';
+                        case '10':
+                            return '<span class="history-status-pill history-status-batal">Berhenti</span>';
+                        default:
+                            return '';
+                    }
+                }
 
                 // DataTable initialization functions
                 function initializeDataTable1() {
@@ -232,46 +279,7 @@
                             {
                                 data: 'status',
                                 render: function(data, type, row) {
-                                    var status = ''; // Initialize an empty string for the button HTML
-
-                                    // Define the button HTML based on the status value
-                                    switch (data) {
-                                        case '1':
-                                            status = '<button class="btn bg-info text-white">Deraf</button>';
-                                            break;
-                                        case '2':
-                                            status = '<button class="btn bg-baharu text-white">Baharu</button>';
-                                            break;
-                                        case '3':
-                                            status = '<button class="btn bg-sedang-disaring text-white">Sedang Disaring</button>';
-                                            break;
-                                        case '4':
-                                            status = '<button class="btn bg-warning text-white">Disokong</button>';
-                                            break;
-                                        case '5':
-                                            status = '<button class="btn bg-dikembalikan text-white">Dikembalikan</button>';
-                                            break;
-                                        case '6':
-                                            status = '<button class="btn bg-success text-white">Layak</button>';
-                                            break;
-                                        case '7':
-                                            status = '<button class="btn bg-danger text-white">Tidak Layak</button>';
-                                            break;
-                                        case '8':
-                                            status = '<button class="btn bg-dibayar text-white">Dibayar</button>';
-                                            break;
-                                        case '9':
-                                            status = '<button class="btn bg-batal text-white">Batal</button>';
-                                            break;
-                                        case '10':
-                                            status = '<button class="btn bg-batal text-white">Berhenti</button>';
-                                            break;    
-                                        default:
-                                            status = ''; // Set empty string for unknown status values
-                                            break;
-                                    }
-
-                                    return status;
+                                    return renderStatusPill(data);
                                 }
                             }
                         ]

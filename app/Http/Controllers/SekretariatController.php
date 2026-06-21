@@ -3458,7 +3458,7 @@ class SekretariatController extends Controller
                     ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
-                            ->with('infoipt');
+                            ->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->orderBy(
                         Tuntutan::select('tarikh_hantar')
@@ -3483,7 +3483,7 @@ class SekretariatController extends Controller
                     ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
-                            ->with('infoipt');
+                            ->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->orderBy(
                         Tuntutan::select('tarikh_hantar')
@@ -3508,7 +3508,7 @@ class SekretariatController extends Controller
                     ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1)
-                            ->with('infoipt');
+                            ->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->orderBy(
                         Tuntutan::select('tarikh_hantar')
@@ -3533,7 +3533,7 @@ class SekretariatController extends Controller
                     ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->orderBy(
                         Tuntutan::select('tarikh_hantar')
@@ -3557,7 +3557,7 @@ class SekretariatController extends Controller
                     ->whereHas('tuntutan')
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
-                        $query->with('infoipt');
+                        $query->with(['infoipt', 'peringkat']);
                     }, 'smoku', 'tuntutan'])
                     ->orderBy(
                         Tuntutan::select('tarikh_hantar')
@@ -3595,7 +3595,7 @@ class SekretariatController extends Controller
         $rujukan = explode("/", $permohonan->no_rujukan_permohonan);
         $peringkat = $rujukan[1];
         $akademik = Akademik::where('smoku_id', $smoku_id)->where('peringkat_pengajian', $peringkat)->first();
-        $sejarah_t = SejarahTuntutan::where('tuntutan_id', $id)->where('status', '!=','4')->orderBy('created_at', 'desc')->get();
+        $sejarah_t = SejarahTuntutan::where('tuntutan_id', $id)->orderBy('created_at', 'asc')->get();
         return view('tuntutan.sekretariat.sejarah.rekod_tuntutan',compact('tuntutan','akademik','smoku','sejarah_t','permohonan'));
     }
 
