@@ -568,7 +568,7 @@ class SekretariatController extends Controller
             })
             ->whereNotIn('status', [9, 10])
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -692,7 +692,7 @@ class SekretariatController extends Controller
             })
             ->whereNotIn('status', [9, 10])
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -816,7 +816,7 @@ class SekretariatController extends Controller
             })
             ->whereNotIn('status', [9, 10])
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -4061,7 +4061,7 @@ class SekretariatController extends Controller
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -4081,7 +4081,7 @@ class SekretariatController extends Controller
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -4101,7 +4101,7 @@ class SekretariatController extends Controller
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -4121,7 +4121,7 @@ class SekretariatController extends Controller
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
@@ -4139,7 +4139,7 @@ class SekretariatController extends Controller
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
             }, 'smoku', 'permohonan'])
             ->get();
 
