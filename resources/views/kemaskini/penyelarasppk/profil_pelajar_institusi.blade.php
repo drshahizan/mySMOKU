@@ -869,6 +869,10 @@
 							</div>
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
+								@php
+									$bolehKemaskiniPeringkat = $permohonan && $permohonan->status < 6;
+									$peringkatSemasa = $peringkat->firstWhere('kod_peringkat', $akademik->peringkat_pengajian);
+								@endphp
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
 								<!--end::Label-->
@@ -876,9 +880,14 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
-									<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
-										<option value="">Pilih</option>
-									</select>
+									@if ($bolehKemaskiniPeringkat)
+										<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+											<option value="">Pilih</option>
+										</select>
+									@else
+										<input type="hidden" name="peringkat_pengajian" value="{{$akademik->peringkat_pengajian}}" />
+										<input type="text" class="form-control form-control-solid" value="{{ strtoupper($peringkatSemasa->peringkat ?? $akademik->peringkat_pengajian) }}" readonly />
+									@endif
 									<!--end::Input wrapper-->
 								</div>
 								<!--end::Row-->
@@ -1793,12 +1802,20 @@
 				}
 
 				// Initial load
-				fetchPeringkat(id_institusi);
+				if ($('#peringkat_pengajian').length) {
+					fetchPeringkat(id_institusi);
+				} else {
+					fetchKursus(id_institusi, kod_peringkat);
+				}
 
 				// When id_institusi changes
 				$('#id_institusi').change(function() {
 					id_institusi = $(this).val();
-					fetchPeringkat(id_institusi);  // Reload peringkat options
+					if ($('#peringkat_pengajian').length) {
+						fetchPeringkat(id_institusi);  // Reload peringkat options
+					} else {
+						fetchKursus(id_institusi, kod_peringkat);
+					}
 				});
 
 				// When peringkat changes

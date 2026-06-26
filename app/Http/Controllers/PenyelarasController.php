@@ -2778,7 +2778,7 @@ class PenyelarasController extends Controller
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
 
-        return view('kemaskini.penyelaras.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen'));
+        return view('kemaskini.penyelaras.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan'));
     }
 
     public function peringkatProfilPelajar($ipt=0)
