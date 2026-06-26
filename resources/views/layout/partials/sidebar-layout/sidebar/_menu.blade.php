@@ -564,6 +564,36 @@
 
 				<div class="menu-item pt-5">
 					<div class="menu-content">
+						<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
+					</div>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.sesi.salur')}}">
+						<span class="menu-icon">{!! getIcon('calendar', 'fs-2') !!}</span>
+						<span class="menu-title">Sesi Salur</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.draf.SPBB')}}">
+						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
+						<span class="menu-title">Draf SPBB</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPBB')}}">
+						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
+						<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link" href="{{ route('sekretariat.muat-turun.lejar')}}">
+						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
+						<span class="menu-title">Muat Turun Lejar</span>
+					</a>
+				</div>
+
+				<div class="menu-item pt-5">
+					<div class="menu-content">
 						<span class="menu-heading fw-bold text-uppercase fs-7">Kemaskini</span>
 					</div>
 				</div>
@@ -665,36 +695,6 @@
 					<a class="menu-link" href="{{ route('kemaskini.sekretariat.institusi')}}">
 						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
 						<span class="menu-title">Senarai Institusi</span>
-					</a>
-				</div>
-
-				<div class="menu-item pt-5">
-					<div class="menu-content">
-						<span class="menu-heading fw-bold text-uppercase fs-7">Penyaluran</span>
-					</div>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.sesi.salur')}}">
-						<span class="menu-icon">{!! getIcon('calendar', 'fs-2') !!}</span>
-						<span class="menu-title">Sesi Salur</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.draf.SPBB')}}">
-						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
-						<span class="menu-title">Draf SPBB</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPBB')}}">
-						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
-						<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.muat-turun.lejar')}}">
-						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
-						<span class="menu-title">Muat Turun Lejar</span>
 					</a>
 				</div>
 
