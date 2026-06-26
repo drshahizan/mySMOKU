@@ -14,6 +14,7 @@ class DokumenESP extends Model
         'user_id',
         'institusi_id',
         'no_rujukan',
+        'sesi_salur_id',
         'dokumen1',
         'dokumen1a',
         'dokumen2',

@@ -2052,28 +2052,63 @@ class SekretariatController extends Controller
 
     public function muatTurunDokumenSPPB()
     {
-        // Get the latest updated_at for each id_institusi
-        $dokumen = DokumenESP::select('dokumen_esp.*')
-            ->join(
+        $dokumen = InfoIpt::select(
+                'bk_info_institusi.id_institusi',
+                'bk_info_institusi.nama_institusi',
+                'dokumen_esp.updated_at',
+                'dokumen_esp.id as dokumen_id'
+            )
+            ->leftJoin(
                 DB::raw('(SELECT institusi_id, MAX(updated_at) as latest_update 
                         FROM dokumen_esp 
                         GROUP BY institusi_id) as latest'),
                 function ($join) {
-                    $join->on('dokumen_esp.institusi_id', '=', 'latest.institusi_id')
-                        ->on('dokumen_esp.updated_at', '=', 'latest.latest_update');
+                    $join->on('bk_info_institusi.id_institusi', '=', 'latest.institusi_id');
                 }
             )
-            ->orderBy('latest.latest_update', 'desc')
+            ->leftJoin('dokumen_esp', function ($join) {
+                $join->on('dokumen_esp.institusi_id', '=', 'latest.institusi_id')
+                    ->on('dokumen_esp.updated_at', '=', 'latest.latest_update');
+            })
+            ->where('bk_info_institusi.jenis_institusi', 'UA')
+            ->where(function ($query) {
+                $query->whereNull('bk_info_institusi.id_induk')
+                    ->orWhereColumn('bk_info_institusi.id_induk', 'bk_info_institusi.id_institusi');
+            })
+            ->orderBy('bk_info_institusi.nama_institusi')
             ->get();
 
         return view('spbb.sekretariat.muat_turun_dokumen', compact('dokumen'));
     }
 
-    public function salinanDokumenSPPB($id)
+    public function salinanDokumenSPPB(Request $request, $id)
     {
-        $penyata =  MaklumatBank::where('institusi_id', $id)->first();
-        $dokumen = DokumenESP::where('institusi_id', $id)->orderByDesc('id')->first();
-        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','penyata'));
+        $penyata = MaklumatBank::where('institusi_id', $id)->first();
+        $dokumenSenarai = DokumenESP::where('institusi_id', $id)
+            ->leftJoin('bk_sesi_salur', 'dokumen_esp.sesi_salur_id', '=', 'bk_sesi_salur.id')
+            ->select('dokumen_esp.*', 'bk_sesi_salur.sesi as sesi_salur')
+            ->orderByDesc('bk_sesi_salur.id')
+            ->orderByDesc('dokumen_esp.updated_at')
+            ->get()
+            ->map(function ($dokumen) {
+                if (!$dokumen->sesi_salur) {
+                    $sesiSalur = SesiSalur::where('created_at', '<=', $dokumen->updated_at)
+                        ->orderByDesc('created_at')
+                        ->first();
+
+                    $dokumen->sesi_salur = $sesiSalur?->sesi;
+                }
+
+                return $dokumen;
+            })
+            ->filter(function ($dokumen) {
+                return !empty($dokumen->sesi_salur);
+            })
+            ->values();
+
+        $dokumen = $dokumenSenarai->firstWhere('id', (int) $request->dokumen_id) ?? $dokumenSenarai->first();
+
+        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','dokumenSenarai','penyata'));
     }
 
     //TUNTUTAN

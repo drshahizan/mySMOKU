@@ -58,6 +58,7 @@ use App\Models\JumlahTuntutan;
 use App\Models\Role;
 use App\Models\SaringanTuntutan;
 use App\Models\SenaraiBank;
+use App\Models\SesiSalur;
 use App\Models\TukarInstitusi;
 use Carbon\Carbon;
 use DateInterval;
@@ -2056,14 +2057,16 @@ class PenyelarasController extends Controller
     {   
         $user = auth()->user();
         $institusiId = $user->id_institusi;
+        $sesiSalur = SesiSalur::orderByDesc('id')->first();
         
-        // Get documents for the user's 'institusi_id' and 'no_rujukan' ending in '/2'
         $dokumen = DokumenESP::where('institusi_id', $institusiId)
-            // ->where('no_rujukan', 'like', '%/2')
+            ->when($sesiSalur, function ($query) use ($sesiSalur) {
+                $query->where('sesi_salur_id', $sesiSalur->id);
+            })
             ->orderByDesc('id')
             ->get();
 
-        return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen'));
+        return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen','sesiSalur'));
     }
 
     public function hantarBorangSPBB(Request $request)
@@ -2071,12 +2074,16 @@ class PenyelarasController extends Controller
         $user = auth()->user();
         $institusiId = $user->id_institusi;
         $currentYear = Carbon::now()->year;
-        $currentMonth = Carbon::now()->month;
+        $sesiSalur = SesiSalur::orderByDesc('id')->first();
 
-        // Check last record in the same month/year
-        $lastRecord = DokumenESP::where('institusi_id', $institusiId)
-            ->whereYear('created_at', $currentYear)
-            ->whereMonth('created_at', $currentMonth)
+        if (!$sesiSalur) {
+            return redirect()->back()
+                ->withErrors(['sesi_salur' => 'Sesi salur belum ditetapkan.'])
+                ->withInput();
+        }
+
+        $existingRecord = DokumenESP::where('institusi_id', $institusiId)
+            ->where('sesi_salur_id', $sesiSalur->id)
             ->orderByDesc('id')
             ->first();
 
@@ -2104,8 +2111,8 @@ class PenyelarasController extends Controller
                 ->withInput();
         }
 
-        if (!$lastRecord) {
-            // Create new record → increment number for institusi
+        if (!$existingRecord) {
+            // Create new record and increment number for institusi.
             $lastRecordOverall = DokumenESP::where('institusi_id', $institusiId)
                 ->whereYear('created_at', $currentYear)
                 ->orderByDesc('id')
@@ -2123,9 +2130,10 @@ class PenyelarasController extends Controller
             $dokumenESP->user_id = $user->id;
             $dokumenESP->institusi_id = $institusiId;
             $dokumenESP->no_rujukan = $noRujukan;
+            $dokumenESP->sesi_salur_id = $sesiSalur->id;
         } else {
-            // Update same-month record
-            $dokumenESP = $lastRecord;
+            // Update only the record for the current sesi salur.
+            $dokumenESP = $existingRecord;
         }
 
         $uploadedAnyFile = false;

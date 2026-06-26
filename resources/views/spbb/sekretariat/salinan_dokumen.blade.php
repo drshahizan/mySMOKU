@@ -1,71 +1,88 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
-<!--begin::Head-->
-<head>
-    <title>{{ config('app.name', 'SistemBKOKU') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:type" content="article"/>
-    <link rel="stylesheet" href="/assets/css/style.bundle.css">
-    <link rel="stylesheet" href="/assets/css/saringan.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
+<x-default-layout>
     <style>
-        .nav, h3{
-            margin: 10px!important;
-        }
-        body{
-            margin: 10px;
-        }
-        .border{
+        .spbb-document-frame {
             border: 1px solid black!important;
         }
-    </style>
-</head>
 
-<body>
-    <h3>Muat Turun Borang Permohonan Peruntukan Program BKOKU</h3>
+        .spbb-document-viewer {
+            width: 100%;
+            height: 80vh;
+        }
+    </style>
+
+    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Penyaluran</h1>
+        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Muat Turun</li>
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <li class="breadcrumb-item text-dark" style="color:darkblue">Borang SPBB</li>
+        </ul>
+    </div>
+
+    <br>
+
+    <div class="card p-5">
+        <h3>Muat Turun Borang Permohonan Peruntukan Program BKOKU</h3>
+
+    @if ($dokumenSenarai->isNotEmpty())
+        <form method="GET" class="mb-5">
+            <label for="dokumen_id" class="form-label">Sesi Salur</label>
+            <div class="w-100 mw-400px">
+                <select name="dokumen_id" id="dokumen_id" class="form-select" onchange="this.form.submit()">
+                    @foreach ($dokumenSenarai as $doc)
+                        <option value="{{ $doc->id }}" {{ $dokumen && $dokumen->id == $doc->id ? 'selected' : '' }}>
+                            {{ $doc->sesi_salur }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            @if ($dokumen)
+                <div class="text-muted mt-2">
+                    No Rujukan: {{ $dokumen->no_rujukan }}
+                </div>
+            @endif
+        </form>
+    @endif
     
-    <div class="border">
+    <div class="spbb-document-frame">
+        @if (!$dokumen)
+            <p style="text-align: center; margin: 20px;">Tiada dokumen SPBB dimuat naik untuk institusi ini.</p>
+        @else
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen1-tab" data-toggle="tab" data-target="#dokumen1" type="button" role="tab" aria-controls="dokumen1" aria-selected="true">
+                <button class="nav-link" id="dokumen1-tab" data-bs-toggle="tab" data-bs-target="#dokumen1" type="button" role="tab" aria-controls="dokumen1" aria-selected="true">
                     SPBB 1
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen1a-tab" data-toggle="tab" data-target="#dokumen1a" type="button" role="tab" aria-controls="dokumen1a" aria-selected="true">
+                <button class="nav-link" id="dokumen1a-tab" data-bs-toggle="tab" data-bs-target="#dokumen1a" type="button" role="tab" aria-controls="dokumen1a" aria-selected="true">
                     SPBB 1a
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen2-tab" data-toggle="tab" data-target="#dokumen2" type="button" role="tab" aria-controls="dokumen2" aria-selected="true">
+                <button class="nav-link" id="dokumen2-tab" data-bs-toggle="tab" data-bs-target="#dokumen2" type="button" role="tab" aria-controls="dokumen2" aria-selected="true">
                     SPBB 2
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen2a-tab" data-toggle="tab" data-target="#dokumen2a" type="button" role="tab" aria-controls="dokumen2a" aria-selected="true">
+                <button class="nav-link" id="dokumen2a-tab" data-bs-toggle="tab" data-bs-target="#dokumen2a" type="button" role="tab" aria-controls="dokumen2a" aria-selected="true">
                     SPBB 2a
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen3-tab" data-toggle="tab" data-target="#dokumen3" type="button" role="tab" aria-controls="dokumen3" aria-selected="true">
+                <button class="nav-link" id="dokumen3-tab" data-bs-toggle="tab" data-bs-target="#dokumen3" type="button" role="tab" aria-controls="dokumen3" aria-selected="true">
                     SPBB 3
                 </button>
             </li>  
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dokumen4-tab" data-toggle="tab" data-target="#dokumen4" type="button" role="tab" aria-controls="dokumen4" aria-selected="true">
+                <button class="nav-link" id="dokumen4-tab" data-bs-toggle="tab" data-bs-target="#dokumen4" type="button" role="tab" aria-controls="dokumen4" aria-selected="true">
                     Surat Iringan Universiti
                 </button>
             </li>  
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="penyata-tab" data-toggle="tab" data-target="#penyata" type="button" role="tab" aria-controls="penyata" aria-selected="true">
+                <button class="nav-link" id="penyata-tab" data-bs-toggle="tab" data-bs-target="#penyata" type="button" role="tab" aria-controls="penyata" aria-selected="true">
                     Penyata Bank
                 </button>
             </li>  
@@ -87,7 +104,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Permohonan Salur Pelajar Sedia Ada</p>
                         <a href="/assets/dokumen/sppb_1/{{$dokumen->dokumen1}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_1/{{$dokumen->dokumen1}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_1/{{$dokumen->dokumen1}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Permohonan Salur Pelajar Sedia Ada tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -104,7 +121,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Salur Pelajar Baharu</p>
                         <a href="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_1a/{{$dokumen->dokumen1a}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Salur Pelajar Baharu tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -121,7 +138,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Laporan Bayaran</p>
                         <a href="/assets/dokumen/sppb_2/{{$dokumen->dokumen2}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_2/{{$dokumen->dokumen2}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_2/{{$dokumen->dokumen2}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Laporan Bayaran tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -138,7 +155,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Laporan Tuntutan</p>
                         <a href="/assets/dokumen/sppb_2a/{{$dokumen->dokumen2a}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_2a/{{$dokumen->dokumen2a}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_2a/{{$dokumen->dokumen2a}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Laporan Tuntutan tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -155,7 +172,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Penyata Terimaan</p>
                         <a href="/assets/dokumen/sppb_3/{{$dokumen->dokumen3}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_3/{{$dokumen->dokumen3}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_3/{{$dokumen->dokumen3}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Penyata Terimaan tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -172,7 +189,7 @@
                         <p>Sila klik link di bawah untuk muat turun Dokumen Surat Iringan Universiti</p>
                         <a href="/assets/dokumen/sppb_4/{{$dokumen->dokumen4}}" download>Klik Sini</a><br>
                     @elseif (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/sppb_4/{{$dokumen->dokumen4}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/sppb_4/{{$dokumen->dokumen4}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Dokumen Surat Iringan Universiti tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -182,11 +199,11 @@
             <div class="tab-pane fadeshow" id="penyata" role="tabpanel" aria-labelledby="penyata-tab">
                 <div style="text-align: center">
                     @php
-                        $fileExtension = pathinfo($penyata->penyata_bank, PATHINFO_EXTENSION);
+                        $fileExtension = pathinfo($penyata->penyata_bank ?? '', PATHINFO_EXTENSION);
                     @endphp
                     
                     @if (in_array($fileExtension, $pdfExtensions))
-                        <embed src="/assets/dokumen/penyata_bank_islam/{{$penyata->penyata_bank}}#zoom=90" width="70%" height="605px" />
+                        <embed src="/assets/dokumen/penyata_bank_islam/{{$penyata->penyata_bank}}#zoom=90" class="spbb-document-viewer" />
                     @else
                         <p>Penyata bank tidak dimuat naik oleh penyelaras.</p>
                     @endif
@@ -194,9 +211,9 @@
             </div>
 
         </div>
+        @endif
     </div>
-</body>
-</html>
+    </div>
 
 <script>
       if (navigator.plugins && navigator.plugins.length > 0) {
@@ -210,3 +227,4 @@
     $('.nav').find('.nav-link:first').addClass('active');
     $('.tab-content').find('.tab-pane:first').addClass('active');
 </script>
+</x-default-layout>

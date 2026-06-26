@@ -42,7 +42,7 @@
 				<div class="row clearfix">
 					<div class="card p-5">
 						<div class="header">
-							<h2>Borang Salur Peruntukan Bantuan BKOKU<br><small>Sila klik pada ikon "Lihat" untuk semak dokumen yang dimuat naik oleh penyelaras universiti awam.</small></h2>
+							<h2>Borang Salur Peruntukan Bantuan BKOKU<br><small>Sila klik pada ikon "Papar" untuk semak dokumen yang dimuat naik oleh penyelaras universiti awam.</small></h2>
 						</div>
 
 						<div class="body">
@@ -63,18 +63,18 @@
 							
 										@foreach ($dokumen as $doc)
 											@php
-												$id = $doc->institusi_id;
-												$nama_institusi = DB::table('bk_info_institusi')->where('id_institusi', $id)->value('nama_institusi');
+												$id = $doc->id_institusi;
+												$nama_institusi = $doc->nama_institusi;
 											@endphp
 							
 											{{-- @if (str_ends_with($doc->no_rujukan, '/2')) --}}
 												<tr>
 													<td class="text-center" data-no="{{ $i++ }}">{{ $i }}.</td>
 													<td>{{ $nama_institusi }}</td>
-													<td class="text-center">{{date('d/m/Y', strtotime($doc->updated_at))}}</td>
+													<td class="text-center">{{ $doc->updated_at ? date('d/m/Y', strtotime($doc->updated_at)) : '-' }}</td>
 													<td class="text-center">
 														<a href="{{ url('penyaluran/sekretariat/lihat/salinan-dokumen/SPBB/'.$id) }}" class="btn btn-info btn-sm" style="width: 60%; margin: 0 auto;">
-															Lihat <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
+															Papar <i class='fas fa-eye' style='color:white; padding-left:20px;'></i>
 														</a>
 													</td>
 												</tr>
