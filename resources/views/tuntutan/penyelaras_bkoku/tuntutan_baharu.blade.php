@@ -7,6 +7,43 @@
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+    .status-pill {
+        align-items: center;
+        border: 0;
+        border-radius: 8px;
+        color: #fff;
+        display: inline-flex;
+        font-weight: 700;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 14px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        width: 156px;
+    }
+
+    .status-pill:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .status-pill-button {
+        cursor: pointer;
+    }
+
+    .status-deraf { background-color: #7239ea; }
+    .status-baharu { background-color: #1f73e8; }
+    .status-sedang-disaring { background-color: #ea4fb5; }
+    .status-disokong { background-color: #ffb800; }
+    .status-dikembalikan { background-color: #e65f4f; }
+    .status-layak { background-color: #50cd89; }
+    .status-tidak-layak { background-color: #f1416c; }
+    .status-dibayar { background-color: #10a4ad; }
+    .status-batal { background-color: #6c757d; }
+    .status-belum-tuntut { background-color: #1f73e8; }
+</style>
 </head>    
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
@@ -54,7 +91,7 @@
 								<th class="text-center"><b>Peringkat Pengajian</b></th>
 								<th class="text-center"><b>Nama Kursus</b></th>
                                 <th class="text-center"><b>Tempoh Penajaan</b></th>
-                                <th class="text-center"><b>Status</b></th>
+                                <th class="text-center"><b>Status Terkini</b></th>
                                 <th class="text-center"><b>Tindakan</b></th>
                             </tr>
                         </thead>
@@ -297,16 +334,16 @@
                                             @endphp
 
                                             @if ($layak->tuntutan_status=='1')
-                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-deraf">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='2')
-                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-baharu">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='3')
-                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-sedang-disaring">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='4')
-                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-disokong">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='5')
                                                 <td class="text-center">
-                                                    <button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $layak->smoku_id }}">{{ucwords(strtolower($status))}}</button>
+                                                    <button class="status-pill status-dikembalikan status-pill-button" data-bs-toggle="modal" data-bs-target="#saringanModal{{ $layak->smoku_id }}">{{ucwords(strtolower($status))}}</button>
 
                                                     <div class="modal fade" id="saringanModal{{ $layak->smoku_id }}" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -321,18 +358,18 @@
                                                     </div>
                                                 </td>
                                             @elseif ($layak->tuntutan_status=='6')
-                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-layak">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='7')
-                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-tidak-layak">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='8')
-                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-dibayar">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='9')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-batal">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='10')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>    
+                                                <td class="text-center"><span class="status-pill status-batal">{{ucwords(strtolower($status))}}</span></td>    
                                             @endif
                                         @else
-                                            <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
+                                            <td class="text-center"><span class="status-pill status-belum-tuntut">Belum Tuntut</span></td>
                                         @endif
                                         
                                         <td class="text-center">

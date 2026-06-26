@@ -56,7 +56,7 @@
                 <tr class="gap-left">
                     <td style="width: 16%">Peringkat Pengajian</td>
                     <td style="width: 2%">:</td>
-                    <td>{{$peringkat_pengajian ?? '' }}</td>
+                    <td>{{strtoupper($peringkat_pengajian ?? '')}}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 16%">Nama Pusat Pengajian</td>

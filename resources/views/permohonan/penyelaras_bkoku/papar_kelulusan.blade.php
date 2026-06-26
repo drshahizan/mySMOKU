@@ -1,4 +1,4 @@
-
+<x-default-layout>
 <head>
     <title>{{ config('app.name', 'SistemBKOKU') }}</title>
     <link rel="stylesheet" href="/assets/css/style.bundle.css">
@@ -21,7 +21,6 @@
     </style>
 </head>
 
-<body>
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
@@ -139,4 +138,4 @@
         </div>
     </div>
 </div>
-</body>
+</x-default-layout>

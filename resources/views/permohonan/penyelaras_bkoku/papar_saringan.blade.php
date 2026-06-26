@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
+<x-default-layout>
     <head>
         <title>{{ config('app.name', 'SistemBKOKU') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -67,7 +66,6 @@
         </style>
     </head>
 
-    <body>
         <!--begin::Page title-->
         <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
             <!--begin::Title-->
@@ -405,6 +403,15 @@
                                             <td>:</td>
                                             <td>{{ucwords(strtolower($status))}} ({{date('d/m/Y', strtotime($sejarah_p->created_at))}})</td>
                                         </tr>
+                                        <tr>
+                                            <td><strong>No Baucer</strong></td>
+                                            <td>:</td>
+                                            <td>{{ $permohonan->no_baucer ?: '-' }}</td>
+                                            <td class="space">&nbsp;</td>
+                                            <td><strong>Tarikh Baucer</strong></td>
+                                            <td>:</td>
+                                            <td>{{ $permohonan->tarikh_baucer ? date('d/m/Y', strtotime($permohonan->tarikh_baucer)) : '-' }}</td>
+                                        </tr>
                                     </table>
                                     <hr>
                                     <!--begin: Invoice body-->
@@ -611,5 +618,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+</x-default-layout>

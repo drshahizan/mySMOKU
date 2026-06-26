@@ -1,7 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {!! printHtmlAttributes('html') !!}>
-<!--begin::Head-->
+<x-default-layout>
 <head>
     <title>{{ config('app.name', 'SistemBKOKU') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -67,7 +64,6 @@
         color: red!important;
     }
 </style>
-<body>
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
@@ -217,5 +213,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+</x-default-layout>

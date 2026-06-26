@@ -1,4 +1,17 @@
 {{-- PELAJAR UA/IPTS/PPK --}}
+<style>
+	.app-sidebar .menu .menu-item .menu-link.active {
+		background-color: #5b2a86 !important;
+	}
+
+	.app-sidebar .menu .menu-item .menu-link.active .menu-title,
+	.app-sidebar .menu .menu-item .menu-link.active .menu-icon,
+	.app-sidebar .menu .menu-item .menu-link.active .menu-icon .svg-icon,
+	.app-sidebar .menu .menu-item .menu-link.active .menu-icon i {
+		color: #ffffff !important;
+	}
+</style>
+
 @if(Auth::user()->tahap=='1')
 	@php
 		$smoku = DB::table('smoku')
@@ -467,6 +480,10 @@
 		$tukarInstitusi = DB::table('tukar_institusi')->where('status', '=', '0')->count();
 		//pengesahan CGPA
 		$pengesahanCGPA = DB::table('permohonan_peperiksaan')->where('pengesahan_rendah', '=', '1')->count();
+
+		$menuActive = function (...$patterns) {
+			return request()->is(...$patterns) ? 'active' : '';
+		};
 	@endphp
 
 	<!--begin::sidebar menu-->
@@ -477,7 +494,7 @@
 			<div class="menu menu-column menu-rounded menu-sub-indention px-3 fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
 				<!--begin:Menu item-->
 				<div class="menu-item">
-					<a class="menu-link" href="{{ url('dashboard/sekretariat') }}">
+					<a class="menu-link {{ $menuActive('dashboard/sekretariat') }}" href="{{ url('dashboard/sekretariat') }}">
 						<span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
 						<span class="menu-title">Laman Utama</span>
 					</a>
@@ -489,38 +506,38 @@
 					</div>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('permohonan/sekretariat/saringan/senarai-permohonan')}}">
+					<a class="menu-link {{ $menuActive('permohonan/sekretariat/saringan/*') }}" href="{{url('permohonan/sekretariat/saringan/senarai-permohonan')}}">
 							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 							<span class="menu-title">Saringan ({{$baharu}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('permohonan/sekretariat/kelulusan')}}">
+					<a class="menu-link {{ $menuActive('permohonan/sekretariat/kelulusan*') }}" href="{{url('permohonan/sekretariat/kelulusan')}}">
 							<span class="menu-icon">{!! getIcon('loading', 'fs-2') !!}</span>
 							<span class="menu-title">Kelulusan ({{$sokong}})</span>
 					</a>
 				</div>
 
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('permohonan/sekretariat/keputusan')}}">
+					<a class="menu-link {{ $menuActive('permohonan/sekretariat/keputusan*') }}" href="{{url('permohonan/sekretariat/keputusan')}}">
 							<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
 							<span class="menu-title">Keputusan </span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('permohonan.esp')}}">
+					<a class="menu-link {{ $menuActive('permohonanESP*') }}" href="{{ route('permohonan.esp')}}">
 							<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
 							<span class="menu-title">Maklumat ESP ({{$layak}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('permohonan/sekretariat/pembayaran/senarai')}}">
+					<a class="menu-link {{ $menuActive('permohonan/sekretariat/pembayaran/*') }}" href="{{url('permohonan/sekretariat/pembayaran/senarai')}}">
 						<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
 						<span class="menu-title">Pembayaran ({{$bayar}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('permohonan/sekretariat/sejarah/sejarah-permohonan')}}">
+					<a class="menu-link {{ $menuActive('permohonan/sekretariat/sejarah/*') }}" href="{{url('permohonan/sekretariat/sejarah/sejarah-permohonan')}}">
 						<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
 						<span class="menu-title">Sejarah ({{$total}})</span>
 					</a>
@@ -532,31 +549,31 @@
 					</div>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ url('tuntutan/sekretariat/saringan/senarai-tuntutan') }}">
+					<a class="menu-link {{ $menuActive('tuntutan/sekretariat/saringan/*') }}" href="{{ url('tuntutan/sekretariat/saringan/senarai-tuntutan') }}">
 							<span class="menu-icon">{!! getIcon('notepad-edit', 'fs-2') !!}</span>
 							<span class="menu-title">Saringan ({{$baharuT}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
+					<a class="menu-link {{ $menuActive('tuntutan/sekretariat/keputusan/*') }}" href="{{ url('tuntutan/sekretariat/keputusan/keputusan-tuntutan') }}">
 							<span class="menu-icon">{!! getIcon('check-square', 'fs-2') !!}</span>
 							<span class="menu-title">Keputusan </span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('tuntutan.esp')}}">
+					<a class="menu-link {{ $menuActive('tuntutanESP*') }}" href="{{ route('tuntutan.esp')}}">
 							<span class="menu-icon">{!! getIcon('square-brackets', 'fs-2') !!}</span>
 							<span class="menu-title">Maklumat ESP ({{$layakT}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
+					<a class="menu-link {{ $menuActive('tuntutan/sekretariat/pembayaran/*') }}" href="{{url('tuntutan/sekretariat/pembayaran/senarai')}}">
 						<span class="menu-icon">{!! getIcon('dollar', 'fs-2') !!}</span>
 						<span class="menu-title">Pembayaran ({{$bayarT}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('senarai.tuntutan') }}">
+					<a class="menu-link {{ $menuActive('tuntutan/sekretariat/sejarah/*') }}" href="{{ route('senarai.tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('watch', 'fs-2') !!}</span>
 						<span class="menu-title">Sejarah ({{$totalT}})</span>
 					</a>
@@ -568,25 +585,25 @@
 					</div>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.sesi.salur')}}">
+					<a class="menu-link {{ $menuActive('penyaluran/sekretariat/sesi/salur*') }}" href="{{ route('sekretariat.sesi.salur')}}">
 						<span class="menu-icon">{!! getIcon('calendar', 'fs-2') !!}</span>
 						<span class="menu-title">Sesi Salur</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.draf.SPBB')}}">
+					<a class="menu-link {{ $menuActive('penyaluran/sekretariat/draf/*') }}" href="{{ route('sekretariat.draf.SPBB')}}">
 						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
 						<span class="menu-title">Draf SPBB</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.muat-turun.SPBB')}}">
+					<a class="menu-link {{ $menuActive('penyaluran/sekretariat/muat-turun/dokumen/SPBB*', 'penyaluran/sekretariat/lihat/salinan-dokumen/SPBB*') }}" href="{{ route('sekretariat.muat-turun.SPBB')}}">
 						<span class="menu-icon">{!! getIcon('folder', 'fs-2') !!}</span>
 						<span class="menu-title">Muat Turun SPBB & Penyata Bank</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('sekretariat.muat-turun.lejar')}}">
+					<a class="menu-link {{ $menuActive('penyaluran/sekretariat/muat-turun/lejar*') }}" href="{{ route('sekretariat.muat-turun.lejar')}}">
 						<span class="menu-icon">{!! getIcon('eye', 'fs-2') !!}</span>
 						<span class="menu-title">Muat Turun Lejar</span>
 					</a>
@@ -598,43 +615,43 @@
 					</div>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('peringkat.pengajian') }}">
+					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/peringkat/pengajian*') }}" href="{{ route('peringkat.pengajian') }}">
 						<span class="menu-icon">{!! getIcon('teacher', 'fs-2') !!}</span>
 						<span class="menu-title">Peringkat Pengajian ({{$peringkat}})</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('tangguh.lanjut.pengajian') }}">
+					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/pengajian*') }}" href="{{ route('tangguh.lanjut.pengajian') }}">
 						<span class="menu-icon">{!! getIcon('time', 'fs-2') !!}</span>
 						<span class="menu-title">Permohonan Penangguhan / Perlanjutan</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('senarai.tukar.institusi')}}">
+					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/senarai/pelajar*') }}" href="{{ route('senarai.tukar.institusi')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 						<span class="menu-title">Tukar Institusi ({{$tukarInstitusi}}) </span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('senarai.pengesahan.cgpa')}}">
+					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/senarai/cgpa/pelajar*') }}" href="{{ route('senarai.pengesahan.cgpa')}}">
 						<span class="menu-icon">{!! getIcon('key', 'fs-2') !!}</span>
 						<span class="menu-title">Pengesahan CGPA ({{$pengesahanCGPA}}) </span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/*jumlah-peruntukan*') }}" href="{{url('kemaskini/sekretariat/jumlah-peruntukan')}}">
 						<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
 						<span class="menu-title">Peruntukan Tahunan</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<span class="menu-link">
+					<span class="menu-link {{ $menuActive('kemaskini/sekretariat/surat/tawaran/preview*') }}">
 						<span class="menu-icon">{!! getIcon('document', 'fs-2') !!}</span>
 						<span class="menu-title">Surat Tawaran</span>
 					</span>
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="{{ route('preview') }}">
+						<a class="menu-link {{ $menuActive('kemaskini/sekretariat/surat/tawaran/preview') }}" href="{{ route('preview') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -644,7 +661,7 @@
 					<!-- End of submenu -->
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="{{ route('previewPPK') }}">
+						<a class="menu-link {{ $menuActive('kemaskini/sekretariat/surat/tawaran/previewPPK') }}" href="{{ route('previewPPK') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -654,45 +671,45 @@
 					<!-- End of submenu -->
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/emel/*') }}" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
 						<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
 						<span class="menu-title">E-mel</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/maklumat_pelajar*', 'kemaskini/sekretariat/pelajar/semak_pelajar*') }}" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
 						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
 						<span class="menu-title">Maklumat Akaun Pengguna</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/pelajar/institusi*', 'kemaskini/sekretariat/profil/pelajar*', 'kemaskini/sekretariat/lapor/tamat/pengajian*') }}" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
 						<span class="menu-title">Maklumat Pelajar</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.sekretariat.daftar.pelajar')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/pendaftaran_pelajar*', 'kemaskini/sekretariat/daftar/pelajar*') }}" href="{{ route('kemaskini.sekretariat.daftar.pelajar')}}">
 						<span class="menu-icon">{!! getIcon('bookmark', 'fs-2') !!}</span>
 						<span class="menu-title">Pendaftaran Pelajar Sedia Ada</span>
 					</a>
 				</div>
 
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.sekretariat.surat.tawaran')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/surat/tawaran*') }}" href="{{ route('kemaskini.sekretariat.surat.tawaran')}}">
 						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
 						<span class="menu-title">Surat Tawaran Pelajar</span>
 					</a>
 				</div>
 
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.sekretariat.kursus')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/kursus*') }}" href="{{ route('kemaskini.sekretariat.kursus')}}">
 						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
 						<span class="menu-title">Senarai Kursus</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('kemaskini.sekretariat.institusi')}}">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/institusi*', 'kemaskini/sekretariat/institusi*') }}" href="{{ route('kemaskini.sekretariat.institusi')}}">
 						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
 						<span class="menu-title">Senarai Institusi</span>
 					</a>
@@ -704,19 +721,19 @@
 					</div>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('laporan.keseluruhan') }}">
+					<a class="menu-link {{ $menuActive('laporan/keseluruhan*') }}" href="{{ route('laporan.keseluruhan') }}">
 						<span class="menu-icon">{!! getIcon('calculator', 'fs-2') !!}</span>
 						<span class="menu-title">Keseluruhan</span>
 					</a>
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('laporan.permohonan') }}" >
+					<a class="menu-link {{ $menuActive('laporan/permohonan*', 'laporan/statistik*') }}" href="{{ route('laporan.permohonan') }}" >
 						<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
 						<span class="menu-title">Permohonan</span>
 					</a>
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="{{ route('laporan.statistik') }}">
+						<a class="menu-link {{ $menuActive('laporan/statistik*') }}" href="{{ route('laporan.statistik') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -726,13 +743,13 @@
 					<!-- End of submenu -->
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('laporan.permohonan') }}" >
+					<a class="menu-link {{ $menuActive('laporan/excel/*') }}" href="{{ route('laporan.permohonan') }}" >
 						<span class="menu-icon">{!! getIcon('chart-simple', 'fs-2') !!}</span>
 						<span class="menu-title">Data Excel</span>
 					</a>
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="{{ route('laporan.excel.bkoku') }}">
+						<a class="menu-link {{ $menuActive('laporan/excel/bkoku*') }}" href="{{ route('laporan.excel.bkoku') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -742,7 +759,7 @@
 					<!-- End of submenu -->
 					<!-- Start of submenu -->
 					<ul> 
-						<a class="menu-link" href="{{ route('laporan.excel.ppk') }}">
+						<a class="menu-link {{ $menuActive('laporan/excel/ppk*') }}" href="{{ route('laporan.excel.ppk') }}">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot"></span>
 							</span>
@@ -752,7 +769,7 @@
 					<!-- End of submenu -->
 				</div>
 				<div class="menu-item">
-					<a class="menu-link" href="{{ route('laporan.tuntutan') }}">
+					<a class="menu-link {{ $menuActive('laporan/tuntutan*') }}" href="{{ route('laporan.tuntutan') }}">
 						<span class="menu-icon">{!! getIcon('chart-line', 'fs-2') !!}</span>
 						<span class="menu-title">Tuntutan</span>
 					</a>
@@ -1073,4 +1090,34 @@
         confirmButtonText: 'OK'
         });
     }
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const currentPath = window.location.pathname.replace(/\/$/, '');
+		const menuLinks = document.querySelectorAll('.app-sidebar .menu-link[href]');
+		let activeLink = null;
+		let activeLength = 0;
+
+		menuLinks.forEach(function (link) {
+			const href = link.getAttribute('href');
+
+			if (!href || href === '#' || href.startsWith('javascript:')) {
+				return;
+			}
+
+			const linkPath = new URL(href, window.location.origin).pathname.replace(/\/$/, '');
+
+			if (!linkPath || linkPath === '/') {
+				return;
+			}
+
+			if ((currentPath === linkPath || currentPath.startsWith(linkPath + '/')) && linkPath.length > activeLength) {
+				activeLink = link;
+				activeLength = linkPath.length;
+			}
+		});
+
+		if (activeLink) {
+			activeLink.classList.add('active');
+		}
+	});
 </script>

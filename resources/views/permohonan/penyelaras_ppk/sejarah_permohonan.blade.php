@@ -20,7 +20,46 @@
         .nav{
             margin-left: 10px!important;
         }
-    </style>
+    
+        .status-pill {
+            align-items: center;
+            border: 0;
+            border-radius: 8px;
+            color: #fff;
+            display: inline-flex;
+            font-weight: 700;
+            justify-content: center;
+            min-height: 34px;
+            padding: 8px 14px;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            width: 156px;
+        }
+
+        .status-pill:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .status-pill-button {
+            cursor: pointer;
+        }
+
+        .status-pill-link i {
+            margin-right: 0.35rem;
+        }
+
+        .status-deraf { background-color: #7239ea; }
+        .status-baharu { background-color: #1f73e8; }
+        .status-sedang-disaring { background-color: #ea4fb5; }
+        .status-disokong { background-color: #ffb800; }
+        .status-dikembalikan { background-color: #e65f4f; }
+        .status-layak { background-color: #50cd89; }
+        .status-tidak-layak { background-color: #f1416c; }
+        .status-dibayar { background-color: #10a4ad; }
+        .status-batal { background-color: #6c757d; }
+        .status-berhenti { background-color: #488BCD; }</style>
 
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
@@ -113,15 +152,15 @@
                                                         <td>{{$pemohon}}</td>
                                                         <td class="text-center">{{$formattedDate}}</td>
                                                         @if ($item['status']=='1')
-                                                            <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-deraf">{{ucwords(strtolower($status))}}</span></td>
                                                         @elseif ($item['status']=='2')
-                                                            <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-baharu">{{ucwords(strtolower($status))}}</span></td>
                                                         @elseif ($item['status']=='3')
-                                                            <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-sedang-disaring">{{ucwords(strtolower($status))}}</span></td>
                                                         @elseif ($item['status']=='4')
-                                                            <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-disokong">{{ucwords(strtolower($status))}}</span></td>
                                                         @elseif ($item['status']=='5')
-                                                            <td class="text-center"><button class="btn bg-dikembalikan text-white" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
+                                                            <td class="text-center"><button class="status-pill status-dikembalikan status-pill-button" data-bs-toggle="modal" data-bs-target="#dikembalikan{{$item['id']}}">
                                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Papar sebab dikembalikan">
                                                                 {{ucwords(strtolower($status))}}</span>
                                                             </button></td>
@@ -174,21 +213,21 @@
                                                             {{-- Modal --}}
                                                         @elseif ($item['status']=='6')
                                                             <td class="text-center">
-                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn btn-success btn-round btn-sm custom-width-btn">
+                                                                <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="status-pill status-layak status-pill-link">
                                                                     <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak
                                                                 </a>
                                                             </td>
-                                                            {{-- <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td> --}}
+                                                            {{-- <td class="text-center"><span class="status-pill status-layak">{{ucwords(strtolower($status))}}</span></td> --}}
                                                         @elseif ($item['status']=='7')
-                                                            <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-tidak-layak">{{ucwords(strtolower($status))}}</span></td>
                                                         @elseif ($item['status']=='8')
                                                         <td class="text-center">
-                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="btn bg-dibayar btn-round btn-sm custom-width-btn">
+                                                            <a href="{{ route('generate-pdf', ['permohonanId' => $item['id']]) }}" class="status-pill status-dibayar status-pill-link">
                                                                 <i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Dibayar
                                                             </a>
                                                         </td>
                                                         @elseif ($item['status']=='9')
-                                                            <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                            <td class="text-center"><span class="status-pill status-batal">{{ucwords(strtolower($status))}}</span></td>
                                                         @endif
 
                                                         @if ($item['status']=='1')
