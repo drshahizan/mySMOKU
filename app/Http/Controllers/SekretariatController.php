@@ -16,6 +16,7 @@ use App\Exports\PenyaluranTuntutan;
 use App\Exports\SaringanTuntutanExport;
 use App\Exports\SenaraiPendek;
 use App\Exports\SenaraiPendekBKOKU;
+use App\Exports\SenaraiPendekKeseluruhan;
 use App\Exports\SenaraiPendekPOLI;
 use App\Exports\SenaraiPendekKK;
 use App\Exports\SenaraiPendekUA;
@@ -1270,6 +1271,7 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
         
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -1277,6 +1279,7 @@ class SekretariatController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -1314,10 +1317,16 @@ class SekretariatController extends Controller
                             ->whereIn('permohonan.status', ['4'])
                             ->count();
 
+        $countALL = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('permohonan.status', ['4'])
+                            ->count();
+
         // Debug output
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
-        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
+        return view('permohonan.sekretariat.kelulusan.kelulusan', compact('kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA', 'institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));
     }
 
     public function cetakSenaraiDisokongPDF(Request $request, $programCode)
@@ -1338,7 +1347,9 @@ class SekretariatController extends Controller
         $kelulusan = $query->get();
 
         //check programCode
-        if ($programCode == 'IPTS')
+        if ($programCode == 'ALL')
+            $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_keseluruhan_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
+        elseif ($programCode == 'IPTS')
             $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_ipts_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
         elseif ($programCode == 'POLI')
             $pdf = PDF::loadView('permohonan.sekretariat.kelulusan.senarai_disokong_poli_pdf', compact('kelulusan'))->setPaper('A4', 'landscape');
@@ -1370,7 +1381,9 @@ class SekretariatController extends Controller
 
         $kelulusan = $query->get();
         //check programCode
-        if ($programCode == 'IPTS')
+        if ($programCode == 'ALL')
+            return Excel::download(new SenaraiPendekKeseluruhan($programCode, $filters), 'Permohonan_Keseluruhan_Disokong.xlsx');
+        elseif ($programCode == 'IPTS')
             return Excel::download(new SenaraiPendekBKOKU($programCode, $filters), 'Permohonan_BKOKU_IPTS_Disokong.xlsx');
         elseif ($programCode == 'POLI')
             return Excel::download(new SenaraiPendekPOLI($programCode, $filters), 'Permohonan_BKOKU_POLI_Disokong.xlsx');
