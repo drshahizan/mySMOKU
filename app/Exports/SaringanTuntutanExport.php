@@ -53,7 +53,9 @@ class SaringanTuntutanExport implements FromCollection, WithHeadings, WithMappin
             ->whereIn('t.status', ['2', '3', '4', '5'])
             ->orderBy('t.tarikh_hantar', 'desc');
 
-        if ($this->programCode === 'PPK') {
+        if ($this->programCode === 'ALL') {
+            $query->where('c.jenis_institusi', '!=', 'KI');
+        } elseif ($this->programCode === 'PPK') {
             $query->where('a.program', 'PPK');
         } else {
             $query->where('a.program', 'BKOKU')

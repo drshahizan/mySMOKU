@@ -212,6 +212,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/tuntutanESP/BKOKUKK', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUKK'])->name('senarai.esp.tuntutan.BKOKUKK');
         Route::get('/tuntutanESP/BKOKUIPTS', [MaklumatESPController::class, 'getSenaraiEspTuntutanBKOKUIPTS'])->name('senarai.esp.tuntutan.BKOKUIPTS');
         Route::get('/tuntutanESP/PPK', [MaklumatESPController::class, 'getSenaraiEspTuntutanPPK'])->name('senarai.esp.tuntutan.PPK');
+        Route::get('/tuntutanESP/KESELURUHAN', [MaklumatESPController::class, 'getSenaraiEspTuntutanALL'])->name('senarai.esp.tuntutan.ALL');
         Route::post('/tuntutanESP', [MaklumatESPController::class, 'hantarTuntutan'])->name('maklumat_tuntutan.esp');
         Route::post('/tuntutanESP/status-hantar', [MaklumatESPController::class, 'markStatusHantarTuntutan'])->name('maklumat_tuntutan.esp.status-hantar');
 
@@ -313,6 +314,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/sekretariat/pembayaran/senarai/dataKK', [SaringanController::class, 'getPembayaranPermohonanKK'])->name('senarai.pembayaran.dataKK');
         Route::get('permohonan/sekretariat/pembayaran/senarai/dataUA', [SaringanController::class, 'getPembayaranPermohonanUA'])->name('senarai.pembayaran.dataUA');
         Route::get('permohonan/sekretariat/pembayaran/senarai/dataPPK', [SaringanController::class, 'getPembayaranPermohonanPPK'])->name('senarai.pembayaran.dataPPK');
+        Route::get('permohonan/sekretariat/pembayaran/senarai/dataALL', [SaringanController::class, 'getPembayaranPermohonanALL'])->name('senarai.pembayaran.dataALL');
 
         Route::post('permohonan/sekretariat/hantar/info-cek', [SaringanController::class, 'kemaskiniInfoCek'])->name('sekretariat.infocek.submit');
         Route::get('senarai-penyaluran-excel/{programCode}', [SaringanController::class, 'cetakSenaraiPenyaluranExcel'])->name('senarai.penyaluran.excel');
@@ -481,6 +483,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/sekretariat/sejarah/sejarah/dataKK', [SaringanController::class, 'getDataSejarahKK'])->name('sejarah.permohonan.dataKK');
         Route::get('permohonan/sekretariat/sejarah/sejarah/dataUA', [SaringanController::class, 'getDataSejarahUA'])->name('sejarah.permohonan.dataUA');
         Route::get('permohonan/sekretariat/sejarah/sejarah/dataPPK', [SaringanController::class, 'getDataSejarahPPK'])->name('sejarah.permohonan.dataPPK');
+        Route::get('permohonan/sekretariat/sejarah/sejarah/dataALL', [SaringanController::class, 'getDataSejarahALL'])->name('sejarah.permohonan.dataALL');
 
         Route::get('permohonan/sekretariat/sejarah/rekod-permohonan/{id}', [SaringanController::class, 'rekodPermohonan'])->name('rekod.permohonan.id');
         Route::get('permohonan/sekretariat/sejarah/sejarah-permohonan/data/{id}', [SaringanController::class, 'getDataSejarahPermohonan'])->name('sejarah.permohonan.data');
@@ -499,6 +502,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUKK', [SekretariatController::class, 'getSenaraiTuntutanBKOKUKK'])->name('senarai.tuntutan.BKOKUKK');
         Route::get('tuntutan/sekretariat/saringan/senarai/BKOKUIPTS', [SekretariatController::class, 'getSenaraiTuntutanBKOKUIPTS'])->name('senarai.tuntutan.BKOKUIPTS');
         Route::get('tuntutan/sekretariat/saringan/senarai/PPK', [SekretariatController::class, 'getSenaraiTuntutanPPK'])->name('senarai.tuntutan.PPK');
+        Route::get('tuntutan/sekretariat/saringan/senarai/KESELURUHAN', [SekretariatController::class, 'getSenaraiTuntutanALL'])->name('senarai.tuntutan.ALL');
         Route::get('tuntutan/sekretariat/saringan/senarai-excel/{programCode}', [SekretariatController::class, 'cetakSenaraiSaringanTuntutanExcel'])->name('senarai.tuntutan.saringan.excel');
         Route::get('tuntutan/sekretariat/saringan/keputusan-peperiksaan/{id}', [SekretariatController::class, 'keputusanPeperiksaan'])->name('maklumat.tuntutan.peperiksaan.id');
         Route::get('tuntutan/sekretariat/saringan/maklumat-tuntutan-kedua/{id}', [SekretariatController::class, 'maklumatTuntutanKedua'])->name('maklumat.tuntutan.kedua.id');
@@ -515,6 +519,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('tuntutan/sekretariat/pembayaran/senarai/dataKK', [SekretariatController::class, 'getPembayaranTuntutanKK'])->name('senarai.pembayaran.tuntutan.dataKK');
         Route::get('tuntutan/sekretariat/pembayaran/senarai/dataUA', [SekretariatController::class, 'getPembayaranTuntutanUA'])->name('senarai.pembayaran.tuntutan.dataUA');
         Route::get('tuntutan/sekretariat/pembayaran/senarai/dataPPK', [SekretariatController::class, 'getPembayaranTuntutanPPK'])->name('senarai.pembayaran.tuntutan.dataPPK');
+        Route::get('tuntutan/sekretariat/pembayaran/senarai/dataALL', [SekretariatController::class, 'getPembayaranTuntutanALL'])->name('senarai.pembayaran.tuntutan.dataALL');
         
         Route::get('tuntutan/sekretariat/pembayaran/maklumat/{id}', [SekretariatController::class, 'maklumatPembayaran'])->name('t.maklumat.pembayaran.id');
         Route::post('tuntutan/sekretariat/pembayaran/saring/{id}', [SekretariatController::class, 'saringPembayaran'])->name('t.saring.pembayaran.id');;
@@ -531,6 +536,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('tuntutan/sekretariat/keputusan/BKOKU/KK', [SekretariatController::class, 'getKeputusanTuntutanKK'])->name('senarai.keputusan.tuntutan.KK');
         Route::get('tuntutan/sekretariat/keputusan/BKOKU/UA', [SekretariatController::class, 'getKeputusanTuntutanBKOKUUA'])->name('senarai.keputusan.tuntutan.BKOKUUA');
         Route::get('tuntutan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanTuntutanPPK'])->name('senarai.keputusan.tuntutan.PPK');
+        Route::get('tuntutan/sekretariat/keputusan/KESELURUHAN', [SekretariatController::class, 'getKeputusanTuntutanALL'])->name('senarai.keputusan.tuntutan.ALL');
         Route::get('tuntutan/sekretariat/keputusan/filter-tuntutan', [SekretariatController::class, 'filterTuntutan'])->name('filter.tuntutan');
 
         //Tuntutan - Sekretariat - Sejarah
@@ -540,6 +546,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('tuntutan/sekretariat/sejarah/senarai/dataKK', [SekretariatController::class, 'getDataSenaraiKK'])->name('senarai.tuntutan.dataKK');
         Route::get('tuntutan/sekretariat/sejarah/senarai/dataUA', [SekretariatController::class, 'getDataSenaraiUA'])->name('senarai.tuntutan.dataUA');
         Route::get('tuntutan/sekretariat/sejarah/senarai/dataPPK', [SekretariatController::class, 'getDataSenaraiPPK'])->name('senarai.tuntutan.dataPPK');
+        Route::get('tuntutan/sekretariat/sejarah/senarai/dataALL', [SekretariatController::class, 'getDataSenaraiALL'])->name('senarai.tuntutan.dataALL');
         Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan/{id}', [SekretariatController::class, 'sejarahTuntutan'])->name('sejarah.tuntutan');
         Route::get('tuntutan/sekretariat/sejarah/sejarah-tuntutan/data/{id}', [SekretariatController::class, 'getDataSejarahTuntutan'])->name('sejarah.tuntutan.data');
 

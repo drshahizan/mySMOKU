@@ -132,7 +132,15 @@
             {{-- Javascript Nav Bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
+                  <button class="nav-link active" id="keseluruhan-tab" data-toggle="tab" data-target="#keseluruhan" type="button" role="tab" aria-controls="keseluruhan" aria-selected="true">
+                    KESELURUHAN
+                    @if ($countALL > 0)
+                      <span class="badge badge-danger">{{ $countALL }}</span>
+                    @endif
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
                     BKOKU UA
                     @if ($countUA > 0)
                       <span class="badge badge-danger">{{ $countUA }}</span>
@@ -228,8 +236,36 @@
             
             {{-- Content Navigation Bar --}}
             <div class="tab-content" id="myTabContent">
+                {{-- KESELURUHAN --}}
+                <div class="tab-pane fade show active" id="keseluruhan" role="tabpanel" aria-labelledby="keseluruhan-tab">
+                  <br>
+                    <div class="card-body pt-0">
+                      <div class="table-responsive">
+                        <table id="sortTable6" class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th class="text-center" style="width:3%;">
+                                <input type="checkbox" name="select-all" id="select-all-keseluruhan" onclick="toggleSelectAll('keseluruhan');" />
+                              </th>
+                              <th><b>ID Permohonan</b></th>
+                              <th><b>ID Tuntutan</b></th>
+                              <th><b>Program</b></th>
+                              <th><b>Nama</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Tuntutan</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+
                 {{-- BKOKU UA --}}
-                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                   <br>
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
@@ -546,6 +582,7 @@
         var bkokuKKList = @json($institusiPengajianKK);
         var bkokuUAList = @json($institusiPengajianUA);
         var ppkList = @json($institusiPengajianPPK);
+        var keseluruhanList = @json($institusiPengajianALL);
 
         function formatStudentName(data) {
             if (!data) {
@@ -623,6 +660,66 @@
         }
 
         // DataTable initialization functions
+        function initializeDataTable6() {
+            window.datatable6 = $('#sortTable6').DataTable({
+                ordering: true,
+                    order: [],
+                    columnDefs: [
+                        { orderable: false, targets: [0] }
+                    ],
+                ajax: {
+                    url: '{{ route("senarai.esp.tuntutan.ALL") }}',
+                    dataSrc: ''
+                },
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                columns: [
+                {
+                    data: 'smoku.no_kp',
+                    className: 'text-center',
+                    width: '4%',
+                    render: renderEspCheckbox
+                },
+                {
+                    data: 'permohonan.no_rujukan_permohonan',
+                    render: function(data, type, row) {
+                      var permohonanId = row.permohonan && row.permohonan.id ? row.permohonan.id : row.permohonan_id;
+                      var programType = row.permohonan && row.permohonan.program === 'PPK' ? 'PPK' : 'UA';
+                      return `
+                        <a href="#"
+                          class="open-modal-link"
+                          data-id="${permohonanId}"
+                          data-type="${programType}"
+                          data-bs-toggle="modal"
+                          data-bs-target="#dokumenModal">
+                          ${data}
+                        </a>`;
+                    }
+                },
+                { data: 'no_rujukan_tuntutan' },
+                {
+                    data: 'permohonan.program',
+                    render: function(data) {
+                        return data ? data.toUpperCase() : '';
+                    }
+                },
+                {
+                    data: 'smoku.nama',
+                    render: function(data, type, row) {
+                        return formatStudentName(data);
+                    }
+                },
+                { data: 'akademik.infoipt.nama_institusi' },
+                { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                { data: 'tarikh_hantar', render: formatTarikhTuntutan },
+                { data: 'yuran_disokong', render: formatAmaun },
+                { data: 'wang_saku_disokong', render: formatAmaun },
+                { data: 'esp_sent_status', render: renderStatusEsp }
+                ]
+            });
+        }
+
         function initializeDataTable1() {
             $('#sortTable1').DataTable({
                 ordering: true, // Enable manual sorting
@@ -904,6 +1001,9 @@
             if ($.fn.DataTable.isDataTable('#sortTable5')) {
                 $('#sortTable5').DataTable().destroy();
             }
+            if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                $('#sortTable6').DataTable().destroy();
+            }
         }
 
         // Function to update the institution dropdown
@@ -930,6 +1030,10 @@
 
             // Update the institution dropdown based on the active tab
             switch (activeTabId) {
+                case 'keseluruhan-tab':
+                    updateInstitusiDropdown(keseluruhanList);
+                    initializeDataTable6();
+                    break;
                 case 'bkokuIPTS-tab':
                     updateInstitusiDropdown(bkokuIPTSList);
                     initializeDataTable1();
@@ -953,15 +1057,15 @@
             }
         });
 
-        // Trigger the function for the default active tab (bkoku-tab)
-        updateInstitusiDropdown(bkokuUAList);
-        initializeDataTable4(); // Initialize DataTable1 on page load
+        // Trigger the function for the default active tab
+        updateInstitusiDropdown(keseluruhanList);
+        initializeDataTable6();
     });
   </script>
 
   <script>
       // Declare datatables in a higher scope to make them accessible
-      var datatable1, datatable3, datatable2, datatable4, datatable5;
+      var datatable1, datatable3, datatable2, datatable4, datatable5, datatable6;
 
       $(document).ready(function() {
           // Initialize DataTables
@@ -970,6 +1074,9 @@
           initDataTable('#sortTable3', 'datatable3');
           initDataTable('#sortTable4', 'datatable4');
           initDataTable('#sortTable5', 'datatable5');
+          if ($.fn.DataTable.isDataTable('#sortTable6')) {
+              datatable6 = $('#sortTable6').DataTable();
+          }
 
           // Log data for all tables
           logTableData('Table 1 Data:', datatable1);
@@ -977,6 +1084,9 @@
           logTableData('Table 3 Data:', datatable3);
           logTableData('Table 4 Data:', datatable4);
           logTableData('Table 5 Data:', datatable5);
+          if (datatable6) {
+              logTableData('Table 6 Data:', datatable6);
+          }
       });
 
       function initDataTable(tableId, variableName) {
@@ -1004,6 +1114,9 @@
           initDataTable('#sortTable3', 'datatable3');
           initDataTable('#sortTable4', 'datatable4');
           initDataTable('#sortTable5', 'datatable5');
+          if ($.fn.DataTable.isDataTable('#sortTable6')) {
+              datatable6 = $('#sortTable6').DataTable();
+          }
 
           function initDataTable(tableId, variableName) {
               // Check if the datatable is already initialized
@@ -1033,11 +1146,17 @@
           applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
           applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
           applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
+          applyAndLogFilter('Table 6', datatable6, selectedInstitusi);
       }
 
       function applyAndLogFilter(tableName, table, filterValue) {
+          if (!table) {
+              return;
+          }
+
           // Apply search filter to the table
-          table.column(4).search(filterValue).draw();
+          var institutionColumn = tableName === 'Table 6' ? 5 : 4;
+          table.column(institutionColumn).search(filterValue).draw();
 
           // Go to the first page for the table
           table.page(0).draw(false);

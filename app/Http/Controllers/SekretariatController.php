@@ -2156,6 +2156,7 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
         // dd($institusiPengajianPPK); 
         
         // Extract ID values from the collections
@@ -2164,6 +2165,7 @@ class SekretariatController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
@@ -2206,10 +2208,17 @@ class SekretariatController extends Controller
                             ->whereIn('tuntutan.status', ['2'])
                             ->count();
 
+        $countALL = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
+
         // Debug output
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));
     }
 
     //Json saringan
@@ -2431,6 +2440,44 @@ class SekretariatController extends Controller
 
         return response()->json($tuntutan);
 
+    }
+
+    public function getSenaraiTuntutanALL()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '!=', 'KI');
+                    })
+                    ->whereHas('peringkat');
+            })
+            ->whereIn('status', ['2','3','4','5'])
+            ->with([
+                'akademik' => function ($query) {
+                    $query->where('status', 1)->with('infoipt')->with('peringkat');
+                },
+                'smoku',
+                'permohonan'
+            ])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        foreach ($tuntutan as $item) {
+            $user_id = DB::table('sejarah_tuntutan')
+                        ->where('tuntutan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            $item->user_id = $user_id;
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "-";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($tuntutan);
     }
 
     public function cetakSenaraiSaringanTuntutanExcel(Request $request, $programCode)
@@ -3024,8 +3071,9 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
-        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
+        return view('tuntutan.sekretariat.keputusan.keputusan_tuntutan', compact('tuntutan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     public function getKeputusanTuntutanIPTS()
@@ -3065,7 +3113,15 @@ class SekretariatController extends Controller
 
     }
 
-    private function getKeputusanTuntutanByAkademik($program, $jenisInstitusi = null)
+    public function getKeputusanTuntutanALL()
+    {
+        $tuntutan = $this->getKeputusanTuntutanByAkademik(null);
+
+        return response()->json($tuntutan);
+
+    }
+
+    private function getKeputusanTuntutanByAkademik($program = null, $jenisInstitusi = null)
     {
         return DB::table('tuntutan')
             ->join('smoku', 'smoku.id', '=', 'tuntutan.smoku_id')
@@ -3077,15 +3133,21 @@ class SekretariatController extends Controller
             })
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
-            ->where('permohonan.program', $program)
+            ->when($program, function ($query) use ($program) {
+                return $query->where('permohonan.program', $program);
+            })
             ->whereIn('tuntutan.status', ['5', '6', '7'])
             ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
                 return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+            })
+            ->when(!$jenisInstitusi, function ($query) {
+                return $query->where('bk_info_institusi.jenis_institusi', '!=', 'KI');
             })
             ->orderByDesc('tuntutan.updated_at')
             ->select([
                 'tuntutan.id',
                 'tuntutan.permohonan_id',
+                'permohonan.program',
                 'tuntutan.no_rujukan_tuntutan',
                 'tuntutan.status',
                 'tuntutan.yuran_disokong',
@@ -3101,6 +3163,7 @@ class SekretariatController extends Controller
                 return [
                     'id' => $item->id,
                     'permohonan_id' => $item->permohonan_id,
+                    'program' => $item->program,
                     'no_rujukan_tuntutan' => $item->no_rujukan_tuntutan,
                     'status' => (string) $item->status,
                     'yuran_disokong' => $item->yuran_disokong,
@@ -3507,8 +3570,9 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
         
-        return view('tuntutan.sekretariat.sejarah.senarai_tuntutan',compact('permohonan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK'));
+        return view('tuntutan.sekretariat.sejarah.senarai_tuntutan',compact('permohonan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     public function getDataSenaraiIPTS()
@@ -3634,6 +3698,30 @@ class SekretariatController extends Controller
 
 
         return response()->json($permohonanPPK);
+    }
+
+    public function getDataSenaraiALL()
+    {
+        $permohonan = Permohonan::whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'KI');
+                        });
+                    })
+                    ->whereHas('tuntutan')
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);
+                    }, 'smoku', 'tuntutan'])
+                    ->orderBy(
+                        Tuntutan::select('tarikh_hantar')
+                            ->whereColumn('tuntutan.permohonan_id', 'permohonan.id')
+                            ->latest()
+                            ->take(1)
+                    , 'desc')
+                    ->get();
+
+        return response()->json($permohonan);
     }
 
     public function sejarahTuntutan($id)
@@ -4109,8 +4197,9 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
-        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK'));
+        return view('tuntutan.sekretariat.pembayaran.senarai',compact('tuntutan','status_kod','status','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     public function getPembayaranTuntutanIPTS()
@@ -4201,6 +4290,23 @@ class SekretariatController extends Controller
             })
             ->whereHas('permohonan', function ($query) {
                 $query->where('program', 'PPK');
+            })
+            ->where('status', 8)
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
+            }, 'smoku', 'permohonan'])
+            ->get();
+
+        return response()->json($tuntutan);
+    }
+
+    public function getPembayaranTuntutanALL()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '!=', 'KI');
+                    });
             })
             ->where('status', 8)
             ->with(['akademik' => function ($query) {

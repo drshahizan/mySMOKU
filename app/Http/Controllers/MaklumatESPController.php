@@ -339,6 +339,7 @@ class MaklumatESPController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -346,6 +347,7 @@ class MaklumatESPController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
@@ -393,10 +395,18 @@ class MaklumatESPController extends Controller
                             ->whereNull('tuntutan.data_migrate')
                             ->count();
 
+        $countALL = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('tuntutan.status', ['6'])
+                            ->whereNull('tuntutan.data_migrate')
+                            ->count();
+
         // Debug output
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
-        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));     
+        return view('esp.tuntutan.tuntutan_esp', compact('kelulusan','secretKey','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK','institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));
     }
 
     public function getSenaraiEspTuntutanBKOKUUA()
@@ -506,6 +516,27 @@ class MaklumatESPController extends Controller
             })
             ->whereHas('permohonan', function ($query) {
                 $query->where('program', 'PPK');
+            })
+            ->where('status', '=','6')
+            ->whereNull('data_migrate')
+            ->with(['akademik' => function ($query) {
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
+            }, 'smoku', 'permohonan'])
+            ->orderBy('tarikh_hantar', 'desc')
+            ->get();
+
+        return response()->json($tuntutan);
+
+    }
+
+    public function getSenaraiEspTuntutanALL()
+    {
+        $tuntutan = Tuntutan::whereHas('akademik', function ($query) {
+                $query->where('status', 1)
+                    ->whereHas('infoipt', function ($subQuery) {
+                        $subQuery->where('jenis_institusi', '!=', 'KI');
+                    })
+                    ->whereHas('peringkat');
             })
             ->where('status', '=','6')
             ->whereNull('data_migrate')

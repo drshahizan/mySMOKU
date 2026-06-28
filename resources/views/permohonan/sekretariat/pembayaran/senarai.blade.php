@@ -37,7 +37,9 @@
         #sortTable3 th:nth-child(2),
         #sortTable3 td:nth-child(2),
         #sortTable5 th:nth-child(2),
-        #sortTable5 td:nth-child(2) {
+        #sortTable5 td:nth-child(2),
+        #sortTable6 th:nth-child(3),
+        #sortTable6 td:nth-child(3) {
             min-width: 180px;
             white-space: normal;
         }
@@ -45,7 +47,8 @@
         #sortTable2 .status-wrap,
         #sortTable3 .status-wrap,
         #sortTable4 .status-wrap,
-        #sortTable5 .status-wrap {
+        #sortTable5 .status-wrap,
+        #sortTable6 .status-wrap {
             align-items: center;
             display: inline-grid;
             justify-content: center;
@@ -55,7 +58,8 @@
         #sortTable2 .status-pill,
         #sortTable3 .status-pill,
         #sortTable4 .status-pill,
-        #sortTable5 .status-pill {
+        #sortTable5 .status-pill,
+        #sortTable6 .status-pill {
             align-items: center;
             border-radius: 8px;
             color: #fff;
@@ -180,7 +184,10 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
+                                    <button class="nav-link active" id="keseluruhan-tab" data-toggle="tab" data-target="#keseluruhan" type="button" role="tab" aria-controls="keseluruhan" aria-selected="true">KESELURUHAN</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -248,9 +255,31 @@
                             <!--end::Card toolbar-->
 
                             <div class="tab-content mt-0" id="myTabContent">
+                                {{-- KESELURUHAN --}}
+                                <div class="tab-pane fade show active" id="keseluruhan" role="tabpanel" aria-labelledby="keseluruhan-tab">
+                                    <br>
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table id="sortTable6" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID Permohonan</th>
+                                                        <th>Program</th>
+                                                        <th>Nama</th>
+                                                        <th>Institusi Pengajian</th>
+                                                        <th>Peringkat Pengajian</th>
+                                                        <th>Tarikh Permohonan</th>
+                                                        <th>Tarikh Dibayar</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                                 {{-- BKOKU UA--}}
-                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
@@ -482,6 +511,7 @@
                 var bkokuKKList = @json($institusiPengajianKK);
                 var bkokuUAList = @json($institusiPengajianUA);
                 var ppkList = @json($institusiPengajianPPK);
+                var keseluruhanList = @json($institusiPengajianALL);
 
                 function statusBadge(label, className) {
                     return '<span class="status-wrap"><span class="status-pill ' + className + '">' + label + '</span></span>';
@@ -524,6 +554,99 @@
 
 
                 // DataTable initialization functions
+                function initializeDataTable6() {
+                    $('#sortTable6').DataTable({
+                        ordering: true,
+                        order: [[5, 'desc']],
+                        ajax: {
+                            url: '{{ route("senarai.pembayaran.dataALL") }}',
+                            dataSrc: ''
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                        {
+                            data: 'no_rujukan_permohonan',
+                            render: function(data, type, row) {
+                                var url = "{{ url('permohonan/sekretariat/pembayaran/papar/') }}" + '/' + row.id;
+                                return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                            }
+                        },
+                        {
+                            data: 'program',
+                            render: function(data) {
+                                return data ? data.toUpperCase() : '';
+                            }
+                        },
+                        {
+                            data: 'smoku.nama',
+                            render: function(data) {
+                                return formatNama(data);
+                            }
+                        },
+                        { data: 'akademik.infoipt.nama_institusi' },
+                        {
+                            data: 'akademik.peringkat.peringkat',
+                            render: function(data) {
+                                return data || '';
+                            }
+                        },
+                        {
+                            data: 'tarikh_hantar',
+                            render: function(data, type) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' ';
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' ';
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                                    var day = ('0' + date.getDate()).slice(-2);
+                                    return day + '/' + month + '/' + year;
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            data: 'tarikh_transaksi',
+                            render: function(data, type) {
+                                if (type === 'display' || type === 'filter') {
+                                    if (!data) return ' ';
+                                    var date = new Date(data);
+                                    if (isNaN(date.getTime())) return ' ';
+                                    var year = date.getFullYear();
+                                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                                    var day = ('0' + date.getDate()).slice(-2);
+                                    return day + '/' + month + '/' + year;
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            data: 'status',
+                            render: function(data, type, row) {
+                                switch (data) {
+                                    case '6':
+                                        var routeLayak = row.program === 'PPK'
+                                            ? "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}"
+                                            : "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                        return statusBadgeWithDownload('Layak', 'status-layak', routeLayak.replace(':permohonanId', row.id));
+                                    case '8':
+                                        var routeBayar = row.program === 'PPK'
+                                            ? "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}"
+                                            : "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                        return statusBadgeWithDownload('Dibayar', 'status-dibayar', routeBayar.replace(':permohonanId', row.id));
+                                    case '7':
+                                        return statusBadge('Tidak Layak', 'status-tidak-layak');
+                                    default:
+                                        return statusBadge('Dibayar', 'status-dibayar');
+                                }
+                            }
+                        }
+                        ]
+                    });
+                }
+
                 function initializeDataTable1() {
                     $('#sortTable1').DataTable({
                         ordering: true, // Enable manual sorting
@@ -1238,6 +1361,9 @@
                     if ($.fn.DataTable.isDataTable('#sortTable5')) {
                         $('#sortTable5').DataTable().destroy();
                     }
+                    if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                        $('#sortTable6').DataTable().destroy();
+                    }
                 }
 
                 // Function to update the institution dropdown
@@ -1273,6 +1399,10 @@
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
+                        case 'keseluruhan-tab':
+                            updateInstitusiDropdown(keseluruhanList);
+                            initializeDataTable6();
+                            break;
                         case 'bkokuIPTS-tab':
                             updateInstitusiDropdown(bkokuIPTSList);
                             initializeDataTable1();
@@ -1296,9 +1426,10 @@
                     }
                 });
 
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuUAList);
-                initializeDataTable4(); // Initialize DataTable1 on page load
+                // Trigger the function for the default active tab
+                $('.export-container').hide();
+                updateInstitusiDropdown(keseluruhanList);
+                initializeDataTable6();
             });
         </script>
       
@@ -1312,6 +1443,9 @@
                 initDataTable('#sortTable3', 'datatable3');
                 initDataTable('#sortTable4', 'datatable4');
                 initDataTable('#sortTable5', 'datatable5');
+                if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                    datatable6 = $('#sortTable6').DataTable();
+                }
 
 
                 function initDataTable(tableId, variableName) {
@@ -1342,6 +1476,7 @@
                 applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
                 applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
                 applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
+                applyAndLogFilter('Table 6', datatable6, selectedInstitusi);
 
                 // Update the export link with the selected institusi for Table 2
                 var exportLink = document.getElementById('exportLink');
@@ -1349,7 +1484,11 @@
             }
 
             function applyAndLogFilter(tableName, table, filterValue) {
-                var institutionColumn = tableName === 'Table 4' ? 3 : 2;
+                if (!table) {
+                    return;
+                }
+
+                var institutionColumn = tableName === 'Table 4' || tableName === 'Table 6' ? 3 : 2;
 
                 // Apply search filter to the table
                 table.column(institutionColumn).search(filterValue).draw();
