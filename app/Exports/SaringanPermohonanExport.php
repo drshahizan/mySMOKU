@@ -52,7 +52,7 @@ class SaringanPermohonanExport implements FromCollection, WithHeadings, WithMapp
 
         if ($this->programCode === 'ALL') {
             $query->where('c.jenis_institusi', '!=', 'KI')
-                ->whereIn('a.status', ['2', '3'])
+                ->whereIn('a.status', ['2', '3', '4', '5'])
                 ->orderByRaw("CAST(REPLACE(w.pendapatan_waris, ',', '') AS UNSIGNED) ASC");
         } else {
             $query->whereIn('a.status', ['2', '3', '4', '5'])

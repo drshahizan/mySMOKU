@@ -288,6 +288,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/sekretariat/saringan/senarai/BKOKUIPTS', [SaringanController::class, 'getSenaraiPermohonanBKOKUIPTS'])->name('senarai.permohonan.BKOKUIPTS');
         Route::get('permohonan/sekretariat/saringan/senarai/PPK', [SaringanController::class, 'getSenaraiPermohonanPPK'])->name('senarai.permohonan.PPK');
         Route::get('permohonan/sekretariat/saringan/senarai/ALL', [SaringanController::class, 'getSenaraiPermohonanALL'])->name('senarai.permohonan.ALL');
+        Route::get('permohonan/sekretariat/saringan/senarai/RANKING-GAJI', [SaringanController::class, 'getSenaraiPermohonanRankingGaji'])->name('senarai.permohonan.RANKING_GAJI');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan/{id}', [SaringanController::class, 'maklumatPermohonan'])->name('maklumat.permohonan.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-permohonan-diperbaharui/{id}', [SaringanController::class, 'maklumatPermohonanDiperbaharui'])->name('maklumat.permohonan.diperbaharui.id');
         Route::get('permohonan/sekretariat/saringan/maklumat-profil-diri/{id}', [SaringanController::class, 'maklumatProfilDiri'])->name('maklumat.profil.diri.id');

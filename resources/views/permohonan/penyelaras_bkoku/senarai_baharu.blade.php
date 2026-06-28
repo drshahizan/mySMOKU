@@ -8,6 +8,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+	<style>
+		.status-pill {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 112px;
+			padding: 8px 18px;
+			border-radius: 8px;
+			font-weight: 700;
+			line-height: 1;
+			color: #fff;
+		}
+		.status-baharu {
+			background-color: #1d72e8;
+		}
+	</style>
 </head>	 
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
@@ -73,7 +89,7 @@
 								<td>{{ $pemohon}}</td>
 								<td>{{ $smoku->nama_kursus}}</td>
 								<td class="text-center">{{ $formattedDate}}</td>
-								<td class="text-center"><button type="button" class="btn bg-baharu text-white">Baharu</button></td>
+								<td class="text-center"><span class="status-pill status-baharu">Baharu</span></td>
 							</tr>  
 							@endforeach	
 						</tbody>

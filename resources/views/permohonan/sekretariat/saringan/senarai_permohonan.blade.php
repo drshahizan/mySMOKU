@@ -38,7 +38,9 @@
             #sortTable5 th:nth-child(2),
             #sortTable5 td:nth-child(2),
             #sortTable6 th:nth-child(2),
-            #sortTable6 td:nth-child(2) {
+            #sortTable6 td:nth-child(2),
+            #sortTable7 th:nth-child(3),
+            #sortTable7 td:nth-child(3) {
                 min-width: 220px;
             }
 
@@ -47,7 +49,8 @@
             #sortTable3 .status-pill,
             #sortTable4 .status-pill,
             #sortTable5 .status-pill,
-            #sortTable6 .status-pill {
+            #sortTable6 .status-pill,
+            #sortTable7 .status-pill {
                 align-items: center;
                 border-radius: 8px;
                 color: #fff;
@@ -168,7 +171,15 @@
                             {{-- top nav bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
+                                    <button class="nav-link active" id="keseluruhan-tab" data-toggle="tab" data-target="#keseluruhan" type="button" role="tab" aria-controls="keseluruhan" aria-selected="true">
+                                        KESELURUHAN
+                                        @if ($countALL > 0)
+                                            <span class="badge badge-danger">{{ $countALL }}</span>
+                                        @endif
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
                                         BKOKU UA 
                                         @if ($countUA > 0)
                                             <span class="badge badge-danger">{{ $countUA }}</span>
@@ -251,8 +262,8 @@
                                                 <!--end::Actions-->
                                             </div>
                                             <div class="col-md-2 fv-row">
-                                                <a id="exportSaringanExcel" href="{{ route('senarai.permohonan.saringan.excel', ['programCode' => 'UA']) }}" target="_blank" class="btn btn-secondary btn-round" style="font-size:12px; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
-                                                    <i class="fa fa-file-excel" style="color: black;"></i> BKOKU UA
+                                                <a id="exportSaringanExcel" href="{{ route('senarai.permohonan.saringan.excel', ['programCode' => 'ALL']) }}" target="_blank" class="btn btn-secondary btn-round" style="font-size:12px; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+                                                    <i class="fa fa-file-excel" style="color: black;"></i> KESELURUHAN
                                                 </a>
                                             </div>
                                         </div>
@@ -274,8 +285,31 @@
                             <!--end::Card toolbar-->
 
                             <div class="tab-content" id="myTabContent">
+                                {{-- KESELURUHAN --}}
+                                <div class="tab-pane fade show active" id="keseluruhan" role="tabpanel" aria-labelledby="keseluruhan-tab">
+                                    <br>
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table id="sortTable7" class="table table-striped table-hover dataTable js-exportable">
+                                                <thead>
+                                                <tr>
+                                                    <th><b>ID Permohonan</b></th>
+                                                    <th><b>Program</b></th>
+                                                    <th><b>Nama</b></th>
+                                                    <th><b>Institusi Pengajian</b></th>
+                                                    <th><b>Peringkat Pengajian</b></th>
+                                                    <th><b>Tarikh Permohonan</b></th>
+                                                    <th><b>Status Saringan</b></th>
+                                                    <th><b>Disaring Oleh</b></th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{-- BKOKU UA --}}
-                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <br>
                                     <div class="body">
                                         <div class="table-responsive">
@@ -434,8 +468,163 @@
                 var bkokuUAList = @json($institusiPengajianUA);
                 var ppkList = @json($institusiPengajianPPK);
                 var gajiList = @json($institusiPengajianALL);
+                var keseluruhanList = @json($institusiPengajianALL);
         
-            
+                function renderPermohonanLink(data, row) {
+                    let url = '';
+                    const status = row.status;
+                    const ownerId = row.user_id;
+                    const id = row.id;
+
+                    if (status == 2) {
+                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                    } else if (status == 3 && ownerId == currentUserId) {
+                        url = '/permohonan/sekretariat/saringan/maklumat-permohonan/' + id;
+                        return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                    } else if (status == 3 && ownerId != currentUserId) {
+                        return data;
+                    }
+
+                    url = '/permohonan/sekretariat/saringan/papar-permohonan/' + id;
+                    return '<a href="' + url + '" title="' + data + '">' + data + '</a>';
+                }
+
+                function formatNama(data) {
+                    if (!data) return '-';
+
+                    var conjunctions_lower = ['bin', 'binti'];
+                    var conjunctions_upper = ['A/L', 'A/P'];
+                    var words = data.split(' ');
+
+                    for (var i = 0; i < words.length; i++) {
+                        var word = words[i];
+
+                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                            words[i] = word.toLowerCase();
+                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                            words[i] = word.toUpperCase();
+                        } else if (word.charAt(0) === "'" && word.length > 1) {
+                            words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                        } else {
+                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                        }
+                    }
+
+                    return words.join(' ');
+                }
+
+                function formatTarikh(data, type) {
+                    if (type !== 'display' && type !== 'filter') return data;
+                    if (!data) return ' ';
+
+                    var date = new Date(data);
+                    if (isNaN(date.getTime())) return ' ';
+
+                    var year = date.getFullYear();
+                    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    var day = ('0' + date.getDate()).slice(-2);
+
+                    return day + '/' + month + '/' + year;
+                }
+
+                function renderStatusPill(data) {
+                    switch (data) {
+                        case '1':
+                            return '<span class="status-pill status-deraf">Deraf</span>';
+                        case '2':
+                            return '<span class="status-pill status-baharu">Baharu</span>';
+                        case '3':
+                            return '<span class="status-pill status-sedang-disaring">Sedang Disaring</span>';
+                        case '4':
+                            return '<span class="status-pill status-disokong">Disokong</span>';
+                        case '5':
+                            return '<span class="status-pill status-dikembalikan">Dikembalikan</span>';
+                        case '6':
+                            return '<span class="status-pill status-layak">Layak</span>';
+                        case '7':
+                            return '<span class="status-pill status-tidak-layak">Tidak Layak</span>';
+                        case '8':
+                            return '<span class="status-pill status-dibayar">Dibayar</span>';
+                        case '9':
+                            return '<span class="status-pill status-batal">Batal</span>';
+                        case '10':
+                            return '<span class="status-pill status-batal">Berhenti</span>';
+                        default:
+                            return '';
+                    }
+                }
+
+                function initializeDataTable7() {
+                    $('#sortTable7').DataTable({
+                        ordering: true,
+                        order: [],
+                        columnDefs: [
+                            { orderable: false, targets: [0] }
+                        ],
+                        ajax: {
+                            url: '{{ route("senarai.permohonan.ALL") }}',
+                            dataSrc: ''
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                            {
+                                data: 'no_rujukan_permohonan',
+                                render: function(data, type, row) {
+                                    return renderPermohonanLink(data, row);
+                                }
+                            },
+                            {
+                                data: 'program',
+                                render: function(data, type, row) {
+                                    return data ? data.toUpperCase() : '-';
+                                }
+                            },
+                            {
+                                data: 'smoku.nama',
+                                render: function(data, type, row) {
+                                    return formatNama(data);
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data, type, row) {
+                                    return data || '';
+                                }
+                            },
+                            {
+                                data: 'tarikh_hantar',
+                                render: function(data, type, row) {
+                                    return formatTarikh(data, type);
+                                }
+                            },
+                            {
+                                data: 'status',
+                                render: function(data, type, row) {
+                                    return renderStatusPill(data);
+                                }
+                            },
+                            {
+                                data: 'dilaksanakan_oleh_nama',
+                                render: function(data, type, row) {
+                                    var formattedNama = formatNama(data);
+                                    return formattedNama && formattedNama !== 'Tiada Maklumat' ? formattedNama : '-';
+                                }
+                            }
+                        ],
+                        initComplete: function(settings, json) {
+                            let saved = localStorage.getItem('selectedInstitusi_permohonan');
+                            if (saved) {
+                                $('#institusiDropdown').val(saved);
+                                applyFilter();
+                            }
+                        }
+                    });
+                }
+
                 // DataTable initialization functions
                 function initializeDataTable1() {
                     $('#sortTable1').DataTable({
@@ -1431,7 +1620,7 @@
                                 { orderable: false, targets: [0] }
                             ],
                         ajax: {
-                            url: '{{ route("senarai.permohonan.ALL") }}', // URL to fetch data from
+                            url: '{{ route("senarai.permohonan.RANKING_GAJI") }}', // URL to fetch data from
                             dataSrc: '' // Property in the response object containing the data array
                         },
                         language: {
@@ -1655,6 +1844,9 @@
                     if ($.fn.DataTable.isDataTable('#sortTable6')) {
                         $('#sortTable6').DataTable().destroy();
                     }
+                    if ($.fn.DataTable.isDataTable('#sortTable7')) {
+                        $('#sortTable7').DataTable().destroy();
+                    }
                 }
 
                 // Function to update the institution dropdown
@@ -1699,6 +1891,10 @@
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
+                        case 'keseluruhan-tab':
+                            updateInstitusiDropdown(keseluruhanList);
+                            initializeDataTable7();
+                            break;
                         case 'bkokuIPTS-tab':
                             updateInstitusiDropdown(bkokuIPTSList);
                             initializeDataTable1();
@@ -1727,9 +1923,9 @@
                     updateSaringanExportLink(activeTabId);
                 });
 
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuUAList);
-                initializeDataTable4(); // Initialize DataTable1 on page load
+                // Trigger the function for the default active tab
+                updateInstitusiDropdown(keseluruhanList);
+                initializeDataTable7();
                 updateSaringanExportLink();
 
             });
@@ -1748,21 +1944,23 @@
                 filterTable('#sortTable4', selectedInstitusi);
                 filterTable('#sortTable5', selectedInstitusi);
                 filterTable('#sortTable6', selectedInstitusi);
+                filterTable('#sortTable7', selectedInstitusi, 3);
                 updateSaringanExportLink();
             }
 
-            function filterTable(tableSelector, filterValue) {
+            function filterTable(tableSelector, filterValue, columnIndex = 2) {
                 if ($.fn.DataTable.isDataTable(tableSelector)) {
                     var table = $(tableSelector).DataTable();
-                    table.column(2).search(filterValue).draw();
+                    table.column(columnIndex).search(filterValue).draw();
                     table.page(0).draw(false);
                 }
             }
 
             function updateSaringanExportLink(activeTabId)
             {
-                activeTabId = activeTabId || $('.nav-link.active').attr('id') || 'bkokuUA-tab';
+                activeTabId = activeTabId || $('.nav-link.active').attr('id') || 'keseluruhan-tab';
                 var programMap = {
+                    'keseluruhan-tab': { code: 'ALL', label: 'KESELURUHAN' },
                     'bkokuUA-tab': { code: 'UA', label: 'BKOKU UA' },
                     'bkokuPOLI-tab': { code: 'POLI', label: 'BKOKU POLI' },
                     'bkokuKK-tab': { code: 'KK', label: 'BKOKU KK' },
@@ -1770,12 +1968,16 @@
                     'ppk-tab': { code: 'PPK', label: 'PPK' },
                     'gaji-tab': { code: 'ALL', label: 'RANKING GAJI' }
                 };
-                var selectedProgram = programMap[activeTabId] || programMap['bkokuUA-tab'];
+                var selectedProgram = programMap[activeTabId] || programMap['keseluruhan-tab'];
                 var exportUrl = "{{ route('senarai.permohonan.saringan.excel', ['programCode' => '__PROGRAM__']) }}".replace('__PROGRAM__', selectedProgram.code);
                 var selectedInstitusi = $('#institusiDropdown').val() || '';
 
                 if (selectedInstitusi) {
                     exportUrl += '?institusi=' + encodeURIComponent(selectedInstitusi);
+                }
+
+                if (selectedProgram.code === 'ALL') {
+                    exportUrl += (exportUrl.includes('?') ? '&' : '?') + 'jenis=' + (activeTabId === 'keseluruhan-tab' ? 'keseluruhan' : 'ranking');
                 }
 
                 $('#exportSaringanExcel')

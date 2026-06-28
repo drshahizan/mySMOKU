@@ -295,14 +295,14 @@ class SaringanController extends Controller
                             $subQuery->where('jenis_institusi', '!=', 'KI');
                         });
                     })
-                    ->whereIn('status', ['2','3'])
+                    ->whereIn('status', ['2','3','4','5'])
                     ->with(['akademik' => function ($query) {
                         $query->where('status', 1);
                         $query->with(['infoipt', 'peringkat']);
                     }, 'smoku'])
-                    ->join('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
+                    ->leftJoin('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
                     ->select('permohonan.*', 'smoku_waris.pendapatan_waris')
-                    ->orderByRaw("CAST(REPLACE(smoku_waris.pendapatan_waris, ',', '') AS UNSIGNED) ASC")
+                    ->orderBy('permohonan.tarikh_hantar', 'desc')
                     ->get();
 
         // Append name of 'dilaksanakan_oleh'
@@ -326,10 +326,53 @@ class SaringanController extends Controller
 
     }
 
+    public function getSenaraiPermohonanRankingGaji()
+    {
+        $permohonan = Permohonan::whereHas('akademik', function ($query) {
+                        $query->where('status', 1);
+                        $query->whereHas('infoipt', function ($subQuery) {
+                            $subQuery->where('jenis_institusi', '!=', 'KI');
+                        });
+                    })
+                    ->whereIn('status', ['2','3','4','5'])
+                    ->with(['akademik' => function ($query) {
+                        $query->where('status', 1);
+                        $query->with(['infoipt', 'peringkat']);
+                    }, 'smoku'])
+                    ->leftJoin('smoku_waris', 'permohonan.smoku_id', '=', 'smoku_waris.smoku_id')
+                    ->select('permohonan.*', 'smoku_waris.pendapatan_waris')
+                    ->orderByRaw("CASE WHEN smoku_waris.pendapatan_waris IS NULL OR smoku_waris.pendapatan_waris = '' THEN 1 ELSE 0 END ASC")
+                    ->orderByRaw("CAST(REPLACE(smoku_waris.pendapatan_waris, ',', '') AS UNSIGNED) ASC")
+                    ->get();
+
+        // Append name of 'dilaksanakan_oleh'
+        foreach ($permohonan as $item) {
+            $user_id = DB::table('sejarah_permohonan')
+                        ->where('permohonan_id', $item->id)
+                        ->where('status', $item->status)
+                        ->latest()
+                        ->value('dilaksanakan_oleh');
+            // Add to response object
+            $item->user_id = $user_id;
+
+            if ($user_id === null || in_array($item->status, [1, 2])) {
+                $item->dilaksanakan_oleh_nama = "Tiada Maklumat";
+            } else {
+                $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
+            }
+        }
+
+        return response()->json($permohonan);
+
+    }
+
     public function cetakSenaraiSaringanExcel(Request $request, $programCode)
     {
         $institusi = $request->input('institusi');
-        $programName = $programCode === 'ALL' ? 'RANKING_GAJI' : $programCode;
+        $jenis = $request->input('jenis');
+        $programName = $programCode === 'ALL'
+            ? ($jenis === 'keseluruhan' ? 'KESELURUHAN' : 'RANKING_GAJI')
+            : $programCode;
 
         return Excel::download(
             new SaringanPermohonanExport($programCode, $institusi),
