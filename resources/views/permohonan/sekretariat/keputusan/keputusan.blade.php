@@ -159,7 +159,10 @@
                             {{-- Javascript Nav Bar --}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">BKOKU UA</button>
+                                    <button class="nav-link active" id="keseluruhan-tab" data-toggle="tab" data-target="#keseluruhan" type="button" role="tab" aria-controls="keseluruhan" aria-selected="true">KESELURUHAN</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">BKOKU UA</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="bkokuPOLI-tab" data-toggle="tab" data-target="#bkokuPOLI" type="button" role="tab" aria-controls="bkokuPOLI" aria-selected="true">BKOKU POLI</button>
@@ -298,8 +301,34 @@
 
                             {{-- Content Navigation Bar --}}
                             <div class="tab-content mt-0" id="myTabContent">
+                                {{-- KESELURUHAN --}}
+                                <div class="tab-pane fade show active" id="keseluruhan" role="tabpanel" aria-labelledby="keseluruhan-tab">
+                                    <div class="body">
+                                        <div class="table-responsive" id="table-responsive">
+                                            <table id="sortTable6" class="table table-bordered table-striped" style="margin-top: 0 !important;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10% !important;"><b>ID Permohonan</b></th>
+                                                        <th class="text-center" style="width: 8% !important;"><b>Program</b></th>
+                                                        <th style="width: 22% !important;"><b>Nama</b></th>
+                                                        <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 15%"><b>ID Institusi</b></th>
+                                                        <th class="text-center" style="width: 10%"><b>Status</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Yuran Disokong (RM)</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Wang Saku Disokong (RM)</b></th>
+                                                        <th class="text-center" style="width: 15% !important;"><b>No. Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Tarikh Mesyuarat</b></th>
+                                                        <th class="text-center" style="width: 10% !important;"><b>Status Permohonan</b></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{-- BKOKU UA --}}
-                                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                                     <div class="body">
                                         <div class="table-responsive" id="table-responsive">
                                             <table id="sortTable4" class="table table-bordered table-striped" style="margin-top: 0 !important;">
@@ -447,6 +476,7 @@
                 var bkokuKKList = @json($institusiPengajianKK);
                 var bkokuIPTSList = @json($institusiPengajianIPTS);
                 var ppkList = @json($institusiPengajianPPK);
+                var keseluruhanList = @json($institusiPengajianALL);
 
                 function formatAmount(data) {
                     if (data === null || data === '') {
@@ -456,7 +486,7 @@
                     return parseFloat(data).toFixed(2);
                 }
 
-                $('.export-container[data-program-code="UA"]').show();
+                $('.export-container[data-program-code="UA"]').hide();
                 $('.export-container[data-program-code="POLI"]').hide();
                 $('.export-container[data-program-code="KK"]').hide();
                 $('.export-container[data-program-code="IPTS"]').hide();
@@ -465,6 +495,156 @@
 
 
                 // DataTable initialization functions
+                function initializeDataTable6() {
+                    $('#sortTable6').DataTable({
+                        ordering: true,
+                        order: [],
+                        columnDefs: [
+                            { orderable: false, targets: [0] },
+                            { targets: [4], visible: false },
+                            { targets: [5], visible: false },
+                        ],
+                        ajax: {
+                            url: '{{ route("senarai.keputusan.ALL") }}',
+                            dataSrc: ''
+                        },
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        columns: [
+                            { data: 'no_rujukan_permohonan' },
+                            {
+                                data: 'program',
+                                className: 'text-center',
+                                render: function(data) {
+                                    return data ? data.toUpperCase() : '';
+                                }
+                            },
+                            {
+                                data: 'smoku.nama',
+                                render: function(data) {
+                                    if (!data) {
+                                        return '';
+                                    }
+
+                                    var conjunctions_lower = ['bin', 'binti'];
+                                    var conjunctions_upper = ['A/L', 'A/P'];
+                                    var words = data.split(' ');
+
+                                    for (var i = 0; i < words.length; i++) {
+                                        var word = words[i];
+
+                                        if (conjunctions_lower.includes(word.toLowerCase())) {
+                                            words[i] = word.toLowerCase();
+                                        } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                                            words[i] = word.toUpperCase();
+                                        } else if (word.charAt(0) === "'" && word.length > 1) {
+                                            words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                                        } else {
+                                            words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                                        }
+                                    }
+
+                                    return words.join(' ');
+                                }
+                            },
+                            { data: 'akademik.infoipt.nama_institusi' },
+                            { data: 'akademik.infoipt.id_institusi' },
+                            {
+                                data: null,
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'keputusan');
+                                }
+                            },
+                            {
+                                data: 'akademik.peringkat.peringkat',
+                                render: function(data) {
+                                    if (!data) {
+                                        return '';
+                                    }
+
+                                    var words = data.split(' ');
+                                    for (var i = 0; i < words.length; i++) {
+                                        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+                                    }
+
+                                    return words.join(' ');
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: 'yuran_disokong',
+                                className: 'text-center',
+                                render: function(data) {
+                                    return formatAmount(data);
+                                }
+                            },
+                            {
+                                data: 'wang_saku_disokong',
+                                className: 'text-center',
+                                render: function(data) {
+                                    return formatAmount(data);
+                                }
+                            },
+                            {
+                                data: null,
+                                className: 'text-center',
+                                render: function(data, type, row) {
+                                    return getKelulusanValue(row, 'no_mesyuarat');
+                                }
+                            },
+                            {
+                                data: null,
+                                render: function(data, type, row) {
+                                    var tarikhMesyuarat = getKelulusanValue(row, 'tarikh_mesyuarat');
+                                    if (type === 'display' || type === 'filter') {
+                                        if (!tarikhMesyuarat) {
+                                            return '';
+                                        }
+
+                                        var date = new Date(tarikhMesyuarat);
+                                        var year = date.getFullYear();
+                                        var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                                        var day = ('0' + date.getDate()).slice(-2);
+
+                                        return day + '/' + month + '/' + year;
+                                    }
+
+                                    return tarikhMesyuarat;
+                                },
+                                className: 'text-center'
+                            },
+                            {
+                                data: null,
+                                render: function(data, type, row) {
+                                    var status = '';
+                                    var keputusan = getKelulusanValue(row, 'keputusan');
+
+                                    switch (keputusan) {
+                                        case 'Lulus':
+                                            var route = row.program === 'PPK'
+                                                ? "{{ route('generate-pdfPPK', ['permohonanId' => ':permohonanId']) }}"
+                                                : "{{ route('generate-pdf', ['permohonanId' => ':permohonanId']) }}";
+                                            var url = route.replace(':permohonanId', row.id);
+                                            status = '<a href="' + url + '" class="keputusan-status-pill keputusan-status-layak">' +
+                                                        '<i class="fa fa-download fa-sm custom-white-icon" style="color: white !important;"></i> Layak' +
+                                                    '</a>';
+                                            break;
+                                        case 'Tidak Lulus':
+                                            status = '<span class="keputusan-status-pill keputusan-status-tidak-layak">Tidak Layak</span>';
+                                            break;
+                                        default:
+                                            status = '';
+                                            break;
+                                    }
+
+                                    return status;
+                                }
+                            }
+                        ]
+                    });
+                }
+
                 function initializeDataTable4() {
                     $('#sortTable4').DataTable({
                         ordering: true, // Enable manual sorting
@@ -1290,6 +1470,9 @@
                     if ($.fn.DataTable.isDataTable('#sortTable5')) {
                         $('#sortTable5').DataTable().destroy();
                     }
+                    if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                        $('#sortTable6').DataTable().destroy();
+                    }
                 }
 
                 // Function to update the institution dropdown
@@ -1317,6 +1500,8 @@
 
                 function getProgramCode(activeTabId) {
                     switch (activeTabId) {
+                        case 'keseluruhan-tab':
+                            return 'ALL';
                         case 'bkokuUA-tab':
                             return 'UA';
                         case 'bkokuIPTS-tab':
@@ -1344,6 +1529,10 @@
 
                     // Update the institution dropdown based on the active tab
                     switch (activeTabId) {
+                        case 'keseluruhan-tab':
+                            updateInstitusiDropdown(keseluruhanList);
+                            initializeDataTable6();
+                            break;
                         case 'bkokuUA-tab':
                             updateInstitusiDropdown(bkokuUAList);
                             initializeDataTable4();
@@ -1367,9 +1556,9 @@
                     }
                 });
 
-                // Trigger the function for the default active tab (bkoku-tab)
-                updateInstitusiDropdown(bkokuUAList);
-                initializeDataTable4(); // Initialize DataTable1 on page load
+                // Trigger the function for the default active tab
+                updateInstitusiDropdown(keseluruhanList);
+                initializeDataTable6();
             });
 
         </script>
@@ -1384,8 +1573,9 @@
                 initDataTable('#sortTable3', 'datatable3');
                 initDataTable('#sortTable4', 'datatable4');
                 initDataTable('#sortTable5', 'datatable5');
+                initDataTable('#sortTable6', 'datatable6', 4, 5);
 
-                function initDataTable(tableId, variableName) {
+                function initDataTable(tableId, variableName, institusiColumn = 3, statusColumn = 4) {
                     // Check if the datatable is already initialized
                     if ($.fn.DataTable.isDataTable(tableId)) {
                         // Destroy the existing DataTable instance
@@ -1401,8 +1591,8 @@
                         },
                         columnDefs: [
                                 { orderable: false, targets: [0] },
-                                { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [4], visible: false } // Hide column (index 5)
+                                { targets: [institusiColumn], visible: false },
+                                { targets: [statusColumn], visible: false }
                             ]
                     });
                 }
@@ -1423,6 +1613,7 @@
                 applyAndLogFilter('Table 3', datatable3, selectedInstitusi, startDate, endDate, status);
                 applyAndLogFilter('Table 4', datatable4, selectedInstitusi, startDate, endDate, status);
                 applyAndLogFilter('Table 5', datatable5, selectedInstitusi, startDate, endDate, status);
+                applyAndLogFilter('Table 6', datatable6, selectedInstitusi, startDate, endDate, status, 3, 5, 10);
 
 
                 var exportIPTS = document.getElementById('exportIPTS');
@@ -1441,7 +1632,7 @@
                 exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
             }
 
-            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) 
+            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status, institusiColumn = 2, statusColumn = 4, dateColumn = 9) 
             {
                 // Reset the search for all columns to ensure a clean filter
                 table.columns().search('').draw();
@@ -1456,7 +1647,7 @@
                             let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
                             let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
 
-                            let dateAdded = moment(data[9], 'DD/MM/YYYY');
+                            let dateAdded = moment(data[dateColumn], 'DD/MM/YYYY');
 
                             // Check if the date falls within the specified range
                             let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
@@ -1481,13 +1672,13 @@
 
                 // Apply search filter for institusi
                 if (institusi) {
-                    table.column(2).search(institusi).draw();
+                    table.column(institusiColumn).search(institusi).draw();
                 }
 
                 // Apply search filter for status
                 if (status) {
                     console.log('Applying Status Filter:', status);
-                    table.column(4).search(status).draw();
+                    table.column(statusColumn).search(status).draw();
                 } else {
                     console.log('No Status Filter Applied');
                 }

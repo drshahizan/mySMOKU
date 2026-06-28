@@ -1525,12 +1525,13 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         // Pop up notification
         $id_permohonan = Permohonan::where('id', $id)->value('no_rujukan_permohonan');
         $notifikasi = "Emel notifikasi telah dihantar kepada " . $id_permohonan;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan', 'notifikasi', 'kelulusan', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     public function hantarSemuaKeputusanPermohonan(Request $request)
@@ -1679,12 +1680,13 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         // Pop up notification
         $keputusan = $request->get('keputusan');
         $notifikasi = "Emel notifikasi telah dihantar kepada semua pemohon.";
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK' ,'institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('keputusan','notifikasi','kelulusan','institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK' ,'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     //PERMOHONAN - KEPUTUSAN
@@ -1702,10 +1704,11 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         $notifikasi = null;
 
-        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK'));
+        return view('permohonan.sekretariat.keputusan.keputusan', compact('kelulusan', 'notifikasi', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL'));
     }
 
     public function getKeputusanIPTS()
@@ -1743,7 +1746,14 @@ class SekretariatController extends Controller
         return response()->json($permohonan);
     }
 
-    private function getKeputusanPermohonanByAkademik($program, $jenisInstitusi = null)
+    public function getKeputusanALL()
+    {
+        $permohonan = $this->getKeputusanPermohonanByAkademik(null);
+
+        return response()->json($permohonan);
+    }
+
+    private function getKeputusanPermohonanByAkademik($program = null, $jenisInstitusi = null)
     {
         return DB::table('permohonan')
             ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
@@ -1754,15 +1764,21 @@ class SekretariatController extends Controller
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
             ->leftJoin('permohonan_kelulusan', 'permohonan_kelulusan.permohonan_id', '=', 'permohonan.id')
-            ->where('permohonan.program', $program)
+            ->when($program, function ($query) use ($program) {
+                return $query->where('permohonan.program', $program);
+            })
             ->whereNotIn('permohonan.status', [1, 2, 3, 4, 5, 9, 10])
             ->when($jenisInstitusi, function ($query) use ($jenisInstitusi) {
                 return $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+            })
+            ->when(!$jenisInstitusi, function ($query) {
+                return $query->where('bk_info_institusi.jenis_institusi', '!=', 'KI');
             })
             ->orderByDesc('permohonan_kelulusan.tarikh_mesyuarat')
             ->orderByDesc('permohonan_kelulusan.updated_at')
             ->select([
                 'permohonan.id',
+                'permohonan.program',
                 'permohonan.no_rujukan_permohonan',
                 'permohonan.yuran_disokong',
                 'permohonan.wang_saku_disokong',
@@ -1778,6 +1794,7 @@ class SekretariatController extends Controller
             ->map(function ($item) {
                 return [
                     'id' => $item->id,
+                    'program' => $item->program,
                     'no_rujukan_permohonan' => $item->no_rujukan_permohonan,
                     'yuran_disokong' => $item->yuran_disokong,
                     'wang_saku_disokong' => $item->wang_saku_disokong,

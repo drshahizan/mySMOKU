@@ -465,6 +465,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('permohonan/sekretariat/keputusan/BKOKU-KK', [SekretariatController::class, 'getKeputusanKK'])->name('senarai.keputusan.KK');
         Route::get('permohonan/sekretariat/keputusan/BKOKU-UA', [SekretariatController::class, 'getKeputusanUA'])->name('senarai.keputusan.UA');
         Route::get('permohonan/sekretariat/keputusan/PPK', [SekretariatController::class, 'getKeputusanPPK'])->name('senarai.keputusan.PPK');
+        Route::get('permohonan/sekretariat/keputusan/KESELURUHAN', [SekretariatController::class, 'getKeputusanALL'])->name('senarai.keputusan.ALL');
 
         Route::get('senarai-keputusan-permohonan-BKOKU-IPTS-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanIPTS'])->name('senarai.keputusan.BKOKU.IPTS.pdf');
         Route::get('senarai-keputusan-permohonan-BKOKU-POLI-pdf', [SekretariatController::class, 'cetakKeputusanPermohonanPOLI'])->name('senarai.keputusan.BKOKU.POLI.pdf');
