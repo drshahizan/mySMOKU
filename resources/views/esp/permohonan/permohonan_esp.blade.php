@@ -145,7 +145,15 @@
             {{-- Javascript Nav Bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="true">
+                  <button class="nav-link active" id="keseluruhan-tab" data-toggle="tab" data-target="#keseluruhan" type="button" role="tab" aria-controls="keseluruhan" aria-selected="true">
+                    KESELURUHAN
+                    @if ($countALL > 0)
+                      <span class="badge badge-danger">{{ $countALL }}</span>
+                    @endif
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="bkokuUA-tab" data-toggle="tab" data-target="#bkokuUA" type="button" role="tab" aria-controls="bkokuUA" aria-selected="false">
                     BKOKU UA
                     @if ($countUA > 0)
                       <span class="badge badge-danger">{{ $countUA }}</span>
@@ -243,8 +251,39 @@
 
             {{-- Content Navigation Bar --}}
             <div class="tab-content" id="myTabContent">
+                {{-- KESELURUHAN --}}
+                <div class="tab-pane fade show active" id="keseluruhan" role="tabpanel" aria-labelledby="keseluruhan-tab">
+                  <br>
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                      <!--begin::Table-->
+                      <div class="table-responsive">
+                        <table id="sortTable6" class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th class="text-center" style="width:3%;">
+                                <input type="checkbox" name="select-all" id="select-all-keseluruhan" onclick="toggleSelectAll('keseluruhan');" />
+                              </th>
+                              <th><b>ID Permohonan</b></th>
+                              <th><b>Program</b></th>
+                              <th><b>Nama</b></th>
+                              <th><b>Institusi Pengajian</b></th>
+                              <th><b>Peringkat Pengajian</b></th>
+                              <th><b>Tarikh Permohonan</b></th>
+                              <th><b>Yuran Disokong (RM)</b></th>
+                              <th><b>Wang Saku Disokong (RM)</b></th>
+                              <th><b>Status ESP</b></th>
+                            </tr>
+                          </thead>
+                        </table>
+                      </div>
+                      <!--end::Table-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+
                 {{-- BKOKU UA--}}
-                <div class="tab-pane fade show active" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
+                <div class="tab-pane fade" id="bkokuUA" role="tabpanel" aria-labelledby="bkokuUA-tab">
                   <br>
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
@@ -576,6 +615,7 @@
           var bkokuKKList = @json($institusiPengajianKK);
           var bkokuUAList = @json($institusiPengajianUA);
           var ppkList = @json($institusiPengajianPPK);
+          var keseluruhanList = @json($institusiPengajianALL);
 
           function formatTarikhPermohonan(data, type) {
               if (type !== 'display' && type !== 'filter') {
@@ -616,7 +656,90 @@
               return `<input type="checkbox" class="select-checkbox" name="selected_items[]" value="${data}"${disabled} />`;
           }
 
+          function formatNama(data) {
+              if (!data) {
+                  return '';
+              }
+
+              var conjunctions_lower = ['bin', 'binti'];
+              var conjunctions_upper = ['A/L', 'A/P'];
+              var words = data.split(' ');
+
+              for (var i = 0; i < words.length; i++) {
+                  var word = words[i];
+
+                  if (conjunctions_lower.includes(word.toLowerCase())) {
+                      words[i] = word.toLowerCase();
+                  } else if (conjunctions_upper.includes(word.toUpperCase())) {
+                      words[i] = word.toUpperCase();
+                  } else if (word.charAt(0) === "'" && word.length > 1) {
+                      words[i] = "'" + word.charAt(1).toUpperCase() + word.slice(2).toLowerCase();
+                  } else {
+                      words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                  }
+              }
+
+              return words.join(' ');
+          }
+
           // DataTable initialization functions
+          function initializeDataTable6() {
+              window.datatable6 = $('#sortTable6').DataTable({
+                  ordering: true,
+                  order: [],
+                  columnDefs: [
+                      { orderable: false, targets: [0] }
+                  ],
+                  ajax: {
+                      url: '{{ route("senarai.esp.ALL") }}',
+                      dataSrc: ''
+                  },
+                  language: {
+                      url: "/assets/lang/Malay.json"
+                  },
+                  columns: [
+                  {
+                      data: 'smoku.no_kp',
+                      className: 'text-center',
+                      render: renderEspCheckbox
+                  },
+                  {
+                      data: 'no_rujukan_permohonan',
+                      render: function(data, type, row) {
+                        return `
+                          <a href="#"
+                            class="open-modal-link"
+                            data-id="${row.id}"
+                            data-type="${row.program === 'PPK' ? 'PPK' : 'UA'}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#dokumenModal">
+                            ${data}
+                          </a>`;
+                      }
+                  },
+                  {
+                      data: 'program',
+                      className: 'text-center',
+                      render: function(data) {
+                          return data ? data.toUpperCase() : '';
+                      }
+                  },
+                  {
+                      data: 'smoku.nama',
+                      render: function(data) {
+                          return formatNama(data);
+                      }
+                  },
+                  { data: 'akademik.infoipt.nama_institusi' },
+                  { data: 'akademik.peringkat.peringkat', defaultContent: '' },
+                  { data: 'tarikh_hantar', render: formatTarikhPermohonan },
+                  { data: 'yuran_disokong' },
+                  { data: 'wang_saku_disokong' },
+                  { data: 'esp_sent_status', render: renderStatusEsp }
+                  ]
+              });
+          }
+
           function initializeDataTable1() {
               $('#sortTable1').DataTable({
                   ordering: true, // Enable manual sorting
@@ -1038,6 +1161,9 @@
               if ($.fn.DataTable.isDataTable('#sortTable5')) {
                   $('#sortTable5').DataTable().destroy();
               }
+              if ($.fn.DataTable.isDataTable('#sortTable6')) {
+                  $('#sortTable6').DataTable().destroy();
+              }
           }
 
           // Function to update the institution dropdown
@@ -1064,6 +1190,10 @@
 
               // Update the institution dropdown based on the active tab
               switch (activeTabId) {
+                  case 'keseluruhan-tab':
+                      updateInstitusiDropdown(keseluruhanList);
+                      initializeDataTable6();
+                      break;
                   case 'bkokuIPTS-tab':
                       updateInstitusiDropdown(bkokuIPTSList);
                       initializeDataTable1();
@@ -1087,15 +1217,15 @@
               }
           });
 
-          // Trigger the function for the default active tab (bkoku-tab)
-          updateInstitusiDropdown(bkokuUAList);
-          initializeDataTable4(); // Initialize DataTable1 on page load
+          // Trigger the function for the default active tab
+          updateInstitusiDropdown(keseluruhanList);
+          initializeDataTable6();
       });
   </script>
 
   <script>
       // Declare datatables in a higher scope to make them accessible
-      var datatable1, datatable3, datatable2, datatable4, datatable5;
+      var datatable1, datatable3, datatable2, datatable4, datatable5, datatable6;
 
       $(document).ready(function() {
           // Initialize DataTables
@@ -1138,6 +1268,9 @@
           initDataTable('#sortTable3', 'datatable3');
           initDataTable('#sortTable4', 'datatable4');
           initDataTable('#sortTable5', 'datatable5');
+          if ($.fn.DataTable.isDataTable('#sortTable6')) {
+              datatable6 = $('#sortTable6').DataTable();
+          }
 
           function initDataTable(tableId, variableName) {
               // Check if the datatable is already initialized
@@ -1167,11 +1300,12 @@
           applyAndLogFilter('Table 3', datatable3, selectedInstitusi);
           applyAndLogFilter('Table 4', datatable4, selectedInstitusi);
           applyAndLogFilter('Table 5', datatable5, selectedInstitusi);
+          applyAndLogFilter('Table 6', datatable6, selectedInstitusi, 4);
       }
 
-      function applyAndLogFilter(tableName, table, filterValue) {
+      function applyAndLogFilter(tableName, table, filterValue, institusiColumn = 3) {
           // Apply search filter to the table
-          table.column(3).search(filterValue).draw();
+          table.column(institusiColumn).search(filterValue).draw();
 
           // Go to the first page for the table
           table.page(0).draw(false);

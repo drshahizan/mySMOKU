@@ -202,6 +202,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/permohonanESP/BKOKUKK', [MaklumatESPController::class, 'getSenaraiEspBKOKUKK'])->name('senarai.esp.BKOKUKK');
         Route::get('/permohonanESP/BKOKUIPTS', [MaklumatESPController::class, 'getSenaraiEspBKOKUIPTS'])->name('senarai.esp.BKOKUIPTS');
         Route::get('/permohonanESP/PPK', [MaklumatESPController::class, 'getSenaraiEspPPK'])->name('senarai.esp.PPK');
+        Route::get('/permohonanESP/KESELURUHAN', [MaklumatESPController::class, 'getSenaraiEspALL'])->name('senarai.esp.ALL');
         Route::post('/permohonanESP', [MaklumatESPController::class, 'hantar'])->name('maklumat.esp');
         Route::post('/permohonanESP/status-hantar', [MaklumatESPController::class, 'markStatusHantarPermohonan'])->name('maklumat.esp.status-hantar');
 

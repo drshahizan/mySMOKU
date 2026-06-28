@@ -35,6 +35,7 @@ class MaklumatESPController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get();
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
 
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -42,6 +43,7 @@ class MaklumatESPController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
@@ -84,10 +86,17 @@ class MaklumatESPController extends Controller
                             ->whereNull('data_migrate')
                             ->count();
 
+        $countALL = Permohonan::join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('permohonan.status', ['6'])
+                            ->whereNull('data_migrate')
+                            ->count();
+
         // Debug output
         // dd($countUA, $countPOLI, $countKK, $countIPTS, $countPPK);
 
-        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK'));     
+        return view('esp.permohonan.permohonan_esp', compact('kelulusan','secretKey', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));     
         
     }
 
@@ -197,7 +206,15 @@ class MaklumatESPController extends Controller
 
     }
 
-    private function getPermohonanEspByAkademik($program, $jenisInstitusi = null)
+    public function getSenaraiEspALL()
+    {
+        $permohonan = $this->getPermohonanEspByAkademik(null);
+
+        return response()->json($permohonan);
+
+    }
+
+    private function getPermohonanEspByAkademik($program = null, $jenisInstitusi = null)
     {
         $query = Permohonan::query()
             ->join('smoku', 'smoku.id', '=', 'permohonan.smoku_id')
@@ -207,11 +224,14 @@ class MaklumatESPController extends Controller
             })
             ->join('bk_info_institusi', 'bk_info_institusi.id_institusi', '=', 'smoku_akademik.id_institusi')
             ->leftJoin('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')
-            ->where('permohonan.program', $program)
+            ->when($program, function ($query) use ($program) {
+                return $query->where('permohonan.program', $program);
+            })
             ->where('permohonan.status', 6)
             ->whereNull('permohonan.data_migrate')
             ->select([
                 'permohonan.id',
+                'permohonan.program',
                 'permohonan.smoku_id',
                 'permohonan.no_rujukan_permohonan',
                 'permohonan.tarikh_hantar',
@@ -228,11 +248,14 @@ class MaklumatESPController extends Controller
 
         if ($jenisInstitusi) {
             $query->where('bk_info_institusi.jenis_institusi', $jenisInstitusi);
+        } else {
+            $query->where('bk_info_institusi.jenis_institusi', '!=', 'KI');
         }
 
         return $query->get()->map(function ($item) {
             return [
                 'id' => $item->id,
+                'program' => $item->program,
                 'smoku_id' => $item->smoku_id,
                 'no_rujukan_permohonan' => $item->no_rujukan_permohonan,
                 'tarikh_hantar' => $item->tarikh_hantar,
