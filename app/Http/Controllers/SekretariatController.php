@@ -3004,6 +3004,7 @@ class SekretariatController extends Controller
         $institusiPengajianKK = InfoIpt::where('jenis_institusi','KK')->orderBy('nama_institusi')->get();
         $institusiPengajianUA = InfoIpt::where('jenis_institusi','UA')->orderBy('nama_institusi')->get();
         $institusiPengajianPPK = InfoIpt::where('id_institusi', '01055')->orWhere('jenis_permohonan', 'PPK')->orderBy('nama_institusi')->get(); 
+        $institusiPengajianALL = InfoIpt::where('jenis_institusi', '!=', 'KI')->orderBy('nama_institusi')->get();
         
         // Extract ID values from the collections
         $idsIPTS = $institusiPengajianIPTS->pluck('id_institusi')->toArray();
@@ -3011,6 +3012,7 @@ class SekretariatController extends Controller
         $idsKK = $institusiPengajianKK->pluck('id_institusi')->toArray();
         $idsUA = $institusiPengajianUA->pluck('id_institusi')->toArray();
         $idsPPK = $institusiPengajianPPK->pluck('id_institusi')->toArray();
+        $idsALL = $institusiPengajianALL->pluck('id_institusi')->toArray();
 
         // Count the number of applications for each institution type with smoku_akademik join
         $countUA = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
@@ -3052,8 +3054,15 @@ class SekretariatController extends Controller
                             ->whereIn('smoku_akademik.id_institusi', $idsPPK)
                             ->whereIn('tuntutan.status', ['2'])
                             ->count();
+
+        $countALL = Tuntutan::join('permohonan','permohonan.id','=','tuntutan.permohonan_id')
+                            ->join('smoku_akademik', 'permohonan.smoku_id', '=', 'smoku_akademik.smoku_id')
+                            ->where('smoku_akademik.status', 1)
+                            ->whereIn('smoku_akademik.id_institusi', $idsALL)
+                            ->whereIn('tuntutan.status', ['2'])
+                            ->count();
         // return redirect()->route('senarai.tuntutan.kedua');
-        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK','tuntutan','status_kod','status'));
+        return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL','tuntutan','status_kod','status'));
     }
 
     public function keputusanTuntutan(Request $request)
