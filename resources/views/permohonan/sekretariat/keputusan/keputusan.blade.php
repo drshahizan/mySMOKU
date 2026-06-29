@@ -1487,6 +1487,16 @@
                     for (var i = 0; i < institusiList.length; i++) {
                         $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
                     }
+
+                    $('#institusiDropdown').val('').trigger('change');
+                }
+
+                function clearDecisionFilters() {
+                    $('#start_date').val('');
+                    $('#end_date').val('');
+                    $('#status').val('').trigger('change');
+                    $('#institusiDropdown').val('').trigger('change');
+                    $.fn.dataTable.ext.search = [];
                 }
 
                 function updateExportContainers(activeTabId) {
@@ -1521,6 +1531,9 @@
                 $('#myTab .nav-link').on('click', function() {
                     // Get the ID of the active tab
                     var activeTabId = $(this).attr('id');
+
+                    clearDecisionFilters();
+                    updateExportLinks('', '', '', '');
 
                     // Clear filters when changing tabs
                     clearFilters();
@@ -1571,6 +1584,22 @@
                 var endDate = $('#end_date').val();
                 var status = $('#status').val();
 
+                updateExportLinks(startDate, endDate, status, selectedInstitusi);
+
+                var activeTabId = $('#myTab .nav-link.active').attr('id') || 'keseluruhan-tab';
+                var tableConfig = {
+                    'keseluruhan-tab': { selector: '#sortTable6', institusiColumn: 3, statusColumn: 5, dateColumn: 10 },
+                    'bkokuUA-tab': { selector: '#sortTable4', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
+                    'bkokuIPTS-tab': { selector: '#sortTable1', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
+                    'bkokuPOLI-tab': { selector: '#sortTable2', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
+                    'bkokuKK-tab': { selector: '#sortTable3', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
+                    'ppk-tab': { selector: '#sortTable5', institusiColumn: 2, statusColumn: 4, dateColumn: 8 }
+                };
+
+                applyTableFilter(tableConfig[activeTabId], selectedInstitusi, startDate, endDate, status);
+            }
+
+            function updateExportLinks(startDate, endDate, status, selectedInstitusi) {
                 var exportIPTS = document.getElementById('exportIPTS');
                 exportIPTS.href = "{{ route('senarai.keputusan.BKOKU.IPTS.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
 
@@ -1585,18 +1614,6 @@
 
                 var exportPPK = document.getElementById('exportPPK');
                 exportPPK.href = "{{ route('senarai.keputusan.PPK.pdf') }}?start_date=" + startDate + "&end_date=" + endDate + "&status=" + status + "&institusi=" + selectedInstitusi;
-
-                var activeTabId = $('#myTab .nav-link.active').attr('id') || 'keseluruhan-tab';
-                var tableConfig = {
-                    'keseluruhan-tab': { selector: '#sortTable6', institusiColumn: 3, statusColumn: 5, dateColumn: 10 },
-                    'bkokuUA-tab': { selector: '#sortTable4', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
-                    'bkokuIPTS-tab': { selector: '#sortTable1', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
-                    'bkokuPOLI-tab': { selector: '#sortTable2', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
-                    'bkokuKK-tab': { selector: '#sortTable3', institusiColumn: 2, statusColumn: 4, dateColumn: 9 },
-                    'ppk-tab': { selector: '#sortTable5', institusiColumn: 2, statusColumn: 4, dateColumn: 8 }
-                };
-
-                applyTableFilter(tableConfig[activeTabId], selectedInstitusi, startDate, endDate, status);
             }
 
             function parseDateInput(value) {
