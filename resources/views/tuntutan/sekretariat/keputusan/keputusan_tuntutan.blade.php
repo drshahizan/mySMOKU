@@ -1028,13 +1028,25 @@
                     for (var i = 0; i < institusiList.length; i++) {
                         $('#institusiDropdown').append('<option value="' + institusiList[i].nama_institusi + '">' + institusiList[i].nama_institusi + '</option>');
                     }
+
+                    $('#institusiDropdown').val('').trigger('change');
+                }
+
+                function clearDecisionFilters() {
+                    $('#start_date').val('');
+                    $('#end_date').val('');
+                    $('#status').val('').trigger('change');
+                    $('#institusiDropdown').val('').trigger('change');
+                    $.fn.dataTable.ext.search = [];
                 }
 
 
                 // Add an event listener for tab clicks
-                $('.nav-link').on('click', function() {
+                $('#myTab .nav-link').on('click', function() {
                     // Get the ID of the active tab
                     var activeTabId = $(this).attr('id');
+
+                    clearDecisionFilters();
 
                     // Clear filters when changing tabs
                     clearFilters();
