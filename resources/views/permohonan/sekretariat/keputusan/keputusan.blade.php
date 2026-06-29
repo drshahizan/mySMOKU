@@ -1638,6 +1638,10 @@
                 return new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
             }
 
+            function escapeRegex(value) {
+                return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
             function applyTableFilter(config, institusi, startDate, endDate, status) {
                 if (!config || !$.fn.DataTable.isDataTable(config.selector)) {
                     return;
@@ -1673,7 +1677,7 @@
                 }
 
                 if (status) {
-                    table.column(config.statusColumn).search(status);
+                    table.column(config.statusColumn).search('^' + escapeRegex(status) + '$', true, false);
                 }
 
                 table.page(0).draw(false);
