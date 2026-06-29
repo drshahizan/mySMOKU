@@ -1078,121 +1078,85 @@
 
             function applyFilter() 
             {
-                // Reinitialize DataTables
-                initDataTable('#sortTable1', 'datatable1');
-                initDataTable('#sortTable2', 'datatable2');
-                initDataTable('#sortTable3', 'datatable3');
-                initDataTable('#sortTable4', 'datatable4');
-                initDataTable('#sortTable5', 'datatable5');
-                if ($.fn.DataTable.isDataTable('#sortTable6')) {
-                    datatable6 = $('#sortTable6').DataTable();
-                }
-
-                function initDataTable(tableId, variableName) {
-                    // Check if the datatable is already initialized
-                    if ($.fn.DataTable.isDataTable(tableId)) {
-                        // Destroy the existing DataTable instance
-                        $(tableId).DataTable().destroy();
-                    }
-
-                    // Initialize the datatable and assign it to the global variable
-                    window[variableName] = $(tableId).DataTable({
-                        ordering: true, // Enable manual sorting
-                        order: [], // Disable initial sorting
-                        language: {
-                            url: "/assets/lang/Malay.json"
-                        },
-                        columnDefs: [
-                                { orderable: false, targets: [0] },
-                                { targets: [3], visible: false }, // Hide column (index 4)
-                                { targets: [4], visible: false } // Hide column (index 5)
-                            ]
-                    });
-                }
-
                 var selectedInstitusi = $('[name="institusi"]').val();
                 var startDate = $('#start_date').val();
                 var endDate = $('#end_date').val();
                 var status = $('#status').val();
-                console.log(selectedInstitusi);
-                console.log(startDate);
-                console.log(endDate);
-                console.log(status);
 
-                // Apply search filter and log data for all tables
-                applyAndLogFilter('Table 1', datatable1, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 2', datatable2, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 3', datatable3, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 4', datatable4, selectedInstitusi, startDate, endDate, status);
-                applyAndLogFilter('Table 5', datatable5, selectedInstitusi, startDate, endDate, status); 
-                applyAndLogFilter('Table 6', datatable6, selectedInstitusi, startDate, endDate, status);
+                var activeTabId = $('#myTab .nav-link.active').attr('id') || 'keseluruhan-tab';
+                var tableConfig = {
+                    'keseluruhan-tab': { selector: '#sortTable6', institusiColumn: 3, statusColumn: 5, dateColumn: 9 },
+                    'bkokuIPTS-tab': { selector: '#sortTable1', institusiColumn: 2, statusColumn: 4, dateColumn: 8 },
+                    'bkokuPOLI-tab': { selector: '#sortTable2', institusiColumn: 2, statusColumn: 4, dateColumn: 8 },
+                    'bkokuKK-tab': { selector: '#sortTable3', institusiColumn: 2, statusColumn: 4, dateColumn: 8 },
+                    'bkokuUA-tab': { selector: '#sortTable4', institusiColumn: 2, statusColumn: 4, dateColumn: 8 },
+                    'ppk-tab': { selector: '#sortTable5', institusiColumn: 2, statusColumn: 4, dateColumn: 7 }
+                };
+
+                applyTableFilter(tableConfig[activeTabId], selectedInstitusi, startDate, endDate, status);
             }
 
-            function applyAndLogFilter(tableName, table, institusi, startDate, endDate, status) {
-                if (!table) {
+            function parseDateInput(value) {
+                if (!value) {
+                    return null;
+                }
+
+                var parts = value.split('-');
+                return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+            }
+
+            function parseDateDisplay(value) {
+                if (!value) {
+                    return null;
+                }
+
+                var parts = value.split('/');
+                if (parts.length !== 3) {
+                    return null;
+                }
+
+                return new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
+            }
+
+            function applyTableFilter(config, institusi, startDate, endDate, status) {
+                if (!config || !$.fn.DataTable.isDataTable(config.selector)) {
                     return;
                 }
 
-                // Reset the search for all columns to ensure a clean filter
-                table.columns().search('').draw();
+                var table = $(config.selector).DataTable();
 
-                // Clear the previous search functions
+                table.columns().search('');
                 $.fn.dataTable.ext.search = [];
 
-                // Apply date range filter
                 if (startDate || endDate) {
-                    $.fn.dataTable.ext.search.push(
-                        function (settings, data, dataIndex) {
-                            let startDateObj = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-                            let endDateObj = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+                    var startDateObj = parseDateInput(startDate);
+                    var endDateObj = parseDateInput(endDate);
+                    var tableId = config.selector.replace('#', '');
 
-                            let dateColumn = tableName === 'Table 6' ? 9 : 8;
-                            let dateAdded = moment(data[dateColumn], 'DD/MM/YYYY');
-
-                            // Check if the date falls within the specified range
-                            let result = (!startDateObj || dateAdded.isSameOrAfter(startDateObj)) &&
-                                        (!endDateObj || dateAdded.isSameOrBefore(endDateObj));
-
-                            if (result) {
-                                console.log('Date Range Filter Result: true');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                            } else {
-                                console.log('Date Range Filter Result: false');
-                                console.log('Formatted Start Date:', startDateObj ? startDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Formatted End Date:', endDateObj ? endDateObj.format('DD/MM/YYYY') : null);
-                                console.log('Date Added:', dateAdded.format('YYYY-MM-DD'));
-                            }
-
-                            return result;
+                    $.fn.dataTable.ext.search.push(function (settings, data) {
+                        if (settings.nTable.id !== tableId) {
+                            return true;
                         }
-                    );
+
+                        var dateAdded = parseDateDisplay(data[config.dateColumn]);
+                        if (!dateAdded) {
+                            return false;
+                        }
+
+                        return (!startDateObj || dateAdded >= startDateObj) &&
+                            (!endDateObj || dateAdded <= endDateObj);
+                    });
                 }
 
-                // Apply search filter for institusi
                 if (institusi) {
-                    var institusiColumn = tableName === 'Table 6' ? 3 : 2;
-                    table.column(institusiColumn).search(institusi).draw();
+                    table.column(config.institusiColumn).search(institusi);
                 }
 
-                // Apply search filter for status
                 if (status) {
-                    console.log('Applying Status Filter:', status);
-                    var statusColumn = tableName === 'Table 6' ? 5 : 4;
-                    table.column(statusColumn).search(status).draw();
-                } else {
-                    console.log('No Status Filter Applied');
+                    table.column(config.statusColumn).search(status);
                 }
 
-                // Log filtered data
-                console.log(`Filtered Data (${tableName}):`, table.rows({ search: 'applied' }).data().toArray());
-
-                // Go to the first page for the table
                 table.page(0).draw(false);
-
-                // Log the data of visible rows on the first page for the table
-                console.log(`Data on Visible Rows (${tableName}, First Page):`, table.rows({ page: 'current' }).data().toArray());
             }
         </script>
     </body>
