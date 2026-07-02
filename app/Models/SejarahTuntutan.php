@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SejarahTuntutan extends Model
 {
@@ -16,4 +17,13 @@ class SejarahTuntutan extends Model
         'status',
         'dilaksanakan_oleh',
     ];
+
+    protected static function booted()
+    {
+        static::saving(function ($sejarahTuntutan) {
+            if (blank($sejarahTuntutan->dilaksanakan_oleh) && Auth::check()) {
+                $sejarahTuntutan->dilaksanakan_oleh = Auth::id();
+            }
+        });
+    }
 }
