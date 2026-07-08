@@ -9,6 +9,10 @@
         @endphp
         @foreach($dokumen as $item)
             @php
+                if (in_array((string) $item['id_dokumen'], ['3', '4'], true)) {
+                    continue;
+                }
+
                 $dokumen_path = "/assets/dokumen/permohonan/" . $item['dokumen'];
                 $file_path = public_path($dokumen_path); // real file path
                 $ext = pathinfo($dokumen_path, PATHINFO_EXTENSION);
@@ -17,6 +21,8 @@
                     $dokumen_name = "No. Akaun Bank Islam";
                 } elseif ($item['id_dokumen'] == 2) {
                     $dokumen_name = "Surat Tawaran";
+                } elseif ($item['id_dokumen'] == 5) {
+                    $dokumen_name = "Akuan Pendapatan";
                 } elseif ($item['id_dokumen'] == 3) {
                     $dokumen_name = "Invois/Resit";
                 } elseif ($item['id_dokumen'] == 4) {

@@ -1461,7 +1461,7 @@
 							<!--end::Title-->
 							<!--begin::Notice-->
 							<div class="text-muted fw-semibold fs-6">Senarai Dokumen</div>
-							<div class="fw-semibold fs-4" style="color: red">* Salinan dokumen (Resit/Invois) adalah berdasarkan semester semasa</div>
+							{{-- Resit/Invois disembunyikan buat sementara. --}}
 							<!--end::Notice-->
 						</div>
 						<!--end::Heading-->
@@ -1492,6 +1492,11 @@
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
 								<tr>
+									<td class="text-gray-800">Akuan Pendapatan</td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akuanPendapatan" name="akuanPendapatan"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akuanPendapatan" rows="1" name="nota_akuanPendapatan"></textarea></td>
+								</tr>
+								<tr style="display: none;">
 									<td class="text-gray-800">Salinan Resit / Invois&nbsp;<a href="/assets/contoh/invois.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="invoisResit" name="invoisResit"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_invoisResit" rows="1" name="nota_invoisResit"></textarea></td>
@@ -1500,7 +1505,7 @@
 						</table>
 						<!--end::Table-->
 						<!--begin::Table-->
-						<table class="table table-row-dashed fs-6 gy-5">
+						<table class="table table-row-dashed fs-6 gy-5" style="display: none;">
 							<thead>
 								<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
 									<th></th>

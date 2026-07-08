@@ -1283,20 +1283,23 @@
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
 								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
-								@foreach($dokumen as $dok)
-									<tr>
-										<td class="text-gray-800">
-											@if($dok->id_dokumen == '1')
-												Salinan Penyata Bank
-											@elseif($dok->id_dokumen == '2')
-												Salinan Surat Tawaran Pengajian
-											@elseif($dok->id_dokumen == '3')
-												Salinan Resit/Invois
-											@else
-												Resit/Invois Tambahan (Jika Ada)	
-											@endif
-										</td>
-										@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '3')
+									@foreach($dokumen as $dok)
+										@if(in_array($dok->id_dokumen, ['3', '4']))
+											@continue
+										@endif
+										<tr>
+											<td class="text-gray-800">
+												@if($dok->id_dokumen == '1')
+													Salinan Penyata Bank
+												@elseif($dok->id_dokumen == '2')
+													Salinan Surat Tawaran Pengajian
+												@elseif($dok->id_dokumen == '5')
+													Akuan Pendapatan
+												@else
+													Dokumen Tambahan
+												@endif
+											</td>
+											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2' || $dok->id_dokumen == '5')
 											@if($butiranPelajar->status == 5 && $saringan !=null)
 												@php
 												$id = ''; // Initialize $id variable
@@ -1310,16 +1313,16 @@
 													@php
 														$id='suratTawaran';
 													@endphp
-												@elseif($dok->id_dokumen == '3')
-													@php
-														$id='invoisResit';
-													@endphp
-												@endif
+													@elseif($dok->id_dokumen == '5')
+														@php
+															$id='akuanPendapatan';
+														@endphp
+													@endif
 												@if($id == 'akaunBank' && $saring_bank)
 													<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
 													@elseif($id == 'suratTawaran' && $saring_surat)
 														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
-													@elseif($id == 'invoisResit' && $saring_resit)
+													@elseif($id == 'akuanPendapatan')
 														<td class="fv-row"><input type="file" class="form-control form-control-sm" id="{{$id}}" name="{{$id}}"/></td>
 													@else
 														<td class="fv-row"></td>
@@ -1339,12 +1342,17 @@
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akaunBank" name="akaunBank"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea></td>
 								</tr>
-								<tr>
-									<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
-									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
-									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
-								</tr>
-								 @endif	
+									<tr>
+										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh"><i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i></a></td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
+									</tr>
+									<tr>
+										<td class="text-gray-800">Akuan Pendapatan</td>
+										<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akuanPendapatan" name="akuanPendapatan"/></td>
+										<td><textarea type="text" class="form-control form-control-sm" id="nota_akuanPendapatan" rows="1" name="nota_akuanPendapatan"></textarea></td>
+									</tr>
+								@endif
 								
 							</tbody>
 							

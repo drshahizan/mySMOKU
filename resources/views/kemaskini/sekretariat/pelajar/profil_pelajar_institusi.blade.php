@@ -1151,61 +1151,41 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">
-								@if (!$dokumen->isEmpty() && $dokumen->count() >= 2)
-									@foreach($dokumen as $dok)
-										<tr>
-											<td class="text-gray-800">
-												@if($dok->id_dokumen == '1')
-													Salinan Penyata Bank
-												@elseif($dok->id_dokumen == '2')
-													Salinan Surat Tawaran Pengajian
-												@endif
-											</td>
-											@if($dok->id_dokumen == '1' || $dok->id_dokumen == '2')
-											@php
-												$namaDok = ($dok->id_dokumen == '1') ? 'akaunBank' : 'suratTawaran';
-											@endphp
-											<td>
+								@php
+									$dokumenProfil = $senaraiDokumen ?? collect();
+									$dokumenById = $dokumen->keyBy('id_dokumen');
+								@endphp
+								@foreach($dokumenProfil as $config)
+									@php
+										$namaDok = $config->input_name;
+										$dok = $dokumenById->get($config->kod_dokumen);
+									@endphp
+									<tr>
+										<td class="text-gray-800">
+											{{ $config->nama_dokumen }}
+											@if($config->contoh_path)
+												&nbsp;
+												<a href="{{ $config->contoh_path }}" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
+													<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
+												</a>
+											@endif
+										</td>
+										<td class="fv-row">
+											@if($dok && $dok->dokumen)
 												<a href="/assets/dokumen/permohonan/{{ $dok->dokumen }}" target="_blank">{{ $dok->dokumen }}</a>
 												<button type="button" class="btn btn-link p-0" onclick="toggleUpload('{{ $namaDok }}')">
 													<i class="fa-solid fa-pen"></i>
 												</button>
 												<input type="file" class="form-control form-control-sm mt-2" id="upload_{{ $namaDok }}" name="upload_{{ $namaDok }}" style="display: none;">
-											</td>
-											<td>
-												<textarea type="text" class="form-control form-control-sm" id="nota_{{ $namaDok }}" rows="1" name="nota_{{ $namaDok }}">{{ $dok->catatan }}</textarea>
-											</td>
+											@else
+												<input type="file" class="form-control form-control-sm" id="upload_{{ $namaDok }}" name="upload_{{ $namaDok }}"/>
 											@endif
-										</tr>
-									@endforeach
-								@else
-									<tr>
-										<td class="text-gray-800">Salinan Penyata Bank&nbsp;
-											<a href="/assets/contoh/penyata_bank.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
-												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-											</a>
-										</td>
-										<td class="fv-row">
-											<input type="file" class="form-control form-control-sm" id="upload_akaunBank" name="upload_akaunBank"/>
 										</td>
 										<td>
-											<textarea type="text" class="form-control form-control-sm" id="nota_akaunBank" rows="1" name="nota_akaunBank"></textarea>
+											<textarea type="text" class="form-control form-control-sm" id="nota_{{ $namaDok }}" rows="1" name="nota_{{ $namaDok }}">{{ $dok->catatan ?? '' }}</textarea>
 										</td>
 									</tr>
-									<tr>
-										<td class="text-gray-800">Salinan Surat Tawaran Pengajian&nbsp;
-											<a href="/assets/contoh/tawaran.pdf" target="_blank" data-bs-toggle="tooltip" title="Papar contoh">
-												<i class="fa-solid fa-circle-info" style="color: rgb(18, 178, 231);"></i>
-											</a>
-										</td>
-										<td class="fv-row">
-											<input type="file" class="form-control form-control-sm" id="upload_suratTawaran" name="upload_suratTawaran"/>
-										</td>
-										<td>
-											<textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea>
-										</td>
-									</tr>
-								@endif
+								@endforeach
 							</tbody>
 						</table>
 						<!--end::Table-->

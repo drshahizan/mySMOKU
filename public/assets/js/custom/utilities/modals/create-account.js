@@ -566,10 +566,10 @@ var KTCreateAccount = function () {
 						}
 					},
 					
-					'invoisResit': {
+					'akuanPendapatan': {
 						validators: {
 							notEmpty: {
-								message: 'Salinan Resit/Invois diperlukan'
+								message: 'Akuan Pendapatan diperlukan'
 							},
 							file: {
 								extension: 'jpeg,jpg,png,pdf',

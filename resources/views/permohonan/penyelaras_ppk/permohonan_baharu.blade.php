@@ -1435,6 +1435,11 @@
 									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="suratTawaran" name="suratTawaran"/></td>
 									<td><textarea type="text" class="form-control form-control-sm" id="nota_suratTawaran" rows="1" name="nota_suratTawaran"></textarea></td>
 								</tr>
+								<tr>
+									<td class="text-gray-800">Akuan Pendapatan</td>
+									<td class="fv-row"><input type="file" class="form-control form-control-sm" id="akuanPendapatan" name="akuanPendapatan"/></td>
+									<td><textarea type="text" class="form-control form-control-sm" id="nota_akuanPendapatan" rows="1" name="nota_akuanPendapatan"></textarea></td>
+								</tr>
 							</tbody>
 						</table>
 						<!--end::Table-->

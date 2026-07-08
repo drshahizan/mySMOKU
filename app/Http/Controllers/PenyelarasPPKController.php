@@ -7,6 +7,7 @@ use App\Mail\MailDaftarPentadbir;
 use App\Mail\PengesahanCGPA;
 use App\Mail\PermohonanHantar;
 use App\Models\Agama;
+use App\Models\BkDokumen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -642,6 +643,7 @@ class PenyelarasPPKController extends Controller
             'akaunBank' => $docRules,
             'suratTawaran' => $docRules,
             'invoisResit' => $docRules,
+            'akuanPendapatan' => $docRules,
             'dokumen' => 'sometimes|array',
             'dokumen.*' => $docRules,
         ]);
@@ -680,6 +682,7 @@ class PenyelarasPPKController extends Controller
             'akaunBank' => 1,
             'suratTawaran' => 2,
             'invoisResit' => 3,
+            'akuanPendapatan' => 5,
         ];
 
         foreach ($documentTypes as $inputName => $idDokumen) {
@@ -699,12 +702,14 @@ class PenyelarasPPKController extends Controller
                     // Update the existing document
                     $existingDocument->dokumen = $newFilename;
                     $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->jenis_dokumen = $inputName === 'akuanPendapatan' ? 'akuan_pendapatan' : $existingDocument->jenis_dokumen;
                     $existingDocument->save();
                 } else {
                     // Create a new instance of dokumen and set its properties
                     $data = new Dokumen();
                     $data->permohonan_id = $permohonan_id->id;
                     $data->id_dokumen = $idDokumen;
+                    $data->jenis_dokumen = $inputName === 'akuanPendapatan' ? 'akuan_pendapatan' : null;
                     $data->dokumen = $newFilename;
                     $data->catatan = $request->input("nota_$inputName");
 
@@ -714,9 +719,9 @@ class PenyelarasPPKController extends Controller
             }
         }
 
-        //TAMBAHAN FILE
-        $dokumen = $request->file('dokumen'); 
-        $catatan = $request->input('catatan'); 
+        //TAMBAHAN FILE - disembunyikan buat sementara
+        $dokumen = null;
+        $catatan = null;
 
         // Check if $dokumen is a valid array and $catatan is an array
         if (is_array($dokumen) && is_array($catatan)) {
@@ -1460,9 +1465,10 @@ class PenyelarasPPKController extends Controller
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
+        $senaraiDokumen = BkDokumen::where('status', 1)->orderBy('susunan')->orderBy('kod_dokumen')->get();
         $bolehKemaskiniProfil = !$this->profilDikunciSemasaTajaan($akademik, $permohonan);
 
-        return view('kemaskini.penyelarasppk.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','bolehKemaskiniProfil'));
+        return view('kemaskini.penyelarasppk.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','bolehKemaskiniProfil','senaraiDokumen'));
     }
 
     public function peringkatProfilPelajar($ipt=0)
@@ -1675,17 +1681,15 @@ class PenyelarasPPKController extends Controller
         $uploadPath = 'assets/dokumen/permohonan';
 
         $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
-        $request->validate([
-            'upload_akaunBank' => $docRules,
-            'upload_suratTawaran' => $docRules,
-            'upload_invoisResit' => $docRules,
-        ]);
+        $senaraiDokumen = BkDokumen::where('status', 1)->get();
+        $request->validate(
+            $senaraiDokumen
+                ->mapWithKeys(fn ($dokumen) => ["upload_{$dokumen->input_name}" => $docRules])
+                ->toArray()
+        );
 
-        $documentTypes = [
-            'akaunBank' => 1,
-            'suratTawaran' => 2,
-            'invoisResit' => 3,
-        ];
+        $documentTypes = $senaraiDokumen->pluck('kod_dokumen', 'input_name')->toArray();
+        $documentJenis = $senaraiDokumen->pluck('jenis_dokumen', 'input_name')->toArray();
 
         foreach ($documentTypes as $inputName => $idDokumen) {
             $file = $request->file("upload_$inputName");
@@ -1717,12 +1721,14 @@ class PenyelarasPPKController extends Controller
                     // Update the existing document record
                     $existingDocument->dokumen = $newFilename;
                     $existingDocument->catatan = $noteContent;
+                    $existingDocument->jenis_dokumen = $documentJenis[$inputName] ?? $existingDocument->jenis_dokumen;
                     $existingDocument->save();
                 } else {
                     // Create a new document record
                     $data = new Dokumen();
                     $data->permohonan_id = $permohonan->id;
                     $data->id_dokumen = $idDokumen;
+                    $data->jenis_dokumen = $documentJenis[$inputName] ?? null;
                     $data->dokumen = $newFilename;
                     $data->catatan = $noteContent;
                     $data->save();

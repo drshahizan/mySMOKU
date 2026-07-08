@@ -487,6 +487,7 @@ class PermohonanController extends Controller
             'akaunBank' => $docRules,
             'suratTawaran' => $docRules,
             'invoisResit' => $docRules,
+            'akuanPendapatan' => $docRules,
             'dokumen' => 'sometimes|array',
             'dokumen.*' => $docRules,
         ]);
@@ -522,6 +523,7 @@ class PermohonanController extends Controller
             'akaunBank' => 1,
             'suratTawaran' => 2,
             'invoisResit' => 3,
+            'akuanPendapatan' => 5,
         ];
 
         foreach ($documentTypes as $inputName => $idDokumen) {
@@ -541,12 +543,14 @@ class PermohonanController extends Controller
                     // Update the existing document
                     $existingDocument->dokumen = $newFilename;
                     $existingDocument->catatan = $request->input("nota_$inputName");
+                    $existingDocument->jenis_dokumen = $inputName === 'akuanPendapatan' ? 'akuan_pendapatan' : $existingDocument->jenis_dokumen;
                     $existingDocument->save();
                 } else {
                     // Create a new instance of dokumen and set its properties
                     $data = new Dokumen();
                     $data->permohonan_id = $permohonan_id->id;
                     $data->id_dokumen = $idDokumen;
+                    $data->jenis_dokumen = $inputName === 'akuanPendapatan' ? 'akuan_pendapatan' : null;
                     $data->dokumen = $newFilename;
                     $data->catatan = $request->input("nota_$inputName");
 
@@ -556,11 +560,10 @@ class PermohonanController extends Controller
             }
         }
 
-        //TAMBAHAN FILE
-        $dokumen = $request->file('dokumen'); 
-        $catatan = $request->input('catatan'); 
+        //TAMBAHAN FILE - disembunyikan buat sementara
+        $dokumen = null;
+        $catatan = null;
 
-        // Check if $dokumen is a valid array and $catatan is an array
         if (is_array($dokumen) && is_array($catatan)) {
             foreach ($dokumen as $key => $img) {
                 $extension = strtolower($img->getClientOriginalExtension());

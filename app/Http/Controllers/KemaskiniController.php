@@ -6,6 +6,7 @@ use App\Mail\MailDaftarPentadbir;
 use App\Models\Agama;
 use App\Models\Akademik;
 use App\Models\Bandar;
+use App\Models\BkDokumen;
 use App\Models\ButiranPelajar;
 use App\Models\Dokumen;
 use App\Models\Dun;
@@ -363,6 +364,7 @@ class KemaskiniController extends Controller
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan?->id ?? 0)->get();
+        $senaraiDokumen = BkDokumen::where('status', 1)->orderBy('susunan')->get();
         $adaTamatPengajian = $permohonan
             ? TamatPengajian::where('smoku_id', $smoku->smoku_id)
                 ->where('permohonan_id', $permohonan->id)
@@ -370,7 +372,7 @@ class KemaskiniController extends Controller
             : false;
         $bolehKemaskiniPeringkat = !$adaTamatPengajian;
         
-        return view('kemaskini.sekretariat.pelajar.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','bolehKemaskiniPeringkat'));
+        return view('kemaskini.sekretariat.pelajar.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','senaraiDokumen','bolehKemaskiniPeringkat'));
     }
 
     public function peringkatProfilPelajar($id=0)
@@ -587,17 +589,15 @@ class KemaskiniController extends Controller
         $uploadPath = 'assets/dokumen/permohonan';
 
         $docRules = 'nullable|file|mimes:pdf,jpg,jpeg,png';
-        $request->validate([
-            'upload_akaunBank' => $docRules,
-            'upload_suratTawaran' => $docRules,
-            'upload_invoisResit' => $docRules,
-        ]);
+        $senaraiDokumen = BkDokumen::where('status', 1)->get();
+        $request->validate(
+            $senaraiDokumen
+                ->mapWithKeys(fn ($dokumen) => ["upload_{$dokumen->input_name}" => $docRules])
+                ->toArray()
+        );
 
-        $documentTypes = [
-            'akaunBank' => 1,
-            'suratTawaran' => 2,
-            'invoisResit' => 3,
-        ];
+        $documentTypes = $senaraiDokumen->pluck('kod_dokumen', 'input_name')->toArray();
+        $documentJenis = $senaraiDokumen->pluck('jenis_dokumen', 'input_name')->toArray();
 
         foreach ($documentTypes as $inputName => $idDokumen) {
             $file = $request->file("upload_$inputName");
@@ -629,12 +629,14 @@ class KemaskiniController extends Controller
                     // Update the existing document record
                     $existingDocument->dokumen = $newFilename;
                     $existingDocument->catatan = $noteContent;
+                    $existingDocument->jenis_dokumen = $documentJenis[$inputName] ?? $existingDocument->jenis_dokumen;
                     $existingDocument->save();
                 } else {
                     // Create a new document record
                     $data = new Dokumen();
                     $data->permohonan_id = $permohonan->id;
                     $data->id_dokumen = $idDokumen;
+                    $data->jenis_dokumen = $documentJenis[$inputName] ?? null;
                     $data->dokumen = $newFilename;
                     $data->catatan = $noteContent;
                     $data->save();

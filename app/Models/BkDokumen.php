@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dokumen extends Model
+class BkDokumen extends Model
 {
     use HasFactory;
-    protected $table = 'permohonan_dokumen'; 
+
+    protected $table = 'bk_dokumen';
 
     protected $fillable = [
-        'permohonan_id',
-        'id_dokumen',
+        'kod_dokumen',
+        'nama_dokumen',
+        'input_name',
         'jenis_dokumen',
-        'dokumen',
-        'catatan',
+        'contoh_path',
+        'status',
+        'susunan',
     ];
 }
