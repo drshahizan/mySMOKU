@@ -130,6 +130,11 @@
 				@csrf
 					<!--begin::Wrapper-->
 					<div class="w-100">
+						@if (!$bolehKemaskiniProfil)
+							<div class="alert alert-warning d-flex align-items-center justify-content-center text-center text-dark w-100 mb-10 py-3">
+								Profil pelajar hanya boleh dikemaskini ketika tempoh pembukaan sistem.
+							</div>
+						@endif
 						<!--begin::Heading-->
 						<div class="pb-10 pb-lg-15">
 							<!--begin::Title-->
@@ -865,7 +870,7 @@
 								<div class="row fv-row">
 									<!--begin::Input wrapper-->
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="peringkat" name="peringkat" value="{{$akademik->peringkat_pengajian}}" />
-									@if ($bolehKemaskiniPeringkat)
+									@if ($bolehKemaskiniProfil && $bolehKemaskiniPeringkat)
 										<select id="peringkat_pengajian" name="peringkat_pengajian" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
 											<option value="">Pilih</option>
 										</select>
@@ -1239,14 +1244,10 @@
 						</i>Kembali</button>
 					</div>
 					<!--end::Wrapper-->
-					@php
-						$smoku_id = DB::table('smoku')->where('no_kp',Auth::user()->no_kp)->first();
-						$permohonan = DB::table('permohonan')->orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
-					@endphp
 							
 					<!--begin::Wrapper-->
 					<div>
-						@if (in_array($permohonan->status, [1, 2, 5, 6, 7, 8]))
+						@if ($bolehKemaskiniProfil && $permohonan && in_array($permohonan->status, [1, 2, 5, 6, 7, 8]))
 							<button type="submit" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" >
 								<span class="indicator-label">Simpan
 								<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -1256,7 +1257,6 @@
 								<span class="indicator-progress">Sila tunggu...
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 							</button>
-						
 						@endif
 
 						{{-- <button type="button" class="btn btn-lg btn-primary{{ in_array($permohonan->status, [1, 5, 9]) ? ' save-next-button' : '' }}" data-kt-stepper-action="next"> --}}
@@ -1816,6 +1816,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+	@if (!$bolehKemaskiniProfil)
+		document.addEventListener('DOMContentLoaded', function () {
+			document.querySelectorAll('#kt_create_account_form input, #kt_create_account_form select, #kt_create_account_form textarea').forEach(function (field) {
+				if (field.tagName === 'SELECT' || field.type === 'file' || field.type === 'checkbox' || field.type === 'radio') {
+					field.disabled = true;
+				} else if (field.type !== 'hidden') {
+					field.readOnly = true;
+				}
+			});
+
+			if (window.jQuery) {
+				$('#kt_create_account_form select').trigger('change.select2');
+			}
+		});
+	@endif
+
     // Check if there is a flash message
     @if(session('success'))
         Swal.fire({

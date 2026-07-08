@@ -870,7 +870,7 @@
 							<!--begin::Col-->
 							<div class="col-md-6 fv-row">
 								@php
-									$bolehKemaskiniPeringkat = $permohonan && $permohonan->status < 6;
+									$bolehKemaskiniPeringkat = $bolehKemaskiniPeringkat ?? false;
 									$peringkatSemasa = $peringkat->firstWhere('kod_peringkat', $akademik->peringkat_pengajian);
 								@endphp
 								<!--begin::Label-->
@@ -1744,7 +1744,8 @@
 								var selectedValue = $('#peringkat').val();
 
 								response['data'].forEach(function(item) {
-									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${item.peringkat}</option>`;
+									var peringkatLabel = String(item.peringkat || '').toUpperCase();
+									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${peringkatLabel}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 

@@ -291,11 +291,18 @@ class KemaskiniController extends Controller
                 // Check tamat pengajian
                 $permohonanId = optional($item->permohonan->first())->id;
 
-                $tamat_pengajian = $permohonanId
+                $tamatPengajian = $permohonanId
                     ? TamatPengajian::where('smoku_id', $item->id)
                         ->where('permohonan_id', $permohonanId)
-                        ->exists()
-                    : false;
+                        ->first()
+                    : null;
+
+                $tamat_pengajian = !is_null($tamatPengajian);
+                $bolehSemakTukarPeringkat = $tamatPengajian
+                    && filled($tamatPengajian->institusi)
+                    && filled($tamatPengajian->peringkat)
+                    && filled($tamatPengajian->kursus)
+                    && blank($tamatPengajian->peringkat_baharu);
                 
                 // Ambil hanya satu rekod akademik yang status=1
                 $akademik = $item->akademik->first();
@@ -311,7 +318,8 @@ class KemaskiniController extends Controller
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
                     'has_permohonan' => $hasPermohonan,
-                    'tamat_pengajian' => $tamat_pengajian
+                    'tamat_pengajian' => $tamat_pengajian,
+                    'boleh_semak_tukar_peringkat' => $bolehSemakTukarPeringkat
                 ];
             });
 
@@ -355,8 +363,14 @@ class KemaskiniController extends Controller
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan?->id ?? 0)->get();
+        $adaTamatPengajian = $permohonan
+            ? TamatPengajian::where('smoku_id', $smoku->smoku_id)
+                ->where('permohonan_id', $permohonan->id)
+                ->exists()
+            : false;
+        $bolehKemaskiniPeringkat = !$adaTamatPengajian;
         
-        return view('kemaskini.sekretariat.pelajar.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan'));
+        return view('kemaskini.sekretariat.pelajar.profil_pelajar_institusi',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','oku','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','bolehKemaskiniPeringkat'));
     }
 
     public function peringkatProfilPelajar($id=0)
@@ -396,6 +410,11 @@ class KemaskiniController extends Controller
         $akademik = Akademik::where('smoku_id',$smoku->id)->where('status', 1)->first();
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+        $adaTamatPengajian = $permohonan
+            ? TamatPengajian::where('smoku_id', $smoku->id)
+                ->where('permohonan_id', $permohonan->id)
+                ->exists()
+            : false;
 
         $dokumen1 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 1)->first();
         $dokumen2 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 2)->first();
@@ -695,6 +714,10 @@ class KemaskiniController extends Controller
             
             $permohonans = Permohonan::where('smoku_id', $smoku->id)->get();
 
+            if ($adaTamatPengajian && $request->peringkat_pengajian != $akademik->peringkat_pengajian) {
+                return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini kerana rekod tamat pengajian telah wujud.');
+            }
+
             // Update no_kp in smoku first
             if ($request->no_kp != $smoku->no_kp) {
                 //semak dalam smoku no_kp
@@ -711,16 +734,12 @@ class KemaskiniController extends Controller
 
             // Update akademik
             if ($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
-                if ($permohonans->firstWhere('status', '<', 6)) {
-                    Akademik::where('smoku_id', $smoku->id)
-                        ->where('status', 1)
-                        ->update([
-                            'peringkat_pengajian' => $request->peringkat_pengajian,
-                            'nama_kursus' => $request->nama_kursus,
-                        ]);
-                } else {
-                    return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini.');
-                }
+                Akademik::where('smoku_id', $smoku->id)
+                    ->where('status', 1)
+                    ->update([
+                        'peringkat_pengajian' => $request->peringkat_pengajian,
+                        'nama_kursus' => $request->nama_kursus,
+                    ]);
             } else {
                 // peringkat unchanged, only update course name
                 Akademik::where('smoku_id', $smoku->id)
@@ -771,17 +790,13 @@ class KemaskiniController extends Controller
                 if (count($parts) === 4) { // Ensure it's in format B/peringkat/no_kp/n
                     $updateRujukan = false;
 
-                    // Match only tuntutan with peringkat same as request
-                    if ($parts[1] == $request->peringkat_pengajian) {
+                    // Match tuntutan with the old active peringkat.
+                    if ($parts[1] == $akademik->peringkat_pengajian) {
 
                         // Update peringkat_pengajian
                         if ($request->peringkat_pengajian != $akademik->peringkat_pengajian) {
-                            if ($permohonan && $permohonan->status < 6) {
-                                $parts[1] = $request->peringkat_pengajian;
-                                $updateRujukan = true;
-                            } else {
-                                return back()->with('failed', 'Maklumat peringkat pengajian tidak boleh dikemaskini.');
-                            }
+                            $parts[1] = $request->peringkat_pengajian;
+                            $updateRujukan = true;
                         }
                     
                     }

@@ -26,6 +26,7 @@ use App\Models\SejarahPermohonan;
 use App\Models\Smoku;
 use App\Models\SumberBiaya;
 use App\Models\SuratTawaran;
+use App\Models\TarikhIklan;
 use App\Models\TamatPengajian;
 use App\Models\TangguhPengajian;
 use App\Models\Tuntutan;
@@ -556,8 +557,9 @@ class PelajarController extends Controller
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->smoku_id)->first();
         $dokumen = Dokumen::where('permohonan_id', $permohonan->id)->get();
+        $bolehKemaskiniProfil = !$this->profilDikunciSemasaTajaan($akademik, $permohonan);
 
-        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan'));
+        return view('kemaskini.pelajar.profil_pelajar',compact('smoku','butiranPelajar','negeri','keturunan','agama','bandar','parlimen','dun','waris','hubungan','akademik','institusi','peringkat','kursus','mod','biaya','penaja','penajaArray','dokumen','permohonan','bolehKemaskiniProfil'));
     }
 
     public function peringkatProfil($ipt=0)
@@ -596,6 +598,10 @@ class PelajarController extends Controller
         $akademik = Akademik::where('smoku_id',$smoku->id)->where('status', 1)->first();
 
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
+
+        if ($this->profilDikunciSemasaTajaan($akademik, $permohonan)) {
+            return back()->with('failed', 'Maklumat peribadi dan peringkat pengajian hanya boleh dikemaskini ketika tempoh pembukaan sistem.');
+        }
 
         $dokumen1 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 1)->first();
         $dokumen2 = Dokumen::where('permohonan_id', $permohonan->id)->where('id_dokumen', 2)->first();
@@ -899,6 +905,42 @@ class PelajarController extends Controller
 
         // No updates were made
         return back();
+    }
+
+    private function profilDikunciSemasaTajaan(?Akademik $akademik, ?Permohonan $permohonan): bool
+    {
+        return $this->masihDalamTempohTajaan($akademik, $permohonan)
+            && !$this->dalamTempohPembukaanPermohonan();
+    }
+
+    private function masihDalamTempohTajaan(?Akademik $akademik, ?Permohonan $permohonan): bool
+    {
+        if (!$akademik || !$permohonan || !in_array((int) $permohonan->status, [6, 8], true)) {
+            return false;
+        }
+
+        if (!$akademik->tarikh_mula || !$akademik->tarikh_tamat) {
+            return false;
+        }
+
+        $tarikhMula = Carbon::parse($akademik->tarikh_mula)->startOfDay();
+        $tarikhTamat = Carbon::parse($akademik->tarikh_tamat)->endOfDay();
+
+        return Carbon::now()->between($tarikhMula, $tarikhTamat);
+    }
+
+    private function dalamTempohPembukaanPermohonan(): bool
+    {
+        $tarikhIklan = TarikhIklan::orderBy('created_at', 'desc')->first();
+
+        if (!$tarikhIklan) {
+            return false;
+        }
+
+        $tarikhMula = Carbon::parse($tarikhIklan->tarikh_mula . ' ' . $tarikhIklan->masa_mula);
+        $tarikhTamat = Carbon::parse($tarikhIklan->tarikh_tamat . ' ' . $tarikhIklan->masa_tamat);
+
+        return Carbon::now()->between($tarikhMula, $tarikhTamat);
     }
 
     public function suratTawaran()

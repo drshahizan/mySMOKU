@@ -276,6 +276,16 @@
                                                     'Lapor Tamat Pengajian' +
                                                 '</a>';
                                     }
+
+                                    if (row.boleh_semak_tukar_peringkat) {
+                                        var semakTukarPeringkatUrl = "{{ route('peringkat.pengajian') }}";
+                                        return  '<div class="badge badge-light-danger fw-bold mb-2">Tidak Aktif</div>' +
+                                                '<br>' +
+                                                '<a href="' + semakTukarPeringkatUrl + '" class="btn btn-sm btn-danger mt-2" title="Semak Tukar Peringkat">' +
+                                                    'Semak Tukar Peringkat' +
+                                                '</a>';
+                                    }
+
                                     return '<div class="badge badge-light-danger fw-bold">Tidak Aktif</div>';
                                 }
                             },
