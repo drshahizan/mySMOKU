@@ -149,6 +149,10 @@
         .form-select {
                 margin-left: 10px !important; 
         }
+        #sortTable1 th:nth-child(2),
+        #sortTable1 td:nth-child(2) {
+            min-width: 220px;
+        }
     </style>
 
     <script>
@@ -165,9 +169,11 @@
           function initializeDataTable1() {
               $('#sortTable1').DataTable({
                   ordering: true, // Enable manual sorting
+                      autoWidth: false,
                       order: [], // Disable initial sorting
                       columnDefs: [
-                          { orderable: false, targets: [0] }
+                          { orderable: false, targets: [0] },
+                          { width: '220px', targets: [1] }
                       ],
                   ajax: {
                       url: '{{ route("kemaskini.getSenaraiPelajar") }}', // URL to fetch data from
@@ -368,9 +374,11 @@
             // Initialize the datatable and assign it to the global variable
             window[variableName] = $(tableId).DataTable({
                 ordering: true, // Enable manual sorting
+                autoWidth: false,
                 order: [], // Disable initial sorting
                 columnDefs: [
-                    { orderable: false, targets: [0] }
+                    { orderable: false, targets: [0] },
+                    { width: '220px', targets: [1] }
                 ]
             });
         }
@@ -394,12 +402,14 @@
                 // Initialize the datatable and assign it to the global variable
                 window[variableName] = $(tableId).DataTable({
                     ordering: true, // Enable manual sorting
+                    autoWidth: false,
                     order: [], // Disable initial sorting
                     language: {
                         url: "/assets/lang/Malay.json"
                     },
                     columnDefs: [
-                        { orderable: false, targets: [0] }
+                        { orderable: false, targets: [0] },
+                        { width: '220px', targets: [1] }
                     ]
                 });
             }
