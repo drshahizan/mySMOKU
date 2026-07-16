@@ -281,16 +281,17 @@ class KemaskiniController extends Controller
                 $query->where('status', 1);
             })
             ->with(['akademik' => function ($query) {
-                $query->where('status', 1)->with('infoipt');
+                $query->where('status', 1)->with(['infoipt', 'peringkat']);
                  },
             'permohonan'])
             ->orderBy('nama')
             ->get()
             ->map(function ($item) {
                 $hasPermohonan = $item->permohonan->isNotEmpty();
+                $permohonan = $item->permohonan->sortByDesc('id')->first();
 
                 // Check tamat pengajian
-                $permohonanId = optional($item->permohonan->first())->id;
+                $permohonanId = optional($permohonan)->id;
 
                 $tamatPengajian = $permohonanId
                     ? TamatPengajian::where('smoku_id', $item->id)
@@ -310,11 +311,13 @@ class KemaskiniController extends Controller
                 return [
                     'id' => $item->id,
                     'smoku_id' => $item->id,
+                    'program' => $permohonan->program ?? '-',
                     'nama' => $item->nama,
                     'no_kp' => $item->no_kp,
                     'no_daftar_oku' => $item->no_daftar_oku,
                     'nama_kursus' => $akademik->nama_kursus ?? '-',
                     'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
+                    'peringkat_pengajian' => $akademik->peringkat->peringkat ?? '-',
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
