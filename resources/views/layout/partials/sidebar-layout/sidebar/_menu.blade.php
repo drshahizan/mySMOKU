@@ -617,15 +617,42 @@
 				<div class="menu-item">
 					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/peringkat/pengajian*') }}" href="{{ route('peringkat.pengajian') }}">
 						<span class="menu-icon">{!! getIcon('teacher', 'fs-2') !!}</span>
-						<span class="menu-title">Peringkat Pengajian ({{$peringkat}})</span>
+						<span class="menu-title">Lapor Tamat Pengajian / Tukar Peringkat Pengajian ({{$peringkat}})</span>
+					</a>
+				</div>				<div class="menu-item">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/maklumat_pelajar*', 'kemaskini/sekretariat/pelajar/semak_pelajar*') }}" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
+						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
+						<span class="menu-title">Maklumat Akaun Pengguna</span>
 					</a>
 				</div>
+				<div class="menu-item">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/pelajar/institusi*', 'kemaskini/sekretariat/profil/pelajar*', 'kemaskini/sekretariat/lapor/tamat/pengajian*') }}" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
+						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+						<span class="menu-title">Maklumat Pelajar</span>
+					</a>
+				</div>
+				<div class="menu-item">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/pendaftaran_pelajar*', 'kemaskini/sekretariat/daftar/pelajar*') }}" href="{{ route('kemaskini.sekretariat.daftar.pelajar')}}">
+						<span class="menu-icon">{!! getIcon('bookmark', 'fs-2') !!}</span>
+						<span class="menu-title">Pendaftaran Pelajar Sedia Ada</span>
+					</a>
+				</div>
+
+				<div class="menu-item">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/surat/tawaran*') }}" href="{{ route('kemaskini.sekretariat.surat.tawaran')}}">
+						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
+						<span class="menu-title">Surat Tawaran Pelajar</span>
+					</a>
+				</div>
+
+				{{--
 				<div class="menu-item">
 					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/pengajian*') }}" href="{{ route('tangguh.lanjut.pengajian') }}">
 						<span class="menu-icon">{!! getIcon('time', 'fs-2') !!}</span>
 						<span class="menu-title">Permohonan Penangguhan / Perlanjutan</span>
 					</a>
 				</div>
+				--}}
 				<div class="menu-item">
 					<a class="menu-link {{ $menuActive('sekretariat/kemaskini/senarai/pelajar*') }}" href="{{ route('senarai.tukar.institusi')}}">
 						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
@@ -674,31 +701,6 @@
 					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/emel/*') }}" href="{{url('kemaskini/sekretariat/emel/senarai-emel')}}">
 						<span class="menu-icon">{!! getIcon('send', 'fs-2') !!}</span>
 						<span class="menu-title">E-mel</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/maklumat_pelajar*', 'kemaskini/sekretariat/pelajar/semak_pelajar*') }}" href="{{url('kemaskini/sekretariat/pelajar/maklumat_pelajar')}}">
-						<span class="menu-icon">{!! getIcon('file', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat Akaun Pengguna</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/pelajar/institusi*', 'kemaskini/sekretariat/profil/pelajar*', 'kemaskini/sekretariat/lapor/tamat/pengajian*') }}" href="{{ route('kemaskini.sekretariat.senarai.profil')}}">
-						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
-						<span class="menu-title">Maklumat Pelajar</span>
-					</a>
-				</div>
-				<div class="menu-item">
-					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/pelajar/pendaftaran_pelajar*', 'kemaskini/sekretariat/daftar/pelajar*') }}" href="{{ route('kemaskini.sekretariat.daftar.pelajar')}}">
-						<span class="menu-icon">{!! getIcon('bookmark', 'fs-2') !!}</span>
-						<span class="menu-title">Pendaftaran Pelajar Sedia Ada</span>
-					</a>
-				</div>
-
-				<div class="menu-item">
-					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/surat/tawaran*') }}" href="{{ route('kemaskini.sekretariat.surat.tawaran')}}">
-						<span class="menu-icon">{!! getIcon('note', 'fs-2') !!}</span>
-						<span class="menu-title">Surat Tawaran Pelajar</span>
 					</a>
 				</div>
 
