@@ -958,7 +958,7 @@ class KemaskiniController extends Controller
                     'smoku_id' => $item->id,
                     'nama' => $item->nama,
                     'no_kp' => $item->no_kp,
-                    'peringkat_pengajian' => ucfirst(strtolower($akademik->peringkat->peringkat)) ?? '-',
+                    'peringkat_pengajian' => $akademik->peringkat->peringkat ?? '-',
                     'nama_kursus' => $akademik->nama_kursus ?? '-',
                     'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',

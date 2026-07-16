@@ -115,11 +115,11 @@
                                 <table id="sortTable1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th><b>Nama</b></th>                                        
+                                            <th><b>Program</b></th>
+                                            <th><b>Nama</b></th>
                                             <th><b>No. Kad Pengenalan</b></th>
-                                            <th><b>Peringkat Pengajian</b></th>
-                                            <th><b>Nama Kursus</b></th>
                                             <th><b>Nama Institusi</b></th>
+                                            <th><b>Peringkat Pengajian</b></th>
                                             <th><b>Tarikh Mula</b></th>
                                             <th><b>Tarikh Tamat</b></th>
                                             <th><b>Status</b></th>
@@ -148,6 +148,10 @@
         .form-select {
                 margin-left: 10px !important; 
         }
+        #sortTable1 th:nth-child(2),
+        #sortTable1 td:nth-child(2) {
+            min-width: 220px;
+        }
     </style>
 
     <script>
@@ -165,8 +169,10 @@
               $('#sortTable1').DataTable({
                   ordering: true, // Enable manual sorting
                       order: [], // Disable initial sorting
+                      autoWidth: false,
                       columnDefs: [
-                          { orderable: false, targets: [0] }
+                          { orderable: false, targets: [8] },
+                          { width: '220px', targets: [1] }
                       ],
                   ajax: {
                       url: '{{ route("kemaskini.getSenaraiLayak") }}', // URL to fetch data from
@@ -176,6 +182,7 @@
                       url: "/assets/lang/Malay.json"
                   },
                   columns: [ 
+                    { data: 'program' },
                     {
                         data: 'nama',
                         render: function(data, type, row) {
@@ -207,10 +214,8 @@
                         }
                     },
                     { data: 'no_kp' }, 
-                    
-                    { data: 'peringkat_pengajian' }, 
-                    { data: 'nama_kursus' }, 
                     { data: 'nama_institusi' },
+                    { data: 'peringkat_pengajian' },
                     { 
                             data: 'tarikh_mula',
                             render: function(data, type, row) {
@@ -352,8 +357,10 @@
             window[variableName] = $(tableId).DataTable({
                 ordering: true, // Enable manual sorting
                 order: [], // Disable initial sorting
-                columnDefs: [
-                    { orderable: false, targets: [0] }
+                      autoWidth: false,
+                      columnDefs: [
+                    { orderable: false, targets: [8] },
+                          { width: '220px', targets: [1] }
                 ]
             });
         }
@@ -381,8 +388,10 @@
                     language: {
                         url: "/assets/lang/Malay.json"
                     },
+                    autoWidth: false,
                     columnDefs: [
-                        { orderable: false, targets: [0] }
+                        { orderable: false, targets: [8] },
+                          { width: '220px', targets: [1] }
                     ]
                 });
             }
@@ -399,7 +408,7 @@
 
         function applyAndLogFilter(tableName, table, filterValue) {
             // Apply search filter to the table
-            table.column(4).search(filterValue).draw();
+            table.column(3).search(filterValue).draw();
 
             // Go to the first page for the table
             table.page(0).draw(false);
