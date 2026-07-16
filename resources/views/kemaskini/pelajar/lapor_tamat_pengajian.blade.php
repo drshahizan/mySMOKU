@@ -32,14 +32,32 @@
 									<!--end::Top-->
 									<div class="table-responsive">
 										<table class="table table-bordered table-striped">
-											{{-- MAKLUMAT TAMAT PENGAJIAN--}}
+											{{-- JENIS LAPORAN --}}
 											<thead>
+												<tr>
+													<th colspan="2" class="text-center">Jenis Laporan</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Jenis Laporan Pengajian</td>
+													<td>
+														<select id="jenis_laporan" name="jenis_laporan" class="form-select form-select-solid" data-control="select2" data-hide-search="true" required oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
+															<option value="">PILIH</option>
+															<option value="TAMAT" {{ $jenis_laporan === 'TAMAT' ? 'selected' : '' }}>TAMAT PENGAJIAN</option>
+															<option value="BERHENTI" {{ $jenis_laporan === 'BERHENTI' ? 'selected' : '' }}>BERHENTI PENGAJIAN</option>
+														</select>
+													</td>
+												</tr>
+											</tbody>
+											{{-- MAKLUMAT TAMAT PENGAJIAN--}}
+											<thead class="section-tamat-pengajian">
 												<tr>
 													<th colspan="2" class="text-center">Maklumat Tamat Pengajian</th>
 												</tr>
 											</thead>
 									
-											<tbody>
+											<tbody class="section-tamat-pengajian">
 												{{-- SIJIL TAMAT / SENAT --}}
 												<tr>
 													<td>
@@ -53,9 +71,11 @@
 														<input 
 															type="file" 
 															id="sijilTamat" 
+													class="tamat-pengajian-field"
+													data-required-tamat="{{ empty($uploadedSijilTamat) ? '1' : '0' }}" 
 															name="sijilTamat[]" 
 															accept=".pdf, .jpg, .png, .jpeg"
-															@if(empty($uploadedSijilTamat)) required @endif
+															@if($jenis_laporan === 'TAMAT' && empty($uploadedSijilTamat)) required @endif
 															oninvalid="this.setCustomValidity('Sila muat naik fail.')"
 															oninput="setCustomValidity('')"
 															@if(!empty($uploadedSijilTamat)) style="display: none;" @endif
@@ -92,9 +112,11 @@
 														<input 
 															type="file" 
 															id="transkrip" 
+													class="tamat-pengajian-field"
+													data-required-tamat="{{ empty($uploadedTranskrip) ? '1' : '0' }}" 
 															name="transkrip[]" 
 															accept=".pdf, .jpg, .png, .jpeg"
-															@if(empty($uploadedTranskrip)) required @endif
+															@if($jenis_laporan === 'TAMAT' && empty($uploadedTranskrip)) required @endif
 															oninvalid="this.setCustomValidity('Sila muat naik fail.')"
 															oninput="setCustomValidity('')"
 															@if(!empty($uploadedTranskrip)) style="display: none;" @endif
@@ -129,7 +151,7 @@
 													
 													<td>
 														<!--begin::Input-->
-														<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="3.50" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" value="{{ $cgpa }}"/>
+														<input id="cgpa" type="number" name="cgpa" class="form-control form-control-solid tamat-pengajian-field" data-required-tamat="1" step="0.01" max="4.00" pattern="^[0-4](\.\d{1,2})?$" placeholder="3.50" @if($jenis_laporan === 'TAMAT') required @endif oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')" value="{{ $cgpa }}"/>
 														<!--end::Input-->
 													</td>
 												</tr>
@@ -141,7 +163,7 @@
 													</td>
 													<td>
 														<!--begin::Input-->
-														<select id="kelas" name="kelas" class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="PILIH" required oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
+														<select id="kelas" name="kelas" class="form-select form-select-solid tamat-pengajian-field" data-required-tamat="1" data-control="select2" data-hide-search="true" data-placeholder="PILIH" @if($jenis_laporan === 'TAMAT') required @endif oninvalid="this.setCustomValidity('Sila pilih.')" oninput="setCustomValidity('')">
 															<option></option>
 															@foreach ($kelas as $kelas)
 																<option value="{{$kelas->id}}" {{$kelas_p == $kelas->id ? 'selected' : ''}}>{{ $kelas->kelas}}</option>
@@ -416,6 +438,30 @@
 		</style>
 
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script>
+			$(document).ready(function () {
+				function toggleJenisLaporan() {
+					var jenisLaporan = $('#jenis_laporan').val();
+					var hasPilihan = jenisLaporan !== '';
+					var isBerhenti = jenisLaporan === 'BERHENTI';
+
+					$('.section-tamat-pengajian').toggle(hasPilihan && !isBerhenti);
+					$('.tamat-pengajian-field').each(function () {
+						var shouldRequire = hasPilihan && !isBerhenti && $(this).data('required-tamat') == 1;
+						$(this).prop('disabled', !hasPilihan || isBerhenti);
+						$(this).prop('required', shouldRequire);
+					});
+
+					$('#kelas').trigger('change.select2');
+				}
+
+				toggleJenisLaporan();
+				$('#jenis_laporan').on('change', function () {
+					this.setCustomValidity('');
+					toggleJenisLaporan();
+				});
+			});
+		</script>
 		<script>
 			//BEKERJA
 			$(document).ready(function(){

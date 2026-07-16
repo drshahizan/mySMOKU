@@ -151,6 +151,7 @@ class PelajarController extends Controller
         $cgpa = '';
         $kelas_p = '';
         $perakuan = '';
+        $jenis_laporan = '';
         $status_pekerjaan = '';
         $sektor = '';
         $pekerjaan = '';
@@ -162,6 +163,10 @@ class PelajarController extends Controller
 
         // Check if $tamat_pengajian is not null and has uploaded files
         if ($tamat_pengajian) {
+            if ($tamat_pengajian->jenis_laporan) {
+                $jenis_laporan = $tamat_pengajian->jenis_laporan;
+            }
+
             if ($tamat_pengajian->sijil_tamat) {
                 $uploadedSijilTamat = is_array($tamat_pengajian->sijil_tamat) ? $tamat_pengajian->sijil_tamat : [$tamat_pengajian->sijil_tamat];
             }
@@ -225,7 +230,7 @@ class PelajarController extends Controller
 
            
 
-        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'status_pekerjaan', 'sektor', 'pekerjaan', 'pendapatan', 'kelas', 'uploadedTawaran', 'ipt', 'tamat_pengajian'));
+        return view('kemaskini.pelajar.lapor_tamat_pengajian', compact('uploadedSijilTamat', 'uploadedTranskrip', 'cgpa', 'kelas_p', 'perakuan', 'jenis_laporan', 'status_pekerjaan', 'sektor', 'pekerjaan', 'pendapatan', 'kelas', 'uploadedTawaran', 'ipt', 'tamat_pengajian'));
     }
 
     public function hantarTamatPengajian(Request $request)
@@ -235,12 +240,34 @@ class PelajarController extends Controller
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
         $akademik = Akademik::orderBy('id', 'desc')->where('smoku_id', $smoku->id)->first();
 
-        // Validate incoming file uploads
-        $validatedData = $request->validate([
-            'sijilTamat.*' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'transkrip.*' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'tawaran.*'    => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        // Find or create a TamatPengajian record
+        $tamatPengajian = TamatPengajian::firstOrNew([
+            'smoku_id' => $smoku->id,
+            'permohonan_id' => $permohonan->id,
         ]);
+
+        $jenisLaporan = $request->input('jenis_laporan');
+        $rules = [
+            'jenis_laporan' => 'required|in:TAMAT,BERHENTI',
+            'perakuan' => 'required',
+            'tawaran.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        ];
+
+        if ($jenisLaporan === 'TAMAT') {
+            $rules['sijilTamat'] = $tamatPengajian->sijil_tamat ? 'nullable|array' : 'required|array';
+            $rules['sijilTamat.*'] = 'file|mimes:pdf,jpg,jpeg,png|max:2048';
+            $rules['transkrip'] = $tamatPengajian->transkrip ? 'nullable|array' : 'required|array';
+            $rules['transkrip.*'] = 'file|mimes:pdf,jpg,jpeg,png|max:2048';
+            $rules['cgpa'] = 'required|numeric|min:0|max:4';
+            $rules['kelas'] = 'required';
+        } else {
+            $rules['sijilTamat.*'] = 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048';
+            $rules['transkrip.*'] = 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048';
+            $rules['cgpa'] = 'nullable|numeric|min:0|max:4';
+            $rules['kelas'] = 'nullable';
+        }
+
+        $request->validate($rules);
 
         $uploadedSijilTamat = [];
         $uploadedTranskrip = [];
@@ -250,16 +277,9 @@ class PelajarController extends Controller
         $transkrip = $request->file('transkrip');
         $tawaran = $request->file('tawaran');
 
-        $cgpa = $request->cgpa;
-        $kelas = $request->kelas;
+        $cgpa = $jenisLaporan === 'TAMAT' ? $request->cgpa : null;
+        $kelas = $jenisLaporan === 'TAMAT' ? $request->kelas : null;
         $perakuan = $request->perakuan;
-
-        // Find or create a TamatPengajian record
-        $tamatPengajian = TamatPengajian::firstOrNew([
-            'smoku_id' => $smoku->id,
-            'permohonan_id' => $permohonan->id,
-        ]);
-
         // Handle sijil tamat & transkrip
         if ($sijilTamat && $transkrip) {
             foreach ($sijilTamat as $key => $sijil) {
@@ -294,6 +314,7 @@ class PelajarController extends Controller
         }
 
         // Save academic info
+        $tamatPengajian->jenis_laporan = $jenisLaporan;
         $tamatPengajian->cgpa = $cgpa;
         $tamatPengajian->kelas = $kelas;
         // Save new permohonan info
@@ -325,7 +346,7 @@ class PelajarController extends Controller
         session()->put('uploadedTawaran', $uploadedTawaran);
         session()->put('perakuan', $perakuan);
 
-        return redirect()->route('tamat.pengajian')->with('success', 'Dokumen lapor diri tamat pengajian telah berjaya dihantar.');
+        return redirect()->route('tamat.pengajian')->with('success', 'Maklumat laporan pengajian telah berjaya dihantar.');
     }
 
 
