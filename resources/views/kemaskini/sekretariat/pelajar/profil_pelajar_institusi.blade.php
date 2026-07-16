@@ -872,6 +872,7 @@
 								@php
 									$bolehKemaskiniPeringkat = $bolehKemaskiniPeringkat ?? false;
 									$peringkatSemasa = $peringkat->firstWhere('kod_peringkat', $akademik->peringkat_pengajian);
+									$peringkatSemasaLabel = strtoupper($peringkatSemasa->peringkat ?? $akademik->peringkat_pengajian);
 								@endphp
 								<!--begin::Label-->
 								<label class=" fs-6 fw-semibold form-label mb-2">Peringkat Pengajian</label>
@@ -886,7 +887,7 @@
 										</select>
 									@else
 										<input type="hidden" name="peringkat_pengajian" value="{{$akademik->peringkat_pengajian}}" />
-										<input type="text" class="form-control form-control-solid" value="{{ strtoupper($peringkatSemasa->peringkat ?? $akademik->peringkat_pengajian) }}" readonly />
+										<input type="text" class="form-control form-control-solid" value="{{ $peringkatSemasaLabel }}" readonly />
 									@endif
 									<!--end::Input wrapper-->
 								</div>
@@ -1710,6 +1711,7 @@
 			$(document).ready(function() {
 				var id_institusi = $('#id_institusi').val();
 				var kod_peringkat = $('#peringkat').val();
+				var peringkatSemasaLabel = @json($peringkatSemasaLabel);
 
 				// Function to fetch peringkat options
 				function fetchPeringkat(id) {
@@ -1722,17 +1724,27 @@
 							
 							if (response['data']) {
 								var selectedValue = $('#peringkat').val();
+								var selectedExists = false;
 
 								response['data'].forEach(function(item) {
 									var peringkatLabel = String(item.peringkat || '').toUpperCase();
-									var option = `<option value="${item.kod_peringkat}" ${item.kod_peringkat === selectedValue ? "selected" : ""}>${peringkatLabel}</option>`;
+									var isSelected = String(item.kod_peringkat) === String(selectedValue);
+
+									if (isSelected) selectedExists = true;
+
+									var option = `<option value="${item.kod_peringkat}" ${isSelected ? "selected" : ""}>${peringkatLabel}</option>`;
 									$("#peringkat_pengajian").append(option);
 								});
 
-								// Update kod_peringkat to the newly selected value
-								kod_peringkat = $('#peringkat_pengajian').val();
+								if (!selectedExists && selectedValue) {
+									var fallbackOption = `<option value="${selectedValue}" selected>${peringkatSemasaLabel}</option>`;
+									$("#peringkat_pengajian").append(fallbackOption);
+								}
 
-								// Fetch courses based on the new id_institusi and kod_peringkat
+								kod_peringkat = selectedValue;
+								$('#peringkat_pengajian').val(selectedValue).trigger('change.select2');
+
+								// Fetch courses based on the original academic level, even when it is not offered by the selected institution.
 								fetchKursus(id_institusi, kod_peringkat);
 							}
 						},
