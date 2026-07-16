@@ -73,15 +73,15 @@
         <br>
 
         <table class="table table-striped">
-            <thead class="text-center">
+                        <thead class="text-center">
                 <tr>
                     <th style="width: 3%"><b>No.</b></th>
                     <th style="width: 7%"><b>Program</b></th>
                     <th style="width: 10%"><b>ID Permohonan</b></th>
-                    <th style="width: 17%"><b>Nama</b></th>
-                    <th style="width: 9%"><b>Jenis Kecacatan</b></th>
-                    <th style="width: 18%"><b>Nama Kursus</b></th>
+                    <th style="width: 16%"><b>Nama</b></th>
                     <th style="width: 18%"><b>Institusi Pengajian</b></th>
+                    <th style="width: 10%"><b>Peringkat Pengajian</b></th>
+                    <th style="width: 18%"><b>Nama Kursus</b></th>
                     <th style="width: 9%"><b>Tarikh Mula Pengajian</b></th>
                     <th style="width: 9%"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
@@ -97,13 +97,13 @@
                         $i++;
                         $pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                         $kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->value('nama_kursus');
-                        $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                         $institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_info_institusi.nama_institusi');
                         $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->value('tarikh_mula');
                         $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('status', 1)->value('tarikh_tamat');
 
                         $nama_pemohon = formatNamaPemohon($pemohon);
                         $nama_kursus = transformBracketsToCapital(ucwords(strtolower($kursus)));
+                        $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', 1)->value('bk_peringkat_pengajian.peringkat');
                         $institusi_pengajian = transformBracketsToUppercase(ucwords(strtolower($institusi)));
                     @endphp
 
@@ -112,9 +112,9 @@
                         <td class="text-center">{{ strtoupper($item['program']) }}</td>
                         <td>{{ $item['no_rujukan_permohonan'] }}</td>
                         <td>{{ $nama_pemohon }}</td>
-                        <td>{{ ucwords(strtolower($jenis_kecacatan)) }}</td>
-                        <td>{{ $nama_kursus }}</td>
                         <td>{{ $institusi_pengajian }}</td>
+                        <td>{{ $peringkat_pengajian }}</td>
+                        <td>{{ $nama_kursus }}</td>
                         <td class="text-center">{{ $tarikh_mula ? date('d/m/Y', strtotime($tarikh_mula)) : '-' }}</td>
                         <td class="text-center">{{ $tarikh_tamat ? date('d/m/Y', strtotime($tarikh_tamat)) : '-' }}</td>
                     </tr>

@@ -83,15 +83,16 @@
         <br>
         {{-- Table --}}
         <table id="sortTable" class="table table-striped">
-            <thead class="text-center">
+                        <thead class="text-center">
                 <tr>
                     <th style="width: 3%"><b>No.</b></th>
+                    <th style="width: 7%"><b>Program</b></th>
                     <th style="width: 10%"><b>ID Permohonan</b></th>
-                    <th style="width: 20%"><b>Nama</b></th>
-                    <th style="width: 10%"><b>Jenis Kecacatan</b></th>                                        
-                    <th style="width: 20%"><b>Nama Kursus</b></th>
-                    <th style="width: 20%"><b>Institusi Pengajian</b></th>
-                    <th style="width: 8%"><b>Tarikh Mula Pengajian</b></th>
+                    <th style="width: 16%"><b>Nama</b></th>
+                    <th style="width: 18%"><b>Institusi Pengajian</b></th>
+                    <th style="width: 10%"><b>Peringkat Pengajian</b></th>
+                    <th style="width: 18%"><b>Nama Kursus</b></th>
+                    <th style="width: 9%"><b>Tarikh Mula Pengajian</b></th>
                     <th style="width: 9%"><b>Tarikh Tamat Pengajian</b></th>
                 </tr>
             </thead>
@@ -126,26 +127,23 @@
                         );
             
                         // Institusi pengajian
+                        $peringkat_pengajian = DB::table('bk_peringkat_pengajian')->where('kod_peringkat', $akademik->peringkat_pengajian ?? null)->value('peringkat');
                         $institusi_pengajian = transformBracketsToUppercase(
                             collect(explode(' ', ucwords(strtolower($institusi ?? ''))))
                                 ->map(fn($word) => in_array(Str::lower($word), ['of', 'in', 'and']) ? Str::lower($word) : $word)
                                 ->implode(' ')
                         );
             
-                        // Jenis kecacatan
-                        $jenis_kecacatan = DB::table('smoku')
-                            ->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')
-                            ->where('smoku.id', $item['smoku_id'])
-                            ->value('bk_jenis_oku.kecacatan');
                     @endphp
             
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ strtoupper($item['program']) }}</td>
                         <td>{{ $item['no_rujukan_permohonan'] }}</td>
                         <td>{{ $nama_pemohon }}</td>
-                        <td>{{ ucwords(strtolower($jenis_kecacatan)) }}</td>
-                        <td>{{ $nama_kursus }}</td>
                         <td>{{ $institusi_pengajian }}</td>
+                        <td>{{ $peringkat_pengajian }}</td>
+                        <td>{{ $nama_kursus }}</td>
                         <td class="text-center">{{ $akademik->tarikh_mula ? date('d/m/Y', strtotime($akademik->tarikh_mula)) : '-' }}</td>
                         <td class="text-center">{{ $akademik->tarikh_tamat ? date('d/m/Y', strtotime($akademik->tarikh_tamat)) : '-' }}</td>
                     </tr>

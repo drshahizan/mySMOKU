@@ -295,9 +295,9 @@
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>
                                                         <th class="text-center" style="width: 8%"><b>Program</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
@@ -313,9 +313,9 @@
                                                         @php
                                                             $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                             $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('nama_kursus');
-                                                            $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                             $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                             $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                            $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                             $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                             $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
 
@@ -354,9 +354,9 @@
                                                             <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                             <td class="text-center" style="width: 8%">{{ strtoupper($item['program']) }}</td>
                                                             <td style="width: 20%">{{$pemohon}}</td>
-                                                            <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>
-                                                            <td style="width: 17%">{{$namakursus}}</td>
                                                             <td style="width: 20%">{{$institusipengajian}}</td>
+                                                            <td style="width: 12%">{{$peringkat_pengajian}}</td>
+                                                            <td style="width: 17%">{{$namakursus}}</td>
                                                             <td style="width: 20%">{{$id_institusi}}</td>
                                                             <td class="text-center" style="width: 10%">{{ $tarikh_mula ? date('d/m/Y', strtotime($tarikh_mula)) : '-' }}</td>
                                                             <td class="text-center" style="width: 10%">{{ $tarikh_tamat ? date('d/m/Y', strtotime($tarikh_tamat)) : '-' }}</td>
@@ -421,9 +421,9 @@
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
@@ -445,9 +445,9 @@
                                                                 $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                                 $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                                $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
@@ -491,9 +491,9 @@
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td style="width: 20%">{{$pemohon}}</td>
-                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 12%">{{$peringkat_pengajian}}</td>
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
@@ -562,9 +562,9 @@
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
@@ -586,9 +586,9 @@
                                                                 $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                                 $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                                $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
@@ -632,9 +632,9 @@
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td style="width: 20%">{{$pemohon}}</td>
-                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 12%">{{$peringkat_pengajian}}</td>
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
@@ -704,9 +704,9 @@
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
@@ -728,9 +728,9 @@
                                                                 $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                                 $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                                $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
@@ -774,9 +774,9 @@
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td style="width: 20%">{{$pemohon}}</td>
-                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 12%">{{$peringkat_pengajian}}</td>
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
@@ -846,9 +846,9 @@
                                                         <th class="text-center" style="width: 3%;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10%"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20%"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10%"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12%"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17%"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10%"><b>Tarikh Tamat Pengajian</b></th>
@@ -870,9 +870,9 @@
                                                                 $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                                 $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                                $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                                 $jenis_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.jenis_institusi');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
@@ -916,9 +916,9 @@
                                                                     <td class="text-center" style="width: 3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                     <td style="width: 10%"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                     <td style="width: 20%">{{$pemohon}}</td>
-                                                                    <td style="width: 10%">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$institusipengajian}}</td>
+                                                                    <td style="width: 12%">{{$peringkat_pengajian}}</td>
+                                                                    <td style="width: 17%">{{$namakursus}}</td>
                                                                     <td style="width: 20%">{{$id_institusi}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                     <td class="text-center" style="width: 10%">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
@@ -989,9 +989,9 @@
                                                         <th class="text-center" style="width: 3% !important;"><input type="checkbox" name="select-all" id="select-all" onclick="toggle(this);" /></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>ID Permohonan</b></th>                                                   
                                                         <th class="text-center" style="width: 20% !important;"><b>Nama</b></th>
-                                                        <th class="text-center" style="width: 10% !important;"><b>Jenis Kecacatan</b></th>
-                                                        <th class="text-center" style="width: 17% !important;"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20% !important;"><b>Institusi Pengajian</b></th>
+                                                        <th class="text-center" style="width: 12% !important;"><b>Peringkat Pengajian</b></th>
+                                                        <th class="text-center" style="width: 17% !important;"><b>Nama Kursus</b></th>
                                                         <th class="text-center" style="width: 20%"><b>ID Institusi</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Mula Pengajian</b></th>
                                                         <th class="text-center" style="width: 10% !important;"><b>Tarikh Tamat Pengajian</b></th>
@@ -1013,9 +1013,9 @@
                                                                 $nama_pemohon = DB::table('smoku')->where('id', $item['smoku_id'])->value('nama');
                                                                 $nama_kursus = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->value('nama_kursus');
                                                                 $no_kp = DB::table('smoku')->where('id', $item['smoku_id'])->value('no_kp');
-                                                                $jenis_kecacatan = DB::table('smoku')->join('bk_jenis_oku', 'bk_jenis_oku.kod_oku', '=', 'smoku.kategori')->where('smoku.id', $item['smoku_id'])->value('bk_jenis_oku.kecacatan');
                                                                 $institusi_pengajian = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.nama_institusi');
                                                                 $id_institusi = DB::table('smoku_akademik')->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi' )->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_info_institusi.id_institusi');
+                                                                $peringkat_pengajian = DB::table('smoku_akademik')->join('bk_peringkat_pengajian', 'bk_peringkat_pengajian.kod_peringkat', '=', 'smoku_akademik.peringkat_pengajian')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('bk_peringkat_pengajian.peringkat');
                                                                 $tarikh_mula = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_mula');
                                                                 $tarikh_tamat = DB::table('smoku_akademik')->where('smoku_id', $item['smoku_id'])->where('smoku_akademik.status', '1')->value('tarikh_tamat');
 
@@ -1057,9 +1057,9 @@
                                                                 <td class="text-center" style="width:3%;"><input type="checkbox" name="selected_items[]" value="{{ $item->id }}" /></td>                                           
                                                                 <td style="width: 10%;"><a href="{{ url('permohonan/sekretariat/kelulusan/'. $item['id']) }}" target="_blank">{{$item['no_rujukan_permohonan']}}</a></td>
                                                                 <td style="width: 20%;">{{$pemohon}}</td>
-                                                                <td style="width: 10%;">{{ucwords(strtolower($jenis_kecacatan))}}</td>                                       
-                                                                <td style="width: 17%;">{{$namakursus}}</td>
                                                                 <td style="width: 20%;">{{$institusipengajian}}</td>
+                                                                <td style="width: 12%;">{{$peringkat_pengajian}}</td>
+                                                                    <td style="width: 17%;">{{$namakursus}}</td>
                                                                 <td style="width: 20%">{{$id_institusi}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_mula))}}</td>
                                                                 <td class="text-center"  style="width: 10%;">{{date('d/m/Y', strtotime($tarikh_tamat))}}</td>
