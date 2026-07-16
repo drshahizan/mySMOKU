@@ -65,6 +65,7 @@
                                                 <th style="width: 13%" class="text-center"><b>Sijil Tamat Pengajian</b></th>
                                                 <th style="width: 12%" class="text-center"><b>Salinan Transkrip</b></th> 
                                                 <th style="width: 12%" class="text-center"><b>Surat Tawaran Baharu</b></th> 
+                                                <th style="width: 8%" class="text-center"><b>Jenis</b></th>
                                                 <th style="width: 10%" class="text-center">Permohonan Peringkat Pengajian Baharu</th>
                                             </tr>
                                         </thead>
@@ -187,15 +188,25 @@
                                                     
             
                                                     <td class="text-center">
-                                                        <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Papar
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
+                                                        @if ($items->sijil_tamat)
+                                                            <a href="{{ asset('assets/dokumen/sijil_tamat/' . $items->sijil_tamat) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                Papar
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
+                                                            </a>
+                                                        @else
+                                                            -
+                                                        @endif
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
-                                                        Papar
-                                                        <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
+                                                        @if ($items->transkrip)
+                                                            <a href="{{ asset('assets/dokumen/salinan_transkrip/' . $items->transkrip) }}" target="_blank" class="btn btn-info btn-sm">
+                                                                Papar
+                                                                <i class='fas fa-eye' style='color:white; font-size:10px; padding-left:5px;'></i>
+                                                            </a>
+                                                        @else
+                                                            -
+                                                        @endif
                                                     </td>
 
                                                     <td class="text-center">
@@ -207,6 +218,9 @@
                                                         @else
                                                             -
                                                         @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ ($items->jenis_laporan ?? 'TAMAT') === 'BERHENTI' ? 'BERHENTI PENGAJIAN' : 'TAMAT PENGAJIAN' }}
                                                     </td>
 
 
