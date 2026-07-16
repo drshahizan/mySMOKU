@@ -123,41 +123,8 @@ class PelajarController extends Controller
 
             if ($currentDate->greaterThan($tarikhTamat) && (!$tamat_pengajian && !$lanjut_pengajian && !$tangguh_pengajian)) {
                 echo "<script>
-                    var userChoice;
-                    var isValidChoice = false;
-
-                    while (!isValidChoice) {
-                        userChoice = prompt('Tempoh pengajian telah tamat. Sila pilih satu opsyen:\\n\\n1. Lapor Tamat Pengajian\\n2. Tangguh Pengajian\\n3. Perlanjutan Pengajian');
-
-                        if (userChoice === null) {
-                            // Handle the case when the user clicks cancel in the prompt
-                            alert('Pilihan dibatalkan. Sila pilih satu opsyen.');
-                        } else if (userChoice === '1') {
-                            // Handle option 1
-                            var confirmOption1 = confirm('Adakah anda pasti mahu lapor tamat pengajian?');
-                            if (confirmOption1) {
-                                window.location.href = '" . route('tamat.pengajian') . "'; // Redirect to option 1 route 
-                                isValidChoice = true;
-                            }
-                        } else if (userChoice === '2') {
-                            // Handle option 2
-                            var confirmOption2 = confirm('Adakah anda pasti mahu tangguh pengajian?');
-                            if (confirmOption2) {
-                                window.location.href = '" . route('tangguh.pengajian') . "'; // Redirect to option 2 route 
-                                isValidChoice = true;
-                            }
-                        } else if (userChoice === '3') {
-                            // Handle option 3
-                            var confirmOption3 = confirm('Adakah anda pasti mahu perlanjutan pengajian?');
-                            if (confirmOption3) {
-                                window.location.href = '" . route('lanjut.pengajian') . "'; // Redirect to option 3 route 
-                                isValidChoice = true;
-                            }
-                        } else {
-                            // Handle invalid input
-                            alert('Pilihan tidak sah. Sila pilih antara 1, 2, atau 3.');
-                        }
-                    }
+                    alert('Tempoh pengajian telah tamat. Sila Lapor Tamat Pengajian.');
+                    window.location.href = '" . route('tamat.pengajian') . "';
                 </script>";
             }
         }
