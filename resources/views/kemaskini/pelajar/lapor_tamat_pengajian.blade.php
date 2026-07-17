@@ -496,6 +496,21 @@
         	$(document).ready(function () {
 	let id_institusi = $('#id_institusi').val();
 	let kod_peringkat = $('#peringkat').val(); // hidden input with saved value
+	const hasUploadedTawaran = @json(!empty($uploadedTawaran));
+
+	function hasMaklumatPengajianBaharu() {
+		return Boolean($('#id_institusi').val() || $('#peringkat_pengajian').val() || $('#nama_kursus').val());
+	}
+
+	function updateTawaranRequirement() {
+		const tawaranInput = document.getElementById('tawaran');
+		if (!tawaranInput) {
+			return;
+		}
+
+		tawaranInput.required = !hasUploadedTawaran && hasMaklumatPengajianBaharu();
+		tawaranInput.setCustomValidity('');
+	}
 
 	// Fetch peringkat and optionally select one
 	function fetchPeringkat(id, preselect = false) {
@@ -519,6 +534,7 @@
 						fetchKursus(id, kod_peringkat);
 					}
 				}
+				updateTawaranRequirement();
 			},
 			error: function () {
 				alert('Failed to load peringkat options');
@@ -553,6 +569,7 @@
 
 						});
 				}
+				updateTawaranRequirement();
 			},
 			error: function () {
 				alert('Failed to load kursus options');
@@ -575,6 +592,7 @@
 		if (id_institusi) {
 			fetchPeringkat(id_institusi, false); // don't preselect
 		}
+		updateTawaranRequirement();
 	});
 
 	// 🔹 On user change of peringkat
@@ -583,7 +601,11 @@
 		if (id_institusi && kod_peringkat) {
 			fetchKursus(id_institusi, kod_peringkat);
 		}
+		updateTawaranRequirement();
 	});
+
+	$('#nama_kursus').change(updateTawaranRequirement);
+	updateTawaranRequirement();
 });
 
 

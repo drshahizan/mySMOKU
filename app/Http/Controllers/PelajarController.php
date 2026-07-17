@@ -253,6 +253,15 @@ class PelajarController extends Controller
             'tawaran.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ];
 
+        $adaMaklumatPengajianBaharu = filled($request->id_institusi)
+            || filled($request->peringkat_pengajian)
+            || filled($request->nama_kursus);
+
+        if ($adaMaklumatPengajianBaharu && !$tamatPengajian->tawaran) {
+            $rules['tawaran'] = 'required|array';
+            $rules['tawaran.*'] = 'required|file|mimes:pdf,jpg,jpeg,png|max:2048';
+        }
+
         if ($jenisLaporan === 'TAMAT') {
             $rules['sijilTamat'] = $tamatPengajian->sijil_tamat ? 'nullable|array' : 'required|array';
             $rules['sijilTamat.*'] = 'file|mimes:pdf,jpg,jpeg,png|max:2048';
@@ -267,7 +276,10 @@ class PelajarController extends Controller
             $rules['kelas'] = 'nullable';
         }
 
-        $request->validate($rules);
+        $request->validate($rules, [
+            'tawaran.required' => 'Sila muat naik salinan surat tawaran pengajian.',
+            'tawaran.*.required' => 'Sila muat naik salinan surat tawaran pengajian.',
+        ]);
 
         $uploadedSijilTamat = [];
         $uploadedTranskrip = [];
