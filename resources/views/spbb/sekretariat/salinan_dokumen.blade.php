@@ -25,65 +25,97 @@
 
     <div class="card p-5">
         <h3>Muat Turun Borang Permohonan Peruntukan Program BKOKU</h3>
+        @if ($institusi)
+            <div class="text-muted mb-3">
+                Institusi: {{ $institusi->nama_institusi }}
+            </div>
+        @endif
 
     @if ($dokumenSenarai->isNotEmpty())
         <form method="GET" class="mb-5">
-            <label for="dokumen_id" class="form-label">Sesi Salur</label>
+            <label for="selected_ref" class="form-label">Sesi Salur</label>
             <div class="w-100 mw-400px">
-                <select name="dokumen_id" id="dokumen_id" class="form-select" onchange="this.form.submit()">
-                    @foreach ($dokumenSenarai as $doc)
-                        <option value="{{ $doc->id }}" {{ $dokumen && $dokumen->id == $doc->id ? 'selected' : '' }}>
-                            {{ $doc->sesi_salur }}
+                <select name="selected_ref" id="selected_ref" class="form-select" onchange="this.form.submit()">
+                    @foreach ($dokumenSenarai as $item)
+                        <option value="{{ $item->key }}" {{ $selectedOption && $selectedOption->key == $item->key ? 'selected' : '' }}>
+                            {{ $item->label }}{{ !$item->has_dokumen ? ' - Tiada Dokumen' : '' }}
                         </option>
                     @endforeach
                 </select>
             </div>
-            @if ($dokumen)
+            @if ($selectedOption)
                 <div class="text-muted mt-2">
-                    No Rujukan: {{ $dokumen->no_rujukan }}
+                    Pilih sesi salur untuk melihat dokumen yang pernah dimuat naik bagi sesi tersebut.
                 </div>
             @endif
+            @if ($selectedOption && $selectedOption->no_rujukan)
+                <div class="text-muted mt-2">
+                    No Rujukan: {{ $selectedOption->no_rujukan }}
+                </div>
+            @endif
+            @if ($selectedOption && !$selectedOption->has_dokumen)
+                <div class="text-muted mt-2">
+                    Tiada dokumen SPBB dimuat naik untuk sesi ini.
+                </div>
+            @endif
+            @php
+                $statusDokumen = [
+                    'SPBB 1' => !empty($dokumen?->dokumen1),
+                    'SPBB 1a' => !empty($dokumen?->dokumen1a),
+                    'SPBB 2' => !empty($dokumen?->dokumen2),
+                    'SPBB 2a' => !empty($dokumen?->dokumen2a),
+                    'SPBB 3' => !empty($dokumen?->dokumen3),
+                    'Surat Iringan' => !empty($dokumen?->dokumen4),
+                    'Penyata Bank' => !empty($penyata?->penyata_bank),
+                ];
+            @endphp
         </form>
     @endif
     
     <div class="spbb-document-frame">
         @if (!$dokumen)
-            <p style="text-align: center; margin: 20px;">Tiada dokumen SPBB dimuat naik untuk institusi ini.</p>
+            <p style="text-align: center; margin: 20px;">
+                @if ($selectedOption && !$selectedOption->has_dokumen)
+                    Tiada dokumen SPBB dimuat naik untuk sesi ini.
+                @else
+                    Tiada dokumen SPBB dimuat naik untuk institusi ini.
+                @endif
+            </p>
         @else
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen1-tab" data-bs-toggle="tab" data-bs-target="#dokumen1" type="button" role="tab" aria-controls="dokumen1" aria-selected="true">
-                    SPBB 1
+                    SPBB 1 {{ $statusDokumen['SPBB 1'] ? '✓' : '-' }}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen1a-tab" data-bs-toggle="tab" data-bs-target="#dokumen1a" type="button" role="tab" aria-controls="dokumen1a" aria-selected="true">
-                    SPBB 1a
+                    SPBB 1a {{ $statusDokumen['SPBB 1a'] ? '✓' : '-' }}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen2-tab" data-bs-toggle="tab" data-bs-target="#dokumen2" type="button" role="tab" aria-controls="dokumen2" aria-selected="true">
-                    SPBB 2
+                    SPBB 2 {{ $statusDokumen['SPBB 2'] ? '✓' : '-' }}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen2a-tab" data-bs-toggle="tab" data-bs-target="#dokumen2a" type="button" role="tab" aria-controls="dokumen2a" aria-selected="true">
-                    SPBB 2a
+                    SPBB 2a {{ $statusDokumen['SPBB 2a'] ? '✓' : '-' }}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen3-tab" data-bs-toggle="tab" data-bs-target="#dokumen3" type="button" role="tab" aria-controls="dokumen3" aria-selected="true">
-                    SPBB 3
+                    SPBB 3 {{ $statusDokumen['SPBB 3'] ? '✓' : '-' }}
                 </button>
             </li>  
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="dokumen4-tab" data-bs-toggle="tab" data-bs-target="#dokumen4" type="button" role="tab" aria-controls="dokumen4" aria-selected="true">
-                    Surat Iringan Universiti
+                    Surat Iringan Universiti {{ $statusDokumen['Surat Iringan'] ? '✓' : '-' }}
                 </button>
             </li>  
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="penyata-tab" data-bs-toggle="tab" data-bs-target="#penyata" type="button" role="tab" aria-controls="penyata" aria-selected="true">
-                    Penyata Bank
+                    Penyata Bank {{ $statusDokumen['Penyata Bank'] ? '✓' : '-' }}
                 </button>
             </li>  
         </ul>

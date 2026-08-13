@@ -2114,31 +2114,74 @@ class SekretariatController extends Controller
     public function salinanDokumenSPPB(Request $request, $id)
     {
         $penyata = MaklumatBank::where('institusi_id', $id)->first();
-        $dokumenSenarai = DokumenESP::where('institusi_id', $id)
-            ->leftJoin('bk_sesi_salur', 'dokumen_esp.sesi_salur_id', '=', 'bk_sesi_salur.id')
-            ->select('dokumen_esp.*', 'bk_sesi_salur.sesi as sesi_salur')
-            ->orderByDesc('bk_sesi_salur.id')
-            ->orderByDesc('dokumen_esp.updated_at')
+        $institusi = InfoIpt::where('id_institusi', $id)->first();
+        $dokumenBySesi = DokumenESP::where('institusi_id', $id)
+            ->whereNotNull('sesi_salur_id')
+            ->orderByDesc('id')
             ->get()
-            ->map(function ($dokumen) {
-                if (!$dokumen->sesi_salur) {
-                    $sesiSalur = SesiSalur::where('created_at', '<=', $dokumen->updated_at)
-                        ->orderByDesc('created_at')
-                        ->first();
+            ->unique('sesi_salur_id')
+            ->keyBy('sesi_salur_id');
 
-                    $dokumen->sesi_salur = $sesiSalur?->sesi;
-                }
+        $sesiSalurList = SesiSalur::orderByDesc('id')->get();
+        $dokumenSenarai = collect();
 
-                return $dokumen;
+        foreach ($sesiSalurList as $sesiSalur) {
+            $dokumenSesi = $dokumenBySesi->get($sesiSalur->id);
+
+            $dokumenSenarai->push((object) [
+                'key' => 'sesi:' . $sesiSalur->id,
+                'label' => $sesiSalur->sesi,
+                'sesi_salur' => $sesiSalur->sesi,
+                'no_rujukan' => $dokumenSesi?->no_rujukan,
+                'dokumen' => $dokumenSesi,
+                'has_dokumen' => $dokumenSesi !== null,
+                'is_legacy' => false,
+            ]);
+        }
+
+        $dokumenLegacy = DokumenESP::where('institusi_id', $id)
+            ->whereNull('sesi_salur_id')
+            ->orderByDesc('updated_at')
+            ->get();
+
+        foreach ($dokumenLegacy as $dokumenLama) {
+            $sesiSalur = SesiSalur::where('created_at', '<=', $dokumenLama->updated_at)
+                ->orderByDesc('created_at')
+                ->first();
+            $label = $sesiSalur
+                ? $sesiSalur->sesi . ' - ' . $dokumenLama->no_rujukan . ' (Rekod Lama)'
+                : 'Rekod Lama - ' . $dokumenLama->no_rujukan;
+
+            $dokumenLama->sesi_salur = $sesiSalur?->sesi;
+
+            $dokumenSenarai->push((object) [
+                'key' => 'legacy:' . $dokumenLama->id,
+                'label' => $label,
+                'sesi_salur' => $sesiSalur?->sesi,
+                'no_rujukan' => $dokumenLama->no_rujukan,
+                'dokumen' => $dokumenLama,
+                'has_dokumen' => true,
+                'is_legacy' => true,
+            ]);
+        }
+
+        $selectedKey = $request->selected_ref;
+
+        if (!$selectedKey && $request->dokumen_id) {
+            $selectedKey = $dokumenSenarai
+                ->first(function ($item) use ($request) {
+                    return $item->dokumen && $item->dokumen->id == (int) $request->dokumen_id;
+                })?->key;
+        }
+
+        $selectedOption = $dokumenSenarai->firstWhere('key', $selectedKey)
+            ?? $dokumenSenarai->first(function ($item) {
+                return $item->has_dokumen;
             })
-            ->filter(function ($dokumen) {
-                return !empty($dokumen->sesi_salur);
-            })
-            ->values();
+            ?? $dokumenSenarai->first();
+        $dokumen = $selectedOption?->dokumen;
 
-        $dokumen = $dokumenSenarai->firstWhere('id', (int) $request->dokumen_id) ?? $dokumenSenarai->first();
-
-        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','dokumenSenarai','penyata'));
+        return view('spbb.sekretariat.salinan_dokumen',compact('dokumen','dokumenSenarai','penyata','selectedOption','institusi'));
     }
 
     //TUNTUTAN

@@ -2059,20 +2059,30 @@ class PenyelarasController extends Controller
         return Excel::download(new DokumenSPBB3, 'SPBB3-BKOKU.xlsx');
     }
 
-    public function muatNaikBorangSPBB()
+    public function muatNaikBorangSPBB(Request $request)
     {   
         $user = auth()->user();
         $institusiId = $user->id_institusi;
-        $sesiSalur = SesiSalur::orderByDesc('id')->first();
+        $sesiSalurList = SesiSalur::orderByDesc('id')->get();
+        $selectedSesiSalur = $request->filled('sesi_salur_id')
+            ? $sesiSalurList->firstWhere('id', (int) $request->sesi_salur_id)
+            : $sesiSalurList->first();
+
+        if (!$selectedSesiSalur) {
+            $selectedSesiSalur = $sesiSalurList->first();
+        }
         
         $dokumen = DokumenESP::where('institusi_id', $institusiId)
-            ->when($sesiSalur, function ($query) use ($sesiSalur) {
-                $query->where('sesi_salur_id', $sesiSalur->id);
+            ->when($selectedSesiSalur, function ($query) use ($selectedSesiSalur) {
+                $query->where('sesi_salur_id', $selectedSesiSalur->id);
+            })
+            ->when(!$selectedSesiSalur, function ($query) {
+                $query->whereRaw('1 = 0');
             })
             ->orderByDesc('id')
             ->get();
 
-        return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen','sesiSalur'));
+        return view('spbb.penyelaras.muat_naik_dokumen', compact('institusiId','dokumen','sesiSalurList','selectedSesiSalur'));
     }
 
     public function hantarBorangSPBB(Request $request)
@@ -2080,11 +2090,11 @@ class PenyelarasController extends Controller
         $user = auth()->user();
         $institusiId = $user->id_institusi;
         $currentYear = Carbon::now()->year;
-        $sesiSalur = SesiSalur::orderByDesc('id')->first();
+        $sesiSalur = SesiSalur::find($request->sesi_salur_id);
 
         if (!$sesiSalur) {
             return redirect()->back()
-                ->withErrors(['sesi_salur' => 'Sesi salur belum ditetapkan.'])
+                ->withErrors(['sesi_salur_id' => 'Sila pilih sesi salur.'])
                 ->withInput();
         }
 
@@ -2095,6 +2105,7 @@ class PenyelarasController extends Controller
 
         // Validation rules
         $rules = [
+            'sesi_salur_id' => 'required|exists:bk_sesi_salur,id',
             'dokumen1.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
             'dokumen1a.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
             'dokumen2.*' => 'sometimes|nullable|file|mimes:pdf,xls,xlsx|mimetypes:application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:8192',
@@ -2104,6 +2115,8 @@ class PenyelarasController extends Controller
         ];
 
         $customMessages = [
+            'sesi_salur_id.required' => 'Sila pilih sesi salur.',
+            'sesi_salur_id.exists' => 'Sesi salur tidak sah.',
             'mimes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
             'mimetypes' => 'Format fail bagi :attribute mestilah pdf, xls, atau xlsx sahaja.',
             'max' => 'Saiz maksimum bagi :attribute adalah 8 MB.',
@@ -2142,36 +2155,47 @@ class PenyelarasController extends Controller
             $dokumenESP = $existingRecord;
         }
 
-        $uploadedAnyFile = false;
+        $uploadedItems = [];
 
         // Helper function to handle file upload
-        $processFile = function ($inputName, $folder, $oldFile = null) use ($request, &$uploadedAnyFile) {
+        $processFile = function ($inputName, $folder, $label, $oldFile = null) use ($request, &$uploadedItems) {
             $file = $request->file($inputName)[0] ?? null;
             if ($file && $file->isValid()) {
                 $extension = strtolower($file->getClientOriginalExtension());
                 $filename = Str::uuid()->toString() . '.' . $extension;
-                $file->move("assets/dokumen/{$folder}", $filename);
-                $uploadedAnyFile = true; // mark as uploaded
+                $destination = public_path("assets/dokumen/{$folder}");
+
+                if (!is_dir($destination)) {
+                    mkdir($destination, 0755, true);
+                }
+
+                $file->move($destination, $filename);
+                $uploadedItems[] = $label;
                 return $filename;
             }
             return $oldFile; // keep old if no new file
         };
 
         // Only replace if uploaded, else keep old
-        $dokumenESP->dokumen1 = $processFile('dokumen1', 'sppb_1', $dokumenESP->dokumen1);
-        $dokumenESP->dokumen1a = $processFile('dokumen1a', 'sppb_1a', $dokumenESP->dokumen1a);
-        $dokumenESP->dokumen2 = $processFile('dokumen2', 'sppb_2', $dokumenESP->dokumen2);
-        $dokumenESP->dokumen2a = $processFile('dokumen2a', 'sppb_2a', $dokumenESP->dokumen2a);
-        $dokumenESP->dokumen3 = $processFile('dokumen3', 'sppb_3', $dokumenESP->dokumen3);
-        $dokumenESP->dokumen4 = $processFile('dokumen4', 'sppb_4', $dokumenESP->dokumen4);
+        $dokumenESP->dokumen1 = $processFile('dokumen1', 'sppb_1', 'SPBB 1', $dokumenESP->dokumen1);
+        $dokumenESP->dokumen1a = $processFile('dokumen1a', 'sppb_1a', 'SPBB 1a', $dokumenESP->dokumen1a);
+        $dokumenESP->dokumen2 = $processFile('dokumen2', 'sppb_2', 'SPBB 2', $dokumenESP->dokumen2);
+        $dokumenESP->dokumen2a = $processFile('dokumen2a', 'sppb_2a', 'SPBB 2a', $dokumenESP->dokumen2a);
+        $dokumenESP->dokumen3 = $processFile('dokumen3', 'sppb_3', 'SPBB 3', $dokumenESP->dokumen3);
+        $dokumenESP->dokumen4 = $processFile('dokumen4', 'sppb_4', 'Surat Iringan Universiti', $dokumenESP->dokumen4);
 
         $dokumenESP->save();
 
-        if ($uploadedAnyFile) {
-            return redirect()->route('penyelaras.muat-naik.SPBB')
-                ->with('success', 'Fail SPBB telah berjaya dikemaskini.');
+        if (!empty($uploadedItems)) {
+            $message = count($uploadedItems) === 1
+                ? $uploadedItems[0] . ' telah berjaya dikemaskini.'
+                : implode(', ', $uploadedItems) . ' telah berjaya dikemaskini.';
+
+            return redirect()->route('penyelaras.muat-naik.SPBB', ['sesi_salur_id' => $sesiSalur->id])
+                ->with('sesi_salur_id', $sesiSalur->id)
+                ->with('success', $message);
         } else {
-            return redirect()->route('penyelaras.muat-naik.SPBB');
+            return redirect()->route('penyelaras.muat-naik.SPBB', ['sesi_salur_id' => $sesiSalur->id]);
         }
 
     }

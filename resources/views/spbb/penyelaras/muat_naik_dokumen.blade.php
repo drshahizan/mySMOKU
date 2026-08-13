@@ -106,6 +106,13 @@
 									<br><br>
 								@endif
 
+								@if (!$selectedSesiSalur)
+									<div class="alert alert-warning text-center" style="width: 80%; margin: 0 auto; color: black;">
+										Sesi salur belum ditetapkan. Sila hubungi sekretariat sebelum memuat naik fail SPBB.
+									</div>
+									<br><br>
+								@endif
+
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
@@ -124,6 +131,50 @@
 											<td>Nama Institusi Pengajian</td>
 											<td>
 												<input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{$nama_uni}}" readonly>												
+											</td>
+										</tr>
+
+										{{-- SESI SALUR --}}
+										<tr>
+											<td>Sesi Salur</td>
+											<td>
+												<select
+													class="form-control"
+													id="sesi_salur_id"
+													name="sesi_salur_id"
+													required
+													@if($sesiSalurList->isEmpty()) disabled @endif
+													onchange="window.location='{{ route('penyelaras.muat-naik.SPBB') }}?sesi_salur_id=' + this.value"
+												>
+													@if($sesiSalurList->isEmpty())
+														<option value="">Tiada sesi salur</option>
+													@else
+														@foreach($sesiSalurList as $sesi)
+															<option value="{{ $sesi->id }}" {{ $selectedSesiSalur && $selectedSesiSalur->id == $sesi->id ? 'selected' : '' }}>
+																{{ $sesi->sesi }}
+															</option>
+														@endforeach
+													@endif
+												</select>
+												@if($selectedSesiSalur)
+													<small class="text-muted">
+														Pilih sesi salur untuk melihat atau mengemaskini dokumen yang pernah dimuat naik bagi sesi tersebut.
+													</small>
+													<br>
+													<small class="text-muted">
+														Fail baharu yang dihantar akan disimpan untuk sesi {{ $selectedSesiSalur->sesi }}.
+													</small>
+													<br>
+													@if($dokumen->first())
+														<small class="text-muted">
+															No Rujukan: {{ $dokumen->first()->no_rujukan }}
+														</small>
+													@else
+														<small class="text-muted">
+															Tiada dokumen dimuat naik untuk sesi ini. Fail baharu yang dihantar akan mewujudkan rekod bagi sesi ini.
+														</small>
+													@endif
+												@endif
 											</td>
 										</tr>
 
@@ -365,7 +416,7 @@
 								</table>
 
 								<div class="modal-footer mt-3">
-									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary" style="margin: 0 auto;">
+									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary" style="margin: 0 auto;" @if(!$selectedSesiSalur) disabled @endif>
 										<span class="indicator-label">Hantar</span>
 									</button>
 								</div>
