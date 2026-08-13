@@ -224,7 +224,10 @@ class TuntutanController extends Controller
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id',$smoku_id->id)->first();
         $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-        $tuntutan = Tuntutan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
+        $tuntutan = Tuntutan::orderBy('id', 'desc')
+            ->where('smoku_id', '=', $smoku_id->id)
+            ->where('permohonan_id', '=', $permohonan->id)
+            ->first();
 
         if(!$tuntutan || $tuntutan->status == 6 || $tuntutan->status == 8 || $tuntutan->status == 9){
             
@@ -371,8 +374,11 @@ class TuntutanController extends Controller
             // Ambil no rujukan permohonan
             $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-            // Semak tuntutan terakhir
-            $tuntutan_akhir = Tuntutan::where('smoku_id', $smoku_id->id)->orderByDesc('id')->first();
+            // Semak tuntutan terakhir untuk permohonan semasa sahaja.
+            $tuntutan_akhir = Tuntutan::where('smoku_id', $smoku_id->id)
+                ->where('permohonan_id', $permohonan->id)
+                ->orderByDesc('id')
+                ->first();
 
             if (!$tuntutan_akhir || ($tuntutan_akhir && in_array($tuntutan_akhir->status, [6, 8, 9]))) {
                 $biltuntutan = Tuntutan::where('smoku_id', $smoku_id->id)
