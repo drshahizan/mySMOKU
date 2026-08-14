@@ -12,7 +12,7 @@
         align-items: center;
         border: 0;
         border-radius: 8px;
-        color: #fff;
+        color: #fff !important;
         display: inline-flex;
         font-weight: 700;
         justify-content: center;
@@ -25,7 +25,7 @@
     }
 
     .status-pill:hover {
-        color: #fff;
+        color: #fff !important;
         text-decoration: none;
     }
 
