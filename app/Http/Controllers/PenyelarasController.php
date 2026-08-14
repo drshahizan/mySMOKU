@@ -3366,41 +3366,59 @@ class PenyelarasController extends Controller
 
     public function senaraiPenyelarasInstitusi()
     {
-        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+        $user = Auth::user();
 
-        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
-            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        if ((string) $user->tahap === '3') {
+            $institusiPengajian = InfoIpt::whereIn('jenis_institusi', ['UA', 'P', 'KK'])
+                ->orderBy('nama_institusi')
+                ->get();
         } else {
-            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+            $infoipt = InfoIpt::where('id_institusi', $user->id_institusi)->first();
+
+            if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
+                $infoiptCollection = InfoIpt::where('id_induk', $user->id_institusi)->get();
+            } else {
+                $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+            }
+
+            $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+            $institusiPengajian = InfoIpt::whereIn('id_institusi', $idInstitusiList)->orderBy('nama_institusi')->get();
         }
-
-        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
-
-        $institusiPengajian = InfoIpt::whereIn('id_institusi', $idInstitusiList)->orderBy('nama_institusi')->get();
 
         $tahap = Role::all()->sortBy('id');
         $infoipt = InfoIpt::where('jenis_institusi','!=', 'IPTS')->orderBy('nama_institusi')->get();
         $infoppk = InfoIpt::whereIn('id_institusi', ['01055','00938','01127','00933','00031','00331'])->orderBy('nama_institusi')->get();
+        $getSenaraiPenyelarasRoute = (string) $user->tahap === '3' ? 'sekretariat.getSenaraiPenyelaras' : 'penyelaras.getSenaraiPenyelaras';
+        $kemaskiniPenyelarasRoute = (string) $user->tahap === '3' ? 'sekretariat.kemaskini.penyelaras' : 'penyelaras.kemaskini.penyelaras';
 
-        return view('kemaskini.penyelaras.senarai_penyelaras_institusi', compact('institusiPengajian', 'tahap', 'infoipt', 'infoppk'));
+        return view('kemaskini.penyelaras.senarai_penyelaras_institusi', compact('institusiPengajian', 'tahap', 'infoipt', 'infoppk', 'getSenaraiPenyelarasRoute', 'kemaskiniPenyelarasRoute'));
     }
 
     public function getSenaraiPenyelaras()
     {
-        $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+        $user = Auth::user();
+        $penyelarasQuery = User::whereIn('users.tahap', [2,6]) // Penyelaras sahaja
+            ->with(['role','infoipt'])
+            ->orderBy('created_at', 'desc');
 
-        if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
-            $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
+        if ((string) $user->tahap === '3') {
+            $penyelarasQuery->whereHas('infoipt', function ($query) {
+                $query->whereIn('jenis_institusi', ['UA', 'P', 'KK']);
+            });
         } else {
-            $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+            $infoipt = InfoIpt::where('id_institusi', $user->id_institusi)->first();
+
+            if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
+                $infoiptCollection = InfoIpt::where('id_induk', $user->id_institusi)->get();
+            } else {
+                $infoiptCollection = collect([$infoipt]); // Wrap single object in a collection
+            }
+
+            $idInstitusiList = $infoiptCollection->pluck('id_institusi');
+            $penyelarasQuery->whereIn('id_institusi', $idInstitusiList);
         }
 
-        $idInstitusiList = $infoiptCollection->pluck('id_institusi');
-
-        $penyelaras = User::whereIn('users.tahap', [2,6]) // Penyelaras sahaja
-            ->whereIn('id_institusi', $idInstitusiList)
-            ->with(['role','infoipt'])
-            ->orderBy('created_at', 'desc')
+        $penyelaras = $penyelarasQuery
             ->get()
             ->map(function ($item) {
                 return [
@@ -3425,6 +3443,8 @@ class PenyelarasController extends Controller
 
     public function kemaskiniPenyelaras(Request $request)
     {
+        $redirectRoute = (string) Auth::user()->tahap === '3' ? 'sekretariat.senarai.penyelaras' : 'senarai.penyelaras';
+
         $request->validate([
             'nama' => ['required', 'string'],
             'email' => ['required', 'email'],
@@ -3484,9 +3504,9 @@ class PenyelarasController extends Controller
             ]);
 
             if ($status == 1) {
-                return redirect()->route('senarai.penyelaras')->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
+                return redirect()->route($redirectRoute)->with('message', 'Status pengguna ' . $request->nama . ' telah diaktifkan.');
             } else {
-                return redirect()->route('senarai.penyelaras')->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
+                return redirect()->route($redirectRoute)->with('tidak', 'Status pengguna ' . $request->nama . ' telah ditukar tidak aktif.');
             }
         }
 
@@ -3499,7 +3519,7 @@ class PenyelarasController extends Controller
             'id_institusi' => $institutionId,
         ]);
 
-        return redirect()->route('senarai.penyelaras');
+        return redirect()->route($redirectRoute);
     }
 
     public function senaraiPelajar()

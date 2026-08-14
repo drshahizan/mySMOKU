@@ -452,6 +452,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('penyaluran/sekretariat/muat-turun/lejar-permohonan/{id}/{sesi}', [SekretariatController::class, 'muatTurunLejarPermohonan'])->where('sesi', '.*')->name('sekretariat.muat-turun.lejar.permohonan');
         Route::get('penyaluran/sekretariat/muat-turun/lejar-tuntutan/{id}/{sesi}', [SekretariatController::class, 'muatTurunLejarTuntutan'])->where('sesi', '.*')->name('sekretariat.muat-turun.lejar.tuntutan');
 
+        //Kemaskini - Sekretariat - Senarai Penyelaras
+        Route::get('kemaskini/sekretariat/senarai/penyelaras/institusi', [PenyelarasController::class, 'senaraiPenyelarasInstitusi'])->name('sekretariat.senarai.penyelaras');
+        Route::get('kemaskini/sekretariat/senarai/penyelaras/getSenarai', [PenyelarasController::class, 'getSenaraiPenyelaras'])->name('sekretariat.getSenaraiPenyelaras');
+        Route::post('kemaskini/sekretariat/senarai/penyelaras/getSenarai', [PenyelarasController::class, 'kemaskiniPenyelaras'])->name('sekretariat.kemaskini.penyelaras');
+
         //Permohonan - Sekretariat - Kelulusan
         Route::post('permohonan/sekretariat/hantar/semua', [SekretariatController::class, 'hantarSemuaKeputusanPermohonan'])->name('bulk.approval');
         Route::get('permohonan/sekretariat/kelulusan', [SekretariatController::class, 'senaraiKelulusanPermohonan']);

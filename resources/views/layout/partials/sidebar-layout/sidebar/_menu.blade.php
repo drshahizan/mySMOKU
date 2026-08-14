@@ -644,6 +644,12 @@
 						<span class="menu-title">Surat Tawaran Pelajar</span>
 					</a>
 				</div>
+				<div class="menu-item">
+					<a class="menu-link {{ $menuActive('kemaskini/sekretariat/senarai/penyelaras/*') }}" href="{{ route('sekretariat.senarai.penyelaras')}}">
+						<span class="menu-icon">{!! getIcon('user', 'fs-2') !!}</span>
+						<span class="menu-title">Senarai Penyelaras</span>
+					</a>
+				</div>
 
 				{{--
 				<div class="menu-item">

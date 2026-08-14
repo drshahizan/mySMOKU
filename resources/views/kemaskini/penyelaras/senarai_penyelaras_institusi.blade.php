@@ -16,6 +16,11 @@
 </head>
 
 <body>
+    @php
+        $getSenaraiPenyelarasRoute = $getSenaraiPenyelarasRoute ?? 'penyelaras.getSenaraiPenyelaras';
+        $kemaskiniPenyelarasRoute = $kemaskiniPenyelarasRoute ?? 'penyelaras.kemaskini.penyelaras';
+    @endphp
+
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Kemaskini</h1>
@@ -57,7 +62,7 @@
                         <div class="card-title">
                         <div class="d-flex justify-content-end my-2">
                             <button type="button" class="btn btn-primary fw-semibold" data-toggle="modal" data-target="#kt_modal_add_customer">
-                                Tambah Pengguna
+                                Daftar Penyelaras
                             </button>
                         </div>
                         <!--begin::Search-->
@@ -147,11 +152,11 @@
     <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
-                <form class="form" action="{{ route('penyelaras.kemaskini.penyelaras') }}" id="kt_modal_add_customer_form" method="post" data-kt-redirect="{{ route('daftarpengguna') }}">
+                <form class="form" action="{{ route($kemaskiniPenyelarasRoute) }}" id="kt_modal_add_customer_form" method="post" data-kt-redirect="{{ route('daftarpengguna') }}">
                     @csrf
                     <input type="hidden" name="status" value="1">
                     <div class="modal-header" id="kt_modal_add_customer_header">
-                        <h2 class="fw-bold">Tambah Pengguna</h2>
+                        <h2 class="fw-bold">Daftar Penyelaras</h2>
                         <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-dismiss="modal" data-bs-dismiss="modal">
                             <i class="ki-duotone ki-cross fs-1">
                                 <span class="path1"></span>
@@ -224,7 +229,7 @@
                     </div>
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form id="editUserForm" method="POST" action="{{ route('penyelaras.kemaskini.penyelaras') }}">
+                    <form id="editUserForm" method="POST" action="{{ route($kemaskiniPenyelarasRoute) }}">
                         @csrf
 
                         <input type="hidden" name="id_institusi" id="id_institusi">
@@ -332,7 +337,7 @@
                     { orderable: false, targets: [7] }
                 ],
                 ajax: {
-                    url: '{{ route("penyelaras.getSenaraiPenyelaras") }}',
+                    url: '{{ route($getSenaraiPenyelarasRoute) }}',
                     dataSrc: ''
                 },
                 language: {
