@@ -16,12 +16,12 @@
         display: inline-flex;
         font-weight: 700;
         justify-content: center;
-        min-height: 34px;
-        padding: 8px 14px;
+        min-height: 34px !important;
+        padding: 8px 14px !important;
         text-align: center;
         text-decoration: none;
         white-space: nowrap;
-        width: 156px;
+        width: 156px !important;
     }
 
     .status-pill:hover {

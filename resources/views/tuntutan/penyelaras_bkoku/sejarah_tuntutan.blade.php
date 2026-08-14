@@ -24,20 +24,20 @@
             align-items: center;
             border: 0;
             border-radius: 8px;
-            color: #fff;
+            color: #fff !important;
             display: inline-flex;
             font-weight: 700;
             justify-content: center;
-            min-height: 34px;
-            padding: 8px 14px;
+            min-height: 34px !important;
+            padding: 8px 14px !important;
             text-align: center;
             text-decoration: none;
             white-space: nowrap;
-            width: 156px;
+            width: 156px !important;
         }
 
         .status-pill:hover {
-            color: #fff;
+            color: #fff !important;
             text-decoration: none;
         }
 
