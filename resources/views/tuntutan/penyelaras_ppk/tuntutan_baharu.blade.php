@@ -234,6 +234,15 @@
                                             ->orderBy('tuntutan.id', 'desc')
                                             ->first();
 
+                                        $tuntutan_semester = DB::table('tuntutan')
+                                            ->where('smoku_id', $layak->smoku_id)
+                                            ->where('permohonan_id', $permohonan->id)
+                                            ->where('sesi', $currentSesi)
+                                            ->where('semester', $semSemasa)
+                                            ->whereNull('data_migrate')
+                                            ->orderBy('tuntutan.id', 'desc')
+                                            ->first();
+
                                         // Retrieve data from bk_tarikh_iklan table
                                         $bk_tarikh_iklan = DB::table('bk_tarikh_iklan')->orderBy('created_at', 'desc')->first();
 
@@ -247,14 +256,10 @@
                                         // Check if current date and time fall within the allowed range
                                         $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
 
-                                        // Check if student already submitted a claim during the current session window
+                                        // Check if student already submitted a claim for the current semester
                                         $hasClaimInRange = false;
-                                        if ($tuntutan_latest && $tuntutan_latest->tarikh_hantar) {
-                                            $tarikhHantar = \Carbon\Carbon::parse($tuntutan_latest->tarikh_hantar);
-                                            // Only consider claims in the current range and not with status 2 or 5
-                                            if ($tarikhHantar->between($tarikhMula, $tarikhTamat) && !in_array($tuntutan_latest->status, [1, 2, 5])) {
-                                                $hasClaimInRange = true;
-                                            }
+                                        if ($tuntutan_semester && !in_array($tuntutan_semester->status, [5, 9])) {
+                                            $hasClaimInRange = true;
                                         }
 
                                         // Retrieve amount sem 2
@@ -327,7 +332,7 @@
                                                         {{-- Already has claim in this session --}}
                                                         <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
                                                             data-bs-toggle="tooltip" data-bs-trigger="hover" 
-                                                            title="Borang Tuntutan. Hanya satu kali tuntutan bagi sesi pengajian yang sama"
+                                                            title="Borang Tuntutan. Hanya satu kali tuntutan dibenarkan bagi semester yang sama"
                                                             onclick="showAlertTuntutanOnce()">
                                                             <span>
                                                                 <i class="fa-solid fa-money-check-dollar fs-2" style="color: #000000;"></i>
@@ -552,7 +557,7 @@
         Swal.fire({
         icon: 'error',
         title: 'Tidak Berjaya!',
-        text: 'Hanya satu kali tuntutan bagi sesi pengajian yang sama.',
+        text: 'Hanya satu kali tuntutan dibenarkan bagi semester yang sama.',
         confirmButtonText: 'OK'
         });
     }
