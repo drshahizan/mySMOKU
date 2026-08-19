@@ -102,11 +102,13 @@
                                         <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                                             <thead>
                                             <tr>
-                                                <th style="width: 17%"><b>ID Permohonan</b></th>
-                                                <th style="width: 33%"><b>Nama</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
-                                                <th style="width: 15%" class="text-center"><b>Status Terkini</b></th>
-                                                <th style="width: 5%" class="text-center"><b>Tindakan</b></th>
+                                                <th style="width: 16%"><b>ID Permohonan</b></th>
+                                                <th style="width: 30%"><b>Nama</b></th>
+                                                <th style="width: 12%" class="text-center"><b>Sesi</b></th>
+                                                <th style="width: 10%" class="text-center"><b>Semester</b></th>
+                                                <th style="width: 12%" class="text-center"><b>Tarikh Permohonan</b></th>
+                                                <th style="width: 12%" class="text-center"><b>Status Terkini</b></th>
+                                                <th style="width: 8%" class="text-center"><b>Tindakan</b></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -150,6 +152,8 @@
                                                             <a href="{{ route('ppk.rekod.permohonan', $item['id']) }}" title="">{{$item['no_rujukan_permohonan']}}</a>
                                                         </td>
                                                         <td>{{$pemohon}}</td>
+                                                        <td class="text-center">{{ $item['sesi_pengajian'] ?? '-' }}</td>
+                                                        <td class="text-center">{{ $item['semester_pengajian'] ?? '-' }}</td>
                                                         <td class="text-center">{{$formattedDate}}</td>
                                                         @if ($item['status']=='1')
                                                             <td class="text-center"><span class="status-pill status-deraf">{{ucwords(strtolower($status))}}</span></td>

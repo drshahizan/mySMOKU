@@ -1223,8 +1223,13 @@ class PenyelarasPPKController extends Controller
     {
         $permohonan = Permohonan::join('smoku_akademik', 'smoku_akademik.smoku_id', '=', 'permohonan.smoku_id')
         ->where('smoku_akademik.id_institusi', '=', Auth::user()->id_institusi)
+        ->where('smoku_akademik.status', 1)
         ->orderBy('permohonan.id', 'DESC')
-        ->get(['permohonan.*']);
+        ->get([
+            'permohonan.*',
+            'smoku_akademik.sesi as sesi_pengajian',
+            'smoku_akademik.sem_semasa as semester_pengajian',
+        ]);
         
         return view('permohonan.penyelaras_ppk.sejarah_permohonan',compact('permohonan'));
     }
