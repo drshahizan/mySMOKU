@@ -10,6 +10,33 @@
     <script src="/assets/lang/Malay.json"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>    
+<style>
+    .status-pill {
+        align-items: center;
+        border: 0;
+        border-radius: 8px;
+        color: #fff;
+        display: inline-flex;
+        font-weight: 700;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 14px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        width: 130px;
+    }
+
+    .status-deraf { background-color: #7239ea; }
+    .status-baharu { background-color: #1f73e8; }
+    .status-sedang-disaring { background-color: #ea4fb5; }
+    .status-disokong { background-color: #ffb800; }
+    .status-dikembalikan { background-color: #e65f4f; }
+    .status-layak { background-color: #50cd89; }
+    .status-tidak-layak { background-color: #f1416c; }
+    .status-dibayar { background-color: #10a4ad; }
+    .status-batal { background-color: #6c757d; }
+</style>
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
     <!--begin::Title-->
     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
@@ -51,7 +78,7 @@
                     <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th class="text-center"><b>ID Permohonan</b></th>                                        
+                                <th><b>ID Permohonan</b></th>                                        
 								<th class="text-center"><b>Nama</b></th>
 								<th class="text-center"><b>Nama Kursus</b></th>
                                 <th class="text-center"><b>Tempoh Penajaan</b></th>
@@ -284,7 +311,7 @@
                                     @endphp
 
                                     <tr>
-                                        <td class="text-center">{{ $layak->no_rujukan_permohonan}}</td>
+                                        <td>{{ $layak->no_rujukan_permohonan}}</td>
                                         <td>{{ $pemohon}}</td>
                                         <td>{{ $layak->nama_kursus}}</td>
                                         <td class="text-center">
@@ -294,28 +321,28 @@
                                         </td>
                                         @if($status != null)
                                             @if ($layak->tuntutan_status=='1')
-                                                <td class="text-center"><button class="btn bg-info text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-deraf">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='2')
-                                                <td class="text-center"><button class="btn bg-baharu text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-baharu">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='3')
-                                                <td class="text-center"><button class="btn bg-sedang-disaring text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-sedang-disaring">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='4')
-                                                <td class="text-center"><button class="btn bg-warning text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-disokong">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='5')
-                                                <td class="text-center"><button class="btn bg-dikembalikan text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-dikembalikan">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='6')
-                                                <td class="text-center"><button class="btn bg-success text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-layak">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='7')
-                                                <td class="text-center"><button class="btn bg-danger text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-tidak-layak">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='8')
-                                                <td class="text-center"><button class="btn bg-dibayar text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-dibayar">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='9')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>
+                                                <td class="text-center"><span class="status-pill status-batal">{{ucwords(strtolower($status))}}</span></td>
                                             @elseif ($layak->tuntutan_status=='10')
-                                                <td class="text-center"><button class="btn bg-batal text-white">{{ucwords(strtolower($status))}}</button></td>    
+                                                <td class="text-center"><span class="status-pill status-batal">{{ucwords(strtolower($status))}}</span></td>    
                                             @endif
                                         @else
-                                            <td class="text-center"><button class="btn bg-primary text-white">Belum Tuntut</button></td>
+                                            <td class="text-center"><span class="status-pill status-baharu">Belum Tuntut</span></td>
                                         @endif
 
                                         <td class="text-center">
