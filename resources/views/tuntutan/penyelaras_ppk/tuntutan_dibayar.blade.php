@@ -10,6 +10,25 @@
 	<script src="/assets/lang/Malay.json"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>	 
+<style>
+	.status-pill {
+		align-items: center;
+		border: 0;
+		border-radius: 8px;
+		color: #fff;
+		display: inline-flex;
+		font-weight: 700;
+		justify-content: center;
+		min-height: 34px;
+		padding: 8px 14px;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+		width: 130px;
+	}
+
+	.status-dibayar { background-color: #10a4ad; }
+</style>
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 	<!--begin::Title-->
 	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Tuntutan</h1>
@@ -52,7 +71,7 @@
 								<th style="width: 15%" class="text-center"><b>Tarikh Permohonan</b></th>
 								<th style="width: 15%" class="text-center"><b>Amaun Wang Saku Dibayar</b></th>
 								<th style="width: 15%" class="text-center"><b>Tarikh Transaksi</b></th>
-								<th style="width: 15%" class="text-center"><b>Status Permohonan</b></th>
+								<th style="width: 15%" class="text-center"><b>Status Tuntutan</b></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -86,7 +105,7 @@
 								<td class="text-center">{{ $formattedDate}}</td>
 								<td class="text-center"> RM {{ $smoku->wang_saku_dibayar}}</td>
 								<td class="text-center">{{ $tarikh_transaksi}}</td>
-								<td class="text-center"><button class="btn bg-dibayar text-white">Dibayar</button></td>
+								<td class="text-center"><span class="status-pill status-dibayar">Dibayar</span></td>
 								
 							</tr>  
 							@endforeach	
