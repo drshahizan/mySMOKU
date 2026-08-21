@@ -67,8 +67,14 @@
 									@php
 										$year = date('Y'); 
 										$nextYear = $year + 1; 
-										$sesiSemasa = $year . '/' . $nextYear; 
+										$sesiSemasa = $year . '/' . $nextYear;
+										$isDikembalikan = (int) ($tuntutan?->status ?? 0) === 5;
+										$isDihantar = (int) ($tuntutan?->status ?? 0) === 2;
 									@endphp
+
+									@if($isDikembalikan)
+										<input type="hidden" name="sesi" value="{{ $tuntutan?->sesi }}">
+									@endif
 
 									<select id="sesi" name="sesi"  
 										class="form-select form-select-solid" 
@@ -77,7 +83,8 @@
 										data-placeholder="Pilih" 
 										required 
 										oninvalid="this.setCustomValidity('Sila pilih tahun pengajian.')" 
-										oninput="setCustomValidity('')">
+										oninput="setCustomValidity('')"
+										{{ $isDikembalikan ? 'disabled' : '' }}>
 
 										<option></option>
 										@for ($i = -1; $i <= 1; $i++) 
@@ -99,7 +106,10 @@
 								<label class="form-label fs-6 fw-bold text-gray-700 mb-3">Sesi</label>
 								<!--begin::Input group-->
 								<div class="mb-5">
-									<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')">
+									@if($isDikembalikan)
+										<input type="hidden" name="semester" value="{{ $tuntutan?->semester }}">
+									@endif
+									<select id="semester" name="semester"  class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih" required oninvalid="this.setCustomValidity('Sila pilih sesi.')" oninput="setCustomValidity('')" {{ $isDikembalikan ? 'disabled' : '' }}>
 										<option></option>
 										<option value="1" {{ $tuntutan?->semester == 1 ? 'selected' : '' }}>Sesi 1 (Kemasukan Julai sehingga Disember)</option>
 										<option value="2" {{ $tuntutan?->semester == 2 ? 'selected' : '' }}>Sesi 2 (Kemasukan Januari sehingga Jun)</option>
@@ -129,8 +139,8 @@
                     </div>
 
                     <div class="text-center pt-15">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">Hantar</span>
+                        <button type="submit" class="btn btn-primary" {{ $isDihantar ? 'disabled' : '' }}>
+                            <span class="indicator-label">{{ $isDihantar ? 'Tuntutan Telah Dihantar' : 'Hantar' }}</span>
                             <span class="indicator-progress">
                                 Sila tunggu... 
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>

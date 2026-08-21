@@ -1667,8 +1667,23 @@ class PenyelarasController extends Controller
             
             $no_rujukan_permohonan = $permohonan->no_rujukan_permohonan;
 
-            // Semak tuntutan terakhir
-            $tuntutan_akhir = Tuntutan::where('smoku_id', $id)->orderByDesc('id')->first();
+            // Semak tuntutan terakhir untuk permohonan semasa sahaja
+            $tuntutan_akhir = Tuntutan::where('smoku_id', $id)
+                ->where('permohonan_id', $permohonan->id)
+                ->orderByDesc('id')
+                ->first();
+
+            $sesiTuntutan = $request->sesi;
+            $semesterTuntutan = $request->semester;
+
+            if ($tuntutan_akhir && (string) $tuntutan_akhir->status === '2') {
+                return redirect()->route('bkoku.sejarah.tuntutan')->with('sem', 'Tuntutan pelajar telah dihantar.');
+            }
+
+            if ($tuntutan_akhir && (string) $tuntutan_akhir->status === '5') {
+                $sesiTuntutan = $tuntutan_akhir->sesi;
+                $semesterTuntutan = $tuntutan_akhir->semester;
+            }
 
             if (!$tuntutan_akhir || ($tuntutan_akhir && in_array($tuntutan_akhir->status, [6, 8, 9]))) {
                 $biltuntutan = Tuntutan::where('smoku_id', $id)
@@ -1689,7 +1704,7 @@ class PenyelarasController extends Controller
                 'smoku_id' => $id,
                 'permohonan_id' => $permohonan->id,
                 'no_rujukan_tuntutan' => $no_rujukan_tuntutan,
-                'sesi' => $request->sesi,
+                'sesi' => $sesiTuntutan,
             ];
 
             $existing = Tuntutan::where($tuntutan)->orderByDesc('id')->first();
@@ -1699,7 +1714,7 @@ class PenyelarasController extends Controller
 
             // --- Data untuk dikemas kini / cipta
             $updateData = [
-                'semester' => $request->semester,
+                'semester' => $semesterTuntutan,
                 'wang_saku' => '1',
                 'amaun_wang_saku' => $request->amaun_wang_saku,
                 'jumlah' => $request->amaun_wang_saku,
