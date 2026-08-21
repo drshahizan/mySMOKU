@@ -2264,6 +2264,20 @@ class SekretariatController extends Controller
         return view('tuntutan.sekretariat.saringan.senarai_tuntutan',compact('tuntutan','status_kod','status', 'institusiPengajianIPTS', 'institusiPengajianPOLI', 'institusiPengajianKK', 'institusiPengajianUA','institusiPengajianPPK', 'institusiPengajianALL', 'countIPTS', 'countPOLI', 'countKK', 'countUA', 'countPPK', 'countALL'));
     }
 
+    private function appendCatatanDikembalikanTuntutan($tuntutan)
+    {
+        $catatanByTuntutan = SaringanTuntutan::whereIn('tuntutan_id', $tuntutan->pluck('id'))
+            ->where('status', 5)
+            ->orderByDesc('id')
+            ->get()
+            ->unique('tuntutan_id')
+            ->pluck('catatan', 'tuntutan_id');
+
+        foreach ($tuntutan as $item) {
+            $item->catatan_dikembalikan = $catatanByTuntutan[$item->id] ?? null;
+        }
+    }
+
     //Json saringan
     public function getSenaraiTuntutanBKOKUUA()
     {
@@ -2304,6 +2318,8 @@ class SekretariatController extends Controller
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
         }
+
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
 
         return response()->json($tuntutan);
 
@@ -2349,6 +2365,8 @@ class SekretariatController extends Controller
             }
         }
 
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
+
         return response()->json($tuntutan);
 
     }
@@ -2392,6 +2410,8 @@ class SekretariatController extends Controller
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
         }
+
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
 
         return response()->json($tuntutan);
 
@@ -2437,6 +2457,8 @@ class SekretariatController extends Controller
             }
         }
 
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
+
         return response()->json($tuntutan);
 
     }
@@ -2481,6 +2503,8 @@ class SekretariatController extends Controller
             }
         }
 
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
+
         return response()->json($tuntutan);
 
     }
@@ -2519,6 +2543,8 @@ class SekretariatController extends Controller
                 $item->dilaksanakan_oleh_nama = DB::table('users')->where('id', $user_id)->value('nama');
             }
         }
+
+        $this->appendCatatanDikembalikanTuntutan($tuntutan);
 
         return response()->json($tuntutan);
     }

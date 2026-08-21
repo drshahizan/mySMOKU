@@ -47,6 +47,9 @@
             .status-tidak-layak { background-color: #f1416c; }
             .status-dibayar { background-color: #12a8b3; }
             .status-batal { background-color: #6c757d; }
+            .status-pill-button {
+                cursor: pointer;
+            }
 
             @media (max-width: 768px) {
                 .nav-tabs {
@@ -392,6 +395,16 @@
         </div>
         <!-- Javascript -->
 
+        <div class="modal fade" id="dikembalikanSaringanModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-3" style="border-radius: 12px;">
+                    <div class="modal-body text-center">
+                        <p id="dikembalikanSaringanCatatan" class="mb-3">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             $(document).ready(function() {
                 $('.js-example-basic-single').select2();
@@ -403,6 +416,30 @@
             function statusPill(label, className) {
                 return '<span class="status-pill ' + className + '">' + label + '</span>';
             }
+
+            function escapeHtml(value) {
+                return String(value || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function statusDikembalikanPill(row) {
+                const catatan = row && row.catatan_dikembalikan ? row.catatan_dikembalikan : '-';
+                return '<span role="button" tabindex="0" class="status-pill status-dikembalikan status-pill-button" data-bs-toggle="modal" data-bs-target="#dikembalikanSaringanModal" data-catatan="' + escapeHtml(catatan) + '">Dikembalikan</span>';
+            }
+
+            document.addEventListener('show.bs.modal', function(event) {
+                if (event.target.id !== 'dikembalikanSaringanModal') {
+                    return;
+                }
+
+                const button = event.relatedTarget;
+                const catatan = button ? button.getAttribute('data-catatan') : '-';
+                document.getElementById('dikembalikanSaringanCatatan').textContent = catatan || '-';
+            });
         </script>
         
         <script>
@@ -460,13 +497,13 @@
                     }
                 }
 
-                function renderStatusSaringan(data) {
+                function renderStatusSaringan(data, type, row) {
                     switch (data) {
                         case '1': return statusPill('Deraf', 'status-info');
                         case '2': return statusPill('Baharu', 'status-baharu');
                         case '3': return statusPill('Sedang Disaring', 'status-saringan');
                         case '4': return statusPill('Disokong', 'status-disokong');
-                        case '5': return statusPill('Dikembalikan', 'status-dikembalikan');
+                        case '5': return statusDikembalikanPill(row);
                         case '6': return statusPill('Layak', 'status-layak');
                         case '7': return statusPill('Tidak Layak', 'status-tidak-layak');
                         case '8': return statusPill('Dibayar', 'status-dibayar');
@@ -647,7 +684,7 @@
                                             status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
+                                            status = statusDikembalikanPill(row);
                                             break;
                                         case '6':
                                             status = statusPill('Layak', 'status-layak');
@@ -840,7 +877,7 @@
                                             status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
+                                            status = statusDikembalikanPill(row);
                                             break;
                                         case '6':
                                             status = statusPill('Layak', 'status-layak');
@@ -1032,7 +1069,7 @@
                                             status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
+                                            status = statusDikembalikanPill(row);
                                             break;
                                         case '6':
                                             status = statusPill('Layak', 'status-layak');
@@ -1224,7 +1261,7 @@
                                             status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
+                                            status = statusDikembalikanPill(row);
                                             break;
                                         case '6':
                                             status = statusPill('Layak', 'status-layak');
@@ -1416,7 +1453,7 @@
                                             status = statusPill('Disokong', 'status-disokong');
                                             break;
                                         case '5':
-                                            status = statusPill('Dikembalikan', 'status-dikembalikan');
+                                            status = statusDikembalikanPill(row);
                                             break;
                                         case '6':
                                             status = statusPill('Layak', 'status-layak');
