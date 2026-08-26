@@ -22,10 +22,11 @@
             color: #fff !important;
             display: inline-flex;
             font-weight: 700;
+            height: 38px;
             justify-content: center;
-            min-width: 130px;
-            padding: 9px 18px;
+            padding: 0 12px;
             text-align: center;
+            width: 140px;
         }
         .history-status-info { background-color: #7239ea; }
         .history-status-baharu { background-color: #1b84ff; }
