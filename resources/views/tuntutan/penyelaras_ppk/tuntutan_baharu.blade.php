@@ -123,14 +123,14 @@
                                         $totalSemesters = $akademik->tempoh_pengajian * $bilSem;
                                         $currentDate = Carbon::now();
 
-                                        $tarikhMula = Carbon::parse($akademik->tarikh_mula);
-                                        $tarikhTamat = Carbon::parse($akademik->tarikh_tamat);
+                                        $tarikhMulaPengajian = Carbon::parse($akademik->tarikh_mula);
+                                        $tarikhTamatPengajian = Carbon::parse($akademik->tarikh_tamat);
 
-                                        $bulanMula  = $tarikhMula->format('n');
+                                        $bulanMula  = $tarikhMulaPengajian->format('n');
                                         $isSpecialStart = in_array($bulanMula, [1, 2, 3, 4, 5, 6]);
 
                                         // Initialize tahun sesi
-                                        $tahunSesi = $isSpecialStart ? $tarikhMula->year - 1 : $tarikhMula->year;
+                                        $tahunSesi = $isSpecialStart ? $tarikhMulaPengajian->year - 1 : $tarikhMulaPengajian->year;
                                         $sesiMula = $tahunSesi . '/' . ($tahunSesi + 1);
 
                                         // Define semester pattern
@@ -150,13 +150,13 @@
                                         $currentPattern = $pattern[$patternIndex];
                                         $semInCurrentSesi = 0;
 
-                                        $tarikhNextSem = clone $tarikhMula;
+                                        $tarikhNextSem = clone $tarikhMulaPengajian;
                                         $nextSemesterDates = [];
                                         $semCounter = 0;
                                         $semSemasa = 1;
 
                                         // Build all semesters
-                                        while ($tarikhNextSem < $tarikhTamat) {
+                                        while ($tarikhNextSem < $tarikhTamatPengajian) {
                                             $bulanMasuk = $tarikhNextSem->month;
                                             //     // 10092025 - tak kira semester dah. kira sesi 1 dan sesi 2 
                                             //     // sesi 1 untuk kemasukan bulan julai sehingga disember
@@ -211,7 +211,7 @@
 
                                             $semesterEndDate = $nextSemesterStartDate 
                                                 ? $nextSemesterStartDate->subSecond() 
-                                                : ($tarikhTamat ? $tarikhTamat->endOfDay()->subSecond() : $dateOfSemester->endOfDay()->subSecond());
+                                                : $tarikhTamatPengajian->copy()->endOfDay()->subSecond();
 
                                             if ($currentDate->between($dateOfSemester->startOfDay(), $semesterEndDate)) {
                                                 $currentSesi = $data['sesi'];        // tahun akademik (eg. 2025/2026)
@@ -277,11 +277,11 @@
                                         $currentDateTime = now();
 
                                         // Check if current date and time fall within the allowed range
-                                        $tarikhMula = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
-                                        $tarikhTamat = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
+                                        $tarikhMulaIklan = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_mula . ' ' . $bk_tarikh_iklan->masa_mula);
+                                        $tarikhTamatIklan = \Carbon\Carbon::parse($bk_tarikh_iklan->tarikh_tamat . ' ' . $bk_tarikh_iklan->masa_tamat);
 
                                         // Check if current date and time fall within the allowed range
-                                        $isWithinRange = $currentDateTime->between($tarikhMula, $tarikhTamat);
+                                        $isWithinRange = $currentDateTime->between($tarikhMulaIklan, $tarikhTamatIklan);
 
                                         // Check if student already submitted a claim for the current semester
                                         $hasClaimInRange = false;
@@ -367,10 +367,10 @@
                                                         </a>
                                                     @else
                                                         {{-- Normal behavior --}}
-                                                        <a href="{{ $semSemasa <= $totalSemesters && $result == null && $currentDate < ($tarikhTamat) ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+                                                        <a href="{{ $semSemasa <= $totalSemesters && $result == null && $currentDate < $tarikhTamatPengajian ? route('ppk.kemaskini.keputusan', $layak->smoku_id) : '#' }}" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
                                                 
                                                             @if(!$tuntutan || ($tuntutan && $tuntutan->status == 8 || $tuntutan->status == 1 || $tuntutan->status == 2 || $tuntutan->status == 5))
-                                                                @if($semSemasa <= $totalSemesters && $currentDate < ($tarikhTamat))
+                                                                @if($semSemasa <= $totalSemesters && $currentDate < $tarikhTamatPengajian)
                                                                     @if (!$result && !$tuntutan && $sesiLepas != 'Tiada')
                                                                         data-bs-toggle="tooltip" data-bs-trigger="hover" title="Borang Tuntutan. Sila kemaskini keputusan peperiksaan semester lepas terlebih dahulu."
                                                                     @elseif ($result && $result->pengesahan_rendah== 1)
@@ -378,10 +378,10 @@
                                                                     @else
                                                                         data-bs-toggle="modal" data-bs-trigger="hover" title="Borang Tuntutan" data-bs-target="#kt_modal_tuntutan{{$layak->smoku_id}}"
                                                                     @endif
-                                                                @elseif($currentDate->greaterThan($tarikhTamat))  
+                                                                @elseif($currentDate->greaterThan($tarikhTamatPengajian))
                                                                     data-bs-toggle="tooltip" data-bs-trigger="hover" title="Pelajar telah tamat pengajian."
-                                                                @elseif($isInNextSemester === false)
-                                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan hanya boleh dikemukakan pada semester seterusnya."
+                                                                @elseif($semSemasa > $totalSemesters)
+                                                                    data-bs-toggle="tooltip" data-bs-trigger="hover" title="Sila semak maklumat akademik pelajar."
                                                                 @endif
                                                             @elseif($tuntutan && ($tuntutan->status == 3 || $tuntutan->status == 4))
                                                                 data-bs-toggle="tooltip" data-bs-trigger="hover" title="Tuntutan masih dalam semakan."  
