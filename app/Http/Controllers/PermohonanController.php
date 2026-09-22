@@ -170,6 +170,9 @@ class PermohonanController extends Controller
         $keturunan = $smoku?->keturunanRelation;
         $oku = $smoku?->okuRelation;
         $parlimen = $butiranPelajar->parlimenRelation;
+        $useFallback = static fn ($value, $fallback) => $value !== null && $value !== ''
+            ? $value
+            : $fallback;
 
         $butiranPelajar->setAttribute('nama', $smoku?->nama);
         $butiranPelajar->setAttribute('no_kp', $smoku?->no_kp);
@@ -183,13 +186,64 @@ class PermohonanController extends Controller
         $butiranPelajar->setAttribute('kod_oku', $oku?->kod_oku);
         $butiranPelajar->setAttribute('id_parlimen', $parlimen?->id ?? $butiranPelajar->parlimen);
 
-        $butiranPelajar->setAttribute('alamat_tetap_baru', $butiranPelajar->alamat_tetap);
-        $butiranPelajar->setAttribute('alamat_surat_baru', $butiranPelajar->alamat_surat_menyurat);
-        $butiranPelajar->setAttribute('tel_bimbit_baru', $butiranPelajar->tel_bimbit);
-        $butiranPelajar->setAttribute('status_pekerjaan_baru', $butiranPelajar->status_pekerjaan);
-        $butiranPelajar->setAttribute('pekerjaan_baru', $butiranPelajar->pekerjaan);
-        $butiranPelajar->setAttribute('pendapatan_baru', $butiranPelajar->pendapatan);
-        $butiranPelajar->setAttribute('tel_rumah_baru', $butiranPelajar->tel_rumah);
+        $gunaAlamatTetapLegacy = ($butiranPelajar->alamat_tetap === null || $butiranPelajar->alamat_tetap === '')
+            && filled($smoku?->alamat_tetap);
+        $gunaAlamatSuratLegacy = ($butiranPelajar->alamat_surat_menyurat === null || $butiranPelajar->alamat_surat_menyurat === '')
+            && filled($smoku?->alamat_surat_menyurat);
+        $alamatTetap = $useFallback($butiranPelajar->alamat_tetap, $smoku?->alamat_tetap);
+        $alamatSurat = $useFallback($butiranPelajar->alamat_surat_menyurat, $smoku?->alamat_surat_menyurat);
+
+        $butiranPelajar->setAttribute('tel_bimbit_baru', $useFallback($butiranPelajar->tel_bimbit, $smoku?->tel_bimbit));
+        $butiranPelajar->setAttribute('status_pekerjaan_baru', $useFallback($butiranPelajar->status_pekerjaan, $smoku?->status_pekerjaan));
+        $butiranPelajar->setAttribute('pekerjaan_baru', $useFallback($butiranPelajar->pekerjaan, $smoku?->pekerjaan));
+        $butiranPelajar->setAttribute('pendapatan_baru', $useFallback($butiranPelajar->pendapatan, $smoku?->pendapatan));
+        $butiranPelajar->setAttribute('tel_rumah_baru', $useFallback($butiranPelajar->tel_rumah, $smoku?->tel_rumah));
+        $butiranPelajar->setAttribute('emel', $useFallback($butiranPelajar->emel, $smoku?->email));
+
+        [
+            $butiranPelajar->alamat_tetap_negeri,
+            $butiranPelajar->alamat_tetap_bandar,
+            $butiranPelajar->alamat_tetap_poskod,
+        ] = $this->resolveAddressParts(
+            $alamatTetap,
+            $butiranPelajar->alamat_tetap_negeri,
+            $butiranPelajar->alamat_tetap_bandar,
+            $butiranPelajar->alamat_tetap_poskod
+        );
+
+        [
+            $butiranPelajar->alamat_surat_negeri,
+            $butiranPelajar->alamat_surat_bandar,
+            $butiranPelajar->alamat_surat_poskod,
+        ] = $this->resolveAddressParts(
+            $alamatSurat,
+            $butiranPelajar->alamat_surat_negeri,
+            $butiranPelajar->alamat_surat_bandar,
+            $butiranPelajar->alamat_surat_poskod
+        );
+
+        $butiranPelajar->setAttribute(
+            'alamat_tetap_baru',
+            $gunaAlamatTetapLegacy
+                ? $this->stripResolvedAddressParts(
+                    $alamatTetap,
+                    $butiranPelajar->alamat_tetap_negeri,
+                    $butiranPelajar->alamat_tetap_bandar,
+                    $butiranPelajar->alamat_tetap_poskod
+                )
+                : $alamatTetap
+        );
+        $butiranPelajar->setAttribute(
+            'alamat_surat_baru',
+            $gunaAlamatSuratLegacy
+                ? $this->stripResolvedAddressParts(
+                    $alamatSurat,
+                    $butiranPelajar->alamat_surat_negeri,
+                    $butiranPelajar->alamat_surat_bandar,
+                    $butiranPelajar->alamat_surat_poskod
+                )
+                : $alamatSurat
+        );
 
         $butiranPelajar->setAttribute('nama_waris', $waris?->nama_waris);
         $butiranPelajar->setAttribute('no_kp_waris', $waris?->no_kp_waris);
@@ -226,6 +280,74 @@ class PermohonanController extends Controller
         $butiranPelajar->setAttribute('amaun_wang_saku', $permohonan?->amaun_wang_saku);
 
         return $butiranPelajar;
+    }
+
+    private function resolveAddressParts(?string $address, $negeriId, $bandarId, $poskod): array
+    {
+        $address = trim((string) $address);
+
+        if ($address === '') {
+            return [$negeriId, $bandarId, $poskod];
+        }
+
+        if (empty($poskod) && preg_match('/\b(\d{5})\b/', $address, $matches)) {
+            $poskod = $matches[1];
+        }
+
+        if (empty($negeriId)) {
+            $normalizedAddress = Str::upper($address);
+            $matchedNegeri = Negeri::all()
+                ->sortByDesc(fn ($item) => strlen($item->negeri))
+                ->first(fn ($item) => Str::contains($normalizedAddress, Str::upper($item->negeri)));
+
+            if ($matchedNegeri) {
+                $negeriId = $matchedNegeri->id;
+            }
+        }
+
+        if (empty($bandarId) && !empty($negeriId)) {
+            $negeri = Negeri::find($negeriId);
+            $normalizedAddress = Str::upper($address);
+            $matchedBandar = Bandar::where(function ($query) use ($negeriId, $negeri) {
+                    $query->where('negeri_id', $negeriId);
+
+                    if ($negeri?->kod_negeri) {
+                        $query->orWhere('negeri_id', $negeri->kod_negeri);
+                    }
+                })
+                ->get(['id', 'bandar'])
+                ->sortByDesc(fn ($item) => strlen($item->bandar))
+                ->first(fn ($item) => Str::contains($normalizedAddress, Str::upper($item->bandar)));
+
+            if ($matchedBandar) {
+                $bandarId = $matchedBandar->id;
+            }
+        }
+
+        return [$negeriId, $bandarId, $poskod];
+    }
+
+    private function stripResolvedAddressParts(?string $address, $negeriId, $bandarId, $poskod): string
+    {
+        $address = (string) $address;
+        $negeri = $negeriId ? Negeri::find($negeriId) : null;
+        $bandar = $bandarId ? Bandar::find($bandarId) : null;
+        $parts = array_filter([
+            $poskod,
+            $bandar?->bandar,
+            $negeri?->negeri,
+            'WILAYAH PERSEKUTUAN',
+            'W.P.',
+        ], fn ($part) => filled($part));
+
+        foreach ($parts as $part) {
+            $address = preg_replace('/' . preg_quote(trim((string) $part), '/') . '/iu', ' ', $address);
+        }
+
+        $address = preg_replace('/\s*,\s*,+/', ', ', $address);
+        $address = preg_replace('/\s+/', ' ', $address);
+
+        return trim($address, " \t\n\r\0\x0B,");
     }
 
     public function getBandar($idnegeri=0)
@@ -328,6 +450,33 @@ class PermohonanController extends Controller
             'amaun_yuran' => $amaun_yuran ? $amaun_yuran->jumlah : null,
             'amaun_wang_saku' => $amaun_wang_saku ? $amaun_wang_saku->jumlah : null
         ]);
+    }
+
+    private function upsertButiranPelajar(Request $request, int $smokuId): void
+    {
+        $butiranPelajar = ButiranPelajar::firstOrNew(['smoku_id' => $smokuId]);
+        $butiranPelajar->forceFill([
+            'negeri_lahir' => $request->negeri_lahir,
+            'agama' => $request->agama,
+            'alamat_tetap' => $request->alamat_tetap,
+            'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
+            'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
+            'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
+            'parlimen' => $request->parlimen,
+            'dun' => $request->dun,
+            'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
+            'alamat_surat_negeri' => $request->alamat_surat_negeri,
+            'alamat_surat_bandar' => $request->alamat_surat_bandar,
+            'alamat_surat_poskod' => $request->alamat_surat_poskod,
+            'tel_bimbit' => $request->tel_bimbit,
+            'tel_rumah' => $request->tel_rumah,
+            'no_akaun_bank' => $request->no_akaun_bank,
+            'emel' => $request->emel,
+            'status_pekerjaan' => $request->status_pekerjaan,
+            'pekerjaan' => $request->pekerjaan,
+            'pendapatan' => $request->pendapatan,
+        ]);
+        $butiranPelajar->save();
     }
 
     public function simpanPermohonan(Request $request)
@@ -504,6 +653,7 @@ class PermohonanController extends Controller
         ]);
 
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
+        $this->upsertButiranPelajar($request, $smoku_id->id);
         $permohonan = Permohonan::orderBy('id', 'desc')->where('smoku_id', '=', $smoku_id->id)->first();
         
         if ($permohonan != null) {
@@ -626,30 +776,7 @@ class PermohonanController extends Controller
     public function kemaskiniPermohonan(Request $request)
     {   
         $smoku_id = Smoku::where('no_kp',Auth::user()->no_kp)->first();
-        ButiranPelajar::where('smoku_id' ,$smoku_id->id)
-        ->update([
-
-                'negeri_lahir' => $request->negeri_lahir,
-                'agama' => $request->agama,
-                'alamat_tetap' => $request->alamat_tetap,
-                'alamat_tetap_negeri' => $request->alamat_tetap_negeri,
-                'alamat_tetap_bandar' => $request->alamat_tetap_bandar,
-                'alamat_tetap_poskod' => $request->alamat_tetap_poskod,
-                'parlimen' => $request->parlimen,
-                'dun' => $request->dun,
-                'alamat_surat_menyurat' => $request->alamat_surat_menyurat,
-                'alamat_surat_negeri' => $request->alamat_surat_negeri,
-                'alamat_surat_bandar' => $request->alamat_surat_bandar,
-                'alamat_surat_poskod' => $request->alamat_surat_poskod,
-                'tel_bimbit' => $request->tel_bimbit,
-                'tel_rumah' => $request->tel_rumah,
-                'no_akaun_bank' => $request->no_akaun_bank,
-                'emel' => $request->emel,
-                'status_pekerjaan' => $request->status_pekerjaan,
-                'pekerjaan' => $request->pekerjaan,
-                'pendapatan' => $request->pendapatan,
-
-        ]);
+        $this->upsertButiranPelajar($request, $smoku_id->id);
 
         Waris::where('smoku_id' ,$smoku_id->id)
         ->update([

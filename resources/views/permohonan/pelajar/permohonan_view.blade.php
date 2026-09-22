@@ -434,6 +434,7 @@
 									<!--begin::Input-->
 									<input type="hidden" class="form-control form-control-solid" placeholder="" id="alamat_negeri" name="alamat_negeri" value="{{$butiranPelajar->alamat_tetap_negeri}}" />
 									<select id="alamat_tetap_negeri" name="alamat_tetap_negeri" class="form-select form-select-lg form-select-solid js-example-basic-single"  data-control="select2" data-hide-search="true" {{ in_array($butiranPelajar->status, [2, 3, 4, 6, 7, 8, 9]) ? 'disabled' : '' }}>{{$butiranPelajar->alamat_tetap_baru}}>
+										<option value="">Pilih</option>
 										@foreach ($negeri as $negeritetap)	
 										<option value="{{$negeritetap->id}}" {{$butiranPelajar->alamat_tetap_negeri == $negeritetap->id ? 'selected' : ''}}>{{ $negeritetap->negeri}}</option>
 										@endforeach
@@ -520,7 +521,7 @@
 										<!--begin::Label-->
 										<div class="me-5">
 											<!--begin::Input-->
-											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if($butiranPelajar->alamat_surat_baru == $butiranPelajar->alamat_tetap_baru) checked @endif />
+											<input class="form-check-input" id="sama" name="sama" onclick="myFunction()" type="checkbox" value="1" @if(filled($butiranPelajar->alamat_surat_baru) && filled($butiranPelajar->alamat_tetap_baru) && $butiranPelajar->alamat_surat_baru === $butiranPelajar->alamat_tetap_baru) checked @endif />
 											<!--end::Input-->
 											<!--begin::Label-->
 											<label class="form-label">Sama seperti Alamat Tetap</label>
