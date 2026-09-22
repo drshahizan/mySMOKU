@@ -149,7 +149,18 @@ class PermohonanController extends Controller
     private function hydrateButiranPelajarForView(?ButiranPelajar $butiranPelajar, ?Permohonan $permohonan): ?ButiranPelajar
     {
         if (!$butiranPelajar) {
-            return null;
+            $butiranPelajar = new ButiranPelajar([
+                'smoku_id' => $permohonan?->smoku_id,
+            ]);
+
+            $butiranPelajar->load([
+                'smoku.jantinaRelation',
+                'smoku.keturunanRelation',
+                'smoku.okuRelation',
+                'waris',
+                'akademik',
+                'parlimenRelation',
+            ]);
         }
 
         $smoku = $butiranPelajar->smoku;
