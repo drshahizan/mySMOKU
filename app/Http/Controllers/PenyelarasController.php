@@ -2734,6 +2734,7 @@ class PenyelarasController extends Controller
     public function getSenaraiPelajarPenyelaras()
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+        $statusPermohonan = DB::table('bk_status')->pluck('status', 'kod_status');
 
         if ($infoipt && $infoipt->id_induk != null && $infoipt->id_induk == $infoipt->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
@@ -2756,13 +2757,15 @@ class PenyelarasController extends Controller
                     ->with('infoipt');
                 },
                 'permohonan' => function ($query) {
-                    $query->where('program', 'BKOKU');
+                    $query->where('program', 'BKOKU')->orderByDesc('id');
                 }
             ])
             ->orderBy('nama')
             ->get()
-            ->map(function ($item) {
+            ->map(function ($item) use ($statusPermohonan) {
                 $akademik = $item->akademik->first();
+                $permohonan = $item->permohonan->first();
+
                 return [
                     'id' => $item->id,
                     'smoku_id' => $item->id,
@@ -2774,6 +2777,10 @@ class PenyelarasController extends Controller
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
+                    'kod_status_permohonan' => $permohonan->status ?? null,
+                    'status_permohonan' => $permohonan
+                        ? Str::title(Str::lower($statusPermohonan[$permohonan->status] ?? '-'))
+                        : '-',
                 ];
             });
     
