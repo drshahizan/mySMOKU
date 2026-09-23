@@ -276,19 +276,22 @@ class KemaskiniController extends Controller
 
     public function getSenaraiPelajar()
     {
-        
+        $statusPermohonan = DB::table('bk_status')->pluck('status', 'kod_status');
+
         $pelajar = Smoku::whereHas('akademik', function ($query) {
                 $query->where('status', 1);
             })
             ->with(['akademik' => function ($query) {
                 $query->where('status', 1)->with(['infoipt', 'peringkat']);
                  },
-            'permohonan'])
+            'permohonan' => function ($query) {
+                $query->orderByDesc('id');
+            }])
             ->orderBy('nama')
             ->get()
-            ->map(function ($item) {
+            ->map(function ($item) use ($statusPermohonan) {
                 $hasPermohonan = $item->permohonan->isNotEmpty();
-                $permohonan = $item->permohonan->sortByDesc('id')->first();
+                $permohonan = $item->permohonan->first();
 
                 // Check tamat pengajian
                 $permohonanId = optional($permohonan)->id;
@@ -321,6 +324,10 @@ class KemaskiniController extends Controller
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now()),
+                    'kod_status_permohonan' => $permohonan->status ?? null,
+                    'status_permohonan' => $permohonan
+                        ? Str::title(Str::lower($statusPermohonan[$permohonan->status] ?? '-'))
+                        : 'Tiada Permohonan',
                     'has_permohonan' => $hasPermohonan,
                     'tamat_pengajian' => $tamat_pengajian,
                     'boleh_semak_tukar_peringkat' => $bolehSemakTukarPeringkat

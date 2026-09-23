@@ -123,7 +123,8 @@
                                             <th><b>Peringkat Pengajian</b></th>
                                             <th><b>Tarikh Mula</b></th>
                                             <th><b>Tarikh Tamat</b></th>
-                                            <th><b>Status</b></th>
+                                            <th><b>Status Pengajian</b></th>
+                                            <th><b>Status Permohonan</b></th>
                                             <th><b>Tindakan</b></th>
                                         </tr>
                                     </thead>
@@ -295,6 +296,32 @@
 
                                     return '<div class="badge badge-light-danger fw-bold">Tidak Aktif</div>';
                                 }
+                            },
+                            className: 'text-center'
+                    },
+                    {
+                            data: 'status_permohonan',
+                            render: function (data, type, row) {
+                                if (type !== 'display') {
+                                    return data;
+                                }
+
+                                var badgeClass = 'badge-light-primary';
+                                var statusCode = String(row.kod_status_permohonan ?? '');
+
+                                if (statusCode === '6') {
+                                    badgeClass = 'badge-light-success';
+                                } else if (statusCode === '7') {
+                                    badgeClass = 'badge-light-danger';
+                                } else if (statusCode === '5') {
+                                    badgeClass = 'badge-light-warning';
+                                } else if (statusCode === '8') {
+                                    badgeClass = 'badge-light-info';
+                                } else if (statusCode === '9' || statusCode === '') {
+                                    badgeClass = 'badge-light-secondary';
+                                }
+
+                                return '<div class="badge ' + badgeClass + ' fw-bold">' + (data || '-') + '</div>';
                             },
                             className: 'text-center'
                     },
