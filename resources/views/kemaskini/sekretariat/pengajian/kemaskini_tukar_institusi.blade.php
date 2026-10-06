@@ -111,6 +111,9 @@
                                 
                                 
                                 <td class="text-center">
+                                    @if($pelajar->status == 1)
+                                        &mdash;
+                                    @else
                                     <!--begin::Edit-->
                                     <form action="{{ route('kemaskini.tukar.institusi', $pelajar->smoku_id) }}" method="post">
                                         @csrf
@@ -122,6 +125,7 @@
                                         </select>
                                     </form>
                                     <!--end::Edit-->
+                                    @endif
                                 </td>
                                 
                             </tr>

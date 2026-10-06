@@ -115,10 +115,10 @@
                                 <table id="sortTable1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th class="text-start"><b>Program</b></th>
                                             <th><b>Nama</b></th>                                        
                                             <th><b>No. Kad Pengenalan</b></th>
                                             <th><b>No. Kad JKM</b></th>
-                                            <th><b>Nama Kursus</b></th>
                                             <th><b>Nama Institusi</b></th>
                                             <th><b>Tarikh Mula</b></th>
                                             <th><b>Tarikh Tamat</b></th>
@@ -179,6 +179,7 @@
                       url: "/assets/lang/Malay.json"
                   },
                   columns: [ 
+                    { data: 'program', className: 'text-start' },
                     {
                         data: 'nama',
                         render: function(data, type, row) {
@@ -212,7 +213,6 @@
                     { data: 'no_kp' }, 
                     
                     { data: 'no_daftar_oku' }, 
-                    { data: 'nama_kursus' }, 
                     { data: 'nama_institusi' },
                     { 
                             data: 'tarikh_mula',

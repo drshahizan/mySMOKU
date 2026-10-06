@@ -59,16 +59,31 @@
           <!--end::Header-->
           <!--begin::Card body-->
           <div class="body">
+              <div class="d-flex align-items-center gap-4 mb-5">
+                  <div style="width: 450px; max-width: calc(100% - 90px);">
+                  <select id="institusiDropdown" class="form-select searchable-dropdown" style="max-width: 450px;" aria-label="Pilih Institusi Pengajian">
+                      <option value="">Pilih Institusi Pengajian</option>
+                      @foreach ($institusiPengajian as $institusi)
+                          <option value="{{ $institusi->nama_institusi }}">{{ $institusi->nama_institusi }}</option>
+                      @endforeach
+                  </select>
+                  </div>
+                  <button type="button" id="tapisInstitusi" class="btn btn-primary" aria-label="Tapis institusi">
+                      <i class="ki-duotone ki-filter fs-2"><span class="path1"></span><span class="path2"></span></i>
+                  </button>
+              </div>
               <!--begin::Table-->
               <div class="table-responsive">
                   <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
                       <thead>
                           <tr>
+                              <th class="text-start"><b>Program</b></th>
                               <th class="text-center"><b>Nama</b></th>                                        
                               <th class="text-center"><b>No. Kad Pengenalan</b></th>
-                              <th class="text-center"><b>Nama Kursus</b></th>
+                              <th class="text-center"><b>Nama Institusi</b></th>
                               <th class="text-center"><b>Tarikh Daftar</b></th>
-                              <th class="text-center"><b>Status</b></th>
+                              <th class="text-center"><b>Status Pengajian</b></th>
+                              <th class="text-center"><b>Status Permohonan</b></th>
                               <th class="text-center"><b>Tindakan</b></th>
                           </tr>
                       </thead>
@@ -99,16 +114,17 @@
                                   
                               @endphp
                           <tr>
+                              <td class="text-start">{{ $pelajar->program_permohonan }}</td>
                               <td>{{ $pemohon}}</td>
                               <td>{{ $pelajar->no_kp}}</td>
-                              <td>{{ $pelajar->nama_kursus}}</td>
+                              <td>{{ $pelajar->nama_institusi}}</td>
                               <td>
                                   {{ \Carbon\Carbon::parse($pelajar->tarikh_daftar)->format('d/m/Y h:i:sa') }}
                               </td>
                               
                              
                                   <td class="text-center">
-                                    @if($pelajar->status == 1)
+                                    @if($pelajar->status_aktif)
                                         <div class="badge badge-light-success fw-bold">Aktif</div>
                                     @else
                                         <div class="badge badge-light-danger fw-bold">Tidak Aktif</div>
@@ -122,6 +138,18 @@
                               
                               
                               
+                              <td class="text-center">
+                                  @php
+                                      $badgeClass = [
+                                          '6' => 'badge-light-success',
+                                          '7' => 'badge-light-danger',
+                                          '5' => 'badge-light-warning',
+                                          '8' => 'badge-light-info',
+                                          '9' => 'badge-light-secondary',
+                                      ][$pelajar->kod_status_permohonan] ?? 'badge-light-primary';
+                                  @endphp
+                                  <div class="badge {{ $badgeClass }} fw-bold">{{ $pelajar->status_permohonan }}</div>
+                              </td>
                               <td class="text-center">
                                   <!--begin::Edit-->
                                   @if ($tukar_institusi != null && $tukar_institusi->status == 1 && $tukar_institusi->id_institusi_baru != $pelajar->id_institusi && $tukar_institusi->id_institusi_baru == Auth::user()->id_institusi)
@@ -275,46 +303,6 @@
                                             </div>
                                             <!--end::Scroll-->
 
-                                            <script type='text/javascript'>
-                                                $(document).ready(function () {
-                                                    // Initialize Select2 for the searchable-dropdown class
-                                                    $('.searchable-dropdown').select2();
-
-                                                    // Store options for each jenis_institusi
-                                                    var jenisOptions = {
-                                                        'UA': {!! json_encode($infoipt) !!},
-                                                        'IPTS': {!! json_encode($infoiptIPTS) !!},
-                                                        'P': {!! json_encode($infoiptP) !!},
-                                                        'KK': {!! json_encode($infoiptKK) !!}
-                                                    };
-
-                                                    // Update id_institusi dropdown based on the selected jenis_institusi
-                                                    $('#jenis_institusi{{$pelajar->no_kp}}').on('change', function () {
-                                                        // Update selectedValue when jenis_institusi changes
-                                                        console.log('Selected Jenis Institusi:', $(this).val());
-
-                                                        selectedValue = $(this).val();
-
-                                                        var options = jenisOptions[selectedValue];
-
-                                                        // Clear existing options
-                                                        $('#id_institusi{{$pelajar->no_kp}}').empty();
-
-                                                        // Add new options
-                                                        options.forEach(function (info) {
-                                                            var isSelected = (info.id_institusi == $('#id_institusi_asal{{$pelajar->no_kp}}').val());
-                                                            $('#id_institusi{{$pelajar->no_kp}}').append($('<option>', {
-                                                                value: info.id_institusi,
-                                                                text: info.nama_institusi.toUpperCase(),
-                                                                selected: isSelected
-                                                            }));
-                                                        });
-
-                                                        // Trigger Select2 to update the UI
-                                                        $('#id_institusi{{$pelajar->no_kp}}').trigger('change');
-                                                    });
-                                                });
-                                            </script>
 
 
                                             <!--begin::Actions-->
@@ -352,18 +340,50 @@
 
 <script>
     $(document).ready(function() {
+        var jenisOptions = {
+            'UA': @json($infoipt),
+            'IPTS': @json($infoiptIPTS),
+            'P': @json($infoiptP),
+            'KK': @json($infoiptKK)
+        };
+
+        $(document).on('change', 'select[name="jenis_institusi"]', function () {
+            var form = $(this).closest('form');
+            var dropdown = form.find('select[name="id_institusi"]');
+            var institusiAsal = form.find('input[name="id_institusi_asal"]').val();
+            var options = jenisOptions[$(this).val()] || [];
+
+            dropdown.empty();
+            options.forEach(function (info) {
+                dropdown.append($('<option>', {
+                    value: info.id_institusi,
+                    text: info.nama_institusi.toUpperCase(),
+                    selected: info.id_institusi == institusiAsal
+                }));
+            });
+            dropdown.trigger('change');
+        });
+
         // Initialize Select2
         $('.searchable-dropdown').select2();
+        $('#institusiDropdown').select2({ width: '100%' });
     });
 </script>
 <script>
-	$('#sortTable2').DataTable({
+    $(document).ready(function () {
+	var table = $('#sortTable2').DataTable({
             ordering: true, // Enable manual sorting
             order: [], // Disable initial sorting
 			language: {
 				url: "/assets/lang/Malay.json"
 			}
         });
+        $('#tapisInstitusi').on('click', function () {
+            var institusi = $('#institusiDropdown').val() || '';
+            var pattern = institusi ? '^' + $.fn.dataTable.util.escapeRegex(institusi) + '$' : '';
+            table.column(3).search(pattern, true, false).draw();
+        });
+    });
 </script>
 
 

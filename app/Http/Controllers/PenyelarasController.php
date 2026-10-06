@@ -2749,7 +2749,7 @@ class PenyelarasController extends Controller
                     ->whereIn('id_institusi', $idInstitusiList);
             })
             ->whereHas('permohonan', function ($query) {
-                $query->where('program', 'BKOKU');
+                $query->whereIn('program', ['BKOKU', 'PPK']);
             })
             ->with(['akademik' => function ($query) use ($idInstitusiList) {
                 $query->where('status', 1)
@@ -2757,7 +2757,7 @@ class PenyelarasController extends Controller
                     ->with('infoipt');
                 },
                 'permohonan' => function ($query) {
-                    $query->where('program', 'BKOKU')->orderByDesc('id');
+                    $query->whereIn('program', ['BKOKU', 'PPK'])->orderByDesc('id');
                 }
             ])
             ->orderBy('nama')
@@ -2772,6 +2772,7 @@ class PenyelarasController extends Controller
                     'nama' => $item->nama,
                     'no_kp' => $item->no_kp,
                     'no_daftar_oku' => $item->no_daftar_oku,
+                    'program' => $permohonan->program ?? '-',
                     'nama_kursus' => $akademik->nama_kursus ?? '-',
                     'nama_institusi' => $akademik->infoipt->nama_institusi ?? '-',
                     'tarikh_mula' => $akademik->tarikh_mula ?? '',
@@ -3576,12 +3577,36 @@ class PenyelarasController extends Controller
         ->orderBy('smoku.id', 'DESC')
         ->get(['smoku.*','tukar_institusi.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
 
-        $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get();
-        $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get();
-        $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get();
-        $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get();
+        $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);
+        $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);
+        $infoiptP = InfoIpt::where('jenis_institusi', 'P')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);
+        $infoiptKK = InfoIpt::where('jenis_institusi', 'KK')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);
 
-        return view('kemaskini.penyelaras.senarai_pelajar', compact('pelajar','infoipt','infoiptIPTS','infoiptP','infoiptKK'));
+        $statusPermohonan = DB::table('bk_status')->pluck('status', 'kod_status');
+        $permohonanTerkini = Permohonan::whereIn('smoku_id', $pelajar->pluck('smoku_id'))
+            ->whereIn('program', ['BKOKU', 'PPK'])
+            ->orderByDesc('id')
+            ->get(['smoku_id', 'status', 'program'])
+            ->groupBy('smoku_id')
+            ->map(function ($permohonan) {
+                return $permohonan->first();
+            });
+
+        foreach ($pelajar as $item) {
+            $permohonan = $permohonanTerkini->get($item->smoku_id);
+            $item->program_permohonan = $permohonan->program ?? '-';
+            $item->kod_status_permohonan = $permohonan->status ?? null;
+            $item->status_permohonan = $permohonan
+                ? Str::title(Str::lower($statusPermohonan[$permohonan->status] ?? '-'))
+                : '-';
+            $item->status_aktif = $item->tarikh_tamat && Carbon::parse($item->tarikh_tamat)->gte(now());
+        }
+
+        $institusiPengajian = InfoIpt::whereIn('id_institusi', $idInstitusiList)
+            ->orderBy('nama_institusi')
+            ->get();
+
+        return view('kemaskini.penyelaras.senarai_pelajar', compact('pelajar','infoipt','infoiptIPTS','infoiptP','infoiptKK','institusiPengajian'));
     }
 
     public function tukarInstitusi(Request $request, $id)
@@ -3672,6 +3697,7 @@ class PenyelarasController extends Controller
     public function getSenaraiLayakBKOKU()
     {
         $infoipt = InfoIpt::where('id_institusi', Auth::user()->id_institusi)->first();
+        $statusPermohonan = DB::table('bk_status')->pluck('status', 'kod_status');
 
         if ($infoipt && $infoipt->id_induk != null && $infoipt ->id_induk == $infoipt ->id_institusi) {
             $infoiptCollection = InfoIpt::where('id_induk', Auth::user()->id_institusi)->get();
@@ -3693,14 +3719,16 @@ class PenyelarasController extends Controller
             ->with(['akademik' => function ($query) use ($idInstitusiList) {
                 $query->where('status', 1)->whereIn('id_institusi', $idInstitusiList)->with(['infoipt', 'peringkat']);
                  },
-            'permohonan'])
+            'permohonan' => function ($query) {
+                $query->whereIn('status', [6, 8])->orderByDesc('id');
+            }])
             ->orderBy('nama')
             ->get()
-            ->map(function ($item) {
+            ->map(function ($item) use ($statusPermohonan) {
                 // Ambil hanya satu rekod akademik yang status=1
                 $akademik = $item->akademik->first();
                 // Ambil hanya satu rekod permohonan latest
-                $permohonan = $item->permohonan->whereIn('status', [6, 8])->first();
+                $permohonan = $item->permohonan->first();
                 return [
                     'id' => $item->id,
                     'smoku_id' => $item->id,
@@ -3713,6 +3741,10 @@ class PenyelarasController extends Controller
                     'tarikh_tamat' => $akademik->tarikh_tamat ?? '',
                     'permohonan_id' => $permohonan->id ?? '',
                     'program' => $permohonan->program ?? '',
+                    'kod_status_permohonan' => $permohonan->status ?? null,
+                    'status_permohonan' => $permohonan
+                        ? Str::title(Str::lower($statusPermohonan[$permohonan->status] ?? '-'))
+                        : '-',
                     'status_aktif' => $akademik->tarikh_tamat && Carbon::parse($akademik->tarikh_tamat)->gte(now())
                 ];
             });

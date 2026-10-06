@@ -115,14 +115,15 @@
                                 <table id="sortTable1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th class="text-start"><b>Program</b></th>
                                             <th><b>Nama</b></th>                                        
                                             <th><b>No. Kad Pengenalan</b></th>
                                             <th><b>Peringkat Pengajian</b></th>
-                                            <th><b>Nama Kursus</b></th>
                                             <th><b>Nama Institusi</b></th>
                                             <th><b>Tarikh Mula</b></th>
                                             <th><b>Tarikh Tamat</b></th>
-                                            <th><b>Status</b></th>
+                                            <th><b>Status Pengajian</b></th>
+                                            <th><b>Status Permohonan</b></th>
                                             <th><b>Tindakan</b></th>
                                         </tr>
                                     </thead>
@@ -176,6 +177,7 @@
                       url: "/assets/lang/Malay.json"
                   },
                   columns: [ 
+                    { data: 'program', className: 'text-start' },
                     {
                         data: 'nama',
                         render: function(data, type, row) {
@@ -209,7 +211,6 @@
                     { data: 'no_kp' }, 
                     
                     { data: 'peringkat_pengajian' }, 
-                    { data: 'nama_kursus' }, 
                     { data: 'nama_institusi' },
                     { 
                             data: 'tarikh_mula',
@@ -266,6 +267,26 @@
                                 }
                             },
                             className: 'text-center'
+                    },
+                    {
+                        data: 'status_permohonan',
+                        render: function (data, type, row) {
+                            if (type !== 'display') {
+                                return data;
+                            }
+
+                            var badgeClasses = {
+                                '6': 'badge-light-success',
+                                '7': 'badge-light-danger',
+                                '5': 'badge-light-warning',
+                                '8': 'badge-light-info',
+                                '9': 'badge-light-secondary'
+                            };
+                            var badgeClass = badgeClasses[String(row.kod_status_permohonan ?? '')] || 'badge-light-primary';
+
+                            return '<div class="badge ' + badgeClass + ' fw-bold">' + (data || '-') + '</div>';
+                        },
+                        className: 'text-center'
                     },
                     {
                         data: 'permohonan_id',
