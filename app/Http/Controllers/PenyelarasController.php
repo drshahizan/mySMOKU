@@ -3562,11 +3562,35 @@ class PenyelarasController extends Controller
         // Extract all `id_institusi` values (handles both single and multiple records)
         $idInstitusiList = $infoiptCollection->pluck('id_institusi');
 
-        $pelajar = Smoku::join('smoku_akademik','smoku_akademik.smoku_id','=','smoku.id')
-        ->join('bk_info_institusi','bk_info_institusi.id_institusi','=','smoku_akademik.id_institusi')
-        // ->join('smoku_penyelaras','smoku_penyelaras.smoku_id','=','smoku.id')
-        ->join('users','users.no_kp','=','smoku.no_kp')
-        ->leftJoin('tukar_institusi', 'tukar_institusi.smoku_id', '=', 'smoku.id')
+        $akademikSemasa = DB::table('smoku_akademik')
+            ->selectRaw('smoku_id, MAX(id) as akademik_id')
+            ->where('status', 1)
+            ->groupBy('smoku_id');
+        $pertukaranTerkini = DB::table('tukar_institusi')
+            ->selectRaw('smoku_id, MAX(id) as pertukaran_id')
+            ->groupBy('smoku_id');
+        $pendaftaranPelajar = DB::table('users')
+            ->selectRaw('no_kp, MIN(created_at) as tarikh_daftar')
+            ->groupBy('no_kp');
+        $institusiTerkini = DB::table('bk_info_institusi')
+            ->selectRaw('id_institusi, MAX(id) as institusi_id')
+            ->groupBy('id_institusi');
+
+        $pelajar = Smoku::joinSub($akademikSemasa, 'akademik_semasa', function ($join) {
+            $join->on('akademik_semasa.smoku_id', '=', 'smoku.id');
+        })
+        ->join('smoku_akademik', 'smoku_akademik.id', '=', 'akademik_semasa.akademik_id')
+        ->joinSub($institusiTerkini, 'institusi_terkini', function ($join) {
+            $join->on('institusi_terkini.id_institusi', '=', 'smoku_akademik.id_institusi');
+        })
+        ->join('bk_info_institusi', 'bk_info_institusi.id', '=', 'institusi_terkini.institusi_id')
+        ->joinSub($pendaftaranPelajar, 'pendaftaran_pelajar', function ($join) {
+            $join->on('pendaftaran_pelajar.no_kp', '=', 'smoku.no_kp');
+        })
+        ->leftJoinSub($pertukaranTerkini, 'pertukaran_terkini', function ($join) {
+            $join->on('pertukaran_terkini.smoku_id', '=', 'smoku.id');
+        })
+        ->leftJoin('tukar_institusi', 'tukar_institusi.id', '=', 'pertukaran_terkini.pertukaran_id')
         ->where(function ($query) use ($idInstitusiList) {
             $query->whereIn('smoku_akademik.id_institusi', $idInstitusiList)
                   ->orWhere(function ($subQuery) use ($idInstitusiList) {
@@ -3575,7 +3599,7 @@ class PenyelarasController extends Controller
                   });
         })
         ->orderBy('smoku.id', 'DESC')
-        ->get(['smoku.*','tukar_institusi.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','users.created_at as tarikh_daftar']);
+        ->get(['smoku.*','smoku.id as smoku_id','smoku_akademik.*', 'bk_info_institusi.id_institusi', 'bk_info_institusi.nama_institusi', 'bk_info_institusi.jenis_institusi','pendaftaran_pelajar.tarikh_daftar', 'tukar_institusi.id as pertukaran_id', 'tukar_institusi.status as status_pertukaran', 'tukar_institusi.id_institusi_baru as institusi_baru_pertukaran']);
 
         $infoipt = InfoIpt::where('jenis_institusi', 'UA')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);
         $infoiptIPTS = InfoIpt::where('jenis_institusi', 'IPTS')->orderBy('nama_institusi')->get(['id_institusi', 'nama_institusi']);

@@ -106,10 +106,10 @@
                                   $pemohon = implode(' ', $result);
                                   
                                   // dd($pelajar->jenis_institusi);
-                                  $tukar_institusi = DB::table('tukar_institusi')
-                                      ->orderBy('id', 'desc')
-                                      ->where('smoku_id', $pelajar['smoku_id'])
-                                      ->first(); 
+                                  $tukar_institusi = $pelajar->pertukaran_id ? (object) [
+                                      'status' => $pelajar->status_pertukaran,
+                                      'id_institusi_baru' => $pelajar->institusi_baru_pertukaran,
+                                  ] : null;
                                                                    
                                   
                               @endphp
