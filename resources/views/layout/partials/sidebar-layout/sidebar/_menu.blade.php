@@ -440,6 +440,8 @@
 							<span class="menu-title">Maklumat Bank Universiti</span>
 						</a>
 					</div>
+				@endif
+				@if(in_array($institusi->jenis_institusi, ['UA', 'P', 'KK'], true))
 					<div class="menu-item">
 						<a class="menu-link" href="{{ route('senarai.pelajar.ua')}}">
 							<span class="menu-icon">{!! getIcon('home', 'fs-2') !!}</span>
